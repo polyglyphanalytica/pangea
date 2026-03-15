@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flora — The Atlas of Plants</title>
+<meta name="description" content="Flora — The Atlas of Plants: An interactive exploration of 50+ historically significant plants, their origins, spread, and cultural impact across civilizations and eras.">
+<meta name="keywords" content="plants, agriculture, botany, history, atlas, interactive map, crop origins, domestication">
+<meta name="author" content="The Pangea Project">
+<link rel="canonical" href="https://polyglyphanalytica.github.io/pangea/flora/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Flora — The Atlas of Plants">
+<meta property="og:description" content="An interactive atlas exploring the origins, spread, and cultural impact of 50+ historically significant plants across civilizations.">
+<meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/flora/">
+<meta property="og:site_name" content="The Pangea Project">
+<meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/flora/og-image.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Flora — The Atlas of Plants">
+<meta name="twitter:description" content="An interactive atlas exploring the origins, spread, and cultural impact of 50+ historically significant plants.">
+<meta name="twitter:image" content="https://polyglyphanalytica.github.io/pangea/flora/og-image.png">
+
+<!-- Schema.org WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Flora — The Atlas of Plants",
+  "description": "An interactive atlas exploring the origins, spread, and cultural impact of historically significant plants across civilizations.",
+  "url": "https://polyglyphanalytica.github.io/pangea/flora/",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Any",
+  "author": {
+    "@type": "Organization",
+    "name": "The Pangea Project"
+  }
+}
+</script>
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   PANGEA DESIGN SYSTEM — FLORA THEME
+   ============================================================ */
+
+/* --- CSS Variables / Dark Theme (default) --- */
+:root {
+  --bg: #02040a;
+  --panel: #070b12;
+  --amber: #e89820;
+  --txt: #f2e8d5;
+  --accent: #4a9e3f;
+  --accent-dim: #2d6627;
+  --accent-glow: rgba(74, 158, 63, 0.35);
+  --border: rgba(74, 158, 63, 0.18);
+  --border-hi: rgba(74, 158, 63, 0.4);
+  --shadow: rgba(0,0,0,0.5);
+  --txt-dim: rgba(242,232,213,0.5);
+  --txt-mid: rgba(242,232,213,0.7);
+  --panel-hi: #0d1520;
+  --danger: #c0392b;
+  --radius: 6px;
+  --font-heading: 'Cinzel', serif;
+  --font-display: 'Cinzel Decorative', serif;
+  --font-body: 'Crimson Pro', serif;
+  --header-h: 54px;
+  --timeline-h: 64px;
+  --drawer-w: 370px;
+}
+
+/* --- Light Theme --- */
+[data-theme="light"] {
+  --bg: #f0ebe0;
+  --panel: #e8e0d0;
+  --amber: #4a2c00;
+  --txt: #1a1206;
+  --accent: #2d7a22;
+  --accent-dim: #a3cfa0;
+  --accent-glow: rgba(45, 122, 34, 0.2);
+  --border: rgba(45, 122, 34, 0.2);
+  --border-hi: rgba(45, 122, 34, 0.45);
+  --shadow: rgba(0,0,0,0.12);
+  --txt-dim: rgba(26,18,6,0.45);
+  --txt-mid: rgba(26,18,6,0.65);
+  --panel-hi: #ddd5c4;
+  --danger: #a93226;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f0ebe0;
+    --panel: #e8e0d0;
+    --amber: #4a2c00;
+    --txt: #1a1206;
+    --accent: #2d7a22;
+    --accent-dim: #a3cfa0;
+    --accent-glow: rgba(45, 122, 34, 0.2);
+    --border: rgba(45, 122, 34, 0.2);
+    --border-hi: rgba(45, 122, 34, 0.45);
+    --shadow: rgba(0,0,0,0.12);
+    --txt-dim: rgba(26,18,6,0.45);
+    --txt-mid: rgba(26,18,6,0.65);
+    --panel-hi: #ddd5c4;
+    --danger: #a93226;
+  }
+}
+
+/* --- Reset / Base --- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* --- Header --- */
+#header {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 100;
+  gap: 12px;
+}
+
+#logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 3px;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+#subtitle {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  color: var(--txt-dim);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#era-display {
+  margin-left: auto;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  color: var(--amber);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#year-display {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+/* --- Lens Dropdown --- */
+#lens-container {
+  position: fixed;
+  top: var(--header-h);
+  left: 12px;
+  z-index: 90;
+  padding-top: 8px;
+}
+
+#lens-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--txt);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.2s, background 0.2s;
+}
+#lens-btn:hover { border-color: var(--border-hi); background: var(--panel-hi); }
+
+#lens-dd {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 200px;
+  box-shadow: 0 8px 24px var(--shadow);
+  padding: 6px 0;
+  max-height: 360px;
+  overflow-y: auto;
+}
+#lens-dd.open { display: block; }
+
+.lens-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--txt-mid);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.lens-item:hover { background: var(--panel-hi); color: var(--txt); }
+.lens-item.active { color: var(--accent); font-weight: 600; }
+.lens-item .ico { font-size: 16px; width: 22px; text-align: center; }
+
+/* --- Mode Buttons --- */
+#mode-bar {
+  position: fixed;
+  top: var(--header-h);
+  right: 12px;
+  z-index: 90;
+  padding-top: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+.mode-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--txt-mid);
+  font-family: var(--font-heading);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.mode-btn:hover { border-color: var(--border-hi); color: var(--txt); }
+.mode-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+/* --- SVG Map Area --- */
+#map-container {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  bottom: var(--timeline-h);
+  overflow: hidden;
+  background: var(--bg);
+  cursor: grab;
+}
+#map-container.dragging { cursor: grabbing; }
+
+#map-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Map continent paths */
+.continent {
+  fill: var(--panel);
+  stroke: var(--border);
+  stroke-width: 0.5;
+  transition: fill 0.3s;
+}
+
+/* Plant markers */
+.plant-marker {
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s;
+}
+.plant-marker:hover { transform: scale(1.3); }
+.plant-marker.inactive { opacity: 0.15; }
+
+.marker-circle {
+  transition: r 0.2s, fill-opacity 0.2s;
+}
+
+.marker-label {
+  font-family: var(--font-body);
+  font-size: 7px;
+  fill: var(--txt-mid);
+  text-anchor: middle;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.plant-marker:hover .marker-label,
+.plant-marker.selected .marker-label { opacity: 1; }
+
+/* Pulse animation for active markers */
+@keyframes pulse {
+  0% { r: 0; opacity: 0.6; }
+  100% { r: 14; opacity: 0; }
+}
+.pulse-ring {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  animation: pulse 2s ease-out infinite;
+}
+
+/* Connection lines */
+.connection-line {
+  fill: none;
+  stroke: var(--accent-dim);
+  stroke-width: 0.8;
+  stroke-dasharray: 4 3;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+.connection-line.highlight { opacity: 0.9; stroke: var(--accent); stroke-width: 1.4; }
+
+/* Transmission paths */
+.transmission-path {
+  fill: none;
+  stroke: var(--amber);
+  stroke-width: 1;
+  stroke-dasharray: 6 4;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.transmission-path.visible { opacity: 0.6; }
+
+/* --- Info Panel / Drawer --- */
+#drawer {
+  position: fixed;
+  top: var(--header-h);
+  right: 0;
+  width: var(--drawer-w);
+  bottom: var(--timeline-h);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#drawer.open { transform: translateX(0); }
+
+#drawer-header {
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+#drawer-close {
+  background: none;
+  border: none;
+  color: var(--txt-dim);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 2px 6px;
+  margin-left: auto;
+  transition: color 0.2s;
+  line-height: 1;
+}
+#drawer-close:hover { color: var(--txt); }
+
+#drawer-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+#drawer-subtitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--txt-dim);
+  margin-top: 2px;
+}
+
+#drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px;
+}
+
+#drawer-content::-webkit-scrollbar { width: 5px; }
+#drawer-content::-webkit-scrollbar-track { background: transparent; }
+#drawer-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.drawer-section {
+  margin-bottom: 18px;
+}
+
+.drawer-section-title {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.drawer-section-body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--txt-mid);
+  line-height: 1.6;
+}
+
+.drawer-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.meta-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+}
+
+.meta-label {
+  font-family: var(--font-heading);
+  font-size: 9px;
+  color: var(--txt-dim);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.meta-value {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--txt);
+  margin-top: 2px;
+}
+
+/* Compare mode panel */
+#compare-panel {
+  display: none;
+  position: fixed;
+  top: var(--header-h);
+  right: 0;
+  width: 600px;
+  max-width: 90vw;
+  bottom: var(--timeline-h);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  z-index: 80;
+  overflow-y: auto;
+}
+#compare-panel.open { display: flex; }
+
+.compare-col {
+  flex: 1;
+  padding: 16px;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+.compare-col:last-child { border-right: none; }
+
+.compare-col h3 {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+/* --- Timeline Bar --- */
+#timeline {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--timeline-h);
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 100;
+  gap: 12px;
+}
+
+#timeline-label-start,
+#timeline-label-end {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  color: var(--txt-dim);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+#slider-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  position: relative;
+}
+
+#density-bar {
+  height: 16px;
+  width: 100%;
+  display: block;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#timeline-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+#timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--panel);
+  box-shadow: 0 0 6px var(--accent-glow);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+#timeline-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+#timeline-slider::-moz-range-thumb {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--panel);
+  box-shadow: 0 0 6px var(--accent-glow);
+  cursor: pointer;
+}
+
+#play-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+#play-btn:hover { border-color: var(--accent); background: var(--accent-glow); }
+
+/* --- Burger Menu --- */
+#burger-btn {
+  background: none;
+  border: none;
+  color: var(--txt-mid);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: color 0.2s;
+  line-height: 1;
+  flex-shrink: 0;
+}
+#burger-btn:hover { color: var(--txt); }
+
+#burger-menu {
+  position: fixed;
+  top: var(--header-h);
+  right: 0;
+  width: 260px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 0 var(--radius);
+  box-shadow: 0 8px 32px var(--shadow);
+  z-index: 110;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  padding: 8px 0;
+}
+#burger-menu.open { transform: translateX(0); }
+
+.burger-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  color: var(--txt-mid);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.burger-item:hover { background: var(--panel-hi); color: var(--txt); }
+
+.burger-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 16px;
+}
+
+/* --- About Modal --- */
+#about-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+#about-overlay.open { display: flex; }
+
+#about-modal {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 520px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 28px;
+  box-shadow: 0 16px 48px var(--shadow);
+}
+
+#about-modal h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 14px;
+  letter-spacing: 2px;
+}
+
+#about-modal p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--txt-mid);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+#about-modal .close-about {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 8px 24px;
+  border-radius: var(--radius);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.2s;
+}
+#about-modal .close-about:hover { opacity: 0.85; }
+
+/* --- Tooltip --- */
+#tooltip {
+  position: fixed;
+  background: var(--panel);
+  border: 1px solid var(--border-hi);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--txt);
+  pointer-events: none;
+  z-index: 150;
+  box-shadow: 0 4px 16px var(--shadow);
+  display: none;
+  max-width: 220px;
+  line-height: 1.4;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  :root {
+    --drawer-w: 100vw;
+    --header-h: 48px;
+    --timeline-h: 56px;
+  }
+
+  #subtitle { display: none; }
+
+  #logo { font-size: 18px; letter-spacing: 2px; }
+
+  #era-display { font-size: 10px; }
+
+  #lens-container { left: 8px; }
+
+  #mode-bar { right: 8px; }
+  .mode-btn { font-size: 10px; padding: 5px 8px; }
+
+  #timeline { padding: 0 10px; gap: 8px; }
+
+  #compare-panel { width: 100vw; flex-direction: column; }
+  .compare-col { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+@media (max-width: 480px) {
+  #mode-bar { display: none; }
+  #year-display { display: none; }
+  #era-display { font-size: 9px; max-width: 120px; }
+}
+
+/* --- Utility --- */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.3s ease-out; }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header id="header">
+  <div id="logo">FLORA</div>
+  <div id="subtitle">The Atlas of Plants</div>
+  <span id="era-display">Pre-Agriculture</span>
+  <span id="year-display">10 000 BCE</span>
+  <button id="burger-btn" aria-label="Open menu" onclick="toggleBurger()">&#9776;</button>
+</header>
+
+<!-- ========== BURGER MENU ========== -->
+<nav id="burger-menu" role="navigation" aria-label="Main menu">
+  <a class="burger-item" href="../">&#127758; Back to Pangea</a>
+  <div class="burger-divider"></div>
+  <button class="burger-item" onclick="setMode('explore');closeBurger()">&#128270; Explore</button>
+  <button class="burger-item" onclick="setMode('threads');closeBurger()">&#128208; Threads</button>
+  <button class="burger-item" onclick="setMode('compare');closeBurger()">&#9878; Compare</button>
+  <div class="burger-divider"></div>
+  <button class="burger-item" onclick="toggleTheme();closeBurger()">&#127763; Toggle Theme</button>
+  <button class="burger-item" onclick="showAbout();closeBurger()">&#9432; About Flora</button>
+</nav>
+
+<!-- ========== LENS DROPDOWN ========== -->
+<div id="lens-container">
+  <button id="lens-btn" onclick="toggleLensDD()" aria-label="Select lens">
+    <span id="lens-ico">&#127807;</span>
+    <span id="lens-name">Overview</span>
+    <span style="font-size:10px">&#9660;</span>
+  </button>
+  <div id="lens-dd" role="listbox" aria-label="Lens options"></div>
+</div>
+
+<!-- ========== MODE BAR ========== -->
+<div id="mode-bar">
+  <button class="mode-btn active" data-mode="explore" onclick="setMode('explore')">Explore</button>
+  <button class="mode-btn" data-mode="threads" onclick="setMode('threads')">Threads</button>
+  <button class="mode-btn" data-mode="compare" onclick="setMode('compare')">Compare</button>
+</div>
+
+<!-- ========== MAP ========== -->
+<div id="map-container">
+  <svg id="map-svg" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <g id="continents"></g>
+    <g id="connections"></g>
+    <g id="transmissions"></g>
+    <g id="markers"></g>
+  </svg>
+</div>
+
+<!-- ========== INFO DRAWER ========== -->
+<aside id="drawer" role="complementary" aria-label="Plant information">
+  <div id="drawer-header">
+    <div>
+      <div id="drawer-title">Select a Plant</div>
+      <div id="drawer-subtitle">Click any marker on the map</div>
+    </div>
+    <button id="drawer-close" onclick="closeDrawer()" aria-label="Close panel">&times;</button>
+  </div>
+  <div id="drawer-content"></div>
+</aside>
+
+<!-- ========== COMPARE PANEL ========== -->
+<div id="compare-panel">
+  <div class="compare-col" id="compare-a"></div>
+  <div class="compare-col" id="compare-b"></div>
+</div>
+
+<!-- ========== TIMELINE ========== -->
+<footer id="timeline">
+  <button id="play-btn" onclick="togglePlay()" aria-label="Play timeline">&#9654;</button>
+  <span id="timeline-label-start">10 000 BCE</span>
+  <div id="slider-container">
+    <canvas id="density-bar"></canvas>
+    <input type="range" id="timeline-slider" min="0" max="1000" value="0"
+           aria-label="Timeline slider" oninput="onSliderInput(this.value)">
+  </div>
+  <span id="timeline-label-end">2025 CE</span>
+</footer>
+
+<!-- ========== TOOLTIP ========== -->
+<div id="tooltip"></div>
+
+<!-- ========== ABOUT MODAL ========== -->
+<div id="about-overlay" onclick="closeAbout()">
+  <div id="about-modal" onclick="event.stopPropagation()">
+    <h2>Flora</h2>
+    <p>The Atlas of Plants is part of The Pangea Project — an interactive exploration of how plants shaped human civilization.</p>
+    <p>Explore 50+ historically significant plants across eight eras of agricultural history. Switch lenses to view cultivation, trade, medicine, mythology, and more.</p>
+    <button class="close-about" onclick="closeAbout()">CLOSE</button>
+  </div>
+</div>
+
+<script>
+</script>
+</body>
+</html>

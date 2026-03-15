@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bellum — The Atlas of War &amp; Conflict</title>
+<meta name="description" content="Bellum — an interactive atlas of war and conflict throughout human history. Explore 50+ wars across 5,000 years of military history.">
+<meta name="keywords" content="war, conflict, atlas, military history, battles, interactive map">
+<link rel="canonical" href="https://polyglyphanalytica.github.io/pangea/bellum/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bellum — The Atlas of War &amp; Conflict">
+<meta property="og:description" content="An interactive atlas of war and conflict throughout human history.">
+<meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/bellum/">
+<meta property="og:site_name" content="The Pangea Project">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bellum — The Atlas of War &amp; Conflict">
+<meta name="twitter:description" content="An interactive atlas of war and conflict throughout human history.">
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Bellum — The Atlas of War & Conflict",
+  "description":"An interactive atlas of war and conflict throughout human history.",
+  "url":"https://polyglyphanalytica.github.io/pangea/bellum/",
+  "applicationCategory":"Education",
+  "operatingSystem":"Any",
+  "author":{"@type":"Organization","name":"The Pangea Project"}
+}
+</script>
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   BELLUM — THE ATLAS OF WAR & CONFLICT
+   Design System & Layout
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── CSS Custom Properties (Dark Theme Default) ─────────── */
+:root {
+  --bg: #02040a;
+  --panel: #070b12;
+  --amber: #e89820;
+  --txt: #f2e8d5;
+  --accent: #e8251a;
+  --accent-glow: rgba(232, 37, 26, 0.4);
+  --border: rgba(232, 152, 32, 0.15);
+  --border-hover: rgba(232, 152, 32, 0.35);
+  --muted: rgba(242, 232, 213, 0.5);
+  --overlay: rgba(2, 4, 10, 0.85);
+  --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  --radius: 6px;
+  --transition: 0.3s ease;
+  --font-display: 'Cinzel Decorative', 'Cinzel', serif;
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Crimson Pro', serif;
+}
+
+/* ── Light Theme ─────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg: #f0ebe0;
+  --panel: #e8e0d0;
+  --amber: #4a2c00;
+  --txt: #1a1206;
+  --accent: #c41a0a;
+  --accent-glow: rgba(196, 26, 10, 0.25);
+  --border: rgba(74, 44, 0, 0.2);
+  --border-hover: rgba(74, 44, 0, 0.4);
+  --muted: rgba(26, 18, 6, 0.5);
+  --overlay: rgba(240, 235, 224, 0.9);
+  --shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f0ebe0;
+    --panel: #e8e0d0;
+    --amber: #4a2c00;
+    --txt: #1a1206;
+    --accent: #c41a0a;
+    --accent-glow: rgba(196, 26, 10, 0.25);
+    --border: rgba(74, 44, 0, 0.2);
+    --border-hover: rgba(74, 44, 0, 0.4);
+    --muted: rgba(26, 18, 6, 0.5);
+    --overlay: rgba(240, 235, 224, 0.9);
+    --shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+}
+
+/* ── Reset & Base ────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--amber); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--txt);
+  font-size: 1rem;
+}
+
+/* ── Skip Link ───────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  z-index: 9999;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+}
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+/* ── Focus Visible ───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.2rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  flex-shrink: 0;
+  min-height: 52px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.subtitle {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.era-display {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+.lens-dropdown {
+  position: relative;
+}
+
+.lens-btn {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  color: var(--amber);
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: border-color var(--transition);
+  letter-spacing: 0.05em;
+}
+.lens-btn:hover { border-color: var(--border-hover); }
+
+.lens-dd-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.4rem;
+  min-width: 200px;
+  box-shadow: var(--shadow);
+  z-index: 200;
+  display: none;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.lens-dd-menu.open { display: block; }
+
+.lens-dd-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  width: 100%;
+  text-align: left;
+  transition: background var(--transition);
+}
+.lens-dd-item:hover { background: var(--border); }
+.lens-dd-item.active { color: var(--accent); }
+.lens-dd-item .ico { font-size: 1rem; }
+.lens-dd-item .check { margin-left: auto; opacity: 0; font-size: 0.7rem; color: var(--accent); }
+.lens-dd-item.active .check { opacity: 1; }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ── Burger Menu ─────────────────────────────────────────── */
+.burger-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: var(--radius);
+  transition: background var(--transition);
+}
+.burger-btn:hover { background: var(--border); }
+.burger-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--amber);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+.burger-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.burger-btn.open span:nth-child(2) { opacity: 0; }
+.burger-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+.burger-menu {
+  position: fixed;
+  top: 52px;
+  right: 0;
+  width: 280px;
+  max-height: calc(100vh - 52px);
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 500;
+  transform: translateX(100%);
+  transition: transform var(--transition);
+  overflow-y: auto;
+  padding: 0.75rem 0;
+}
+.burger-menu.open { transform: translateX(0); }
+
+.burger-section {
+  padding: 0.4rem 1rem;
+}
+.burger-section-title {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.burger-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  width: 100%;
+  text-align: left;
+  transition: background var(--transition);
+}
+.burger-item:hover { background: var(--border); }
+.burger-item.active { color: var(--accent); }
+.burger-item .ico { font-size: 1.1rem; width: 1.4rem; text-align: center; }
+
+.burger-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.5rem 1rem;
+}
+
+/* ── Main Layout ─────────────────────────────────────────── */
+main {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+}
+.map-container:active { cursor: grabbing; }
+
+.map-container svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── SVG Map Styles ──────────────────────────────────────── */
+.land {
+  fill: rgba(232, 152, 32, 0.06);
+  stroke: rgba(232, 152, 32, 0.15);
+  stroke-width: 0.5;
+}
+[data-theme="light"] .land {
+  fill: rgba(74, 44, 0, 0.06);
+  stroke: rgba(74, 44, 0, 0.15);
+}
+
+.war-marker {
+  cursor: pointer;
+  transition: r 0.2s ease;
+}
+.war-marker:hover { filter: brightness(1.3); }
+
+.war-label {
+  font-family: var(--font-heading);
+  font-size: 6px;
+  fill: var(--txt);
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.connection-line {
+  stroke: var(--amber);
+  stroke-width: 0.5;
+  stroke-dasharray: 4 2;
+  opacity: 0.3;
+  fill: none;
+}
+
+.transmission-line {
+  stroke: var(--accent);
+  stroke-width: 1;
+  stroke-dasharray: 6 3;
+  opacity: 0.5;
+  fill: none;
+  marker-end: url(#arrowhead);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; r: inherit; }
+  50% { opacity: 1; }
+}
+.war-pulse {
+  animation: pulse 2s ease-in-out infinite;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.5;
+}
+
+.war-glow {
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+}
+
+/* ── Info Panel / Drawer ─────────────────────────────────── */
+.info-panel {
+  width: 340px;
+  background: var(--panel);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+  transition: width var(--transition), transform var(--transition);
+}
+.info-panel.collapsed {
+  width: 0;
+  overflow: hidden;
+  border-left: none;
+}
+
+.panel-header {
+  padding: 1rem 1.2rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.panel-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.panel-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.meta-tag {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  color: var(--amber);
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+}
+
+.panel-body {
+  padding: 1rem 1.2rem;
+  flex: 1;
+}
+
+.lens-section {
+  margin-bottom: 1rem;
+}
+.lens-section-title {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  color: var(--amber);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.lens-section-body {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--txt);
+}
+
+.panel-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+.panel-placeholder .ico { font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.4; }
+.panel-placeholder p {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* ── Compare Panel ───────────────────────────────────────── */
+.compare-panel {
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.5rem;
+  z-index: 300;
+  min-width: 600px;
+  max-width: 90vw;
+}
+.compare-panel.open { display: flex; gap: 2rem; }
+
+.compare-col {
+  flex: 1;
+  min-width: 0;
+}
+.compare-col-title {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+.compare-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2rem 0;
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+.compare-label { color: var(--muted); }
+.compare-val { color: var(--txt); font-weight: 600; }
+
+.compare-divider {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+}
+
+/* ── Timeline Bar ────────────────────────────────────────── */
+.timeline {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1.2rem;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  min-height: 46px;
+}
+
+.timeline-label {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  color: var(--amber);
+  letter-spacing: 0.05em;
+  min-width: 80px;
+  text-align: center;
+}
+
+.timeline-slider-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.timeline-density {
+  width: 100%;
+  height: 16px;
+}
+.density-bar {
+  fill: var(--accent);
+  opacity: 0.4;
+}
+
+.timeline-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+.timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px var(--accent-glow);
+}
+.timeline-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px var(--accent-glow);
+}
+
+.timeline-endpoints {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.timeline-play {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  transition: all var(--transition);
+}
+.timeline-play:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── About Modal ─────────────────────────────────────────── */
+.about-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  z-index: 900;
+  align-items: center;
+  justify-content: center;
+}
+.about-overlay.open {
+  display: flex;
+}
+
+.about-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 2.5rem;
+  max-width: 520px;
+  width: 90vw;
+  box-shadow: var(--shadow);
+}
+.about-box h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.1em;
+}
+.about-box p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+.about-box .close-btn {
+  display: block;
+  margin: 1rem auto 0;
+  padding: 0.4rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--amber);
+  transition: all var(--transition);
+}
+.about-box .close-btn:hover { border-color: var(--amber); }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .info-panel {
+    position: fixed;
+    top: 52px;
+    right: 0;
+    bottom: 46px;
+    width: 320px;
+    z-index: 150;
+    transform: translateX(100%);
+    border-left: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .info-panel.mobile-open {
+    transform: translateX(0);
+  }
+  .info-panel.collapsed {
+    transform: translateX(100%);
+  }
+
+  .header-center { display: none; }
+  .subtitle { display: none; }
+
+  .compare-panel {
+    min-width: auto;
+    flex-direction: column;
+    bottom: 56px;
+  }
+  .compare-divider { width: 100%; height: 1px; }
+}
+
+@media (max-width: 600px) {
+  header { padding: 0.5rem 0.8rem; }
+  .logo { font-size: 1.1rem; }
+  .info-panel { width: 100%; }
+  .burger-menu { width: 100%; }
+  .timeline { padding: 0.4rem 0.8rem; gap: 0.5rem; }
+  .timeline-label { min-width: 60px; font-size: 0.7rem; }
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+</style>
+</head>
+<body>
+<!-- Skip Link -->
+<a href="#main-map" class="skip-link">Skip to map</a>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-left">
+    <div class="logo">BELLUM</div>
+    <div class="subtitle">The Atlas of War</div>
+  </div>
+
+  <div class="header-center">
+    <div class="era-display" id="eraDisplay">— Loading —</div>
+    <div class="lens-dropdown">
+      <button class="lens-btn" id="lensBtn" aria-label="Select lenses" aria-haspopup="true">
+        <span>🔍</span> Lenses <span style="font-size:0.6rem">▼</span>
+      </button>
+      <div class="lens-dd-menu" id="lensDDMenu" role="menu"></div>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <button class="burger-btn" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════
+     BURGER MENU
+     ═══════════════════════════════════════════════════════ -->
+<nav class="burger-menu" id="burgerMenu" aria-label="Main navigation">
+  <div class="burger-section">
+    <div class="burger-section-title">Navigation</div>
+    <a href="../" class="burger-item"><span class="ico">🌍</span> Back to Pangea</a>
+  </div>
+  <div class="burger-divider"></div>
+  <div class="burger-section">
+    <div class="burger-section-title">Mode</div>
+    <button class="burger-item active" data-mode="explore" onclick="setMode('explore')">
+      <span class="ico">🗺️</span> Explore
+    </button>
+    <button class="burger-item" data-mode="threads" onclick="setMode('threads')">
+      <span class="ico">🔗</span> Threads
+    </button>
+    <button class="burger-item" data-mode="compare" onclick="setMode('compare')">
+      <span class="ico">⚖️</span> Compare
+    </button>
+  </div>
+  <div class="burger-divider"></div>
+  <div class="burger-section">
+    <div class="burger-section-title">Settings</div>
+    <button class="burger-item" onclick="toggleTheme()">
+      <span class="ico" id="themeIco">🌙</span> <span id="themeLabel">Dark Mode</span>
+    </button>
+  </div>
+  <div class="burger-divider"></div>
+  <div class="burger-section">
+    <button class="burger-item" onclick="showAbout()">
+      <span class="ico">ℹ️</span> About Bellum
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN AREA
+     ═══════════════════════════════════════════════════════ -->
+<main>
+  <!-- Map Container -->
+  <div class="map-container" id="mapContainer">
+    <svg id="mainMap" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+          <polygon points="0 0, 6 2, 0 4" fill="var(--accent)" opacity="0.6"/>
+        </marker>
+      </defs>
+      <!-- World map paths will be rendered here -->
+      <g id="landGroup"></g>
+      <!-- Connection lines -->
+      <g id="connectionsGroup"></g>
+      <!-- Transmission chains -->
+      <g id="transmissionsGroup"></g>
+      <!-- War markers -->
+      <g id="markersGroup"></g>
+      <!-- Labels -->
+      <g id="labelsGroup"></g>
+    </svg>
+  </div>
+
+  <!-- Info Panel -->
+  <aside class="info-panel" id="infoPanel">
+    <div class="panel-placeholder" id="panelPlaceholder">
+      <div class="ico">⚔️</div>
+      <p>Select a conflict on the map<br>to view its details</p>
+    </div>
+    <div id="panelContent" style="display:none"></div>
+  </aside>
+</main>
+
+<!-- ═══════════════════════════════════════════════════════
+     COMPARE PANEL
+     ═══════════════════════════════════════════════════════ -->
+<div class="compare-panel" id="comparePanel"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     TIMELINE BAR
+     ═══════════════════════════════════════════════════════ -->
+<div class="timeline">
+  <div class="timeline-label" id="yearLabel">3000 BCE</div>
+  <div class="timeline-slider-wrap">
+    <svg class="timeline-density" id="densityBar" viewBox="0 0 500 16" preserveAspectRatio="none"></svg>
+    <input type="range" class="timeline-slider" id="timeSlider" min="0" max="5025" value="0" aria-label="Timeline year slider">
+    <div class="timeline-endpoints">
+      <span>3000 BCE</span>
+      <span>2025 CE</span>
+    </div>
+  </div>
+  <button class="timeline-play" id="playBtn" aria-label="Play timeline">▶</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABOUT MODAL
+     ═══════════════════════════════════════════════════════ -->
+<div class="about-overlay" id="aboutOverlay">
+  <div class="about-box">
+    <h2>⚔️ Bellum</h2>
+    <p><strong>The Atlas of War &amp; Conflict</strong> — an interactive exploration of warfare throughout human history, from the Bronze Age to the modern era.</p>
+    <p>Part of <em>The Pangea Project</em>, a collection of interactive atlases mapping human civilization.</p>
+    <p>Navigate the timeline, explore conflict lenses, trace military innovation threads, and compare wars side by side.</p>
+    <button class="close-btn" onclick="closeAbout()">Close</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SCRIPT
+     ═══════════════════════════════════════════════════════ -->
+<script>
+</script>
+</body>
+</html>

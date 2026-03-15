@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Numen — The Atlas of Belief</title>
+<meta name="description" content="Numen — The Atlas of Belief: An interactive map of humanity's religious and spiritual traditions across 10,000 years of history. Explore beliefs, practices, sacred texts, and the transmission of ideas.">
+<meta name="keywords" content="religion, beliefs, spirituality, world religions, history, atlas, comparative religion, sacred texts">
+<meta name="author" content="The Pangea Project">
+<link rel="canonical" href="https://polyglyphanalytica.github.io/pangea/numen/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Numen — The Atlas of Belief">
+<meta property="og:description" content="An interactive atlas of humanity's religious and spiritual traditions across 10,000 years of history.">
+<meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/numen/">
+<meta property="og:site_name" content="The Pangea Project">
+<meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/numen/og-image.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Numen — The Atlas of Belief">
+<meta name="twitter:description" content="An interactive atlas of humanity's religious and spiritual traditions across 10,000 years.">
+<meta name="twitter:image" content="https://polyglyphanalytica.github.io/pangea/numen/og-image.png">
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Numen — The Atlas of Belief",
+  "description":"An interactive atlas of humanity's religious and spiritual traditions across 10,000 years of history.",
+  "url":"https://polyglyphanalytica.github.io/pangea/numen/",
+  "applicationCategory":"Education",
+  "operatingSystem":"Any",
+  "author":{"@type":"Organization","name":"The Pangea Project"}
+}
+</script>
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   NUMEN — THE ATLAS OF BELIEF
+   Pangea Design System — Dark / Light Theme
+   ============================================================ */
+
+/* ---------- CSS Variables (Dark default) ---------- */
+:root {
+  --bg: #02040a;
+  --panel: #070b12;
+  --panel-border: #1a1e2a;
+  --amber: #e89820;
+  --txt: #f2e8d5;
+  --txt-dim: #9a8e7a;
+  --accent: #c8a8e8;
+  --accent-dim: #7a5e9a;
+  --link: #e8c878;
+  --danger: #d04040;
+  --success: #40b060;
+  --overlay: rgba(2,4,10,0.85);
+  --radius: 6px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.4);
+  --font-heading: 'Cinzel', serif;
+  --font-decorative: 'Cinzel Decorative', serif;
+  --font-body: 'Crimson Pro', serif;
+  --map-land: #181e28;
+  --map-water: #050810;
+  --map-border: #2a3040;
+  --glow: 0 0 12px rgba(232,152,32,0.35);
+  --header-h: 54px;
+  --timeline-h: 64px;
+}
+
+[data-theme="light"] {
+  --bg: #f0ebe0;
+  --panel: #e8e0d0;
+  --panel-border: #c8c0a8;
+  --amber: #4a2c00;
+  --txt: #1a1206;
+  --txt-dim: #6a5e48;
+  --accent: #5a3080;
+  --accent-dim: #8a6aaa;
+  --link: #6a4800;
+  --overlay: rgba(240,235,224,0.9);
+  --map-land: #d8d0c0;
+  --map-water: #c8c0b0;
+  --map-border: #a8a090;
+  --glow: 0 0 12px rgba(74,44,0,0.25);
+  --shadow: 0 2px 16px rgba(0,0,0,0.1);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f0ebe0;
+    --panel: #e8e0d0;
+    --panel-border: #c8c0a8;
+    --amber: #4a2c00;
+    --txt: #1a1206;
+    --txt-dim: #6a5e48;
+    --accent: #5a3080;
+    --accent-dim: #8a6aaa;
+    --link: #6a4800;
+    --overlay: rgba(240,235,224,0.9);
+    --map-land: #d8d0c0;
+    --map-water: #c8c0b0;
+    --map-border: #a8a090;
+    --glow: 0 0 12px rgba(74,44,0,0.25);
+    --shadow: 0 2px 16px rgba(0,0,0,0.1);
+  }
+}
+
+/* ---------- Reset ---------- */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--txt);
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--panel); }
+::-webkit-scrollbar-thumb { background:var(--txt-dim); border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:var(--amber); }
+
+/* ---------- Selection ---------- */
+::selection { background:var(--amber); color:var(--bg); }
+
+/* ---------- Typography ---------- */
+h1,h2,h3,h4 { font-family:var(--font-heading); font-weight:600; line-height:1.3; }
+
+a { color:var(--link); text-decoration:none; transition:color 0.2s; }
+a:hover { color:var(--amber); }
+
+/* ---------- Header ---------- */
+#header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  background: var(--panel);
+  border-bottom: 1px solid var(--panel-border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 100;
+  gap: 12px;
+}
+
+#header .logo {
+  font-family: var(--font-decorative);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#header .subtitle {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--txt-dim);
+  font-style: italic;
+  white-space: nowrap;
+}
+
+#header .era-display {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  color: var(--accent);
+  margin-left: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#header .year-display {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--amber);
+  white-space: nowrap;
+  min-width: 70px;
+  text-align: right;
+}
+
+/* ---------- Burger Menu ---------- */
+.burger-btn {
+  background: none;
+  border: none;
+  color: var(--txt);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  transition: background 0.2s;
+  line-height: 1;
+}
+.burger-btn:hover { background: rgba(232,152,32,0.15); }
+
+#burger-menu {
+  position: fixed;
+  top: var(--header-h);
+  right: 0;
+  width: 280px;
+  max-height: calc(100vh - var(--header-h));
+  background: var(--panel);
+  border-left: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--panel-border);
+  box-shadow: var(--shadow);
+  z-index: 120;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  border-radius: 0 0 0 var(--radius);
+}
+
+#burger-menu.open {
+  transform: translateX(0);
+}
+
+#burger-menu .menu-section {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+#burger-menu .menu-section:last-child {
+  border-bottom: none;
+}
+
+#burger-menu .menu-title {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  color: var(--txt-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+#burger-menu .menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--txt);
+  transition: background 0.2s, color 0.2s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.menu-item:hover { background: rgba(232,152,32,0.12); color: var(--amber); }
+.menu-item .ico { font-size: 1.1rem; width: 24px; text-align: center; }
+
+/* ---------- Main Layout ---------- */
+#main {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  bottom: var(--timeline-h);
+  display: flex;
+  overflow: hidden;
+}
+
+/* ---------- Map Container ---------- */
+#map-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  background: var(--map-water);
+}
+
+#map-container:active { cursor: grabbing; }
+
+#map-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---------- Map Markers ---------- */
+.marker {
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+}
+.marker:hover {
+  filter: brightness(1.3);
+}
+.marker.active-marker {
+  animation: markerPulse 1.8s infinite;
+}
+@keyframes markerPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.5) drop-shadow(0 0 6px var(--amber)); }
+}
+
+.marker-label {
+  font-family: var(--font-heading);
+  font-size: 7px;
+  fill: var(--txt);
+  pointer-events: none;
+  text-anchor: middle;
+  opacity: 0.85;
+}
+
+/* Land paths */
+.land {
+  fill: var(--map-land);
+  stroke: var(--map-border);
+  stroke-width: 0.5;
+}
+
+/* Connection lines */
+.connection-line {
+  stroke: var(--accent);
+  stroke-width: 0.8;
+  stroke-dasharray: 4 3;
+  opacity: 0.4;
+  fill: none;
+}
+
+/* ---------- Lens Dropdown ---------- */
+#lens-bar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 30;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#lens-select {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  background: var(--panel);
+  color: var(--amber);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 5px 10px;
+  cursor: pointer;
+  outline: none;
+}
+#lens-select:focus { border-color: var(--amber); }
+#lens-select option { background: var(--panel); color: var(--txt); }
+
+.lens-pill {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  color: var(--txt-dim);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.lens-pill:hover { border-color: var(--amber); color: var(--amber); }
+.lens-pill.active { border-color: var(--amber); color: var(--amber); background: rgba(232,152,32,0.1); }
+
+/* ---------- Info Panel / Drawer ---------- */
+#info-panel {
+  width: 360px;
+  min-width: 300px;
+  max-width: 420px;
+  background: var(--panel);
+  border-left: 1px solid var(--panel-border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  transition: transform 0.35s ease, opacity 0.3s;
+  z-index: 20;
+}
+
+#info-panel.collapsed {
+  transform: translateX(100%);
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#info-panel .panel-header {
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--panel-border);
+  z-index: 5;
+}
+
+#info-panel .panel-title {
+  font-family: var(--font-decorative);
+  font-size: 1.15rem;
+  color: var(--amber);
+  margin-bottom: 2px;
+}
+
+#info-panel .panel-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--txt-dim);
+  font-style: italic;
+}
+
+#info-panel .panel-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.meta-tag {
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid var(--panel-border);
+  color: var(--txt-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#info-panel .panel-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--txt-dim);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius);
+  transition: color 0.2s, background 0.2s;
+}
+#info-panel .panel-close:hover { color: var(--amber); background: rgba(232,152,32,0.1); }
+
+#info-panel .panel-body {
+  padding: 12px 16px 20px;
+}
+
+.lens-section {
+  margin-bottom: 16px;
+}
+
+.lens-section-title {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.lens-section-title .ico { font-size: 0.85rem; }
+
+.lens-section-body {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--txt);
+  line-height: 1.6;
+}
+
+/* ---------- Compare View ---------- */
+#compare-view {
+  display: none;
+  position: fixed;
+  top: var(--header-h);
+  left: 0; right: 0;
+  bottom: var(--timeline-h);
+  background: var(--bg);
+  z-index: 50;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+#compare-view.active { display: block; }
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.compare-col {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.compare-col h3 {
+  font-family: var(--font-decorative);
+  font-size: 1.05rem;
+  color: var(--amber);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.compare-select {
+  width: 100%;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  background: var(--bg);
+  color: var(--txt);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  margin-bottom: 12px;
+}
+
+/* ---------- Threads View ---------- */
+#threads-view {
+  display: none;
+  position: fixed;
+  top: var(--header-h);
+  left: 0; right: 0;
+  bottom: var(--timeline-h);
+  background: var(--bg);
+  z-index: 50;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+#threads-view.active { display: block; }
+
+.thread-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.thread-card:hover { border-color: var(--accent); }
+
+.thread-card h3 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.thread-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.thread-node {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(200,168,232,0.12);
+  color: var(--accent);
+  border: 1px solid var(--accent-dim);
+}
+
+.thread-arrow {
+  color: var(--txt-dim);
+  font-size: 0.7rem;
+}
+
+/* ---------- About Modal ---------- */
+#about-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--overlay);
+  z-index: 200;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+#about-modal.active { display: flex; }
+
+.about-content {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  max-width: 560px;
+  width: 100%;
+  padding: 28px;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.about-content h2 {
+  font-family: var(--font-decorative);
+  font-size: 1.3rem;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+
+.about-content p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--txt);
+  margin-bottom: 10px;
+  line-height: 1.65;
+}
+
+.about-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  background: none;
+  border: none;
+  color: var(--txt-dim);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.about-close:hover { color: var(--amber); }
+
+/* ---------- Timeline Bar ---------- */
+#timeline {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--timeline-h);
+  background: var(--panel);
+  border-top: 1px solid var(--panel-border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  z-index: 100;
+}
+
+#timeline .tl-label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  color: var(--txt-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+#timeline .tl-year {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--amber);
+  min-width: 72px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#timeline .tl-slider-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+#timeline input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--panel-border);
+  outline: none;
+  cursor: pointer;
+}
+
+#timeline input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--amber);
+  border: 2px solid var(--bg);
+  box-shadow: var(--glow);
+  cursor: pointer;
+}
+
+#timeline input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--amber);
+  border: 2px solid var(--bg);
+  box-shadow: var(--glow);
+  cursor: pointer;
+}
+
+#density-bar {
+  width: 100%;
+  height: 14px;
+  display: block;
+}
+
+#timeline .tl-play {
+  background: none;
+  border: 1px solid var(--panel-border);
+  color: var(--amber);
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  transition: background 0.2s;
+}
+#timeline .tl-play:hover { background: rgba(232,152,32,0.12); }
+
+/* ---------- Floating Controls ---------- */
+.float-controls {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 25;
+}
+
+.float-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  color: var(--txt);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.float-btn:hover { background: rgba(232,152,32,0.12); color: var(--amber); }
+
+/* ---------- Tooltip ---------- */
+#tooltip {
+  position: fixed;
+  background: var(--panel);
+  border: 1px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--txt);
+  pointer-events: none;
+  z-index: 300;
+  display: none;
+  max-width: 220px;
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Loading ---------- */
+.loading-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: opacity 0.6s;
+}
+.loading-overlay.fade { opacity: 0; pointer-events: none; }
+
+.loading-symbol {
+  font-size: 3rem;
+  animation: spin 3s linear infinite;
+  margin-bottom: 16px;
+}
+@keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+
+.loading-text {
+  font-family: var(--font-decorative);
+  font-size: 1.1rem;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  #info-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 320px;
+    min-width: 0;
+    box-shadow: var(--shadow);
+  }
+  #info-panel.collapsed {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 640px) {
+  #header .subtitle { display: none; }
+  #header .era-display { font-size: 0.72rem; }
+
+  #info-panel {
+    width: 100%;
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--panel-border);
+  }
+
+  #burger-menu { width: 100%; }
+
+  .compare-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #timeline { padding: 0 10px; gap: 8px; }
+  #timeline .tl-label { display: none; }
+
+  #lens-bar {
+    top: 4px;
+    left: 4px;
+  }
+  .lens-pill { font-size: 0.58rem; padding: 2px 7px; }
+}
+
+@media (max-width: 420px) {
+  #header { padding: 0 10px; gap: 8px; }
+  #header .logo { font-size: 1.1rem; }
+  #header .year-display { font-size: 0.75rem; min-width: 55px; }
+
+  #info-panel .panel-title { font-size: 1rem; }
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeIn 0.35s ease; }
+
+/* ---------- Focus / Accessibility ---------- */
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible) { outline: none; }
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div class="loading-overlay" id="loading">
+  <div class="loading-symbol">🕊️</div>
+  <div class="loading-text">NUMEN</div>
+</div>
+
+<!-- Tooltip -->
+<div id="tooltip"></div>
+
+<!-- Header -->
+<header id="header">
+  <span class="logo" onclick="resetView()" tabindex="0" role="button" aria-label="Numen home">NUMEN</span>
+  <span class="subtitle">The Atlas of Belief</span>
+  <span class="era-display" id="era-display">Modern Pluralism</span>
+  <span class="year-display" id="year-display">2025 CE</span>
+  <button class="burger-btn" id="burger-btn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false">☰</button>
+</header>
+
+<!-- Burger Menu -->
+<nav id="burger-menu" role="navigation" aria-label="Main menu">
+  <div class="menu-section">
+    <div class="menu-title">Navigation</div>
+    <a class="menu-item" href="../">
+      <span class="ico">🌍</span> Back to Pangea
+    </a>
+  </div>
+  <div class="menu-section">
+    <div class="menu-title">Views</div>
+    <button class="menu-item" onclick="showExplore()">
+      <span class="ico">🗺️</span> Explore Map
+    </button>
+    <button class="menu-item" onclick="showThreads()">
+      <span class="ico">🧵</span> Concept Threads
+    </button>
+    <button class="menu-item" onclick="showCompare()">
+      <span class="ico">⚖️</span> Compare Traditions
+    </button>
+  </div>
+  <div class="menu-section">
+    <div class="menu-title">Settings</div>
+    <button class="menu-item" onclick="toggleTheme()">
+      <span class="ico" id="theme-ico">🌙</span> <span id="theme-label">Toggle Light Mode</span>
+    </button>
+  </div>
+  <div class="menu-section">
+    <button class="menu-item" onclick="showAbout()">
+      <span class="ico">ℹ️</span> About Numen
+    </button>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main id="main">
+  <!-- Map -->
+  <div id="map-container">
+    <div id="lens-bar"></div>
+    <svg id="map-svg" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <radialGradient id="markerGlow">
+          <stop offset="0%" stop-color="var(--amber)" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="var(--amber)" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g id="world-group">
+        <g id="land-group"></g>
+        <g id="connections-group"></g>
+        <g id="markers-group"></g>
+        <g id="labels-group"></g>
+      </g>
+    </svg>
+    <div class="float-controls">
+      <button class="float-btn" onclick="zoomIn()" aria-label="Zoom in" title="Zoom in">+</button>
+      <button class="float-btn" onclick="zoomOut()" aria-label="Zoom out" title="Zoom out">−</button>
+      <button class="float-btn" onclick="resetZoom()" aria-label="Reset view" title="Reset view">⟳</button>
+    </div>
+  </div>
+
+  <!-- Info Panel -->
+  <aside id="info-panel" class="collapsed" aria-label="Belief details">
+    <div class="panel-header">
+      <button class="panel-close" onclick="closePanel()" aria-label="Close panel">✕</button>
+      <div class="panel-title" id="panel-title">Select a Tradition</div>
+      <div class="panel-subtitle" id="panel-subtitle"></div>
+      <div class="panel-meta" id="panel-meta"></div>
+    </div>
+    <div class="panel-body" id="panel-body">
+      <p style="color:var(--txt-dim);font-style:italic;">Click on a marker to explore a tradition.</p>
+    </div>
+  </aside>
+</main>
+
+<!-- Compare View -->
+<div id="compare-view">
+  <div style="text-align:center;margin-bottom:16px;">
+    <h2 style="font-family:var(--font-decorative);color:var(--amber);font-size:1.2rem;">Compare Traditions</h2>
+    <button class="menu-item" onclick="showExplore()" style="display:inline-flex;margin-top:8px;width:auto;">
+      <span class="ico">←</span> Back to Map
+    </button>
+  </div>
+  <div class="compare-grid" id="compare-grid"></div>
+</div>
+
+<!-- Threads View -->
+<div id="threads-view">
+  <div style="text-align:center;margin-bottom:16px;">
+    <h2 style="font-family:var(--font-decorative);color:var(--accent);font-size:1.2rem;">Concept Threads</h2>
+    <p style="color:var(--txt-dim);font-size:0.88rem;max-width:600px;margin:8px auto;">Trace how religious ideas and practices have been transmitted across traditions and centuries.</p>
+    <button class="menu-item" onclick="showExplore()" style="display:inline-flex;margin-top:8px;width:auto;">
+      <span class="ico">←</span> Back to Map
+    </button>
+  </div>
+  <div id="threads-list"></div>
+</div>
+
+<!-- About Modal -->
+<div id="about-modal">
+  <div class="about-content">
+    <button class="about-close" onclick="closeAbout()" aria-label="Close">✕</button>
+    <h2>Numen — The Atlas of Belief</h2>
+    <p>Numen maps humanity's religious and spiritual traditions across 10,000 years of history. From prehistoric animism to modern pluralism, explore how beliefs emerged, spread, and influenced one another.</p>
+    <p>The name <em>Numen</em> derives from the Latin word for divine power or spirit — the sense of a sacred presence that pervades the world's many traditions.</p>
+    <p>Navigate the timeline to see which traditions were active in each era. Use lenses to explore different aspects: beliefs, practices, sacred texts, key figures, and more. Compare traditions side by side or trace conceptual threads across cultures.</p>
+    <p style="color:var(--txt-dim);font-size:0.85rem;margin-top:16px;">Part of <a href="../">The Pangea Project</a>. All descriptions aim for academic neutrality and respectful representation of every tradition.</p>
+  </div>
+</div>
+
+<!-- Timeline -->
+<footer id="timeline" aria-label="Timeline controls">
+  <span class="tl-label">Era</span>
+  <button class="tl-play" id="tl-play" onclick="togglePlay()" aria-label="Play timeline">▶</button>
+  <span class="tl-year" id="tl-year">2025 CE</span>
+  <div class="tl-slider-wrap">
+    <input type="range" id="tl-slider" min="0" max="1000" value="1000"
+           oninput="onSliderInput(this.value)" aria-label="Timeline slider">
+    <canvas id="density-bar" height="14"></canvas>
+  </div>
+  <span class="tl-label" id="tl-era-label">Modern Pluralism</span>
+</footer>
+
+<script>
+/* ============================================================
+   NUMEN — The Atlas of Belief — JavaScript
+   ============================================================ */
+</script>
+</body>
+</html>
