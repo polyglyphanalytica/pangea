@@ -1046,16 +1046,14 @@ function togglePlay(){
 
 /* --- Render World Map (D3 + TopoJSON) --- */
 function renderWorldMap(world){
-  const W=1000,H=520;
-  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
+  const proj=d3.geoMercator().scale(158).translate([500,300]);
   window._proj=proj;
   const pathGen=d3.geoPath().projection(proj);
   const land=topojson.feature(world,world.objects.land);
-  const graticule=d3.geoGraticule()();
   const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
-  let g=document.getElementById('map-layer');
-  g.innerHTML=
-    `<path d="${pathGen(graticule)||''}" fill="none" stroke="var(--bdr2)" stroke-width=".3"/>`+
+  const grat=d3.geoGraticule()();
+  document.getElementById('map-layer').innerHTML=
+    `<path d="${pathGen(grat)||''}" fill="none" stroke="var(--bdr2)" stroke-width=".3"/>`+
     `<path d="${pathGen(land)||''}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>`+
     `<path d="${pathGen(borders)||''}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
 }
