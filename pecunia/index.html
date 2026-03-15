@@ -1329,6 +1329,10 @@ button {
   </div>
 </div>
 
+<!-- D3 + TopoJSON (must load before main script) -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+
 <script>
 // Pecunia — The Atlas of Money
 // ============================================================
@@ -1774,6 +1778,301 @@ function renderDensityBar(){
     ctx.fillRect(i,h-(intensity*h),1,intensity*h);
   }
 }
+
+/* ============================================================
+   SELECT / CLICK HANDLERS
+   ============================================================ */
+function selectMoney(m){
+  curMoney=m;
+  renderMap();
+  renderDrawer(m);
+}
+
+function closePanel(){
+  curMoney=null;
+  document.getElementById("infoPanel").classList.remove("open");
+  renderMap();
+}
+
+/* ============================================================
+   ZOOM & PAN
+   ============================================================ */
+function applyTransform(){
+  const g=document.getElementById("map-layer");
+  const mg=document.getElementById("markerGroup");
+  const cg=document.getElementById("connectionGroup");
+  const tg=document.getElementById("transmissionGroup");
+  const lg=document.getElementById("landGroup");
+  const t=`translate(${mapPanX},${mapPanY}) scale(${mapZoom})`;
+  [g,mg,cg,tg,lg].forEach(el=>{if(el)el.setAttribute("transform",t);});
+}
+
+function initPanZoom(){
+  const container=document.getElementById("mapContainer");
+  const svg=document.getElementById("mapSvg");
+
+  container.addEventListener("mousedown",e=>{
+    dragging=true;
+    dragStart={x:e.clientX,y:e.clientY};
+    panStart={x:mapPanX,y:mapPanY};
+    container.style.cursor="grabbing";
+  });
+
+  window.addEventListener("mousemove",e=>{
+    if(!dragging) return;
+    mapPanX=panStart.x+(e.clientX-dragStart.x)/mapZoom;
+    mapPanY=panStart.y+(e.clientY-dragStart.y)/mapZoom;
+    applyTransform();
+  });
+
+  window.addEventListener("mouseup",()=>{
+    dragging=false;
+    document.getElementById("mapContainer").style.cursor="grab";
+  });
+
+  container.addEventListener("wheel",e=>{
+    e.preventDefault();
+    const delta=e.deltaY>0?0.9:1.1;
+    mapZoom=Math.max(0.5,Math.min(8,mapZoom*delta));
+    applyTransform();
+  },{passive:false});
+
+  // Touch support
+  let lastTouchDist=0;
+  container.addEventListener("touchstart",e=>{
+    if(e.touches.length===1){
+      dragging=true;
+      dragStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+      panStart={x:mapPanX,y:mapPanY};
+    } else if(e.touches.length===2){
+      lastTouchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+    }
+  },{passive:true});
+
+  container.addEventListener("touchmove",e=>{
+    if(e.touches.length===1&&dragging){
+      mapPanX=panStart.x+(e.touches[0].clientX-dragStart.x)/mapZoom;
+      mapPanY=panStart.y+(e.touches[0].clientY-dragStart.y)/mapZoom;
+      applyTransform();
+    } else if(e.touches.length===2){
+      const dist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      if(lastTouchDist>0){
+        mapZoom=Math.max(0.5,Math.min(8,mapZoom*(dist/lastTouchDist)));
+        applyTransform();
+      }
+      lastTouchDist=dist;
+    }
+  },{passive:true});
+
+  container.addEventListener("touchend",()=>{dragging=false;lastTouchDist=0;});
+}
+
+/* ============================================================
+   THEME TOGGLE
+   ============================================================ */
+function toggleTheme(){
+  const html=document.documentElement;
+  const toggle=document.getElementById("themeToggle");
+  if(html.getAttribute("data-theme")==="dark"){
+    html.setAttribute("data-theme","light");
+    toggle.classList.add("light");
+    toggle.setAttribute("aria-checked","true");
+  } else {
+    html.setAttribute("data-theme","dark");
+    toggle.classList.remove("light");
+    toggle.setAttribute("aria-checked","false");
+  }
+  // Re-render map for theme colors
+  if(typeof renderMap==="function") renderMap();
+}
+
+/* ============================================================
+   BURGER MENU
+   ============================================================ */
+function toggleBurger(){
+  const menu=document.getElementById("burgerMenu");
+  const btn=document.getElementById("burgerBtn");
+  const isOpen=menu.classList.contains("open");
+  menu.classList.toggle("open");
+  btn.classList.toggle("open");
+  btn.setAttribute("aria-expanded",!isOpen);
+}
+
+function closeBurger(){
+  document.getElementById("burgerMenu").classList.remove("open");
+  document.getElementById("burgerBtn").classList.remove("open");
+  document.getElementById("burgerBtn").setAttribute("aria-expanded","false");
+}
+
+/* ============================================================
+   ABOUT MODAL
+   ============================================================ */
+function showAbout(){
+  document.getElementById("aboutModal").classList.add("open");
+}
+
+function closeAbout(){
+  document.getElementById("aboutModal").classList.remove("open");
+}
+
+// Close modal on overlay click
+document.getElementById("aboutModal").addEventListener("click",e=>{
+  if(e.target===e.currentTarget) closeAbout();
+});
+
+/* ============================================================
+   MODE: EXPLORE / THREADS / COMPARE
+   ============================================================ */
+function setMode(m){
+  mode=m;
+  // Update burger menu active states
+  document.querySelectorAll(".burger-link").forEach(el=>el.classList.remove("active"));
+  const modeNames={explore:"Explore",threads:"Threads",compare:"Compare"};
+  document.querySelectorAll(".burger-link").forEach(el=>{
+    if(el.textContent.trim()===modeNames[m]) el.classList.add("active");
+  });
+
+  if(m==="threads") showThreads();
+  else if(m==="compare") showCompare();
+  else { closePanel(); }
+}
+
+/* ============================================================
+   THREADS VIEW
+   ============================================================ */
+function showThreads(){
+  const panel=document.getElementById("infoPanel");
+  const title=document.getElementById("infoPanelTitle");
+  const meta=document.getElementById("infoPanelMeta");
+  const body=document.getElementById("infoPanelBody");
+
+  title.textContent="Monetary Threads";
+  meta.innerHTML=`<span class="meta-tag primary">Narrative Chains</span>`;
+
+  const threads=[
+    {title:"The Coinage Revolution",desc:"From Lydian staters to global denominations.",chain:["lydian-stater","greek-drachma","roman-denarius","byzantine-solidus"]},
+    {title:"Paper Money's Journey",desc:"From Song Dynasty China to modern banknotes.",chain:["jiaozi","assignat","british-pound","us-dollar"]},
+    {title:"Rise of Central Banking",desc:"Institutional evolution of monetary authority.",chain:["medici-bank","bank-of-amsterdam","bank-of-england","federal-reserve"]},
+    {title:"Digital Money Revolution",desc:"From credit cards to cryptocurrency.",chain:["credit-card","venmo-paypal","bitcoin","cbdc"]},
+    {title:"Crises That Shaped Finance",desc:"Bubbles, crashes, and their aftermath.",chain:["tulip-mania","south-sea-bubble","great-depression","2008-crisis"]}
+  ];
+
+  let html="";
+  threads.forEach(t=>{
+    html+=`<div class="thread-item"><div class="thread-title">${t.title}</div><div class="thread-desc">${t.desc}</div><div class="thread-chain">`;
+    t.chain.forEach((id,i)=>{
+      const m=MONEYS.find(x=>x.id===id);
+      if(m){
+        html+=`<span class="thread-node" onclick="selectMoney(MONEYS.find(x=>x.id==='${id}'));setMode('explore')">${m.n}</span>`;
+        if(i<t.chain.length-1) html+=`<span class="thread-arrow">→</span>`;
+      }
+    });
+    html+=`</div></div>`;
+  });
+
+  body.innerHTML=html;
+  panel.classList.add("open");
+}
+
+/* ============================================================
+   COMPARE VIEW
+   ============================================================ */
+function showCompare(){
+  const panel=document.getElementById("infoPanel");
+  const title=document.getElementById("infoPanelTitle");
+  const meta=document.getElementById("infoPanelMeta");
+  const body=document.getElementById("infoPanelBody");
+
+  title.textContent="Compare Currencies";
+  meta.innerHTML=`<span class="meta-tag primary">Select two currencies</span>`;
+
+  let html=`<div style="padding:8px 0"><p class="info-section-text">Pick two currencies from the map to compare them side by side.</p>`;
+  html+=`<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:12px">`;
+  MONEYS.forEach(m=>{
+    const selA=compareA&&compareA.id===m.id?"border-color:var(--accent);background:var(--accent-glow)":"";
+    const selB=compareB&&compareB.id===m.id?"border-color:var(--gold-bright);background:var(--accent-glow)":"";
+    html+=`<span class="thread-node" style="${selA||selB}" onclick="pickCompare('${m.id}')">${m.n}</span>`;
+  });
+  html+=`</div></div>`;
+
+  if(compareA&&compareB){
+    html+=`<div class="compare-container" style="margin-top:12px;border:1px solid var(--panel-border);border-radius:var(--radius)">`;
+    [compareA,compareB].forEach(m=>{
+      html+=`<div class="compare-col"><div class="compare-col-header">${m.n}</div>`;
+      html+=`<div class="info-section"><div class="info-section-title">Period</div><p class="info-section-text">${fmtYear(m.s)} — ${fmtYear(m.e)}</p></div>`;
+      html+=`<div class="info-section"><div class="info-section-title">Region</div><p class="info-section-text">${m.region||"N/A"}</p></div>`;
+      html+=`<div class="info-section"><div class="info-section-title">Type</div><p class="info-section-text">${m.type||"N/A"}</p></div>`;
+      if(m.d.overview) html+=`<div class="info-section"><div class="info-section-title">Overview</div><p class="info-section-text">${m.d.overview}</p></div>`;
+      html+=`</div>`;
+    });
+    html+=`</div>`;
+  }
+
+  body.innerHTML=html;
+  panel.classList.add("open");
+}
+
+function pickCompare(id){
+  const m=MONEYS.find(x=>x.id===id);
+  if(!m) return;
+  if(!compareA||compareB){compareA=m;compareB=null;}
+  else{compareB=m;}
+  showCompare();
+}
+
+/* ============================================================
+   KEYBOARD SHORTCUTS
+   ============================================================ */
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){
+    closePanel();closeBurger();closeAbout();
+    document.getElementById("lensDropdown").classList.remove("open");
+  }
+  if(e.key==="ArrowLeft") stepYear(-50);
+  if(e.key==="ArrowRight") stepYear(50);
+  if(e.key===" "&&document.activeElement===document.body){e.preventDefault();togglePlay();}
+});
+
+// Close lens dropdown on outside click
+document.addEventListener("click",e=>{
+  const lc=document.querySelector(".lens-container");
+  if(lc&&!lc.contains(e.target)){
+    document.getElementById("lensDropdown").classList.remove("open");
+    document.getElementById("lensBtn").classList.remove("open");
+    document.getElementById("lensBtn").setAttribute("aria-expanded","false");
+  }
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+async function init(){
+  const TOPO_URL="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+  try{
+    const resp=await fetch(TOPO_URL);
+    const topo=await resp.json();
+    renderWorldMap(topo);
+  }catch(err){
+    console.warn("TopoJSON load failed, using fallback markers only:",err);
+  }
+
+  setYear(-3000);
+  renderDensityBar();
+  initPanZoom();
+
+  // Hide loading overlay
+  setTimeout(()=>{
+    const lo=document.getElementById("loadingOverlay");
+    lo.classList.add("hidden");
+    setTimeout(()=>lo.style.display="none",600);
+  },800);
+}
+
+// Resize handler
+window.addEventListener("resize",()=>{renderDensityBar();});
+
+// Start
+init();
 </script>
 
 </body>
