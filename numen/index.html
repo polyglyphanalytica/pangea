@@ -3,40 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Numen — The Atlas of Belief | 50 Belief Systems, 10,000 Years of Spiritual History</title>
+<title>Numen — Religion & Belief Atlas</title>
 
 <!-- Primary SEO -->
-<meta name="description" content="Explore 50 belief systems across 10,000 years of spiritual history on an interactive world map. Navigate a continuous timeline from ancient animism to modern movements, with interpretive lenses, transmission threads, and comparative tools.">
-<meta name="keywords" content="world religions map, interactive religion, belief systems, spiritual history, timeline, comparative religion, theology, philosophy, sacred traditions">
-<meta name="author" content="The Pangea Project">
+<meta name="description" content="Explore 50 religions and belief systems across 65,000 years of spiritual history on an interactive world map. Navigate a continuous timeline from Aboriginal Dreamtime to modern movements, with 20 interpretive lenses, concept transmissions, What-If scenarios, and Heritage ancestry mapping.">
+<meta name="keywords" content="world religion map, interactive religion history, belief systems, spiritual traditions, timeline, religious history, faith atlas, theology, comparative religion">
+<meta name="author" content="Polyglyph Analytica">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://polyglyphanalytica.github.io/pangea/numen/">
+<link rel="canonical" href="https://polyglyphanalytica.github.io/numen/">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/numen/">
-<meta property="og:title" content="Numen — The Atlas of Belief">
-<meta property="og:description" content="50 belief systems. 10,000 years. Every prayer, philosophy, and sacred tradition that shaped the human spirit — mapped, connected, and explorable.">
-<meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/numen/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://polyglyphanalytica.github.io/numen/">
+<meta property="og:title" content="Numen — Religion & Belief Atlas">
+<meta property="og:description" content="50 religions and belief systems. 65,000 years. Every spiritual tradition, theological innovation, and sacred practice — mapped, connected, and explorable.">
 <meta property="og:site_name" content="Numen">
 <meta property="og:locale" content="en_US">
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Numen — The Atlas of Belief">
-<meta name="twitter:description" content="50 belief systems. 10,000 years. Every prayer, philosophy, and sacred tradition that shaped the human spirit — mapped, connected, and explorable.">
-<meta name="twitter:image" content="https://polyglyphanalytica.github.io/pangea/numen/og-image.png">
+<meta name="twitter:title" content="Numen — Religion & Belief Atlas">
+<meta name="twitter:description" content="50 religions and belief systems. 65,000 years. Every spiritual tradition mapped, connected, and explorable.">
 
 <!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Numen — The Atlas of Belief",
-  "description": "An interactive world atlas exploring 50 belief systems across 10,000 years of spiritual history. Features a real geographic map, continuous timeline, 12 interpretive lenses, concept transmission threads, and comparative tools.",
-  "url": "https://polyglyphanalytica.github.io/pangea/numen/",
+  "name": "Numen — Religion & Belief Atlas",
+  "description": "An interactive world religion application exploring 50 belief systems across 65,000 years. Features a real geographic map, continuous timeline, 20 interpretive lenses, cultural transmissions, What-If scenarios, and Heritage ancestry mapping.",
+  "url": "https://polyglyphanalytica.github.io/numen/",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Web Browser",
   "offers": {
@@ -46,27 +42,13 @@
   },
   "author": {
     "@type": "Organization",
-    "name": "The Pangea Project"
-  },
-  "featureList": [
-    "50 belief systems from ancient animism to modern spiritual movements",
-    "10,000-year interactive timeline",
-    "12 interpretive lenses including Theology, Ritual, Ethics, Sacred Texts",
-    "Religious concept transmission tracking across traditions",
-    "Belief system fingerprint radar charts",
-    "Side-by-side comparison mode",
-    "Dark and light themes"
-  ],
-  "about": {
-    "@type": "Thing",
-    "name": "World Religions and Belief Systems",
-    "description": "The complete arc of human spiritual expression from earliest animistic practices to the present day"
+    "name": "Polyglyph Analytica"
   }
 }
 </script>
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☸</text></svg>">
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
@@ -138,6 +120,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .cnt-disp{text-align:right;font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--txt3)}
 .cnt-n{font-size:22px;font-weight:600;color:var(--amber);display:block;line-height:1}
+.theme-btn{background:none;border:1px solid var(--bdr);padding:4px 8px;cursor:pointer;font-size:13px;color:var(--txt2);border-radius:3px;transition:all .15s;flex-shrink:0}
+.theme-btn:hover{background:var(--amber-x);color:var(--amber-b)}
 
 /* ── MAIN LAYOUT ── */
 .main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
@@ -206,9 +190,10 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
 .hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--hint);display:flex;align-items:center;justify-content:center;padding:0 8px;white-space:nowrap;overflow:hidden}
 #map-hint-text{pointer-events:none;overflow:hidden;text-overflow:ellipsis}
 
-/* ── MOBILE ── */
+/* ── MOB MAP BUTTON ── */
 .mob-map-btn{display:none}
 
+/* ── PORTRAIT MOBILE ── */
 @media(max-width:768px) and (orientation:portrait){
   .logo-s{display:none}
   .cnt-disp{display:none}
@@ -216,7 +201,8 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   .logo-t{font-size:16px;letter-spacing:2px}
   .era-y{font-size:18px}
   .era-n{font-size:10px;letter-spacing:1.5px}
-  .main{top:52px!important;bottom:0;flex-direction:column}
+  .main{top:52px!important}
+  .main{bottom:0;flex-direction:column}
   .map-tl-col{width:100%}
   .map-c{flex:0 0 42vh;width:100%}
   .info-panel{flex:1;width:100%;border-left:none;border-top:1px solid var(--bdr);overflow-y:auto;padding:0 16px 16px;border-radius:0}
@@ -228,6 +214,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   .lens-row-lbl{font-size:13px}
 }
 
+/* ── LANDSCAPE MOBILE ── */
 @media(max-width:900px) and (orientation:landscape){
   .logo-s{display:none}
   .hdr{padding:6px 14px}
@@ -260,7 +247,8 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
   max-height:0;overflow:hidden;
   transition:max-height .32s cubic-bezier(.4,0,.2,1);
 }
-.thread-panel.open{border-bottom:1px solid var(--bdr);box-shadow:0 6px 24px var(--shadow);max-height:70vh}
+.thread-panel.open{border-bottom:1px solid var(--bdr);box-shadow:0 6px 24px var(--shadow)}
+.thread-panel.open{max-height:70vh}
 .thread-panel-inner{padding:16px 20px 20px;overflow-y:auto;max-height:calc(70vh - 1px)}
 .thread-panel-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
 .thread-panel-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase}
@@ -301,7 +289,7 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
 .fp-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:8px}
 .fp-svg{display:block;margin:0 auto}
 .fp-label{font-family:'Cinzel',serif;font-size:8px;fill:var(--txt3)}
-.fp-poly{fill:rgba(232,152,32,.18);stroke:#e89820;stroke-width:1.2}
+.fp-poly{fill:rgba(200,168,232,.18);stroke:#c8a8e8;stroke-width:1.2}
 .fp-grid{fill:none;stroke:var(--bdr);stroke-width:.5}
 
 /* ── CONTEMPORARY BAR ── */
@@ -316,13 +304,25 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
 /* ── DENSITY SPARKLINE ── */
 #density-bar{height:18px;width:100%;display:block;margin-bottom:1px}
 
-/* ── MAP ZOOM/PAN ── */
-#wsvg{touch-action:none;user-select:none;-webkit-user-select:none;transition:none}
-.map-zoom-ctrl{position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px;z-index:50}
-.map-zoom-btn{width:28px;height:28px;background:var(--panel);border:1px solid var(--bdr);color:var(--amber-b);font-size:16px;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;transition:all .15s}
-.map-zoom-btn:hover{background:var(--panel2);border-color:var(--amber)}
-.cluster-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);background:var(--panel);border:1px solid var(--bdr);padding:4px 12px;border-radius:20px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:51}
-.cluster-hint.show{opacity:1}
+/* ── WHAT-IF MODE ── */
+.whatif-civ-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:7px 10px;text-align:left;cursor:pointer;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.5px;color:var(--txt2);margin-bottom:3px;border-radius:2px;transition:all .15s;display:flex;align-items:center;justify-content:space-between}
+.whatif-civ-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.whatif-civ-btn.selected{background:rgba(200,168,232,.12);border-color:#c8a8e8;color:#c8a8e8}
+.whatif-result{margin-top:12px;padding:12px;border:1px solid var(--bdr);border-radius:3px;background:var(--panel2)}
+.whatif-chain{padding:6px 0;border-bottom:1px solid var(--bdr2);font-size:12px;color:var(--txt2)}
+.whatif-chain:last-child{border-bottom:none}
+.whatif-chain.lost{color:#c8a8e8;text-decoration:line-through;opacity:.6}
+.whatif-intro{font-size:13px;line-height:1.7;color:var(--txt2);font-style:italic;margin-bottom:12px}
+
+/* ── HERITAGE MODE ── */
+.heritage-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+.heritage-btn{background:none;border:1px solid var(--bdr2);padding:8px 6px;cursor:pointer;font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.5px;color:var(--txt2);border-radius:2px;transition:all .15s;text-align:center}
+.heritage-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.heritage-btn.active{background:var(--amber-x);border-color:var(--amber-b);color:var(--amber-b)}
+.heritage-civ{padding:5px 0;border-bottom:1px solid var(--bdr2);font-size:12.5px;cursor:pointer;transition:color .15s}
+.heritage-civ:hover{color:var(--amber-b)}
+.heritage-civ-nm{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);display:block;margin-bottom:2px}
+.heritage-civ-why{font-size:11px;color:var(--txt3)}
 
 /* ── CLUSTER PICKER ── */
 #cluster-picker{
@@ -339,187 +339,83 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
   border-bottom:1px solid var(--bdr2);text-transform:uppercase;
   display:flex;justify-content:space-between;align-items:center;
 }
-.cluster-item{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--bdr2);transition:background .12s}
+.cluster-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;
+  cursor:pointer;border-bottom:1px solid var(--bdr2);
+  transition:background .12s;
+}
 .cluster-item:last-child{border-bottom:none}
 .cluster-item:hover,.cluster-item:active{background:var(--panel2)}
-.cluster-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cluster-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#c8a8e8}
 .cluster-item-nm{font-family:'Cinzel',serif;font-size:13px;color:var(--txt);flex:1}
 .cluster-item-sb{font-size:11px;color:var(--txt3);margin-top:1px}
 
 /* ── BURGER MENU ── */
 .burger-wrap{position:relative}
-.burger-btn{background:none;border:1px solid var(--bdr);color:var(--amber-b);cursor:pointer;width:34px;height:34px;border-radius:3px;display:flex;align-items:center;justify-content:center;transition:all .15s;padding:0}
+.burger-btn{background:none;border:1px solid var(--bdr);color:var(--amber-b);cursor:pointer;
+  width:34px;height:34px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;padding:0}
 .burger-btn:hover{background:var(--panel2);border-color:var(--amber)}
-.burger-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel);border:1px solid var(--bdr);border-radius:4px;min-width:196px;box-shadow:0 8px 32px var(--shadow);z-index:800;display:none;flex-direction:column;overflow:hidden}
+.burger-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:4px;min-width:196px;
+  box-shadow:0 8px 32px var(--shadow);z-index:800;
+  display:none;flex-direction:column;overflow:hidden}
 .burger-menu.open{display:flex}
-.burger-item{display:flex;align-items:center;gap:10px;padding:12px 16px;background:none;border:none;color:var(--txt2);cursor:pointer;text-align:left;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.5px;width:100%;transition:background .12s;white-space:nowrap}
+.burger-item{display:flex;align-items:center;gap:10px;padding:12px 16px;
+  background:none;border:none;color:var(--txt2);cursor:pointer;text-align:left;
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:.5px;width:100%;
+  transition:background .12s;white-space:nowrap}
 .burger-item:hover,.burger-item:active{background:var(--panel2);color:var(--txt)}
-.burger-item.active{background:var(--amber-x);color:var(--amber-b)}
+.burger-item.active,.burger-item.burger-mode.active{background:var(--amber-x);color:var(--amber-b)}
+.burger-item-badge{margin-left:auto;font-size:9px;color:var(--amber-b);
+  font-family:'Cinzel',serif;letter-spacing:1px;display:none}
+.burger-item-badge.on{display:inline}
 .burger-divider{height:1px;background:var(--bdr2);margin:2px 0}
+
+/* ── MAP ZOOM/PAN ── */
+#wsvg{touch-action:none;user-select:none;-webkit-user-select:none;transition:none}
+.map-zoom-ctrl{position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px;z-index:50}
+.map-zoom-btn{width:28px;height:28px;background:var(--panel);border:1px solid var(--bdr);color:var(--amber-b);
+  font-size:16px;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;transition:all .15s}
+.map-zoom-btn:hover{background:var(--panel2);border-color:var(--amber)}
+.cluster-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);
+  background:var(--panel);border:1px solid var(--bdr);padding:4px 12px;border-radius:20px;
+  opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:51}
+.cluster-hint.show{opacity:1}
+
+/* ── FAMILY COLOR MARKERS ── */
+.family-abrahamic{fill:#4a8ec8}
+.family-dharmic{fill:#e89820}
+.family-eastasian{fill:#e8251a}
+.family-indigenous{fill:#4a9e3f}
+.family-iranian{fill:#9b6fd4}
+.family-classical{fill:#c8881c}
+.family-modern{fill:#c060a0}
+
+/* ── PULL TO REFRESH ── */
+#ptr-indicator{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  height:0;overflow:hidden;background:var(--panel);
+  border-bottom:1px solid var(--bdr);
+  transition:height .2s ease,opacity .2s ease;
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;
+  color:var(--txt3);text-transform:uppercase;opacity:0;
+  pointer-events:none;
+}
+#ptr-indicator.pulling{height:52px;opacity:1}
+#ptr-indicator.ready{color:var(--amber-b)}
+#ptr-indicator.refreshing{height:52px;opacity:1}
+#ptr-spinner{
+  width:16px;height:16px;border:2px solid var(--bdr);
+  border-top-color:var(--amber-b);border-radius:50%;
+  transition:transform .25s ease;flex-shrink:0;
+}
+#ptr-indicator.refreshing #ptr-spinner{
+  animation:ptr-spin .7s linear infinite;
+}
+@keyframes ptr-spin{to{transform:rotate(360deg)}}
 </style>
 </head>
-<body>
-
-<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to belief panel</button>
-<header class="hdr" role="banner">
-  <div class="hdr-left">
-    <span class="logo-t">NUMEN</span>
-    <span class="logo-s">The Atlas of Belief</span>
-  </div>
-  <div class="era-disp">
-    <div class="era-y" id="era-y">3000 BCE</div>
-    <div class="era-n" id="era-n">ANCIENT WORLD</div>
-  </div>
-  <div class="hdr-right">
-    <div class="cnt-disp">
-      <span class="cnt-n" id="cnt-n">2</span>
-      beliefs active
-    </div>
-    <div class="burger-wrap" id="burger-wrap">
-      <button class="burger-btn" id="burger-btn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
-        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <line x1="0" y1="7" x2="18" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <line x1="0" y1="13" x2="18" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <div class="burger-menu" id="burger-menu" role="menu">
-        <a class="burger-item" href="../index.html" role="menuitem" style="text-decoration:none">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          <span>The Pangea Project</span>
-        </a>
-        <div class="burger-divider"></div>
-        <button class="burger-item active" id="btn-explore" onclick="setMode('explore');closeBurger()" role="menuitem" aria-pressed="true">
-          <span>&#9737;</span><span>Explore</span>
-        </button>
-        <button class="burger-item" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>&#10227;</span><span>Threads</span>
-        </button>
-        <button class="burger-item" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>&#8862;</span><span>Compare</span>
-        </button>
-        <div class="burger-divider"></div>
-        <button class="burger-item" id="menu-theme" onclick="toggleTheme();closeBurger()" role="menuitem">
-          <span>&#9681;</span>
-          <span>Toggle Theme</span>
-        </button>
-        <div class="burger-divider"></div>
-        <button class="burger-item" onclick="showAbout();closeBurger()" role="menuitem">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span>About</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</header>
-
-<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Religious concept transmissions">
-  <div class="thread-panel-inner">
-    <div class="thread-panel-bar">
-      <span class="thread-panel-title" id="thread-panel-title">Religious Threads</span>
-      <div style="display:flex;align-items:center;gap:12px">
-        <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">&larr; All Threads</button>
-        <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">&#10005;</button>
-      </div>
-    </div>
-    <div id="thread-concept-list"></div>
-    <div id="thread-active-steps" style="display:none"></div>
-  </div>
-</div>
-
-<div class="share-toast" id="share-toast">Link copied to clipboard</div>
-
-<div class="main">
-  <div class="map-tl-col">
-  <div class="map-c">
-    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with belief system markers" style="cursor:pointer">
-      <defs>
-        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#c8881c" flood-opacity=".85"/>
-        </filter>
-        <filter id="glow2" x="-100%" y="-100%" width="300%" height="300%">
-          <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#c8881c" flood-opacity=".5"/>
-        </filter>
-      </defs>
-      <rect width="1000" height="520" fill="var(--bg)"/>
-      <g stroke="rgba(200,136,28,.04)" stroke-width=".5" fill="none">
-        <line x1="0" y1="120" x2="1000" y2="120"/>
-        <line x1="0" y1="195" x2="1000" y2="195"/>
-        <line x1="0" y1="265" x2="1000" y2="265"/>
-        <line x1="0" y1="335" x2="1000" y2="335"/>
-        <line x1="0" y1="405" x2="1000" y2="405"/>
-        <line x1="200" y1="0" x2="200" y2="520"/>
-        <line x1="400" y1="0" x2="400" y2="520"/>
-        <line x1="600" y1="0" x2="600" y2="520"/>
-        <line x1="800" y1="0" x2="800" y2="520"/>
-      </g>
-      <g id="map-layer"></g>
-      <g id="conn-layer"></g>
-      <g id="mark-layer"></g>
-      <g id="thread-layer"></g>
-      <g id="label-layer"></g>
-    </svg>
-    <div class="map-zoom-ctrl">
-      <button class="map-zoom-btn" onclick="zoomMap(1.4)" aria-label="Zoom in">+</button>
-      <button class="map-zoom-btn" onclick="zoomMap(1/1.4)" aria-label="Zoom out">&minus;</button>
-      <button class="map-zoom-btn" id="map-reset-btn" onclick="resetMapZoom()" aria-label="Reset zoom" style="display:none;font-size:11px">&#8634;</button>
-    </div>
-    <div class="cluster-hint" id="cluster-hint"></div>
-  </div>
-  <div class="tl-wrap">
-    <div class="tl-lbls">
-      <span class="tl-lbl">8000 BCE</span>
-      <span class="tl-lbl">Present</span>
-    </div>
-    <div class="tl-trk">
-      <div class="tl-fill" id="tl-fill"></div>
-      <div class="tl-thumb" id="tl-thumb" style="left:0%"></div>
-      <input type="range" class="tl-range" id="tl" min="0" max="1000" value="0"
-        aria-label="Timeline" aria-valuenow="0" aria-valuetext="8000 BCE">
-    </div>
-    <svg id="density-bar" aria-hidden="true"></svg>
-    <div class="hint"><span id="map-hint-text">Drag the timeline to explore 10,000 years of belief</span></div>
-  </div>
-  </div>
-  <div class="info-panel" id="info-panel" tabindex="-1" role="complementary" aria-label="Belief system details">
-    <div id="drawer-top"></div>
-    <div id="drawer-content"></div>
-  </div>
-</div>
-
-<!-- Cluster picker popup -->
-<div id="cluster-picker" role="dialog" aria-label="Select belief system">
-  <div id="cluster-picker-hdr">
-    <span>Select belief system</span>
-    <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">&#10005;</button>
-  </div>
-  <div id="cluster-list"></div>
-</div>
-
-<!-- About modal -->
-<div id="about-modal" role="dialog" aria-modal="true" aria-label="About Numen" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center">
-  <div style="background:var(--panel);border:1px solid var(--bdr);border-radius:6px;padding:28px 32px;max-width:420px;width:calc(100% - 40px);position:relative;box-shadow:0 16px 48px rgba(0,0,0,.6)">
-    <button onclick="closeAbout()" aria-label="Close" style="position:absolute;top:12px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1">&#10005;</button>
-    <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px">NUMEN</div>
-    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">The Atlas of Belief</div>
-    <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:12px">
-      An interactive atlas of humanity's religious and spiritual traditions across 10,000 years. Part of <a href="../index.html" style="color:var(--amber-b);text-decoration:underline;text-underline-offset:3px">The Pangea Project</a>.
-    </p>
-    <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:12px">
-      Created by <a href="https://polyglyphanalytica.com" target="_blank" rel="noopener" style="color:var(--amber-b);text-decoration:underline;text-underline-offset:3px">Polyglyph Analytica</a> &copy; <span id="about-year"></span>
-    </p>
-    <p style="font-size:12px;line-height:1.7;color:var(--txt3)">
-      Offered under the MIT License. This project approaches all belief systems with academic neutrality and respect. No tradition is privileged or diminished.
-    </p>
-  </div>
-</div>
-
-<script>
-// ══════════════════════════════════════════════════════
-// NUMEN — THE ATLAS OF BELIEF
-// Data, rendering, and interaction
-// ══════════════════════════════════════════════════════
-
-</script>
-</body>
-</html>
