@@ -1,3065 +1,560 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pecunia — The Atlas of Money</title>
-<meta name="description" content="Pecunia — The Atlas of Money: An interactive exploration of monetary history from ancient barter to digital currencies. Trace the evolution of money across civilizations, eras, and continents.">
-<meta name="keywords" content="money history, currency atlas, monetary evolution, numismatics, financial history, coins, paper money, digital currency">
-<meta name="author" content="The Pangea Project">
-<link rel="canonical" href="https://polyglyphanalytica.github.io/pangea/pecunia/">
+<title>Pecunia — Money & Economics Atlas</title>
 
-<!-- Open Graph -->
+<!-- Primary SEO -->
+<meta name="description" content="Explore 50 monetary systems and economic milestones across 8,000 years of financial history on an interactive world map. Navigate a continuous timeline from Mesopotamian silver to cryptocurrency, with 20 interpretive lenses, economic transmissions, What-If scenarios, and heritage modes.">
+<meta name="keywords" content="money history, economics atlas, currency history, financial history, interactive map, trade routes, banking history, economic education">
+<meta name="author" content="Polyglyph Analytica">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://polyglyphanalytica.github.io/pecunia/">
+
+<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Pecunia — The Atlas of Money">
-<meta property="og:description" content="An interactive atlas tracing the evolution of money from ancient barter to digital currencies across civilizations and continents.">
-<meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/pecunia/">
-<meta property="og:site_name" content="The Pangea Project">
-<meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/pecunia/og-image.png">
+<meta property="og:url" content="https://polyglyphanalytica.github.io/pecunia/">
+<meta property="og:title" content="Pecunia — Money & Economics Atlas">
+<meta property="og:description" content="50 monetary systems. 8,000 years. Every coin, currency, and financial revolution that shaped the modern economy — mapped, connected, and explorable.">
+<meta property="og:site_name" content="Pecunia">
+<meta property="og:locale" content="en_US">
 
-<!-- Twitter Card -->
+<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pecunia — The Atlas of Money">
-<meta name="twitter:description" content="An interactive atlas tracing the evolution of money from ancient barter to digital currencies.">
-<meta name="twitter:image" content="https://polyglyphanalytica.github.io/pangea/pecunia/og-image.png">
+<meta name="twitter:title" content="Pecunia — Money & Economics Atlas">
+<meta name="twitter:description" content="50 monetary systems. 8,000 years. Every coin, currency, and financial revolution that shaped the modern economy — mapped, connected, and explorable.">
 
-<!-- Schema.org WebApplication -->
+<!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Pecunia — The Atlas of Money",
-  "description": "An interactive atlas tracing the evolution of money from ancient barter to digital currencies across civilizations and continents.",
-  "url": "https://polyglyphanalytica.github.io/pangea/pecunia/",
+  "name": "Pecunia — Money & Economics Atlas",
+  "description": "An interactive economic history application exploring 50 monetary systems across 8,000 years. Features a real geographic map, continuous timeline, 20 interpretive lenses, economic transmissions, What-If scenarios, and heritage modes.",
+  "url": "https://polyglyphanalytica.github.io/pecunia/",
   "applicationCategory": "EducationalApplication",
-  "operatingSystem": "Any",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
   "author": {
     "@type": "Organization",
-    "name": "The Pangea Project"
+    "name": "Polyglyph Analytica"
   }
 }
 </script>
 
 <!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪙</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
 
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   PECUNIA — THE ATLAS OF MONEY
-   Pangea Design System
-   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box}
 
-/* --- CSS Custom Properties (Dark Theme Default) --- */
-:root {
-  --bg: #02040a;
-  --panel: #070b12;
-  --panel-border: #1a1510;
-  --amber: #e89820;
-  --accent: #d4a820;
-  --accent-dim: #8a6e18;
-  --accent-glow: rgba(212, 168, 32, 0.25);
-  --txt: #f2e8d5;
-  --txt-dim: #a09882;
-  --txt-muted: #6a6050;
-  --gold: #d4a820;
-  --gold-bright: #f0c840;
-  --gold-dark: #8a6e18;
-  --map-land: #181410;
-  --map-border: #2a2418;
-  --map-water: #02040a;
-  --danger: #c44;
-  --success: #4a4;
-  --info: #48a;
-  --header-h: 54px;
-  --timeline-h: 64px;
-  --panel-w: 380px;
-  --radius: 6px;
-  --radius-lg: 10px;
-  --font-display: 'Cinzel Decorative', 'Cinzel', serif;
-  --font-heading: 'Cinzel', serif;
-  --font-body: 'Crimson Pro', 'Georgia', serif;
-  --shadow: 0 2px 16px rgba(0,0,0,0.5);
-  --shadow-lg: 0 4px 32px rgba(0,0,0,0.7);
-  --transition: 0.25s ease;
-  --land: #2a4a18;
-  --land-s: #3a6020;
-  --bdr2: rgba(200,180,140,0.12);
+/* ── DARK THEME (default) ── */
+:root{
+  --bg:#02040a;
+  --panel:#070b12;
+  --panel2:#0c1018;
+  --ocean-start:#0a1628;--ocean-end:#061020;
+  --land:#2a4a18;--land-s:#3a6020;
+  --amber:#e89820;--amber-b:#f0b040;--amber-d:#3a2204;
+  --amber-x:rgba(232,152,32,0.14);--amber-xx:rgba(232,152,32,0.08);
+  --txt:#f2e8d5;--txt2:#e0d4b4;--txt3:#c8aa78;
+  --bdr:rgba(232,152,32,0.22);--bdr2:rgba(232,152,32,0.10);
+  --hint:rgba(224,212,180,0.65);
+  --tl-bg:rgba(2,4,10,0.99);
+  --hdr-bg:rgba(2,4,10,0.97);
+  --conn-bdr:rgba(232,152,32,0.10);
+  --shadow:rgba(0,0,0,0.6);
 }
 
-/* --- Light Theme --- */
-[data-theme="light"] {
-  --bg: #f0ebe0;
-  --panel: #e8e0d0;
-  --panel-border: #c8c0b0;
-  --amber: #4a2c00;
-  --accent: #8a6e18;
-  --accent-dim: #b89830;
-  --accent-glow: rgba(138, 110, 24, 0.2);
-  --txt: #1a1206;
-  --txt-dim: #5a5040;
-  --txt-muted: #8a8070;
-  --gold: #8a6e18;
-  --gold-bright: #a88420;
-  --gold-dark: #5a4810;
-  --map-land: #d8d0c0;
-  --map-border: #b8b0a0;
-  --map-water: #e8e2d8;
-  --danger: #a22;
-  --success: #282;
-  --info: #268;
-  --shadow: 0 2px 16px rgba(0,0,0,0.12);
-  --shadow-lg: 0 4px 32px rgba(0,0,0,0.18);
-  --land: #8ca860;
-  --land-s: #7a9850;
-  --bdr2: rgba(80,60,30,0.12);
+/* ── LIGHT THEME ── */
+[data-theme="light"]{
+  --bg:#f0ebe0;
+  --panel:#e8e0d0;
+  --panel2:#ddd4c0;
+  --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
+  --land:#8ca860;--land-s:#7a9850;
+  --amber:#4a2c00;--amber-b:#5a3800;--amber-d:#f0d8a0;
+  --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
+  --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
+  --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
+  --hint:rgba(30,18,6,0.6);
+  --tl-bg:rgba(236,228,214,0.99);
+  --hdr-bg:rgba(236,228,214,0.97);
+  --conn-bdr:rgba(122,78,0,0.12);
+  --shadow:rgba(0,0,0,0.18);
 }
 
-/* --- Prefers Color Scheme --- */
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #f0ebe0;
-    --panel: #e8e0d0;
-    --panel-border: #c8c0b0;
-    --amber: #4a2c00;
-    --accent: #8a6e18;
-    --accent-dim: #b89830;
-    --accent-glow: rgba(138, 110, 24, 0.2);
-    --txt: #1a1206;
-    --txt-dim: #5a5040;
-    --txt-muted: #8a8070;
-    --gold: #8a6e18;
-    --gold-bright: #a88420;
-    --gold-dark: #5a4810;
-    --map-land: #d8d0c0;
-    --map-border: #b8b0a0;
-    --map-water: #e8e2d8;
-    --danger: #a22;
-    --success: #282;
-    --info: #268;
-    --shadow: 0 2px 16px rgba(0,0,0,0.12);
-    --shadow-lg: 0 4px 32px rgba(0,0,0,0.18);
-    --land: #8ca860;
-    --land-s: #7a9850;
-    --bdr2: rgba(80,60,30,0.12);
+@media(prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#f0ebe0;--panel:#e8e0d0;--panel2:#ddd4c0;
+    --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
+    --land:#8ca860;--land-s:#7a9850;
+    --amber:#4a2c00;--amber-b:#5a3800;--amber-d:#f0d8a0;
+    --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
+    --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
+    --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
+    --hint:rgba(30,18,6,0.6);
+    --tl-bg:rgba(236,228,214,0.99);
+    --hdr-bg:rgba(236,228,214,0.97);
+    --conn-bdr:rgba(122,78,0,0.12);
+    --shadow:rgba(0,0,0,0.18);
   }
 }
 
-/* --- Reset & Base --- */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--txt);
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a { color: var(--accent); text-decoration: none; }
-a:hover { color: var(--gold-bright); }
-
-button {
-  font-family: var(--font-body);
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: var(--txt);
-  font-size: 0.95rem;
-}
-
-/* --- Scrollbar --- */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-/* ============================================================
-   HEADER
-   ============================================================ */
-.header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: var(--header-h);
-  background: var(--panel);
-  border-bottom: 1px solid var(--panel-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  z-index: 100;
-  user-select: none;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.logo {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 900;
-  color: var(--accent);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.logo-icon {
-  font-size: 1.2rem;
-  margin-right: 4px;
-}
-
-.subtitle {
-  font-family: var(--font-heading);
-  font-size: 0.72rem;
-  color: var(--txt-dim);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin-left: 2px;
-}
-
-.header-center {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.era-display {
-  font-family: var(--font-heading);
-  font-size: 0.82rem;
-  color: var(--accent);
-  letter-spacing: 0.08em;
-  padding: 4px 14px;
-  border: 1px solid var(--accent-dim);
-  border-radius: var(--radius);
-  background: var(--accent-glow);
-  white-space: nowrap;
-}
-
-.year-display {
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  color: var(--txt);
-  letter-spacing: 0.05em;
-  min-width: 80px;
-  text-align: center;
-}
-
-/* Lens Dropdown */
-.lens-container {
-  position: relative;
-}
-
-.lens-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  background: var(--panel);
-  color: var(--txt);
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-  transition: border-color var(--transition);
-}
-
-.lens-btn:hover {
-  border-color: var(--accent);
-}
-
-.lens-btn .lens-icon {
-  font-size: 0.95rem;
-}
-
-.lens-btn .lens-arrow {
-  font-size: 0.6rem;
-  margin-left: 2px;
-  transition: transform var(--transition);
-}
-
-.lens-btn.open .lens-arrow {
-  transform: rotate(180deg);
-}
-
-.lens-dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  padding: 6px 0;
-  min-width: 200px;
-  max-height: 360px;
-  overflow-y: auto;
-  box-shadow: var(--shadow-lg);
-  z-index: 200;
-  display: none;
-}
-
-.lens-dropdown.open {
-  display: block;
-}
-
-.lens-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  color: var(--txt-dim);
-  transition: background var(--transition), color var(--transition);
-}
-
-.lens-option:hover {
-  background: var(--accent-glow);
-  color: var(--txt);
-}
-
-.lens-option.active {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.lens-option .lo-icon {
-  font-size: 1rem;
-  width: 22px;
-  text-align: center;
-}
-
-/* Header Right / Burger */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.burger-btn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 36px;
-  height: 36px;
-  gap: 5px;
-  cursor: pointer;
-  border-radius: var(--radius);
-  transition: background var(--transition);
-}
-
-.burger-btn:hover {
-  background: var(--accent-glow);
-}
-
-.burger-line {
-  width: 20px;
-  height: 2px;
-  background: var(--txt-dim);
-  border-radius: 1px;
-  transition: all var(--transition);
-}
-
-.burger-btn.open .burger-line:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.burger-btn.open .burger-line:nth-child(2) {
-  opacity: 0;
-}
-
-.burger-btn.open .burger-line:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* ============================================================
-   BURGER MENU / SIDEBAR
-   ============================================================ */
-.burger-menu {
-  position: fixed;
-  top: var(--header-h);
-  right: 0;
-  width: 280px;
-  max-height: calc(100vh - var(--header-h));
-  background: var(--panel);
-  border-left: 1px solid var(--panel-border);
-  border-bottom: 1px solid var(--panel-border);
-  box-shadow: var(--shadow-lg);
-  z-index: 150;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
-  overflow-y: auto;
-  border-radius: 0 0 0 var(--radius-lg);
-}
-
-.burger-menu.open {
-  transform: translateX(0);
-}
-
-.burger-section {
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--panel-border);
-}
-
-.burger-section:last-child {
-  border-bottom: none;
-}
-
-.burger-section-title {
-  font-family: var(--font-heading);
-  font-size: 0.68rem;
-  color: var(--txt-muted);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.burger-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: var(--radius);
-  color: var(--txt-dim);
-  font-family: var(--font-body);
-  font-size: 0.92rem;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.burger-link:hover {
-  background: var(--accent-glow);
-  color: var(--txt);
-}
-
-.burger-link.active {
-  color: var(--accent);
-  background: var(--accent-glow);
-}
-
-.burger-link-icon {
-  font-size: 1.05rem;
-  width: 24px;
-  text-align: center;
-}
-
-.theme-toggle-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 10px;
-}
-
-.theme-toggle-label {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--txt-dim);
-}
-
-.theme-toggle {
-  position: relative;
-  width: 44px;
-  height: 24px;
-  background: var(--accent-dim);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background var(--transition);
-}
-
-.theme-toggle.light {
-  background: var(--accent);
-}
-
-.theme-toggle-knob {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 18px;
-  height: 18px;
-  background: var(--txt);
-  border-radius: 50%;
-  transition: transform var(--transition);
-}
-
-.theme-toggle.light .theme-toggle-knob {
-  transform: translateX(20px);
-}
-
-/* ============================================================
-   MAIN LAYOUT
-   ============================================================ */
-.main {
-  position: fixed;
-  top: var(--header-h);
-  left: 0;
-  right: 0;
-  bottom: calc(var(--timeline-h) + 28px);
-  overflow: hidden;
-  background: var(--map-water);
-}
-
-/* ============================================================
-   SVG MAP
-   ============================================================ */
-.map-container {
-  width: 100%;
-  height: 100%;
-  cursor: grab;
-  overflow: hidden;
-  position: relative;
-}
-
-.map-container:active {
-  cursor: grabbing;
-}
-
-.map-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* Map Elements */
-.land {
-  fill: var(--map-land);
-  stroke: var(--map-border);
-  stroke-width: 0.5;
-  transition: fill var(--transition);
-}
-
-.money-marker {
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.money-marker:hover .marker-circle {
-  filter: brightness(1.3);
-}
-
-.marker-circle {
-  transition: all var(--transition);
-}
-
-.marker-label {
-  font-family: var(--font-heading);
-  font-size: 6px;
-  fill: var(--txt);
-  text-anchor: middle;
-  pointer-events: none;
-  opacity: 0.85;
-}
-
-/* Pulse animation for active markers */
-@keyframes pulse-ring {
-  0% { r: inherit; opacity: 0.6; }
-  70% { opacity: 0; }
-  100% { r: 20; opacity: 0; }
-}
-
-.pulse {
-  animation: pulse-ring 2s ease-out infinite;
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 1.5;
-}
-
-/* Connection lines */
-.connection-line {
-  stroke: var(--accent-dim);
-  stroke-width: 0.8;
-  stroke-dasharray: 4 3;
-  fill: none;
-  opacity: 0.4;
-  transition: opacity var(--transition);
-}
-
-.connection-line.active {
-  opacity: 0.8;
-  stroke: var(--accent);
-}
-
-/* Transmission paths */
-.transmission-path {
-  stroke: var(--gold);
-  stroke-width: 1.2;
-  fill: none;
-  opacity: 0;
-  stroke-dasharray: 6 4;
-  transition: opacity 0.5s ease;
-}
-
-.transmission-path.visible {
-  opacity: 0.6;
-}
-
-@keyframes dash-flow {
-  to { stroke-dashoffset: -20; }
-}
-
-.transmission-path.animated {
-  animation: dash-flow 1.5s linear infinite;
-}
-
-/* ============================================================
-   INFO PANEL / DRAWER
-   ============================================================ */
-.info-panel {
-  position: fixed;
-  top: var(--header-h);
-  right: 0;
-  width: var(--panel-w);
-  height: calc(100vh - var(--header-h) - var(--timeline-h));
-  background: var(--panel);
-  border-left: 1px solid var(--panel-border);
-  box-shadow: var(--shadow-lg);
-  z-index: 80;
-  transform: translateX(100%);
-  transition: transform 0.35s ease;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.info-panel.open {
-  transform: translateX(0);
-}
-
-.info-panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 18px 12px;
-  border-bottom: 1px solid var(--panel-border);
-  flex-shrink: 0;
-}
-
-.info-panel-title {
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.04em;
-}
-
-.info-panel-close {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 1.1rem;
-  color: var(--txt-dim);
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.info-panel-close:hover {
-  background: var(--accent-glow);
-  color: var(--txt);
-}
-
-.info-panel-meta {
-  padding: 12px 18px;
-  border-bottom: 1px solid var(--panel-border);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.meta-tag {
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  color: var(--txt-dim);
-  background: var(--accent-glow);
-  padding: 3px 10px;
-  border-radius: 12px;
-  border: 1px solid var(--panel-border);
-}
-
-.meta-tag.primary {
-  color: var(--accent);
-  border-color: var(--accent-dim);
-}
-
-.info-panel-body {
-  padding: 14px 18px 20px;
-  flex: 1;
-  overflow-y: auto;
-}
-
-.info-section {
-  margin-bottom: 16px;
-}
-
-.info-section-title {
-  font-family: var(--font-heading);
-  font-size: 0.72rem;
-  color: var(--txt-muted);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-
-.info-section-text {
-  font-family: var(--font-body);
-  font-size: 0.92rem;
-  color: var(--txt-dim);
-  line-height: 1.55;
-}
-
-/* Compare panel */
-.compare-container {
-  display: flex;
-  gap: 1px;
-  background: var(--panel-border);
-  flex: 1;
-  overflow: hidden;
-}
-
-.compare-col {
-  flex: 1;
-  background: var(--panel);
-  overflow-y: auto;
-  padding: 14px;
-}
-
-.compare-col-header {
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  color: var(--accent);
-  text-align: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--panel-border);
-  margin-bottom: 10px;
-}
-
-/* Threads panel */
-.thread-item {
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--panel-border);
-  cursor: pointer;
-  transition: background var(--transition);
-}
-
-.thread-item:hover {
-  background: var(--accent-glow);
-}
-
-.thread-title {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  color: var(--txt);
-  margin-bottom: 4px;
-}
-
-.thread-desc {
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  color: var(--txt-dim);
-}
-
-.thread-chain {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  flex-wrap: wrap;
-}
-
-.thread-node {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--accent);
-  background: var(--accent-glow);
-  padding: 2px 8px;
-  border-radius: 10px;
-  border: 1px solid var(--accent-dim);
-  cursor: pointer;
-}
-
-.thread-node:hover {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-.thread-arrow {
-  color: var(--txt-muted);
-  font-size: 0.7rem;
-}
-
-/* ============================================================
-   TIMELINE BAR
-   ============================================================ */
-.timeline {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: var(--timeline-h);
-  background: var(--panel);
-  border-top: 1px solid var(--panel-border);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  gap: 12px;
-  z-index: 90;
-  user-select: none;
-}
-
-.timeline-controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
-.timeline-btn {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius);
-  font-size: 0.85rem;
-  color: var(--txt-dim);
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.timeline-btn:hover {
-  background: var(--accent-glow);
-  color: var(--txt);
-}
-
-.timeline-slider-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  position: relative;
-}
-
-.density-bar {
-  width: 100%;
-  height: 16px;
-  display: flex;
-  align-items: flex-end;
-}
-
-.density-bar canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-  border-radius: 2px;
-}
-
-.timeline-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 6px;
-  background: var(--panel-border);
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-}
-
-.timeline-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  background: var(--accent);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 8px var(--accent-glow);
-  transition: transform var(--transition);
-}
-
-.timeline-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-}
-
-.timeline-slider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  background: var(--accent);
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 0 8px var(--accent-glow);
-}
-
-.timeline-labels {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.timeline-label {
-  font-family: var(--font-heading);
-  font-size: 0.58rem;
-  color: var(--txt-muted);
-  letter-spacing: 0.08em;
-}
-
-.timeline-year {
-  font-family: var(--font-heading);
-  font-size: 0.82rem;
-  color: var(--accent);
-  min-width: 70px;
-  text-align: right;
-  flex-shrink: 0;
-  letter-spacing: 0.04em;
-}
-
-/* ============================================================
-   ABOUT MODAL
-   ============================================================ */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 500;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-}
-
-.modal-overlay.open {
-  display: flex;
-}
-
-.modal {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-lg);
-  padding: 28px 32px;
-  max-width: 520px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-lg);
-}
-
-.modal-title {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  color: var(--accent);
-  margin-bottom: 14px;
-  letter-spacing: 0.08em;
-}
-
-.modal-text {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--txt-dim);
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-
-.modal-close {
-  margin-top: 16px;
-  padding: 8px 24px;
-  background: var(--accent);
-  color: var(--bg);
-  border-radius: var(--radius);
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-  transition: background var(--transition);
-}
-
-.modal-close:hover {
-  background: var(--gold-bright);
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 900px) {
-  .info-panel {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .subtitle {
-    display: none;
-  }
-
-  .era-display {
-    font-size: 0.72rem;
-    padding: 3px 10px;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --header-h: 48px;
-    --timeline-h: 56px;
-    --panel-w: 100%;
-  }
-
-  .header {
-    padding: 0 10px;
-  }
-
-  .logo {
-    font-size: 1.1rem;
-    letter-spacing: 0.12em;
-  }
-
-  .header-center {
-    display: none;
-  }
-
-  .timeline {
-    padding: 0 10px;
-    gap: 8px;
-  }
-
-  .timeline-year {
-    font-size: 0.72rem;
-    min-width: 55px;
-  }
-
-  .timeline-controls {
-    gap: 2px;
-  }
-
-  .burger-menu {
-    width: 100%;
-    border-radius: 0;
-  }
-
-  .modal {
-    padding: 20px;
-    margin: 10px;
-  }
-}
-
-@media (max-width: 400px) {
-  .logo {
-    font-size: 0.95rem;
-  }
-
-  .timeline-btn {
-    width: 26px;
-    height: 26px;
-  }
-}
-
-/* ============================================================
-   ACCESSIBILITY / FOCUS
-   ============================================================ */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-/* ============================================================
-   UTILITY ANIMATIONS
-   ============================================================ */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(12px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.fade-in {
-  animation: fadeIn 0.4s ease;
-}
-
-.slide-up {
-  animation: slideUp 0.35s ease;
-}
-
-/* ============================================================
-   LOADING STATE
-   ============================================================ */
-.loading-overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: opacity 0.5s ease;
-}
-
-.loading-overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.loading-coin {
-  font-size: 3rem;
-  animation: spin 2s ease-in-out infinite;
-}
-
-@keyframes spin {
-  0%, 100% { transform: rotateY(0deg); }
-  50% { transform: rotateY(180deg); }
-}
-
-.loading-text {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  color: var(--accent);
-  margin-top: 16px;
-  letter-spacing: 0.2em;
-}
-
-/* ============================================================
-   SEARCH OVERLAY
-   ============================================================ */
-.search-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 400;
-  display: none;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 12vh;
-  backdrop-filter: blur(6px);
-}
-
-.search-overlay.open {
-  display: flex;
-}
-
-.search-box {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-lg);
-  padding: 18px 22px;
-  width: 90%;
-  max-width: 520px;
-  box-shadow: var(--shadow-lg);
-}
-
-.search-input-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.search-input {
-  flex: 1;
-  background: var(--bg);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  padding: 10px 14px;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--txt);
-  outline: none;
-}
-
-.search-input::placeholder {
-  color: var(--txt-muted);
-}
-
-.search-input:focus {
-  border-color: var(--accent);
-}
-
-.search-close {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  color: var(--txt-dim);
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.search-close:hover {
-  background: var(--accent-glow);
-  color: var(--txt);
-}
-
-.search-results {
-  max-height: 360px;
-  overflow-y: auto;
-}
-
-.search-result-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  cursor: pointer;
-  border-radius: var(--radius);
-  transition: background var(--transition);
-}
-
-.search-result-item:hover {
-  background: var(--accent-glow);
-}
-
-.search-result-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.search-result-name {
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  color: var(--txt);
-}
-
-.search-result-meta {
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  color: var(--txt-dim);
-  margin-left: auto;
-}
-
-.search-empty {
-  text-align: center;
-  padding: 24px;
-  color: var(--txt-muted);
-  font-family: var(--font-body);
-  font-size: 0.92rem;
-}
-
-/* ============================================================
-   STATS BAR
-   ============================================================ */
-.stats-bar {
-  position: fixed;
-  bottom: var(--timeline-h);
-  left: 0;
-  right: 0;
-  height: 28px;
-  background: var(--panel);
-  border-top: 1px solid var(--panel-border);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  gap: 18px;
-  z-index: 85;
-  opacity: 0.85;
-}
-
-.stat-item {
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  color: var(--txt-dim);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.stat-value {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-/* ============================================================
-   MINI MAP LEGEND
-   ============================================================ */
-.map-legend {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  padding: 8px 12px;
-  z-index: 50;
-  opacity: 0.9;
-  max-width: 180px;
-}
-
-.map-legend-title {
-  font-family: var(--font-heading);
-  font-size: 0.62rem;
-  color: var(--txt-muted);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 3px;
-}
-
-.legend-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.legend-label {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  color: var(--txt-dim);
-}
-
-/* ============================================================
-   ZOOM CONTROLS
-   ============================================================ */
-.zoom-controls {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  z-index: 50;
-}
-
-.zoom-btn {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  color: var(--txt-dim);
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.zoom-btn:hover {
-  background: var(--accent-glow);
-  color: var(--txt);
-  border-color: var(--accent-dim);
-}
-
-/* ============================================================
-   TOOLTIP
-   ============================================================ */
-.map-tooltip {
-  position: fixed;
-  background: var(--panel);
-  border: 1px solid var(--accent-dim);
-  border-radius: var(--radius);
-  padding: 8px 12px;
-  pointer-events: none;
-  z-index: 300;
-  max-width: 240px;
-  display: none;
-  box-shadow: var(--shadow);
-}
-
-.map-tooltip.visible {
-  display: block;
-}
-
-.tooltip-name {
-  font-family: var(--font-heading);
-  font-size: 0.82rem;
-  color: var(--accent);
-  margin-bottom: 2px;
-}
-
-.tooltip-detail {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--txt-dim);
-  line-height: 1.4;
-}
-
-/* ============================================================
-   ERA INDICATOR PIPS
-   ============================================================ */
-.era-pips {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  display: flex;
-  pointer-events: none;
-}
-
-.era-pip {
-  height: 100%;
-  opacity: 0.5;
-}
-
-/* ============================================================
-   ADDITIONAL RESPONSIVE
-   ============================================================ */
-@media (max-width: 900px) {
-  .stats-bar {
-    display: none;
-  }
-
-  .map-legend {
-    display: none;
-  }
-
-  .zoom-controls {
-    top: 8px;
-    right: 8px;
-  }
-
-  .zoom-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .search-box {
-    margin: 0 8px;
-    padding: 14px 16px;
-  }
-
-  .zoom-controls {
-    display: none;
-  }
-}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif}
+
+/* ── HEADER ── */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--hdr-bg);gap:12px}
+.hdr-left{display:flex;align-items:baseline;gap:0;min-width:0}
+.logo-t{font-family:'Cinzel Decorative',serif;font-size:20px;font-weight:700;color:var(--amber-b);letter-spacing:3px;white-space:nowrap}
+.logo-s{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-left:10px;white-space:nowrap}
+.era-disp{text-align:center;font-family:'Cinzel',serif;flex-shrink:0}
+.era-y{font-size:22px;font-weight:600;color:var(--amber-b);letter-spacing:1px}
+.era-n{font-size:12px;letter-spacing:1.5px;color:var(--txt2);margin-top:1px;text-transform:uppercase;font-weight:600}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.cnt-disp{text-align:right;font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--txt3)}
+.cnt-n{font-size:22px;font-weight:600;color:var(--amber);display:block;line-height:1}
+.theme-btn{background:none;border:1px solid var(--bdr);padding:4px 8px;cursor:pointer;font-size:13px;color:var(--txt2);border-radius:3px;transition:all .15s;flex-shrink:0}
+.theme-btn:hover{background:var(--amber-x);color:var(--amber-b)}
+
+/* ── MAIN LAYOUT ── */
+.main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
+.map-c{flex:1;position:relative;overflow:hidden;min-width:0;min-height:0}
+.map-tl-col{display:flex;flex-direction:column;flex:1;min-width:0}
+#wsvg{width:100%;height:100%}
+
+/* ── DESKTOP PANEL ── */
+.info-panel{width:320px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;padding:18px 18px 28px;position:relative}
+.info-close{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;line-height:1;padding:4px;float:right;margin:-2px -2px 0 0}
+.info-close:hover{color:var(--amber-b)}
+.info-nm{font-family:'Cinzel Decorative',serif;font-size:16px;font-weight:700;color:var(--amber-b);margin-bottom:3px;clear:both}
+.info-sb{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt2);text-transform:uppercase;margin-bottom:10px}
+.info-dates{display:flex;gap:6px;margin-bottom:14px;align-items:center}
+.info-dt{padding:5px 12px;border:1px solid var(--bdr);font-family:'Cinzel',serif;font-size:13.5px;color:var(--amber-b)}
+.info-arr{color:var(--txt2);font-size:12px}
+
+/* ── LENS DROPDOWN ── */
+.lens-dd-wrap{border:1px solid var(--bdr);margin-bottom:14px}
+.lens-dd-hdr{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;cursor:pointer;user-select:none;background:var(--amber-xx);border-bottom:1px solid transparent;transition:background .15s}
+.lens-dd-hdr:hover{background:var(--amber-x)}
+.lens-dd-hdr.open{border-bottom-color:var(--bdr)}
+.lens-dd-title{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2.5px;color:var(--txt2);text-transform:uppercase;flex-shrink:0}
+.lens-dd-summary{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.5px;color:var(--amber-b);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;padding:0 6px}
+.lens-dd-arrow{color:var(--txt2);font-size:10px;transition:transform .18s;flex-shrink:0}
+.lens-dd-arrow.open{transform:rotate(180deg)}
+.lens-dd-list{display:none;max-height:260px;overflow-y:auto}
+.lens-dd-list.open{display:block}
+.lens-row{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--bdr2);transition:background .15s}
+.lens-row:last-child{border-bottom:none}
+.lens-row:hover{background:var(--amber-x)}
+.lens-row-chk{width:13px;height:13px;border:1px solid var(--bdr);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--amber-b);line-height:1}
+.lens-row-chk.on{background:var(--amber-x);border-color:var(--amber-b)}
+.lens-row-ico{font-size:14px;width:16px;text-align:center;flex-shrink:0;color:var(--txt2)}
+.lens-row-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.5px;color:var(--txt2)}
+.lens-row.on .lens-row-lbl{color:var(--amber-b);font-weight:600}
+.lens-row-sep{border-bottom:1px solid var(--bdr);margin-bottom:2px}
+.lens-dd-close-btn{text-align:center;padding:10px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:var(--amber-b);border-top:1px solid var(--bdr);cursor:pointer;text-transform:uppercase;transition:background .15s}
+.lens-dd-close-btn:hover{background:var(--amber-x)}
+
+/* ── DRAWER CONTENT ── */
+.lens-section{margin-bottom:18px}
+.lens-section-hdr{display:flex;align-items:center;gap:7px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--bdr)}
+.lens-section-ico{font-size:12px;color:var(--txt2)}
+.lens-section-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--amber-b);text-transform:uppercase;font-weight:600}
+.info-div{border:none;border-top:1px solid var(--bdr);margin:12px 0}
+.info-txt{font-size:17.5px;line-height:1.95;color:var(--txt);font-style:italic}
+.overview-arc{font-size:17.5px;line-height:1.95;color:var(--txt)}
+.overview-arc p{margin-bottom:14px}
+.civ-span-bar{height:3px;background:var(--bdr2);position:relative;margin:14px 0 6px;border-radius:2px}
+.civ-span-fill{position:absolute;top:0;height:100%;background:var(--amber-b);border-radius:2px;opacity:.8}
+.civ-span-lbls{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--txt3)}
+.conn-hdr{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin:18px 0 8px;font-weight:600}
+.conn-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--conn-bdr);font-size:16px;color:var(--txt2);cursor:pointer;transition:color .15s}
+.conn-item:hover{color:var(--amber-b)}
+.conn-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* ── TIMELINE ── */
+.tl-wrap{position:relative;height:88px;background:var(--tl-bg);border-top:1px solid var(--bdr);padding:8px 20px 14px;flex-shrink:0}
+.tl-lbls{display:flex;justify-content:space-between;margin-bottom:5px}
+.tl-lbl{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.8px;color:var(--txt3);text-transform:uppercase;font-weight:600}
+.tl-trk{position:relative;height:5px;background:var(--bdr);border-radius:3px}
+.tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--amber-b);border-radius:3px;pointer-events:none;opacity:.7}
+.tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--amber-b);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--amber),0 0 20px rgba(232,152,32,.3);pointer-events:none;transition:left .04s linear}
+input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0;cursor:pointer;transform:translateY(-50%);margin:0;z-index:2}
+.hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--hint);display:flex;align-items:center;justify-content:center;padding:0 8px;white-space:nowrap;overflow:hidden}
+#map-hint-text{pointer-events:none;overflow:hidden;text-overflow:ellipsis}
+
+/* ── MOB MAP BUTTON ── */
+.mob-map-btn{display:none}
+
+/* ── PORTRAIT MOBILE ── */
+@media(max-width:768px) and (orientation:portrait){
+  .logo-s{display:none}
+  .cnt-disp{display:none}
+  .hdr{padding:8px 12px}
+  .logo-t{font-size:16px;letter-spacing:2px}
+  .era-y{font-size:18px}
+  .era-n{font-size:10px;letter-spacing:1.5px}
+  .main{top:52px!important}
+  .main{bottom:0;flex-direction:column}
+  .map-tl-col{width:100%}
+  .map-c{flex:0 0 42vh;width:100%}
+  .info-panel{flex:1;width:100%;border-left:none;border-top:1px solid var(--bdr);overflow-y:auto;padding:0 16px 16px;border-radius:0}
+  .tl-wrap{height:76px;padding:6px 14px 10px}
+  .tl-lbl{font-size:9px;letter-spacing:.8px}
+  .hint{font-size:8px;letter-spacing:.8px}
+  .lens-dd-list{max-height:180px}
+  .info-txt,.overview-arc{font-size:16px;line-height:1.82}
+  .lens-row-lbl{font-size:13px}
+}
+
+/* ── LANDSCAPE MOBILE ── */
+@media(max-width:900px) and (orientation:landscape){
+  .logo-s{display:none}
+  .hdr{padding:6px 14px}
+  .logo-t{font-size:15px;letter-spacing:2px}
+  .era-y{font-size:15px}
+  .hint{font-size:7px;letter-spacing:.5px;white-space:normal;text-align:center;line-height:1.4}
+  .tl-wrap{height:68px;padding:4px 12px 8px}
+  .tl-lbl{font-size:8px}
+  .info-panel{width:280px}
+}
+
+@keyframes ring-pulse{0%{r:5;opacity:.7}100%{r:26;opacity:0}}
+
+@media(pointer:coarse){
+  #mark-layer g[role="button"]{cursor:pointer}
+}
+
+/* ── ACCESSIBILITY ── */
+:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px;border-radius:2px}
+.conn-item:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
+.lens-row:focus-visible{outline:2px solid var(--amber-b);outline-offset:-2px}
+button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--amber-b);color:var(--bg);padding:8px 16px;z-index:9999;font-family:'Cinzel',serif;font-size:11px;text-decoration:none}
+.skip-link:focus{top:0}
+
+/* ── THREAD PANEL ── */
+.thread-panel{position:fixed;top:52px;left:0;right:0;z-index:400;background:var(--panel);max-height:0;overflow:hidden;transition:max-height .32s cubic-bezier(.4,0,.2,1)}
+.thread-panel.open{border-bottom:1px solid var(--bdr);box-shadow:0 6px 24px var(--shadow)}
+.thread-panel.open{max-height:70vh}
+.thread-panel-inner{padding:16px 20px 20px;overflow-y:auto;max-height:calc(70vh - 1px)}
+.thread-panel-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.thread-panel-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase}
+.thread-close-btn{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1;padding:4px;transition:color .15s}
+.thread-close-btn:hover{color:var(--amber-b)}
+.thread-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px}
+.thread-concept-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:9px 12px;text-align:left;cursor:pointer;border-radius:3px;transition:all .15s}
+.thread-concept-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.thread-concept-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.8px;color:var(--txt2);display:block;margin-bottom:4px}
+.thread-concept-chain{font-size:11px;color:var(--txt3);line-height:1.5}
+.thread-back-btn{background:none;border:none;padding:0;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;transition:opacity .15s}
+.thread-back-btn:hover{opacity:.7}
+.thread-active-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);margin:10px 0 14px}
+.thread-steps-grid{display:flex;flex-direction:column;align-items:center;padding:4px 0 16px}
+.thread-step{width:min(360px,90%);text-align:center;padding:10px 14px;border:1px solid var(--bdr2);border-radius:4px;font-size:12.5px;color:var(--txt2);background:var(--panel2)}
+.thread-step-yr{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);margin-bottom:4px}
+.thread-step-txt{line-height:1.6;color:var(--txt2)}
+.thread-step-civ{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);margin-bottom:4px}
+.thread-chain-link{display:flex;flex-direction:column;align-items:center;padding:2px 0;color:var(--amber-b);opacity:.6}
+.thread-chain-line{width:1px;height:8px;background:var(--amber-b);opacity:.4}
+
+/* ── COMPARE MODE ── */
+.compare-wrap{display:flex;gap:0;height:100%;width:100%}
+.compare-col{flex:1;min-width:0;overflow-y:auto;padding:16px;border-right:1px solid var(--bdr)}
+.compare-col:last-child{border-right:none}
+.compare-col-hdr{font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.compare-remove{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:2px}
+.compare-remove:hover{color:var(--amber-b)}
+.compare-prompt{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--txt3);font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:20px;opacity:.6}
+.compare-diff{background:var(--amber-xx);border-left:2px solid var(--amber-b);padding:6px 8px;margin-bottom:2px}
+
+/* ── SHARE TOAST ── */
+.share-toast{position:fixed;bottom:108px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--panel);border:1px solid var(--bdr);padding:8px 18px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:var(--amber-b);text-transform:uppercase;border-radius:20px;opacity:0;transition:all .3s;pointer-events:none;z-index:500;white-space:nowrap}
+.share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── FINGERPRINT CHART ── */
+.fp-wrap{margin:14px 0 6px}
+.fp-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:8px}
+.fp-svg{display:block;margin:0 auto}
+.fp-label{font-family:'Cinzel',serif;font-size:8px;fill:var(--txt3)}
+.fp-poly{fill:rgba(212,168,32,.18);stroke:#d4a820;stroke-width:1.2}
+.fp-grid{fill:none;stroke:var(--bdr);stroke-width:.5}
+
+/* ── CONTEMPORARY BAR ── */
+.contemp-wrap{margin:12px 0 4px}
+.contemp-bar-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;cursor:pointer;transition:opacity .15s}
+.contemp-bar-row:hover{opacity:.75}
+.contemp-bar-nm{font-family:'Cinzel',serif;font-size:8.5px;color:var(--txt3);width:80px;flex-shrink:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.contemp-bar-track{flex:1;height:5px;background:var(--bdr2);border-radius:2px;position:relative}
+.contemp-bar-fill{position:absolute;top:0;height:100%;border-radius:2px;opacity:.7}
+.contemp-bar-yr{font-family:'Cinzel',serif;font-size:7.5px;color:var(--txt3);white-space:nowrap;width:60px;text-align:right;flex-shrink:0}
+
+/* ── DENSITY SPARKLINE ── */
+#density-bar{height:18px;width:100%;display:block;margin-bottom:1px}
+
+/* ── WHAT-IF MODE ── */
+.whatif-civ-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:7px 10px;text-align:left;cursor:pointer;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.5px;color:var(--txt2);margin-bottom:3px;border-radius:2px;transition:all .15s;display:flex;align-items:center;justify-content:space-between}
+.whatif-civ-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.whatif-civ-btn.selected{background:rgba(212,168,32,.12);border-color:#d4a820;color:#d4a820}
+.whatif-result{margin-top:12px;padding:12px;border:1px solid var(--bdr);border-radius:3px;background:var(--panel2)}
+.whatif-chain{padding:6px 0;border-bottom:1px solid var(--bdr2);font-size:12px;color:var(--txt2)}
+.whatif-chain:last-child{border-bottom:none}
+.whatif-chain.lost{color:#d4a820;text-decoration:line-through;opacity:.6}
+.whatif-intro{font-size:13px;line-height:1.7;color:var(--txt2);font-style:italic;margin-bottom:12px}
+
+/* ── HERITAGE MODE ── */
+.heritage-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+.heritage-btn{background:none;border:1px solid var(--bdr2);padding:8px 6px;cursor:pointer;font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.5px;color:var(--txt2);border-radius:2px;transition:all .15s;text-align:center}
+.heritage-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.heritage-btn.active{background:var(--amber-x);border-color:var(--amber-b);color:var(--amber-b)}
+.heritage-civ{padding:5px 0;border-bottom:1px solid var(--bdr2);font-size:12.5px;cursor:pointer;transition:color .15s}
+.heritage-civ:hover{color:var(--amber-b)}
+.heritage-civ-nm{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);display:block;margin-bottom:2px}
+.heritage-civ-why{font-size:11px;color:var(--txt3)}
+
+/* ── MAP ZOOM TRANSITION ── */
+#wsvg{transition:none}
+
+/* ── CLUSTER PICKER ── */
+#cluster-picker{
+  position:fixed;z-index:900;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:6px;
+  min-width:180px;max-width:260px;max-height:320px;overflow-y:auto;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);
+  display:none;
+}
+#cluster-picker.open{display:block}
+#cluster-picker-hdr{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
+  color:var(--txt3);padding:8px 12px 6px;
+  border-bottom:1px solid var(--bdr2);text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.cluster-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;
+  cursor:pointer;border-bottom:1px solid var(--bdr2);
+  transition:background .12s;
+}
+.cluster-item:last-child{border-bottom:none}
+.cluster-item:hover,.cluster-item:active{background:var(--panel2)}
+.cluster-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#d4a820}
+.cluster-item-nm{font-family:'Cinzel',serif;font-size:13px;color:var(--txt);flex:1}
+.cluster-item-sb{font-size:11px;color:var(--txt3);margin-top:1px}
+
+/* ── BURGER MENU ── */
+.burger-wrap{position:relative}
+.burger-btn{background:none;border:1px solid var(--bdr);color:var(--amber-b);cursor:pointer;
+  width:34px;height:34px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;padding:0}
+.burger-btn:hover{background:var(--panel2);border-color:var(--amber)}
+.burger-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:4px;min-width:196px;
+  box-shadow:0 8px 32px var(--shadow);z-index:800;
+  display:none;flex-direction:column;overflow:hidden}
+.burger-menu.open{display:flex}
+.burger-item{display:flex;align-items:center;gap:10px;padding:12px 16px;
+  background:none;border:none;color:var(--txt2);cursor:pointer;text-align:left;
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:.5px;width:100%;
+  transition:background .12s;white-space:nowrap}
+.burger-item:hover,.burger-item:active{background:var(--panel2);color:var(--txt)}
+.burger-item.active,.burger-item.burger-mode.active{background:var(--amber-x);color:var(--amber-b)}
+.burger-item-badge{margin-left:auto;font-size:9px;color:var(--amber-b);
+  font-family:'Cinzel',serif;letter-spacing:1px;display:none}
+.burger-item-badge.on{display:inline}
+.burger-divider{height:1px;background:var(--bdr2);margin:2px 0}
+
+/* ── MAP ZOOM/PAN ── */
+#wsvg{touch-action:none;user-select:none;-webkit-user-select:none}
+.map-zoom-ctrl{position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px;z-index:50}
+.map-zoom-btn{width:28px;height:28px;background:var(--panel);border:1px solid var(--bdr);color:var(--amber-b);
+  font-size:16px;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;transition:all .15s}
+.map-zoom-btn:hover{background:var(--panel2);border-color:var(--amber)}
+.cluster-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);
+  background:var(--panel);border:1px solid var(--bdr);padding:4px 12px;border-radius:20px;
+  opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:51}
+.cluster-hint.show{opacity:1}
+
+/* ── PULL TO REFRESH ── */
+#ptr-indicator{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  height:0;overflow:hidden;background:var(--panel);
+  border-bottom:1px solid var(--bdr);
+  transition:height .2s ease,opacity .2s ease;
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;
+  color:var(--txt3);text-transform:uppercase;opacity:0;
+  pointer-events:none;
+}
+#ptr-indicator.pulling{height:52px;opacity:1}
+#ptr-indicator.ready{color:var(--amber-b)}
+#ptr-indicator.refreshing{height:52px;opacity:1}
+#ptr-spinner{
+  width:16px;height:16px;border:2px solid var(--bdr);
+  border-top-color:var(--amber-b);border-radius:50%;
+  transition:transform .25s ease;flex-shrink:0;
+}
+#ptr-indicator.refreshing #ptr-spinner{
+  animation:ptr-spin .7s linear infinite;
+}
+@keyframes ptr-spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
-<!-- Loading Overlay -->
-<div class="loading-overlay" id="loadingOverlay">
-  <div class="loading-coin">🪙</div>
-  <div class="loading-text">PECUNIA</div>
-</div>
-
-<!-- Header -->
-<header class="header" role="banner">
-  <div class="header-left">
-    <div class="logo" aria-label="Pecunia">
-      <span class="logo-icon">🪙</span>PECUNIA
-    </div>
-    <div class="subtitle">The Atlas of Money</div>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to entry panel</button>
+<header class="hdr" role="banner">
+  <div class="hdr-left">
+    <span class="logo-t">PECUNIA</span>
+    <span class="logo-s">Money & Economics Atlas</span>
   </div>
-
-  <div class="header-center">
-    <div class="era-display" id="eraDisplay" aria-live="polite">Barter Era</div>
-    <div class="year-display" id="yearDisplay">3000 BCE</div>
-    <div class="lens-container">
-      <button class="lens-btn" id="lensBtn" onclick="renderLensDD()" aria-haspopup="listbox" aria-expanded="false">
-        <span class="lens-icon">🔭</span>
-        <span id="lensLabel">Overview</span>
-        <span class="lens-arrow">&#9660;</span>
+  <div class="era-disp">
+    <div class="era-y" id="era-y">3000 BCE</div>
+    <div class="era-n" id="era-n">EARLY COMMODITY MONEY</div>
+  </div>
+  <div class="hdr-right">
+    <div class="cnt-disp">
+      <span class="cnt-n" id="cnt-n">2</span>
+      systems active
+    </div>
+    <div class="burger-wrap" id="burger-wrap">
+      <button class="burger-btn" id="burger-btn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="0" y1="7" x2="18" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="0" y1="13" x2="18" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
       </button>
-      <div class="lens-dropdown" id="lensDropdown" role="listbox"></div>
-    </div>
-  </div>
-
-  <div class="header-right">
-    <button class="timeline-btn" onclick="openSearch()" aria-label="Search" title="Search (Ctrl+K)" style="font-size:1rem">&#128269;</button>
-    <button class="burger-btn" id="burgerBtn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false">
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-    </button>
-  </div>
-</header>
-
-<!-- Burger Menu -->
-<nav class="burger-menu" id="burgerMenu" role="navigation" aria-label="Main menu">
-  <div class="burger-section">
-    <div class="burger-section-title">Navigation</div>
-    <a class="burger-link" href="../" aria-label="Back to Pangea">
-      <span class="burger-link-icon">🌍</span> Back to Pangea
-    </a>
-  </div>
-  <div class="burger-section">
-    <div class="burger-section-title">Views</div>
-    <div class="burger-link active" onclick="setMode('explore');closeBurger()" role="button" tabindex="0">
-      <span class="burger-link-icon">🗺️</span> Explore
-    </div>
-    <div class="burger-link" onclick="setMode('threads');closeBurger()" role="button" tabindex="0">
-      <span class="burger-link-icon">🧵</span> Threads
-    </div>
-    <div class="burger-link" onclick="setMode('compare');closeBurger()" role="button" tabindex="0">
-      <span class="burger-link-icon">⚖️</span> Compare
-    </div>
-  </div>
-  <div class="burger-section">
-    <div class="burger-section-title">Settings</div>
-    <div class="theme-toggle-row">
-      <span class="theme-toggle-label">Light Theme</span>
-      <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" role="switch" aria-checked="false" tabindex="0">
-        <div class="theme-toggle-knob"></div>
+      <div class="burger-menu" id="burger-menu" role="menu">
+        <a class="burger-item" href="../index.html" role="menuitem" style="text-decoration:none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>The Pangea Project</span>
+        </a>
+        <div class="burger-divider"></div>
+        <button class="burger-item burger-mode active" id="btn-explore" onclick="setMode('explore');closeBurger()" role="menuitem" aria-pressed="true">
+          <span>◉</span><span>Explore</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>⟳</span><span>Threads</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>⊞</span><span>Compare</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-whatif" onclick="setMode('whatif');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>⟁</span><span>What If</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-heritage" onclick="setMode('heritage');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>⌂</span><span>Heritage</span>
+        </button>
+        <div class="burger-divider"></div>
+        <button class="burger-item" id="menu-theme" onclick="toggleTheme();closeBurger()" role="menuitem">
+          <span>◑</span>
+          <span>Toggle Theme</span>
+        </button>
+        <div class="burger-divider"></div>
+        <button class="burger-item" onclick="showAbout();closeBurger()" role="menuitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>About</span>
+        </button>
       </div>
     </div>
   </div>
-  <div class="burger-section">
-    <div class="burger-link" onclick="showAbout();closeBurger()" role="button" tabindex="0">
-      <span class="burger-link-icon">ℹ️</span> About Pecunia
-    </div>
-  </div>
-</nav>
+</header>
 
-<!-- Main Map Area -->
-<main class="main" id="mainArea" role="main">
-  <div class="map-container" id="mapContainer">
-    <svg class="map-svg" id="mapSvg" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" aria-label="World map showing monetary history">
+<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Economic transmission chains">
+  <div class="thread-panel-inner">
+    <div class="thread-panel-bar">
+      <span class="thread-panel-title" id="thread-panel-title">Innovation Threads</span>
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">← All Threads</button>
+        <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">✕</button>
+      </div>
+    </div>
+    <div id="thread-concept-list"></div>
+    <div id="thread-active-steps" style="display:none"></div>
+  </div>
+</div>
+
+<div class="share-toast" id="share-toast">Link copied to clipboard</div>
+
+<div class="main">
+  <div class="map-tl-col">
+  <div class="map-c">
+    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with monetary system markers" style="cursor:pointer">
       <defs>
-        <radialGradient id="markerGlow">
-          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.4"/>
-          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
-        </radialGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="2" result="blur"/>
-          <feMerge>
-            <feMergeNode in="blur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
+        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#b8901a" flood-opacity=".85"/>
+        </filter>
+        <filter id="glow2" x="-100%" y="-100%" width="300%" height="300%">
+          <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#b8901a" flood-opacity=".5"/>
         </filter>
       </defs>
-      <!-- World map (D3/TopoJSON) -->
+
+      <rect width="1000" height="520" fill="var(--bg)"/>
+
+      <!-- Grid -->
+      <g stroke="rgba(180,140,20,.04)" stroke-width=".5" fill="none">
+        <line x1="0" y1="120" x2="1000" y2="120"/>
+        <line x1="0" y1="195" x2="1000" y2="195"/>
+        <line x1="0" y1="265" x2="1000" y2="265"/>
+        <line x1="0" y1="335" x2="1000" y2="335"/>
+        <line x1="0" y1="405" x2="1000" y2="405"/>
+        <line x1="200" y1="0" x2="200" y2="520"/>
+        <line x1="400" y1="0" x2="400" y2="520"/>
+        <line x1="600" y1="0" x2="600" y2="520"/>
+        <line x1="800" y1="0" x2="800" y2="520"/>
+      </g>
+      <!-- Equator -->
+      <line x1="0" y1="265" x2="1000" y2="265" stroke="rgba(180,140,20,.10)" stroke-width=".8" stroke-dasharray="3,7"/>
+
+      <!-- Continents -->
       <g id="map-layer"></g>
-      <!-- Continent outlines rendered by JS -->
-      <g id="landGroup"></g>
       <!-- Connection lines -->
-      <g id="connectionGroup"></g>
-      <!-- Transmission paths -->
-      <g id="transmissionGroup"></g>
-      <!-- Money markers -->
-      <g id="markerGroup"></g>
+      <g id="conn-layer"></g>
+      <!-- Thread paths -->
+      <g id="thread-layer"></g>
+      <!-- Labels (non-interactive) -->
+      <g id="label-layer" pointer-events="none"></g>
+      <!-- Markers -->
+      <g id="mark-layer"></g>
     </svg>
-    <!-- Zoom controls -->
-    <div class="zoom-controls" role="group" aria-label="Map zoom controls">
-      <button class="zoom-btn" onclick="zoomIn()" aria-label="Zoom in" title="Zoom in">+</button>
-      <button class="zoom-btn" onclick="zoomOut()" aria-label="Zoom out" title="Zoom out">&minus;</button>
-      <button class="zoom-btn" onclick="zoomReset()" aria-label="Reset zoom" title="Reset zoom">&#8634;</button>
-    </div>
-    <!-- Map legend -->
-    <div class="map-legend" id="mapLegend">
-      <div class="map-legend-title">Legend</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#d4a820"></div><span class="legend-label">Coin / Currency</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#c8a870"></div><span class="legend-label">Paper Money</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#60a0c8"></div><span class="legend-label">Institution</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#cc4444"></div><span class="legend-label">Crisis / Bubble</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#f7931a"></div><span class="legend-label">Digital / Crypto</span></div>
-    </div>
-    <!-- Tooltip -->
-    <div class="map-tooltip" id="mapTooltip">
-      <div class="tooltip-name" id="tooltipName"></div>
-      <div class="tooltip-detail" id="tooltipDetail"></div>
+    <div class="hint" id="map-hint">
+      <span id="map-hint-text">TAP A MONETARY SYSTEM  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
+      <button id="map-reset-btn" onclick="resetMapZoom()" style="display:none;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--amber-b);background:none;border:1px solid var(--bdr);padding:2px 8px;border-radius:10px;cursor:pointer;margin-left:10px;white-space:nowrap">⊙ RESET ZOOM</button>
     </div>
   </div>
-</main>
-
-<!-- Stats Bar -->
-<div class="stats-bar" id="statsBar" aria-live="polite" aria-atomic="true">
-  <div class="stat-item">Active: <span class="stat-value" id="statActive">0</span></div>
-  <div class="stat-item">Total: <span class="stat-value" id="statTotal">0</span></div>
-  <div class="stat-item">Era: <span class="stat-value" id="statEra">--</span></div>
-  <div class="stat-item">Connections: <span class="stat-value" id="statConns">0</span></div>
-</div>
-
-<!-- Search Overlay -->
-<div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search monetary history" aria-modal="true">
-  <div class="search-box" role="search">
-    <div class="search-input-row">
-      <input class="search-input" id="searchInput" type="search" placeholder="Search currencies, institutions, events..." autocomplete="off" aria-label="Search monetary history">
-      <button class="search-close" onclick="closeSearch()" aria-label="Close search">&times;</button>
-    </div>
-    <div class="search-results" id="searchResults" role="listbox" aria-label="Search results">
-      <div class="search-empty">Type to search across all monetary entries...</div>
-    </div>
+  <div class="tl-wrap" role="navigation" aria-label="Timeline">
+  <svg id="density-bar" aria-label="Monetary system density over time"></svg>
+  <div class="tl-lbls">
+    <span class="tl-lbl">6000 BCE</span>
+    <span class="tl-lbl">3000 BCE</span>
+    <span class="tl-lbl">1000 BCE</span>
+    <span class="tl-lbl">1 CE</span>
+    <span class="tl-lbl">1000 CE</span>
+    <span class="tl-lbl">1800 CE</span>
+    <span class="tl-lbl">2024 CE</span>
+  </div>
+  <div class="tl-trk">
+    <div class="tl-fill" id="tl-fill"></div>
+    <div class="tl-thumb" id="tl-thumb"></div>
+    <input type="range" class="tl-range" id="tl" min="0" max="1000" value="0" step="1" aria-label="Timeline year" aria-valuemin="-6000" aria-valuemax="2024" aria-valuenow="-6000">
   </div>
 </div>
+  </div><!-- /map-tl-col -->
 
-<!-- Info Panel / Drawer -->
-<aside class="info-panel" id="infoPanel" role="complementary" aria-label="Currency details">
-  <div class="info-panel-header">
-    <div class="info-panel-title" id="infoPanelTitle">Select a Currency</div>
-    <button class="info-panel-close" onclick="closePanel()" aria-label="Close panel">&times;</button>
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Monetary system details">
+    <div id="drawer-top"></div>
+    <div id="drawer-content"></div>
   </div>
-  <div class="info-panel-meta" id="infoPanelMeta"></div>
-  <div class="info-panel-body" id="infoPanelBody">
-    <p class="info-section-text" style="text-align:center;margin-top:40px;color:var(--txt-muted)">
-      Click a marker on the map to explore its monetary history.
-    </p>
-  </div>
-</aside>
-
-<!-- Timeline Bar -->
-<div class="timeline" role="navigation" aria-label="Timeline">
-  <div class="timeline-controls">
-    <button class="timeline-btn" onclick="setYear(-3000)" aria-label="Go to beginning" title="Beginning">&#9198;</button>
-    <button class="timeline-btn" onclick="stepYear(-100)" aria-label="Step back" title="Step back">&#9664;</button>
-    <button class="timeline-btn" onclick="togglePlay()" id="playBtn" aria-label="Play/Pause" title="Play/Pause">&#9654;</button>
-    <button class="timeline-btn" onclick="stepYear(100)" aria-label="Step forward" title="Step forward">&#9654;</button>
-    <button class="timeline-btn" onclick="setYear(2025)" aria-label="Go to present" title="Present">&#9197;</button>
-  </div>
-  <div class="timeline-slider-container">
-    <div class="density-bar" id="densityBar">
-      <canvas id="densityCanvas" height="16"></canvas>
-    </div>
-    <input type="range" class="timeline-slider" id="timelineSlider" min="0" max="1000" value="0"
-      oninput="setYear(sliderToYear(this.value))" aria-label="Timeline slider">
-    <div class="timeline-labels">
-      <span class="timeline-label">3000 BCE</span>
-      <span class="timeline-label">2000 BCE</span>
-      <span class="timeline-label">1000 BCE</span>
-      <span class="timeline-label">1 CE</span>
-      <span class="timeline-label">1000 CE</span>
-      <span class="timeline-label">2000 CE</span>
-    </div>
-  </div>
-  <div class="timeline-year" id="timelineYear">3000 BCE</div>
+  <button class="mob-map-btn hidden" id="mob-map-btn" onclick="closeMobileSheet()">◎ Map</button>
 </div>
-
-<!-- About Modal -->
-<div class="modal-overlay" id="aboutModal">
-  <div class="modal">
-    <div class="modal-title">Pecunia -- The Atlas of Money</div>
-    <p class="modal-text">
-      Pecunia is an interactive atlas of monetary history, tracing the evolution of money from
-      ancient barter systems to modern digital currencies. Explore how currencies, financial
-      innovations, and economic ideas spread across civilizations and continents over five
-      millennia of human history.
-    </p>
-    <p class="modal-text">
-      <strong>How to Use:</strong>
-    </p>
-    <p class="modal-text">
-      <strong>Timeline:</strong> Use the slider at the bottom to travel through time, from
-      3000 BCE to 2025 CE. Press play to animate through history, or use arrow keys to step
-      through the centuries. The density bar above the slider shows periods of high monetary
-      activity.
-    </p>
-    <p class="modal-text">
-      <strong>Map:</strong> Click any gold marker to explore its history in the info panel.
-      Scroll to zoom; click and drag to pan. Dashed lines show connections between related
-      monetary systems. Use the zoom controls in the top-right corner.
-    </p>
-    <p class="modal-text">
-      <strong>Lenses:</strong> Switch between twelve different analytical lenses in the header
-      to view different aspects of monetary history -- from innovation and trade to crises
-      and regulation.
-    </p>
-    <p class="modal-text">
-      <strong>Threads:</strong> Open the menu and select Threads to follow narrative chains
-      through monetary history, such as the evolution of coinage or the rise of digital money.
-    </p>
-    <p class="modal-text">
-      <strong>Compare:</strong> Select Compare mode to place two currencies side by side and
-      examine their similarities and differences.
-    </p>
-    <p class="modal-text">
-      <strong>Search:</strong> Press Ctrl+K or click the search icon to find any currency,
-      institution, or event by name.
-    </p>
-    <p class="modal-text">
-      <strong>Keyboard Shortcuts:</strong> Arrow keys (timeline), Space (play/pause),
-      +/- (zoom), T (threads), C (compare), E (explore), Ctrl+K (search), Escape (close).
-    </p>
-    <p class="modal-text" style="margin-top:12px;border-top:1px solid var(--panel-border);padding-top:12px">
-      Part of <strong>The Pangea Project</strong> -- exploring the interconnected history of
-      human civilization through interactive maps. Pecunia covers over 55 monetary entries
-      spanning coins, paper money, banking institutions, financial crises, and digital
-      currencies, connected by 15 direct links and 10 narrative threads.
-    </p>
-    <p class="modal-text" style="font-size:0.82rem;color:var(--txt-muted)">
-      Map data: Natural Earth via TopoJSON. Visualization: D3.js.
-      All historical content is for educational purposes.
-    </p>
-    <button class="modal-close" onclick="closeAbout()">Close</button>
-  </div>
-</div>
-
-<!-- D3 + TopoJSON -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 
 <script>
-// Pecunia — The Atlas of Money
-// ============================================================
-
-/* --- Lenses --- */
-const LENSES=[{id:"overview",n:"Overview",ico:"📋"},{id:"innovation",n:"Innovation",ico:"💡"},{id:"spread",n:"Spread & Trade",ico:"🗺"},{id:"economics",n:"Economics",ico:"📈"},{id:"legacy",n:"Legacy",ico:"🏛"},{id:"figures",n:"Key Figures",ico:"👤"},{id:"decline",n:"Decline/Crisis",ico:"📉"},{id:"material",n:"Material",ico:"🔧"},{id:"global",n:"Global Impact",ico:"🌍"},{id:"banking",n:"Banking",ico:"🏦"},{id:"digital",n:"Digital",ico:"💻"},{id:"regulation",n:"Regulation",ico:"⚖"}];
-
-/* --- Eras --- */
-const ERAS=[{y:-9000,n:"Barter"},{y:-3000,n:"Commodity Money"},{y:-700,n:"Coinage"},{y:600,n:"Paper Money"},{y:1400,n:"Banking Age"},{y:1700,n:"Gold Standard"},{y:1971,n:"Fiat Era"},{y:2009,n:"Digital Age"}];
-
-/* --- Monetary Entries (first 25) --- */
-const MONEYS=[
-{id:"cowrie-shell",n:"Cowrie Shells",s:-3000,e:1900,lon:35,lat:5,x:530,y:280,col:"#e8c870",sz:1.0,region:"Africa / Asia",type:"Commodity",issuer:"Various cultures",material:"Shell",d:{overview:"One of the oldest and most widespread forms of currency, used across Africa and Asia for millennia.",innovation:"Natural uniformity of shells provided a ready-made unit of exchange.",spread:"Cowrie trade networks stretched from the Maldives to West Africa.",economics:"Served as both currency and status symbol in dozens of societies.",legacy:"Remained legal tender in parts of Africa into the twentieth century.",figures:"No single issuer; adopted organically by many civilizations.",decline:"Replaced by metal coinage as trade economies industrialized."}},
-{id:"mesopotamian-shekel",n:"Mesopotamian Silver Shekel",s:-2500,e:-300,lon:44,lat:33,x:555,y:225,col:"#c0c0c0",sz:1.1,region:"Mesopotamia",type:"Commodity",issuer:"Sumerian city-states",material:"Silver",d:{overview:"Standardized silver weight used in ancient Sumer as a unit of account and payment.",innovation:"Codified weight standards enabled large-scale palace and temple economies.",spread:"Adopted across Akkadian, Babylonian, and Assyrian empires.",economics:"Anchored the earliest known price lists and wage records.",legacy:"The word shekel survives in modern Israeli currency.",figures:"Codified under the Third Dynasty of Ur and later in Hammurabi's code.",decline:"Gradually replaced by minted coinage from Lydia and Persia."}},
-{id:"lydian-stater",n:"Lydian Stater",s:-610,e:-546,lon:28,lat:38.5,x:530,y:210,col:"#d4a820",sz:1.2,region:"Anatolia",type:"Coin",issuer:"Kingdom of Lydia",material:"Electrum",d:{overview:"First standardized metal coins in history, minted in the Kingdom of Lydia.",innovation:"Royal seal stamped on metal guaranteed weight and purity.",spread:"Greek city-states adopted coinage within decades.",economics:"Enabled market economies to replace pure barter.",legacy:"Template for all subsequent coinage worldwide.",figures:"King Alyattes and King Croesus of Lydia.",decline:"Conquered by Persian Empire; replaced by the Persian daric."}},
-{id:"greek-drachma",n:"Greek Drachma",s:-600,e:-31,lon:23.7,lat:38,x:522,y:212,col:"#c0c8d8",sz:1.1,region:"Greece",type:"Coin",issuer:"Greek city-states",material:"Silver",d:{overview:"Silver coin that became the standard currency of classical Greece.",innovation:"Introduced consistent denominations enabling everyday commerce.",spread:"Circulated throughout the Mediterranean via Greek colonies and trade.",economics:"Funded Athenian democracy and monumental public works.",legacy:"Name revived for modern Greek currency used until the euro.",figures:"Athenian owl drachma bore the image of the goddess Athena.",decline:"Supplanted by Macedonian and later Roman coinage after conquest."}},
-{id:"chinese-cash",n:"Chinese Cash Coin",s:-500,e:1912,lon:116,lat:35,x:735,y:220,col:"#b87333",sz:1.2,region:"China",type:"Coin",issuer:"Chinese dynasties",material:"Bronze",d:{overview:"Round bronze coin with a square center hole, used across China for over two millennia.",innovation:"Square hole allowed stringing coins together for large transactions.",spread:"Circulated throughout East and Southeast Asia via tributary trade.",economics:"Backbone of the longest-running monetary system in history.",legacy:"Inspired coin designs in Japan, Korea, and Vietnam.",figures:"Standardized by Qin Shi Huang after unification of China.",decline:"Abolished with the fall of the Qing dynasty in 1912."}},
-{id:"roman-denarius",n:"Roman Denarius",s:-211,e:270,lon:12.5,lat:42,x:510,y:210,col:"#d0d0d0",sz:1.3,region:"Roman Empire",type:"Coin",issuer:"Roman Republic / Empire",material:"Silver",d:{overview:"Principal silver coin of Rome that anchored the economy of the ancient world.",innovation:"Mass-produced coinage with political imagery spread imperial authority.",spread:"Circulated from Britain to Mesopotamia across the entire Roman world.",economics:"Debasement of the denarius contributed to third-century inflation.",legacy:"Root of the words dinar, denier, and the symbol d for pence.",figures:"First minted during the Second Punic War under Roman Senate authority.",decline:"Progressive silver debasement rendered it worthless by the late third century."}},
-{id:"persian-daric",n:"Persian Daric",s:-520,e:-330,lon:52,lat:32,x:565,y:225,col:"#ffd700",sz:1.1,region:"Persia",type:"Coin",issuer:"Achaemenid Empire",material:"Gold",d:{overview:"Gold coin of the Achaemenid Empire that facilitated imperial administration.",innovation:"Bimetallic system paired gold darics with silver sigloi at a fixed ratio.",spread:"Used to pay Greek mercenaries, spreading Persian gold across the Mediterranean.",economics:"Financed the Royal Road postal system and massive building projects.",legacy:"First large-scale gold coinage to circulate internationally.",figures:"Introduced by Darius I the Great of Persia.",decline:"Replaced by Alexander the Great's coinage after Persian conquest."}},
-{id:"byzantine-solidus",n:"Byzantine Solidus",s:309,e:1092,lon:29,lat:41,x:530,y:208,col:"#ffc820",sz:1.2,region:"Byzantine Empire",type:"Coin",issuer:"Byzantine Empire",material:"Gold",d:{overview:"Gold coin of Byzantium that served as the international trade currency for seven centuries.",innovation:"Maintained strict weight and purity standards for unprecedented duration.",spread:"Accepted from Scandinavia to China as the dollar of the Middle Ages.",economics:"Anchored Mediterranean and Silk Road commerce for centuries.",legacy:"Inspired the Islamic dinar and influenced medieval European coinage.",figures:"Introduced by Emperor Constantine I in the early fourth century.",decline:"Debasement under the Komnenian dynasty led to its replacement by the hyperpyron."}},
-{id:"islamic-dinar",n:"Islamic Gold Dinar",s:696,e:1258,lon:44.4,lat:33.3,x:555,y:222,col:"#e8b820",sz:1.1,region:"Islamic Caliphate",type:"Coin",issuer:"Umayyad / Abbasid Caliphate",material:"Gold",d:{overview:"Gold coin of the Islamic caliphates that unified commerce across the Muslim world.",innovation:"Replaced Byzantine imagery with Quranic inscriptions, creating a distinct monetary identity.",spread:"Circulated from Spain to Central Asia along Islamic trade routes.",economics:"Facilitated the Islamic Golden Age of science, culture, and trade.",legacy:"Modern revival movements have proposed returning to a gold dinar standard.",figures:"Caliph Abd al-Malik ibn Marwan standardized the dinar in 696 CE.",decline:"Mongol invasion and fragmentation of the caliphate ended unified issuance."}},
-{id:"jiaozi",n:"Jiaozi (Chinese Paper Money)",s:1024,e:1279,lon:104,lat:30.5,x:720,y:230,col:"#c8a870",sz:1.2,region:"China",type:"Paper",issuer:"Song Dynasty",material:"Paper",d:{overview:"World's first government-issued paper currency, created in Song Dynasty China.",innovation:"Replaced heavy iron coins with lightweight printed notes backed by deposits.",spread:"Concept spread to the Yuan Dynasty and eventually inspired European banknotes.",economics:"Enabled Song China to manage one of the largest economies in the medieval world.",legacy:"Direct ancestor of all modern paper currency systems.",figures:"Pioneered by merchants in Sichuan and later adopted by the imperial government.",decline:"Overprinting led to inflation and collapse during the late Song period."}},
-{id:"venetian-ducat",n:"Venetian Ducat",s:1284,e:1797,lon:12.3,lat:45.4,x:510,y:200,col:"#ffd700",sz:1.1,region:"Venice",type:"Coin",issuer:"Republic of Venice",material:"Gold",d:{overview:"Gold coin of Venice that dominated Mediterranean trade for five centuries.",innovation:"Maintained 3.5 grams of pure gold without debasement for its entire run.",spread:"Accepted across Europe, the Levant, and along Indian Ocean trade routes.",economics:"Financed Venice's transformation into a commercial empire.",legacy:"Set the standard for reliability that later coins sought to emulate.",figures:"First minted under Doge Giovanni Dandolo in 1284.",decline:"Ended with Napoleon's conquest and dissolution of the Venetian Republic."}},
-{id:"florentine-florin",n:"Florentine Florin",s:1252,e:1533,lon:11.25,lat:43.77,x:508,y:203,col:"#f0c040",sz:1.1,region:"Florence",type:"Coin",issuer:"Republic of Florence",material:"Gold",d:{overview:"Gold coin of Florence that became the premier trade currency of Renaissance Europe.",innovation:"Standardized gold content made it the benchmark for international commerce.",spread:"Widely imitated across Europe, spawning dozens of florin variants.",economics:"Fueled the rise of Florentine banking and the Renaissance economy.",legacy:"Inspired the naming of the Dutch guilder (gulden/florin) and other currencies.",figures:"Minted under the authority of the Florentine Republic's banking guilds.",decline:"Supplanted by the Spanish real as global trade shifted to the Atlantic."}},
-{id:"spanish-real",n:"Spanish Real / Piece of Eight",s:1497,e:1868,lon:-3.7,lat:40.4,x:478,y:208,col:"#d8d8d8",sz:1.3,region:"Spain",type:"Coin",issuer:"Spanish Empire",material:"Silver",d:{overview:"Silver coin of the Spanish Empire that became the first global currency.",innovation:"Machine-milled edges prevented clipping and set a standard for modern minting.",spread:"Circulated on every continent via Spanish colonial trade networks.",economics:"New World silver flooded global markets, causing the Price Revolution in Europe.",legacy:"Direct ancestor of the US dollar; the dollar sign may derive from the Pillars of Hercules.",figures:"Instituted by the Catholic Monarchs Ferdinand and Isabella.",decline:"Replaced by the peseta in 1868 as Spain modernized its monetary system."}},
-{id:"dutch-guilder",n:"Dutch Guilder",s:1680,e:2002,lon:4.9,lat:52.4,x:502,y:185,col:"#e8a830",sz:1.0,region:"Netherlands",type:"Coin",issuer:"Dutch Republic / Netherlands",material:"Gold/Silver",d:{overview:"Currency of the Dutch Republic and later the Netherlands, anchoring its Golden Age.",innovation:"Backed by the Bank of Amsterdam, providing unprecedented monetary stability.",spread:"Circulated globally through the Dutch East India Company trade empire.",economics:"Funded Dutch commercial supremacy and early capitalism in the seventeenth century.",legacy:"One of the longest-serving European currencies before adoption of the euro.",figures:"Closely associated with the rise of the Dutch merchant class.",decline:"Replaced by the euro in 2002."}},
-{id:"british-pound",n:"British Pound Sterling",s:1694,e:2025,lon:-0.1,lat:51.5,x:495,y:188,col:"#c8a848",sz:1.3,region:"United Kingdom",type:"Banknote/Coin",issuer:"Bank of England",material:"Various",d:{overview:"One of the oldest surviving currencies, central to the global financial system.",innovation:"Bank of England pioneered central banking and modern monetary policy.",spread:"Became the world's primary reserve currency during the British Empire.",economics:"Sterling-based gold standard defined nineteenth-century international finance.",legacy:"Remains a major global reserve currency and financial benchmark.",figures:"Founded under William III; shaped by figures from Isaac Newton to Montagu Norman.",decline:"Lost reserve-currency dominance to the US dollar after World War II."}},
-{id:"swedish-riksdaler",n:"Swedish Riksdaler",s:1604,e:1873,lon:18.07,lat:59.33,x:510,y:175,col:"#b8b8b8",sz:0.9,region:"Sweden",type:"Coin",issuer:"Kingdom of Sweden",material:"Silver/Copper",d:{overview:"Swedish silver coin that helped finance Sweden's Baltic empire.",innovation:"Stockholm Banco issued the first European banknotes in 1661 to supplement riksdalers.",spread:"Circulated across Scandinavia and the Baltic trading sphere.",economics:"Copper plate money and early banknotes were bold monetary experiments.",legacy:"Led to creation of the Riksbank, the world's oldest central bank.",figures:"Johan Palmstruch founded Stockholm Banco and pioneered European paper money.",decline:"Replaced by the krona when Sweden joined the Scandinavian Monetary Union."}},
-{id:"us-dollar",n:"United States Dollar",s:1792,e:2025,lon:-77,lat:38.9,x:260,y:210,col:"#85bb65",sz:1.4,region:"United States",type:"Banknote/Coin",issuer:"United States Government",material:"Various",d:{overview:"World's primary reserve currency and most widely traded money since World War II.",innovation:"Federal Reserve System created a flexible monetary framework for the modern era.",spread:"Bretton Woods made the dollar the anchor of the post-war monetary order.",economics:"Dollar hegemony underpins global commodity pricing and international lending.",legacy:"Remains the benchmark currency for global trade, debt, and reserves.",figures:"Alexander Hamilton established the US Mint; the Federal Reserve was created in 1913.",decline:"Periodic crises and rising alternatives challenge but have not displaced dollar dominance."}},
-{id:"french-franc",n:"French Franc",s:1795,e:2002,lon:2.35,lat:48.86,x:498,y:195,col:"#4488cc",sz:1.0,region:"France",type:"Banknote/Coin",issuer:"French Republic",material:"Various",d:{overview:"Currency of France from the Revolution to the euro, spanning two centuries of change.",innovation:"Decimal system of francs and centimes became a model for metric currencies.",spread:"Franc zone extended across French colonies in Africa and the Pacific.",economics:"Anchored the Latin Monetary Union, an early experiment in currency harmonization.",legacy:"CFA franc still operates in fourteen African nations as a successor.",figures:"Introduced during the French Revolution; shaped by Napoleon's monetary reforms.",decline:"Replaced by the euro in 2002."}},
-{id:"medici-bank",n:"Medici Bank",s:1397,e:1494,lon:11.25,lat:43.77,x:508,y:203,col:"#a07828",sz:1.0,region:"Florence",type:"Institution",issuer:"Medici family",material:"N/A",d:{overview:"Most powerful bank of the fifteenth century, financing popes and kings.",innovation:"Pioneered double-entry bookkeeping and the letter of credit for international trade.",spread:"Branches in Rome, Venice, London, Bruges, and Geneva formed a pan-European network.",economics:"Medici wealth funded the Renaissance and shaped European power politics.",legacy:"Blueprint for modern international banking and financial networks.",figures:"Giovanni di Bicci founded it; Lorenzo the Magnificent expanded its political influence.",decline:"Overextension of political loans and loss of papal accounts led to collapse."}},
-{id:"bank-of-amsterdam",n:"Bank of Amsterdam",s:1609,e:1820,lon:4.9,lat:52.37,x:502,y:185,col:"#60a0c8",sz:1.0,region:"Netherlands",type:"Institution",issuer:"City of Amsterdam",material:"N/A",d:{overview:"Public bank that stabilized Dutch Golden Age commerce by guaranteeing deposits.",innovation:"Created bank money (banco) that eliminated coin-clipping and debasement problems.",spread:"Model copied by central banks across Europe including the Bank of England.",economics:"Made Amsterdam the financial capital of seventeenth-century Europe.",legacy:"Prototype for modern central banking and deposit-guarantee systems.",figures:"Established by the Amsterdam city council inspired by Italian banking precedents.",decline:"Secret loans to the Dutch East India Company eroded trust and led to closure."}},
-{id:"bank-of-england",n:"Bank of England",s:1694,e:2025,lon:-0.09,lat:51.51,x:495,y:188,col:"#c8a050",sz:1.2,region:"United Kingdom",type:"Institution",issuer:"British Government",material:"N/A",d:{overview:"Central bank that defined modern monetary policy and central banking practice.",innovation:"First to issue reliable banknotes at scale and act as lender of last resort.",spread:"Its model was adopted by central banks worldwide throughout the nineteenth century.",economics:"Managed the gold standard that governed international finance for over a century.",legacy:"Remains one of the most influential central banks in the global financial system.",figures:"Founded by William Paterson; Walter Bagehot articulated its lender-of-last-resort role.",decline:"Loss of empire and Bretton Woods shifted financial dominance to the Federal Reserve."}},
-{id:"south-sea-bubble",n:"South Sea Bubble",s:1720,e:1720,lon:-0.1,lat:51.5,x:495,y:188,col:"#cc4444",sz:1.0,region:"United Kingdom",type:"Crisis",issuer:"South Sea Company",material:"N/A",d:{overview:"Speculative mania in South Sea Company shares that crashed the London market in 1720.",innovation:"Demonstrated how stock manipulation and political corruption can inflate asset bubbles.",spread:"Panic spread to France's Mississippi Bubble and Dutch markets simultaneously.",economics:"Wiped out fortunes including Isaac Newton's and triggered a parliamentary investigation.",legacy:"Led to the Bubble Act and early securities regulation in Britain.",figures:"Promoted by John Blunt and politically connected directors of the South Sea Company.",decline:"Share price collapsed from over one thousand pounds to under one hundred within months."}},
-{id:"assignat",n:"French Assignat",s:1789,e:1796,lon:2.35,lat:48.86,x:498,y:195,col:"#cc6644",sz:0.9,region:"France",type:"Paper",issuer:"French Revolutionary Government",material:"Paper",d:{overview:"Paper currency of the French Revolution backed by confiscated church lands.",innovation:"Early experiment in fiat currency backed by government-seized real estate.",spread:"Circulated only within France and its occupied territories.",economics:"Massive overprinting caused hyperinflation that undermined the Revolutionary economy.",legacy:"Became a textbook example of the dangers of unbacked money printing.",figures:"Proposed by Charles-Maurice de Talleyrand and enacted by the National Assembly.",decline:"Hyperinflation rendered them worthless; Napoleon restored hard currency with the franc."}},
-{id:"gold-standard",n:"Classical Gold Standard",s:1870,e:1914,lon:-0.1,lat:51.5,x:495,y:188,col:"#ffd700",sz:1.3,region:"Global",type:"System",issuer:"Multiple nations",material:"Gold",d:{overview:"International monetary system tying major currencies to fixed gold parities.",innovation:"Created automatic balance-of-payments adjustment through gold flows between nations.",spread:"Adopted by most industrialized nations by the 1880s creating a unified global system.",economics:"Enabled unprecedented growth in international trade and capital flows.",legacy:"Nostalgia for gold-standard stability continues to influence monetary debates.",figures:"Championed by British policy; David Hume's price-specie flow mechanism provided theory.",decline:"Suspended during World War I and never fully restored despite interwar attempts."}},
-{id:"federal-reserve",n:"Federal Reserve System",s:1913,e:2025,lon:-77,lat:38.9,x:260,y:210,col:"#4a8850",sz:1.3,region:"United States",type:"Institution",issuer:"United States Government",material:"N/A",d:{overview:"Central bank of the United States, the most powerful monetary institution in the world.",innovation:"Dual mandate balancing price stability with maximum employment was a policy breakthrough.",spread:"Dollar reserve system extended Fed influence to every corner of global finance.",economics:"Controls the federal funds rate and conducts open market operations shaping global liquidity.",legacy:"Its decisions ripple through every financial market on earth.",figures:"Created after the Panic of 1907; shaped by Paul Volcker, Alan Greenspan, and Ben Bernanke.",decline:"Criticized for contributing to asset bubbles and growing wealth inequality."}}
-/* --- Phase 2B: remaining 25 entries --- */,
-{id:"bretton-woods",n:"Bretton Woods System",s:1944,e:1971,lon:-71.17,lat:44.26,x:270,y:195,col:"#3a7850",sz:1.2,region:"United States",type:"System",issuer:"Allied Nations",material:"N/A",d:{overview:"Post-war monetary order pegging global currencies to the US dollar convertible to gold.",innovation:"Created fixed exchange rates with the dollar as the sole gold-convertible anchor.",spread:"Adopted by forty-four Allied nations at the 1944 Bretton Woods Conference.",economics:"Enabled decades of stable growth and trade expansion in the post-war West.",legacy:"Established the IMF and World Bank as pillars of international finance.",figures:"John Maynard Keynes and Harry Dexter White were the chief architects.",decline:"Nixon ended gold convertibility in 1971, collapsing the fixed-rate system."}},
-{id:"imf",n:"International Monetary Fund",s:1945,e:2025,lon:-77.04,lat:38.9,x:260,y:210,col:"#2868a8",sz:1.1,region:"Global",type:"Institution",issuer:"United Nations member states",material:"N/A",d:{overview:"International institution providing financial stability, surveillance, and emergency lending.",innovation:"Special Drawing Rights created a synthetic reserve asset for global liquidity.",spread:"Membership grew from forty-four to one hundred ninety nations.",economics:"Conditional lending programs shape fiscal policy in borrowing nations worldwide.",legacy:"Remains the lender of last resort for sovereign financial crises.",figures:"Founded at Bretton Woods; led by figures from Christine Lagarde to Kristalina Georgieva.",decline:"Criticized for imposing austerity that deepens poverty in developing nations."}},
-{id:"credit-card",n:"Credit Card (Diners Club)",s:1950,e:2025,lon:-73.97,lat:40.75,x:265,y:200,col:"#e87820",sz:1.0,region:"United States",type:"Payment System",issuer:"Diners Club / Private sector",material:"Plastic",d:{overview:"First general-purpose charge card, launched at a New York restaurant in 1950.",innovation:"Separated the moment of purchase from the moment of payment for the first time.",spread:"Visa and Mastercard networks expanded card payments to every country on earth.",economics:"Consumer credit cards transformed retail spending and created a multi-trillion-dollar industry.",legacy:"Foundation for all modern electronic payment systems including contactless and mobile.",figures:"Frank McNamara and Ralph Schneider founded Diners Club after a forgotten wallet incident.",decline:"Plastic cards face disruption from mobile wallets and cryptocurrency payment rails."}},
-{id:"eurodollar",n:"Eurodollar Market",s:1957,e:2025,lon:-0.1,lat:51.5,x:495,y:188,col:"#70a0c0",sz:1.0,region:"Global",type:"Market",issuer:"International banks",material:"N/A",d:{overview:"Offshore dollar deposits held outside the United States, forming a vast unregulated market.",innovation:"Created an international dollar market beyond the reach of US banking regulation.",spread:"London became the hub, but eurodollar trading expanded to every major financial center.",economics:"Provides trillions in dollar-denominated liquidity to global borrowers.",legacy:"Basis for LIBOR and the modern interbank lending market.",figures:"Soviet-era banks in London first deposited dollars offshore to avoid US seizure risk.",decline:"LIBOR manipulation scandal and transition to risk-free rates undermined market credibility."}},
-{id:"petrodollar",n:"Petrodollar System",s:1974,e:2025,lon:46.7,lat:24.7,x:560,y:240,col:"#404040",sz:1.1,region:"Middle East / Global",type:"System",issuer:"OPEC / United States",material:"N/A",d:{overview:"Agreement to price global oil exclusively in US dollars, reinforcing dollar hegemony.",innovation:"Linked energy security to currency dominance in an unprecedented geopolitical arrangement.",spread:"All OPEC nations adopted dollar pricing, channeling petrodollars back into US assets.",economics:"Generated massive capital flows that financed US deficits and global dollar liquidity.",legacy:"Cornerstone of US financial power and the dollar's reserve-currency status.",figures:"Henry Kissinger negotiated the arrangement with Saudi Arabia after the 1973 oil shock.",decline:"De-dollarization efforts by China, Russia, and BRICS nations challenge the system."}},
-{id:"deutsche-mark",n:"Deutsche Mark",s:1948,e:2002,lon:13.4,lat:52.5,x:510,y:185,col:"#d8c840",sz:1.0,region:"Germany",type:"Banknote/Coin",issuer:"Federal Republic of Germany",material:"Various",d:{overview:"Currency of West Germany and reunified Germany, symbolizing post-war economic revival.",innovation:"Bundesbank's strict anti-inflation mandate became a model for central bank independence.",spread:"Became Europe's strongest currency and anchor of the European Monetary System.",economics:"Underpinned the Wirtschaftswunder, Germany's post-war economic miracle.",legacy:"Its stability culture was embedded in the European Central Bank and the euro.",figures:"Ludwig Erhard championed the currency reform that launched the social market economy.",decline:"Replaced by the euro in 2002 as Germany led European monetary integration."}},
-{id:"japanese-yen",n:"Japanese Yen",s:1871,e:2025,lon:139.7,lat:35.7,x:780,y:215,col:"#d84040",sz:1.1,region:"Japan",type:"Banknote/Coin",issuer:"Bank of Japan",material:"Various",d:{overview:"Currency of Japan, the world's third-largest economy and a major reserve asset.",innovation:"Adopted decimal denomination during the Meiji modernization of Japanese finance.",spread:"Became a key international currency through Japan's export-driven economic rise.",economics:"Yen carry trade has been a dominant force in global foreign exchange markets.",legacy:"Remains one of the most traded currencies and a safe-haven asset.",figures:"Created during the Meiji Restoration; Bank of Japan shapes modern monetary policy.",decline:"Decades of deflation and ultra-low interest rates have weakened yen purchasing power."}},
-{id:"chinese-yuan",n:"Chinese Yuan (Renminbi)",s:1949,e:2025,lon:116.4,lat:39.9,x:735,y:210,col:"#cc2828",sz:1.2,region:"China",type:"Banknote/Coin",issuer:"People's Bank of China",material:"Various",d:{overview:"Currency of the People's Republic of China, rising to global prominence with China's economy.",innovation:"Managed float and capital controls create a unique hybrid monetary regime.",spread:"Included in the IMF's SDR basket in 2016, recognizing its international role.",economics:"Yuan internationalization is a strategic priority for Chinese economic statecraft.",legacy:"Potential challenger to US dollar hegemony in the twenty-first century.",figures:"Governed by the People's Bank of China under state council direction.",decline:"Capital controls and geopolitical tensions limit full reserve-currency status."}},
-{id:"indian-rupee",n:"Indian Rupee",s:1540,e:2025,lon:77.2,lat:28.6,x:625,y:240,col:"#e87020",sz:1.1,region:"India",type:"Banknote/Coin",issuer:"Reserve Bank of India",material:"Various",d:{overview:"One of the oldest currencies in continuous use, serving the world's most populous nation.",innovation:"Sher Shah Suri standardized the silver rupee in the sixteenth century.",spread:"British colonial rule spread the rupee across South Asia and East Africa.",economics:"Anchors one of the world's fastest-growing major economies.",legacy:"The rupee symbol was officially adopted in 2010 as a mark of economic identity.",figures:"Sher Shah Suri introduced it; the Reserve Bank of India manages it since 1935.",decline:"Periodic devaluations and inflation have eroded purchasing power over decades."}},
-{id:"swiss-franc",n:"Swiss Franc",s:1850,e:2025,lon:7.45,lat:46.95,x:505,y:195,col:"#d02020",sz:1.0,region:"Switzerland",type:"Banknote/Coin",issuer:"Swiss National Bank",material:"Various",d:{overview:"Currency of Switzerland, renowned as the world's premier safe-haven money.",innovation:"Swiss banking secrecy and neutrality made the franc a refuge in every crisis.",spread:"Held as a reserve asset and safe-haven by investors and central banks globally.",economics:"Strong franc reflects Switzerland's trade surpluses and low inflation record.",legacy:"Synonymous with financial stability, neutrality, and wealth preservation.",figures:"Swiss National Bank manages policy; banking secrecy shaped by decades of legislation.",decline:"Negative interest rates and pressure on banking secrecy challenge the traditional model."}},
-{id:"euro",n:"Euro",s:1999,e:2025,lon:8.68,lat:50.11,x:505,y:190,col:"#003399",sz:1.4,region:"Eurozone",type:"Banknote/Coin",issuer:"European Central Bank",material:"Various",d:{overview:"Shared currency of twenty eurozone nations, the world's second-largest reserve currency.",innovation:"Unprecedented monetary union among sovereign nations with independent fiscal policies.",spread:"Adopted by three hundred forty million people across twenty countries.",economics:"Eliminated exchange-rate risk within Europe but created fiscal-policy tensions.",legacy:"Largest monetary union experiment in history, reshaping European identity.",figures:"Jacques Delors championed the project; Mario Draghi's 'whatever it takes' saved it.",decline:"Eurozone debt crises exposed structural flaws in a currency union without fiscal union."}},
-{id:"m-pesa",n:"M-Pesa",s:2007,e:2025,lon:36.82,lat:-1.29,x:545,y:290,col:"#4caf50",sz:1.0,region:"Kenya / Africa",type:"Mobile Money",issuer:"Safaricom / Vodafone",material:"Digital",d:{overview:"Mobile money platform that revolutionized financial inclusion in Africa.",innovation:"Turned basic mobile phones into bank accounts for the unbanked population.",spread:"Expanded from Kenya to Tanzania, India, and dozens of developing nations.",economics:"Processes billions of dollars annually, transforming informal economies.",legacy:"Proved that mobile technology can leapfrog traditional banking infrastructure.",figures:"Launched by Safaricom CEO Michael Joseph with Vodafone backing.",decline:"Competition from banks and fintech apps is eroding M-Pesa's market dominance."}},
-{id:"bitcoin",n:"Bitcoin",s:2009,e:2025,lon:-122.4,lat:37.8,x:200,y:210,col:"#f7931a",sz:1.3,region:"Global (digital)",type:"Cryptocurrency",issuer:"Decentralized network",material:"Digital",d:{overview:"First decentralized cryptocurrency, enabling peer-to-peer value transfer without intermediaries.",innovation:"Blockchain technology solved the double-spending problem without a trusted third party.",spread:"Adopted by millions of users and recognized as legal tender in El Salvador.",economics:"Market capitalization has exceeded one trillion dollars at peak valuations.",legacy:"Spawned an entire ecosystem of cryptocurrencies and decentralized finance.",figures:"Created by the pseudonymous Satoshi Nakamoto in a 2008 whitepaper.",decline:"Energy consumption, volatility, and regulatory crackdowns threaten mainstream adoption."}},
-{id:"ethereum",n:"Ethereum",s:2015,e:2025,lon:-73.9,lat:40.7,x:265,y:200,col:"#627eea",sz:1.1,region:"Global (digital)",type:"Cryptocurrency",issuer:"Decentralized network",material:"Digital",d:{overview:"Programmable blockchain platform enabling smart contracts and decentralized applications.",innovation:"Turing-complete smart contracts expanded blockchain beyond simple value transfer.",spread:"Hosts thousands of tokens and decentralized applications across global markets.",economics:"Decentralized finance built on Ethereum manages tens of billions in locked value.",legacy:"Foundation of the DeFi and NFT ecosystems that redefined digital ownership.",figures:"Vitalik Buterin proposed Ethereum in 2013 and launched it in 2015.",decline:"High gas fees and scaling challenges have driven users to competing chains."}},
-{id:"tether",n:"Tether (USDT)",s:2014,e:2025,lon:-72.6,lat:19,x:275,y:245,col:"#26a17b",sz:1.0,region:"Global (digital)",type:"Stablecoin",issuer:"Tether Limited",material:"Digital",d:{overview:"Largest stablecoin by market cap, pegged one-to-one to the US dollar.",innovation:"Brought dollar stability to volatile cryptocurrency markets as a digital safe harbor.",spread:"Most traded cryptocurrency by volume, used as base pair on exchanges worldwide.",economics:"Functions as a shadow dollar system processing hundreds of billions monthly.",legacy:"Proved market demand for blockchain-based dollar equivalents.",figures:"Created by Brock Pierce, Reeve Collins, and Craig Sellars.",decline:"Persistent questions about reserve transparency and regulatory scrutiny threaten trust."}},
-{id:"venmo-paypal",n:"Venmo / PayPal",s:1998,e:2025,lon:-122.15,lat:37.38,x:200,y:212,col:"#3396cd",sz:1.0,region:"United States / Global",type:"Payment System",issuer:"PayPal Holdings",material:"Digital",d:{overview:"Digital payment platforms that made online and peer-to-peer transfers mainstream.",innovation:"PayPal pioneered secure online payments; Venmo added a social layer to transfers.",spread:"Over four hundred million active accounts spanning two hundred markets worldwide.",economics:"Processed over one trillion dollars in payment volume annually.",legacy:"Catalyzed the fintech revolution and inspired a generation of payment startups.",figures:"Founded by Peter Thiel, Max Levchin, and Elon Musk's X.com merger in early 2000s.",decline:"Intense competition from Apple Pay, Zelle, and emerging fintech challengers."}},
-{id:"quantitative-easing",n:"Quantitative Easing",s:2008,e:2025,lon:-77,lat:38.9,x:260,y:210,col:"#5080a0",sz:1.1,region:"Global",type:"Policy",issuer:"Major central banks",material:"N/A",d:{overview:"Unconventional monetary policy where central banks purchase assets to inject liquidity.",innovation:"Expanded the central bank toolkit beyond interest rates to direct asset purchases.",spread:"Adopted by the Fed, ECB, Bank of Japan, and Bank of England after 2008.",economics:"Inflated asset prices and lowered borrowing costs but widened wealth inequality.",legacy:"Redefined the boundaries of central bank intervention in modern economies.",figures:"Ben Bernanke at the Federal Reserve was the most prominent advocate.",decline:"Taper tantrums and inflation surges revealed the risks of unwinding massive balance sheets."}},
-{id:"swift",n:"SWIFT Network",s:1973,e:2025,lon:4.37,lat:50.85,x:502,y:190,col:"#e0a820",sz:1.0,region:"Global",type:"Infrastructure",issuer:"SWIFT cooperative (Belgium)",material:"Digital",d:{overview:"Global messaging network connecting over eleven thousand financial institutions for payments.",innovation:"Standardized international payment messaging, replacing unreliable telex communications.",spread:"Connects banks in over two hundred countries for cross-border transactions.",economics:"Processes trillions of dollars in daily international payment instructions.",legacy:"Backbone of the global financial plumbing for half a century.",figures:"Founded by two hundred thirty-nine banks from fifteen countries in 1973.",decline:"Weaponization as a sanctions tool and competition from blockchain alternatives threaten neutrality."}},
-{id:"tulip-mania",n:"Tulip Mania",s:1637,e:1637,lon:4.9,lat:52.37,x:502,y:185,col:"#cc4488",sz:0.9,region:"Netherlands",type:"Crisis",issuer:"Dutch speculators",material:"N/A",d:{overview:"Speculative bubble in Dutch tulip bulb futures that crashed spectacularly in February 1637.",innovation:"One of the earliest recorded futures markets emerged around tulip contracts.",spread:"Confined largely to the Dutch Republic but became a universal cautionary tale.",economics:"Prices for single bulbs briefly exceeded the cost of Amsterdam canal houses.",legacy:"The term tulip mania remains shorthand for irrational speculative excess.",figures:"No single figure; driven by a broad frenzy among Dutch merchants and artisans.",decline:"Market collapsed overnight when buyers failed to appear at a routine auction."}},
-{id:"great-depression",n:"Great Depression / Dollar Crisis",s:1929,e:1939,lon:-74,lat:40.7,x:265,y:200,col:"#884444",sz:1.2,region:"Global",type:"Crisis",issuer:"N/A",material:"N/A",d:{overview:"Worst economic downturn in modern history, triggered by the 1929 stock market crash.",innovation:"Demonstrated that gold standard rigidity could amplify deflationary spirals.",spread:"Spread from the United States to engulf every major economy within two years.",economics:"Global GDP fell by an estimated fifteen percent and unemployment soared above twenty percent.",legacy:"Inspired Keynesian economics and the creation of modern financial safety nets.",figures:"Franklin Roosevelt's New Deal and John Maynard Keynes reshaped policy responses.",decline:"Only fully ended with the massive fiscal spending of World War II."}},
-{id:"2008-crisis",n:"2008 Global Financial Crisis",s:2008,e:2009,lon:-74,lat:40.7,x:265,y:200,col:"#cc2222",sz:1.2,region:"Global",type:"Crisis",issuer:"N/A",material:"N/A",d:{overview:"Collapse of the US housing bubble triggered the worst financial crisis since the Great Depression.",innovation:"Exposed the systemic risks of securitization, credit default swaps, and shadow banking.",spread:"Contagion spread from Wall Street to European banks and emerging markets within weeks.",economics:"Global output contracted and trillions in wealth were destroyed almost overnight.",legacy:"Led to Dodd-Frank regulation, Basel III standards, and the rise of fintech alternatives.",figures:"Lehman Brothers' collapse became the symbol; Bernanke, Paulson, and Geithner led the response.",decline:"Massive bailouts and quantitative easing stabilized markets but left lasting public anger."}},
-{id:"argentine-peso-crisis",n:"Argentine Peso Crisis",s:2001,e:2002,lon:-58.4,lat:-34.6,x:310,y:370,col:"#cc6622",sz:1.0,region:"Argentina",type:"Crisis",issuer:"Argentine government",material:"N/A",d:{overview:"Collapse of Argentina's currency board peg to the dollar caused economic devastation.",innovation:"Demonstrated the fragility of fixed exchange rate regimes under fiscal stress.",spread:"Triggered regional contagion across Latin American financial markets.",economics:"GDP fell by over ten percent and poverty rates doubled within a year.",legacy:"Argentina's repeated defaults made it a cautionary tale of monetary mismanagement.",figures:"President de la Rua resigned amid riots; Domingo Cavallo designed the failed peg.",decline:"Forced devaluation of seventy percent destroyed savings and trust in institutions."}},
-{id:"zimbabwe-hyperinflation",n:"Zimbabwe Hyperinflation",s:2007,e:2009,lon:31.05,lat:-17.83,x:540,y:330,col:"#aa2222",sz:1.0,region:"Zimbabwe",type:"Crisis",issuer:"Reserve Bank of Zimbabwe",material:"Paper",d:{overview:"Hyperinflation reached an estimated seventy-nine billion percent monthly at its peak in 2008.",innovation:"Produced the hundred-trillion-dollar banknote, the largest denomination ever printed.",spread:"Confined to Zimbabwe but became a global symbol of monetary collapse.",economics:"Destroyed the domestic economy and forced dollarization of everyday transactions.",legacy:"Textbook case study in the consequences of unchecked money printing.",figures:"Reserve Bank governor Gideon Gono oversaw the catastrophic monetary expansion.",decline:"Zimbabwe abandoned its currency entirely in 2009, adopting the US dollar and rand."}},
-{id:"cbdc",n:"Central Bank Digital Currency (CBDC)",s:2020,e:2025,lon:116.4,lat:39.9,x:735,y:210,col:"#8040c0",sz:1.1,region:"Global",type:"Digital Currency",issuer:"Various central banks",material:"Digital",d:{overview:"Digital form of sovereign currency issued directly by central banks to the public.",innovation:"Combines the trust of central bank money with the efficiency of digital payments.",spread:"Over one hundred nations are researching or piloting CBDCs as of 2024.",economics:"Could reshape monetary transmission, financial inclusion, and cross-border payments.",legacy:"Represents the next evolution of state-issued money in the digital age.",figures:"People's Bank of China leads with the digital yuan; ECB is developing the digital euro.",decline:"Privacy concerns and disintermediation of commercial banks pose adoption challenges."}},
-{id:"stablecoin",n:"Stablecoins",s:2014,e:2025,lon:-122.4,lat:37.8,x:200,y:210,col:"#28a088",sz:1.0,region:"Global (digital)",type:"Cryptocurrency",issuer:"Various private issuers",material:"Digital",d:{overview:"Cryptocurrencies designed to maintain a stable value by pegging to fiat currencies or assets.",innovation:"Bridged the gap between volatile crypto markets and stable fiat-denominated value.",spread:"Total stablecoin market cap exceeded one hundred fifty billion dollars by 2024.",economics:"Serve as critical infrastructure for DeFi lending, trading, and remittances.",legacy:"Forced regulators worldwide to develop new frameworks for digital money.",figures:"Tether, Circle (USDC), and MakerDAO (DAI) are the dominant issuers.",decline:"Regulatory crackdowns and de-pegging events like Terra's collapse exposed systemic risks."}},
-{id:"south-korean-won",n:"South Korean Won",
- s:1945,e:2025,lon:126.98,lat:37.57,x:770,y:215,
- col:"#003478",sz:1.0,region:"South Korea",type:"Banknote/Coin",
- issuer:"Bank of Korea",material:"Paper/Coin",
- d:{overview:"Currency of South Korea, reflecting the nation's transformation into an economic powerhouse.",
-    innovation:"South Korea's rapid industrialization made the won one of Asia's most traded currencies.",
-    spread:"Significant in Asian financial markets and global electronics trade.",
-    economics:"Supported the Miracle on the Han River economic transformation from poverty to prosperity.",
-    legacy:"South Korea's financial development model has been studied worldwide.",
-    figures:"Park Chung-hee's economic reforms laid the foundation for Korea's financial growth.",
-    decline:"Vulnerable to capital flight during Asian and global financial crises."}},
-{id:"mexican-peso",n:"Mexican Peso",
- s:1821,e:2025,lon:-99.13,lat:19.43,x:225,y:250,
- col:"#006847",sz:1.0,region:"Mexico",type:"Banknote/Coin",
- issuer:"Banco de Mexico",material:"Polymer/Coin",
- d:{overview:"Currency of Mexico, descended from the Spanish colonial piece of eight.",
-    innovation:"Mexico pioneered polymer banknotes in the Americas for durability and security.",
-    spread:"Major currency in Latin American trade and closely linked to the US dollar.",
-    economics:"The 1994 Tequila Crisis forced major structural monetary reforms.",
-    legacy:"Heir to the most globally circulated coin of the early modern period.",
-    figures:"Banco de Mexico gained independence in 1993 to ensure monetary stability.",
-    decline:"Periodic devaluations and inflation have eroded long-term purchasing power."}},
-{id:"nigerian-naira",n:"Nigerian Naira",
- s:1973,e:2025,lon:3.39,lat:6.45,x:497,y:280,
- col:"#008751",sz:0.9,region:"Nigeria",type:"Banknote/Coin",
- issuer:"Central Bank of Nigeria",material:"Paper/Polymer",
- d:{overview:"Currency of Africa's largest economy, tied closely to oil revenues.",
-    innovation:"Nigeria introduced an eNaira CBDC in 2021, among the first in Africa.",
-    spread:"Dominant currency in West African regional trade and commerce.",
-    economics:"Oil price fluctuations cause dramatic exchange rate volatility for the naira.",
-    legacy:"The eNaira pilot provides lessons for CBDC implementation across developing nations.",
-    figures:"Central Bank governors have shaped monetary policy amid competing political pressures.",
-    decline:"Chronic foreign exchange shortages and parallel market premiums undermine confidence."}},
-{id:"saudi-riyal",n:"Saudi Riyal",
- s:1932,e:2025,lon:46.72,lat:24.71,x:560,y:245,
- col:"#006C35",sz:0.9,region:"Saudi Arabia",type:"Banknote/Coin",
- issuer:"Saudi Arabian Monetary Authority",material:"Paper/Coin",
- d:{overview:"Currency of Saudi Arabia, pegged to the US dollar and anchored by oil wealth.",
-    innovation:"Fixed dollar peg since 1986 has provided remarkable exchange rate stability.",
-    spread:"Key currency in Gulf Cooperation Council trade and Islamic finance markets.",
-    economics:"Oil revenues denominated in dollars support the peg and sovereign wealth fund.",
-    legacy:"Central to the petrodollar system that underpins global dollar demand.",
-    figures:"King Abdulaziz established the Saudi monetary system during national unification.",
-    decline:"Diversification away from oil dependence poses long-term questions for the peg."}},
-{id:"turkish-lira",n:"Turkish Lira",
- s:1923,e:2025,lon:32.86,lat:39.93,x:530,y:210,
- col:"#E30A17",sz:0.9,region:"Turkey",type:"Banknote/Coin",
- issuer:"Central Bank of Turkey",material:"Paper/Coin",
- d:{overview:"Currency of Turkey, experiencing dramatic depreciation in recent years.",
-    innovation:"Turkey redenominated in 2005, removing six zeros to restore confidence.",
-    spread:"Important regional currency bridging European and Middle Eastern financial systems.",
-    economics:"Unorthodox monetary policy of cutting rates during inflation caused severe depreciation.",
-    legacy:"Illustrates the consequences of political interference in central bank independence.",
-    figures:"President Erdogan's insistence on low rates despite high inflation defined recent policy.",
-    decline:"Lost over eighty percent of its value against the dollar between 2018 and 2023."}},
-{id:"philippine-peso",n:"Philippine Peso",
- s:1852,e:2025,lon:121,lat:14.6,x:770,y:258,
- col:"#0038A8",sz:0.8,region:"Philippines",type:"Banknote/Coin",
- issuer:"Bangko Sentral ng Pilipinas",material:"Paper/Coin",
- d:{overview:"Currency of the Philippines, rooted in the Spanish colonial peso system.",
-    innovation:"GCash and Maya mobile payment platforms have rapidly digitized Philippine finance.",
-    spread:"Remittances from overseas Filipino workers make the peso globally significant.",
-    economics:"Overseas remittances account for nearly ten percent of Philippine GDP.",
-    legacy:"The peso name reflects centuries of Spanish colonial monetary influence in Asia.",
-    figures:"The Bangko Sentral ng Pilipinas was reconstituted in 1993 for greater independence.",
-    decline:"Periodic depreciation reflects the country's trade deficits and external vulnerabilities."}},
-{id:"thai-baht",n:"Thai Baht",
- s:1897,e:2025,lon:100.5,lat:13.75,x:730,y:258,
- col:"#A51931",sz:0.9,region:"Thailand",type:"Banknote/Coin",
- issuer:"Bank of Thailand",material:"Paper/Coin",
- d:{overview:"Currency of Thailand whose speculative attack in 1997 triggered the Asian Financial Crisis.",
-    innovation:"Thailand's recovery led to stronger foreign reserve management across Asia.",
-    spread:"Important currency in Southeast Asian trade and tourism industries.",
-    economics:"The 1997 baht devaluation cascaded into the worst Asian financial crisis in decades.",
-    legacy:"Asian nations built massive foreign reserves after 1997 to prevent future crises.",
-    figures:"Finance Minister Thanong Bidaya was forced to float the baht on July 2, 1997.",
-    decline:"The 1997 crisis caused GDP to contract by over ten percent in a single year."}}
-];
-
-/* --- Connections (15) --- */
-const CONNECTIONS=[
-{from:"lydian-stater",to:"greek-drachma",label:"Coinage spreads to Greece"},
-{from:"greek-drachma",to:"roman-denarius",label:"Rome adopts Greek monetary concepts"},
-{from:"persian-daric",to:"byzantine-solidus",label:"Eastern gold coinage tradition"},
-{from:"byzantine-solidus",to:"islamic-dinar",label:"Islamic coinage modeled on solidus"},
-{from:"florentine-florin",to:"venetian-ducat",label:"Competing Italian gold coins"},
-{from:"medici-bank",to:"bank-of-amsterdam",label:"Italian banking model spreads north"},
-{from:"bank-of-amsterdam",to:"bank-of-england",label:"Central banking concept adopted"},
-{from:"bank-of-england",to:"federal-reserve",label:"Central bank model crosses Atlantic"},
-{from:"spanish-real",to:"us-dollar",label:"Dollar modeled on piece of eight"},
-{from:"gold-standard",to:"bretton-woods",label:"Gold anchor continues post-war"},
-{from:"bretton-woods",to:"petrodollar",label:"Dollar hegemony reinforced by oil"},
-{from:"bitcoin",to:"ethereum",label:"Blockchain platform evolution"},
-{from:"bitcoin",to:"tether",label:"Stablecoins built on crypto rails"},
-{from:"m-pesa",to:"venmo-paypal",label:"Mobile payment revolution"},
-{from:"2008-crisis",to:"quantitative-easing",label:"Crisis triggers unconventional policy"}
-];
-
-/* --- Transmissions (thematic narrative chains) --- */
-const TRANSMISSIONS=[
-{id:"t-coinage",
- n:"Birth of Coinage",
- d:"From Lydian electrum to Greek silver to Roman denarii -- the invention that changed commerce forever.",
- y:-610,
- chain:["lydian-stater","greek-drachma","persian-daric","roman-denarius"]},
-{id:"t-paper",
- n:"Paper Money Revolution",
- d:"From Song Dynasty China to Revolutionary France to modern banknotes -- paper transforms money.",
- y:1024,
- chain:["jiaozi","assignat","british-pound","federal-reserve"]},
-{id:"t-gold",
- n:"Rise and Fall of Gold",
- d:"Gold coins to the gold standard to fiat -- the arc of metallic money.",
- y:309,
- chain:["byzantine-solidus","venetian-ducat","gold-standard","bretton-woods","nixon-shock"]},
-{id:"t-dollar",
- n:"Rise of the Dollar",
- d:"From the Spanish piece of eight to global reserve currency dominance.",
- y:1497,
- chain:["spanish-real","continental-dollar","us-dollar","bretton-woods","petrodollar"]},
-{id:"t-banking",
- n:"Banking Evolution",
- d:"From Templar letters of credit to modern central banks -- the institutional backbone of money.",
- y:1150,
- chain:["templar-banking","medici-bank","bank-of-amsterdam","bank-of-england","federal-reserve"]},
-{id:"t-african",
- n:"Money in Africa",
- d:"From cowrie shells and manillas to mobile money -- Africa's diverse monetary journey.",
- y:-3000,
- chain:["cowrie-shell","manilla","cfa-franc","m-pesa"]},
-{id:"t-bubbles",
- n:"Speculative Bubbles",
- d:"History's greatest financial manias and the crashes that followed them.",
- y:1637,
- chain:["tulip-mania","south-sea-bubble","great-depression","2008-crisis"]},
-{id:"t-crypto",
- n:"Digital Money Revolution",
- d:"From credit cards to mobile payments to cryptocurrency -- the digitization of value.",
- y:1950,
- chain:["credit-card","venmo-paypal","bitcoin","ethereum","tether"]},
-{id:"t-islamic",
- n:"Islamic Monetary Tradition",
- d:"From golden dinars to hawala networks to petrodollars -- Islamic finance through the ages.",
- y:696,
- chain:["islamic-dinar","hawala","petrodollar"]},
-{id:"t-hyperinflation",
- n:"Hyperinflation Episodes",
- d:"When money printing goes wrong -- cautionary tales from four centuries.",
- y:1789,
- chain:["assignat","continental-dollar","weimar-hyperinflation","zimbabwe-hyperinflation"]}
-];
-
-/* --- State --- */
-let curYear=-3000,curLens="overview",curMoney=null,playing=false,playTimer=null;
-let compareA=null,compareB=null,mode="explore";
-let mapZoom=1,mapPanX=0,mapPanY=0,dragging=false,dragStart={x:0,y:0},panStart={x:0,y:0};
-let projection=null,pathGen=null;
-
-/* ============================================================
-   CORE UTILITY FUNCTIONS
-   ============================================================ */
-
-/* Format year for display: negative years as BCE, positive as CE */
-
-/* ============================================================
-   UTILITY FUNCTIONS
-   ============================================================ */
-function fmtYear(y){
-  if(y<0) return Math.abs(y)+" BCE";
-  if(y===0) return "1 BCE";
-  return y+" CE";
-}
-
-/* Alias for fmt(y) as specified */
-function fmt(y){ return fmtYear(y); }
-
-/* Get era name for a given year */
-function eraName(y){
-  var era=getEra(y);
-  return era?era.n:"Unknown";
-}
-
-/* Check if a money entry is active at the current year */
-function active(m){
-  return curYear>=m.s&&curYear<=m.e;
-}
-
-function yearToSlider(y){
-  // Map -3000..2025 to 0..1000
-  return Math.round(((y+3000)/5025)*1000);
-}
-
-function sliderToYear(v){
-  return Math.round((v/1000)*5025-3000);
-}
-
-function getEra(y){
-  let era=ERAS[0];
-  for(const e of ERAS){if(y>=e.y) era=e;}
-  return era;
-}
-
-function getVisibleMoneys(y){
-  return MONEYS.filter(m=>y>=m.s&&y<=m.e);
-}
-
-function getVisibleConnections(y){
-  return CONNECTIONS.filter(c=>{
-    const a=MONEYS.find(m=>m.id===c.from);
-    const b=MONEYS.find(m=>m.id===c.to);
-    if(!a||!b) return false;
-    return y>=a.s&&y>=b.s&&y<=Math.max(a.e,b.e);
-  });
-}
-
-function getVisibleTransmissions(y){
-  return TRANSMISSIONS.filter(function(t){
-    if(t.y!==undefined) return y>=t.y;
-    if(t.chain&&t.chain.length){
-      var first=MONEYS.find(function(m){return m.id===t.chain[0];});
-      return first&&y>=first.s;
-    }
-    return false;
-  });
-}
-
-function moneyPt(m){
-  if(!m)return[500,260];
-  if(window._proj&&typeof m.lon==='number'&&typeof m.lat==='number'){
-    try{const pt=window._proj([m.lon,m.lat]);if(pt&&isFinite(pt[0]))return pt;}catch(e){}
-  }
-  return[m.x||500,m.y||260];
-}
-
-/* ============================================================
-   RENDER WORLD MAP (D3 / TopoJSON)
-   ============================================================ */
-function renderWorldMap(world){
-  const W=1000,H=520;
-  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
-  window._proj=proj;
-  projection=proj;
-  const pathG=d3.geoPath().projection(proj);
-  pathGen=pathG;
-  const land=topojson.feature(world,world.objects.land);
-  const graticule=d3.geoGraticule()();
-  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
-  let g=document.getElementById('map-layer');
-  g.innerHTML=
-    `<path d="${pathG(graticule)||''}" fill="none" stroke="var(--bdr2)" stroke-width=".3"/>`+
-    `<path d="${pathG(land)||''}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>`+
-    `<path d="${pathG(borders)||''}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
-}
-
-/* ============================================================
-   RENDER MAP MARKERS, CONNECTIONS, TRANSMISSIONS
-   ============================================================ */
-function renderMap(){
-  const svg=document.getElementById("mapSvg");
-  const markerG=document.getElementById("markerGroup");
-  const connG=document.getElementById("connectionGroup");
-  const transG=document.getElementById("transmissionGroup");
-  markerG.innerHTML="";
-  connG.innerHTML="";
-  transG.innerHTML="";
-
-  const vis=getVisibleMoneys(curYear);
-  const conns=getVisibleConnections(curYear);
-  const trans=getVisibleTransmissions(curYear);
-
-  // Helper: get projected position using moneyPt
-  function pos(m){
-    const pt=moneyPt(m);
-    return {x:pt[0],y:pt[1]};
-  }
-
-  // Connections
-  conns.forEach(c=>{
-    const a=MONEYS.find(m=>m.id===c.from);
-    const b=MONEYS.find(m=>m.id===c.to);
-    if(!a||!b) return;
-    const pa=pos(a),pb=pos(b);
-    const line=document.createElementNS("http://www.w3.org/2000/svg","line");
-    line.setAttribute("x1",pa.x);line.setAttribute("y1",pa.y);
-    line.setAttribute("x2",pb.x);line.setAttribute("y2",pb.y);
-    line.setAttribute("class","connection-line");
-    line.setAttribute("data-from",c.from);line.setAttribute("data-to",c.to);
-    const title=document.createElementNS("http://www.w3.org/2000/svg","title");
-    title.textContent=c.label;line.appendChild(title);
-    connG.appendChild(line);
-  });
-
-  // Transmissions (chain-based or from/to)
-  trans.forEach(t=>{
-    if(t.chain&&t.chain.length>=2){
-      // Draw chain as connected arcs
-      for(var ci=0;ci<t.chain.length-1;ci++){
-        var ca=MONEYS.find(m=>m.id===t.chain[ci]);
-        var cb=MONEYS.find(m=>m.id===t.chain[ci+1]);
-        if(!ca||!cb) continue;
-        var cpa=pos(ca),cpb=pos(cb);
-        var cmx=(cpa.x+cpb.x)/2,cmy=Math.min(cpa.y,cpb.y)-20;
-        var cpath=document.createElementNS("http://www.w3.org/2000/svg","path");
-        cpath.setAttribute("d","M"+cpa.x+","+cpa.y+" Q"+cmx+","+cmy+" "+cpb.x+","+cpb.y);
-        cpath.setAttribute("class","transmission-path visible animated");
-        var ctitle=document.createElementNS("http://www.w3.org/2000/svg","title");
-        ctitle.textContent=t.n||t.label||"";cpath.appendChild(ctitle);
-        transG.appendChild(cpath);
-      }
-      return;
-    }
-    // Fallback: from/to format
-    const a=MONEYS.find(m=>m.id===t.from);
-    const b=MONEYS.find(m=>m.id===t.to);
-    if(!a||!b) return;
-    const pa=pos(a),pb=pos(b);
-    const mx=(pa.x+pb.x)/2,my=Math.min(pa.y,pb.y)-30;
-    const path=document.createElementNS("http://www.w3.org/2000/svg","path");
-    path.setAttribute("d",`M${pa.x},${pa.y} Q${mx},${my} ${pb.x},${pb.y}`);
-    path.setAttribute("class","transmission-path visible animated");
-    const title=document.createElementNS("http://www.w3.org/2000/svg","title");
-    title.textContent=t.label;path.appendChild(title);
-    transG.appendChild(path);
-  });
-
-  // Markers
-  vis.forEach(m=>{
-    const p=pos(m);
-    const g=document.createElementNS("http://www.w3.org/2000/svg","g");
-    g.setAttribute("class","money-marker");
-    g.setAttribute("data-id",m.id);
-    g.setAttribute("transform",`translate(${p.x},${p.y})`);
-    g.style.cursor="pointer";
-    g.setAttribute("role","button");
-    g.setAttribute("aria-label",m.n);
-    g.setAttribute("tabindex","0");
-
-    // Glow
-    const glow=document.createElementNS("http://www.w3.org/2000/svg","circle");
-    glow.setAttribute("r",8*m.sz);glow.setAttribute("fill","url(#markerGlow)");
-    g.appendChild(glow);
-
-    // Pulse if selected
-    if(curMoney&&curMoney.id===m.id){
-      const pulse=document.createElementNS("http://www.w3.org/2000/svg","circle");
-      pulse.setAttribute("r",6*m.sz);pulse.setAttribute("class","pulse");
-      g.appendChild(pulse);
-    }
-
-    // Main circle
-    const circ=document.createElementNS("http://www.w3.org/2000/svg","circle");
-    circ.setAttribute("r",5*m.sz);
-    circ.setAttribute("fill",m.col||"#d4a820");
-    circ.setAttribute("class","marker-circle");
-    circ.setAttribute("stroke","rgba(255,255,255,0.3)");
-    circ.setAttribute("stroke-width","0.6");
-    g.appendChild(circ);
-
-    // Label
-    const txt=document.createElementNS("http://www.w3.org/2000/svg","text");
-    txt.setAttribute("y",10*m.sz+2);
-    txt.setAttribute("class","marker-label");
-    txt.textContent=m.n;
-    g.appendChild(txt);
-
-    g.addEventListener("click",function(){selectMoney(m);});
-    g.addEventListener("keydown",function(ev){if(ev.key==="Enter")selectMoney(m);});
-    g.addEventListener("mouseenter",function(ev){showTooltip(m,ev);});
-    g.addEventListener("mouseleave",function(){hideTooltip();});
-    markerG.appendChild(g);
-  });
-
-  // Highlight connections for selected money
-  if(curMoney){
-    connG.querySelectorAll(".connection-line").forEach(l=>{
-      if(l.getAttribute("data-from")===curMoney.id||l.getAttribute("data-to")===curMoney.id){
-        l.classList.add("active");
-      }
-    });
-  }
-}
-
-/* ============================================================
-   RENDER DRAWER / INFO PANEL
-   ============================================================ */
-function renderDrawer(m){
-  const panel=document.getElementById("infoPanel");
-  const title=document.getElementById("infoPanelTitle");
-  const meta=document.getElementById("infoPanelMeta");
-  const body=document.getElementById("infoPanelBody");
-
-  if(!m){
-    panel.classList.remove("open");
-    return;
-  }
-
-  title.textContent=m.n;
-
-  // Meta tags
-  let metaHTML=`<span class="meta-tag primary">${fmtYear(m.s)} — ${fmtYear(m.e)}</span>`;
-  if(m.region) metaHTML+=`<span class="meta-tag">${m.region}</span>`;
-  if(m.type) metaHTML+=`<span class="meta-tag">${m.type}</span>`;
-  if(m.material&&m.material!=="N/A") metaHTML+=`<span class="meta-tag">${m.material}</span>`;
-  if(m.issuer) metaHTML+=`<span class="meta-tag">${m.issuer}</span>`;
-  meta.innerHTML=metaHTML;
-
-  // Body sections based on current lens
-  let bodyHTML="";
-  if(curLens==="overview"){
-    // Show all available description fields
-    const lensMap={overview:"Overview",innovation:"Innovation",spread:"Spread & Trade",economics:"Economics",legacy:"Legacy",figures:"Key Figures",decline:"Decline/Crisis"};
-    for(const[k,label] of Object.entries(lensMap)){
-      if(m.d[k]){
-        bodyHTML+=`<div class="info-section"><div class="info-section-title">${label}</div><p class="info-section-text">${m.d[k]}</p></div>`;
-      }
-    }
-  } else {
-    // Show specific lens
-    const lens=LENSES.find(l=>l.id===curLens);
-    const key=curLens==="spread"?"spread":curLens==="figures"?"figures":curLens==="decline"?"decline":curLens;
-    if(m.d[key]){
-      bodyHTML+=`<div class="info-section"><div class="info-section-title">${lens?lens.n:curLens}</div><p class="info-section-text">${m.d[key]}</p></div>`;
-    } else {
-      bodyHTML+=`<p class="info-section-text" style="text-align:center;margin-top:20px;color:var(--txt-muted)">No ${lens?lens.n:curLens} data for this entry.</p>`;
-    }
-  }
-
-  // Mini timeline bar for this entry
-  var totalSpan=5025; // -3000 to 2025
-  var startPct=((m.s+3000)/totalSpan)*100;
-  var widthPct=((m.e-m.s)/totalSpan)*100;
-  if(widthPct<0.5) widthPct=0.5;
-  bodyHTML+=`<div class="info-section">`;
-  bodyHTML+=`<div class="info-section-title">Timeline Span</div>`;
-  bodyHTML+=`<div style="position:relative;height:14px;background:var(--panel-border);border-radius:3px;margin:6px 0;overflow:hidden">`;
-  bodyHTML+=`<div style="position:absolute;left:${startPct}%;width:${widthPct}%;height:100%;background:${m.col||'var(--accent)'};border-radius:3px;opacity:0.8"></div>`;
-  bodyHTML+=`</div>`;
-  bodyHTML+=`<div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--txt-muted)">`;
-  bodyHTML+=`<span>3000 BCE</span><span>1 CE</span><span>2025 CE</span>`;
-  bodyHTML+=`</div>`;
-  bodyHTML+=`</div>`;
-
-  // Duration calculation
-  var duration=m.e-m.s;
-  if(duration>0){
-    bodyHTML+=`<div class="info-section">`;
-    bodyHTML+=`<div class="info-section-title">Duration</div>`;
-    bodyHTML+=`<p class="info-section-text">${duration} years (${fmtYear(m.s)} to ${fmtYear(m.e)})</p>`;
-    bodyHTML+=`</div>`;
-  }
-
-  // Related connections
-  var related=CONNECTIONS.filter(function(c){return c.from===m.id||c.to===m.id;});
-  if(related.length>0){
-    bodyHTML+=`<div class="info-section"><div class="info-section-title">Connections</div>`;
-    related.forEach(function(c){
-      var other=c.from===m.id?c.to:c.from;
-      var om=MONEYS.find(function(x){return x.id===other;});
-      if(om){
-        bodyHTML+=`<p class="info-section-text" style="cursor:pointer;color:var(--accent)" `;
-        bodyHTML+=`onclick="selectMoney(MONEYS.find(function(x){return x.id==='${other}';}))">`;
-        bodyHTML+=`\u2192 ${om.n}: ${c.label}</p>`;
-      }
-    });
-    bodyHTML+=`</div>`;
-  }
-
-  // Related threads
-  var relThreads=TRANSMISSIONS.filter(function(t){
-    if(t.chain) return t.chain.indexOf(m.id)>=0;
-    return t.from===m.id||t.to===m.id;
-  });
-  if(relThreads.length>0){
-    bodyHTML+=`<div class="info-section"><div class="info-section-title">Part of Threads</div>`;
-    relThreads.forEach(function(t){
-      bodyHTML+=`<p class="info-section-text" style="cursor:pointer;color:var(--accent)" `;
-      bodyHTML+=`onclick="setMode('threads')">\u{1F9F5} ${t.n||t.label}</p>`;
-    });
-    bodyHTML+=`</div>`;
-  }
-
-  body.innerHTML=bodyHTML;
-  panel.classList.add("open");
-}
-
-/* Alias for renderDrawerContent */
-function renderDrawerContent(m){ renderDrawer(m); }
-
-/* Toggle a specific lens by id */
-function toggleLens(id){
-  if(curLens===id) id="overview";
-  pickLens(id);
-}
-
-/* Navigate to a specific money by id */
-function moneyClick(id){
-  var m=MONEYS.find(function(x){return x.id===id;});
-  if(m) selectMoney(m);
-}
-
-/* ============================================================
-   RENDER LENS DROPDOWN
-   ============================================================ */
-function renderLensDD(){
-  const btn=document.getElementById("lensBtn");
-  const dd=document.getElementById("lensDropdown");
-  const isOpen=dd.classList.contains("open");
-
-  if(isOpen){
-    dd.classList.remove("open");
-    btn.classList.remove("open");
-    btn.setAttribute("aria-expanded","false");
-    return;
-  }
-
-  let html="";
-  LENSES.forEach(l=>{
-    const active=l.id===curLens?"active":"";
-    html+=`<div class="lens-option ${active}" role="option" onclick="pickLens('${l.id}')"><span class="lo-icon">${l.ico}</span>${l.n}</div>`;
-  });
-  dd.innerHTML=html;
-  dd.classList.add("open");
-  btn.classList.add("open");
-  btn.setAttribute("aria-expanded","true");
-}
-
-function pickLens(id){
-  curLens=id;
-  const lens=LENSES.find(l=>l.id===id);
-  document.getElementById("lensLabel").textContent=lens?lens.n:"Overview";
-  document.getElementById("lensBtn").querySelector(".lens-icon").textContent=lens?lens.ico:"🔭";
-  document.getElementById("lensDropdown").classList.remove("open");
-  document.getElementById("lensBtn").classList.remove("open");
-  document.getElementById("lensBtn").setAttribute("aria-expanded","false");
-  if(curMoney) renderDrawer(curMoney);
-}
-
-/* ============================================================
-   SET YEAR / TIMELINE
-   ============================================================ */
-function setYear(y){
-  curYear=Math.max(-3000,Math.min(2025,Math.round(y)));
-  document.getElementById("timelineSlider").value=yearToSlider(curYear);
-  document.getElementById("timelineYear").textContent=fmtYear(curYear);
-  document.getElementById("yearDisplay").textContent=fmtYear(curYear);
-  const era=getEra(curYear);
-  document.getElementById("eraDisplay").textContent=era.n+" Era";
-  renderMap();
-  updateStats();
-}
-
-function stepYear(delta){
-  setYear(curYear+delta);
-}
-
-function togglePlay(){
-  playing=!playing;
-  const btn=document.getElementById("playBtn");
-  if(playing){
-    btn.innerHTML="&#9646;&#9646;";
-    playTimer=setInterval(()=>{
-      if(curYear>=2025){playing=false;btn.innerHTML="&#9654;";clearInterval(playTimer);return;}
-      setYear(curYear+5);
-    },120);
-  } else {
-    btn.innerHTML="&#9654;";
-    clearInterval(playTimer);
-  }
-}
-
-/* ============================================================
-   RENDER DENSITY BAR
-   ============================================================ */
-function renderDensityBar(){
-  const canvas=document.getElementById("densityCanvas");
-  const container=canvas.parentElement;
-  canvas.width=container.offsetWidth||800;
-  const ctx=canvas.getContext("2d");
-  const w=canvas.width,h=16;
-  ctx.clearRect(0,0,w,h);
-
-  // Count moneys active at each year point
-  const steps=w;
-  for(let i=0;i<steps;i++){
-    const y=sliderToYear((i/steps)*1000);
-    const count=getVisibleMoneys(y).length;
-    const intensity=Math.min(count/15,1);
-    ctx.fillStyle=`rgba(212,168,32,${intensity*0.6})`;
-    ctx.fillRect(i,h-(intensity*h),1,intensity*h);
-  }
-}
-
-/* ============================================================
-   SELECT / CLICK HANDLERS
-   ============================================================ */
-function selectMoney(m){
-  curMoney=m;
-  if(m) window.location.hash=m.id;
-  renderMap();
-  renderDrawer(m);
-}
-
-function closePanel(){
-  curMoney=null;
-  document.getElementById("infoPanel").classList.remove("open");
-  renderMap();
-}
-
-/* ============================================================
-   ZOOM & PAN
-   ============================================================ */
-function applyTransform(){
-  const g=document.getElementById("map-layer");
-  const mg=document.getElementById("markerGroup");
-  const cg=document.getElementById("connectionGroup");
-  const tg=document.getElementById("transmissionGroup");
-  const lg=document.getElementById("landGroup");
-  const t=`translate(${mapPanX},${mapPanY}) scale(${mapZoom})`;
-  [g,mg,cg,tg,lg].forEach(el=>{if(el)el.setAttribute("transform",t);});
-}
-
-function initPanZoom(){
-  const container=document.getElementById("mapContainer");
-  const svg=document.getElementById("mapSvg");
-
-  container.addEventListener("mousedown",e=>{
-    dragging=true;
-    dragStart={x:e.clientX,y:e.clientY};
-    panStart={x:mapPanX,y:mapPanY};
-    container.style.cursor="grabbing";
-  });
-
-  window.addEventListener("mousemove",e=>{
-    if(!dragging) return;
-    mapPanX=panStart.x+(e.clientX-dragStart.x)/mapZoom;
-    mapPanY=panStart.y+(e.clientY-dragStart.y)/mapZoom;
-    applyTransform();
-  });
-
-  window.addEventListener("mouseup",()=>{
-    dragging=false;
-    document.getElementById("mapContainer").style.cursor="grab";
-  });
-
-  container.addEventListener("wheel",e=>{
-    e.preventDefault();
-    const delta=e.deltaY>0?0.9:1.1;
-    mapZoom=Math.max(0.5,Math.min(8,mapZoom*delta));
-    applyTransform();
-  },{passive:false});
-
-  // Touch support
-  let lastTouchDist=0;
-  container.addEventListener("touchstart",e=>{
-    if(e.touches.length===1){
-      dragging=true;
-      dragStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
-      panStart={x:mapPanX,y:mapPanY};
-    } else if(e.touches.length===2){
-      lastTouchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-    }
-  },{passive:true});
-
-  container.addEventListener("touchmove",e=>{
-    if(e.touches.length===1&&dragging){
-      mapPanX=panStart.x+(e.touches[0].clientX-dragStart.x)/mapZoom;
-      mapPanY=panStart.y+(e.touches[0].clientY-dragStart.y)/mapZoom;
-      applyTransform();
-    } else if(e.touches.length===2){
-      const dist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-      if(lastTouchDist>0){
-        mapZoom=Math.max(0.5,Math.min(8,mapZoom*(dist/lastTouchDist)));
-        applyTransform();
-      }
-      lastTouchDist=dist;
-    }
-  },{passive:true});
-
-  container.addEventListener("touchend",()=>{dragging=false;lastTouchDist=0;});
-}
-
-/* ============================================================
-   THEME TOGGLE
-   ============================================================ */
-function toggleTheme(){
-  const html=document.documentElement;
-  const toggle=document.getElementById("themeToggle");
-  if(html.getAttribute("data-theme")==="dark"){
-    html.setAttribute("data-theme","light");
-    toggle.classList.add("light");
-    toggle.setAttribute("aria-checked","true");
-  } else {
-    html.setAttribute("data-theme","dark");
-    toggle.classList.remove("light");
-    toggle.setAttribute("aria-checked","false");
-  }
-  // Re-render map for theme colors
-  if(typeof renderMap==="function") renderMap();
-}
-
-/* ============================================================
-   BURGER MENU
-   ============================================================ */
-function toggleBurger(){
-  const menu=document.getElementById("burgerMenu");
-  const btn=document.getElementById("burgerBtn");
-  const isOpen=menu.classList.contains("open");
-  menu.classList.toggle("open");
-  btn.classList.toggle("open");
-  btn.setAttribute("aria-expanded",!isOpen);
-}
-
-function closeBurger(){
-  document.getElementById("burgerMenu").classList.remove("open");
-  document.getElementById("burgerBtn").classList.remove("open");
-  document.getElementById("burgerBtn").setAttribute("aria-expanded","false");
-}
-
-/* ============================================================
-   ABOUT MODAL
-   ============================================================ */
-function showAbout(){
-  document.getElementById("aboutModal").classList.add("open");
-}
-
-function closeAbout(){
-  document.getElementById("aboutModal").classList.remove("open");
-}
-
-// Close modal on overlay click
-document.getElementById("aboutModal").addEventListener("click",e=>{
-  if(e.target===e.currentTarget) closeAbout();
-});
-
-/* ============================================================
-   MODE: EXPLORE / THREADS / COMPARE
-   ============================================================ */
-function setMode(m){
-  mode=m;
-  // Update burger menu active states
-  document.querySelectorAll(".burger-link").forEach(el=>el.classList.remove("active"));
-  const modeNames={explore:"Explore",threads:"Threads",compare:"Compare"};
-  document.querySelectorAll(".burger-link").forEach(el=>{
-    if(el.textContent.trim()===modeNames[m]) el.classList.add("active");
-  });
-
-  if(m==="threads") showThreads();
-  else if(m==="compare") showCompare();
-  else { closePanel(); }
-}
-
-/* ============================================================
-   THREADS VIEW
-   ============================================================ */
-function showThreads(){
-  const panel=document.getElementById("infoPanel");
-  const title=document.getElementById("infoPanelTitle");
-  const meta=document.getElementById("infoPanelMeta");
-  const body=document.getElementById("infoPanelBody");
-
-  title.textContent="Monetary Threads";
-  meta.innerHTML='<span class="meta-tag primary">Narrative Chains</span><span class="meta-tag">'+TRANSMISSIONS.length+' threads</span>';
-
-  let html="";
-  TRANSMISSIONS.forEach(function(t){
-    var tTitle=t.n||t.label||"Thread";
-    var tDesc=t.d||t.label||"";
-    html+='<div class="thread-item">';
-    html+='<div class="thread-title">'+tTitle+'</div>';
-    html+='<div class="thread-desc">'+tDesc+'</div>';
-    html+='<div class="thread-chain">';
-    // Support both chain-array and from/to formats
-    if(t.chain&&t.chain.length){
-      t.chain.forEach(function(id,i){
-        var m=MONEYS.find(function(x){return x.id===id;});
-        if(m){
-          html+='<span class="thread-node" onclick="selectMoney(MONEYS.find(function(x){return x.id===\''+id+'\';}));setMode(\'explore\')">'+m.n+'</span>';
-          if(i<t.chain.length-1) html+='<span class="thread-arrow">\u2192</span>';
-        }
-      });
-    } else if(t.from&&t.to){
-      var a=MONEYS.find(function(x){return x.id===t.from;});
-      var b=MONEYS.find(function(x){return x.id===t.to;});
-      if(a) html+='<span class="thread-node" onclick="selectMoney(MONEYS.find(function(x){return x.id===\''+t.from+'\';}));setMode(\'explore\')">'+a.n+'</span>';
-      html+='<span class="thread-arrow">\u2192</span>';
-      if(b) html+='<span class="thread-node" onclick="selectMoney(MONEYS.find(function(x){return x.id===\''+t.to+'\';}));setMode(\'explore\')">'+b.n+'</span>';
-    }
-    html+='</div></div>';
-  });
-
-  body.innerHTML=html;
-  panel.classList.add("open");
-}
-
-/* ============================================================
-   COMPARE VIEW
-   ============================================================ */
-function showCompare(){
-  const panel=document.getElementById("infoPanel");
-  const title=document.getElementById("infoPanelTitle");
-  const meta=document.getElementById("infoPanelMeta");
-  const body=document.getElementById("infoPanelBody");
-
-  title.textContent="Compare Currencies";
-  meta.innerHTML=`<span class="meta-tag primary">Select two currencies</span>`;
-
-  let html=`<div style="padding:8px 0"><p class="info-section-text">Pick two currencies from the map to compare them side by side.</p>`;
-  html+=`<div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:12px">`;
-  MONEYS.forEach(m=>{
-    const selA=compareA&&compareA.id===m.id?"border-color:var(--accent);background:var(--accent-glow)":"";
-    const selB=compareB&&compareB.id===m.id?"border-color:var(--gold-bright);background:var(--accent-glow)":"";
-    html+=`<span class="thread-node" style="${selA||selB}" onclick="pickCompare('${m.id}')">${m.n}</span>`;
-  });
-  html+=`</div></div>`;
-
-  if(compareA&&compareB){
-    html+=`<div class="compare-container" style="margin-top:12px;border:1px solid var(--panel-border);border-radius:var(--radius)">`;
-    [compareA,compareB].forEach(m=>{
-      html+=`<div class="compare-col"><div class="compare-col-header">${m.n}</div>`;
-      html+=`<div class="info-section"><div class="info-section-title">Period</div><p class="info-section-text">${fmtYear(m.s)} — ${fmtYear(m.e)}</p></div>`;
-      html+=`<div class="info-section"><div class="info-section-title">Region</div><p class="info-section-text">${m.region||"N/A"}</p></div>`;
-      html+=`<div class="info-section"><div class="info-section-title">Type</div><p class="info-section-text">${m.type||"N/A"}</p></div>`;
-      if(m.d.overview) html+=`<div class="info-section"><div class="info-section-title">Overview</div><p class="info-section-text">${m.d.overview}</p></div>`;
-      html+=`</div>`;
-    });
-    html+=`</div>`;
-  }
-
-  body.innerHTML=html;
-  panel.classList.add("open");
-}
-
-function pickCompare(id){
-  const m=MONEYS.find(x=>x.id===id);
-  if(!m) return;
-  if(!compareA||compareB){compareA=m;compareB=null;}
-  else{compareB=m;}
-  showCompare();
-}
-
-/* ============================================================
-   ZOOM BUTTON HANDLERS
-   ============================================================ */
-function zoomIn(){
-  mapZoom=Math.min(8,mapZoom*1.3);
-  applyTransform();
-}
-
-function zoomOut(){
-  mapZoom=Math.max(0.5,mapZoom/1.3);
-  applyTransform();
-}
-
-function zoomReset(){
-  mapZoom=1;
-  mapPanX=0;
-  mapPanY=0;
-  applyTransform();
-}
-
-/* ============================================================
-   SEARCH FUNCTIONALITY
-   ============================================================ */
-function openSearch(){
-  document.getElementById("searchOverlay").classList.add("open");
-  var inp=document.getElementById("searchInput");
-  inp.value="";
-  inp.focus();
-  renderSearchResults("");
-}
-
-function closeSearch(){
-  document.getElementById("searchOverlay").classList.remove("open");
-}
-
-function renderSearchResults(query){
-  var container=document.getElementById("searchResults");
-  if(!query||query.length<1){
-    container.innerHTML='<div class="search-empty">Type to search across all monetary entries...</div>';
-    return;
-  }
-  var q=query.toLowerCase();
-  var results=MONEYS.filter(function(m){
-    return m.n.toLowerCase().indexOf(q)>=0 ||
-           m.region.toLowerCase().indexOf(q)>=0 ||
-           m.type.toLowerCase().indexOf(q)>=0 ||
-           (m.issuer&&m.issuer.toLowerCase().indexOf(q)>=0) ||
-           (m.material&&m.material.toLowerCase().indexOf(q)>=0) ||
-           (m.d.overview&&m.d.overview.toLowerCase().indexOf(q)>=0);
-  });
-
-  if(results.length===0){
-    container.innerHTML='<div class="search-empty">No results for "'+query+'"</div>';
-    return;
-  }
-
-  var html="";
-  results.forEach(function(m){
-    html+='<div class="search-result-item" onclick="searchSelect(\''+m.id+'\')">';
-    html+='<div class="search-result-dot" style="background:'+m.col+'"></div>';
-    html+='<div><div class="search-result-name">'+m.n+'</div>';
-    html+='<div class="search-result-meta">'+m.region+' \u00B7 '+m.type+'</div></div>';
-    html+='<div class="search-result-meta">'+fmtYear(m.s)+'</div>';
-    html+='</div>';
-  });
-  container.innerHTML=html;
-}
-
-function searchSelect(id){
-  var m=MONEYS.find(function(x){return x.id===id;});
-  if(!m) return;
-  closeSearch();
-  // Navigate timeline to the money's start date
-  setYear(m.s);
-  selectMoney(m);
-}
-
-// Search input handler
-document.getElementById("searchInput").addEventListener("input",function(e){
-  renderSearchResults(e.target.value);
-});
-
-// Close search on overlay click
-document.getElementById("searchOverlay").addEventListener("click",function(e){
-  if(e.target===e.currentTarget) closeSearch();
-});
-
-/* ============================================================
-   TOOLTIP HANDLERS
-   ============================================================ */
-function showTooltip(m,evt){
-  var tip=document.getElementById("mapTooltip");
-  document.getElementById("tooltipName").textContent=m.n;
-  document.getElementById("tooltipDetail").textContent=
-    fmtYear(m.s)+" \u2014 "+fmtYear(m.e)+" \u00B7 "+m.region;
-  tip.style.left=(evt.clientX+14)+"px";
-  tip.style.top=(evt.clientY-10)+"px";
-  tip.classList.add("visible");
-}
-
-function hideTooltip(){
-  document.getElementById("mapTooltip").classList.remove("visible");
-}
-
-/* ============================================================
-   STATS BAR UPDATE
-   ============================================================ */
-function updateStats(){
-  var vis=getVisibleMoneys(curYear);
-  var conns=getVisibleConnections(curYear);
-  var era=getEra(curYear);
-  var el;
-  el=document.getElementById("statActive"); if(el) el.textContent=vis.length;
-  el=document.getElementById("statTotal"); if(el) el.textContent=MONEYS.length;
-  el=document.getElementById("statEra"); if(el) el.textContent=era.n;
-  el=document.getElementById("statConns"); if(el) el.textContent=conns.length;
-}
-
-/* ============================================================
-   NAVIGATE TO MONEY (from URL hash)
-   ============================================================ */
-function navigateToMoney(id){
-  var m=MONEYS.find(function(x){return x.id===id;});
-  if(!m) return;
-  setYear(m.s);
-  selectMoney(m);
-}
-
-/* ============================================================
-   ERA PIPS IN TIMELINE
-   ============================================================ */
-function renderEraPips(){
-  var container=document.querySelector(".timeline-slider-container");
-  if(!container) return;
-  var existing=container.querySelector(".era-pips");
-  if(existing) existing.remove();
-
-  var pips=document.createElement("div");
-  pips.className="era-pips";
-  var total=5025; // -3000 to 2025
-
-  ERAS.forEach(function(era,i){
-    var nextY=(i<ERAS.length-1)?ERAS[i+1].y:2025;
-    var start=era.y+3000;
-    var end=nextY+3000;
-    var pip=document.createElement("div");
-    pip.className="era-pip";
-    pip.style.flex=((end-start)/total);
-    // Use a gold-tinted color with varying opacity
-    var hue=30+i*25;
-    pip.style.background="hsla("+hue+",60%,50%,0.3)";
-    pip.title=era.n;
-    pips.appendChild(pip);
-  });
-
-  container.insertBefore(pips,container.firstChild);
-}
-
-/* ============================================================
-   KEYBOARD SHORTCUTS
-   ============================================================ */
-document.addEventListener("keydown",function(e){
-  // Check if we're in a text input
-  if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA"){
-    if(e.key==="Escape") closeSearch();
-    return;
-  }
-
-  if(e.key==="Escape"){
-    closePanel();closeBurger();closeAbout();closeSearch();
-    document.getElementById("lensDropdown").classList.remove("open");
-  }
-  if(e.key==="ArrowLeft") stepYear(-50);
-  if(e.key==="ArrowRight") stepYear(50);
-  if(e.key===" "&&document.activeElement===document.body){e.preventDefault();togglePlay();}
-  if((e.ctrlKey||e.metaKey)&&e.key==="k"){e.preventDefault();openSearch();}
-  if(e.key==="+"||e.key==="=") zoomIn();
-  if(e.key==="-") zoomOut();
-  if(e.key==="0") zoomReset();
-  if(e.key==="t"||e.key==="T"){setMode("threads");closeBurger();}
-  if(e.key==="c"||e.key==="C"){setMode("compare");closeBurger();}
-  if(e.key==="e"||e.key==="E"){setMode("explore");closeBurger();}
-});
-
-// Close lens dropdown on outside click
-document.addEventListener("click",function(e){
-  var lc=document.querySelector(".lens-container");
-  if(lc&&!lc.contains(e.target)){
-    document.getElementById("lensDropdown").classList.remove("open");
-    document.getElementById("lensBtn").classList.remove("open");
-    document.getElementById("lensBtn").setAttribute("aria-expanded","false");
-  }
-});
-
-/* ============================================================
-   RANDOM MONEY EXPLORER
-   ============================================================ */
-function randomMoney(){
-  var vis=getVisibleMoneys(curYear);
-  if(vis.length===0) vis=MONEYS;
-  var m=vis[Math.floor(Math.random()*vis.length)];
-  setYear(Math.max(m.s,Math.min(m.e,curYear)));
-  selectMoney(m);
-}
-
-/* ============================================================
-   SUMMARY STATISTICS GENERATOR
-   ============================================================ */
-function getSummaryStats(){
-  var stats={
-    totalEntries: MONEYS.length,
-    totalConnections: CONNECTIONS.length,
-    totalTransmissions: TRANSMISSIONS.length,
-    totalLenses: LENSES.length,
-    totalEras: ERAS.length,
-    byType: {},
-    byRegion: {},
-    oldestEntry: null,
-    newestEntry: null,
-    longestRunning: null
-  };
-
-  var oldest=Infinity, newest=-Infinity, longestDur=0;
-
-  MONEYS.forEach(function(m){
-    // Count by type
-    var t=m.type||"Unknown";
-    stats.byType[t]=(stats.byType[t]||0)+1;
-
-    // Count by region
-    var r=m.region||"Unknown";
-    stats.byRegion[r]=(stats.byRegion[r]||0)+1;
-
-    // Track extremes
-    if(m.s<oldest){oldest=m.s;stats.oldestEntry=m;}
-    if(m.e>newest){newest=m.e;stats.newestEntry=m;}
-
-    var dur=m.e-m.s;
-    if(dur>longestDur){longestDur=dur;stats.longestRunning=m;}
-  });
-
-  return stats;
-}
-
-/* ============================================================
-   EXPORT DATA (for debugging / analysis)
-   ============================================================ */
-function exportVisibleData(){
-  var vis=getVisibleMoneys(curYear);
-  var data=vis.map(function(m){
-    return {
-      name:m.n,
-      start:fmtYear(m.s),
-      end:fmtYear(m.e),
-      region:m.region,
-      type:m.type,
-      issuer:m.issuer,
-      material:m.material
-    };
-  });
-  console.table(data);
-  return data;
-}
-
-/* ============================================================
-   FOCUS / ACCESSIBILITY HELPERS
-   ============================================================ */
-function focusFirstMarker(){
-  var first=document.querySelector(".money-marker");
-  if(first) first.focus();
-}
-
-function handleMarkerKeyNav(e){
-  if(e.key==="Tab"){
-    // Allow tab navigation through markers
-    return;
-  }
-  if(e.key==="Home"){
-    e.preventDefault();
-    setYear(-3000);
-  }
-  if(e.key==="End"){
-    e.preventDefault();
-    setYear(2025);
-  }
-  if(e.key==="PageUp"){
-    e.preventDefault();
-    stepYear(-500);
-  }
-  if(e.key==="PageDown"){
-    e.preventDefault();
-    stepYear(500);
-  }
-}
-
-// Add marker key nav to the map container
-document.getElementById("mapContainer").addEventListener("keydown",handleMarkerKeyNav);
-
-/* ============================================================
-   PRINT-FRIENDLY STYLES (injected on demand)
-   ============================================================ */
-function addPrintStyles(){
-  if(document.getElementById("printStyles")) return;
-  var style=document.createElement("style");
-  style.id="printStyles";
-  style.textContent=[
-    "@media print {",
-    "  .header, .timeline, .burger-menu, .stats-bar,",
-    "  .zoom-controls, .map-legend, .loading-overlay,",
-    "  .search-overlay, .modal-overlay { display: none !important; }",
-    "  .main { position: static; height: auto; }",
-    "  .info-panel { position: static; transform: none;",
-    "    width: 100%; max-width: 100%; border: none;",
-    "    box-shadow: none; }",
-    "  .info-panel.open { display: block; }",
-    "  body { overflow: auto; height: auto; }",
-    "}"
-  ].join("\n");
-  document.head.appendChild(style);
-}
-addPrintStyles();
-
-/* ============================================================
-   LOCAL STORAGE: REMEMBER THEME PREFERENCE
-   ============================================================ */
-function loadThemePreference(){
-  try {
-    var saved=localStorage.getItem("pecunia-theme");
-    if(saved==="light"){
-      document.documentElement.setAttribute("data-theme","light");
-      var toggle=document.getElementById("themeToggle");
-      if(toggle){toggle.classList.add("light");toggle.setAttribute("aria-checked","true");}
-    }
-  } catch(e){}
-}
-
-function saveThemePreference(){
-  try {
-    var theme=document.documentElement.getAttribute("data-theme")||"dark";
-    localStorage.setItem("pecunia-theme",theme);
-  } catch(e){}
-}
-
-// Load theme on startup
-loadThemePreference();
-
-/* ============================================================
-   ENHANCED THEME TOGGLE (with persistence)
-   ============================================================ */
-var _originalToggleTheme=toggleTheme;
-toggleTheme=function(){
-  _originalToggleTheme();
-  saveThemePreference();
-};
-
-/* ============================================================
-   CONNECTION HIGHLIGHT ON HOVER
-   ============================================================ */
-function highlightConnections(moneyId){
-  document.querySelectorAll(".connection-line").forEach(function(line){
-    if(line.getAttribute("data-from")===moneyId||
-       line.getAttribute("data-to")===moneyId){
-      line.classList.add("active");
-    } else {
-      line.classList.remove("active");
-    }
-  });
-}
-
-function clearConnectionHighlights(){
-  document.querySelectorAll(".connection-line").forEach(function(line){
-    line.classList.remove("active");
-  });
-  // Re-highlight selected money connections if any
-  if(curMoney){
-    highlightConnections(curMoney.id);
-  }
-}
-
-/* ============================================================
-   INIT
-   ============================================================ */
-async function init(){
-  const TOPO_URL="https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
-  try{
-    const resp=await fetch(TOPO_URL);
-    const topo=await resp.json();
-    renderWorldMap(topo);
-  }catch(err){
-    console.warn("TopoJSON load failed, using fallback markers only:",err);
-  }
-
-  setYear(-3000);
-  renderDensityBar();
-  renderEraPips();
-  initPanZoom();
-  updateStats();
-
-  // Check URL hash for deep linking
-  if(window.location.hash){
-    var hashId=window.location.hash.slice(1);
-    setTimeout(function(){navigateToMoney(hashId);},200);
-  }
-
-  // Hide loading overlay
-  setTimeout(function(){
-    var lo=document.getElementById("loadingOverlay");
-    lo.classList.add("hidden");
-    setTimeout(function(){lo.style.display="none";},600);
-  },800);
-}
-
-// Resize handler
-window.addEventListener("resize",function(){renderDensityBar();});
-
-// Hash change handler for deep linking
-window.addEventListener("hashchange",function(){
-  if(window.location.hash){
-    navigateToMoney(window.location.hash.slice(1));
-  }
-});
-
-// Start
-init();
-</script>
-
-</body>
-</html>

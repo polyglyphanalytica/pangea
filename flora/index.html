@@ -3,36 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flora — The Atlas of Plants</title>
-<meta name="description" content="Flora — The Atlas of Plants: An interactive exploration of 50+ historically significant plants, their origins, spread, and cultural impact across civilizations and eras.">
-<meta name="keywords" content="plants, agriculture, botany, history, atlas, interactive map, crop origins, domestication">
+<title>Flora — The Plant Atlas</title>
+
+<!-- Primary SEO -->
+<meta name="description" content="Explore 50 historically significant plants across 12,000 years of human agriculture on an interactive world map. Navigate a continuous timeline from the first domesticated wheat to modern supercrops, with 20 interpretive lenses, trade transmissions, What-If scenarios, and heritage modes.">
+<meta name="keywords" content="plants, agriculture, botany, history, atlas, interactive map, crop origins, domestication, food history, botanical atlas">
 <meta name="author" content="The Pangea Project">
+<meta name="robots" content="index, follow">
 <link rel="canonical" href="https://polyglyphanalytica.github.io/pangea/flora/">
 
-<!-- Open Graph -->
+<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Flora — The Atlas of Plants">
-<meta property="og:description" content="An interactive atlas exploring the origins, spread, and cultural impact of 50+ historically significant plants across civilizations.">
 <meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/flora/">
-<meta property="og:site_name" content="The Pangea Project">
+<meta property="og:title" content="Flora — The Plant Atlas">
+<meta property="og:description" content="50 plants. 12,000 years. Every crop, spice, and medicinal herb that shaped human civilisation — mapped, connected, and explorable.">
 <meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/flora/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="The Pangea Project">
+<meta property="og:locale" content="en_US">
 
-<!-- Twitter Card -->
+<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Flora — The Atlas of Plants">
-<meta name="twitter:description" content="An interactive atlas exploring the origins, spread, and cultural impact of 50+ historically significant plants.">
+<meta name="twitter:title" content="Flora — The Plant Atlas">
+<meta name="twitter:description" content="50 plants. 12,000 years. Every crop, spice, and medicinal herb that shaped human civilisation — mapped, connected, and explorable.">
 <meta name="twitter:image" content="https://polyglyphanalytica.github.io/pangea/flora/og-image.png">
 
-<!-- Schema.org WebApplication -->
+<!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Flora — The Atlas of Plants",
-  "description": "An interactive atlas exploring the origins, spread, and cultural impact of historically significant plants across civilizations.",
+  "name": "Flora — The Plant Atlas",
+  "description": "An interactive botanical atlas exploring 50 historically significant plants across 12,000 years. Features a real geographic map, continuous timeline, 20 interpretive lenses, trade transmissions, What-If scenarios, and heritage modes.",
   "url": "https://polyglyphanalytica.github.io/pangea/flora/",
   "applicationCategory": "EducationalApplication",
-  "operatingSystem": "Any",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
   "author": {
     "@type": "Organization",
     "name": "The Pangea Project"
@@ -41,1403 +52,521 @@
 </script>
 
 <!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
 
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   PANGEA DESIGN SYSTEM — FLORA THEME
-   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box}
 
-/* --- CSS Variables / Dark Theme (default) --- */
-:root {
-  --bg: #02040a;
-  --panel: #070b12;
-  --amber: #e89820;
-  --txt: #f2e8d5;
-  --accent: #4a9e3f;
-  --accent-dim: #2d6627;
-  --accent-glow: rgba(74, 158, 63, 0.35);
-  --border: rgba(74, 158, 63, 0.18);
-  --border-hi: rgba(74, 158, 63, 0.4);
-  --shadow: rgba(0,0,0,0.5);
-  --txt-dim: rgba(242,232,213,0.5);
-  --txt-mid: rgba(242,232,213,0.7);
-  --panel-hi: #0d1520;
-  --danger: #c0392b;
-  --bdr2: rgba(232,152,32,0.10);
-  --land: #2a4a18;
-  --land-s: #3a6020;
-  --radius: 6px;
-  --font-heading: 'Cinzel', serif;
-  --font-display: 'Cinzel Decorative', serif;
-  --font-body: 'Crimson Pro', serif;
-  --header-h: 54px;
-  --timeline-h: 64px;
-  --drawer-w: 370px;
+/* ── DARK THEME (default) ── */
+:root{
+  --bg:#02040a;
+  --panel:#070b12;
+  --panel2:#0c1018;
+  --ocean-start:#0a1628;--ocean-end:#061020;
+  --land:#2a4a18;--land-s:#3a6020;
+  --amber:#e89820;--amber-b:#f0b040;--amber-d:#3a2204;
+  --amber-x:rgba(232,152,32,0.14);--amber-xx:rgba(232,152,32,0.08);
+  --txt:#f2e8d5;--txt2:#e0d4b4;--txt3:#c8aa78;
+  --bdr:rgba(232,152,32,0.22);--bdr2:rgba(232,152,32,0.10);
+  --hint:rgba(224,212,180,0.65);
+  --tl-bg:rgba(2,4,10,0.99);
+  --hdr-bg:rgba(2,4,10,0.97);
+  --conn-bdr:rgba(232,152,32,0.10);
+  --shadow:rgba(0,0,0,0.6);
 }
 
-/* --- Light Theme --- */
-[data-theme="light"] {
-  --bg: #f0ebe0;
-  --panel: #e8e0d0;
-  --amber: #4a2c00;
-  --txt: #1a1206;
-  --accent: #2d7a22;
-  --accent-dim: #a3cfa0;
-  --accent-glow: rgba(45, 122, 34, 0.2);
-  --border: rgba(45, 122, 34, 0.2);
-  --border-hi: rgba(45, 122, 34, 0.45);
-  --shadow: rgba(0,0,0,0.12);
-  --txt-dim: rgba(26,18,6,0.45);
-  --txt-mid: rgba(26,18,6,0.65);
-  --panel-hi: #ddd5c4;
-  --danger: #a93226;
-  --bdr2: rgba(122,78,0,0.14);
-  --land: #8ca860;
-  --land-s: #7a9850;
+/* ── LIGHT THEME ── */
+[data-theme="light"]{
+  --bg:#f0ebe0;
+  --panel:#e8e0d0;
+  --panel2:#ddd4c0;
+  --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
+  --land:#8ca860;--land-s:#7a9850;
+  --amber:#4a2c00;--amber-b:#5a3800;--amber-d:#f0d8a0;
+  --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
+  --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
+  --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
+  --hint:rgba(30,18,6,0.6);
+  --tl-bg:rgba(236,228,214,0.99);
+  --hdr-bg:rgba(236,228,214,0.97);
+  --conn-bdr:rgba(122,78,0,0.12);
+  --shadow:rgba(0,0,0,0.18);
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #f0ebe0;
-    --panel: #e8e0d0;
-    --amber: #4a2c00;
-    --txt: #1a1206;
-    --accent: #2d7a22;
-    --accent-dim: #a3cfa0;
-    --accent-glow: rgba(45, 122, 34, 0.2);
-    --border: rgba(45, 122, 34, 0.2);
-    --border-hi: rgba(45, 122, 34, 0.45);
-    --shadow: rgba(0,0,0,0.12);
-    --txt-dim: rgba(26,18,6,0.45);
-    --txt-mid: rgba(26,18,6,0.65);
-    --panel-hi: #ddd5c4;
-    --danger: #a93226;
-    --bdr2: rgba(122,78,0,0.14);
-    --land: #8ca860;
-    --land-s: #7a9850;
+@media(prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#f0ebe0;--panel:#e8e0d0;--panel2:#ddd4c0;
+    --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
+    --land:#8ca860;--land-s:#7a9850;
+    --amber:#4a2c00;--amber-b:#5a3800;--amber-d:#f0d8a0;
+    --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
+    --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
+    --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
+    --hint:rgba(30,18,6,0.6);
+    --tl-bg:rgba(236,228,214,0.99);
+    --hdr-bg:rgba(236,228,214,0.97);
+    --conn-bdr:rgba(122,78,0,0.12);
+    --shadow:rgba(0,0,0,0.18);
   }
 }
 
-/* --- Reset / Base --- */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif}
 
-html, body {
-  width: 100%; height: 100%;
-  overflow: hidden;
-  background: var(--bg);
-  color: var(--txt);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  transition: background 0.4s, color 0.4s;
+/* ── HEADER ── */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--hdr-bg);gap:12px}
+.hdr-left{display:flex;align-items:baseline;gap:0;min-width:0}
+.logo-t{font-family:'Cinzel Decorative',serif;font-size:20px;font-weight:700;color:var(--amber-b);letter-spacing:3px;white-space:nowrap}
+.logo-s{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-left:10px;white-space:nowrap}
+.era-disp{text-align:center;font-family:'Cinzel',serif;flex-shrink:0}
+.era-y{font-size:22px;font-weight:600;color:var(--amber-b);letter-spacing:1px}
+.era-n{font-size:12px;letter-spacing:1.5px;color:var(--txt2);margin-top:1px;text-transform:uppercase;font-weight:600}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.cnt-disp{text-align:right;font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--txt3)}
+.cnt-n{font-size:22px;font-weight:600;color:var(--amber);display:block;line-height:1}
+.theme-btn{background:none;border:1px solid var(--bdr);padding:4px 8px;cursor:pointer;font-size:13px;color:var(--txt2);border-radius:3px;transition:all .15s;flex-shrink:0}
+.theme-btn:hover{background:var(--amber-x);color:var(--amber-b)}
+
+/* ── MAIN LAYOUT ── */
+.main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
+.map-c{flex:1;position:relative;overflow:hidden;min-width:0;min-height:0}
+.map-tl-col{display:flex;flex-direction:column;flex:1;min-width:0}
+#wsvg{width:100%;height:100%}
+
+/* ── DESKTOP PANEL ── */
+.info-panel{width:320px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;padding:18px 18px 28px;position:relative}
+.info-close{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;line-height:1;padding:4px;float:right;margin:-2px -2px 0 0}
+.info-close:hover{color:var(--amber-b)}
+.info-nm{font-family:'Cinzel Decorative',serif;font-size:16px;font-weight:700;color:var(--amber-b);margin-bottom:3px;clear:both}
+.info-sb{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt2);text-transform:uppercase;margin-bottom:10px}
+.info-dates{display:flex;gap:6px;margin-bottom:14px;align-items:center}
+.info-dt{padding:5px 12px;border:1px solid var(--bdr);font-family:'Cinzel',serif;font-size:13.5px;color:var(--amber-b)}
+.info-arr{color:var(--txt2);font-size:12px}
+
+/* ── LENS DROPDOWN ── */
+.lens-dd-wrap{border:1px solid var(--bdr);margin-bottom:14px}
+.lens-dd-hdr{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;cursor:pointer;user-select:none;background:var(--amber-xx);border-bottom:1px solid transparent;transition:background .15s}
+.lens-dd-hdr:hover{background:var(--amber-x)}
+.lens-dd-hdr.open{border-bottom-color:var(--bdr)}
+.lens-dd-title{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2.5px;color:var(--txt2);text-transform:uppercase;flex-shrink:0}
+.lens-dd-summary{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.5px;color:var(--amber-b);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;padding:0 6px}
+.lens-dd-arrow{color:var(--txt2);font-size:10px;transition:transform .18s;flex-shrink:0}
+.lens-dd-arrow.open{transform:rotate(180deg)}
+.lens-dd-list{display:none;max-height:260px;overflow-y:auto}
+.lens-dd-list.open{display:block}
+.lens-row{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--bdr2);transition:background .15s}
+.lens-row:last-child{border-bottom:none}
+.lens-row:hover{background:var(--amber-x)}
+.lens-row-chk{width:13px;height:13px;border:1px solid var(--bdr);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--amber-b);line-height:1}
+.lens-row-chk.on{background:var(--amber-x);border-color:var(--amber-b)}
+.lens-row-ico{font-size:14px;width:16px;text-align:center;flex-shrink:0;color:var(--txt2)}
+.lens-row-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.5px;color:var(--txt2)}
+.lens-row.on .lens-row-lbl{color:var(--amber-b);font-weight:600}
+.lens-row-sep{border-bottom:1px solid var(--bdr);margin-bottom:2px}
+.lens-dd-close-btn{text-align:center;padding:10px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:var(--amber-b);border-top:1px solid var(--bdr);cursor:pointer;text-transform:uppercase;transition:background .15s}
+.lens-dd-close-btn:hover{background:var(--amber-x)}
+
+/* ── DRAWER CONTENT ── */
+.lens-section{margin-bottom:18px}
+.lens-section-hdr{display:flex;align-items:center;gap:7px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--bdr)}
+.lens-section-ico{font-size:12px;color:var(--txt2)}
+.lens-section-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--amber-b);text-transform:uppercase;font-weight:600}
+.info-div{border:none;border-top:1px solid var(--bdr);margin:12px 0}
+.info-txt{font-size:17.5px;line-height:1.95;color:var(--txt);font-style:italic}
+.overview-arc{font-size:17.5px;line-height:1.95;color:var(--txt)}
+.overview-arc p{margin-bottom:14px}
+.civ-span-bar{height:3px;background:var(--bdr2);position:relative;margin:14px 0 6px;border-radius:2px}
+.civ-span-fill{position:absolute;top:0;height:100%;background:var(--amber-b);border-radius:2px;opacity:.8}
+.civ-span-lbls{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--txt3)}
+.conn-hdr{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin:18px 0 8px;font-weight:600}
+.conn-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--conn-bdr);font-size:16px;color:var(--txt2);cursor:pointer;transition:color .15s}
+.conn-item:hover{color:var(--amber-b)}
+.conn-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* ── TIMELINE ── */
+.tl-wrap{position:relative;height:88px;background:var(--tl-bg);border-top:1px solid var(--bdr);padding:8px 20px 14px;flex-shrink:0}
+
+.tl-lbls{display:flex;justify-content:space-between;margin-bottom:5px}
+.tl-lbl{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.8px;color:var(--txt3);text-transform:uppercase;font-weight:600}
+.tl-trk{position:relative;height:5px;background:var(--bdr);border-radius:3px}
+.tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--amber-b);border-radius:3px;pointer-events:none;opacity:.7}
+.tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--amber-b);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--amber),0 0 20px rgba(232,152,32,.3);pointer-events:none;transition:left .04s linear}
+input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0;cursor:pointer;transform:translateY(-50%);margin:0;z-index:2}
+.hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--hint);display:flex;align-items:center;justify-content:center;padding:0 8px;white-space:nowrap;overflow:hidden}
+#map-hint-text{pointer-events:none;overflow:hidden;text-overflow:ellipsis}
+
+/* ── MOB MAP BUTTON ── */
+.mob-map-btn{display:none}
+
+/* ── PORTRAIT MOBILE ── */
+@media(max-width:768px) and (orientation:portrait){
+  .logo-s{display:none}
+  .cnt-disp{display:none}
+  .hdr{padding:8px 12px}
+  .logo-t{font-size:16px;letter-spacing:2px}
+  .era-y{font-size:18px}
+  .era-n{font-size:10px;letter-spacing:1.5px}
+  .main{top:52px!important}
+  .main{bottom:0;flex-direction:column}
+  .map-tl-col{width:100%}
+  .map-c{flex:0 0 42vh;width:100%}
+  .info-panel{flex:1;width:100%;border-left:none;border-top:1px solid var(--bdr);overflow-y:auto;padding:0 16px 16px;border-radius:0}
+  .tl-wrap{height:76px;padding:6px 14px 10px}
+  .tl-lbl{font-size:9px;letter-spacing:.8px}
+  .hint{font-size:8px;letter-spacing:.8px}
+  .lens-dd-list{max-height:180px}
+  .info-txt,.overview-arc{font-size:16px;line-height:1.82}
+  .lens-row-lbl{font-size:13px}
 }
 
-/* --- Header --- */
-#header {
-  position: fixed; top: 0; left: 0; right: 0;
-  height: var(--header-h);
-  background: var(--panel);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  z-index: 100;
-  gap: 12px;
+/* ── LANDSCAPE MOBILE ── */
+@media(max-width:900px) and (orientation:landscape){
+  .logo-s{display:none}
+  .hdr{padding:6px 14px}
+  .logo-t{font-size:15px;letter-spacing:2px}
+  .era-y{font-size:15px}
+  .hint{font-size:7px;letter-spacing:.5px;white-space:normal;text-align:center;line-height:1.4}
+  .tl-wrap{height:68px;padding:4px 12px 8px}
+  .tl-lbl{font-size:8px}
+  .info-panel{width:280px}
 }
 
-#logo {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 3px;
-  cursor: pointer;
-  user-select: none;
-  white-space: nowrap;
+@keyframes ring-pulse{0%{r:5;opacity:.7}100%{r:26;opacity:0}}
+
+@media(pointer:coarse){
+  #mark-layer g[role="button"]{cursor:pointer}
 }
 
-#subtitle {
-  font-family: var(--font-heading);
-  font-size: 11px;
-  color: var(--txt-dim);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  white-space: nowrap;
+/* ── ACCESSIBILITY ── */
+:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px;border-radius:2px}
+.conn-item:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
+.lens-row:focus-visible{outline:2px solid var(--amber-b);outline-offset:-2px}
+button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--amber-b);color:var(--bg);padding:8px 16px;z-index:9999;font-family:'Cinzel',serif;font-size:11px;text-decoration:none}
+.skip-link:focus{top:0}
+
+/* ── THREAD PANEL ── */
+.thread-panel{
+  position:fixed;top:52px;left:0;right:0;z-index:400;
+  background:var(--panel);
+  max-height:0;overflow:hidden;
+  transition:max-height .32s cubic-bezier(.4,0,.2,1);
 }
+.thread-panel.open{border-bottom:1px solid var(--bdr);box-shadow:0 6px 24px var(--shadow)}
+.thread-panel.open{max-height:70vh}
+.thread-panel-inner{padding:16px 20px 20px;overflow-y:auto;max-height:calc(70vh - 1px)}
+.thread-panel-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.thread-panel-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase}
+.thread-close-btn{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1;padding:4px;transition:color .15s}
+.thread-close-btn:hover{color:var(--amber-b)}
+.thread-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px}
+.thread-concept-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:9px 12px;text-align:left;cursor:pointer;border-radius:3px;transition:all .15s}
+.thread-concept-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.thread-concept-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.8px;color:var(--txt2);display:block;margin-bottom:4px}
+.thread-concept-chain{font-size:11px;color:var(--txt3);line-height:1.5}
+.thread-back-btn{background:none;border:none;padding:0;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;transition:opacity .15s}
+.thread-back-btn:hover{opacity:.7}
+.thread-active-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);margin:10px 0 14px}
+.thread-steps-grid{display:flex;flex-direction:column;align-items:center;padding:4px 0 16px}
+.thread-step{width:min(360px,90%);text-align:center;padding:10px 14px;border:1px solid var(--bdr2);border-radius:4px;font-size:12.5px;color:var(--txt2);background:var(--panel2)}
+.thread-step-yr{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);margin-bottom:4px}
+.thread-step-txt{line-height:1.6;color:var(--txt2)}
+.thread-step-civ{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);margin-bottom:4px}
+.thread-chain-link{display:flex;flex-direction:column;align-items:center;padding:2px 0;color:var(--amber-b);opacity:.6}
+.thread-chain-line{width:1px;height:8px;background:var(--amber-b);opacity:.4}
 
-#era-display {
-  margin-left: auto;
-  font-family: var(--font-heading);
-  font-size: 12px;
-  color: var(--amber);
-  letter-spacing: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* ── COMPARE MODE ── */
+.compare-wrap{display:flex;gap:0;height:100%;width:100%}
+.compare-col{flex:1;min-width:0;overflow-y:auto;padding:16px;border-right:1px solid var(--bdr)}
+.compare-col:last-child{border-right:none}
+.compare-col-hdr{font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.compare-remove{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:2px}
+.compare-remove:hover{color:var(--amber-b)}
+.compare-prompt{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--txt3);font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:20px;opacity:.6}
+.compare-diff{background:var(--amber-xx);border-left:2px solid var(--amber-b);padding:6px 8px;margin-bottom:2px}
+
+/* ── SHARE TOAST ── */
+.share-toast{position:fixed;bottom:108px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--panel);border:1px solid var(--bdr);padding:8px 18px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:var(--amber-b);text-transform:uppercase;border-radius:20px;opacity:0;transition:all .3s;pointer-events:none;z-index:500;white-space:nowrap}
+.share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── FINGERPRINT CHART ── */
+.fp-wrap{margin:14px 0 6px}
+.fp-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:8px}
+.fp-svg{display:block;margin:0 auto}
+.fp-label{font-family:'Cinzel',serif;font-size:8px;fill:var(--txt3)}
+.fp-poly{fill:rgba(74,158,63,.18);stroke:#4a9e3f;stroke-width:1.2}
+.fp-grid{fill:none;stroke:var(--bdr);stroke-width:.5}
+
+/* ── CONTEMPORARY BAR ── */
+.contemp-wrap{margin:12px 0 4px}
+.contemp-bar-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;cursor:pointer;transition:opacity .15s}
+.contemp-bar-row:hover{opacity:.75}
+.contemp-bar-nm{font-family:'Cinzel',serif;font-size:8.5px;color:var(--txt3);width:80px;flex-shrink:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.contemp-bar-track{flex:1;height:5px;background:var(--bdr2);border-radius:2px;position:relative}
+.contemp-bar-fill{position:absolute;top:0;height:100%;border-radius:2px;opacity:.7}
+.contemp-bar-yr{font-family:'Cinzel',serif;font-size:7.5px;color:var(--txt3);white-space:nowrap;width:60px;text-align:right;flex-shrink:0}
+
+/* ── DENSITY SPARKLINE ── */
+#density-bar{height:18px;width:100%;display:block;margin-bottom:1px}
+
+/* ── WHAT-IF MODE ── */
+.whatif-civ-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:7px 10px;text-align:left;cursor:pointer;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.5px;color:var(--txt2);margin-bottom:3px;border-radius:2px;transition:all .15s;display:flex;align-items:center;justify-content:space-between}
+.whatif-civ-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.whatif-civ-btn.selected{background:rgba(232,37,26,.12);border-color:#e8251a;color:#e8251a}
+.whatif-result{margin-top:12px;padding:12px;border:1px solid var(--bdr);border-radius:3px;background:var(--panel2)}
+.whatif-chain{padding:6px 0;border-bottom:1px solid var(--bdr2);font-size:12px;color:var(--txt2)}
+.whatif-chain:last-child{border-bottom:none}
+.whatif-chain.lost{color:#e8251a;text-decoration:line-through;opacity:.6}
+.whatif-intro{font-size:13px;line-height:1.7;color:var(--txt2);font-style:italic;margin-bottom:12px}
+
+/* ── HERITAGE MODE ── */
+.heritage-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+.heritage-btn{background:none;border:1px solid var(--bdr2);padding:8px 6px;cursor:pointer;font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.5px;color:var(--txt2);border-radius:2px;transition:all .15s;text-align:center}
+.heritage-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.heritage-btn.active{background:var(--amber-x);border-color:var(--amber-b);color:var(--amber-b)}
+.heritage-civ{padding:5px 0;border-bottom:1px solid var(--bdr2);font-size:12.5px;cursor:pointer;transition:color .15s}
+.heritage-civ:hover{color:var(--amber-b)}
+.heritage-civ-nm{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);display:block;margin-bottom:2px}
+.heritage-civ-why{font-size:11px;color:var(--txt3)}
+
+/* ── MAP ZOOM TRANSITION ── */
+#wsvg{transition:none}
+
+/* ── CLUSTER PICKER ── */
+#cluster-picker{
+  position:fixed;z-index:900;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:6px;
+  min-width:180px;max-width:260px;max-height:320px;overflow-y:auto;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);
+  display:none;
 }
-
-#year-display {
-  font-family: var(--font-heading);
-  font-size: 13px;
-  color: var(--accent);
-  letter-spacing: 1px;
-  white-space: nowrap;
-  margin-right: 8px;
+#cluster-picker.open{display:block}
+#cluster-picker-hdr{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
+  color:var(--txt3);padding:8px 12px 6px;
+  border-bottom:1px solid var(--bdr2);text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
 }
-
-/* --- Lens Dropdown --- */
-#lens-container {
-  position: fixed;
-  top: var(--header-h);
-  left: 12px;
-  z-index: 90;
-  padding-top: 8px;
+.cluster-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;
+  cursor:pointer;border-bottom:1px solid var(--bdr2);
+  transition:background .12s;
 }
+.cluster-item:last-child{border-bottom:none}
+.cluster-item:hover,.cluster-item:active{background:var(--panel2)}
+.cluster-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#4a9e3f}
+.cluster-item-nm{font-family:'Cinzel',serif;font-size:13px;color:var(--txt);flex:1}
+.cluster-item-sb{font-size:11px;color:var(--txt3);margin-top:1px}
 
-#lens-btn {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  color: var(--txt);
-  font-family: var(--font-heading);
-  font-size: 12px;
-  letter-spacing: 1px;
-  padding: 6px 14px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: border-color 0.2s, background 0.2s;
+/* ── BURGER MENU ── */
+.burger-wrap{position:relative}
+.burger-btn{background:none;border:1px solid var(--bdr);color:var(--amber-b);cursor:pointer;
+  width:34px;height:34px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;padding:0}
+.burger-btn:hover{background:var(--panel2);border-color:var(--amber)}
+.burger-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:4px;min-width:196px;
+  box-shadow:0 8px 32px var(--shadow);z-index:800;
+  display:none;flex-direction:column;overflow:hidden}
+.burger-menu.open{display:flex}
+.burger-item{display:flex;align-items:center;gap:10px;padding:12px 16px;
+  background:none;border:none;color:var(--txt2);cursor:pointer;text-align:left;
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:.5px;width:100%;
+  transition:background .12s;white-space:nowrap}
+.burger-item:hover,.burger-item:active{background:var(--panel2);color:var(--txt)}
+.burger-item.active,.burger-item.burger-mode.active{background:var(--amber-x);color:var(--amber-b)}
+.burger-item-badge{margin-left:auto;font-size:9px;color:var(--amber-b);
+  font-family:'Cinzel',serif;letter-spacing:1px;display:none}
+.burger-item-badge.on{display:inline}
+.burger-divider{height:1px;background:var(--bdr2);margin:2px 0}
+
+/* ── MAP ZOOM/PAN ── */
+#wsvg{touch-action:none;user-select:none;-webkit-user-select:none}
+.map-zoom-ctrl{position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px;z-index:50}
+.map-zoom-btn{width:28px;height:28px;background:var(--panel);border:1px solid var(--bdr);color:var(--amber-b);
+  font-size:16px;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;transition:all .15s}
+.map-zoom-btn:hover{background:var(--panel2);border-color:var(--amber)}
+.cluster-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);
+  background:var(--panel);border:1px solid var(--bdr);padding:4px 12px;border-radius:20px;
+  opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:51}
+.cluster-hint.show{opacity:1}
+
+/* ── PULL TO REFRESH ── */
+#ptr-indicator{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  height:0;overflow:hidden;background:var(--panel);
+  border-bottom:1px solid var(--bdr);
+  transition:height .2s ease,opacity .2s ease;
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;
+  color:var(--txt3);text-transform:uppercase;opacity:0;
+  pointer-events:none;
 }
-#lens-btn:hover { border-color: var(--border-hi); background: var(--panel-hi); }
-
-#lens-dd {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 4px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  min-width: 200px;
-  box-shadow: 0 8px 24px var(--shadow);
-  padding: 6px 0;
-  max-height: 360px;
-  overflow-y: auto;
+#ptr-indicator.pulling{height:52px;opacity:1}
+#ptr-indicator.ready{color:var(--amber-b)}
+#ptr-indicator.refreshing{height:52px;opacity:1}
+#ptr-spinner{
+  width:16px;height:16px;border:2px solid var(--bdr);
+  border-top-color:var(--amber-b);border-radius:50%;
+  transition:transform .25s ease;flex-shrink:0;
 }
-#lens-dd.open { display: block; }
-
-.lens-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--txt-mid);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+#ptr-indicator.refreshing #ptr-spinner{
+  animation:ptr-spin .7s linear infinite;
 }
-.lens-item:hover { background: var(--panel-hi); color: var(--txt); }
-.lens-item.active { color: var(--accent); font-weight: 600; }
-.lens-item .ico { font-size: 16px; width: 22px; text-align: center; }
-
-/* --- Mode Buttons --- */
-#mode-bar {
-  position: fixed;
-  top: var(--header-h);
-  right: 12px;
-  z-index: 90;
-  padding-top: 8px;
-  display: flex;
-  gap: 6px;
-}
-
-.mode-btn {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  color: var(--txt-mid);
-  font-family: var(--font-heading);
-  font-size: 11px;
-  letter-spacing: 1px;
-  padding: 6px 12px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: all 0.2s;
-  text-transform: uppercase;
-}
-.mode-btn:hover { border-color: var(--border-hi); color: var(--txt); }
-.mode-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
-
-/* --- SVG Map Area --- */
-#map-container {
-  position: fixed;
-  top: var(--header-h);
-  left: 0;
-  right: 0;
-  bottom: var(--timeline-h);
-  overflow: hidden;
-  background: var(--bg);
-  cursor: grab;
-}
-#map-container.dragging { cursor: grabbing; }
-
-#map-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* Map continent paths */
-.continent {
-  fill: var(--panel);
-  stroke: var(--border);
-  stroke-width: 0.5;
-  transition: fill 0.3s;
-}
-
-/* Plant markers */
-.plant-marker {
-  cursor: pointer;
-  transition: transform 0.2s, opacity 0.3s;
-}
-.plant-marker:hover { transform: scale(1.3); }
-.plant-marker.inactive { opacity: 0.15; }
-
-.marker-circle {
-  transition: r 0.2s, fill-opacity 0.2s;
-}
-
-.marker-label {
-  font-family: var(--font-body);
-  font-size: 7px;
-  fill: var(--txt-mid);
-  text-anchor: middle;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.plant-marker:hover .marker-label,
-.plant-marker.selected .marker-label { opacity: 1; }
-
-/* Pulse animation for active markers */
-@keyframes pulse {
-  0% { r: 0; opacity: 0.6; }
-  100% { r: 14; opacity: 0; }
-}
-.pulse-ring {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 1;
-  animation: pulse 2s ease-out infinite;
-}
-
-/* Connection lines */
-.connection-line {
-  fill: none;
-  stroke: var(--accent-dim);
-  stroke-width: 0.8;
-  stroke-dasharray: 4 3;
-  opacity: 0.4;
-  transition: opacity 0.3s;
-}
-.connection-line.highlight { opacity: 0.9; stroke: var(--accent); stroke-width: 1.4; }
-
-/* Transmission paths */
-.transmission-path {
-  fill: none;
-  stroke: var(--amber);
-  stroke-width: 1;
-  stroke-dasharray: 6 4;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.transmission-path.visible { opacity: 0.6; }
-
-/* --- Info Panel / Drawer --- */
-#drawer {
-  position: fixed;
-  top: var(--header-h);
-  right: 0;
-  width: var(--drawer-w);
-  bottom: var(--timeline-h);
-  background: var(--panel);
-  border-left: 1px solid var(--border);
-  transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-  z-index: 80;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-#drawer.open { transform: translateX(0); }
-
-#drawer-header {
-  padding: 16px 18px 12px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-#drawer-close {
-  background: none;
-  border: none;
-  color: var(--txt-dim);
-  font-size: 20px;
-  cursor: pointer;
-  padding: 2px 6px;
-  margin-left: auto;
-  transition: color 0.2s;
-  line-height: 1;
-}
-#drawer-close:hover { color: var(--txt); }
-
-#drawer-title {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  color: var(--accent);
-  letter-spacing: 1px;
-}
-
-#drawer-subtitle {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--txt-dim);
-  margin-top: 2px;
-}
-
-#drawer-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px 18px;
-}
-
-#drawer-content::-webkit-scrollbar { width: 5px; }
-#drawer-content::-webkit-scrollbar-track { background: transparent; }
-#drawer-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-.drawer-section {
-  margin-bottom: 18px;
-}
-
-.drawer-section-title {
-  font-family: var(--font-heading);
-  font-size: 11px;
-  color: var(--amber);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.drawer-section-body {
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--txt-mid);
-  line-height: 1.6;
-}
-
-.drawer-meta {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.meta-item {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 8px 10px;
-}
-
-.meta-label {
-  font-family: var(--font-heading);
-  font-size: 9px;
-  color: var(--txt-dim);
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.meta-value {
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--txt);
-  margin-top: 2px;
-}
-
-/* Compare mode panel */
-#compare-panel {
-  display: none;
-  position: fixed;
-  top: var(--header-h);
-  right: 0;
-  width: 600px;
-  max-width: 90vw;
-  bottom: var(--timeline-h);
-  background: var(--panel);
-  border-left: 1px solid var(--border);
-  z-index: 80;
-  overflow-y: auto;
-}
-#compare-panel.open { display: flex; }
-
-.compare-col {
-  flex: 1;
-  padding: 16px;
-  border-right: 1px solid var(--border);
-  overflow-y: auto;
-}
-.compare-col:last-child { border-right: none; }
-
-.compare-col h3 {
-  font-family: var(--font-heading);
-  font-size: 15px;
-  color: var(--accent);
-  margin-bottom: 12px;
-  letter-spacing: 1px;
-}
-
-/* --- Timeline Bar --- */
-#timeline {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: var(--timeline-h);
-  background: var(--panel);
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  z-index: 100;
-  gap: 12px;
-}
-
-#timeline-label-start,
-#timeline-label-end {
-  font-family: var(--font-heading);
-  font-size: 10px;
-  color: var(--txt-dim);
-  letter-spacing: 1px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-#slider-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 2px;
-  position: relative;
-}
-
-#density-bar {
-  height: 16px;
-  width: 100%;
-  display: block;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-#timeline-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 6px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-}
-#timeline-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--panel);
-  box-shadow: 0 0 6px var(--accent-glow);
-  cursor: pointer;
-  transition: transform 0.15s;
-}
-#timeline-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
-#timeline-slider::-moz-range-thumb {
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--panel);
-  box-shadow: 0 0 6px var(--accent-glow);
-  cursor: pointer;
-}
-
-#play-btn {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--accent);
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 14px;
-  flex-shrink: 0;
-  transition: all 0.2s;
-}
-#play-btn:hover { border-color: var(--accent); background: var(--accent-glow); }
-
-/* --- Burger Menu --- */
-#burger-btn {
-  background: none;
-  border: none;
-  color: var(--txt-mid);
-  font-size: 22px;
-  cursor: pointer;
-  padding: 4px 6px;
-  transition: color 0.2s;
-  line-height: 1;
-  flex-shrink: 0;
-}
-#burger-btn:hover { color: var(--txt); }
-
-#burger-menu {
-  position: fixed;
-  top: var(--header-h);
-  right: 0;
-  width: 260px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 0 var(--radius);
-  box-shadow: 0 8px 32px var(--shadow);
-  z-index: 110;
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-  padding: 8px 0;
-}
-#burger-menu.open { transform: translateX(0); }
-
-.burger-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  font-family: var(--font-heading);
-  font-size: 13px;
-  color: var(--txt-mid);
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: background 0.15s, color 0.15s;
-  text-decoration: none;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-}
-.burger-item:hover { background: var(--panel-hi); color: var(--txt); }
-
-.burger-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 6px 16px;
-}
-
-/* --- About Modal --- */
-#about-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-}
-#about-overlay.open { display: flex; }
-
-#about-modal {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  max-width: 520px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  padding: 28px;
-  box-shadow: 0 16px 48px var(--shadow);
-}
-
-#about-modal h2 {
-  font-family: var(--font-display);
-  font-size: 22px;
-  color: var(--accent);
-  margin-bottom: 14px;
-  letter-spacing: 2px;
-}
-
-#about-modal p {
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--txt-mid);
-  line-height: 1.7;
-  margin-bottom: 12px;
-}
-
-#about-modal .close-about {
-  background: var(--accent);
-  color: var(--bg);
-  border: none;
-  padding: 8px 24px;
-  border-radius: var(--radius);
-  font-family: var(--font-heading);
-  font-size: 12px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  margin-top: 8px;
-  transition: opacity 0.2s;
-}
-#about-modal .close-about:hover { opacity: 0.85; }
-
-/* --- Tooltip --- */
-#tooltip {
-  position: fixed;
-  background: var(--panel);
-  border: 1px solid var(--border-hi);
-  border-radius: var(--radius);
-  padding: 8px 12px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--txt);
-  pointer-events: none;
-  z-index: 150;
-  box-shadow: 0 4px 16px var(--shadow);
-  display: none;
-  max-width: 220px;
-  line-height: 1.4;
-}
-
-/* --- Responsive --- */
-@media (max-width: 768px) {
-  :root {
-    --drawer-w: 100vw;
-    --header-h: 48px;
-    --timeline-h: 56px;
-  }
-
-  #subtitle { display: none; }
-
-  #logo { font-size: 18px; letter-spacing: 2px; }
-
-  #era-display { font-size: 10px; }
-
-  #lens-container { left: 8px; }
-
-  #mode-bar { right: 8px; }
-  .mode-btn { font-size: 10px; padding: 5px 8px; }
-
-  #timeline { padding: 0 10px; gap: 8px; }
-
-  #compare-panel { width: 100vw; flex-direction: column; }
-  .compare-col { border-right: none; border-bottom: 1px solid var(--border); }
-}
-
-@media (max-width: 480px) {
-  #mode-bar { display: none; }
-  #year-display { display: none; }
-  #era-display { font-size: 9px; max-width: 120px; }
-}
-
-/* --- Utility --- */
-.sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Fade-in animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.fade-in { animation: fadeIn 0.3s ease-out; }
+@keyframes ptr-spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
-<!-- ========== HEADER ========== -->
-<header id="header">
-  <div id="logo">FLORA</div>
-  <div id="subtitle">The Atlas of Plants</div>
-  <span id="era-display">Pre-Agriculture</span>
-  <span id="year-display">10 000 BCE</span>
-  <button id="burger-btn" aria-label="Open menu" aria-expanded="false" onclick="toggleBurger()">&#9776;</button>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to plant panel</button>
+<header class="hdr" role="banner">
+  <div class="hdr-left">
+    <span class="logo-t">FLORA</span>
+    <span class="logo-s">The Plant Atlas</span>
+  </div>
+  <div class="era-disp">
+    <div class="era-y" id="era-y">10000 BCE</div>
+    <div class="era-n" id="era-n">NEOLITHIC</div>
+  </div>
+  <div class="hdr-right">
+    <div class="cnt-disp">
+      <span class="cnt-n" id="cnt-n">2</span>
+      plants active
+    </div>
+    <!-- Burger menu -->
+    <div class="burger-wrap" id="burger-wrap">
+      <button class="burger-btn" id="burger-btn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="0" y1="7" x2="18" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="0" y1="13" x2="18" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="burger-menu" id="burger-menu" role="menu">
+        <a class="burger-item" href="../index.html" role="menuitem" style="text-decoration:none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>The Pangea Project</span>
+        </a>
+        <div class="burger-divider"></div>
+        <button class="burger-item burger-mode active" id="btn-explore" onclick="setMode('explore');closeBurger()" role="menuitem" aria-pressed="true">
+          <span>&#9673;</span><span>Explore</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>&#10227;</span><span>Threads</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>&#8862;</span><span>Compare</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-whatif" onclick="setMode('whatif');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>&#9921;</span><span>What If</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-heritage" onclick="setMode('heritage');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>&#8962;</span><span>Heritage</span>
+        </button>
+        <div class="burger-divider"></div>
+        <button class="burger-item" id="menu-theme" onclick="toggleTheme();closeBurger()" role="menuitem">
+          <span>&#9681;</span>
+          <span>Toggle Theme</span>
+        </button>
+        <div class="burger-divider"></div>
+        <button class="burger-item" onclick="showAbout();closeBurger()" role="menuitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>About</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </header>
 
-<!-- ========== BURGER MENU ========== -->
-<nav id="burger-menu" role="navigation" aria-label="Main menu">
-  <a class="burger-item" href="../">&#127758; Back to Pangea</a>
-  <div class="burger-divider"></div>
-  <button class="burger-item" onclick="setMode('explore');closeBurger()">&#128270; Explore</button>
-  <button class="burger-item" onclick="setMode('threads');closeBurger()">&#128208; Threads</button>
-  <button class="burger-item" onclick="setMode('compare');closeBurger()">&#9878; Compare</button>
-  <div class="burger-divider"></div>
-  <button class="burger-item" onclick="toggleTheme();closeBurger()">&#127763; Toggle Theme</button>
-  <button class="burger-item" onclick="showAbout();closeBurger()">&#9432; About Flora</button>
-</nav>
-
-<!-- ========== LENS DROPDOWN ========== -->
-<div id="lens-container">
-  <button id="lens-btn" onclick="toggleLensDD()" aria-label="Select lens" aria-expanded="false" aria-haspopup="listbox">
-    <span id="lens-ico">&#127807;</span>
-    <span id="lens-name">Overview</span>
-    <span style="font-size:10px">&#9660;</span>
-  </button>
-  <div id="lens-dd" role="listbox" aria-label="Lens options"></div>
-</div>
-
-<!-- ========== MODE BAR ========== -->
-<div id="mode-bar">
-  <button class="mode-btn active" data-mode="explore" onclick="setMode('explore')">Explore</button>
-  <button class="mode-btn" data-mode="threads" onclick="setMode('threads')">Threads</button>
-  <button class="mode-btn" data-mode="compare" onclick="setMode('compare')">Compare</button>
-</div>
-
-<!-- ========== MAP ========== -->
-<div id="map-container">
-  <svg id="map-svg" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet">
-    <defs>
-      <filter id="glow">
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
-    <g id="continents"></g>
-    <g id="map-layer"></g>
-    <g id="connections"></g>
-    <g id="transmissions"></g>
-    <g id="markers"></g>
-  </svg>
-</div>
-
-<!-- ========== INFO DRAWER ========== -->
-<aside id="drawer" role="complementary" aria-label="Plant information">
-  <div id="drawer-header">
-    <div>
-      <div id="drawer-title">Select a Plant</div>
-      <div id="drawer-subtitle">Click any marker on the map</div>
+<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Plant trade threads">
+  <div class="thread-panel-inner">
+    <div class="thread-panel-bar">
+      <span class="thread-panel-title" id="thread-panel-title">Plant Threads</span>
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">&larr; All Threads</button>
+        <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">&#10005;</button>
+      </div>
     </div>
-    <button id="drawer-close" onclick="closeDrawer()" aria-label="Close panel">&times;</button>
-  </div>
-  <div id="drawer-content"></div>
-</aside>
-
-<!-- ========== COMPARE PANEL ========== -->
-<div id="compare-panel">
-  <div class="compare-col" id="compare-a"></div>
-  <div class="compare-col" id="compare-b"></div>
-</div>
-
-<!-- ========== TIMELINE ========== -->
-<footer id="timeline">
-  <button id="play-btn" onclick="togglePlay()" aria-label="Play timeline" aria-keyshortcuts="Space">&#9654;</button>
-  <span id="timeline-label-start">10 000 BCE</span>
-  <div id="slider-container">
-    <canvas id="density-bar"></canvas>
-    <input type="range" id="timeline-slider" min="0" max="1000" value="0"
-           aria-label="Timeline slider" oninput="onSliderInput(this.value)">
-  </div>
-  <span id="timeline-label-end">2025 CE</span>
-</footer>
-
-<!-- ========== TOOLTIP ========== -->
-<div id="tooltip"></div>
-
-<!-- ========== ABOUT MODAL ========== -->
-<div id="about-overlay" onclick="closeAbout()">
-  <div id="about-modal" onclick="event.stopPropagation()">
-    <h2>Flora</h2>
-    <p>The Atlas of Plants is part of The Pangea Project — an interactive exploration of how plants shaped human civilization.</p>
-    <p>Explore 50+ historically significant plants across eight eras of agricultural history. Switch lenses to view cultivation, trade, medicine, mythology, and more.</p>
-    <button class="close-about" onclick="closeAbout()">CLOSE</button>
+    <div id="thread-concept-list"></div>
+    <div id="thread-active-steps" style="display:none"></div>
   </div>
 </div>
 
-<!-- D3 + TopoJSON CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<div class="share-toast" id="share-toast">Link copied to clipboard</div>
 
-<script>
-/* ============================================================
-   PHASE 2 — DATA CONSTANTS
-   ============================================================ */
+<div class="main">
+  <div class="map-tl-col">
+  <div class="map-c">
+    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with plant origin markers" style="cursor:pointer">
+      <defs>
+        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#3a8030" flood-opacity=".85"/>
+        </filter>
+        <filter id="glow2" x="-100%" y="-100%" width="300%" height="300%">
+          <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#3a8030" flood-opacity=".5"/>
+        </filter>
+      </defs>
 
-const LENSES=[{id:"overview",n:"Overview",ico:"\ud83d\udccb"},{id:"cultivation",n:"Cultivation",ico:"\ud83c\udf31"},{id:"spread",n:"Spread & Trade",ico:"\ud83d\uddfa"},{id:"uses",n:"Uses",ico:"\ud83d\udd27"},{id:"cultural",n:"Cultural",ico:"\ud83c\udfad"},{id:"science",n:"Science",ico:"\ud83d\udd2c"},{id:"ecology",n:"Ecology",ico:"\ud83c\udf0d"},{id:"economics",n:"Economics",ico:"\ud83d\udcb0"},{id:"medicine",n:"Medicine",ico:"\ud83d\udc8a"},{id:"mythology",n:"Mythology",ico:"\ud83d\udcd6"},{id:"cuisine",n:"Cuisine",ico:"\ud83c\udf7d"},{id:"genetics",n:"Genetics",ico:"\ud83e\uddec"}];
+      <rect width="1000" height="520" fill="var(--bg)"/>
 
-const ERAS=[{y:-12000,n:"Pre-Agriculture"},{y:-9000,n:"Neolithic Revolution"},{y:-3000,n:"Ancient Agriculture"},{y:500,n:"Medieval Farming"},{y:1492,n:"Columbian Exchange"},{y:1750,n:"Industrial Agriculture"},{y:1945,n:"Green Revolution"},{y:1990,n:"Biotech Era"}];
+      <!-- Grid -->
+      <g stroke="rgba(200,136,28,.04)" stroke-width=".5" fill="none">
+        <line x1="0" y1="120" x2="1000" y2="120"/>
+        <line x1="0" y1="195" x2="1000" y2="195"/>
+        <line x1="0" y1="265" x2="1000" y2="265"/>
+        <line x1="0" y1="335" x2="1000" y2="335"/>
+        <line x1="0" y1="405" x2="1000" y2="405"/>
+        <line x1="200" y1="0" x2="200" y2="520"/>
+        <line x1="400" y1="0" x2="400" y2="520"/>
+        <line x1="600" y1="0" x2="600" y2="520"/>
+        <line x1="800" y1="0" x2="800" y2="520"/>
+      </g>
+      <!-- Equator -->
+      <line x1="0" y1="265" x2="1000" y2="265" stroke="rgba(200,136,28,.10)" stroke-width=".8" stroke-dasharray="3,7"/>
 
+      <!-- Continents -->
+      <g id="map-layer"></g>
 
-const PLANTS=[
-/* ---- Phase 2A: first 25 plants ---- */
-{id:"wheat",n:"Wheat",s:-9500,e:2025,lon:38,lat:36,x:560,y:210,col:"#4a9e3f",sz:1.4,region:"Fertile Crescent",family:"Poaceae",type:"Cereal",d:{overview:"Foundation grain of Western civilization, first domesticated in the Fertile Crescent.",cultivation:"Earliest cultivation in SE Turkey around 9500 BCE.",spread:"Reached Europe by 5000 BCE and China by 3000 BCE.",uses:"Bread, pasta, beer, animal feed.",cultural:"Sacred to Demeter and Ceres in Greek and Roman mythology.",science:"Norman Borlaug's dwarf varieties sparked the Green Revolution.",ecology:"Covers 220M hectares, more land than any other crop.",economics:"Global commodity with futures trading since 1877.",medicine:"Wheat germ oil is rich in vitamin E and used in supplements.",mythology:"Greek myth credits Demeter with giving wheat to humankind.",cuisine:"Essential for bread, noodles, couscous, and pastry worldwide.",genetics:"Hexaploid genome with 42 chromosomes, among the largest of crop plants."}},
-{id:"rice",n:"Rice",s:-8000,e:2025,lon:110,lat:28,x:720,y:240,col:"#7ec850",sz:1.4,region:"Yangtze River Valley",family:"Poaceae",type:"Cereal",d:{overview:"Staple food for over half the world's population, domesticated in China.",cultivation:"Paddy rice cultivation began along the Yangtze around 8000 BCE.",spread:"Reached India by 3000 BCE and West Africa by 1500 CE.",uses:"Food grain, rice wine, vinegar, paper, and straw crafts.",cultural:"Central to Asian identity, ritual offerings, and harvest festivals.",science:"First crop plant to have its full genome sequenced in 2005.",ecology:"Paddy fields produce about 1.5 percent of global methane emissions.",economics:"Feeds 3.5 billion people and dominates Asian agricultural economies.",medicine:"Rice water has been used for centuries to treat dehydration.",mythology:"In Japanese myth, the deity Inari protects rice and prosperity.",cuisine:"Foundation of sushi, risotto, paella, biryani, and congee.",genetics:"Relatively compact genome of 430 Mb across 12 chromosomes."}},
-{id:"maize",n:"Maize",s:-7000,e:2025,lon:-96,lat:18,x:190,y:260,col:"#e8c820",sz:1.4,region:"Mesoamerica",family:"Poaceae",type:"Cereal",d:{overview:"Domesticated from teosinte in Mexico, now the world's most produced grain.",cultivation:"Selective breeding from wild teosinte began around 7000 BCE in Oaxaca.",spread:"Spread throughout the Americas and reached Europe after 1492.",uses:"Food, animal feed, ethanol fuel, corn syrup, and bioplastics.",cultural:"The Maya believed humans were shaped from maize dough.",science:"Barbara McClintock discovered transposons studying maize genetics.",ecology:"US corn belt covers 36M hectares with heavy fertiliser input.",economics:"Largest US crop by volume, underpinning livestock and ethanol industries.",medicine:"Corn silk tea is a traditional diuretic remedy in Central America.",mythology:"The Popol Vuh describes the gods creating people from corn.",cuisine:"Tortillas, polenta, grits, popcorn, and countless global preparations.",genetics:"Ten chromosomes with extensive transposable element content."}},
-{id:"potato",n:"Potato",s:-5000,e:2025,lon:-70,lat:-15,x:230,y:340,col:"#c4a45a",sz:1.2,region:"Andes",family:"Solanaceae",type:"Tuber",d:{overview:"Andean tuber that became Europe's most important food crop by the 1800s.",cultivation:"Cultivated in the Peruvian Andes from around 5000 BCE.",spread:"Brought to Europe by Spain in the 1570s, slow adoption until 1700s.",uses:"Food staple, vodka, starch, animal feed.",cultural:"The Irish Famine of 1845-52 killed one million and reshaped emigration.",science:"First food plant grown in space aboard the Space Shuttle in 1995.",ecology:"Requires less water per calorie than wheat or rice.",economics:"Fourth most important food crop globally by production tonnage.",medicine:"Raw potato juice is a folk remedy for stomach ulcers.",mythology:"Inca legend holds the potato was a gift from the creator god Viracocha.",cuisine:"Chips, fries, mash, gnocchi, and thousands of Andean cultivars.",genetics:"Tetraploid with 48 chromosomes, making breeding complex."}},
-{id:"cassava",n:"Cassava",s:-8000,e:2025,lon:-55,lat:-5,x:270,y:300,col:"#d4a860",sz:1.1,region:"Amazon Basin",family:"Euphorbiaceae",type:"Tuber",d:{overview:"Tropical root crop that feeds 800 million people, mostly in Africa.",cultivation:"Domesticated in the Amazon Basin around 8000 BCE.",spread:"Portuguese traders brought it to Africa in the 1500s.",uses:"Flour, tapioca, starch, animal feed, and bioethanol.",cultural:"Called the bread of the tropics across sub-Saharan Africa.",science:"Biofortified varieties with higher vitamin A are combating malnutrition.",ecology:"Tolerates poor soils and drought, vital for food security.",economics:"Largest source of carbohydrates in tropical Africa.",medicine:"Bitter varieties contain cyanogenic glucosides requiring careful processing.",mythology:"Tupi legend says cassava grew from the grave of a chief's daughter.",cuisine:"Tapioca pearls, fufu, cassava bread, and Brazilian farofa.",genetics:"Highly heterozygous diploid with 36 chromosomes."}},
-{id:"barley",n:"Barley",s:-9000,e:2025,lon:36,lat:34,x:555,y:215,col:"#b8a040",sz:1.1,region:"Fertile Crescent",family:"Poaceae",type:"Cereal",d:{overview:"One of the first domesticated grains, historically vital for beer and bread.",cultivation:"Domesticated alongside wheat in the Fertile Crescent around 9000 BCE.",spread:"Reached Egypt by 5000 BCE and Northern Europe by 3000 BCE.",uses:"Malt for beer and whisky, animal feed, soups, and flatbread.",cultural:"Sumerian workers were paid in barley rations and barley beer.",science:"Used as a model organism for cereal genetics research.",ecology:"Highly adaptable, grown from subarctic Scandinavia to Ethiopian highlands.",economics:"Fourth largest cereal crop globally by production volume.",medicine:"Barley water is a traditional remedy for kidney and bladder ailments.",mythology:"Ancient Egyptians associated barley with resurrection of Osiris.",cuisine:"Pearl barley soup, Scottish bannock, and Korean boricha tea.",genetics:"Diploid with 14 chromosomes and a 5.3 Gb genome."}},
-{id:"oats",n:"Oats",s:-3000,e:2025,lon:30,lat:40,x:545,y:205,col:"#c8b870",sz:0.9,region:"Near East",family:"Poaceae",type:"Cereal",d:{overview:"Once a weed in wheat fields, oats became a cold-climate staple cereal.",cultivation:"Likely domesticated as a secondary crop around 3000 BCE in Anatolia.",spread:"Became important in Northern Europe and Scotland by the Middle Ages.",uses:"Porridge, oat milk, animal feed, and cosmetic skin products.",cultural:"Samuel Johnson joked oats were food for horses in England and people in Scotland.",science:"Beta-glucan in oats is scientifically proven to lower cholesterol.",ecology:"Tolerates cool, wet climates unsuitable for wheat.",economics:"Global production around 25 million tonnes annually led by Russia and Canada.",medicine:"Colloidal oatmeal is FDA-approved for treating eczema and skin irritation.",mythology:"Norse farmers left oat sheaves for Odin's horse Sleipnir at Yule.",cuisine:"Porridge, granola, flapjacks, and haggis casing.",genetics:"Hexaploid with 42 chromosomes, genome fully sequenced in 2022."}},
-{id:"sorghum",n:"Sorghum",s:-6000,e:2025,lon:32,lat:12,x:550,y:265,col:"#d08040",sz:1.0,region:"Sahel / East Africa",family:"Poaceae",type:"Cereal",d:{overview:"Africa's most important native cereal, highly drought-tolerant.",cultivation:"Domesticated in the Sahel region of Africa around 6000 BCE.",spread:"Reached India by 2000 BCE and China by the Silk Road era.",uses:"Grain, syrup, animal feed, brewing, and biofuel.",cultural:"Essential to traditional brewing of African opaque beers.",science:"C4 photosynthesis makes sorghum exceptionally water-efficient.",ecology:"Requires only 330 mm of rainfall, vital for dryland farming.",economics:"Fifth most produced cereal globally, critical for arid-zone food security.",medicine:"Sorghum bran is rich in antioxidants and used in health food products.",mythology:"In parts of Sudan, sorghum planting is timed by star observations.",cuisine:"Injera, porridge, sorghum beer, and gluten-free flour.",genetics:"Diploid with 20 chromosomes and a compact 730 Mb genome."}},
-{id:"millet",n:"Millet",s:-8000,e:2025,lon:108,lat:35,x:715,y:210,col:"#c8a830",sz:0.9,region:"Northern China",family:"Poaceae",type:"Cereal",d:{overview:"Ancient grain domesticated independently in China and Africa.",cultivation:"Foxtail millet cultivated in northern China from around 8000 BCE.",spread:"Pearl millet was separately domesticated in the Sahel by 3000 BCE.",uses:"Porridge, flatbread, beer, bird seed, and animal fodder.",cultural:"Millet was the foundation grain of early Chinese civilisation before rice.",science:"Exceptionally short growing season of 60-90 days suits marginal climates.",ecology:"Thrives in poor soils with minimal water, ideal for semi-arid regions.",economics:"Staple for 90 million people in Africa and Asia.",medicine:"Rich in iron and magnesium, traditionally used to strengthen digestion.",mythology:"Chinese legend credits Hou Ji, Lord of Millet, as ancestor of the Zhou dynasty.",cuisine:"Millet porridge in China, ragi dosa in India, fonio in West Africa.",genetics:"Foxtail millet has a small 490 Mb diploid genome."}},
-{id:"rye",n:"Rye",s:-3000,e:2025,lon:35,lat:38,x:555,y:200,col:"#8a7a40",sz:0.8,region:"Anatolia",family:"Poaceae",type:"Cereal",d:{overview:"Hardy cereal that thrives in cold climates where wheat fails.",cultivation:"Originated as a weed in wheat fields, domesticated by 3000 BCE.",spread:"Became a staple of Northern and Eastern Europe during the Middle Ages.",uses:"Bread, rye whiskey, animal feed, and cover cropping.",cultural:"Dark rye bread is a cultural icon of German and Scandinavian cuisine.",science:"Ergot fungus on rye led to discovery of LSD by Albert Hofmann in 1938.",ecology:"Excellent cover crop that suppresses weeds and prevents erosion.",economics:"Key crop in Poland, Germany, and Russia for bread and spirits.",medicine:"Ergot alkaloids from rye fungus are used to treat migraines.",mythology:"Slavic tradition personified the rye spirit as a field guardian.",cuisine:"Pumpernickel, crispbread, kvass, and rye whiskey.",genetics:"Diploid with 14 chromosomes but an enormous 7.9 Gb genome."}},
-{id:"apple",n:"Apple",s:-4000,e:2025,lon:75,lat:42,x:640,y:195,col:"#e04040",sz:1.0,region:"Central Asia",family:"Rosaceae",type:"Fruit",d:{overview:"World's most culturally iconic fruit, originating in Central Asian forests.",cultivation:"Wild ancestor Malus sieversii still grows in Kazakhstan's Tien Shan mountains.",spread:"Carried westward along the Silk Road, reaching Europe by 3000 BCE.",uses:"Fresh eating, cider, vinegar, pectin, and cooking.",cultural:"Symbolises knowledge, temptation, and immortality across many traditions.",science:"Over 7500 cultivars exist, developed through centuries of grafting.",ecology:"Requires winter chill hours, limiting tropical cultivation.",economics:"Global production exceeds 85 million tonnes annually.",medicine:"Pectin and polyphenols support gut health and lower cholesterol.",mythology:"Golden apples appear in Greek, Norse, and Celtic mythology.",cuisine:"Pies, cider, strudel, tarte tatin, and candy apples.",genetics:"Diploid with 34 chromosomes, genome sequenced in 2010."}},
-{id:"banana",n:"Banana",s:-5000,e:2025,lon:110,lat:2,x:720,y:295,col:"#e8d040",sz:1.1,region:"Southeast Asia",family:"Musaceae",type:"Fruit",d:{overview:"World's most popular fruit, domesticated in Papua New Guinea and Southeast Asia.",cultivation:"Among the earliest cultivated fruits, grown from around 5000 BCE.",spread:"Reached Africa by 1000 BCE and the Americas with Portuguese colonists.",uses:"Fresh fruit, cooking banana, flour, fibre, and banana wine.",cultural:"United Fruit Company's power in Central America created banana republics.",science:"The Cavendish monoculture faces existential threat from Panama disease TR4.",ecology:"Requires consistent tropical rainfall and cannot tolerate frost.",economics:"Most traded fruit globally, worth over 25 billion dollars annually.",medicine:"High potassium content helps regulate blood pressure.",mythology:"In Hindu tradition, the banana plant symbolises fertility and prosperity.",cuisine:"Plantain chips, bananas foster, banana bread, and Thai banana desserts.",genetics:"Triploid and seedless, propagated only by clonal cuttings."}},
-{id:"grape",n:"Grape",s:-6000,e:2025,lon:45,lat:40,x:570,y:200,col:"#8040a0",sz:1.1,region:"South Caucasus",family:"Vitaceae",type:"Fruit",d:{overview:"Foundation of winemaking culture for 8000 years, from the Caucasus worldwide.",cultivation:"Earliest wine residues found in Georgian jars dating to 6000 BCE.",spread:"Greeks and Romans spread viticulture across the Mediterranean.",uses:"Wine, raisins, juice, vinegar, and grape seed oil.",cultural:"Wine is sacramental in Christianity and central to Mediterranean culture.",science:"Resveratrol in grape skins sparked research into anti-aging compounds.",ecology:"Mediterranean climates are ideal and terroir profoundly affects flavour.",economics:"Global wine industry worth over 300 billion dollars annually.",medicine:"Moderate red wine consumption is linked to cardiovascular benefits.",mythology:"Dionysus and Bacchus were Greek and Roman gods of wine and ecstasy.",cuisine:"Wine, raisins, verjuice, grape leaves, and fresh table grapes.",genetics:"Diploid with 38 chromosomes, highly heterozygous genome."}},
-{id:"olive",n:"Olive",s:-5000,e:2025,lon:35,lat:33,x:555,y:220,col:"#708040",sz:1.0,region:"Eastern Mediterranean",family:"Oleaceae",type:"Fruit",d:{overview:"Sacred tree of the Mediterranean, cultivated for oil for 7000 years.",cultivation:"First cultivated in the Levant around 5000 BCE.",spread:"Phoenicians and Greeks spread olive culture across the entire Mediterranean.",uses:"Olive oil, table olives, soap, lamp fuel, and cosmetics.",cultural:"Symbol of peace, wisdom, and victory since ancient Greece.",science:"Cold-pressed extra virgin oil retains polyphenols with anti-inflammatory properties.",ecology:"Thrives in poor, rocky Mediterranean soils with hot dry summers.",economics:"Spain produces nearly half the world's olive oil.",medicine:"Oleocanthal in olive oil has ibuprofen-like anti-inflammatory effects.",mythology:"Athena won Athens by gifting the first olive tree on the Acropolis.",cuisine:"Cornerstone of Mediterranean diet in oil, tapenade, and cured forms.",genetics:"Diploid with 46 chromosomes, large and complex genome."}},
-{id:"date",n:"Date Palm",s:-6000,e:2025,lon:47,lat:30,x:580,y:230,col:"#c08030",sz:0.9,region:"Persian Gulf",family:"Arecaceae",type:"Fruit",d:{overview:"Oldest cultivated fruit tree, sustaining desert civilisations for millennia.",cultivation:"Cultivated in Mesopotamia from around 6000 BCE.",spread:"Spread across North Africa, the Middle East, and into the Indus Valley.",uses:"Fresh and dried fruit, syrup, vinegar, and palm wine.",cultural:"Mentioned over 50 times in the Quran and revered in Islam.",science:"Ancient seeds from Masada were germinated after 2000 years in 2005.",ecology:"Tolerates extreme heat, salinity, and drought in oasis agriculture.",economics:"Major export crop for Iraq, Saudi Arabia, Egypt, and Iran.",medicine:"High in fibre, potassium, and antioxidants, used to break Ramadan fasts.",mythology:"In Mesopotamian art, the sacred tree is often identified as a date palm.",cuisine:"Stuffed dates, date syrup, date sugar, and ma'amoul cookies.",genetics:"Dioecious palm with 36 chromosomes, genome sequenced in 2011."}},
-{id:"fig",n:"Fig",s:-9000,e:2025,lon:35,lat:32,x:555,y:222,col:"#6a4a80",sz:0.8,region:"Western Asia",family:"Moraceae",type:"Fruit",d:{overview:"Possibly the first domesticated plant, predating cereal agriculture.",cultivation:"Carbonised figs from 9400 BCE found at Gilgal in the Jordan Valley.",spread:"Cultivated throughout the Mediterranean, reaching China by the Silk Road.",uses:"Fresh and dried fruit, jam, and fig leaf wrapping for cooking.",cultural:"Adam and Eve used fig leaves; Buddha achieved enlightenment under a fig tree.",science:"Figs require specialised wasp pollinators in an 80-million-year mutualism.",ecology:"Keystone tropical species, feeding more wildlife than almost any other tree.",economics:"Turkey leads global production, mainly for dried fig export.",medicine:"Fig latex has been used traditionally to remove warts.",mythology:"The fig tree is sacred in Hinduism, Buddhism, and Abrahamic traditions.",cuisine:"Fresh figs with cheese, dried figs in baking, and fig preserves.",genetics:"Diploid with 26 chromosomes."}},
-{id:"mango",n:"Mango",s:-4000,e:2025,lon:85,lat:22,x:670,y:250,col:"#e8a020",sz:1.0,region:"South Asia",family:"Anacardiaceae",type:"Fruit",d:{overview:"King of fruits in South Asia, cultivated in India for over 4000 years.",cultivation:"Domesticated in northeast India and Myanmar around 4000 BCE.",spread:"Spread to Southeast Asia, then to Africa and the Americas by Portuguese traders.",uses:"Fresh fruit, juice, pickle, chutney, dried slices, and flavouring.",cultural:"India's national fruit, associated with love and fertility in Hindu tradition.",science:"Over 1000 cultivars developed through centuries of Indian horticulture.",ecology:"Thrives in tropical monsoon climates with a distinct dry season.",economics:"India produces over 40 percent of the world's mangoes.",medicine:"Mango leaf extract is studied for anti-diabetic properties.",mythology:"Hindu god Ganesha is often depicted holding a mango.",cuisine:"Aam panna, mango lassi, sticky rice with mango, and green mango salad.",genetics:"Polyploid with 40 chromosomes, complex and large genome."}},
-{id:"coconut",n:"Coconut",s:-3000,e:2025,lon:110,lat:5,x:720,y:290,col:"#60a040",sz:1.0,region:"Southeast Asia / Pacific",family:"Arecaceae",type:"Fruit",d:{overview:"The tree of life providing food, drink, shelter, and fibre to tropical peoples.",cultivation:"Cultivated across the Pacific and Indian Ocean coasts from 3000 BCE.",spread:"Ocean currents and Austronesian voyagers dispersed it across the tropics.",uses:"Copra, coconut oil, milk, water, fibre (coir), and timber.",cultural:"Central to Pacific Island culture, ceremony, and daily sustenance.",science:"Coconut water is naturally sterile and was used as emergency IV fluid.",ecology:"Coastal palm that tolerates salt spray and sandy soils.",economics:"Philippines and Indonesia produce over 60 percent of the global supply.",medicine:"Lauric acid in coconut oil has antimicrobial properties.",mythology:"In Filipino myth, the coconut grew from the head of a buried giant.",cuisine:"Curries, coconut milk desserts, copra, and fresh coconut water.",genetics:"Diploid with 32 chromosomes, genome sequenced in 2020."}},
-{id:"avocado",n:"Avocado",s:-5000,e:2025,lon:-99,lat:19,x:185,y:258,col:"#408040",sz:0.9,region:"Mesoamerica",family:"Lauraceae",type:"Fruit",d:{overview:"Mesoamerican fruit prized for its rich flesh and healthy fats.",cultivation:"Cultivated in Mexico from around 5000 BCE by pre-Olmec peoples.",spread:"Spanish brought it to Europe and commercial boom began in California in the 1900s.",uses:"Fresh fruit, guacamole, oil, and cosmetic products.",cultural:"Aztec name ahuacatl reflects its shape and fertility symbolism.",science:"Contains more potassium than bananas and 15 grams of healthy fat.",ecology:"Water-intensive crop, with one fruit requiring about 320 litres of water.",economics:"Global market worth 14 billion dollars, driven by millennial demand.",medicine:"High monounsaturated fat content supports cardiovascular health.",mythology:"Aztecs believed avocados gave strength and were an aphrodisiac.",cuisine:"Guacamole, avocado toast, sushi rolls, and Brazilian vitamina smoothies.",genetics:"Diploid with 24 chromosomes, genome published in 2019."}},
-{id:"pepper_black",n:"Black Pepper",s:-2000,e:2025,lon:76,lat:10,x:660,y:270,col:"#404040",sz:0.9,region:"Malabar Coast, India",family:"Piperaceae",type:"Spice",d:{overview:"King of Spices that drove global trade and exploration for millennia.",cultivation:"Grown on the Malabar Coast of India from at least 2000 BCE.",spread:"Traded to Rome, then dominated European spice routes through the Middle Ages.",uses:"Universal seasoning, food preservation, and traditional medicine.",cultural:"Roman pepper imports were so vast that Alaric demanded pepper as ransom.",science:"Piperine enhances bioavailability of drugs including curcumin by 2000 percent.",ecology:"Tropical vine needing shade trees, warm temperatures, and high rainfall.",economics:"Most traded spice in the world, with Vietnam now the top producer.",medicine:"Piperine stimulates digestive enzymes and has anti-inflammatory effects.",mythology:"Called black gold by medieval traders who kept its origin secret.",cuisine:"Essential in virtually every world cuisine as a table seasoning.",genetics:"Diploid with 52 chromosomes, genome recently sequenced."}},
-{id:"cinnamon",n:"Cinnamon",s:-2000,e:2025,lon:80,lat:7,x:665,y:280,col:"#a06020",sz:0.8,region:"Sri Lanka",family:"Lauraceae",type:"Spice",d:{overview:"Ancient spice from Sri Lanka that was once more valuable than gold.",cultivation:"True cinnamon harvested in Sri Lanka from at least 2000 BCE.",spread:"Traded to Egypt for embalming and reached Europe via Arab merchants.",uses:"Flavouring, perfume, embalming, medicine, and food preservation.",cultural:"Egyptian pharaohs used cinnamon oil in the mummification process.",science:"Cinnamaldehyde gives cinnamon its flavour and has antimicrobial properties.",ecology:"Evergreen tree thriving in tropical lowland rainforest conditions.",economics:"Sri Lanka produces 80 percent of true cinnamon; cassia dominates mass market.",medicine:"May help regulate blood sugar levels in type 2 diabetes.",mythology:"Herodotus claimed cinnamon was gathered from the nests of giant birds.",cuisine:"Baking, chai, mulled wine, Mexican chocolate, and Middle Eastern stews.",genetics:"Diploid tree with complex terpene biosynthesis pathways."}},
-{id:"vanilla",n:"Vanilla",s:-1000,e:2025,lon:-96,lat:20,x:188,y:255,col:"#c8a870",sz:0.8,region:"Mesoamerica",family:"Orchidaceae",type:"Spice",d:{overview:"World's most labour-intensive spice, from a Mexican orchid pollinated by hand.",cultivation:"Totonac people of Mexico first cultivated vanilla around 1000 BCE.",spread:"Spanish brought it to Europe and plantations established in Madagascar by 1840s.",uses:"Flavouring for ice cream, chocolate, perfume, and baked goods.",cultural:"Aztecs flavoured their royal chocolate drink xocolatl with vanilla.",science:"Each flower must be hand-pollinated within 12 hours of opening.",ecology:"Epiphytic orchid vine requiring tropical humidity and shade.",economics:"Second most expensive spice after saffron, with volatile prices.",medicine:"Vanillin has mild anti-inflammatory and antioxidant properties.",mythology:"Totonac legend says vanilla grew from the blood of a princess.",cuisine:"Ice cream, custard, creme brulee, and Coca-Cola flavouring.",genetics:"Large genome typical of orchids with complex polyploidy."}},
-{id:"saffron",n:"Saffron",s:-1500,e:2025,lon:35,lat:35,x:555,y:212,col:"#e06020",sz:0.7,region:"Eastern Mediterranean",family:"Iridaceae",type:"Spice",d:{overview:"Most expensive spice by weight, harvested as crocus stigmas by hand.",cultivation:"Cultivated in Crete or Persia from around 1500 BCE.",spread:"Arab traders spread it to Spain and the Kashmir region became a major source.",uses:"Food colouring, flavouring, dye, perfume, and traditional medicine.",cultural:"Cleopatra bathed in saffron-infused water and Buddhist robes are saffron-dyed.",science:"Requires 150000 flowers to produce one kilogram of dried saffron.",ecology:"Needs hot dry summers and cold winters as an autumn-flowering bulb.",economics:"Worth 5000-15000 dollars per kg, with Iran producing 90 percent of supply.",medicine:"Crocin shows potential antidepressant effects in clinical trials.",mythology:"Greek myth says saffron crocus sprang from the blood of the youth Crocus.",cuisine:"Paella, risotto alla milanese, Persian rice, and Indian biryani.",genetics:"Triploid sterile hybrid, reproduced only by corm division."}},
-{id:"cotton",n:"Cotton",s:-5000,e:2025,lon:72,lat:25,x:645,y:245,col:"#e0e0e0",sz:1.2,region:"Indus Valley / Mesoamerica",family:"Malvaceae",type:"Fibre",d:{overview:"World's most important natural fibre, independently domesticated in two hemispheres.",cultivation:"Grown in the Indus Valley by 5000 BCE and in Peru by 3000 BCE.",spread:"Arab traders brought Indian cotton to Europe and American plantations expanded massively.",uses:"Textiles, medical gauze, banknotes, cottonseed oil, and animal feed.",cultural:"Cotton plantations were central to the Atlantic slave trade.",science:"Eli Whitney's cotton gin in 1793 revolutionised fibre processing.",ecology:"Water-intensive crop, contributing to the Aral Sea's desiccation.",economics:"50 billion dollar global market, vital export for West African nations.",medicine:"Sterile cotton gauze is fundamental to wound care worldwide.",mythology:"Hindu texts describe cotton as white gold woven by the gods.",cuisine:"Cottonseed oil is widely used in snack food and frying.",genetics:"Allotetraploid with 52 chromosomes from two ancestral genomes."}},
-{id:"sugarcane",n:"Sugarcane",s:-6000,e:2025,lon:147,lat:-6,x:785,y:300,col:"#60c060",sz:1.2,region:"New Guinea",family:"Poaceae",type:"Industrial",d:{overview:"Tropical grass that fuelled the slave trade and transformed global diets.",cultivation:"First cultivated in New Guinea around 6000 BCE.",spread:"Reached India by 1000 BCE and Columbus brought it to the Caribbean in 1493.",uses:"Sugar, rum, molasses, ethanol fuel, and bagasse for bioenergy.",cultural:"Caribbean sugar plantations drove the largest forced migration in history.",science:"Brazil leads sugarcane ethanol production as a petrol alternative.",ecology:"Highly productive C4 grass but requires tropical heat and heavy irrigation.",economics:"Brazil and India produce over 60 percent of global supply.",medicine:"Policosanol from sugarcane wax may lower cholesterol.",mythology:"Indian texts call sugar sarkara, from which the English word derives.",cuisine:"White sugar, brown sugar, jaggery, rum, and cachaca.",genetics:"Complex polyploid with 100-130 chromosomes from interspecific hybrids."}},
-/* ---- Phase 2B: remaining 25 plants ---- */
-{id:"tobacco",n:"Tobacco",s:-3000,e:2025,lon:-78,lat:20,x:200,y:250,col:"#5a7a30",sz:1.0,region:"Americas",family:"Solanaceae",type:"Stimulant",d:{overview:"Sacred plant of the Americas that became the world's most addictive cash crop.",cultivation:"Used ceremonially by Indigenous peoples from at least 3000 BCE.",spread:"Europeans adopted it after 1492 and plantations spread across colonial empires.",uses:"Smoking, chewing, snuff, insecticide, and nicotine patches.",cultural:"Central to Native American ritual and diplomacy through the peace pipe.",science:"Nicotine was among the first alkaloids isolated, in 1828.",ecology:"Heavy nitrogen feeder that depletes tropical soils rapidly.",economics:"Multi-billion-dollar global industry despite declining smoking rates.",medicine:"Paradoxically both a major health hazard and source of medicinal nicotine.",mythology:"Cherokee legend says tobacco was a gift from the spirits to ease human suffering.",cuisine:"Not eaten, but tobacco leaves are sometimes used to smoke meats ceremonially.",genetics:"Allotetraploid with 48 chromosomes, genome sequenced in 2014."}},
-{id:"coffee",n:"Coffee",s:-850,e:2025,lon:36,lat:8,x:555,y:275,col:"#6b3a2a",sz:1.2,region:"Ethiopia",family:"Rubiaceae",type:"Beverage",d:{overview:"World's most popular stimulant beverage, discovered in the Ethiopian highlands.",cultivation:"Legend credits a goatherd named Kaldi who noticed his goats' energy after eating berries.",spread:"Spread to Yemen by the 1400s, then coffeehouses appeared across the Ottoman Empire and Europe.",uses:"Beverage, flavouring, cosmetics, and caffeine extraction.",cultural:"Coffeehouses became centres of intellectual exchange in 17th-century Europe.",science:"Caffeine is the world's most consumed psychoactive substance.",ecology:"Shade-grown coffee supports biodiversity; sun-grown drives deforestation.",economics:"Second most traded commodity after petroleum, supporting 125 million livelihoods.",medicine:"Moderate consumption linked to reduced risk of Parkinson's and type 2 diabetes.",mythology:"Sufi monks used coffee to stay awake during nighttime prayers.",cuisine:"Espresso, cappuccino, Turkish coffee, cold brew, and coffee-flavoured desserts.",genetics:"Coffea arabica is an allotetraploid with 44 chromosomes."}},
-{id:"tea",n:"Tea",s:-2700,e:2025,lon:100,lat:28,x:710,y:230,col:"#5a9e50",sz:1.1,region:"Yunnan, China",family:"Theaceae",type:"Beverage",d:{overview:"The world's most consumed beverage after water, steeped in Chinese tradition.",cultivation:"Legendary discovery by Emperor Shen Nung around 2700 BCE.",spread:"Reached Japan by 800 CE and Europe by 1600, sparking the Opium Wars.",uses:"Beverage, flavouring, ceremonial use, and antioxidant supplements.",cultural:"Japanese tea ceremony and British afternoon tea define distinct cultural identities.",science:"Catechins and L-theanine provide both stimulant and calming effects.",ecology:"Tea plantations shape hillside landscapes across Asia and East Africa.",economics:"Global market worth over 200 billion dollars annually.",medicine:"Green tea catechins are studied for anti-cancer and cardiovascular benefits.",mythology:"Chinese legend says a tea leaf blew into Shen Nung's boiling water.",cuisine:"Matcha, chai, bubble tea, kombucha, and tea-smoked duck.",genetics:"Diploid with 30 chromosomes and a 3 Gb genome."}},
-{id:"cacao",n:"Cacao",s:-1900,e:2025,lon:-90,lat:15,x:192,y:262,col:"#4a2a10",sz:1.0,region:"Mesoamerica",family:"Malvaceae",type:"Beverage",d:{overview:"Source of chocolate, once so valuable it served as currency in Mesoamerica.",cultivation:"Olmec and Maya cultivated cacao in Central America from 1900 BCE.",spread:"Spanish brought it to Europe where sugar transformed it into a confection.",uses:"Chocolate, cocoa butter, beverages, and cosmetics.",cultural:"Aztec emperor Montezuma reportedly drank 50 cups of xocolatl daily.",science:"Theobromine provides mild stimulation without the jitters of caffeine.",ecology:"Grows only within 20 degrees of the equator in humid understorey conditions.",economics:"Ivory Coast and Ghana produce over 60 percent of world supply.",medicine:"Flavonoids in dark chocolate may lower blood pressure.",mythology:"Maya believed cacao was discovered by the gods in a sacred mountain.",cuisine:"Chocolate bars, hot cocoa, mole sauce, and truffles.",genetics:"Diploid with 20 chromosomes, genome sequenced in 2010."}},
-{id:"rubber",n:"Rubber Tree",s:-1600,e:2025,lon:-60,lat:-3,x:250,y:290,col:"#808080",sz:1.0,region:"Amazon Basin",family:"Euphorbiaceae",type:"Industrial",d:{overview:"Source of natural latex that powered the industrial revolution's machinery.",cultivation:"Indigenous Amazonians used latex for waterproofing from at least 1600 BCE.",spread:"Seeds smuggled from Brazil to Kew Gardens in 1876, then planted across Southeast Asia.",uses:"Tyres, gloves, elastic, waterproofing, and medical equipment.",cultural:"The Amazon rubber boom created fabulous wealth and terrible exploitation.",science:"Vulcanisation by Charles Goodyear in 1839 made rubber commercially viable.",ecology:"Monoculture plantations in Southeast Asia replaced diverse tropical forests.",economics:"Thailand, Indonesia, and Malaysia produce over 70 percent of natural rubber.",medicine:"Latex gloves are essential for medical hygiene worldwide.",mythology:"Maya used rubber balls in the sacred Mesoamerican ballgame.",cuisine:"Not consumed, though latex is used in food-grade gloves and packaging.",genetics:"Diploid with 36 chromosomes, genome assembled in 2016."}},
-{id:"opium",n:"Opium Poppy",s:-3400,e:2025,lon:34,lat:37,x:555,y:210,col:"#c06080",sz:0.9,region:"Western Mediterranean",family:"Papaveraceae",type:"Medicinal",d:{overview:"Source of morphine and codeine, humanity's oldest and most potent painkiller.",cultivation:"Cultivated in the western Mediterranean from around 3400 BCE.",spread:"Traded throughout the ancient world and sparked the Opium Wars with China.",uses:"Pain relief, anaesthesia, recreational drug, and poppy seeds for cooking.",cultural:"The Opium Wars between Britain and China reshaped East Asian geopolitics.",science:"Morphine was the first alkaloid ever isolated from a plant, in 1804.",ecology:"Grows in temperate climates with well-drained soils.",economics:"Legal opiate production for medicine alongside massive illicit trade.",medicine:"Morphine remains the gold standard for severe pain management.",mythology:"Greek god Hypnos carried poppies to bring sleep to mortals.",cuisine:"Poppy seeds used in baking, curries, and Central European pastries.",genetics:"Diploid with 22 chromosomes, genome decoded in 2018."}},
-{id:"hemp",n:"Hemp",s:-4000,e:2025,lon:90,lat:35,x:660,y:210,col:"#5a8a30",sz:0.9,region:"Central Asia",family:"Cannabaceae",type:"Industrial",d:{overview:"One of humanity's oldest cultivated fibres, grown for rope, cloth, and seed.",cultivation:"Grown in Central Asia from around 4000 BCE for fibre and seed.",spread:"Spread to Europe by 2000 BCE and was mandatory to grow in colonial America.",uses:"Rope, textiles, paper, seed oil, building materials, and CBD products.",cultural:"George Washington and Thomas Jefferson both grew hemp on their plantations.",science:"CBD from hemp shows promise for epilepsy and chronic pain treatment.",ecology:"Fast-growing crop that requires minimal pesticides and improves soil.",economics:"Legal hemp industry is rapidly expanding since regulatory reforms.",medicine:"CBD oil is used for anxiety, pain, and seizure disorders.",mythology:"Hindu texts describe cannabis as one of five sacred plants.",cuisine:"Hemp seeds are a protein-rich superfood used in smoothies and granola.",genetics:"Diploid with 20 chromosomes, closely related to hops."}},
-{id:"tomato",n:"Tomato",s:-700,e:2025,lon:-105,lat:20,x:180,y:255,col:"#e04040",sz:1.0,region:"Mesoamerica",family:"Solanaceae",type:"Fruit",d:{overview:"Once feared as poisonous in Europe, now the world's most popular garden crop.",cultivation:"Domesticated in Mexico, likely from small wild berries around 700 BCE.",spread:"Spanish brought it to Europe by the 1520s but acceptance took centuries.",uses:"Fresh eating, sauces, ketchup, canning, juice, and paste.",cultural:"Italians initially called it the golden apple and feared it was toxic.",science:"Flavr Savr tomato in 1994 was the first commercially grown GM food.",ecology:"Grown on every continent except Antarctica in greenhouses and fields.",economics:"Global production exceeds 180 million tonnes annually.",medicine:"Lycopene in tomatoes is linked to reduced prostate cancer risk.",mythology:"Europeans called it the love apple, believing it was an aphrodisiac.",cuisine:"Pizza, pasta sauce, salsa, gazpacho, ketchup, and caprese salad.",genetics:"Diploid with 24 chromosomes, genome sequenced in 2012."}},
-{id:"chili",n:"Chili Pepper",s:-7000,e:2025,lon:-90,lat:15,x:192,y:260,col:"#d03020",sz:0.9,region:"Mesoamerica",family:"Solanaceae",type:"Spice",d:{overview:"Fiery fruit domesticated in Mexico that conquered global cuisines after 1492.",cultivation:"Earliest evidence of chili use dates to 7000 BCE in Tehuacan Valley.",spread:"Portuguese traders spread it to Africa, India, and Asia within decades of contact.",uses:"Seasoning, food preservation, pepper spray, and medicinal patches.",cultural:"Over a quarter of the world's population eats chilis daily.",science:"Capsaicin triggers pain receptors but causes no actual tissue damage.",ecology:"Capsaicin evolved to deter mammals while allowing birds to spread seeds.",economics:"India is the world's largest producer and exporter of dried chilies.",medicine:"Capsaicin patches are FDA-approved for neuropathic pain relief.",mythology:"Aztecs used chili smoke as a form of punishment for disobedient children.",cuisine:"Sriracha, harissa, sambal, gochujang, and every spicy tradition worldwide.",genetics:"Diploid with 24 chromosomes across five domesticated species."}},
-{id:"squash",n:"Squash",s:-8000,e:2025,lon:-100,lat:20,x:185,y:255,col:"#e0a030",sz:0.9,region:"Mesoamerica",family:"Cucurbitaceae",type:"Vegetable",d:{overview:"One of the earliest American domesticates, grown with maize and beans as the Three Sisters.",cultivation:"Cultivated in Mexico from around 8000 BCE, predating maize.",spread:"Spread throughout the Americas and reached Europe after 1492.",uses:"Food, animal feed, containers, sponges, and decorative gourds.",cultural:"The Three Sisters planting with maize and beans is a cornerstone of Native agriculture.",science:"Squash seeds are among the oldest directly dated plant domesticates.",ecology:"Sprawling vines provide living mulch that suppresses weeds in polyculture.",economics:"Global production exceeds 27 million tonnes annually.",medicine:"Pumpkin seeds are rich in zinc and used as a traditional anti-parasitic.",mythology:"Iroquois legend credits squash as one of three sisters given by the Creator.",cuisine:"Pumpkin pie, butternut soup, zucchini bread, and roasted winter squash.",genetics:"Diploid with 40 chromosomes across multiple domesticated species."}},
-{id:"sunflower",n:"Sunflower",s:-3000,e:2025,lon:-100,lat:38,x:180,y:215,col:"#e8c020",sz:1.0,region:"North America",family:"Asteraceae",type:"Oilseed",d:{overview:"Native American crop that became one of the world's top oilseed plants.",cultivation:"Domesticated by Indigenous peoples of eastern North America around 3000 BCE.",spread:"Spanish brought it to Europe and Russian Orthodox Church promoted it as a fasting oil.",uses:"Cooking oil, seeds, animal feed, biodiesel, and ornamental planting.",cultural:"National flower of Ukraine and a global symbol of peace and optimism.",science:"Each sunflower head contains up to 2000 individual florets in Fibonacci spirals.",ecology:"Attracts pollinators and can be used for phytoremediation of heavy metals.",economics:"Ukraine and Russia together produce over half the world's sunflower oil.",medicine:"Rich in vitamin E and unsaturated fats that support heart health.",mythology:"Greek myth tells of the nymph Clytie who turned into a sunflower following the sun god.",cuisine:"Roasted seeds, sunflower butter, halva, and cooking oil.",genetics:"Diploid with 34 chromosomes, genome sequenced in 2017."}},
-{id:"peanut",n:"Peanut",s:-3500,e:2025,lon:-65,lat:-20,x:240,y:350,col:"#c4a060",sz:0.9,region:"South America",family:"Fabaceae",type:"Legume",d:{overview:"Underground fruit from South America that became a global protein source.",cultivation:"Domesticated in the foothills of the Andes around 3500 BCE.",spread:"Portuguese traders carried it to Africa and Asia in the 1500s.",uses:"Peanut butter, oil, animal feed, and industrial products.",cultural:"George Washington Carver promoted peanuts to revitalise Southern US agriculture.",science:"Peanuts are legumes that fix nitrogen, improving soil fertility.",ecology:"Nitrogen-fixing crop that enriches soil for subsequent plantings.",economics:"China and India are the top producers, together over 50 percent of global output.",medicine:"Peanut allergies affect 2 percent of children, driving major food safety research.",mythology:"Inca tombs contained peanut-shaped pottery showing their cultural importance.",cuisine:"Peanut butter, satay sauce, groundnut stew, and boiled peanuts.",genetics:"Allotetraploid with 40 chromosomes from two wild ancestor species."}},
-{id:"pineapple",n:"Pineapple",s:-1200,e:2025,lon:-50,lat:-15,x:260,y:335,col:"#e8c040",sz:0.8,region:"South America",family:"Bromeliaceae",type:"Fruit",d:{overview:"Tropical fruit that became a symbol of hospitality and colonial luxury.",cultivation:"Cultivated by Tupi-Guarani peoples in Brazil from around 1200 BCE.",spread:"Columbus encountered it in Guadeloupe in 1493 and brought it to Spain.",uses:"Fresh fruit, juice, canning, bromelain enzyme, and fibre.",cultural:"A pineapple on a gatepost was the universal colonial sign of welcome.",science:"Bromelain enzyme is used as a meat tenderiser and anti-inflammatory agent.",ecology:"Tolerates poor acidic soils but susceptible to frost damage.",economics:"Costa Rica leads global production and export of fresh pineapple.",medicine:"Bromelain reduces swelling and is used post-surgery.",mythology:"Guarani legend says the pineapple grew from the transformed body of a young girl.",cuisine:"Pina colada, Hawaiian pizza, upside-down cake, and tepache.",genetics:"Diploid with 50 chromosomes, genome sequenced in 2015."}},
-{id:"cinchona",n:"Cinchona",s:-1600,e:2025,lon:-76,lat:-13,x:215,y:330,col:"#d08080",sz:0.8,region:"Andes",family:"Rubiaceae",type:"Medicinal",d:{overview:"Source of quinine, the first effective treatment for malaria.",cultivation:"Bark harvested from wild Andean trees by Quechua people from 1600 BCE.",spread:"Jesuits brought quinine to Europe in the 1630s, transforming tropical colonisation.",uses:"Anti-malarial medicine, tonic water flavouring, and fever reducer.",cultural:"Quinine enabled European colonisation of malaria-ridden tropical regions.",science:"Quinine was isolated in 1820 and synthesised by Woodward in 1944.",ecology:"Native to Andean cloud forests at 1500-3000 metres elevation.",economics:"British smuggled seeds to establish plantations in India and Java.",medicine:"Quinine remains a backup treatment for drug-resistant malaria strains.",mythology:"Legend says a feverish Inca drank from a pool beside a fallen cinchona tree and was cured.",cuisine:"Tonic water was originally a medicinal drink mixed with gin by British colonials.",genetics:"Diploid tree producing over 30 different alkaloids."}},
-{id:"willow",n:"Willow",s:-3000,e:2025,lon:35,lat:40,x:557,y:205,col:"#70a070",sz:0.7,region:"Europe / Western Asia",family:"Salicaceae",type:"Medicinal",d:{overview:"Source of salicin, the natural precursor to aspirin, used since antiquity.",cultivation:"Willow bark chewed for pain relief since at least 3000 BCE.",spread:"Hippocrates prescribed willow bark tea in 400 BCE and its use spread globally.",uses:"Pain relief, basket weaving, charcoal, cricket bats, and erosion control.",cultural:"Willow symbolises mourning and grief in European art and literature.",science:"Felix Hoffmann synthesised aspirin from salicylic acid at Bayer in 1897.",ecology:"Willows stabilise riverbanks and are pioneers in wetland restoration.",economics:"Aspirin derived from willow chemistry is one of the most used drugs worldwide.",medicine:"Aspirin prevents blood clots and reduces heart attack and stroke risk.",mythology:"In Celtic tradition, the willow was sacred to the moon goddess.",cuisine:"Not consumed, but willow bark tea was a widespread folk remedy.",genetics:"Diploid with 38 chromosomes, fast-growing and easily propagated."}},
-{id:"foxglove",n:"Foxglove",s:-1500,e:2025,lon:-3,lat:52,x:490,y:185,col:"#a060c0",sz:0.7,region:"Western Europe",family:"Plantaginaceae",type:"Medicinal",d:{overview:"Beautiful but deadly plant that gave medicine one of its most important heart drugs.",cultivation:"Wild European plant noted for medicinal use from around 1500 BCE.",spread:"William Withering formalised its use for heart failure in 1785.",uses:"Heart medication (digitalis), ornamental garden plant.",cultural:"Its folk names include dead men's bells and witch's gloves.",science:"Digoxin from foxglove regulates heartbeat and remains clinically essential.",ecology:"Biennial woodland plant that thrives in acidic soils and partial shade.",economics:"Pharmaceutical digitalis is still extracted from cultivated foxglove leaves.",medicine:"Digoxin treats atrial fibrillation and congestive heart failure.",mythology:"Fairies allegedly gave foxes the flowers to wear as gloves for silent hunting.",cuisine:"Highly toxic and never consumed as food.",genetics:"Diploid producing complex cardiac glycosides via specialised biosynthetic pathways."}},
-{id:"aloe",n:"Aloe Vera",s:-2000,e:2025,lon:48,lat:14,x:575,y:260,col:"#60b060",sz:0.7,region:"Arabian Peninsula",family:"Asphodelaceae",type:"Medicinal",d:{overview:"Desert succulent prized for its healing gel for over 4000 years.",cultivation:"Cultivated on the Arabian Peninsula from around 2000 BCE.",spread:"Traded throughout the ancient world and now grown commercially worldwide.",uses:"Skin care, burn treatment, beverages, and laxatives.",cultural:"Cleopatra and Nefertiti reportedly used aloe vera in their beauty routines.",science:"Acemannan in aloe gel accelerates wound healing and modulates immunity.",ecology:"Drought-tolerant succulent thriving in arid subtropical climates.",economics:"Global aloe vera market worth over 4 billion dollars annually.",medicine:"FDA-recognised treatment for minor burns and skin irritation.",mythology:"Ancient Egyptians called aloe the plant of immortality.",cuisine:"Aloe vera juice and gel are used in drinks and desserts across Asia.",genetics:"Diploid with 14 chromosomes, relatively small genome."}},
-{id:"oak",n:"Oak",s:-5000,e:2025,lon:0,lat:48,x:500,y:190,col:"#6a5020",sz:1.0,region:"Northern Hemisphere",family:"Fagaceae",type:"Timber",d:{overview:"Foundational forest tree that built the ships, barrels, and buildings of Western civilisation.",cultivation:"Managed oak forests date to at least 5000 BCE across Europe.",spread:"Over 500 species found throughout the Northern Hemisphere.",uses:"Ship timber, furniture, barrels for wine and whiskey, and flooring.",cultural:"Sacred to Zeus, Thor, and the Druids across European traditions.",science:"Cork oak bark regenerates after harvest, a remarkable renewable material.",ecology:"Keystone species supporting over 2000 associated insect and fungal species.",economics:"Wine and whiskey industries depend on oak barrels for flavour maturation.",medicine:"Oak bark tannins have astringent and antiseptic properties.",mythology:"The Druids held their most sacred rituals in oak groves.",cuisine:"Acorns were a staple food of many Indigenous peoples worldwide.",genetics:"Diploid with 24 chromosomes, extremely long-lived specimens over 1000 years."}},
-{id:"bamboo",n:"Bamboo",s:-5000,e:2025,lon:104,lat:28,x:720,y:235,col:"#50a050",sz:1.0,region:"East Asia",family:"Poaceae",type:"Multi-use",d:{overview:"The world's fastest-growing plant, central to Asian culture and construction.",cultivation:"Used in China for tools, building, and writing from at least 5000 BCE.",spread:"Over 1400 species found across tropical and subtropical regions worldwide.",uses:"Construction, furniture, paper, textiles, food, and musical instruments.",cultural:"Symbolises resilience, flexibility, and integrity in East Asian philosophy.",science:"Some species grow up to 91 cm per day, the fastest plant growth recorded.",ecology:"Bamboo forests sequester carbon rapidly and prevent soil erosion.",economics:"Global bamboo economy worth over 72 billion dollars annually.",medicine:"Bamboo silica is used in traditional Chinese medicine for respiratory health.",mythology:"In Japanese folklore, Princess Kaguya was found inside a glowing bamboo stalk.",cuisine:"Bamboo shoots are a staple vegetable in East and Southeast Asian cooking.",genetics:"Complex polyploid grasses with varying chromosome numbers across species."}},
-{id:"baobab",n:"Baobab",s:-3000,e:2025,lon:20,lat:-12,x:530,y:310,col:"#a08050",sz:1.0,region:"Sub-Saharan Africa",family:"Malvaceae",type:"Multi-use",d:{overview:"Africa's tree of life, storing thousands of litres of water in its massive trunk.",cultivation:"Revered and managed by African communities for at least 5000 years.",spread:"Eight species worldwide, six endemic to Madagascar and one to Australia.",uses:"Fruit pulp, seeds, bark fibre, water storage, and shade.",cultural:"Village meeting places are traditionally held under the baobab tree.",science:"Radiocarbon dating shows some baobabs are over 2000 years old.",ecology:"Provides food and shelter for countless animals during the dry season.",economics:"Baobab fruit powder is a growing superfood export from Africa.",medicine:"Fruit pulp is extremely rich in vitamin C, six times more than oranges.",mythology:"African legend says God planted the baobab upside down in anger.",cuisine:"Baobab fruit powder in smoothies, juices, and traditional African porridge.",genetics:"Diploid with complex genome adapted to extreme drought survival."}},
-{id:"sequoia",n:"Sequoia",s:-5000,e:2025,lon:-119,lat:37,x:145,y:210,col:"#8a4020",sz:1.0,region:"Western North America",family:"Cupressaceae",type:"Timber",d:{overview:"The largest living organisms on Earth, towering over 80 metres in California's mountains.",cultivation:"Revered by Indigenous peoples and protected in national parks since 1890.",spread:"Native only to California's Sierra Nevada, though planted ornamentally worldwide.",uses:"Historic timber harvesting, now primarily conservation and tourism.",cultural:"Giant sequoias inspired the American national park movement.",science:"General Sherman tree is the largest living organism by volume at 1487 cubic metres.",ecology:"Fire-adapted species whose cones require heat to open and release seeds.",economics:"Tourism to sequoia groves generates hundreds of millions annually.",medicine:"Not used medicinally, but forest bathing among sequoias reduces stress hormones.",mythology:"Indigenous Miwok people considered sequoia groves sacred ceremonial sites.",cuisine:"Not consumed as food.",genetics:"Hexaploid with 66 chromosomes and remarkable longevity genes."}},
-{id:"teak",n:"Teak",s:-3000,e:2025,lon:78,lat:15,x:650,y:260,col:"#906030",sz:0.9,region:"South and Southeast Asia",family:"Lamiaceae",type:"Timber",d:{overview:"The world's most valuable tropical hardwood, prized for its durability and beauty.",cultivation:"Managed teak forests in India date back over 3000 years.",spread:"Dutch and British colonial powers established teak plantations across the tropics.",uses:"Shipbuilding, furniture, flooring, outdoor construction, and carving.",cultural:"Teak-built ships carried trade goods across the Indian Ocean for millennia.",science:"Natural oils in teak wood resist water, fungus, and termites.",ecology:"Old-growth teak forests are critically endangered due to overharvesting.",economics:"Myanmar was historically the top producer; plantations now dominate supply.",medicine:"Teak leaf extract is used in traditional medicine for wound healing.",mythology:"In Hindu tradition, teak is associated with Vishwakarma, the divine architect.",cuisine:"Not consumed, but teak leaves are used to wrap and steam food in India.",genetics:"Diploid with 36 chromosomes, relatively small genome for a tree."}},
-{id:"soybean",n:"Soybean",s:-3000,e:2025,lon:117,lat:36,x:740,y:210,col:"#a8b860",sz:1.1,region:"Northern China",family:"Fabaceae",type:"Legume",d:{overview:"The world's most important legume, providing protein for humans and livestock.",cultivation:"Domesticated in northern China around 3000 BCE.",spread:"Reached Southeast Asia by the 1st century CE and the Americas by the 1800s.",uses:"Tofu, soy sauce, edamame, oil, animal feed, and biodiesel.",cultural:"Considered one of the five sacred grains in ancient Chinese culture.",science:"Nitrogen fixation by soybean root nodules enriches soil naturally.",ecology:"Amazon deforestation is driven partly by soybean cultivation expansion.",economics:"US and Brazil are top producers, together over 60 percent of global supply.",medicine:"Soy isoflavones are studied for benefits in menopause symptom relief.",mythology:"Chinese legend attributes soybean cultivation to the mythical emperor Shennong.",cuisine:"Tofu, tempeh, miso, soy sauce, edamame, and soy milk.",genetics:"Diploid with 40 chromosomes, genome fully sequenced in 2010."}},
-{id:"lentil",n:"Lentil",s:-8000,e:2025,lon:37,lat:37,x:558,y:208,col:"#8a6030",sz:0.8,region:"Fertile Crescent",family:"Fabaceae",type:"Legume",d:{overview:"One of the oldest cultivated crops, providing protein to civilisations for 10000 years.",cultivation:"Domesticated alongside wheat and barley in the Fertile Crescent around 8000 BCE.",spread:"Reached the Indus Valley by 2500 BCE and was eaten by Egyptian pyramid builders.",uses:"Food, animal feed, and soil-improving rotation crop.",cultural:"Esau sold his birthright for a bowl of lentil stew in the Bible.",science:"Lentils fix atmospheric nitrogen, reducing the need for synthetic fertiliser.",ecology:"Low water footprint compared to animal protein sources.",economics:"Canada and India are the world's top producers and consumers.",medicine:"Rich in folate, iron, and fibre, supporting cardiovascular health.",mythology:"Biblical story of Esau and Jacob centres on a pot of red lentil soup.",cuisine:"Indian dal, Egyptian koshari, French lentil salad, and Middle Eastern soups.",genetics:"Diploid with 14 chromosomes and a 4 Gb genome."}},
-{id:"ginger",n:"Ginger",s:-3000,e:2025,lon:90,lat:23,x:660,y:240,col:"#c0a040",sz:0.8,region:"Southeast Asia",family:"Zingiberaceae",type:"Spice",d:{overview:"Pungent tropical rhizome traded across Asia for over 5000 years.",cultivation:"Cultivated in South and Southeast Asia from around 3000 BCE.",spread:"Reached the Mediterranean by the 1st century CE via the spice trade.",uses:"Cooking spice, candied ginger, beverages, and traditional medicine.",cultural:"One of the first Asian spices to reach Europe via the Roman Empire.",science:"Gingerols and shogaols give ginger its heat and anti-nausea properties.",ecology:"Tropical understory plant requiring shade, warmth, and high humidity.",economics:"India produces over 40 percent of the global ginger supply.",medicine:"Clinically proven to reduce nausea from chemotherapy and morning sickness.",mythology:"Confucius reportedly ate ginger with every meal for health.",cuisine:"Sushi gari, ginger beer, stir-fries, chai, and gingerbread.",genetics:"Diploid with 22 chromosomes, genome rich in terpene synthase genes."}}
-];
+      <!-- Connection lines -->
+      <g id="conn-layer"></g>
+      <!-- Thread paths -->
+      <g id="thread-layer"></g>
+      <!-- Labels -->
+      <g id="label-layer" pointer-events="none"></g>
+      <!-- Plant markers -->
+      <g id="mark-layer"></g>
+      <!-- Labels overlay -->
+      <g id="label-layer" pointer-events="none"></g>
+    </svg>
+    <div class="hint" id="map-hint">
+      <span id="map-hint-text">TAP A PLANT &middot; PINCH TO ZOOM &middot; DRAG TO PAN</span>
+      <button id="map-reset-btn" onclick="resetMapZoom()" style="display:none;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--amber-b);background:none;border:1px solid var(--bdr);padding:2px 8px;border-radius:10px;cursor:pointer;margin-left:10px;white-space:nowrap">&#8857; RESET ZOOM</button>
+    </div>
+  </div>
+  <div class="tl-wrap" role="navigation" aria-label="Timeline">
+  <svg id="density-bar" aria-label="Plant density over time"></svg>
+  <div class="tl-lbls">
+    <span class="tl-lbl">10000 BCE</span>
+    <span class="tl-lbl">5000 BCE</span>
+    <span class="tl-lbl">3000 BCE</span>
+    <span class="tl-lbl">1000 BCE</span>
+    <span class="tl-lbl">1 CE</span>
+    <span class="tl-lbl">1000 CE</span>
+    <span class="tl-lbl">2024 CE</span>
+  </div>
+  <div class="tl-trk">
+    <div class="tl-fill" id="tl-fill"></div>
+    <div class="tl-thumb" id="tl-thumb"></div>
+    <input type="range" class="tl-range" id="tl" min="0" max="1000" value="0" step="1" aria-label="Timeline year" aria-valuemin="-10000" aria-valuemax="2024" aria-valuenow="-10000">
+  </div>
+</div>
+  </div><!-- /map-tl-col -->
 
-const CONNECTIONS=[
-  {from:"wheat",to:"barley",label:"Co-domesticated cereals"},
-  {from:"maize",to:"chili",label:"Mesoamerican companion crops"},
-  {from:"maize",to:"potato",label:"New World staples"},
-  {from:"tea",to:"coffee",label:"Global caffeinated beverages"},
-  {from:"sugarcane",to:"cotton",label:"Plantation economy crops"},
-  {from:"pepper_black",to:"cinnamon",label:"Indian spice trade"},
-  {from:"grape",to:"olive",label:"Mediterranean triad"},
-  {from:"rice",to:"tea",label:"East Asian staples"},
-  {from:"rubber",to:"cinchona",label:"Amazonian exports"},
-  {from:"tomato",to:"chili",label:"Solanaceae companions"},
-  {from:"soybean",to:"rice",label:"Asian protein-grain pair"},
-  {from:"cacao",to:"vanilla",label:"Mesoamerican flavours"},
-  {from:"hemp",to:"cotton",label:"Ancient fibre crops"},
-  {from:"wheat",to:"lentil",label:"Fertile Crescent package"},
-  {from:"banana",to:"coconut",label:"Tropical staple pair"}
-];
-
-const TRANSMISSIONS=[
-  {id:"t1",n:"Columbian Exchange",plants:["maize","potato","tomato","chili","cacao","vanilla","tobacco","rubber","sunflower","peanut"],era:1492,desc:"Transfer of crops between Old and New Worlds after 1492."},
-  {id:"t2",n:"Silk Road Agriculture",plants:["wheat","grape","apple","saffron","rice"],era:-200,desc:"Agricultural knowledge and crops spread along Silk Road trade routes."},
-  {id:"t3",n:"Spice Trade",plants:["pepper_black","cinnamon","ginger"],era:-100,desc:"Maritime spice routes connecting India and Southeast Asia to the Mediterranean."},
-  {id:"t4",n:"Arab Agricultural Revolution",plants:["sugarcane","rice","cotton","banana"],era:700,desc:"Arabs introduced tropical crops across the Mediterranean from the 8th to 13th century."},
-  {id:"t5",n:"Neolithic Package",plants:["wheat","barley","lentil","fig"],era:-8000,desc:"Core crops of the Near Eastern agricultural revolution."},
-  {id:"t6",n:"Plantation Complex",plants:["sugarcane","cotton","tobacco","coffee","rubber"],era:1500,desc:"Tropical cash crops cultivated with enslaved labour in colonial plantations."},
-  {id:"t7",n:"Green Revolution",plants:["wheat","rice","maize"],era:1960,desc:"High-yield crop varieties transformed developing world agriculture."},
-  {id:"t8",n:"African Crops",plants:["sorghum","millet","coffee"],era:-3000,desc:"Independent crop domestication centres across the African continent."},
-  {id:"t9",n:"Pacific Canoe Plants",plants:["coconut","banana","bamboo"],era:-1500,desc:"Crops carried by Polynesian voyagers across the Pacific Ocean."},
-  {id:"t10",n:"Medicinal Plant Trade",plants:["opium","aloe","cinchona","ginger","willow"],era:-1000,desc:"Ancient trade networks for healing plants across Eurasia."}
-];
-
-
-/* ============================================================
-   PHASE 3 — CORE JAVASCRIPT
-   ============================================================ */
-
-/* --- State --- */
-let curYear=-10000, selPlant=null, curLens=["overview"], curMode="explore";
-let compareA=null,compareB=null;
-let zoomK=1,panX=0,panY=0;
-let playing=false, playTimer=null;
-let lensOpen=false, burgerOpen=false;
-
-/* --- Utility --- */
-function fmt(y){
-  if(y<=0)return Math.abs(y).toLocaleString()+' BCE';
-  return y+' CE';
-}
-function eraName(y){
-  let name=ERAS[0].n;
-  for(let i=ERAS.length-1;i>=0;i--){if(y>=ERAS[i].y){name=ERAS[i].n;break;}}
-  return name;
-}
-function active(p){return p.s<=curYear&&p.e>=curYear;}
-
-/* --- Projection support --- */
-function plantPt(p){
-  if(!p)return[500,260];
-  if(window._proj&&typeof p.lon==='number'&&typeof p.lat==='number'){
-    try{const pt=window._proj([p.lon,p.lat]);if(pt&&isFinite(pt[0]))return pt;}catch(e){}
-  }
-  return[p.x||500,p.y||260];
-}
-
-/* --- Timeline mapping --- */
-function sliderToYear(v){
-  let t=v/1000;
-  // Non-linear: first 50% covers -10000 to 0, next 50% covers 0 to 2025
-  if(t<=0.5){return Math.round(-10000+t*2*10000);}
-  return Math.round((t-0.5)*2*2025);
-}
-function yearToSlider(y){
-  if(y<=0)return((y+10000)/20000)*1000;
-  return 500+(y/2025)*500;
-}
-function setYear(y){
-  curYear=y;
-  document.getElementById('timeline-slider').value=yearToSlider(y);
-  document.getElementById('year-display').textContent=fmt(y);
-  document.getElementById('era-display').textContent=eraName(y);
-  renderMap();
-  if(selPlant)renderDrawerContent();
-}
-function onSliderInput(v){setYear(sliderToYear(Number(v)));}
-
-/* --- Play/Pause --- */
-function togglePlay(){
-  playing=!playing;
-  document.getElementById('play-btn').innerHTML=playing?'&#9646;&#9646;':'&#9654;';
-  if(playing){
-    playTimer=setInterval(()=>{
-      let next=curYear+50;
-      if(next>2025){next=-10000;playing=false;document.getElementById('play-btn').innerHTML='&#9654;';clearInterval(playTimer);}
-      setYear(next);
-    },80);
-  }else{clearInterval(playTimer);}
-}
-
-/* --- Render World Map (D3 + TopoJSON) --- */
-function renderWorldMap(world){
-  const proj=d3.geoMercator().scale(158).translate([500,300]);
-  window._proj=proj;
-  const pathGen=d3.geoPath().projection(proj);
-  const land=topojson.feature(world,world.objects.land);
-  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
-  const grat=d3.geoGraticule()();
-  document.getElementById('map-layer').innerHTML=
-    `<path d="${pathGen(grat)||''}" fill="none" stroke="var(--bdr2)" stroke-width=".3"/>`+
-    `<path d="${pathGen(land)||''}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>`+
-    `<path d="${pathGen(borders)||''}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
-}
-
-/* --- Render Map Markers, Connections, Transmissions --- */
-function renderMap(){
-  const mg=document.getElementById('markers');
-  const cg=document.getElementById('connections');
-  const tg=document.getElementById('transmissions');
-  let mh='',ch='',th='';
-
-  PLANTS.forEach(p=>{
-    const pt=plantPt(p);
-    const act=active(p);
-    const sel=selPlant&&selPlant.id===p.id;
-    const r=(p.sz||1)*5;
-    const cls='plant-marker'+(act?'':' inactive')+(sel?' selected':'');
-    mh+=`<g class="${cls}" transform="translate(${pt[0]},${pt[1]})" onclick="plantClick('${p.id}')"
-          onmouseenter="showTip(event,'${p.n}')" onmouseleave="hideTip()">`;
-    if(act)mh+=`<circle class="pulse-ring" cx="0" cy="0" r="${r}" stroke="${p.col}"/>`;
-    if(sel)mh+=`<circle cx="0" cy="0" r="${r+4}" fill="none" stroke="${p.col}" stroke-width="1.5" filter="url(#glow)"/>`;
-    mh+=`<circle class="marker-circle" cx="0" cy="0" r="${r}" fill="${p.col}" fill-opacity="${act?0.85:0.2}"/>`;
-    mh+=`<text class="marker-label" y="${r+10}">${p.n}</text>`;
-    mh+=`</g>`;
-  });
-
-  if(curMode==='explore'||curMode==='threads'){
-    CONNECTIONS.forEach(c=>{
-      const a=PLANTS.find(p=>p.id===c.from), b=PLANTS.find(p=>p.id===c.to);
-      if(!a||!b)return;
-      const pa=plantPt(a),pb=plantPt(b);
-      const hi=selPlant&&(selPlant.id===c.from||selPlant.id===c.to);
-      const vis=active(a)&&active(b);
-      if(vis)ch+=`<line class="connection-line${hi?' highlight':''}" x1="${pa[0]}" y1="${pa[1]}" x2="${pb[0]}" y2="${pb[1]}"/>`;
-    });
-  }
-
-  if(curMode==='threads'){
-    TRANSMISSIONS.forEach(tr=>{
-      if(curYear<tr.era)return;
-      const pts=tr.plants.map(id=>PLANTS.find(p=>p.id===id)).filter(Boolean).map(plantPt);
-      if(pts.length<2)return;
-      let d='M'+pts[0][0]+','+pts[0][1];
-      for(let i=1;i<pts.length;i++)d+='L'+pts[i][0]+','+pts[i][1];
-      th+=`<path class="transmission-path visible" d="${d}" data-name="${tr.n}"/>`;
-    });
-  }
-
-  mg.innerHTML=mh;
-  cg.innerHTML=ch;
-  tg.innerHTML=th;
-}
-
-/* --- Density Bar (sparkline) --- */
-function renderDensityBar(){
-  const c=document.getElementById('density-bar');
-  const ctx=c.getContext('2d');
-  const W=c.offsetWidth||c.width, H=c.offsetHeight||c.height;
-  c.width=W;c.height=H;
-  const bins=100;
-  const counts=new Array(bins).fill(0);
-  PLANTS.forEach(p=>{
-    const s=Math.max(0,Math.floor(yearToSlider(p.s)/1000*bins));
-    const e=Math.min(bins-1,Math.floor(yearToSlider(p.e)/1000*bins));
-    for(let i=s;i<=e;i++)counts[i]++;
-  });
-  const mx=Math.max(...counts,1);
-  const style=getComputedStyle(document.documentElement);
-  const accentColor=style.getPropertyValue('--accent').trim()||'#4a9e3f';
-  ctx.clearRect(0,0,W,H);
-  const bw=W/bins;
-  for(let i=0;i<bins;i++){
-    const h=(counts[i]/mx)*H;
-    ctx.fillStyle=accentColor;
-    ctx.globalAlpha=0.35;
-    ctx.fillRect(i*bw,H-h,bw-0.5,h);
-  }
-  ctx.globalAlpha=1;
-}
-
-/* --- Plant Click / Selection --- */
-function plantClick(id){
-  const p=PLANTS.find(x=>x.id===id);
-  if(!p)return;
-  if(curMode==='compare'){
-    if(!compareA){compareA=p;renderCompare();}
-    else if(!compareB){compareB=p;renderCompare();}
-    else{compareA=p;compareB=null;renderCompare();}
-    renderMap();return;
-  }
-  selPlant=p;
-  renderMap();
-  openDrawer(p);
-}
-function navigateToPlant(id){
-  const p=PLANTS.find(x=>x.id===id);
-  if(!p)return;
-  selPlant=p;
-  renderMap();
-  openDrawer(p);
-}
-
-/* --- Drawer --- */
-function openDrawer(p){
-  document.getElementById('drawer').classList.add('open');
-  document.getElementById('drawer-title').textContent=p.n;
-  document.getElementById('drawer-subtitle').textContent=p.family+' \u2022 '+p.type;
-  renderDrawerContent();
-}
-function closeDrawer(){
-  document.getElementById('drawer').classList.remove('open');
-  selPlant=null;
-  renderMap();
-}
-function renderDrawerContent(){
-  if(!selPlant)return;
-  const p=selPlant;
-  let h='';
-  // Meta
-  h+=`<div class="drawer-meta">
-    <div class="meta-item"><div class="meta-label">REGION</div><div class="meta-value">${p.region}</div></div>
-    <div class="meta-item"><div class="meta-label">TYPE</div><div class="meta-value">${p.type}</div></div>
-    <div class="meta-item"><div class="meta-label">DOMESTICATED</div><div class="meta-value">${fmt(p.s)}</div></div>
-    <div class="meta-item"><div class="meta-label">FAMILY</div><div class="meta-value">${p.family}</div></div>
-  </div>`;
-  // Lens content
-  const lensMap={
-    overview:'overview',cultivation:'cultivation',spread:'spread',uses:'uses',
-    cultural:'cultural',science:'science',ecology:'ecology',economics:'economics',
-    medicine:'medicine',mythology:'mythology',cuisine:'cuisine',genetics:'genetics'
-  };
-  curLens.forEach(lid=>{
-    const lens=LENSES.find(l=>l.id===lid);
-    if(!lens)return;
-    const key=lensMap[lid]||'overview';
-    const txt=p.d[key]||'No data available for this lens.';
-    h+=`<div class="drawer-section fade-in">
-      <div class="drawer-section-title">${lens.ico} ${lens.n}</div>
-      <div class="drawer-section-body">${txt}</div>
-    </div>`;
-  });
-  // Related connections
-  const related=CONNECTIONS.filter(c=>c.from===p.id||c.to===p.id);
-  if(related.length){
-    h+=`<div class="drawer-section"><div class="drawer-section-title">\ud83d\udd17 Connections</div><div class="drawer-section-body">`;
-    related.forEach(c=>{
-      const otherId=c.from===p.id?c.to:c.from;
-      const other=PLANTS.find(x=>x.id===otherId);
-      if(other)h+=`<div style="cursor:pointer;padding:4px 0;color:var(--accent)" onclick="navigateToPlant('${otherId}')">\u2192 ${other.n} &mdash; ${c.label}</div>`;
-    });
-    h+=`</div></div>`;
-  }
-  // Transmissions
-  const chains=TRANSMISSIONS.filter(t=>t.plants.includes(p.id));
-  if(chains.length){
-    h+=`<div class="drawer-section"><div class="drawer-section-title">\ud83c\udf10 Trade Routes & Exchanges</div><div class="drawer-section-body">`;
-    chains.forEach(t=>{
-      h+=`<div style="padding:4px 0"><strong>${t.n}</strong> (${fmt(t.era)}): ${t.desc}</div>`;
-    });
-    h+=`</div></div>`;
-  }
-  document.getElementById('drawer-content').innerHTML=h;
-}
-
-/* --- Lens Dropdown --- */
-function renderLensDD(){
-  let h='';
-  LENSES.forEach(l=>{
-    const act=curLens.includes(l.id)?'active':'';
-    h+=`<div class="lens-item ${act}" role="option" onclick="toggleLens('${l.id}')">
-      <span class="ico">${l.ico}</span>${l.n}</div>`;
-  });
-  document.getElementById('lens-dd').innerHTML=h;
-}
-function toggleLensDD(){
-  lensOpen=!lensOpen;
-  document.getElementById('lens-dd').classList.toggle('open',lensOpen);
-  document.getElementById('lens-btn').setAttribute('aria-expanded',lensOpen);
-  if(lensOpen)renderLensDD();
-}
-function toggleLens(id){
-  const idx=curLens.indexOf(id);
-  if(idx>=0&&curLens.length>1)curLens.splice(idx,1);
-  else if(idx<0)curLens.push(id);
-  // Update button label
-  const primary=LENSES.find(l=>l.id===curLens[0]);
-  if(primary){
-    document.getElementById('lens-ico').textContent=primary.ico;
-    document.getElementById('lens-name').textContent=primary.n+(curLens.length>1?' +'+( curLens.length-1):'');
-  }
-  renderLensDD();
-  if(selPlant)renderDrawerContent();
-}
-
-/* --- Mode Switching --- */
-function setMode(m){
-  curMode=m;
-  document.querySelectorAll('.mode-btn').forEach(b=>{
-    b.classList.toggle('active',b.dataset.mode===m);
-  });
-  document.getElementById('compare-panel').classList.toggle('open',m==='compare');
-  if(m!=='compare'){document.getElementById('drawer').classList.remove('open');}
-  if(m==='compare'){compareA=null;compareB=null;renderCompare();}
-  renderMap();
-}
-
-/* --- Compare Mode --- */
-function renderCompare(){
-  const pa=document.getElementById('compare-a');
-  const pb=document.getElementById('compare-b');
-  pa.innerHTML=compareA?buildCompareCol(compareA):'<p style="color:var(--txt-dim);padding:20px">Click a plant on the map to compare.</p>';
-  pb.innerHTML=compareB?buildCompareCol(compareB):'<p style="color:var(--txt-dim);padding:20px">Click a second plant to compare.</p>';
-  document.getElementById('compare-panel').classList.add('open');
-}
-function buildCompareCol(p){
-  let h=`<h3>${p.n}</h3>`;
-  h+=`<div class="meta-item" style="margin-bottom:8px"><div class="meta-label">REGION</div><div class="meta-value">${p.region} (${fmt(p.s)})</div></div>`;
-  h+=`<div class="meta-item" style="margin-bottom:8px"><div class="meta-label">FAMILY</div><div class="meta-value">${p.family} \u2022 ${p.type}</div></div>`;
-  const keys=['overview','cultivation','spread','uses','cultural','science','ecology','economics','medicine','mythology','cuisine','genetics'];
-  keys.forEach(k=>{
-    if(p.d[k])h+=`<div class="drawer-section"><div class="drawer-section-title">${k.toUpperCase()}</div><div class="drawer-section-body">${p.d[k]}</div></div>`;
-  });
-  return h;
-}
-
-/* --- Zoom & Pan --- */
-function applyTransform(){
-  const svg=document.getElementById('map-svg');
-  const inner=svg.querySelector('defs').nextElementSibling;
-  // Apply transform to all child groups
-  ['continents','map-layer','connections','transmissions','markers'].forEach(id=>{
-    const g=document.getElementById(id);
-    if(g)g.setAttribute('transform',`translate(${panX},${panY}) scale(${zoomK})`);
-  });
-}
-
-(function setupZoomPan(){
-  const mc=document.getElementById('map-container');
-  let dragging=false,lastX,lastY;
-
-  mc.addEventListener('wheel',e=>{
-    e.preventDefault();
-    const delta=e.deltaY>0?0.9:1.1;
-    const newK=Math.max(0.5,Math.min(8,zoomK*delta));
-    // Zoom toward mouse
-    const rect=mc.getBoundingClientRect();
-    const svg=document.getElementById('map-svg');
-    const svgRect=svg.getBoundingClientRect();
-    const mx=(e.clientX-svgRect.left)/svgRect.width*1000;
-    const my=(e.clientY-svgRect.top)/svgRect.height*520;
-    const ratio=newK/zoomK;
-    panX=mx-(mx-panX)*ratio;
-    panY=my-(my-panY)*ratio;
-    zoomK=newK;
-    applyTransform();
-  },{passive:false});
-
-  mc.addEventListener('pointerdown',e=>{
-    if(e.button!==0)return;
-    dragging=true;lastX=e.clientX;lastY=e.clientY;
-    mc.classList.add('dragging');
-    mc.setPointerCapture(e.pointerId);
-  });
-  mc.addEventListener('pointermove',e=>{
-    if(!dragging)return;
-    const svg=document.getElementById('map-svg');
-    const svgRect=svg.getBoundingClientRect();
-    const sx=1000/svgRect.width*zoomK;
-    const sy=520/svgRect.height*zoomK;
-    panX+=(e.clientX-lastX)/svgRect.width*1000;
-    panY+=(e.clientY-lastY)/svgRect.height*520;
-    lastX=e.clientX;lastY=e.clientY;
-    applyTransform();
-  });
-  mc.addEventListener('pointerup',e=>{
-    dragging=false;
-    mc.classList.remove('dragging');
-  });
-
-  // Touch pinch support
-  let lastDist=0;
-  mc.addEventListener('touchstart',e=>{
-    if(e.touches.length===2){
-      lastDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-    }
-  },{passive:true});
-  mc.addEventListener('touchmove',e=>{
-    if(e.touches.length===2){
-      const dist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
-      if(lastDist>0){
-        const ratio=dist/lastDist;
-        zoomK=Math.max(0.5,Math.min(8,zoomK*ratio));
-        applyTransform();
-      }
-      lastDist=dist;
-    }
-  },{passive:true});
-})();
-
-/* --- Tooltip --- */
-function showTip(e,text){
-  const tip=document.getElementById('tooltip');
-  tip.textContent=text;
-  tip.style.display='block';
-  tip.style.left=(e.clientX+12)+'px';
-  tip.style.top=(e.clientY-30)+'px';
-}
-function hideTip(){
-  document.getElementById('tooltip').style.display='none';
-}
-
-/* --- Theme --- */
-function applyTheme(){
-  const saved=localStorage.getItem('flora-theme');
-  if(saved)document.documentElement.setAttribute('data-theme',saved);
-}
-function toggleTheme(){
-  const cur=document.documentElement.getAttribute('data-theme');
-  const next=cur==='light'?'dark':'light';
-  document.documentElement.setAttribute('data-theme',next);
-  localStorage.setItem('flora-theme',next);
-  setTimeout(()=>{renderDensityBar();},100);
-}
-
-/* --- Burger Menu --- */
-function toggleBurger(){
-  burgerOpen=!burgerOpen;
-  document.getElementById('burger-menu').classList.toggle('open',burgerOpen);
-  document.getElementById('burger-btn').setAttribute('aria-expanded',burgerOpen);
-}
-function closeBurger(){
-  burgerOpen=false;
-  document.getElementById('burger-menu').classList.remove('open');
-}
-
-/* --- About Modal --- */
-function showAbout(){
-  document.getElementById('about-overlay').classList.add('open');
-}
-function closeAbout(){
-  document.getElementById('about-overlay').classList.remove('open');
-}
-
-/* --- Init --- */
-function init(){
-  applyTheme();
-  setYear(-10000);
-  renderDensityBar();
-  renderLensDD();
-
-  // Fetch TopoJSON world map
-  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-    .then(r=>r.json()).then(world=>{renderWorldMap(world);renderMap();})
-    .catch(()=>console.warn('Map data unavailable'));
-
-  // Close dropdowns on outside click
-  document.addEventListener('click',e=>{
-    if(lensOpen&&!e.target.closest('#lens-container')){
-      lensOpen=false;
-      document.getElementById('lens-dd').classList.remove('open');
-    }
-    if(burgerOpen&&!e.target.closest('#burger-menu')&&!e.target.closest('#burger-btn')){
-      closeBurger();
-    }
-  });
-
-  // Resize handler
-  window.addEventListener('resize',()=>{renderDensityBar();});
-
-  // Keyboard accessibility
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){
-      closeAbout();closeBurger();closeDrawer();
-      if(lensOpen){lensOpen=false;document.getElementById('lens-dd').classList.remove('open');}
-    }
-    if(e.key==='ArrowLeft'){setYear(Math.max(-10000,curYear-100));}
-    if(e.key==='ArrowRight'){setYear(Math.min(2025,curYear+100));}
-    if(e.key===' '&&document.activeElement===document.body){e.preventDefault();togglePlay();}
-    if(e.key==='t'&&!e.ctrlKey&&!e.metaKey&&document.activeElement===document.body)toggleTheme();
-  });
-}
-
-init();
-
-</script>
-</body>
-</html>
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Plant details">
+    <div id="drawer-top"></div>
+    <div id="drawer-content"></div>
+  </div>
+  <button class="mob-map-btn hidden" id="mob-map-btn" onclick="closeMobileSheet()">&#9678; Map</button>
+</div>
