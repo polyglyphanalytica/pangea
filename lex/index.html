@@ -76,6 +76,8 @@
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --header-h: 54px;
   --timeline-h: 64px;
+  --ocean-start:#0a1628;--ocean-end:#061020;
+  --land:#2a4a18;--land-s:#3a6020;
 }
 
 /* --- Light Theme --- */
@@ -92,6 +94,8 @@
   --glass-border: rgba(26,90,140,0.2);
   --shadow: rgba(0,0,0,0.12);
   --glow: rgba(26,90,140,0.15);
+  --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
+  --land:#8ca860;--land-s:#7a9850;
 }
 
 @media (prefers-color-scheme: light) {
@@ -108,6 +112,8 @@
     --glass-border: rgba(26,90,140,0.2);
     --shadow: rgba(0,0,0,0.12);
     --glow: rgba(26,90,140,0.15);
+    --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
+    --land:#8ca860;--land-s:#7a9850;
   }
 }
 
@@ -460,11 +466,8 @@ main {
   display: block;
 }
 
-/* Continent paths */
-.continent {
-  fill: var(--panel);
-  stroke: var(--border);
-  stroke-width: 0.5;
+/* Land paths (D3/TopoJSON) */
+#land-path {
   transition: fill var(--transition);
 }
 
@@ -1137,7 +1140,7 @@ button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible
             <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
         </defs>
-        <g id="continents"></g>
+        <g id="map-layer"></g>
         <g id="connections"></g>
         <g id="markers"></g>
       </svg>
@@ -1253,6 +1256,8 @@ button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script>
 /* ======================================================
    LEX — CORE JAVASCRIPT
@@ -2112,55 +2117,33 @@ function togglePlay() {
 /* ======================================================
    WORLD MAP — simplified continent outlines
    ====================================================== */
-function renderWorldMap() {
-  const g = document.getElementById("continents");
-  g.innerHTML = "";
+function renderWorldMap(world){
+  const W=1000,H=520;
+  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
+  window._proj=proj;
+  const pathGen=d3.geoPath().projection(proj);
+  const land=topojson.feature(world,world.objects.land);
+  const countries=topojson.feature(world,world.objects.countries);
+  let g=document.getElementById('map-layer');
+  const graticule=d3.geoGraticule()();
+  const gratPath=pathGen(graticule)||'';
+  const landPath=pathGen(land)||'';
+  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
+  const borderPath=pathGen(borders)||'';
+  g.innerHTML=
+    `<path d="${gratPath}" fill="none" stroke="var(--border)" stroke-width=".3"/>` +
+    `<path id="land-path" d="${landPath}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>` +
+    `<path d="${borderPath}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
+}
 
-  const continents = [
-    /* North America */
-    {d:"M 80 90 L 120 70 L 180 65 L 220 80 L 260 90 L 270 110 L 280 130 L 275 150 L 260 165 L 255 180 L 260 200 L 250 215 L 235 220 L 230 240 L 220 250 L 200 245 L 185 235 L 170 220 L 155 200 L 140 185 L 130 170 L 115 155 L 100 145 L 90 130 L 80 115 Z"},
-    /* South America */
-    {d:"M 230 270 L 250 265 L 270 275 L 290 285 L 300 310 L 310 330 L 315 355 L 310 380 L 300 400 L 290 415 L 280 430 L 270 440 L 260 445 L 255 435 L 250 420 L 245 400 L 240 380 L 235 360 L 230 340 L 225 320 L 222 300 L 225 280 Z"},
-    /* Europe */
-    {d:"M 420 75 L 440 70 L 460 68 L 480 72 L 500 80 L 510 85 L 510 100 L 505 115 L 500 125 L 495 140 L 490 150 L 480 155 L 470 160 L 460 170 L 450 175 L 440 180 L 430 178 L 420 172 L 415 160 L 418 145 L 420 130 L 425 115 L 425 100 L 422 85 Z"},
-    /* Africa */
-    {d:"M 430 195 L 450 185 L 470 185 L 490 190 L 510 200 L 530 210 L 545 225 L 548 245 L 545 265 L 540 285 L 535 305 L 525 325 L 515 345 L 505 365 L 495 380 L 485 395 L 475 405 L 465 410 L 455 405 L 450 390 L 448 370 L 445 350 L 440 330 L 435 310 L 430 290 L 425 270 L 420 250 L 418 230 L 420 210 Z"},
-    /* Asia */
-    {d:"M 510 60 L 550 55 L 590 50 L 640 55 L 690 60 L 730 70 L 760 80 L 790 90 L 810 105 L 815 120 L 810 140 L 800 155 L 785 170 L 770 185 L 755 195 L 740 205 L 720 215 L 700 220 L 680 225 L 660 230 L 640 235 L 620 240 L 600 245 L 580 240 L 560 230 L 545 215 L 535 200 L 525 185 L 515 170 L 510 155 L 508 140 L 510 120 L 512 100 L 510 80 Z"},
-    /* Oceania / Australia */
-    {d:"M 760 350 L 780 340 L 810 335 L 840 340 L 860 350 L 870 365 L 870 385 L 860 400 L 845 410 L 825 415 L 800 410 L 780 400 L 765 385 L 758 370 Z"},
-    /* Antarctica hint */
-    {d:"M 200 500 L 350 495 L 500 498 L 650 495 L 800 500 L 800 520 L 200 520 Z"}
-  ];
-
-  continents.forEach(c => {
-    const path = document.createElementNS("http://www.w3.org/2000/svg","path");
-    path.setAttribute("d", c.d);
-    path.setAttribute("class","continent");
-    g.appendChild(path);
-  });
-
-  /* Graticule lines */
-  const gratG = document.createElementNS("http://www.w3.org/2000/svg","g");
-  gratG.setAttribute("opacity","0.08");
-  gratG.setAttribute("stroke","var(--muted)");
-  gratG.setAttribute("stroke-width","0.3");
-  gratG.setAttribute("fill","none");
-  /* Horizontal lines (latitudes) */
-  for (let y = 65; y <= 500; y += 65) {
-    const line = document.createElementNS("http://www.w3.org/2000/svg","line");
-    line.setAttribute("x1","0"); line.setAttribute("y1",y);
-    line.setAttribute("x2","1000"); line.setAttribute("y2",y);
-    gratG.appendChild(line);
+function lexPt(item){
+  if(!item)return[500,260];
+  if(!window._proj)return[item.x||500,item.y||260];
+  if(typeof item.lon==='number'&&typeof item.lat==='number'){
+    try{const pt=window._proj([item.lon,item.lat]);return pt&&isFinite(pt[0])&&isFinite(pt[1])?pt:[item.x||500,item.y||260];}
+    catch(e){return[item.x||500,item.y||260];}
   }
-  /* Vertical lines (longitudes) */
-  for (let x = 100; x <= 900; x += 100) {
-    const line = document.createElementNS("http://www.w3.org/2000/svg","line");
-    line.setAttribute("x1",x); line.setAttribute("y1","0");
-    line.setAttribute("x2",x); line.setAttribute("y2","520");
-    gratG.appendChild(line);
-  }
-  g.insertBefore(gratG, g.firstChild);
+  return[item.x||500,item.y||260];
 }
 
 /* ======================================================
@@ -2838,10 +2821,8 @@ document.addEventListener("keydown", (e) => {
    ====================================================== */
 function init() {
   applyTheme();
-  renderWorldMap();
   setYear(-1754);
   renderDensityBar();
-  renderMap();
 
   /* Reset view */
   currentLaw = null;
@@ -2850,6 +2831,15 @@ function init() {
 
   /* Set up zoom/pan */
   initZoomPan();
+
+  /* Fetch real world map */
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(r=>r.json())
+    .then(world=>{
+      renderWorldMap(world);
+      renderMap();
+    })
+    .catch(()=>console.warn('World map data unavailable'));
 }
 
 /* Handle resize */

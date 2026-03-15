@@ -60,6 +60,8 @@
   --font-display: 'Cinzel Decorative', 'Cinzel', serif;
   --font-heading: 'Cinzel', serif;
   --font-body: 'Crimson Pro', serif;
+  --ocean-start:#0a1628;--ocean-end:#061020;
+  --land:#2a4a18;--land-s:#3a6020;
 }
 
 /* ── Light Theme ─────────────────────────────────────────── */
@@ -75,6 +77,8 @@
   --muted: rgba(26, 18, 6, 0.5);
   --overlay: rgba(240, 235, 224, 0.9);
   --shadow: 0 4px 24px rgba(0,0,0,0.12);
+  --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
+  --land:#8ca860;--land-s:#7a9850;
 }
 
 @media (prefers-color-scheme: light) {
@@ -90,6 +94,8 @@
     --muted: rgba(26, 18, 6, 0.5);
     --overlay: rgba(240, 235, 224, 0.9);
     --shadow: 0 4px 24px rgba(0,0,0,0.12);
+    --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
+    --land:#8ca860;--land-s:#7a9850;
   }
 }
 
@@ -360,14 +366,9 @@ main {
 }
 
 /* ── SVG Map Styles ──────────────────────────────────────── */
-.land {
-  fill: rgba(232, 152, 32, 0.06);
-  stroke: rgba(232, 152, 32, 0.15);
-  stroke-width: 0.5;
-}
-[data-theme="light"] .land {
-  fill: rgba(74, 44, 0, 0.06);
-  stroke: rgba(74, 44, 0, 0.15);
+/* Land paths (D3/TopoJSON) */
+#land-path {
+  transition: fill 0.3s ease;
 }
 
 .war-marker {
@@ -825,8 +826,8 @@ main {
           <polygon points="0 0, 6 2, 0 4" fill="var(--accent)" opacity="0.6"/>
         </marker>
       </defs>
-      <!-- World map paths will be rendered here -->
-      <g id="landGroup"></g>
+      <!-- World map (D3/TopoJSON) -->
+      <g id="map-layer"></g>
       <!-- Connection lines -->
       <g id="connectionsGroup"></g>
       <!-- Transmission chains -->
@@ -886,6 +887,8 @@ main {
 <!-- ═══════════════════════════════════════════════════════
      SCRIPT
      ═══════════════════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════
    BELLUM — DATA CONSTANTS
@@ -1718,50 +1721,33 @@ function clamp(v, min, max) {
    SVG WORLD MAP (simplified continent outlines)
    ═══════════════════════════════════════════════════════════ */
 
-const WORLD_PATHS = [
-  // North America
-  "M 60 120 L 80 80 L 130 70 L 170 75 L 200 90 L 230 100 L 260 120 L 280 150 L 270 180 L 250 200 L 240 230 L 230 240 L 210 250 L 190 240 L 160 230 L 140 220 L 120 200 L 100 180 L 80 170 L 60 150 Z",
-  // Central America & Caribbean
-  "M 190 245 L 210 255 L 220 270 L 225 280 L 215 285 L 200 280 L 190 270 Z",
-  // South America
-  "M 230 285 L 260 280 L 290 290 L 310 310 L 320 340 L 315 370 L 300 400 L 280 430 L 270 440 L 265 430 L 260 400 L 250 380 L 240 350 L 235 330 L 230 310 Z",
-  // Europe
-  "M 410 80 L 430 75 L 460 80 L 490 90 L 510 100 L 520 110 L 510 130 L 500 150 L 490 165 L 475 170 L 460 175 L 445 180 L 435 190 L 425 195 L 415 190 L 410 180 L 405 160 L 400 140 L 405 120 L 410 100 Z",
-  // Africa
-  "M 420 220 L 450 210 L 480 215 L 510 225 L 540 240 L 550 260 L 555 290 L 550 320 L 540 350 L 525 375 L 510 390 L 495 380 L 485 360 L 480 340 L 475 310 L 460 290 L 445 270 L 430 250 L 420 235 Z",
-  // Middle East
-  "M 520 180 L 545 185 L 570 195 L 590 210 L 580 230 L 560 240 L 540 235 L 525 225 L 518 210 L 515 195 Z",
-  // Central Asia / Russia
-  "M 520 70 L 580 60 L 640 55 L 700 60 L 760 70 L 800 80 L 830 90 L 850 100 L 840 120 L 810 130 L 770 135 L 730 140 L 690 145 L 650 150 L 620 155 L 590 160 L 560 155 L 540 145 L 525 130 L 520 110 Z",
-  // South Asia (India)
-  "M 620 200 L 650 195 L 680 210 L 690 240 L 680 270 L 660 290 L 640 280 L 630 260 L 620 240 L 615 220 Z",
-  // Southeast Asia
-  "M 700 240 L 730 235 L 755 250 L 760 270 L 750 285 L 730 280 L 715 270 L 705 260 Z",
-  // East Asia (China/Japan/Korea)
-  "M 710 140 L 740 130 L 770 135 L 800 150 L 810 170 L 800 195 L 780 210 L 760 220 L 740 225 L 720 220 L 710 200 L 705 180 L 708 160 Z",
-  // Japan (islands)
-  "M 820 160 L 830 155 L 835 170 L 830 185 L 822 195 L 818 185 L 815 170 Z",
-  // Indonesia / Maritime SEA
-  "M 720 300 L 740 295 L 770 298 L 800 305 L 810 310 L 795 318 L 770 315 L 745 312 L 725 308 Z",
-  // Australia
-  "M 770 340 L 810 335 L 850 345 L 870 365 L 865 390 L 845 405 L 815 410 L 790 400 L 775 380 L 770 360 Z",
-  // New Zealand
-  "M 885 395 L 890 390 L 895 400 L 892 415 L 885 420 L 882 410 Z",
-  // Greenland
-  "M 280 40 L 310 35 L 340 40 L 350 55 L 340 70 L 315 75 L 290 65 L 280 50 Z",
-  // UK/Ireland
-  "M 415 105 L 425 100 L 430 110 L 430 125 L 425 130 L 418 125 L 415 115 Z"
-];
+function renderWorldMap(world){
+  const W=1000,H=520;
+  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
+  window._proj=proj;
+  const pathGen=d3.geoPath().projection(proj);
+  const land=topojson.feature(world,world.objects.land);
+  const countries=topojson.feature(world,world.objects.countries);
+  let g=document.getElementById('map-layer');
+  const graticule=d3.geoGraticule()();
+  const gratPath=pathGen(graticule)||'';
+  const landPath=pathGen(land)||'';
+  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
+  const borderPath=pathGen(borders)||'';
+  g.innerHTML=
+    `<path d="${gratPath}" fill="none" stroke="var(--border)" stroke-width=".3"/>` +
+    `<path id="land-path" d="${landPath}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>` +
+    `<path d="${borderPath}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
+}
 
-function renderWorldMap() {
-  const g = document.getElementById("landGroup");
-  g.innerHTML = "";
-  WORLD_PATHS.forEach(d => {
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("d", d);
-    path.setAttribute("class", "land");
-    g.appendChild(path);
-  });
+function bellPt(item){
+  if(!item)return[500,260];
+  if(!window._proj)return[item.x||500,item.y||260];
+  if(typeof item.lon==='number'&&typeof item.lat==='number'){
+    try{const pt=window._proj([item.lon,item.lat]);return pt&&isFinite(pt[0])&&isFinite(pt[1])?pt:[item.x||500,item.y||260];}
+    catch(e){return[item.x||500,item.y||260];}
+  }
+  return[item.x||500,item.y||260];
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2369,9 +2355,6 @@ function init() {
   if (savedTheme) state.theme = savedTheme;
   applyTheme();
 
-  // Render world map
-  renderWorldMap();
-
   // Render density bar
   renderDensityBar();
 
@@ -2381,8 +2364,14 @@ function init() {
   // Set initial year
   setYear(state.year);
 
-  // Render map
-  renderMap();
+  // Fetch real world map and render
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(r=>r.json())
+    .then(world=>{
+      renderWorldMap(world);
+      renderMap();
+    })
+    .catch(()=>console.warn('World map data unavailable'));
   renderDrawer();
 
   // ── Event Listeners ──
