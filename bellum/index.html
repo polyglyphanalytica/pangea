@@ -2,2538 +2,566 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Bellum — The Atlas of War &amp; Conflict</title>
-<meta name="description" content="Bellum — an interactive atlas of war and conflict throughout human history. Explore 50+ wars across 5,000 years of military history.">
-<meta name="keywords" content="war, conflict, atlas, military history, battles, interactive map">
-<link rel="canonical" href="https://polyglyphanalytica.github.io/pangea/bellum/">
-<!-- Open Graph -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bellum — The Atlas of War | 50 Conflicts, 5,000 Years of Warfare</title>
+
+<!-- Primary SEO -->
+<meta name="description" content="Explore 50 major wars and conflicts across 5,000 years of human history on an interactive world map. Navigate a continuous timeline from ancient Mesopotamia to the present day, with interpretive lenses, cultural transmissions, and What-If scenarios.">
+<meta name="keywords" content="world wars map, interactive history, conflicts, military history, timeline, war atlas, history education, battles, campaigns">
+<meta name="author" content="Polyglyph Analytica">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://polyglyphanalytica.github.io/bellum/">
+
+<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Bellum — The Atlas of War &amp; Conflict">
-<meta property="og:description" content="An interactive atlas of war and conflict throughout human history.">
-<meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/bellum/">
-<meta property="og:site_name" content="The Pangea Project">
-<!-- Twitter Card -->
+<meta property="og:url" content="https://polyglyphanalytica.github.io/bellum/">
+<meta property="og:title" content="Bellum — The Atlas of War">
+<meta property="og:description" content="50 conflicts. 5,000 years. Every war, siege, and revolution that reshaped the world — mapped, connected, and explorable.">
+<meta property="og:site_name" content="Bellum">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Bellum — The Atlas of War &amp; Conflict">
-<meta name="twitter:description" content="An interactive atlas of war and conflict throughout human history.">
-<!-- Schema.org -->
+<meta name="twitter:title" content="Bellum — The Atlas of War">
+<meta name="twitter:description" content="50 conflicts. 5,000 years. Every war, siege, and revolution that reshaped the world — mapped, connected, and explorable.">
+
+<!-- Structured Data -->
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Bellum — The Atlas of War & Conflict",
-  "description":"An interactive atlas of war and conflict throughout human history.",
-  "url":"https://polyglyphanalytica.github.io/pangea/bellum/",
-  "applicationCategory":"Education",
-  "operatingSystem":"Any",
-  "author":{"@type":"Organization","name":"The Pangea Project"}
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Bellum — The Atlas of War",
+  "description": "An interactive world history application exploring 50 major wars and conflicts across 5,000 years.",
+  "url": "https://polyglyphanalytica.github.io/bellum/",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web Browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "Polyglyph Analytica" }
 }
 </script>
-<!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>">
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
-<style>
-/* ═══════════════════════════════════════════════════════════
-   BELLUM — THE ATLAS OF WAR & CONFLICT
-   Design System & Layout
-   ═══════════════════════════════════════════════════════════ */
 
-/* ── CSS Custom Properties (Dark Theme Default) ─────────── */
-:root {
-  --bg: #02040a;
-  --panel: #070b12;
-  --amber: #e89820;
-  --txt: #f2e8d5;
-  --accent: #e8251a;
-  --accent-glow: rgba(232, 37, 26, 0.4);
-  --border: rgba(232, 152, 32, 0.15);
-  --border-hover: rgba(232, 152, 32, 0.35);
-  --muted: rgba(242, 232, 213, 0.5);
-  --overlay: rgba(2, 4, 10, 0.85);
-  --shadow: 0 4px 24px rgba(0,0,0,0.5);
-  --radius: 6px;
-  --transition: 0.3s ease;
-  --font-display: 'Cinzel Decorative', 'Cinzel', serif;
-  --font-heading: 'Cinzel', serif;
-  --font-body: 'Crimson Pro', serif;
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔</text></svg>">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── DARK THEME (default) ── */
+:root{
+  --bg:#02040a;
+  --panel:#070b12;
+  --panel2:#0c1018;
   --ocean-start:#0a1628;--ocean-end:#061020;
   --land:#2a4a18;--land-s:#3a6020;
+  --accent:#e8251a;--accent-b:#f04030;--accent-d:#3a0804;
+  --amber:#e89820;--amber-b:#f0b040;--amber-d:#3a2204;
+  --amber-x:rgba(232,37,26,0.14);--amber-xx:rgba(232,37,26,0.08);
+  --txt:#f2e8d5;--txt2:#e0d4b4;--txt3:#c8aa78;
+  --bdr:rgba(232,37,26,0.22);--bdr2:rgba(232,37,26,0.10);
+  --hint:rgba(224,212,180,0.65);
+  --tl-bg:rgba(2,4,10,0.99);
+  --hdr-bg:rgba(2,4,10,0.97);
+  --conn-bdr:rgba(232,37,26,0.10);
+  --shadow:rgba(0,0,0,0.6);
 }
 
-/* ── Light Theme ─────────────────────────────────────────── */
-[data-theme="light"] {
-  --bg: #f0ebe0;
-  --panel: #e8e0d0;
-  --amber: #4a2c00;
-  --txt: #1a1206;
-  --accent: #c41a0a;
-  --accent-glow: rgba(196, 26, 10, 0.25);
-  --border: rgba(74, 44, 0, 0.2);
-  --border-hover: rgba(74, 44, 0, 0.4);
-  --muted: rgba(26, 18, 6, 0.5);
-  --overlay: rgba(240, 235, 224, 0.9);
-  --shadow: 0 4px 24px rgba(0,0,0,0.12);
+/* ── LIGHT THEME ── */
+[data-theme="light"]{
+  --bg:#f0ebe0;
+  --panel:#e8e0d0;
+  --panel2:#ddd4c0;
   --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
   --land:#8ca860;--land-s:#7a9850;
+  --accent:#b01810;--accent-b:#c02018;--accent-d:#f0d8a0;
+  --amber:#4a2c00;--amber-b:#5a3800;--amber-d:#f0d8a0;
+  --amber-x:rgba(176,24,16,0.10);--amber-xx:rgba(176,24,16,0.06);
+  --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
+  --bdr:rgba(176,24,16,0.28);--bdr2:rgba(176,24,16,0.14);
+  --hint:rgba(30,18,6,0.6);
+  --tl-bg:rgba(236,228,214,0.99);
+  --hdr-bg:rgba(236,228,214,0.97);
+  --conn-bdr:rgba(176,24,16,0.12);
+  --shadow:rgba(0,0,0,0.18);
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #f0ebe0;
-    --panel: #e8e0d0;
-    --amber: #4a2c00;
-    --txt: #1a1206;
-    --accent: #c41a0a;
-    --accent-glow: rgba(196, 26, 10, 0.25);
-    --border: rgba(74, 44, 0, 0.2);
-    --border-hover: rgba(74, 44, 0, 0.4);
-    --muted: rgba(26, 18, 6, 0.5);
-    --overlay: rgba(240, 235, 224, 0.9);
-    --shadow: 0 4px 24px rgba(0,0,0,0.12);
+@media(prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#f0ebe0;--panel:#e8e0d0;--panel2:#ddd4c0;
     --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
     --land:#8ca860;--land-s:#7a9850;
+    --accent:#b01810;--accent-b:#c02018;--accent-d:#f0d8a0;
+    --amber:#4a2c00;--amber-b:#5a3800;--amber-d:#f0d8a0;
+    --amber-x:rgba(176,24,16,0.10);--amber-xx:rgba(176,24,16,0.06);
+    --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
+    --bdr:rgba(176,24,16,0.28);--bdr2:rgba(176,24,16,0.14);
+    --hint:rgba(30,18,6,0.6);
+    --tl-bg:rgba(236,228,214,0.99);
+    --hdr-bg:rgba(236,228,214,0.97);
+    --conn-bdr:rgba(176,24,16,0.12);
+    --shadow:rgba(0,0,0,0.18);
   }
 }
 
-/* ── Reset & Base ────────────────────────────────────────── */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif}
 
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-}
+/* ── HEADER ── */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--hdr-bg);gap:12px}
+.hdr-left{display:flex;align-items:baseline;gap:0;min-width:0}
+.logo-t{font-family:'Cinzel Decorative',serif;font-size:20px;font-weight:700;color:var(--accent);letter-spacing:3px;white-space:nowrap}
+.logo-s{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-left:10px;white-space:nowrap}
+.era-disp{text-align:center;font-family:'Cinzel',serif;flex-shrink:0}
+.era-y{font-size:22px;font-weight:600;color:var(--accent);letter-spacing:1px}
+.era-n{font-size:12px;letter-spacing:1.5px;color:var(--txt2);margin-top:1px;text-transform:uppercase;font-weight:600}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.cnt-disp{text-align:right;font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--txt3)}
+.cnt-n{font-size:22px;font-weight:600;color:var(--accent);display:block;line-height:1}
+.theme-btn{background:none;border:1px solid var(--bdr);padding:4px 8px;cursor:pointer;font-size:13px;color:var(--txt2);border-radius:3px;transition:all .15s;flex-shrink:0}
+.theme-btn:hover{background:var(--amber-x);color:var(--accent)}
 
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--txt);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
+/* ── MAIN LAYOUT ── */
+.main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
+.map-c{flex:1;position:relative;overflow:hidden;min-width:0;min-height:0}
+.map-tl-col{display:flex;flex-direction:column;flex:1;min-width:0}
+#wsvg{width:100%;height:100%}
 
-a { color: var(--amber); text-decoration: none; }
-a:hover { text-decoration: underline; }
+/* ── DESKTOP PANEL ── */
+.info-panel{width:320px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;padding:18px 18px 28px;position:relative}
+.info-close{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;line-height:1;padding:4px;float:right;margin:-2px -2px 0 0}
+.info-close:hover{color:var(--accent)}
+.info-nm{font-family:'Cinzel Decorative',serif;font-size:16px;font-weight:700;color:var(--accent);margin-bottom:3px;clear:both}
+.info-sb{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt2);text-transform:uppercase;margin-bottom:10px}
+.info-dates{display:flex;gap:6px;margin-bottom:14px;align-items:center}
+.info-dt{padding:5px 12px;border:1px solid var(--bdr);font-family:'Cinzel',serif;font-size:13.5px;color:var(--accent)}
+.info-arr{color:var(--txt2);font-size:12px}
 
-button {
-  font-family: var(--font-body);
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: var(--txt);
-  font-size: 1rem;
-}
+/* ── LENS DROPDOWN ── */
+.lens-dd-wrap{border:1px solid var(--bdr);margin-bottom:14px}
+.lens-dd-hdr{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;cursor:pointer;user-select:none;background:var(--amber-xx);border-bottom:1px solid transparent;transition:background .15s}
+.lens-dd-hdr:hover{background:var(--amber-x)}
+.lens-dd-hdr.open{border-bottom-color:var(--bdr)}
+.lens-dd-title{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2.5px;color:var(--txt2);text-transform:uppercase;flex-shrink:0}
+.lens-dd-summary{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.5px;color:var(--accent);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;padding:0 6px}
+.lens-dd-arrow{color:var(--txt2);font-size:10px;transition:transform .18s;flex-shrink:0}
+.lens-dd-arrow.open{transform:rotate(180deg)}
+.lens-dd-list{display:none;max-height:260px;overflow-y:auto}
+.lens-dd-list.open{display:block}
+.lens-row{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--bdr2);transition:background .15s}
+.lens-row:last-child{border-bottom:none}
+.lens-row:hover{background:var(--amber-x)}
+.lens-row-chk{width:13px;height:13px;border:1px solid var(--bdr);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--accent);line-height:1}
+.lens-row-chk.on{background:var(--amber-x);border-color:var(--accent)}
+.lens-row-ico{font-size:14px;width:16px;text-align:center;flex-shrink:0;color:var(--txt2)}
+.lens-row-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.5px;color:var(--txt2)}
+.lens-row.on .lens-row-lbl{color:var(--accent);font-weight:600}
+.lens-row-sep{border-bottom:1px solid var(--bdr);margin-bottom:2px}
+.lens-dd-close-btn{text-align:center;padding:10px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:var(--accent);border-top:1px solid var(--bdr);cursor:pointer;text-transform:uppercase;transition:background .15s}
+.lens-dd-close-btn:hover{background:var(--amber-x)}
 
-/* ── Skip Link ───────────────────────────────────────────── */
-.skip-link {
-  position: absolute;
-  top: -100%;
-  left: 1rem;
-  background: var(--accent);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius);
-  z-index: 9999;
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-}
-.skip-link:focus {
-  top: 0.5rem;
-}
+/* ── DRAWER CONTENT ── */
+.lens-section{margin-bottom:18px}
+.lens-section-hdr{display:flex;align-items:center;gap:7px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--bdr)}
+.lens-section-ico{font-size:12px;color:var(--txt2)}
+.lens-section-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--accent);text-transform:uppercase;font-weight:600}
+.info-div{border:none;border-top:1px solid var(--bdr);margin:12px 0}
+.info-txt{font-size:17.5px;line-height:1.95;color:var(--txt);font-style:italic}
+.overview-arc{font-size:17.5px;line-height:1.95;color:var(--txt)}
+.overview-arc p{margin-bottom:14px}
+.civ-span-bar{height:3px;background:var(--bdr2);position:relative;margin:14px 0 6px;border-radius:2px}
+.civ-span-fill{position:absolute;top:0;height:100%;background:var(--accent);border-radius:2px;opacity:.8}
+.civ-span-lbls{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--txt3)}
+.conn-hdr{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin:18px 0 8px;font-weight:600}
+.conn-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--conn-bdr);font-size:16px;color:var(--txt2);cursor:pointer;transition:color .15s}
+.conn-item:hover{color:var(--accent)}
+.conn-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 
-/* ── Focus Visible ───────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--amber);
-  outline-offset: 2px;
-}
+/* ── TIMELINE ── */
+.tl-wrap{position:relative;height:88px;background:var(--tl-bg);border-top:1px solid var(--bdr);padding:8px 20px 14px;flex-shrink:0}
+.tl-lbls{display:flex;justify-content:space-between;margin-bottom:5px}
+.tl-lbl{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.8px;color:var(--txt3);text-transform:uppercase;font-weight:600}
+.tl-trk{position:relative;height:5px;background:var(--bdr);border-radius:3px}
+.tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--accent);border-radius:3px;pointer-events:none;opacity:.7}
+.tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--accent);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--accent),0 0 20px rgba(232,37,26,.3);pointer-events:none;transition:left .04s linear}
+input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0;cursor:pointer;transform:translateY(-50%);margin:0;z-index:2}
+.hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--hint);display:flex;align-items:center;justify-content:center;padding:0 8px;white-space:nowrap;overflow:hidden}
+#map-hint-text{pointer-events:none;overflow:hidden;text-overflow:ellipsis}
 
-/* ── Header ──────────────────────────────────────────────── */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem 1.2rem;
-  background: var(--panel);
-  border-bottom: 1px solid var(--border);
-  z-index: 100;
-  flex-shrink: 0;
-  min-height: 52px;
-}
+/* ── MOB MAP BUTTON ── */
+.mob-map-btn{display:none}
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.logo {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 900;
-  color: var(--accent);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  user-select: none;
-}
-
-.subtitle {
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  color: var(--muted);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.header-center {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.era-display {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  color: var(--amber);
-  letter-spacing: 0.1em;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  white-space: nowrap;
+/* ── PORTRAIT MOBILE (<=768px, portrait orientation) ── */
+@media(max-width:768px) and (orientation:portrait){
+  .logo-s{display:none}
+  .cnt-disp{display:none}
+  .hdr{padding:8px 12px}
+  .logo-t{font-size:16px;letter-spacing:2px}
+  .era-y{font-size:18px}
+  .era-n{font-size:10px;letter-spacing:1.5px}
+  .main{top:52px!important}
+  .main{bottom:0;flex-direction:column}
+  .map-tl-col{width:100%}
+  .map-c{flex:0 0 42vh;width:100%}
+  .info-panel{flex:1;width:100%;border-left:none;border-top:1px solid var(--bdr);overflow-y:auto;padding:0 16px 16px;border-radius:0}
+  .tl-wrap{height:76px;padding:6px 14px 10px}
+  .tl-lbl{font-size:9px;letter-spacing:.8px}
+  .hint{font-size:8px;letter-spacing:.8px}
+  .lens-dd-list{max-height:180px}
+  .info-txt,.overview-arc{font-size:16px;line-height:1.82}
+  .lens-row-lbl{font-size:13px}
 }
 
-.lens-dropdown {
-  position: relative;
+/* ── LANDSCAPE MOBILE (<=768px, landscape) — desktop layout ── */
+@media(max-width:900px) and (orientation:landscape){
+  .logo-s{display:none}
+  .hdr{padding:6px 14px}
+  .logo-t{font-size:15px;letter-spacing:2px}
+  .era-y{font-size:15px}
+  .hint{font-size:7px;letter-spacing:.5px;white-space:normal;text-align:center;line-height:1.4}
+  .tl-wrap{height:68px;padding:4px 12px 8px}
+  .tl-lbl{font-size:8px}
+  .info-panel{width:280px}
 }
 
-.lens-btn {
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  color: var(--amber);
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: border-color var(--transition);
-  letter-spacing: 0.05em;
-}
-.lens-btn:hover { border-color: var(--border-hover); }
+@keyframes ring-pulse{0%{r:5;opacity:.7}100%{r:26;opacity:0}}
 
-.lens-dd-menu {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0.4rem;
-  min-width: 200px;
-  box-shadow: var(--shadow);
-  z-index: 200;
-  display: none;
-  max-height: 320px;
-  overflow-y: auto;
-}
-.lens-dd-menu.open { display: block; }
-
-.lens-dd-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.6rem;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  width: 100%;
-  text-align: left;
-  transition: background var(--transition);
-}
-.lens-dd-item:hover { background: var(--border); }
-.lens-dd-item.active { color: var(--accent); }
-.lens-dd-item .ico { font-size: 1rem; }
-.lens-dd-item .check { margin-left: auto; opacity: 0; font-size: 0.7rem; color: var(--accent); }
-.lens-dd-item.active .check { opacity: 1; }
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+/* Touch devices */
+@media(pointer:coarse){
+  #mark-layer g[role="button"]{cursor:pointer}
 }
 
-/* ── Burger Menu ─────────────────────────────────────────── */
-.burger-btn {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  border-radius: var(--radius);
-  transition: background var(--transition);
-}
-.burger-btn:hover { background: var(--border); }
-.burger-btn span {
-  display: block;
-  width: 20px;
-  height: 2px;
-  background: var(--amber);
-  border-radius: 2px;
-  transition: all var(--transition);
-}
-.burger-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.burger-btn.open span:nth-child(2) { opacity: 0; }
-.burger-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+/* ── ACCESSIBILITY ── */
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.conn-item:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lens-row:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--accent);color:var(--bg);padding:8px 16px;z-index:9999;font-family:'Cinzel',serif;font-size:11px;text-decoration:none}
+.skip-link:focus{top:0}
 
-.burger-menu {
-  position: fixed;
-  top: 52px;
-  right: 0;
-  width: 280px;
-  max-height: calc(100vh - 52px);
-  background: var(--panel);
-  border-left: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  z-index: 500;
-  transform: translateX(100%);
-  transition: transform var(--transition);
-  overflow-y: auto;
-  padding: 0.75rem 0;
+/* ── THREAD PANEL ── */
+.thread-panel{
+  position:fixed;top:52px;left:0;right:0;z-index:400;
+  background:var(--panel);
+  max-height:0;overflow:hidden;
+  transition:max-height .32s cubic-bezier(.4,0,.2,1);
 }
-.burger-menu.open { transform: translateX(0); }
+.thread-panel.open{border-bottom:1px solid var(--bdr);box-shadow:0 6px 24px var(--shadow)}
+.thread-panel.open{max-height:70vh}
+.thread-panel-inner{padding:16px 20px 20px;overflow-y:auto;max-height:calc(70vh - 1px)}
+.thread-panel-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.thread-panel-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase}
+.thread-close-btn{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1;padding:4px;transition:color .15s}
+.thread-close-btn:hover{color:var(--accent)}
+.thread-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px}
+.thread-concept-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:9px 12px;text-align:left;cursor:pointer;border-radius:3px;transition:all .15s}
+.thread-concept-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.thread-concept-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.8px;color:var(--txt2);display:block;margin-bottom:4px}
+.thread-concept-chain{font-size:11px;color:var(--txt3);line-height:1.5}
+.thread-back-btn{background:none;border:none;padding:0;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;transition:opacity .15s}
+.thread-back-btn:hover{opacity:.7}
+.thread-active-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--accent);margin:10px 0 14px}
+.thread-steps-grid{display:flex;flex-direction:column;align-items:center;padding:4px 0 16px}
+.thread-step{width:min(360px,90%);text-align:center;padding:10px 14px;border:1px solid var(--bdr2);border-radius:4px;font-size:12.5px;color:var(--txt2);background:var(--panel2)}
+.thread-step-yr{font-family:'Cinzel',serif;font-size:9.5px;color:var(--accent);margin-bottom:4px}
+.thread-step-txt{line-height:1.6;color:var(--txt2)}
+.thread-step-civ{font-family:'Cinzel',serif;font-size:9.5px;color:var(--accent);margin-bottom:4px}
+.thread-chain-link{display:flex;flex-direction:column;align-items:center;padding:2px 0;color:var(--accent);opacity:.6}
+.thread-chain-line{width:1px;height:8px;background:var(--accent);opacity:.4}
 
-.burger-section {
-  padding: 0.4rem 1rem;
-}
-.burger-section-title {
-  font-family: var(--font-heading);
-  font-size: 0.65rem;
-  color: var(--muted);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 0.4rem;
-}
+/* ── COMPARE MODE ── */
+.compare-wrap{display:flex;gap:0;height:100%;width:100%}
+.compare-col{flex:1;min-width:0;overflow-y:auto;padding:16px;border-right:1px solid var(--bdr)}
+.compare-col:last-child{border-right:none}
+.compare-col-hdr{font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--accent);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.compare-remove{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:2px}
+.compare-remove:hover{color:var(--accent)}
+.compare-prompt{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--txt3);font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:20px;opacity:.6}
+.compare-diff{background:var(--amber-xx);border-left:2px solid var(--accent);padding:6px 8px;margin-bottom:2px}
 
-.burger-item {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 0.6rem;
-  border-radius: var(--radius);
-  font-size: 0.95rem;
-  width: 100%;
-  text-align: left;
-  transition: background var(--transition);
-}
-.burger-item:hover { background: var(--border); }
-.burger-item.active { color: var(--accent); }
-.burger-item .ico { font-size: 1.1rem; width: 1.4rem; text-align: center; }
+/* ── SHARE TOAST ── */
+.share-toast{position:fixed;bottom:108px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--panel);border:1px solid var(--bdr);padding:8px 18px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:var(--accent);text-transform:uppercase;border-radius:20px;opacity:0;transition:all .3s;pointer-events:none;z-index:500;white-space:nowrap}
+.share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-.burger-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 0.5rem 1rem;
-}
+/* ── FINGERPRINT CHART ── */
+.fp-wrap{margin:14px 0 6px}
+.fp-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:8px}
+.fp-svg{display:block;margin:0 auto}
+.fp-label{font-family:'Cinzel',serif;font-size:8px;fill:var(--txt3)}
+.fp-poly{fill:rgba(232,37,26,.18);stroke:#e8251a;stroke-width:1.2}
+.fp-grid{fill:none;stroke:var(--bdr);stroke-width:.5}
 
-/* ── Main Layout ─────────────────────────────────────────── */
-main {
-  flex: 1;
-  display: flex;
-  position: relative;
-  overflow: hidden;
-}
+/* ── CONTEMPORARY BAR ── */
+.contemp-wrap{margin:12px 0 4px}
+.contemp-bar-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;cursor:pointer;transition:opacity .15s}
+.contemp-bar-row:hover{opacity:.75}
+.contemp-bar-nm{font-family:'Cinzel',serif;font-size:8.5px;color:var(--txt3);width:80px;flex-shrink:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.contemp-bar-track{flex:1;height:5px;background:var(--bdr2);border-radius:2px;position:relative}
+.contemp-bar-fill{position:absolute;top:0;height:100%;border-radius:2px;opacity:.7}
+.contemp-bar-yr{font-family:'Cinzel',serif;font-size:7.5px;color:var(--txt3);white-space:nowrap;width:60px;text-align:right;flex-shrink:0}
 
-.map-container {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  cursor: grab;
-}
-.map-container:active { cursor: grabbing; }
+/* ── DENSITY SPARKLINE ── */
+#density-bar{height:18px;width:100%;display:block;margin-bottom:1px}
 
-.map-container svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+/* ── WHAT-IF MODE ── */
+.whatif-civ-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:7px 10px;text-align:left;cursor:pointer;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.5px;color:var(--txt2);margin-bottom:3px;border-radius:2px;transition:all .15s;display:flex;align-items:center;justify-content:space-between}
+.whatif-civ-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.whatif-civ-btn.selected{background:rgba(232,37,26,.12);border-color:#e8251a;color:#e8251a}
+.whatif-result{margin-top:12px;padding:12px;border:1px solid var(--bdr);border-radius:3px;background:var(--panel2)}
 
-/* ── SVG Map Styles ──────────────────────────────────────── */
-/* Land paths (D3/TopoJSON) */
-#land-path {
-  transition: fill 0.3s ease;
-}
+/* ── MAP ZOOM/PAN ── */
+#wsvg{touch-action:none;user-select:none;-webkit-user-select:none;transition:none}
+.map-zoom-ctrl{position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px;z-index:50}
+.map-zoom-btn{width:28px;height:28px;background:var(--panel);border:1px solid var(--bdr);color:var(--accent);
+  font-size:16px;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;transition:all .15s}
+.map-zoom-btn:hover{background:var(--panel2);border-color:var(--accent)}
+.cluster-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--accent);
+  background:var(--panel);border:1px solid var(--bdr);padding:4px 12px;border-radius:20px;
+  opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:51}
+.cluster-hint.show{opacity:1}
 
-.war-marker {
-  cursor: pointer;
-  transition: r 0.2s ease;
+/* ── CLUSTER PICKER ── */
+#cluster-picker{
+  position:fixed;z-index:900;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:6px;
+  min-width:180px;max-width:260px;max-height:320px;overflow-y:auto;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);
+  display:none;
 }
-.war-marker:hover { filter: brightness(1.3); }
+#cluster-picker.open{display:block}
+#cluster-picker-hdr{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
+  color:var(--txt3);padding:8px 12px 6px;
+  border-bottom:1px solid var(--bdr2);text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.cluster-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;
+  cursor:pointer;border-bottom:1px solid var(--bdr2);
+  transition:background .12s;
+}
+.cluster-item:last-child{border-bottom:none}
+.cluster-item:hover,.cluster-item:active{background:var(--panel2)}
+.cluster-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#e8251a}
+.cluster-item-nm{font-family:'Cinzel',serif;font-size:13px;color:var(--txt);flex:1}
+.cluster-item-sb{font-size:11px;color:var(--txt3);margin-top:1px}
 
-.war-label {
-  font-family: var(--font-heading);
-  font-size: 6px;
-  fill: var(--txt);
-  pointer-events: none;
-  opacity: 0.8;
-}
+/* ── BURGER MENU ── */
+.burger-wrap{position:relative}
+.burger-btn{background:none;border:1px solid var(--bdr);color:var(--accent);cursor:pointer;
+  width:34px;height:34px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;padding:0}
+.burger-btn:hover{background:var(--panel2);border-color:var(--accent)}
+.burger-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:4px;min-width:196px;
+  box-shadow:0 8px 32px var(--shadow);z-index:800;
+  display:none;flex-direction:column;overflow:hidden}
+.burger-menu.open{display:flex}
+.burger-item{display:flex;align-items:center;gap:10px;padding:12px 16px;
+  background:none;border:none;color:var(--txt2);cursor:pointer;text-align:left;
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:.5px;width:100%;
+  transition:background .12s;white-space:nowrap}
+.burger-item:hover,.burger-item:active{background:var(--panel2);color:var(--txt)}
+.burger-item.active,.burger-item.burger-mode.active{background:var(--amber-x);color:var(--accent)}
+.burger-divider{height:1px;background:var(--bdr2);margin:2px 0}
 
-.connection-line {
-  stroke: var(--amber);
-  stroke-width: 0.5;
-  stroke-dasharray: 4 2;
-  opacity: 0.3;
-  fill: none;
+/* ── PULL TO REFRESH ── */
+#ptr-indicator{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  height:0;overflow:hidden;background:var(--panel);
+  border-bottom:1px solid var(--bdr);
+  transition:height .2s ease,opacity .2s ease;
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;
+  color:var(--txt3);text-transform:uppercase;opacity:0;
+  pointer-events:none;
 }
-
-.transmission-line {
-  stroke: var(--accent);
-  stroke-width: 1;
-  stroke-dasharray: 6 3;
-  opacity: 0.5;
-  fill: none;
-  marker-end: url(#arrowhead);
+#ptr-indicator.pulling{height:52px;opacity:1}
+#ptr-indicator.ready{color:var(--accent)}
+#ptr-indicator.refreshing{height:52px;opacity:1}
+#ptr-spinner{
+  width:16px;height:16px;border:2px solid var(--bdr);
+  border-top-color:var(--accent);border-radius:50%;
+  transition:transform .25s ease;flex-shrink:0;
 }
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.6; r: inherit; }
-  50% { opacity: 1; }
-}
-.war-pulse {
-  animation: pulse 2s ease-in-out infinite;
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 1;
-  opacity: 0.5;
-}
-
-.war-glow {
-  filter: drop-shadow(0 0 6px var(--accent-glow));
-}
-
-/* ── Info Panel / Drawer ─────────────────────────────────── */
-.info-panel {
-  width: 340px;
-  background: var(--panel);
-  border-left: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  flex-shrink: 0;
-  transition: width var(--transition), transform var(--transition);
-}
-.info-panel.collapsed {
-  width: 0;
-  overflow: hidden;
-  border-left: none;
-}
-
-.panel-header {
-  padding: 1rem 1.2rem 0.75rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.panel-title {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.05em;
-}
-
-.panel-subtitle {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-top: 0.15rem;
-}
-
-.panel-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0.75rem 1.2rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.meta-tag {
-  font-family: var(--font-heading);
-  font-size: 0.7rem;
-  color: var(--amber);
-  padding: 0.15rem 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  letter-spacing: 0.05em;
-}
-
-.panel-body {
-  padding: 1rem 1.2rem;
-  flex: 1;
-}
-
-.lens-section {
-  margin-bottom: 1rem;
-}
-.lens-section-title {
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  color: var(--amber);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 0.35rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.lens-section-body {
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: var(--txt);
-}
-
-.panel-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: 2rem;
-  text-align: center;
-}
-.panel-placeholder .ico { font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.4; }
-.panel-placeholder p {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  color: var(--muted);
-  letter-spacing: 0.05em;
-}
-
-/* ── Compare Panel ───────────────────────────────────────── */
-.compare-panel {
-  display: none;
-  position: fixed;
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 1rem 1.5rem;
-  z-index: 300;
-  min-width: 600px;
-  max-width: 90vw;
-}
-.compare-panel.open { display: flex; gap: 2rem; }
-
-.compare-col {
-  flex: 1;
-  min-width: 0;
-}
-.compare-col-title {
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
-}
-.compare-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.2rem 0;
-  font-size: 0.85rem;
-  border-bottom: 1px solid var(--border);
-}
-.compare-label { color: var(--muted); }
-.compare-val { color: var(--txt); font-weight: 600; }
-
-.compare-divider {
-  width: 1px;
-  background: var(--border);
-  align-self: stretch;
-}
-
-/* ── Timeline Bar ────────────────────────────────────────── */
-.timeline {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 1.2rem;
-  background: var(--panel);
-  border-top: 1px solid var(--border);
-  flex-shrink: 0;
-  min-height: 46px;
-}
-
-.timeline-label {
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  color: var(--amber);
-  letter-spacing: 0.05em;
-  min-width: 80px;
-  text-align: center;
-}
-
-.timeline-slider-wrap {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.timeline-density {
-  width: 100%;
-  height: 16px;
-}
-.density-bar {
-  fill: var(--accent);
-  opacity: 0.4;
-}
-
-.timeline-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-}
-.timeline-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 6px var(--accent-glow);
-}
-.timeline-slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 6px var(--accent-glow);
-}
-
-.timeline-endpoints {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-heading);
-  font-size: 0.6rem;
-  color: var(--muted);
-  letter-spacing: 0.05em;
-}
-
-.timeline-play {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  font-size: 0.8rem;
-  transition: all var(--transition);
-}
-.timeline-play:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ── About Modal ─────────────────────────────────────────── */
-.about-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: var(--overlay);
-  z-index: 900;
-  align-items: center;
-  justify-content: center;
-}
-.about-overlay.open {
-  display: flex;
-}
-
-.about-box {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2rem 2.5rem;
-  max-width: 520px;
-  width: 90vw;
-  box-shadow: var(--shadow);
-}
-.about-box h2 {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  color: var(--accent);
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.1em;
-}
-.about-box p {
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 0.75rem;
-}
-.about-box .close-btn {
-  display: block;
-  margin: 1rem auto 0;
-  padding: 0.4rem 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  color: var(--amber);
-  transition: all var(--transition);
-}
-.about-box .close-btn:hover { border-color: var(--amber); }
-
-/* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .info-panel {
-    position: fixed;
-    top: 52px;
-    right: 0;
-    bottom: 46px;
-    width: 320px;
-    z-index: 150;
-    transform: translateX(100%);
-    border-left: 1px solid var(--border);
-    box-shadow: var(--shadow);
-  }
-  .info-panel.mobile-open {
-    transform: translateX(0);
-  }
-  .info-panel.collapsed {
-    transform: translateX(100%);
-  }
-
-  .header-center { display: none; }
-  .subtitle { display: none; }
-
-  .compare-panel {
-    min-width: auto;
-    flex-direction: column;
-    bottom: 56px;
-  }
-  .compare-divider { width: 100%; height: 1px; }
-}
-
-@media (max-width: 600px) {
-  header { padding: 0.5rem 0.8rem; }
-  .logo { font-size: 1.1rem; }
-  .info-panel { width: 100%; }
-  .burger-menu { width: 100%; }
-  .timeline { padding: 0.4rem 0.8rem; gap: 0.5rem; }
-  .timeline-label { min-width: 60px; font-size: 0.7rem; }
-}
-
-/* ── Scrollbar ───────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+#ptr-indicator.refreshing #ptr-spinner{animation:ptr-spin .7s linear infinite}
+@keyframes ptr-spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-<!-- Skip Link -->
-<a href="#main-map" class="skip-link">Skip to map</a>
 
-<!-- ═══════════════════════════════════════════════════════
-     HEADER
-     ═══════════════════════════════════════════════════════ -->
-<header>
-  <div class="header-left">
-    <div class="logo">BELLUM</div>
-    <div class="subtitle">The Atlas of War</div>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to conflict panel</button>
+<header class="hdr" role="banner">
+  <div class="hdr-left">
+    <span class="logo-t">BELLUM</span>
+    <span class="logo-s">The Atlas of War</span>
   </div>
-
-  <div class="header-center">
-    <div class="era-display" id="eraDisplay">— Loading —</div>
-    <div class="lens-dropdown">
-      <button class="lens-btn" id="lensBtn" aria-label="Select lenses" aria-haspopup="true">
-        <span>🔍</span> Lenses <span style="font-size:0.6rem">▼</span>
-      </button>
-      <div class="lens-dd-menu" id="lensDDMenu" role="menu"></div>
+  <div class="era-disp">
+    <div class="era-y" id="era-y">3000 BCE</div>
+    <div class="era-n" id="era-n">BRONZE AGE</div>
+  </div>
+  <div class="hdr-right">
+    <div class="cnt-disp">
+      <span class="cnt-n" id="cnt-n">0</span>
+      conflicts active
     </div>
-  </div>
-
-  <div class="header-right">
-    <button class="burger-btn" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="burger-wrap" id="burger-wrap">
+      <button class="burger-btn" id="burger-btn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="0" y1="7" x2="18" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="0" y1="13" x2="18" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="burger-menu" id="burger-menu" role="menu">
+        <a class="burger-item" href="../index.html" role="menuitem" style="text-decoration:none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>The Pangea Project</span>
+        </a>
+        <div class="burger-divider"></div>
+        <button class="burger-item burger-mode active" id="btn-explore" onclick="setMode('explore');closeBurger()" role="menuitem" aria-pressed="true">
+          <span>&#x25C9;</span><span>Explore</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>&#x27F3;</span><span>Threads</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>&#x229E;</span><span>Compare</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-whatif" onclick="setMode('whatif');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>&#x27C1;</span><span>What If</span>
+        </button>
+        <div class="burger-divider"></div>
+        <button class="burger-item" id="menu-theme" onclick="toggleTheme();closeBurger()" role="menuitem">
+          <span>&#x25D1;</span>
+          <span>Toggle Theme</span>
+        </button>
+        <div class="burger-divider"></div>
+        <button class="burger-item" onclick="showAbout();closeBurger()" role="menuitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>About</span>
+        </button>
+      </div>
+    </div>
   </div>
 </header>
 
-<!-- ═══════════════════════════════════════════════════════
-     BURGER MENU
-     ═══════════════════════════════════════════════════════ -->
-<nav class="burger-menu" id="burgerMenu" aria-label="Main navigation">
-  <div class="burger-section">
-    <div class="burger-section-title">Navigation</div>
-    <a href="../" class="burger-item"><span class="ico">🌍</span> Back to Pangea</a>
+<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Conflict transmission threads">
+  <div class="thread-panel-inner">
+    <div class="thread-panel-bar">
+      <span class="thread-panel-title" id="thread-panel-title">Conflict Threads</span>
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">&#x2190; All Threads</button>
+        <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">&#x2715;</button>
+      </div>
+    </div>
+    <div id="thread-concept-list"></div>
+    <div id="thread-active-steps" style="display:none"></div>
   </div>
-  <div class="burger-divider"></div>
-  <div class="burger-section">
-    <div class="burger-section-title">Mode</div>
-    <button class="burger-item active" data-mode="explore" onclick="setMode('explore')">
-      <span class="ico">🗺️</span> Explore
-    </button>
-    <button class="burger-item" data-mode="threads" onclick="setMode('threads')">
-      <span class="ico">🔗</span> Threads
-    </button>
-    <button class="burger-item" data-mode="compare" onclick="setMode('compare')">
-      <span class="ico">⚖️</span> Compare
-    </button>
-  </div>
-  <div class="burger-divider"></div>
-  <div class="burger-section">
-    <div class="burger-section-title">Settings</div>
-    <button class="burger-item" onclick="toggleTheme()">
-      <span class="ico" id="themeIco">🌙</span> <span id="themeLabel">Dark Mode</span>
-    </button>
-  </div>
-  <div class="burger-divider"></div>
-  <div class="burger-section">
-    <button class="burger-item" onclick="showAbout()">
-      <span class="ico">ℹ️</span> About Bellum
-    </button>
-  </div>
-</nav>
+</div>
 
-<!-- ═══════════════════════════════════════════════════════
-     MAIN AREA
-     ═══════════════════════════════════════════════════════ -->
-<main>
-  <!-- Map Container -->
-  <div class="map-container" id="mapContainer">
-    <svg id="mainMap" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<div class="share-toast" id="share-toast">Link copied to clipboard</div>
+
+<div class="main">
+  <div class="map-tl-col">
+  <div class="map-c">
+    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with conflict markers" style="cursor:pointer">
       <defs>
-        <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
-          <polygon points="0 0, 6 2, 0 4" fill="var(--accent)" opacity="0.6"/>
-        </marker>
+        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#e8251a" flood-opacity=".85"/>
+        </filter>
+        <filter id="glow2" x="-100%" y="-100%" width="300%" height="300%">
+          <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#e8251a" flood-opacity=".5"/>
+        </filter>
       </defs>
-      <!-- World map (D3/TopoJSON) -->
+      <rect width="1000" height="520" fill="var(--bg)"/>
+      <g stroke="rgba(232,37,26,.04)" stroke-width=".5" fill="none">
+        <line x1="0" y1="120" x2="1000" y2="120"/>
+        <line x1="0" y1="195" x2="1000" y2="195"/>
+        <line x1="0" y1="265" x2="1000" y2="265"/>
+        <line x1="0" y1="335" x2="1000" y2="335"/>
+        <line x1="0" y1="405" x2="1000" y2="405"/>
+        <line x1="200" y1="0" x2="200" y2="520"/>
+        <line x1="400" y1="0" x2="400" y2="520"/>
+        <line x1="600" y1="0" x2="600" y2="520"/>
+        <line x1="800" y1="0" x2="800" y2="520"/>
+      </g>
+      <line x1="0" y1="265" x2="1000" y2="265" stroke="rgba(232,37,26,.10)" stroke-width=".8" stroke-dasharray="3,7"/>
       <g id="map-layer"></g>
-      <!-- Connection lines -->
-      <g id="connectionsGroup"></g>
-      <!-- Transmission chains -->
-      <g id="transmissionsGroup"></g>
-      <!-- War markers -->
-      <g id="markersGroup"></g>
-      <!-- Labels -->
-      <g id="labelsGroup"></g>
+      <g id="conn-layer"></g>
+      <g id="thread-layer"></g>
+      <g id="label-layer" pointer-events="none"></g>
+      <g id="mark-layer"></g>
     </svg>
-  </div>
-
-  <!-- Info Panel -->
-  <aside class="info-panel" id="infoPanel">
-    <div class="panel-placeholder" id="panelPlaceholder">
-      <div class="ico">⚔️</div>
-      <p>Select a conflict on the map<br>to view its details</p>
+    <div class="map-zoom-ctrl">
+      <button class="map-zoom-btn" onclick="zoomMap(1.4)" aria-label="Zoom in">+</button>
+      <button class="map-zoom-btn" onclick="zoomMap(1/1.4)" aria-label="Zoom out">&#x2212;</button>
     </div>
-    <div id="panelContent" style="display:none"></div>
-  </aside>
-</main>
-
-<!-- ═══════════════════════════════════════════════════════
-     COMPARE PANEL
-     ═══════════════════════════════════════════════════════ -->
-<div class="compare-panel" id="comparePanel"></div>
-
-<!-- ═══════════════════════════════════════════════════════
-     TIMELINE BAR
-     ═══════════════════════════════════════════════════════ -->
-<div class="timeline">
-  <div class="timeline-label" id="yearLabel">3000 BCE</div>
-  <div class="timeline-slider-wrap">
-    <svg class="timeline-density" id="densityBar" viewBox="0 0 500 16" preserveAspectRatio="none"></svg>
-    <input type="range" class="timeline-slider" id="timeSlider" min="0" max="5025" value="0" aria-label="Timeline year slider">
-    <div class="timeline-endpoints">
-      <span>3000 BCE</span>
-      <span>2025 CE</span>
+    <div class="hint" id="map-hint">
+      <span id="map-hint-text">TAP A CONFLICT  &#xB7;  PINCH TO ZOOM  &#xB7;  DRAG TO PAN</span>
+      <button id="map-reset-btn" onclick="resetMapZoom()" style="display:none;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--accent);background:none;border:1px solid var(--bdr);padding:2px 8px;border-radius:10px;cursor:pointer;margin-left:10px;white-space:nowrap">&#x2299; RESET ZOOM</button>
     </div>
   </div>
-  <button class="timeline-play" id="playBtn" aria-label="Play timeline">▶</button>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════
-     ABOUT MODAL
-     ═══════════════════════════════════════════════════════ -->
-<div class="about-overlay" id="aboutOverlay">
-  <div class="about-box">
-    <h2>⚔️ Bellum</h2>
-    <p><strong>The Atlas of War &amp; Conflict</strong> — an interactive exploration of warfare throughout human history, spanning 5,000 years from the Bronze Age to the modern era.</p>
-    <p>Part of <em>The Pangea Project</em>, a collection of interactive atlases mapping the forces that shaped human civilization.</p>
-    <p>Navigate the timeline to see conflicts unfold across the ages. Use <strong>Lenses</strong> to examine wars through different analytical perspectives — causes, tactics, legacy, and more. Switch to <strong>Threads</strong> mode to trace how military innovations like gunpowder and blitzkrieg spread across conflicts. Use <strong>Compare</strong> mode to place two wars side by side.</p>
-    <p style="font-size:0.85rem;color:var(--muted)">Keyboard: Arrow keys to scrub timeline (Shift for larger steps), +/- to zoom, N/P to cycle wars, Space to play/pause, 0 to reset view.</p>
-    <button class="close-btn" onclick="closeAbout()">Close</button>
+  <div class="tl-wrap" role="navigation" aria-label="Timeline">
+  <svg id="density-bar" aria-label="Conflict density over time"></svg>
+  <div class="tl-lbls">
+    <span class="tl-lbl">3000 BCE</span>
+    <span class="tl-lbl">1000 BCE</span>
+    <span class="tl-lbl">1 CE</span>
+    <span class="tl-lbl">1000 CE</span>
+    <span class="tl-lbl">1500</span>
+    <span class="tl-lbl">1800</span>
+    <span class="tl-lbl">2024</span>
+  </div>
+  <div class="tl-trk">
+    <div class="tl-fill" id="tl-fill"></div>
+    <div class="tl-thumb" id="tl-thumb"></div>
+    <input type="range" class="tl-range" id="tl" min="0" max="1000" value="0" step="1" aria-label="Timeline year" aria-valuemin="-3000" aria-valuemax="2024" aria-valuenow="-3000">
   </div>
 </div>
+  </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     SCRIPT
-     ═══════════════════════════════════════════════════════ -->
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Conflict details">
+    <div id="drawer-top"></div>
+    <div id="drawer-content"></div>
+  </div>
+  <button class="mob-map-btn hidden" id="mob-map-btn" onclick="closeMobileSheet()">&#x25CE; Map</button>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// BELLUM — DATA PLACEHOLDER (Phase 2)
+// ══════════════════════════════════════════
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<script>
-/* ═══════════════════════════════════════════════════════════
-   BELLUM — DATA CONSTANTS
-   ═══════════════════════════════════════════════════════════ */
 
-// ── Lenses ──────────────────────────────────────────────────
-const LENSES = [
-  {id:"overview",  n:"Overview",   ico:"📋"},
-  {id:"causes",    n:"Causes",     ico:"🔥"},
-  {id:"tactics",   n:"Tactics",    ico:"♟️"},
-  {id:"outcome",   n:"Outcome",    ico:"🏆"},
-  {id:"legacy",    n:"Legacy",     ico:"📜"},
-  {id:"figures",   n:"Figures",    ico:"👤"},
-  {id:"weapons",   n:"Weapons",    ico:"🗡️"},
-  {id:"civilians", n:"Civilians",  ico:"🏘️"},
-  {id:"naval",     n:"Naval",      ico:"⚓"},
-  {id:"sieges",    n:"Sieges",     ico:"🏰"},
-  {id:"diplomacy", n:"Diplomacy",  ico:"🤝"},
-  {id:"warcrimes", n:"War Crimes", ico:"⚠️"}
-];
+<div id="cluster-picker" role="dialog" aria-label="Select conflict">
+  <div id="cluster-picker-hdr">
+    <span>Select conflict</span>
+    <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">&#x2715;</button>
+  </div>
+  <div id="cluster-list"></div>
+</div>
+
+<div id="about-modal" role="dialog" aria-modal="true" aria-label="About Bellum" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center">
+  <div style="background:var(--panel);border:1px solid var(--bdr);border-radius:6px;padding:28px 32px;max-width:420px;width:calc(100% - 40px);position:relative;box-shadow:0 16px 48px rgba(0,0,0,.6)">
+    <button onclick="closeAbout()" aria-label="Close" style="position:absolute;top:12px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1">&#x2715;</button>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--accent);letter-spacing:2px;margin-bottom:4px">BELLUM</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">The Atlas of War</div>
+    <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:12px">
+      Created by <a href="https://polyglyphanalytica.com" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">Polyglyph Analytica</a> &copy; <span id="about-year"></span>
+    </p>
+    <p style="font-size:12px;line-height:1.7;color:var(--txt3)">
+      Offered under the MIT License.
+    </p>
+  </div>
+</div>
+
+<div id="ptr-indicator" aria-hidden="true">
+  <div id="ptr-spinner"></div>
+  <span id="ptr-label">Pull to refresh</span>
+</div>
 
-// ── Eras ────────────────────────────────────────────────────
-const ERAS = [
-  {id:"bronze",     n:"Bronze Age Warfare",  s:-3000, e:-1200},
-  {id:"classical",  n:"Classical Era",       s:-1200, e:476},
-  {id:"medieval",   n:"Medieval Era",        s:476,   e:1453},
-  {id:"gunpowder",  n:"Gunpowder Age",      s:1453,  e:1700},
-  {id:"colonial",   n:"Colonial Wars",       s:1700,  e:1815},
-  {id:"industrial", n:"Industrial Warfare",  s:1815,  e:1914},
-  {id:"total",      n:"Total War",           s:1914,  e:1945},
-  {id:"asymmetric", n:"Asymmetric Era",      s:1945,  e:2025}
-];
-
-// ── Wars (50+) ──────────────────────────────────────────────
-const WARS = [
-  // ── Ancient / Bronze Age ──
-  {id:"trojan",n:"Trojan War",s:-1260,e:-1250,x:500,y:210,
-   col:"#e8251a",sz:1.1,region:"Anatolia",type:"Siege",
-   parties:["Mycenaean Greeks","Troy"],casualties:"Unknown (mythic)",
-   d:{overview:"Legendary siege of Troy by a Greek coalition, blending myth and Bronze Age reality.",
-      causes:"Rivalry over trade routes and Aegean dominance; mythologized as the abduction of Helen.",
-      tactics:"Prolonged siege warfare with champion combat; the famous wooden horse stratagem.",
-      outcome:"Troy destroyed; Greek heroes scattered on long returns home.",
-      legacy:"Foundation of Western literary tradition through Homer's Iliad and Odyssey.",
-      figures:"Achilles, Hector, Agamemnon, Odysseus, Priam.",
-      weapons:"Bronze swords, spears, chariots, composite bows.",
-      civilians:"Troy's population enslaved or killed after the city fell."}},
-
-  {id:"kadesh",n:"Battle of Kadesh",s:-1274,e:-1274,x:530,y:220,
-   col:"#e8251a",sz:0.8,region:"Levant",type:"Interstate",
-   parties:["Egypt","Hittites"],casualties:"~5,000",
-   d:{overview:"Largest chariot battle in history between Ramesses II and the Hittite Empire at Kadesh.",
-      causes:"Competition for control of Syria and Levantine trade routes.",
-      tactics:"Mass chariot charges; Egyptian near-defeat reversed by reinforcements.",
-      outcome:"Tactical stalemate leading to the world's first known peace treaty.",
-      legacy:"Produced the earliest surviving international peace agreement.",
-      figures:"Ramesses II, Muwatalli II.",
-      weapons:"Chariots, composite bows, bronze khopesh swords.",
-      civilians:"Civilian impact limited to the immediate region around Kadesh."}},
-
-  // ── Classical ──
-  {id:"persian",n:"Greco-Persian Wars",s:-499,e:-449,x:490,y:210,
-   col:"#e8251a",sz:1.3,region:"Mediterranean",type:"Interstate",
-   parties:["Greek city-states","Achaemenid Persia"],casualties:"~300,000",
-   d:{overview:"Series of conflicts between Greek city-states and the Achaemenid Persian Empire.",
-      causes:"Persian expansion westward; Ionian Greek revolt against Persian rule.",
-      tactics:"Greek hoplite phalanx vs. Persian combined arms; decisive naval warfare at Salamis.",
-      outcome:"Greek victory preserved city-state independence and halted Persian expansion into Europe.",
-      legacy:"Birth of Western concepts of citizen-soldier defense and East-West civilizational narratives.",
-      figures:"Xerxes I, Leonidas, Themistocles, Miltiades.",
-      weapons:"Hoplite spears, bronze armor, triremes, Persian cavalry and archers.",
-      civilians:"Athens evacuated and burned by Persians in 480 BCE."}},
-
-  {id:"peloponnesian",n:"Peloponnesian War",s:-431,e:-404,x:492,y:215,
-   col:"#e8251a",sz:1.2,region:"Mediterranean",type:"Interstate",
-   parties:["Athens","Sparta"],casualties:"~100,000",
-   d:{overview:"Devastating war between Athens and Sparta that reshaped the Greek world.",
-      causes:"Athenian imperial expansion alarmed Sparta and its allies.",
-      tactics:"Athens relied on naval power; Sparta on land superiority. Plague devastated Athens.",
-      outcome:"Spartan victory ended the Athenian golden age and weakened all Greek city-states.",
-      legacy:"Thucydides' account became foundational for political realism and strategic studies.",
-      figures:"Pericles, Alcibiades, Lysander, Brasidas.",
-      weapons:"Triremes, hoplite phalanx, siege engines.",
-      civilians:"Athens struck by plague killing a quarter of the population; Melos enslaved."}},
-
-  {id:"warring_states",n:"Warring States Period",s:-475,e:-221,x:760,y:200,
-   col:"#e8251a",sz:1.4,region:"East Asia",type:"Civil",
-   parties:["Qin","Chu","Wei","Zhao","Han","Yan","Qi"],casualties:"~1,500,000+",
-   d:{overview:"Two and a half centuries of interstate warfare among Chinese kingdoms ending in Qin unification.",
-      causes:"Collapse of Zhou authority; competition among rival states for supremacy.",
-      tactics:"Mass infantry armies, crossbows, cavalry, sophisticated siege warfare, and espionage.",
-      outcome:"Qin state conquered all rivals and established China's first unified empire.",
-      legacy:"Produced Sun Tzu's Art of War and shaped Chinese military and political thought.",
-      figures:"Sun Tzu, Shang Yang, Bai Qi, King Zheng (Qin Shi Huang).",
-      weapons:"Crossbows, iron weapons, chariots, mass infantry formations.",
-      civilians:"Mass executions of prisoners; Bai Qi reportedly buried 400,000 Zhao soldiers alive."}},
-
-  {id:"conquests_alexander",n:"Conquests of Alexander",s:-334,e:-323,x:540,y:210,
-   col:"#e8251a",sz:1.3,region:"Mediterranean/Asia",type:"Conquest",
-   parties:["Macedon","Achaemenid Persia","Indian kingdoms"],casualties:"~200,000+",
-   d:{overview:"Alexander the Great's campaigns from Greece to India, creating the largest empire yet seen.",
-      causes:"Macedonian ambition and pan-Hellenic revenge against Persia.",
-      tactics:"Combined arms with heavy cavalry (Companion cavalry), sarissa phalanx, and rapid maneuver.",
-      outcome:"Persian Empire destroyed; Hellenistic kingdoms established across the Near East.",
-      legacy:"Spread Greek culture across Asia; created the Hellenistic civilization.",
-      figures:"Alexander the Great, Darius III, Parmenion, Hephaestion.",
-      weapons:"Sarissa pike, cavalry lance, siege towers, torsion catapults.",
-      civilians:"Tyre and Gaza sacked; populations sold into slavery."}},
-
-  {id:"punic1",n:"First Punic War",s:-264,e:-241,x:460,y:225,
-   col:"#e8251a",sz:1.0,region:"Mediterranean",type:"Interstate",
-   parties:["Rome","Carthage"],casualties:"~250,000",
-   d:{overview:"Rome and Carthage fought for control of Sicily in a war dominated by naval engagements.",
-      causes:"Competition over Sicily and western Mediterranean trade.",
-      tactics:"Rome built a navy from scratch; used the corvus boarding bridge to negate Carthaginian seamanship.",
-      outcome:"Roman victory; Carthage ceded Sicily and paid heavy indemnity.",
-      legacy:"Rome became a naval power; set the stage for the more famous Second Punic War.",
-      figures:"Hamilcar Barca, Gaius Duilius, Regulus.",
-      weapons:"Quinqueremes, corvus boarding devices, Roman legionary equipment.",
-      civilians:"Sicilian cities suffered repeated sieges and occupation."}},
-
-  {id:"punic2",n:"Second Punic War",s:-218,e:-201,x:455,y:222,
-   col:"#e8251a",sz:1.3,region:"Mediterranean",type:"Interstate",
-   parties:["Rome","Carthage"],casualties:"~300,000+",
-   d:{overview:"Hannibal's legendary invasion of Italy over the Alps and Rome's counterattack in Africa.",
-      causes:"Carthaginian desire for revenge after the First Punic War; Hannibal's ambition.",
-      tactics:"Hannibal's double envelopment at Cannae became a tactical masterpiece; Fabius' delaying strategy.",
-      outcome:"Scipio defeated Hannibal at Zama; Carthage reduced to a client state.",
-      legacy:"Cannae remains studied at military academies worldwide as the perfect battle of annihilation.",
-      figures:"Hannibal Barca, Scipio Africanus, Fabius Maximus.",
-      weapons:"War elephants, Roman gladius, pilum javelins, Numidian cavalry.",
-      civilians:"Italian countryside devastated; Hannibal occupied Italy for 15 years."}},
-
-  {id:"gallic_wars",n:"Gallic Wars",s:-58,e:-50,x:440,y:188,
-   col:"#e8251a",sz:1.0,region:"Western Europe",type:"Conquest",
-   parties:["Rome","Gallic tribes"],casualties:"~1,000,000",
-   d:{overview:"Caesar's conquest of Gaul brought modern France under Roman rule.",
-      causes:"Roman expansionism and Caesar's political ambition.",
-      tactics:"Roman legionary discipline vs. Gallic tribal warfare; siege of Alesia was the decisive action.",
-      outcome:"Complete Roman conquest of Gaul; Caesar gained the power base for civil war.",
-      legacy:"Transformed Western Europe; Latin language and Roman culture took root permanently.",
-      figures:"Julius Caesar, Vercingetorix.",
-      weapons:"Roman legionary equipment, siege works, Gallic longswords and chariots.",
-      civilians:"Caesar's own accounts claim a million Gauls killed and another million enslaved."}},
-
-  {id:"jewish_roman",n:"Jewish-Roman Wars",s:66,e:135,x:535,y:225,
-   col:"#e8251a",sz:1.0,region:"Levant",type:"Rebellion",
-   parties:["Judea","Roman Empire"],casualties:"~1,350,000",
-   d:{overview:"Three major Jewish revolts against Rome culminating in the destruction of Jerusalem.",
-      causes:"Roman occupation, religious oppression, and taxation drove recurring rebellions.",
-      tactics:"Urban warfare and sieges; Roman siege of Masada became legendary.",
-      outcome:"Temple destroyed in 70 CE; Jewish diaspora accelerated after Bar Kokhba revolt.",
-      legacy:"Defined Jewish identity in exile and shaped early Christianity's separation from Judaism.",
-      figures:"Titus, Josephus, Simon bar Kokhba, Hadrian.",
-      weapons:"Roman siege engines, legionary equipment, fortifications.",
-      civilians:"Jerusalem destroyed; Josephus claims over a million died in the 70 CE siege."}},
-
-  {id:"three_kingdoms",n:"Three Kingdoms War",s:220,e:280,x:755,y:210,
-   col:"#e8251a",sz:1.3,region:"East Asia",type:"Civil",
-   parties:["Wei","Shu","Wu"],casualties:"~36,000,000",
-   d:{overview:"Fragmentation of Han China into three warring states, one of history's deadliest conflicts.",
-      causes:"Collapse of Han dynasty from corruption, famine, and the Yellow Turban Rebellion.",
-      tactics:"Combined cavalry and infantry warfare; river warfare on the Yangtze; espionage and diplomacy.",
-      outcome:"Jin dynasty reunified China in 280 CE after absorbing all three kingdoms.",
-      legacy:"Romance of the Three Kingdoms became one of the greatest works of Chinese literature.",
-      figures:"Cao Cao, Liu Bei, Sun Quan, Zhuge Liang.",
-      weapons:"Crossbows, halberds, cavalry, river warships.",
-      civilians:"China's population dropped from ~56 million to ~16 million during this period."}},
-
-  {id:"fall_rome",n:"Fall of the Western Roman Empire",s:376,e:476,x:460,y:200,
-   col:"#e8251a",sz:1.2,region:"Europe",type:"Invasion",
-   parties:["Roman Empire","Various Germanic tribes","Huns"],casualties:"Unknown (millions over a century)",
-   d:{overview:"A century of barbarian invasions and internal decay that ended the Western Roman Empire.",
-      causes:"Migration pressure from the Huns, imperial overextension, economic decline, and civil wars.",
-      tactics:"Germanic tribes adopted Roman military techniques; Hunnic horse archery devastated Roman formations.",
-      outcome:"Last Western emperor deposed in 476 CE; successor kingdoms replaced Roman authority.",
-      legacy:"Defined the boundary between antiquity and the Middle Ages.",
-      figures:"Attila the Hun, Alaric, Odoacer, Stilicho, Romulus Augustulus.",
-      weapons:"Gothic heavy cavalry, Hunnic composite bows, Roman late-imperial equipment.",
-      civilians:"Sack of Rome in 410 and 455 CE devastated the eternal city."}},
-
-  // ── Medieval ──
-  {id:"arab_conquests",n:"Arab Conquests",s:632,e:750,x:555,y:235,
-   col:"#e8251a",sz:1.3,region:"Middle East/N. Africa",type:"Conquest",
-   parties:["Rashidun/Umayyad Caliphate","Byzantine Empire","Sassanid Persia"],casualties:"Unknown (hundreds of thousands)",
-   d:{overview:"Rapid Islamic expansion from Arabia across the Middle East, North Africa, and into Spain.",
-      causes:"Religious zeal, Byzantine-Sassanid exhaustion, and tribal unification under Islam.",
-      tactics:"Light cavalry with superior mobility; desert warfare expertise; rapid strategic movement.",
-      outcome:"Created a vast caliphate from Spain to Central Asia; Sassanid Empire destroyed.",
-      legacy:"Spread Islam and Arabic culture; preserved and transmitted Greek knowledge to medieval Europe.",
-      figures:"Khalid ibn al-Walid, Umar, Tariq ibn Ziyad.",
-      weapons:"Arabian horses, curved swords, composite bows, lamellar armor.",
-      civilians:"Generally offered conversion or taxation; some cities sacked during conquest."}},
-
-  {id:"viking_age",n:"Viking Invasions",s:793,e:1066,x:430,y:160,
-   col:"#e8251a",sz:1.1,region:"Europe",type:"Raids/Invasion",
-   parties:["Norse Vikings","Anglo-Saxons","Franks","various"],casualties:"Unknown (tens of thousands)",
-   d:{overview:"Three centuries of Norse raids, conquests, and settlements across Europe and beyond.",
-      causes:"Population pressure, trade opportunities, and the lure of plunder from wealthy monasteries.",
-      tactics:"Lightning-fast longship raids; combined land-sea operations; superior shipbuilding technology.",
-      outcome:"Norse settlements established from Normandy to Russia; ended with Norman Conquest of England.",
-      legacy:"Transformed European politics; founded Normandy, Russia, and Norse settlements in Iceland and beyond.",
-      figures:"Ragnar Lothbrok, Rollo, Harald Hardrada, Leif Erikson.",
-      weapons:"Longships, battle axes, round shields, chainmail, seax knives.",
-      civilians:"Monasteries looted; coastal communities devastated; slave-taking was widespread."}},
-
-  {id:"crusade1",n:"First Crusade",s:1096,e:1099,x:530,y:222,
-   col:"#e8251a",sz:1.1,region:"Levant",type:"Religious",
-   parties:["Crusader states","Seljuk Turks","Fatimid Egypt"],casualties:"~200,000",
-   d:{overview:"Western European knights captured Jerusalem and established crusader states in the Levant.",
-      causes:"Pope Urban II's call to reclaim the Holy Land; Byzantine request for military aid.",
-      tactics:"Heavy cavalry charges; siege warfare; religious fervor compensated for logistical challenges.",
-      outcome:"Jerusalem captured; four crusader states established in the Levant.",
-      legacy:"Initiated two centuries of East-West conflict and cultural exchange.",
-      figures:"Godfrey of Bouillon, Raymond of Toulouse, Bohemond of Taranto.",
-      weapons:"Heavy cavalry, kite shields, crossbows, siege towers.",
-      civilians:"Massacre of Jerusalem's Muslim and Jewish inhabitants upon capture."}},
-
-  {id:"mongol_conquests",n:"Mongol Conquests",s:1206,e:1368,x:660,y:180,
-   col:"#e8251a",sz:1.6,region:"Eurasia",type:"Conquest",
-   parties:["Mongol Empire","Song China","Khwarezmia","Russia","various"],casualties:"~40,000,000",
-   d:{overview:"The largest contiguous land empire in history, created through devastating conquests across Eurasia.",
-      causes:"Unification of Mongol tribes under Genghis Khan; desire for trade and tribute.",
-      tactics:"Mobile horse-archer warfare, feigned retreats, psychological terror, and sophisticated siege engineering.",
-      outcome:"Created the Mongol Empire spanning China to Eastern Europe before fragmenting.",
-      legacy:"Facilitated Eurasian trade via Pax Mongolica; spread gunpowder technology westward.",
-      figures:"Genghis Khan, Kublai Khan, Subutai, Batu Khan.",
-      weapons:"Composite bows, cavalry lances, siege engines adopted from conquered peoples.",
-      civilians:"Entire cities destroyed; Baghdad's sack in 1258 killed hundreds of thousands."}},
-
-  {id:"hundred_years",n:"Hundred Years' War",s:1337,e:1453,x:430,y:190,
-   col:"#e8251a",sz:1.3,region:"Western Europe",type:"Dynastic",
-   parties:["England","France"],casualties:"~3,500,000",
-   d:{overview:"Intermittent Anglo-French conflict over the French throne lasting 116 years.",
-      causes:"English claims to the French crown; feudal disputes over territory.",
-      tactics:"English longbow dominance at Crecy and Agincourt; French eventually adopted cannon and reformed tactics.",
-      outcome:"French victory expelled England from continental France except Calais.",
-      legacy:"Ended feudal warfare in Western Europe; gave rise to national identities in England and France.",
-      figures:"Henry V, Joan of Arc, Edward III, Charles VII.",
-      weapons:"English longbow, early cannon, plate armor, men-at-arms.",
-      civilians:"French countryside devastated by chevauchee raids; bubonic plague compounded suffering."}},
-
-  {id:"reconquista",n:"Reconquista",s:718,e:1492,x:415,y:220,
-   col:"#e8251a",sz:1.1,region:"Iberia",type:"Religious/Territorial",
-   parties:["Christian kingdoms","Moorish states"],casualties:"Unknown (hundreds of thousands over centuries)",
-   d:{overview:"Nearly eight centuries of Christian campaigns to retake the Iberian Peninsula from Muslim rule.",
-      causes:"Religious motivation to reclaim Iberia; political fragmentation of Muslim Al-Andalus.",
-      tactics:"Castle-based frontier warfare; heavy cavalry charges; gradual territorial expansion.",
-      outcome:"Fall of Granada in 1492 completed Christian reconquest of Spain.",
-      legacy:"Shaped Spanish identity and expansionism; led directly to the Age of Exploration.",
-      figures:"El Cid, Ferdinand and Isabella, Alfonso VI.",
-      weapons:"Heavy cavalry, crossbows, siege warfare, fortress networks.",
-      civilians:"Muslim and Jewish populations expelled or forcibly converted after conquest."}},
-
-  {id:"fall_constantinople",n:"Fall of Constantinople",s:1453,e:1453,x:510,y:208,
-   col:"#e8251a",sz:1.0,region:"Eastern Mediterranean",type:"Siege",
-   parties:["Ottoman Empire","Byzantine Empire"],casualties:"~4,000",
-   d:{overview:"Ottoman Sultan Mehmed II captured Constantinople, ending the Byzantine Empire.",
-      causes:"Ottoman expansion; Constantinople's strategic location; Byzantine weakness.",
-      tactics:"Massive cannon bombardment breached the Theodosian Walls; combined land-sea assault.",
-      outcome:"Constantinople became Istanbul, capital of the Ottoman Empire.",
-      legacy:"Marked the end of the Roman Empire; triggered an exodus of Greek scholars to Western Europe.",
-      figures:"Mehmed II, Constantine XI Palaiologos, Giovanni Giustiniani.",
-      weapons:"Massive Orban cannon, gunpowder weapons, Greek fire, siege towers.",
-      civilians:"Three days of looting followed the fall; population enslaved or ransomed."}},
-
-  // ── Early Modern / Gunpowder Age ──
-  {id:"italian_wars",n:"Italian Wars",s:1494,e:1559,x:455,y:205,
-   col:"#e8251a",sz:1.0,region:"Southern Europe",type:"Interstate",
-   parties:["France","Spain","Holy Roman Empire","Italian states"],casualties:"~300,000",
-   d:{overview:"Series of conflicts for control of Italy involving major European powers.",
-      causes:"French claims to Naples and Milan; Habsburg-Valois rivalry for European dominance.",
-      tactics:"Swiss pike formations, Spanish tercios, and early gunpowder combined arms.",
-      outcome:"Spanish dominance of Italy established; France expelled from the peninsula.",
-      legacy:"Spread Renaissance culture; development of the tercio and modern combined arms warfare.",
-      figures:"Charles V, Francis I, Gonzalo de Cordoba, Machiavelli.",
-      weapons:"Pike and shot formations, early muskets, field artillery.",
-      civilians:"Sack of Rome in 1527 by Imperial troops devastated the city."}},
-
-  {id:"spanish_conquest_americas",n:"Spanish Conquest of the Americas",s:1519,e:1572,x:240,y:260,
-   col:"#e8251a",sz:1.2,region:"Americas",type:"Conquest",
-   parties:["Spain","Aztec Empire","Inca Empire"],casualties:"~24,000,000+ (mostly disease)",
-   d:{overview:"Spanish conquistadors overthrew the Aztec and Inca empires, colonizing the Americas.",
-      causes:"Spanish desire for gold, territory, and religious conversion.",
-      tactics:"Steel weapons, horses, and firearms against indigenous armies; exploitation of local rivalries.",
-      outcome:"Aztec and Inca empires destroyed; Spanish colonial empire established.",
-      legacy:"Demographic catastrophe from Old World diseases; permanent transformation of the Americas.",
-      figures:"Hernan Cortes, Francisco Pizarro, Montezuma II, Atahualpa.",
-      weapons:"Steel swords, muskets, horses, war dogs, cannon.",
-      civilians:"Indigenous populations declined by up to 90% primarily from European diseases."}},
-
-  {id:"thirty_years",n:"Thirty Years' War",s:1618,e:1648,x:460,y:185,
-   col:"#e8251a",sz:1.4,region:"Central Europe",type:"Religious/Interstate",
-   parties:["Catholic League/Habsburgs","Protestant states","Sweden","France"],casualties:"~8,000,000",
-   d:{overview:"Devastating religious and political conflict that reshaped Central Europe.",
-      causes:"Religious tensions between Protestants and Catholics; Habsburg power struggles.",
-      tactics:"Pike and shot formations; Swedish innovations under Gustavus Adolphus; scorched earth policies.",
-      outcome:"Peace of Westphalia established the modern state system and religious tolerance.",
-      legacy:"Created the concept of sovereign nation-states; devastated Germany for generations.",
-      figures:"Gustavus Adolphus, Wallenstein, Cardinal Richelieu, Ferdinand II.",
-      weapons:"Pike and musket formations, field artillery, cavalry.",
-      civilians:"German population reduced by 25-40%; widespread famine and plague."}},
-
-  {id:"english_civil",n:"English Civil War",s:1642,e:1651,x:425,y:175,
-   col:"#e8251a",sz:1.0,region:"British Isles",type:"Civil",
-   parties:["Parliamentarians","Royalists"],casualties:"~200,000",
-   d:{overview:"Conflict between Crown and Parliament resulted in the execution of Charles I.",
-      causes:"Disputes over royal authority, parliamentary rights, and religious governance.",
-      tactics:"New Model Army's discipline and professionalism; cavalry tactics on both sides.",
-      outcome:"Parliamentary victory; Charles I executed; brief republican Commonwealth established.",
-      legacy:"Established principle of parliamentary sovereignty; influenced later democratic revolutions.",
-      figures:"Oliver Cromwell, Charles I, Prince Rupert.",
-      weapons:"Pike and shot, cavalry, field artillery, siege weapons.",
-      civilians:"Ireland suffered devastating Cromwellian conquest; widespread property destruction in England."}},
-
-  {id:"great_turkish",n:"Great Turkish War",s:1683,e:1699,x:490,y:195,
-   col:"#e8251a",sz:1.0,region:"Southeastern Europe",type:"Interstate",
-   parties:["Holy League","Ottoman Empire"],casualties:"~200,000+",
-   d:{overview:"Coalition of European powers halted Ottoman expansion and reclaimed Hungary.",
-      causes:"Ottoman siege of Vienna in 1683 triggered a European counter-offensive.",
-      tactics:"Combined European cavalry charges; improved artillery; Ottoman traditional arms.",
-      outcome:"Treaty of Karlowitz; Ottoman Empire ceded Hungary, Transylvania, and parts of Greece.",
-      legacy:"Marked the turning point of Ottoman expansion in Europe; shifted balance eastward.",
-      figures:"Jan III Sobieski, Eugene of Savoy, Kara Mustafa Pasha.",
-      weapons:"Winged hussar cavalry, cannon, muskets, Ottoman sipahi cavalry.",
-      civilians:"Balkans population displaced; frontier regions repeatedly devastated."}},
-
-  // ── Colonial Wars ──
-  {id:"seven_years",n:"Seven Years' War",s:1756,e:1763,x:420,y:180,
-   col:"#e8251a",sz:1.3,region:"Global",type:"Interstate",
-   parties:["Britain/Prussia","France/Austria/Russia"],casualties:"~1,400,000",
-   d:{overview:"First true global conflict fought across Europe, the Americas, India, and the Philippines.",
-      causes:"Colonial rivalries and European balance of power; Prussian-Austrian antagonism.",
-      tactics:"Prussian oblique order tactics; British naval supremacy; colonial guerrilla warfare.",
-      outcome:"British gained Canada and India; Prussia survived as a great power.",
-      legacy:"Set the stage for the American and French Revolutions; established British global dominance.",
-      figures:"Frederick the Great, William Pitt, Marquis de Montcalm, Robert Clive.",
-      weapons:"Line infantry muskets, field cannon, frigates, colonial militia tactics.",
-      civilians:"Bengal famine killed millions; Native American populations displaced in North America."}},
-
-  {id:"american_revolution",n:"American Revolution",s:1775,e:1783,x:250,y:200,
-   col:"#e8251a",sz:1.2,region:"North America",type:"Revolution",
-   parties:["American colonies/France","Great Britain"],casualties:"~37,000",
-   d:{overview:"Thirteen British colonies won independence, creating the United States.",
-      causes:"Taxation without representation; Enlightenment ideals; colonial autonomy disputes.",
-      tactics:"Guerrilla and militia tactics; French naval support was decisive at Yorktown.",
-      outcome:"American independence recognized; new republic established on Enlightenment principles.",
-      legacy:"Inspired democratic revolutions worldwide; created a model constitutional republic.",
-      figures:"George Washington, Benjamin Franklin, Marquis de Lafayette, Cornwallis.",
-      weapons:"Muskets, rifles, field artillery, frigates.",
-      civilians:"Loyalist populations displaced; Native American allies of Britain suffered retribution."}},
-
-  {id:"french_revolution",n:"French Revolutionary Wars",s:1792,e:1802,x:440,y:190,
-   col:"#e8251a",sz:1.2,region:"Europe",type:"Revolutionary",
-   parties:["Revolutionary France","European coalitions"],casualties:"~1,500,000",
-   d:{overview:"Revolutionary France fought multiple coalitions of European monarchies.",
-      causes:"European monarchies sought to crush the French Revolution and restore the Bourbon monarchy.",
-      tactics:"Levee en masse created mass citizen armies; revolutionary elan and new tactical formations.",
-      outcome:"France survived and expanded; Napoleon emerged as the dominant military figure.",
-      legacy:"Introduced mass conscription and ideological warfare; spread revolutionary ideals across Europe.",
-      figures:"Napoleon Bonaparte, Lazare Carnot, Archduke Charles.",
-      weapons:"Muskets, bayonets, horse artillery, column tactics.",
-      civilians:"Reign of Terror killed tens of thousands domestically; Vendee uprising brutally suppressed."}},
-
-  {id:"napoleonic",n:"Napoleonic Wars",s:1803,e:1815,x:445,y:188,
-   col:"#e8251a",sz:1.5,region:"Europe/Global",type:"Interstate",
-   parties:["French Empire","Multiple coalitions"],casualties:"~3,500,000",
-   d:{overview:"Napoleon's campaigns for European dominance, ending at Waterloo.",
-      causes:"French expansionism; Napoleon's ambition; European coalitions to contain France.",
-      tactics:"Corps system, rapid maneuver, decisive battle-seeking, combined arms coordination.",
-      outcome:"Napoleon defeated and exiled; Congress of Vienna restored European balance of power.",
-      legacy:"Spread nationalism and legal reform across Europe; destroyed the old feudal order.",
-      figures:"Napoleon Bonaparte, Wellington, Nelson, Kutuzov, Blucher.",
-      weapons:"Musket and bayonet, horse artillery, cavalry charges, naval ship-of-the-line.",
-      civilians:"Spanish guerrilla war devastated Iberia; Russian scorched earth destroyed the Grande Armee."}},
-
-  {id:"zulu_wars",n:"Anglo-Zulu War",s:1879,e:1879,x:510,y:370,
-   col:"#e8251a",sz:0.8,region:"Southern Africa",type:"Colonial",
-   parties:["British Empire","Zulu Kingdom"],casualties:"~10,000",
-   d:{overview:"British invasion of the Zulu Kingdom resulted in initial defeat at Isandlwana then conquest.",
-      causes:"British desire to consolidate South Africa; Zulu military power seen as a threat.",
-      tactics:"Zulu impis used encirclement tactics; British relied on firepower and fortified positions.",
-      outcome:"Zulu Kingdom defeated and annexed into British South Africa.",
-      legacy:"Battle of Isandlwana remains one of Britain's worst colonial defeats.",
-      figures:"Cetshwayo, Lord Chelmsford, Prince Dabulamanzi.",
-      weapons:"Zulu assegai and shield; British Martini-Henry rifles, artillery, Gatling guns.",
-      civilians:"Zulu homesteads burned; kingdom dismembered into chieftaincies."}},
-
-  // ── Industrial Warfare ──
-  {id:"us_civil",n:"American Civil War",s:1861,e:1865,x:230,y:210,
-   col:"#e8251a",sz:1.4,region:"North America",type:"Civil",
-   parties:["Union (North)","Confederacy (South)"],casualties:"~750,000",
-   d:{overview:"War between Union and Confederate states over slavery and state sovereignty.",
-      causes:"Slavery, states' rights, and sectional economic differences.",
-      tactics:"First modern war: railroads, telegraphs, ironclads, trench warfare foreshadowed WWI.",
-      outcome:"Union victory; slavery abolished; federal authority strengthened.",
-      legacy:"Preserved the Union and ended slavery; reconstruction shaped American race relations for a century.",
-      figures:"Lincoln, Grant, Lee, Sherman, Frederick Douglass.",
-      weapons:"Rifled muskets, ironclad warships, field artillery, Gatling gun, telegraph.",
-      civilians:"Sherman's March destroyed Confederate infrastructure; 50,000+ civilian deaths."}},
-
-  {id:"franco_prussian",n:"Franco-Prussian War",s:1870,e:1871,x:445,y:188,
-   col:"#e8251a",sz:1.1,region:"Western Europe",type:"Interstate",
-   parties:["Prussia/German states","France"],casualties:"~250,000",
-   d:{overview:"Prussian victory over France led to German unification and French humiliation.",
-      causes:"Bismarck provoked France to unite German states; Ems telegram incident.",
-      tactics:"Prussian needle guns, superior artillery, rapid mobilization by rail.",
-      outcome:"German Empire proclaimed; France lost Alsace-Lorraine; Paris Commune followed.",
-      legacy:"Created a unified Germany; French desire for revenge was a root cause of WWI.",
-      figures:"Bismarck, Moltke the Elder, Napoleon III.",
-      weapons:"Krupp steel breech-loading artillery, needle gun, mitrailleuse.",
-      civilians:"Paris besieged and starved; Commune violently suppressed."}},
-
-  {id:"boer_war",n:"Second Boer War",s:1899,e:1902,x:505,y:365,
-   col:"#e8251a",sz:1.0,region:"Southern Africa",type:"Colonial",
-   parties:["British Empire","Boer republics"],casualties:"~75,000",
-   d:{overview:"Britain fought Boer guerrillas in South Africa, pioneering concentration camps.",
-      causes:"British imperial ambition; gold and diamond wealth; Boer independence.",
-      tactics:"Boer guerrilla warfare with mounted infantry; British responded with blockhouse lines and scorched earth.",
-      outcome:"British victory; Boer republics absorbed into British South Africa.",
-      legacy:"Introduced concentration camps that killed ~28,000 Boer civilians; foreshadowed 20th century warfare.",
-      figures:"Lord Kitchener, Paul Kruger, Jan Smuts, Louis Botha.",
-      weapons:"Mauser rifles, Maxim guns, field artillery, mounted infantry.",
-      civilians:"~28,000 Boer women and children died in British concentration camps."}},
-
-  {id:"russo_japanese",n:"Russo-Japanese War",s:1904,e:1905,x:800,y:195,
-   col:"#e8251a",sz:1.0,region:"East Asia",type:"Interstate",
-   parties:["Japan","Russian Empire"],casualties:"~130,000",
-   d:{overview:"Japan's shocking victory over Russia marked the rise of a non-Western great power.",
-      causes:"Competition for influence in Manchuria and Korea.",
-      tactics:"Japanese used rapid mobilization and combined arms; devastating naval battle of Tsushima.",
-      outcome:"Japanese victory; Russia ceded southern Sakhalin; Japan became a major power.",
-      legacy:"First modern victory of an Asian nation over a European power; inspired anti-colonial movements.",
-      figures:"Admiral Togo, General Nogi, Tsar Nicholas II.",
-      weapons:"Pre-dreadnought battleships, rapid-fire artillery, machine guns, barbed wire.",
-      civilians:"Port Arthur siege caused significant civilian suffering."}},
-
-  // ── Total War ──
-  {id:"ww1",n:"World War I",s:1914,e:1918,x:460,y:190,
-   col:"#e8251a",sz:1.7,region:"Global",type:"World War",
-   parties:["Allied Powers","Central Powers"],casualties:"~20,000,000",
-   d:{overview:"Industrial-scale global conflict that destroyed four empires and reshaped the world order.",
-      causes:"Alliance systems, imperial rivalries, nationalism, and the assassination of Archduke Franz Ferdinand.",
-      tactics:"Trench warfare on the Western Front; poison gas, tanks, and aircraft introduced; Eastern Front was mobile.",
-      outcome:"Allied victory; German, Ottoman, Austro-Hungarian, and Russian empires collapsed.",
-      legacy:"Created the conditions for WWII; established the League of Nations; redrew the map of Europe and the Middle East.",
-      figures:"Haig, Ludendorff, Foch, Ataturk, Lawrence of Arabia.",
-      weapons:"Machine guns, poison gas, tanks, aircraft, submarines, barbed wire.",
-      civilians:"Armenian Genocide; civilian famine; Spanish flu killed 50+ million."}},
-
-  {id:"russian_civil",n:"Russian Civil War",s:1917,e:1922,x:580,y:170,
-   col:"#e8251a",sz:1.2,region:"Russia",type:"Civil/Revolutionary",
-   parties:["Bolsheviks (Red Army)","White Army","Various interventionists"],casualties:"~9,000,000",
-   d:{overview:"Multi-sided civil war following the Bolshevik Revolution that established the Soviet Union.",
-      causes:"Bolshevik seizure of power; opposition from monarchists, democrats, and foreign powers.",
-      tactics:"Red Army used centralized command and ideology; Whites suffered from disunity; armored trains and cavalry.",
-      outcome:"Bolshevik victory established the USSR; White movement defeated.",
-      legacy:"Established communist rule in Russia; defined Soviet-Western relations for the 20th century.",
-      figures:"Lenin, Trotsky, Kolchak, Denikin.",
-      weapons:"Rifles, cavalry, armored trains, machine guns.",
-      civilians:"Red and White Terror killed hundreds of thousands; famine killed millions."}},
-
-  {id:"spanish_civil",n:"Spanish Civil War",s:1936,e:1939,x:420,y:215,
-   col:"#e8251a",sz:1.1,region:"Iberia",type:"Civil",
-   parties:["Republicans","Nationalists/Fascists"],casualties:"~500,000",
-   d:{overview:"Ideological civil war that served as a prelude and testing ground for WWII.",
-      causes:"Political polarization between left-wing Republic and right-wing Nationalists.",
-      tactics:"German and Italian forces tested blitzkrieg tactics; Soviet advisors aided Republicans; aerial bombing of cities.",
-      outcome:"Franco's Nationalists won; established a dictatorship lasting until 1975.",
-      legacy:"Guernica bombing became a symbol of modern warfare's horror; dress rehearsal for WWII.",
-      figures:"Franco, Mola, Dolores Ibarruri, International Brigade volunteers.",
-      weapons:"German Condor Legion aircraft, Soviet tanks, rifles, artillery.",
-      civilians:"Bombing of Guernica; political reprisals on both sides; mass executions."}},
-
-  {id:"sino_japanese2",n:"Second Sino-Japanese War",s:1937,e:1945,x:770,y:215,
-   col:"#e8251a",sz:1.3,region:"East Asia",type:"Invasion",
-   parties:["China","Japan"],casualties:"~20,000,000",
-   d:{overview:"Japanese invasion of China merged into the Pacific Theater of WWII.",
-      causes:"Japanese imperial expansion; desire for Chinese resources and territory.",
-      tactics:"Japanese combined arms and air power vs. Chinese defense in depth and guerrilla warfare.",
-      outcome:"Japanese defeat as part of WWII; China gained a permanent UN Security Council seat.",
-      legacy:"Nanjing Massacre remains a source of East Asian tension; weakened Nationalists enabled Communist victory.",
-      figures:"Chiang Kai-shek, Mao Zedong, Emperor Hirohito, Tojo.",
-      weapons:"Aircraft, tanks, naval forces, chemical weapons.",
-      civilians:"Nanjing Massacre killed 200,000-300,000; widespread use of biological weapons."}},
-
-  {id:"ww2",n:"World War II",s:1939,e:1945,x:470,y:195,
-   col:"#e8251a",sz:2.0,region:"Global",type:"World War",
-   parties:["Allies","Axis Powers"],casualties:"~70,000,000",
-   d:{overview:"The deadliest conflict in human history, fought across every continent and ocean.",
-      causes:"Rise of fascism; Treaty of Versailles grievances; Nazi expansionism; Japanese imperialism.",
-      tactics:"Blitzkrieg, carrier aviation, strategic bombing, submarine warfare, amphibious operations.",
-      outcome:"Axis defeat; United Nations established; US and USSR emerged as superpowers.",
-      legacy:"The Holocaust; atomic weapons; decolonization; Cold War; creation of Israel and modern international order.",
-      figures:"Hitler, Churchill, Roosevelt, Stalin, Eisenhower, Zhukov, Yamamoto.",
-      weapons:"Tanks, aircraft carriers, strategic bombers, V-2 rockets, atomic bombs.",
-      civilians:"Holocaust killed 6 million Jews; firebombing and nuclear attacks on cities; 40+ million civilian deaths."}},
-
-  // ── Cold War / Asymmetric Era ──
-  {id:"chinese_civil",n:"Chinese Civil War",s:1945,e:1949,x:755,y:215,
-   col:"#e8251a",sz:1.2,region:"East Asia",type:"Civil",
-   parties:["Communist Party","Nationalists (KMT)"],casualties:"~6,000,000",
-   d:{overview:"Communist victory over Nationalists established the People's Republic of China.",
-      causes:"Ideological divide between Communists and Nationalists; Japanese invasion weakened KMT.",
-      tactics:"Mao's guerrilla and people's war doctrine; Communists won rural support then encircled cities.",
-      outcome:"PRC established on mainland; Nationalists retreated to Taiwan.",
-      legacy:"Created modern China; Taiwan Strait remains a flashpoint; Mao's ideology shaped global communism.",
-      figures:"Mao Zedong, Chiang Kai-shek, Zhou Enlai, Lin Biao.",
-      weapons:"Soviet-supplied and captured Japanese weapons, guerrilla tactics, conventional offensives.",
-      civilians:"Millions displaced; landlords executed in communist-controlled areas."}},
-
-  {id:"arab_israeli_1948",n:"Arab-Israeli War (1948)",s:1948,e:1949,x:535,y:228,
-   col:"#e8251a",sz:1.0,region:"Middle East",type:"Interstate",
-   parties:["Israel","Arab League states"],casualties:"~20,000",
-   d:{overview:"Israel fought for independence against invading Arab armies immediately after declaring statehood.",
-      causes:"End of British Mandate; competing Jewish and Arab claims to Palestine.",
-      tactics:"Israeli improvisation and interior lines vs. poorly coordinated Arab conventional forces.",
-      outcome:"Israeli victory; state consolidated; armistice lines established.",
-      legacy:"Created the Palestinian refugee crisis (Nakba); set the pattern for decades of Arab-Israeli conflict.",
-      figures:"Ben-Gurion, Moshe Dayan, King Abdullah I, Gamal Abdel Nasser.",
-      weapons:"WWII-surplus weapons, improvised armored vehicles, light aircraft.",
-      civilians:"~700,000 Palestinians displaced; massacres on both sides."}},
-
-  {id:"korean",n:"Korean War",s:1950,e:1953,x:790,y:200,
-   col:"#e8251a",sz:1.3,region:"East Asia",type:"Interstate/Proxy",
-   parties:["South Korea/UN/USA","North Korea/China"],casualties:"~3,000,000",
-   d:{overview:"First major Cold War proxy conflict, fought to a stalemate on the Korean Peninsula.",
-      causes:"Communist North Korea invaded the South; Cold War rivalry between US and USSR/China.",
-      tactics:"Amphibious landing at Inchon; Chinese human wave attacks; trench warfare along the 38th parallel.",
-      outcome:"Armistice restored pre-war border roughly along the 38th parallel; no peace treaty signed.",
-      legacy:"Korea remains divided; established the pattern of Cold War proxy conflicts.",
-      figures:"MacArthur, Kim Il-sung, Mao Zedong, Peng Dehuai.",
-      weapons:"Jet aircraft, napalm, tanks, artillery, infantry weapons.",
-      civilians:"Massive civilian casualties from bombing; millions of refugees; cities destroyed."}},
-
-  {id:"french_indochina",n:"First Indochina War",s:1946,e:1954,x:740,y:260,
-   col:"#e8251a",sz:1.0,region:"Southeast Asia",type:"Colonial/Independence",
-   parties:["Viet Minh","France"],casualties:"~500,000",
-   d:{overview:"Vietnamese independence movement defeated French colonial forces at Dien Bien Phu.",
-      causes:"Vietnamese desire for independence; French attempt to restore colonial rule after WWII.",
-      tactics:"Viet Minh guerrilla warfare evolved into conventional operations; French fortified positions failed.",
-      outcome:"French defeat at Dien Bien Phu; Vietnam partitioned at the 17th parallel.",
-      legacy:"Ended French Indochina; set the stage for American involvement in Vietnam.",
-      figures:"Ho Chi Minh, Vo Nguyen Giap, de Lattre de Tassigny.",
-      weapons:"Guerrilla weapons, artillery at Dien Bien Phu, French Foreign Legion equipment.",
-      civilians:"Widespread displacement and suffering in the Vietnamese countryside."}},
-
-  {id:"vietnam",n:"Vietnam War",s:1955,e:1975,x:742,y:262,
-   col:"#e8251a",sz:1.4,region:"Southeast Asia",type:"Interstate/Proxy",
-   parties:["North Vietnam/Viet Cong","South Vietnam/USA"],casualties:"~3,500,000",
-   d:{overview:"Prolonged US intervention in Vietnam ended in North Vietnamese victory and reunification.",
-      causes:"Cold War containment policy; North Vietnamese desire for reunification under communism.",
-      tactics:"US technological superiority vs. guerrilla warfare and tunnel networks; strategic bombing campaigns.",
-      outcome:"US withdrawal in 1973; North Vietnam conquered the South in 1975.",
-      legacy:"Shattered American confidence; influenced US foreign policy; Agent Orange legacy persists.",
-      figures:"Ho Chi Minh, Giap, LBJ, Nixon, Westmoreland.",
-      weapons:"Helicopters, napalm, B-52 bombers, AK-47s, booby traps, Agent Orange.",
-      civilians:"Millions of Vietnamese civilians killed; My Lai massacre; Agent Orange caused generational harm."}},
-
-  {id:"six_day",n:"Six-Day War",s:1967,e:1967,x:536,y:230,
-   col:"#e8251a",sz:0.9,region:"Middle East",type:"Interstate",
-   parties:["Israel","Egypt, Syria, Jordan"],casualties:"~24,000",
-   d:{overview:"Israel's preemptive strike destroyed Arab air forces and captured Sinai, West Bank, and Golan Heights.",
-      causes:"Egyptian blockade of Tiran Strait; Arab military buildup; Cold War tensions.",
-      tactics:"Israeli preemptive air strikes destroyed enemy air forces on the ground; rapid armored advances.",
-      outcome:"Decisive Israeli victory; territorial gains tripled Israel's size.",
-      legacy:"Created the occupied territories issue that dominates Middle East politics to this day.",
-      figures:"Moshe Dayan, Yitzhak Rabin, Gamal Abdel Nasser.",
-      weapons:"Mirage and MiG jets, Centurion and Patton tanks, artillery.",
-      civilians:"~300,000 Palestinians displaced from the West Bank and Gaza."}},
-
-  {id:"soviet_afghan",n:"Soviet-Afghan War",s:1979,e:1989,x:620,y:215,
-   col:"#e8251a",sz:1.2,region:"Central Asia",type:"Insurgency",
-   parties:["Soviet Union","Afghan Mujahideen"],casualties:"~2,000,000",
-   d:{overview:"Soviet Union's failed attempt to support a communist government in Afghanistan.",
-      causes:"Soviet intervention to prop up a failing communist government; Cold War proxy dynamics.",
-      tactics:"Soviet conventional forces vs. mujahideen guerrilla warfare; Stinger missiles changed the air war.",
-      outcome:"Soviet withdrawal in 1989; Afghan civil war continued; contributed to Soviet collapse.",
-      legacy:"Gave rise to the Taliban and al-Qaeda; called 'the Soviet Vietnam.'",
-      figures:"Brezhnev, Ahmad Shah Massoud, Gulbuddin Hekmatyar, Osama bin Laden.",
-      weapons:"Mi-24 helicopters, AK-47s, Stinger missiles, IEDs.",
-      civilians:"1-2 million Afghan civilians killed; 5 million refugees; millions of landmines."}},
-
-  {id:"falklands",n:"Falklands War",s:1982,e:1982,x:290,y:420,
-   col:"#e8251a",sz:0.8,region:"South Atlantic",type:"Interstate",
-   parties:["United Kingdom","Argentina"],casualties:"~907",
-   d:{overview:"Britain recaptured the Falkland Islands after Argentine invasion.",
-      causes:"Argentine junta sought to distract from domestic problems by seizing the disputed islands.",
-      tactics:"British naval task force projected power 8,000 miles; Exocet missile attacks threatened the fleet.",
-      outcome:"British victory restored sovereignty over the Falklands.",
-      legacy:"Demonstrated the continued relevance of conventional naval power; hastened the fall of Argentina's junta.",
-      figures:"Margaret Thatcher, General Galtieri, Admiral Woodward.",
-      weapons:"Harrier jets, Exocet missiles, submarines, naval task force.",
-      civilians:"Minimal civilian casualties; Falkland islanders sheltered during combat."}},
-
-  {id:"iran_iraq",n:"Iran-Iraq War",s:1980,e:1988,x:575,y:230,
-   col:"#e8251a",sz:1.3,region:"Middle East",type:"Interstate",
-   parties:["Iraq","Iran"],casualties:"~1,000,000",
-   d:{overview:"Eight-year war of attrition between Iraq and revolutionary Iran, resembling WWI.",
-      causes:"Iraqi opportunism after Iranian Revolution; border disputes; Sunni-Shia tensions.",
-      tactics:"Trench warfare, human wave attacks, chemical weapons, tanker war in the Persian Gulf.",
-      outcome:"Stalemate; UN ceasefire; borders returned to pre-war status quo.",
-      legacy:"Iraq's war debt drove the invasion of Kuwait; chemical weapons use set dangerous precedents.",
-      figures:"Saddam Hussein, Ayatollah Khomeini.",
-      weapons:"Chemical weapons, Soviet and Western arms, missiles, human wave tactics.",
-      civilians:"Chemical attacks on Kurdish civilians at Halabja; cities targeted by missiles."}},
-
-  {id:"gulf_war",n:"Gulf War (1990-91)",s:1990,e:1991,x:570,y:232,
-   col:"#e8251a",sz:1.1,region:"Middle East",type:"Interstate",
-   parties:["US-led Coalition","Iraq"],casualties:"~35,000",
-   d:{overview:"International coalition expelled Iraq from Kuwait in a swift campaign.",
-      causes:"Iraq's invasion of Kuwait for oil wealth and debt cancellation.",
-      tactics:"Precision air campaign followed by rapid ground offensive; 'left hook' flanking maneuver.",
-      outcome:"Kuwait liberated; Iraq's military devastated but Saddam remained in power.",
-      legacy:"Demonstrated US military dominance; established no-fly zones; unresolved Iraq situation led to 2003 war.",
-      figures:"George H.W. Bush, Norman Schwarzkopf, Saddam Hussein, Colin Powell.",
-      weapons:"Stealth aircraft, precision-guided munitions, M1 Abrams tanks, cruise missiles.",
-      civilians:"Highway of Death; Iraqi infrastructure destroyed; sanctions caused humanitarian crisis."}},
-
-  {id:"yugoslav",n:"Yugoslav Wars",s:1991,e:2001,x:478,y:200,
-   col:"#e8251a",sz:1.2,region:"Southeastern Europe",type:"Civil/Ethnic",
-   parties:["Serbia","Croatia","Bosnia","Kosovo/NATO"],casualties:"~140,000",
-   d:{overview:"Breakup of Yugoslavia led to a series of ethnic conflicts and NATO intervention.",
-      causes:"Collapse of communism; ethnic nationalism; Serbian expansionism.",
-      tactics:"Ethnic cleansing, siege warfare, guerrilla combat; NATO air campaigns.",
-      outcome:"Yugoslavia dissolved into independent states; war criminals prosecuted at The Hague.",
-      legacy:"Established precedent for humanitarian intervention; Srebrenica genocide defined 'ethnic cleansing.'",
-      figures:"Milosevic, Tudjman, Izetbegovic, Mladic, Karadzic.",
-      weapons:"Yugoslav-era military equipment, small arms, NATO precision munitions.",
-      civilians:"Srebrenica massacre killed 8,000; Sarajevo besieged for nearly 4 years; mass displacement."}},
-
-  {id:"rwandan",n:"Rwandan Civil War & Genocide",s:1990,e:1994,x:515,y:310,
-   col:"#e8251a",sz:1.1,region:"Central Africa",type:"Civil/Genocide",
-   parties:["Hutu government","Tutsi RPF"],casualties:"~1,000,000",
-   d:{overview:"Civil war culminated in the 1994 genocide of Tutsis and moderate Hutus.",
-      causes:"Colonial-era ethnic divisions; political extremism; economic pressures.",
-      tactics:"Militia-driven genocide using machetes and small arms; RPF conventional military campaign.",
-      outcome:"RPF victory ended the genocide; refugee crisis destabilized the region.",
-      legacy:"Failure of international community to intervene; reshaped thinking on humanitarian responsibility.",
-      figures:"Paul Kagame, Romeo Dallaire, Juvenal Habyarimana.",
-      weapons:"Machetes, small arms, grenades; RPF had conventional military equipment.",
-      civilians:"~800,000 Tutsis and moderate Hutus killed in 100 days; mass rape as weapon of war."}},
-
-  {id:"afghanistan",n:"War in Afghanistan",s:2001,e:2021,x:625,y:218,
-   col:"#e8251a",sz:1.3,region:"Central/South Asia",type:"Insurgency",
-   parties:["US/NATO/Afghan government","Taliban/al-Qaeda"],casualties:"~240,000",
-   d:{overview:"US-led invasion after 9/11 toppled the Taliban, but a 20-year insurgency followed.",
-      causes:"September 11 attacks; Taliban harboring al-Qaeda; war on terror.",
-      tactics:"US precision strikes and special forces; Taliban guerrilla warfare and IEDs; drone warfare.",
-      outcome:"US withdrawal in 2021; Taliban returned to power; Afghan government collapsed.",
-      legacy:"Longest US war; questioned efficacy of nation-building; drone warfare precedents.",
-      figures:"George W. Bush, Osama bin Laden, Mullah Omar, Hamid Karzai.",
-      weapons:"Drones, precision munitions, IEDs, MRAP vehicles, night-vision technology.",
-      civilians:"~71,000 Afghan civilians killed; millions displaced; humanitarian crisis."}},
-
-  {id:"iraq_war",n:"Iraq War",s:2003,e:2011,x:565,y:228,
-   col:"#e8251a",sz:1.2,region:"Middle East",type:"Invasion/Insurgency",
-   parties:["US-led Coalition","Iraq/Insurgents"],casualties:"~460,000+",
-   d:{overview:"US-led invasion toppled Saddam Hussein, followed by years of insurgency and sectarian violence.",
-      causes:"Alleged WMDs (never found); post-9/11 security doctrine; regime change policy.",
-      tactics:"Rapid conventional victory followed by counterinsurgency; IEDs dominated the insurgent war.",
-      outcome:"Saddam overthrown; protracted insurgency; withdrawal in 2011; ISIS emerged from the chaos.",
-      legacy:"Discredited preemptive war doctrine; destabilized the Middle East; contributed to rise of ISIS.",
-      figures:"George W. Bush, Saddam Hussein, David Petraeus, Abu Musab al-Zarqawi.",
-      weapons:"Precision munitions, IEDs, drones, armored vehicles.",
-      civilians:"Hundreds of thousands of Iraqi civilian deaths; millions of refugees."}},
-
-  {id:"syrian_civil",n:"Syrian Civil War",s:2011,e:2023,x:545,y:222,
-   col:"#e8251a",sz:1.2,region:"Middle East",type:"Civil/Proxy",
-   parties:["Assad regime/Russia","Rebels/ISIS/Kurds/Turkey/US"],casualties:"~600,000",
-   d:{overview:"Multi-sided civil war involving regional and global powers, creating a massive humanitarian crisis.",
-      causes:"Arab Spring protests met with violent repression; sectarian and geopolitical tensions.",
-      tactics:"Urban warfare, barrel bombs, chemical weapons, proxy forces, drone and air strikes.",
-      outcome:"Assad regime survived with Russian and Iranian support; territorial fragmentation.",
-      legacy:"Largest refugee crisis since WWII; chemical weapons use; resurgence of great power competition.",
-      figures:"Bashar al-Assad, Vladimir Putin, Abu Bakr al-Baghdadi.",
-      weapons:"Barrel bombs, chemical weapons, Russian air power, drones, MANPADS.",
-      civilians:"~13 million displaced; chemical attacks on civilians; siege of Aleppo."}},
-
-  {id:"ukraine",n:"Russo-Ukrainian War",s:2014,e:2025,x:505,y:185,
-   col:"#e8251a",sz:1.3,region:"Eastern Europe",type:"Interstate",
-   parties:["Ukraine/Western support","Russia"],casualties:"~200,000+",
-   d:{overview:"Russian aggression against Ukraine escalated from Crimean annexation to full-scale invasion in 2022.",
-      causes:"Russian opposition to Ukrainian Western alignment; NATO expansion; imperial ambitions.",
-      tactics:"Combined arms warfare, drone warfare, trench warfare, cyber attacks, missile strikes on infrastructure.",
-      outcome:"Ongoing as of 2025; Ukraine defending with Western support; Russia occupying ~18% of territory.",
-      legacy:"Revived NATO unity; demonstrated drone warfare's dominance; largest European war since WWII.",
-      figures:"Volodymyr Zelensky, Vladimir Putin, Valerii Zaluzhnyi.",
-      weapons:"Drones, HIMARS, Javelin missiles, Bayraktar TB2, hypersonic missiles.",
-      civilians:"Thousands of civilian deaths; millions of refugees; infrastructure systematically targeted."}},
-
-  {id:"ethiopian_tigray",n:"Tigray War",s:2020,e:2022,x:540,y:290,
-   col:"#e8251a",sz:1.0,region:"East Africa",type:"Civil",
-   parties:["Ethiopian government/Eritrea","TPLF"],casualties:"~600,000",
-   d:{overview:"Devastating civil war in Ethiopia's Tigray region involving federal forces and Eritrean troops.",
-      causes:"Political tensions between federal government and Tigray People's Liberation Front.",
-      tactics:"Conventional and guerrilla warfare; siege and blockade of Tigray; drone strikes.",
-      outcome:"Ceasefire agreement in November 2022; TPLF disarmed.",
-      legacy:"One of the deadliest 21st century conflicts; massive humanitarian crisis largely hidden from world media.",
-      figures:"Abiy Ahmed, Debretsion Gebremichael, Isaias Afwerki.",
-      weapons:"Drones (Turkish/Chinese), artillery, small arms, conventional military equipment.",
-      civilians:"Mass atrocities; sexual violence used as weapon; deliberate starvation through blockade."}},
-
-  {id:"israel_hamas_2023",n:"Israel-Hamas War (2023-)",s:2023,e:2025,x:534,y:227,
-   col:"#e8251a",sz:1.1,region:"Middle East",type:"Asymmetric",
-   parties:["Israel","Hamas/Palestinian groups"],casualties:"~50,000+",
-   d:{overview:"Major escalation following Hamas's October 7 attack, leading to Israeli military campaign in Gaza.",
-      causes:"Hamas attack on October 7, 2023; decades of Israeli-Palestinian conflict; blockade of Gaza.",
-      tactics:"Hamas tunnel warfare and rocket attacks; Israeli air and ground campaign in dense urban terrain.",
-      outcome:"Ongoing as of 2025; massive destruction in Gaza; regional escalation concerns.",
-      legacy:"Unprecedented destruction in Gaza; global debate over laws of war; regional destabilization.",
-      figures:"Benjamin Netanyahu, Yahya Sinwar, Yoav Gallant.",
-      weapons:"Precision munitions, tunnel networks, rockets, drones, urban warfare equipment.",
-      civilians:"Tens of thousands of Palestinian civilians killed; Israeli hostages taken; mass displacement."}}
-];
-
-// ── Connections between related conflicts ───────────────────
-const CONNECTIONS = [
-  {from:"punic1",to:"punic2",label:"Sequel"},
-  {from:"persian",to:"peloponnesian",label:"Post-Persian rivalry"},
-  {from:"french_revolution",to:"napoleonic",label:"Revolutionary to Imperial"},
-  {from:"ww1",to:"ww2",label:"Unresolved grievances"},
-  {from:"ww1",to:"russian_civil",label:"Revolution amid war"},
-  {from:"ww2",to:"korean",label:"Cold War partition"},
-  {from:"ww2",to:"chinese_civil",label:"Post-WWII power vacuum"},
-  {from:"ww2",to:"arab_israeli_1948",label:"Post-colonial partition"},
-  {from:"french_indochina",to:"vietnam",label:"Colonial to Cold War"},
-  {from:"soviet_afghan",to:"afghanistan",label:"Taliban origins"},
-  {from:"gulf_war",to:"iraq_war",label:"Unfinished business"},
-  {from:"iran_iraq",to:"gulf_war",label:"Iraqi debt crisis"},
-  {from:"franco_prussian",to:"ww1",label:"Alsace-Lorraine revanchism"},
-  {from:"spanish_civil",to:"ww2",label:"Ideological prelude"},
-  {from:"six_day",to:"israel_hamas_2023",label:"Occupation legacy"},
-  {from:"mongol_conquests",to:"fall_constantinople",label:"Ottoman rise from Mongol aftermath"},
-  {from:"syrian_civil",to:"israel_hamas_2023",label:"Regional destabilization"},
-  {from:"hundred_years",to:"reconquista",label:"Contemporary conflicts"}
-];
-
-// ── Military Innovation Transmission Chains ─────────────────
-const TRANSMISSIONS = [
-  {id:"gunpowder",n:"Gunpowder",path:["warring_states","mongol_conquests","hundred_years","thirty_years"],
-   desc:"Invented in China, spread westward by Mongols, transformed European warfare."},
-  {id:"stirrup",n:"Stirrup & Heavy Cavalry",path:["warring_states","arab_conquests","crusade1","hundred_years"],
-   desc:"Stirrup enabled mounted shock combat; spread from Central Asia to define medieval warfare."},
-  {id:"blitzkrieg",n:"Blitzkrieg Doctrine",path:["franco_prussian","ww1","spanish_civil","ww2"],
-   desc:"Mobile warfare evolved from Prussian rapid maneuver through WWI stormtroopers to WWII Panzer divisions."},
-  {id:"trench",n:"Trench Warfare",path:["us_civil","russo_japanese","ww1","ukraine"],
-   desc:"Field fortification evolved from American Civil War to WWI's Western Front, returning in Ukraine."},
-  {id:"naval_power",n:"Naval Supremacy",path:["persian","punic1","seven_years","ww2"],
-   desc:"Control of the seas from Greek triremes to WWII carrier warfare."},
-  {id:"guerrilla",n:"Guerrilla Warfare",path:["napoleonic","boer_war","vietnam","afghanistan"],
-   desc:"Asymmetric resistance from Spanish guerrillas to modern insurgencies."},
-  {id:"air_power",n:"Air Power",path:["ww1","spanish_civil","ww2","gulf_war"],
-   desc:"From reconnaissance biplanes to precision-guided munitions and air superiority."},
-  {id:"nuclear",n:"Nuclear Deterrence",path:["ww2","korean","six_day","ukraine"],
-   desc:"Atomic weapons from Hiroshima shaped Cold War strategy and modern deterrence."},
-  {id:"drone",n:"Drone Warfare",path:["gulf_war","afghanistan","ukraine","israel_hamas_2023"],
-   desc:"From early UAV reconnaissance to decisive combat drones in modern warfare."},
-  {id:"propaganda",n:"Information Warfare",path:["napoleonic","ww1","ww2","ukraine"],
-   desc:"From Napoleon's bulletins to social media and cyber warfare in the modern era."}
-];
-
-/* ═══════════════════════════════════════════════════════════
-   CORE APPLICATION STATE
-   ═══════════════════════════════════════════════════════════ */
-let state = {
-  year: 2000,
-  selectedWar: null,
-  compareWar: null,
-  activeLenses: ["overview"],
-  mode: "explore",       // explore | threads | compare
-  theme: null,           // null = system, "dark", "light"
-  zoom: 1,
-  panX: 0,
-  panY: 0,
-  isPanning: false,
-  panStartX: 0,
-  panStartY: 0,
-  panStartPanX: 0,
-  panStartPanY: 0,
-  playing: false,
-  playInterval: null
-};
-
-/* ═══════════════════════════════════════════════════════════
-   UTILITY FUNCTIONS
-   ═══════════════════════════════════════════════════════════ */
-
-/** Format year as BCE/CE string */
-function fmt(y) {
-  if (y < 0) return Math.abs(y) + " BCE";
-  if (y === 0) return "1 BCE";
-  return y + " CE";
-}
-
-/** Get era name for a given year */
-function eraName(y) {
-  for (let i = ERAS.length - 1; i >= 0; i--) {
-    if (y >= ERAS[i].s) return ERAS[i].n;
-  }
-  return ERAS[0].n;
-}
-
-/** Check if a war is "active" (ongoing) at the current timeline year */
-function active(w) {
-  return state.year >= w.s && state.year <= w.e;
-}
-
-/** Convert slider value (0-5025) to year (-3000 to 2025) */
-function sliderToYear(v) {
-  return Math.round(v - 3000);
-}
-
-/** Convert year to slider value */
-function yearToSlider(y) {
-  return y + 3000;
-}
-
-/** Find a war by ID */
-function warById(id) {
-  return WARS.find(w => w.id === id);
-}
-
-/** Clamp a value between min and max */
-function clamp(v, min, max) {
-  return Math.max(min, Math.min(max, v));
-}
-
-/* ═══════════════════════════════════════════════════════════
-   SVG WORLD MAP (simplified continent outlines)
-   ═══════════════════════════════════════════════════════════ */
-
-function renderWorldMap(world){
-  const W=1000,H=520;
-  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
-  window._proj=proj;
-  const pathGen=d3.geoPath().projection(proj);
-  const land=topojson.feature(world,world.objects.land);
-  const countries=topojson.feature(world,world.objects.countries);
-  let g=document.getElementById('map-layer');
-  const graticule=d3.geoGraticule()();
-  const gratPath=pathGen(graticule)||'';
-  const landPath=pathGen(land)||'';
-  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
-  const borderPath=pathGen(borders)||'';
-  g.innerHTML=
-    `<path d="${gratPath}" fill="none" stroke="var(--border)" stroke-width=".3"/>` +
-    `<path id="land-path" d="${landPath}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>` +
-    `<path d="${borderPath}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
-}
-
-function bellPt(item){
-  if(!item)return[500,260];
-  if(!window._proj)return[item.x||500,item.y||260];
-  if(typeof item.lon==='number'&&typeof item.lat==='number'){
-    try{const pt=window._proj([item.lon,item.lat]);return pt&&isFinite(pt[0])&&isFinite(pt[1])?pt:[item.x||500,item.y||260];}
-    catch(e){return[item.x||500,item.y||260];}
-  }
-  return[item.x||500,item.y||260];
-}
-
-/* ═══════════════════════════════════════════════════════════
-   MAP RENDERING
-   ═══════════════════════════════════════════════════════════ */
-
-function renderMap() {
-  const mg = document.getElementById("markersGroup");
-  const lg = document.getElementById("labelsGroup");
-  mg.innerHTML = "";
-  lg.innerHTML = "";
-
-  WARS.forEach(w => {
-    const isActive = active(w);
-    const isSelected = state.selectedWar === w.id;
-    const baseR = w.sz * 4;
-
-    // Pulse ring for active wars
-    if (isActive) {
-      const pulse = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      pulse.setAttribute("cx", w.x);
-      pulse.setAttribute("cy", w.y);
-      pulse.setAttribute("r", baseR + 3);
-      pulse.setAttribute("class", "war-pulse");
-      pulse.style.animationDelay = (Math.random() * 2) + "s";
-      mg.appendChild(pulse);
-    }
-
-    // Main marker
-    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circle.setAttribute("cx", w.x);
-    circle.setAttribute("cy", w.y);
-    circle.setAttribute("r", isSelected ? baseR + 2 : baseR);
-    circle.setAttribute("fill", w.col);
-    circle.setAttribute("class", "war-marker" + (isSelected ? " war-glow" : ""));
-    circle.setAttribute("opacity", isActive ? "0.9" : "0.25");
-    circle.setAttribute("data-id", w.id);
-    circle.setAttribute("tabindex", "0");
-    circle.setAttribute("role", "button");
-    circle.setAttribute("aria-label", w.n + " (" + fmt(w.s) + (w.s !== w.e ? " – " + fmt(w.e) : "") + ")");
-
-    circle.addEventListener("click", () => warClick(w.id));
-    circle.addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); warClick(w.id); }
-    });
-    mg.appendChild(circle);
-
-    // Label for selected or active wars at higher zoom
-    if (isSelected || (isActive && state.zoom > 1.3)) {
-      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-      text.setAttribute("x", w.x);
-      text.setAttribute("y", w.y - baseR - 3);
-      text.setAttribute("text-anchor", "middle");
-      text.setAttribute("class", "war-label");
-      if (isSelected) text.style.fontWeight = "700";
-      text.textContent = w.n;
-      lg.appendChild(text);
-    }
-  });
-
-  renderConnections();
-  renderTransmissions();
-}
-
-function renderConnections() {
-  const g = document.getElementById("connectionsGroup");
-  g.innerHTML = "";
-  if (state.mode !== "explore") return;
-
-  CONNECTIONS.forEach(c => {
-    const from = warById(c.from);
-    const to = warById(c.to);
-    if (!from || !to) return;
-    // Only show connections for selected war
-    if (state.selectedWar && (c.from === state.selectedWar || c.to === state.selectedWar)) {
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      line.setAttribute("x1", from.x);
-      line.setAttribute("y1", from.y);
-      line.setAttribute("x2", to.x);
-      line.setAttribute("y2", to.y);
-      line.setAttribute("class", "connection-line");
-      line.setAttribute("opacity", "0.5");
-      g.appendChild(line);
-    }
-  });
-}
-
-function renderTransmissions() {
-  const g = document.getElementById("transmissionsGroup");
-  g.innerHTML = "";
-  if (state.mode !== "threads") return;
-
-  TRANSMISSIONS.forEach(t => {
-    for (let i = 0; i < t.path.length - 1; i++) {
-      const from = warById(t.path[i]);
-      const to = warById(t.path[i + 1]);
-      if (!from || !to) continue;
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      line.setAttribute("x1", from.x);
-      line.setAttribute("y1", from.y);
-      line.setAttribute("x2", to.x);
-      line.setAttribute("y2", to.y);
-      line.setAttribute("class", "transmission-line");
-      g.appendChild(line);
-    }
-  });
-}
-
-/* ═══════════════════════════════════════════════════════════
-   INFO PANEL / DRAWER
-   ═══════════════════════════════════════════════════════════ */
-
-function renderDrawer() {
-  const panel = document.getElementById("infoPanel");
-  const placeholder = document.getElementById("panelPlaceholder");
-  const content = document.getElementById("panelContent");
-
-  if (!state.selectedWar) {
-    placeholder.style.display = "flex";
-    content.style.display = "none";
-    content.innerHTML = "";
-    return;
-  }
-
-  placeholder.style.display = "none";
-  content.style.display = "block";
-  renderDrawerContent();
-
-  // On mobile, open the panel
-  if (window.innerWidth <= 900) {
-    panel.classList.add("mobile-open");
-    panel.classList.remove("collapsed");
-  }
-}
-
-function renderDrawerContent() {
-  const w = warById(state.selectedWar);
-  if (!w) return;
-  const content = document.getElementById("panelContent");
-
-  let html = "";
-
-  // Header
-  html += '<div class="panel-header">';
-  html += '<div class="panel-title">' + escHtml(w.n) + '</div>';
-  html += '<div class="panel-subtitle">' + fmt(w.s) + (w.s !== w.e ? " – " + fmt(w.e) : "") + '</div>';
-  html += '</div>';
-
-  // Meta tags
-  html += '<div class="panel-meta">';
-  html += '<span class="meta-tag">' + escHtml(w.region) + '</span>';
-  html += '<span class="meta-tag">' + escHtml(w.type) + '</span>';
-  html += '<span class="meta-tag">' + escHtml(w.casualties) + '</span>';
-  if (w.parties) {
-    w.parties.forEach(p => {
-      html += '<span class="meta-tag">' + escHtml(p) + '</span>';
-    });
-  }
-  html += '</div>';
-
-  // Lens sections
-  html += '<div class="panel-body">';
-  state.activeLenses.forEach(lensId => {
-    const lens = LENSES.find(l => l.id === lensId);
-    if (!lens) return;
-    const text = w.d[lensId];
-    if (!text) return;
-    html += '<div class="lens-section">';
-    html += '<div class="lens-section-title">' + lens.ico + " " + escHtml(lens.n) + '</div>';
-    html += '<div class="lens-section-body">' + escHtml(text) + '</div>';
-    html += '</div>';
-  });
-  html += '</div>';
-
-  // Related conflicts
-  const related = CONNECTIONS.filter(c => c.from === w.id || c.to === w.id);
-  if (related.length > 0) {
-    html += '<div class="panel-body" style="border-top:1px solid var(--border);padding-top:0.75rem">';
-    html += '<div class="lens-section-title">🔗 Related Conflicts</div>';
-    related.forEach(c => {
-      const otherId = c.from === w.id ? c.to : c.from;
-      const other = warById(otherId);
-      if (!other) return;
-      html += '<button class="burger-item" onclick="warClick(\'' + otherId + '\')" style="padding:0.3rem 0.4rem;font-size:0.85rem">';
-      html += '<span class="ico" style="font-size:0.8rem">⚔️</span> ' + escHtml(other.n) + ' <span style="color:var(--muted);font-size:0.75rem">(' + escHtml(c.label) + ')</span>';
-      html += '</button>';
-    });
-    html += '</div>';
-  }
-
-  content.innerHTML = html;
-}
-
-function escHtml(s) {
-  const div = document.createElement("div");
-  div.textContent = s;
-  return div.innerHTML;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   LENS DROPDOWN
-   ═══════════════════════════════════════════════════════════ */
-
-function renderLensDD() {
-  const menu = document.getElementById("lensDDMenu");
-  let html = "";
-  LENSES.forEach(l => {
-    const isActive = state.activeLenses.includes(l.id);
-    html += '<button class="lens-dd-item' + (isActive ? " active" : "") + '" onclick="toggleLens(\'' + l.id + '\')" role="menuitem">';
-    html += '<span class="ico">' + l.ico + '</span> ' + escHtml(l.n);
-    html += '<span class="check">✓</span>';
-    html += '</button>';
-  });
-  menu.innerHTML = html;
-}
-
-function toggleLens(id) {
-  const idx = state.activeLenses.indexOf(id);
-  if (idx >= 0) {
-    if (state.activeLenses.length > 1) {
-      state.activeLenses.splice(idx, 1);
-    }
-  } else {
-    state.activeLenses.push(id);
-  }
-  renderLensDD();
-  renderDrawer();
-}
-
-function toggleLensDD() {
-  const menu = document.getElementById("lensDDMenu");
-  menu.classList.toggle("open");
-}
-
-/* ═══════════════════════════════════════════════════════════
-   TIMELINE
-   ═══════════════════════════════════════════════════════════ */
-
-function setYear(y) {
-  state.year = clamp(y, -3000, 2025);
-  document.getElementById("timeSlider").value = yearToSlider(state.year);
-  document.getElementById("yearLabel").textContent = fmt(state.year);
-  document.getElementById("eraDisplay").textContent = eraName(state.year);
-  renderMap();
-}
-
-function renderDensityBar() {
-  const svg = document.getElementById("densityBar");
-  const bins = 100;
-  const binWidth = 5025 / bins;
-  const counts = new Array(bins).fill(0);
-
-  WARS.forEach(w => {
-    const s = yearToSlider(w.s);
-    const e = yearToSlider(w.e);
-    for (let i = 0; i < bins; i++) {
-      const binStart = i * binWidth;
-      const binEnd = (i + 1) * binWidth;
-      if (s < binEnd && e >= binStart) counts[i]++;
-    }
-  });
-
-  const maxC = Math.max(...counts, 1);
-  let html = "";
-  for (let i = 0; i < bins; i++) {
-    const h = (counts[i] / maxC) * 14;
-    const x = (i / bins) * 500;
-    const w = 500 / bins;
-    html += '<rect class="density-bar" x="' + x + '" y="' + (16 - h) + '" width="' + (w - 0.5) + '" height="' + h + '"/>';
-  }
-  svg.innerHTML = html;
-}
-
-function togglePlay() {
-  state.playing = !state.playing;
-  const btn = document.getElementById("playBtn");
-  if (state.playing) {
-    btn.textContent = "⏸";
-    state.playInterval = setInterval(() => {
-      if (state.year >= 2025) {
-        togglePlay();
-        return;
-      }
-      setYear(state.year + 5);
-    }, 100);
-  } else {
-    btn.textContent = "▶";
-    clearInterval(state.playInterval);
-    state.playInterval = null;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   WAR SELECTION & NAVIGATION
-   ═══════════════════════════════════════════════════════════ */
-
-function warClick(id) {
-  if (state.mode === "compare") {
-    if (!state.selectedWar) {
-      state.selectedWar = id;
-    } else if (state.selectedWar !== id) {
-      state.compareWar = id;
-      renderCompare();
-    }
-  } else {
-    state.selectedWar = (state.selectedWar === id) ? null : id;
-    state.compareWar = null;
-  }
-  renderMap();
-  renderDrawer();
-}
-
-function navigateToWar(id) {
-  const w = warById(id);
-  if (!w) return;
-  state.selectedWar = id;
-
-  // Center on the war's location
-  const svg = document.getElementById("mainMap");
-  const rect = svg.getBoundingClientRect();
-  const svgW = rect.width;
-  const svgH = rect.height;
-
-  state.zoom = 2.5;
-  state.panX = -(w.x * state.zoom - svgW / 2);
-  state.panY = -(w.y * state.zoom - svgH / 2);
-
-  applyTransform();
-  setYear(w.s);
-  renderMap();
-  renderDrawer();
-}
-
-/* ═══════════════════════════════════════════════════════════
-   COMPARE MODE
-   ═══════════════════════════════════════════════════════════ */
-
-function renderCompare() {
-  const panel = document.getElementById("comparePanel");
-  if (!state.selectedWar || !state.compareWar) {
-    panel.classList.remove("open");
-    panel.innerHTML = "";
-    return;
-  }
-
-  const w1 = warById(state.selectedWar);
-  const w2 = warById(state.compareWar);
-  if (!w1 || !w2) return;
-
-  panel.classList.add("open");
-
-  const fields = [
-    ["Period", fmt(w1.s) + " – " + fmt(w1.e), fmt(w2.s) + " – " + fmt(w2.e)],
-    ["Region", w1.region, w2.region],
-    ["Type", w1.type, w2.type],
-    ["Casualties", w1.casualties, w2.casualties],
-    ["Parties", w1.parties.join(", "), w2.parties.join(", ")]
-  ];
-
-  let html = '<div class="compare-col">';
-  html += '<div class="compare-col-title">' + escHtml(w1.n) + '</div>';
-  fields.forEach(f => {
-    html += '<div class="compare-row"><span class="compare-label">' + f[0] + '</span><span class="compare-val">' + escHtml(f[1]) + '</span></div>';
-  });
-  html += '</div>';
-  html += '<div class="compare-divider"></div>';
-  html += '<div class="compare-col">';
-  html += '<div class="compare-col-title">' + escHtml(w2.n) + '</div>';
-  fields.forEach(f => {
-    html += '<div class="compare-row"><span class="compare-label">' + f[0] + '</span><span class="compare-val">' + escHtml(f[2]) + '</span></div>';
-  });
-  html += '</div>';
-  html += '<button onclick="closeCompare()" style="position:absolute;top:0.5rem;right:0.75rem;font-size:1.2rem;color:var(--muted)">✕</button>';
-
-  panel.innerHTML = html;
-}
-
-function closeCompare() {
-  state.compareWar = null;
-  document.getElementById("comparePanel").classList.remove("open");
-  document.getElementById("comparePanel").innerHTML = "";
-}
-
-/* ═══════════════════════════════════════════════════════════
-   ZOOM & PAN
-   ═══════════════════════════════════════════════════════════ */
-
-function applyTransform() {
-  const g = document.getElementById("mainMap");
-  const inner = g.querySelector("#landGroup").parentElement;
-  // Apply transform to all child groups via a wrapping transform on the SVG viewBox approach
-  // Instead, we transform the SVG element itself
-  g.style.transformOrigin = "0 0";
-  g.style.transform = "scale(" + state.zoom + ") translate(" + (state.panX / state.zoom) + "px, " + (state.panY / state.zoom) + "px)";
-}
-
-function handleWheel(e) {
-  e.preventDefault();
-  const delta = e.deltaY > 0 ? 0.9 : 1.1;
-  const newZoom = clamp(state.zoom * delta, 0.5, 8);
-
-  // Zoom toward cursor
-  const svg = document.getElementById("mainMap");
-  const rect = svg.getBoundingClientRect();
-  const mx = e.clientX - rect.left;
-  const my = e.clientY - rect.top;
-
-  const zoomRatio = newZoom / state.zoom;
-  state.panX = mx - zoomRatio * (mx - state.panX);
-  state.panY = my - zoomRatio * (my - state.panY);
-  state.zoom = newZoom;
-
-  applyTransform();
-}
-
-function handleMouseDown(e) {
-  if (e.button !== 0) return;
-  // Don't start pan if clicking on a marker
-  if (e.target.classList.contains("war-marker")) return;
-  state.isPanning = true;
-  state.panStartX = e.clientX;
-  state.panStartY = e.clientY;
-  state.panStartPanX = state.panX;
-  state.panStartPanY = state.panY;
-}
-
-function handleMouseMove(e) {
-  if (!state.isPanning) return;
-  state.panX = state.panStartPanX + (e.clientX - state.panStartX);
-  state.panY = state.panStartPanY + (e.clientY - state.panStartY);
-  applyTransform();
-}
-
-function handleMouseUp() {
-  state.isPanning = false;
-}
-
-// Touch support
-let touchStartDist = 0;
-let touchStartZoom = 1;
-
-function handleTouchStart(e) {
-  if (e.touches.length === 1) {
-    const t = e.touches[0];
-    if (e.target.classList.contains("war-marker")) return;
-    state.isPanning = true;
-    state.panStartX = t.clientX;
-    state.panStartY = t.clientY;
-    state.panStartPanX = state.panX;
-    state.panStartPanY = state.panY;
-  } else if (e.touches.length === 2) {
-    state.isPanning = false;
-    const dx = e.touches[0].clientX - e.touches[1].clientX;
-    const dy = e.touches[0].clientY - e.touches[1].clientY;
-    touchStartDist = Math.sqrt(dx * dx + dy * dy);
-    touchStartZoom = state.zoom;
-  }
-}
-
-function handleTouchMove(e) {
-  e.preventDefault();
-  if (e.touches.length === 1 && state.isPanning) {
-    const t = e.touches[0];
-    state.panX = state.panStartPanX + (t.clientX - state.panStartX);
-    state.panY = state.panStartPanY + (t.clientY - state.panStartY);
-    applyTransform();
-  } else if (e.touches.length === 2) {
-    const dx = e.touches[0].clientX - e.touches[1].clientX;
-    const dy = e.touches[0].clientY - e.touches[1].clientY;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    const newZoom = clamp(touchStartZoom * (dist / touchStartDist), 0.5, 8);
-    state.zoom = newZoom;
-    applyTransform();
-  }
-}
-
-function handleTouchEnd() {
-  state.isPanning = false;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   THEME
-   ═══════════════════════════════════════════════════════════ */
-
-function applyTheme() {
-  const root = document.documentElement;
-  if (state.theme) {
-    root.setAttribute("data-theme", state.theme);
-  } else {
-    root.removeAttribute("data-theme");
-  }
-  const isDark = state.theme === "dark" || (!state.theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
-  document.getElementById("themeIco").textContent = isDark ? "🌙" : "☀️";
-  document.getElementById("themeLabel").textContent = isDark ? "Dark Mode" : "Light Mode";
-}
-
-function toggleTheme() {
-  const isDark = state.theme === "dark" || (!state.theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
-  state.theme = isDark ? "light" : "dark";
-  localStorage.setItem("bellum-theme", state.theme);
-  applyTheme();
-}
-
-/* ═══════════════════════════════════════════════════════════
-   BURGER MENU
-   ═══════════════════════════════════════════════════════════ */
-
-function toggleBurger() {
-  const btn = document.getElementById("burgerBtn");
-  const menu = document.getElementById("burgerMenu");
-  const isOpen = menu.classList.toggle("open");
-  btn.classList.toggle("open", isOpen);
-  btn.setAttribute("aria-expanded", isOpen);
-}
-
-function closeBurger() {
-  document.getElementById("burgerMenu").classList.remove("open");
-  document.getElementById("burgerBtn").classList.remove("open");
-  document.getElementById("burgerBtn").setAttribute("aria-expanded", "false");
-}
-
-/* ═══════════════════════════════════════════════════════════
-   MODES
-   ═══════════════════════════════════════════════════════════ */
-
-function setMode(mode) {
-  state.mode = mode;
-  state.compareWar = null;
-  closeCompare();
-
-  // Update burger menu active states
-  document.querySelectorAll(".burger-item[data-mode]").forEach(item => {
-    item.classList.toggle("active", item.getAttribute("data-mode") === mode);
-  });
-
-  closeBurger();
-  renderMap();
-
-  // Show threads info if in threads mode and no war selected
-  if (mode === "threads" && !state.selectedWar) {
-    renderThreadsPanel();
-  } else {
-    renderDrawer();
-  }
-}
-
-function renderThreadsPanel() {
-  const placeholder = document.getElementById("panelPlaceholder");
-  const content = document.getElementById("panelContent");
-  placeholder.style.display = "none";
-  content.style.display = "block";
-
-  let html = '<div class="panel-header">';
-  html += '<div class="panel-title">🔗 Military Innovation Threads</div>';
-  html += '<div class="panel-subtitle">Trace how military innovations spread across conflicts</div>';
-  html += '</div>';
-  html += '<div class="panel-body">';
-
-  TRANSMISSIONS.forEach(t => {
-    html += '<div class="lens-section">';
-    html += '<div class="lens-section-title">' + escHtml(t.n) + '</div>';
-    html += '<div class="lens-section-body">' + escHtml(t.desc) + '</div>';
-    html += '<div style="margin-top:0.3rem;display:flex;flex-wrap:wrap;gap:0.25rem">';
-    t.path.forEach((wId, i) => {
-      const w = warById(wId);
-      if (!w) return;
-      html += '<button class="meta-tag" style="cursor:pointer;background:none" onclick="warClick(\'' + wId + '\')">' + escHtml(w.n) + '</button>';
-      if (i < t.path.length - 1) html += '<span style="color:var(--accent);font-size:0.8rem">→</span>';
-    });
-    html += '</div>';
-    html += '</div>';
-  });
-
-  html += '</div>';
-  content.innerHTML = html;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   ABOUT MODAL
-   ═══════════════════════════════════════════════════════════ */
-
-function showAbout() {
-  document.getElementById("aboutOverlay").classList.add("open");
-  closeBurger();
-  // Focus the close button for accessibility
-  setTimeout(() => {
-    const closeBtn = document.querySelector(".about-box .close-btn");
-    if (closeBtn) closeBtn.focus();
-  }, 100);
-}
-
-function closeAbout() {
-  document.getElementById("aboutOverlay").classList.remove("open");
-  // Return focus to burger button
-  document.getElementById("burgerBtn").focus();
-}
-
-/* ═══════════════════════════════════════════════════════════
-   INITIALIZATION
-   ═══════════════════════════════════════════════════════════ */
-
-function init() {
-  // Load theme
-  const savedTheme = localStorage.getItem("bellum-theme");
-  if (savedTheme) state.theme = savedTheme;
-  applyTheme();
-
-  // Render density bar
-  renderDensityBar();
-
-  // Render lens dropdown
-  renderLensDD();
-
-  // Set initial year
-  setYear(state.year);
-
-  // Fetch real world map and render
-  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-    .then(r=>r.json())
-    .then(world=>{
-      renderWorldMap(world);
-      renderMap();
-    })
-    .catch(()=>console.warn('World map data unavailable'));
-  renderDrawer();
-
-  // ── Event Listeners ──
-
-  // Timeline slider
-  document.getElementById("timeSlider").addEventListener("input", function() {
-    setYear(sliderToYear(+this.value));
-  });
-
-  // Play button
-  document.getElementById("playBtn").addEventListener("click", togglePlay);
-
-  // Lens dropdown toggle
-  document.getElementById("lensBtn").addEventListener("click", function(e) {
-    e.stopPropagation();
-    toggleLensDD();
-  });
-
-  // Burger menu
-  document.getElementById("burgerBtn").addEventListener("click", toggleBurger);
-
-  // Close dropdown/menu on outside click
-  document.addEventListener("click", function(e) {
-    const lensMenu = document.getElementById("lensDDMenu");
-    if (!e.target.closest(".lens-dropdown")) {
-      lensMenu.classList.remove("open");
-    }
-    if (!e.target.closest(".burger-menu") && !e.target.closest(".burger-btn")) {
-      closeBurger();
-    }
-  });
-
-  // About overlay close on backdrop click
-  document.getElementById("aboutOverlay").addEventListener("click", function(e) {
-    if (e.target === this) closeAbout();
-  });
-
-  // Zoom and pan
-  const mapContainer = document.getElementById("mapContainer");
-  mapContainer.addEventListener("wheel", handleWheel, {passive: false});
-  mapContainer.addEventListener("mousedown", handleMouseDown);
-  window.addEventListener("mousemove", handleMouseMove);
-  window.addEventListener("mouseup", handleMouseUp);
-
-  // Touch events
-  mapContainer.addEventListener("touchstart", handleTouchStart, {passive: true});
-  mapContainer.addEventListener("touchmove", handleTouchMove, {passive: false});
-  mapContainer.addEventListener("touchend", handleTouchEnd);
-
-  // Keyboard: Escape to close panels
-  document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") {
-      closeAbout();
-      closeBurger();
-      document.getElementById("lensDDMenu").classList.remove("open");
-      // Close mobile panel
-      document.getElementById("infoPanel").classList.remove("mobile-open");
-    }
-  });
-
-  // Close mobile panel button (tap outside on mobile)
-  mapContainer.addEventListener("click", function(e) {
-    if (window.innerWidth <= 900 && !e.target.classList.contains("war-marker")) {
-      document.getElementById("infoPanel").classList.remove("mobile-open");
-    }
-  });
-}
-
-/* ═══════════════════════════════════════════════════════════
-   KEYBOARD ACCESSIBILITY
-   ═══════════════════════════════════════════════════════════ */
-
-function setupKeyboardNav() {
-  document.addEventListener("keydown", function(e) {
-    // Arrow left/right to adjust timeline when no input focused
-    if (document.activeElement === document.body || document.activeElement === document.getElementById("mapContainer")) {
-      if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        setYear(state.year - (e.shiftKey ? 100 : 10));
-      } else if (e.key === "ArrowRight") {
-        e.preventDefault();
-        setYear(state.year + (e.shiftKey ? 100 : 10));
-      } else if (e.key === "+" || e.key === "=") {
-        state.zoom = clamp(state.zoom * 1.2, 0.5, 8);
-        applyTransform();
-      } else if (e.key === "-") {
-        state.zoom = clamp(state.zoom * 0.8, 0.5, 8);
-        applyTransform();
-      } else if (e.key === "0") {
-        state.zoom = 1;
-        state.panX = 0;
-        state.panY = 0;
-        applyTransform();
-      } else if (e.key === " ") {
-        e.preventDefault();
-        togglePlay();
-      }
-    }
-
-    // Tab through war markers with n/p keys
-    if (e.key === "n" && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== "INPUT") {
-      cycleWar(1);
-    } else if (e.key === "p" && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== "INPUT") {
-      cycleWar(-1);
-    }
-  });
-}
-
-function cycleWar(dir) {
-  // Get wars visible at current year, sorted by x position
-  const visible = WARS.filter(w => w.s <= state.year + 500 && w.e >= state.year - 500)
-    .sort((a, b) => a.x - b.x);
-  if (visible.length === 0) return;
-
-  if (!state.selectedWar) {
-    warClick(visible[0].id);
-    return;
-  }
-
-  const idx = visible.findIndex(w => w.id === state.selectedWar);
-  const nextIdx = (idx + dir + visible.length) % visible.length;
-  warClick(visible[nextIdx].id);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   DOUBLE-TAP ZOOM (MOBILE)
-   ═══════════════════════════════════════════════════════════ */
-
-let lastTap = 0;
-function handleDoubleTap(e) {
-  const now = Date.now();
-  if (now - lastTap < 300) {
-    e.preventDefault();
-    const svg = document.getElementById("mainMap");
-    const rect = svg.getBoundingClientRect();
-    const mx = e.changedTouches[0].clientX - rect.left;
-    const my = e.changedTouches[0].clientY - rect.top;
-
-    if (state.zoom > 1.5) {
-      // Zoom out
-      state.zoom = 1;
-      state.panX = 0;
-      state.panY = 0;
-    } else {
-      // Zoom in
-      state.zoom = 3;
-      state.panX = -(mx * state.zoom - rect.width / 2);
-      state.panY = -(my * state.zoom - rect.height / 2);
-    }
-    applyTransform();
-  }
-  lastTap = now;
-}
-
-// Start the application
-document.addEventListener("DOMContentLoaded", function() {
-  init();
-  setupKeyboardNav();
-
-  // Double-tap zoom on mobile
-  document.getElementById("mapContainer").addEventListener("touchend", handleDoubleTap);
-});
-</script>
 </body>
 </html>
