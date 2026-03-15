@@ -1478,11 +1478,12 @@ function getVisibleTransmissions(y){
   return TRANSMISSIONS.filter(t=>y>=t.y);
 }
 
-function lonLatToXY(lon,lat){
-  // Simple equirectangular: map lon(-180..180)->x(0..1000), lat(90..-90)->y(0..520)
-  const x=((lon+180)/360)*1000;
-  const y=((90-lat)/180)*520;
-  return {x,y};
+function moneyPt(m){
+  if(!m)return[500,260];
+  if(window._proj&&typeof m.lon==='number'&&typeof m.lat==='number'){
+    try{const pt=window._proj([m.lon,m.lat]);if(pt&&isFinite(pt[0]))return pt;}catch(e){}
+  }
+  return[m.x||500,m.y||260];
 }
 
 /* ============================================================
@@ -1521,13 +1522,10 @@ function renderMap(){
   const conns=getVisibleConnections(curYear);
   const trans=getVisibleTransmissions(curYear);
 
-  // Helper: get projected position
+  // Helper: get projected position using moneyPt
   function pos(m){
-    if(projection){
-      const p=projection([m.lon,m.lat]);
-      if(p) return {x:p[0],y:p[1]};
-    }
-    return {x:m.x,y:m.y};
+    const pt=moneyPt(m);
+    return {x:pt[0],y:pt[1]};
   }
 
   // Connections
