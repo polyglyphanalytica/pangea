@@ -1432,6 +1432,348 @@ let curYear=-3000,curLens="overview",curMoney=null,playing=false,playTimer=null;
 let compareA=null,compareB=null,mode="explore";
 let mapZoom=1,mapPanX=0,mapPanY=0,dragging=false,dragStart={x:0,y:0},panStart={x:0,y:0};
 let projection=null,pathGen=null;
+
+/* ============================================================
+   UTILITY FUNCTIONS
+   ============================================================ */
+function fmtYear(y){
+  if(y<0) return Math.abs(y)+" BCE";
+  if(y===0) return "1 BCE";
+  return y+" CE";
+}
+
+function yearToSlider(y){
+  // Map -3000..2025 to 0..1000
+  return Math.round(((y+3000)/5025)*1000);
+}
+
+function sliderToYear(v){
+  return Math.round((v/1000)*5025-3000);
+}
+
+function getEra(y){
+  let era=ERAS[0];
+  for(const e of ERAS){if(y>=e.y) era=e;}
+  return era;
+}
+
+function getVisibleMoneys(y){
+  return MONEYS.filter(m=>y>=m.s&&y<=m.e);
+}
+
+function getVisibleConnections(y){
+  return CONNECTIONS.filter(c=>{
+    const a=MONEYS.find(m=>m.id===c.from);
+    const b=MONEYS.find(m=>m.id===c.to);
+    if(!a||!b) return false;
+    return y>=a.s&&y>=b.s&&y<=Math.max(a.e,b.e);
+  });
+}
+
+function getVisibleTransmissions(y){
+  return TRANSMISSIONS.filter(t=>y>=t.y);
+}
+
+function lonLatToXY(lon,lat){
+  // Simple equirectangular: map lon(-180..180)->x(0..1000), lat(90..-90)->y(0..520)
+  const x=((lon+180)/360)*1000;
+  const y=((90-lat)/180)*520;
+  return {x,y};
+}
+
+/* ============================================================
+   RENDER WORLD MAP (D3 / TopoJSON)
+   ============================================================ */
+function renderWorldMap(topo){
+  const svg=d3.select("#mapSvg");
+  const w=1000,h=520;
+  projection=d3.geoNaturalEarth1().fitSize([w,h],topojson.feature(topo,topo.objects.countries||topo.objects.land));
+  pathGen=d3.geoPath().projection(projection);
+
+  const mapLayer=svg.select("#map-layer");
+  mapLayer.selectAll("*").remove();
+
+  // Water background
+  mapLayer.append("rect").attr("width",w).attr("height",h).attr("fill","var(--map-water)");
+
+  // Graticule
+  const grat=d3.geoGraticule();
+  mapLayer.append("path").datum(grat()).attr("d",pathGen)
+    .attr("fill","none").attr("stroke","var(--bdr2)").attr("stroke-width",0.3);
+
+  // Land
+  const land=topojson.feature(topo,topo.objects.countries||topo.objects.land);
+  mapLayer.selectAll("path.land").data(land.features||[land]).enter()
+    .append("path").attr("class","land").attr("d",pathGen)
+    .attr("fill","var(--land)").attr("stroke","var(--land-s)").attr("stroke-width",0.4);
+
+  // Sphere outline
+  mapLayer.append("path").datum({type:"Sphere"}).attr("d",pathGen)
+    .attr("fill","none").attr("stroke","var(--bdr2)").attr("stroke-width",0.8);
+}
+
+/* ============================================================
+   RENDER MAP MARKERS, CONNECTIONS, TRANSMISSIONS
+   ============================================================ */
+function renderMap(){
+  const svg=document.getElementById("mapSvg");
+  const markerG=document.getElementById("markerGroup");
+  const connG=document.getElementById("connectionGroup");
+  const transG=document.getElementById("transmissionGroup");
+  markerG.innerHTML="";
+  connG.innerHTML="";
+  transG.innerHTML="";
+
+  const vis=getVisibleMoneys(curYear);
+  const conns=getVisibleConnections(curYear);
+  const trans=getVisibleTransmissions(curYear);
+
+  // Helper: get projected position
+  function pos(m){
+    if(projection){
+      const p=projection([m.lon,m.lat]);
+      if(p) return {x:p[0],y:p[1]};
+    }
+    return {x:m.x,y:m.y};
+  }
+
+  // Connections
+  conns.forEach(c=>{
+    const a=MONEYS.find(m=>m.id===c.from);
+    const b=MONEYS.find(m=>m.id===c.to);
+    if(!a||!b) return;
+    const pa=pos(a),pb=pos(b);
+    const line=document.createElementNS("http://www.w3.org/2000/svg","line");
+    line.setAttribute("x1",pa.x);line.setAttribute("y1",pa.y);
+    line.setAttribute("x2",pb.x);line.setAttribute("y2",pb.y);
+    line.setAttribute("class","connection-line");
+    line.setAttribute("data-from",c.from);line.setAttribute("data-to",c.to);
+    const title=document.createElementNS("http://www.w3.org/2000/svg","title");
+    title.textContent=c.label;line.appendChild(title);
+    connG.appendChild(line);
+  });
+
+  // Transmissions
+  trans.forEach(t=>{
+    const a=MONEYS.find(m=>m.id===t.from);
+    const b=MONEYS.find(m=>m.id===t.to);
+    if(!a||!b) return;
+    const pa=pos(a),pb=pos(b);
+    const mx=(pa.x+pb.x)/2,my=Math.min(pa.y,pb.y)-30;
+    const path=document.createElementNS("http://www.w3.org/2000/svg","path");
+    path.setAttribute("d",`M${pa.x},${pa.y} Q${mx},${my} ${pb.x},${pb.y}`);
+    path.setAttribute("class","transmission-path visible animated");
+    const title=document.createElementNS("http://www.w3.org/2000/svg","title");
+    title.textContent=t.label;path.appendChild(title);
+    transG.appendChild(path);
+  });
+
+  // Markers
+  vis.forEach(m=>{
+    const p=pos(m);
+    const g=document.createElementNS("http://www.w3.org/2000/svg","g");
+    g.setAttribute("class","money-marker");
+    g.setAttribute("data-id",m.id);
+    g.setAttribute("transform",`translate(${p.x},${p.y})`);
+    g.style.cursor="pointer";
+    g.setAttribute("role","button");
+    g.setAttribute("aria-label",m.n);
+    g.setAttribute("tabindex","0");
+
+    // Glow
+    const glow=document.createElementNS("http://www.w3.org/2000/svg","circle");
+    glow.setAttribute("r",8*m.sz);glow.setAttribute("fill","url(#markerGlow)");
+    g.appendChild(glow);
+
+    // Pulse if selected
+    if(curMoney&&curMoney.id===m.id){
+      const pulse=document.createElementNS("http://www.w3.org/2000/svg","circle");
+      pulse.setAttribute("r",6*m.sz);pulse.setAttribute("class","pulse");
+      g.appendChild(pulse);
+    }
+
+    // Main circle
+    const circ=document.createElementNS("http://www.w3.org/2000/svg","circle");
+    circ.setAttribute("r",5*m.sz);
+    circ.setAttribute("fill",m.col||"#d4a820");
+    circ.setAttribute("class","marker-circle");
+    circ.setAttribute("stroke","rgba(255,255,255,0.3)");
+    circ.setAttribute("stroke-width","0.6");
+    g.appendChild(circ);
+
+    // Label
+    const txt=document.createElementNS("http://www.w3.org/2000/svg","text");
+    txt.setAttribute("y",10*m.sz+2);
+    txt.setAttribute("class","marker-label");
+    txt.textContent=m.n;
+    g.appendChild(txt);
+
+    g.addEventListener("click",()=>selectMoney(m));
+    g.addEventListener("keydown",ev=>{if(ev.key==="Enter")selectMoney(m);});
+    markerG.appendChild(g);
+  });
+
+  // Highlight connections for selected money
+  if(curMoney){
+    connG.querySelectorAll(".connection-line").forEach(l=>{
+      if(l.getAttribute("data-from")===curMoney.id||l.getAttribute("data-to")===curMoney.id){
+        l.classList.add("active");
+      }
+    });
+  }
+}
+
+/* ============================================================
+   RENDER DRAWER / INFO PANEL
+   ============================================================ */
+function renderDrawer(m){
+  const panel=document.getElementById("infoPanel");
+  const title=document.getElementById("infoPanelTitle");
+  const meta=document.getElementById("infoPanelMeta");
+  const body=document.getElementById("infoPanelBody");
+
+  if(!m){
+    panel.classList.remove("open");
+    return;
+  }
+
+  title.textContent=m.n;
+
+  // Meta tags
+  let metaHTML=`<span class="meta-tag primary">${fmtYear(m.s)} — ${fmtYear(m.e)}</span>`;
+  if(m.region) metaHTML+=`<span class="meta-tag">${m.region}</span>`;
+  if(m.type) metaHTML+=`<span class="meta-tag">${m.type}</span>`;
+  if(m.material&&m.material!=="N/A") metaHTML+=`<span class="meta-tag">${m.material}</span>`;
+  if(m.issuer) metaHTML+=`<span class="meta-tag">${m.issuer}</span>`;
+  meta.innerHTML=metaHTML;
+
+  // Body sections based on current lens
+  let bodyHTML="";
+  if(curLens==="overview"){
+    // Show all available description fields
+    const lensMap={overview:"Overview",innovation:"Innovation",spread:"Spread & Trade",economics:"Economics",legacy:"Legacy",figures:"Key Figures",decline:"Decline/Crisis"};
+    for(const[k,label] of Object.entries(lensMap)){
+      if(m.d[k]){
+        bodyHTML+=`<div class="info-section"><div class="info-section-title">${label}</div><p class="info-section-text">${m.d[k]}</p></div>`;
+      }
+    }
+  } else {
+    // Show specific lens
+    const lens=LENSES.find(l=>l.id===curLens);
+    const key=curLens==="spread"?"spread":curLens==="figures"?"figures":curLens==="decline"?"decline":curLens;
+    if(m.d[key]){
+      bodyHTML+=`<div class="info-section"><div class="info-section-title">${lens?lens.n:curLens}</div><p class="info-section-text">${m.d[key]}</p></div>`;
+    } else {
+      bodyHTML+=`<p class="info-section-text" style="text-align:center;margin-top:20px;color:var(--txt-muted)">No ${lens?lens.n:curLens} data for this entry.</p>`;
+    }
+  }
+
+  // Related connections
+  const related=CONNECTIONS.filter(c=>c.from===m.id||c.to===m.id);
+  if(related.length>0){
+    bodyHTML+=`<div class="info-section"><div class="info-section-title">Connections</div>`;
+    related.forEach(c=>{
+      const other=c.from===m.id?c.to:c.from;
+      const om=MONEYS.find(x=>x.id===other);
+      if(om) bodyHTML+=`<p class="info-section-text" style="cursor:pointer;color:var(--accent)" onclick="selectMoney(MONEYS.find(x=>x.id==='${other}'))">→ ${om.n}: ${c.label}</p>`;
+    });
+    bodyHTML+=`</div>`;
+  }
+
+  body.innerHTML=bodyHTML;
+  panel.classList.add("open");
+}
+
+/* ============================================================
+   RENDER LENS DROPDOWN
+   ============================================================ */
+function renderLensDD(){
+  const btn=document.getElementById("lensBtn");
+  const dd=document.getElementById("lensDropdown");
+  const isOpen=dd.classList.contains("open");
+
+  if(isOpen){
+    dd.classList.remove("open");
+    btn.classList.remove("open");
+    btn.setAttribute("aria-expanded","false");
+    return;
+  }
+
+  let html="";
+  LENSES.forEach(l=>{
+    const active=l.id===curLens?"active":"";
+    html+=`<div class="lens-option ${active}" role="option" onclick="pickLens('${l.id}')"><span class="lo-icon">${l.ico}</span>${l.n}</div>`;
+  });
+  dd.innerHTML=html;
+  dd.classList.add("open");
+  btn.classList.add("open");
+  btn.setAttribute("aria-expanded","true");
+}
+
+function pickLens(id){
+  curLens=id;
+  const lens=LENSES.find(l=>l.id===id);
+  document.getElementById("lensLabel").textContent=lens?lens.n:"Overview";
+  document.getElementById("lensBtn").querySelector(".lens-icon").textContent=lens?lens.ico:"🔭";
+  document.getElementById("lensDropdown").classList.remove("open");
+  document.getElementById("lensBtn").classList.remove("open");
+  document.getElementById("lensBtn").setAttribute("aria-expanded","false");
+  if(curMoney) renderDrawer(curMoney);
+}
+
+/* ============================================================
+   SET YEAR / TIMELINE
+   ============================================================ */
+function setYear(y){
+  curYear=Math.max(-3000,Math.min(2025,Math.round(y)));
+  document.getElementById("timelineSlider").value=yearToSlider(curYear);
+  document.getElementById("timelineYear").textContent=fmtYear(curYear);
+  document.getElementById("yearDisplay").textContent=fmtYear(curYear);
+  const era=getEra(curYear);
+  document.getElementById("eraDisplay").textContent=era.n+" Era";
+  renderMap();
+}
+
+function stepYear(delta){
+  setYear(curYear+delta);
+}
+
+function togglePlay(){
+  playing=!playing;
+  const btn=document.getElementById("playBtn");
+  if(playing){
+    btn.innerHTML="&#9646;&#9646;";
+    playTimer=setInterval(()=>{
+      if(curYear>=2025){playing=false;btn.innerHTML="&#9654;";clearInterval(playTimer);return;}
+      setYear(curYear+5);
+    },120);
+  } else {
+    btn.innerHTML="&#9654;";
+    clearInterval(playTimer);
+  }
+}
+
+/* ============================================================
+   RENDER DENSITY BAR
+   ============================================================ */
+function renderDensityBar(){
+  const canvas=document.getElementById("densityCanvas");
+  const container=canvas.parentElement;
+  canvas.width=container.offsetWidth||800;
+  const ctx=canvas.getContext("2d");
+  const w=canvas.width,h=16;
+  ctx.clearRect(0,0,w,h);
+
+  // Count moneys active at each year point
+  const steps=w;
+  for(let i=0;i<steps;i++){
+    const y=sliderToYear((i/steps)*1000);
+    const count=getVisibleMoneys(y).length;
+    const intensity=Math.min(count/15,1);
+    ctx.fillStyle=`rgba(212,168,32,${intensity*0.6})`;
+    ctx.fillRect(i,h-(intensity*h),1,intensity*h);
+  }
+}
 </script>
 
 </body>
