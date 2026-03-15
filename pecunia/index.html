@@ -1954,12 +1954,32 @@ let mapZoom=1,mapPanX=0,mapPanY=0,dragging=false,dragStart={x:0,y:0},panStart={x
 let projection=null,pathGen=null;
 
 /* ============================================================
+   CORE UTILITY FUNCTIONS
+   ============================================================ */
+
+/* Format year for display: negative years as BCE, positive as CE */
+
+/* ============================================================
    UTILITY FUNCTIONS
    ============================================================ */
 function fmtYear(y){
   if(y<0) return Math.abs(y)+" BCE";
   if(y===0) return "1 BCE";
   return y+" CE";
+}
+
+/* Alias for fmt(y) as specified */
+function fmt(y){ return fmtYear(y); }
+
+/* Get era name for a given year */
+function eraName(y){
+  var era=getEra(y);
+  return era?era.n:"Unknown";
+}
+
+/* Check if a money entry is active at the current year */
+function active(m){
+  return curYear>=m.s&&curYear<=m.e;
 }
 
 function yearToSlider(y){
@@ -2258,6 +2278,21 @@ function renderDrawer(m){
 
   body.innerHTML=bodyHTML;
   panel.classList.add("open");
+}
+
+/* Alias for renderDrawerContent */
+function renderDrawerContent(m){ renderDrawer(m); }
+
+/* Toggle a specific lens by id */
+function toggleLens(id){
+  if(curLens===id) id="overview";
+  pickLens(id);
+}
+
+/* Navigate to a specific money by id */
+function moneyClick(id){
+  var m=MONEYS.find(function(x){return x.id===id;});
+  if(m) selectMoney(m);
 }
 
 /* ============================================================
