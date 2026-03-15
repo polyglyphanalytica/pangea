@@ -1139,6 +1139,189 @@ const TRANSMISSIONS=[
 {id:"t_silk_road",n:"Silk Road Religions",desc:"Faiths transmitted along the great trade routes connecting East and West.",chain:["zoroastrianism","manichaeism","buddhism","islam"]}
 ];
 
+/* ============================================================
+   RENDERING — Utilities & Core Functions
+   ============================================================ */
+
+/* ---------- State ---------- */
+let curYear=2025, curLens="overview", curBelief=null, playing=false, playTimer=null;
+let compareA=null, compareB=null;
+const FAMILY_COL={Dharmic:"#f0c040",Abrahamic:"#6090d0","East Asian":"#e05050",Pagan:"#a070c0",African:"#e08040",Americas:"#40b080",New:"#c0c0c0"};
+const MIN_YEAR=-10000, MAX_YEAR=2025;
+
+/* ---------- Utility ---------- */
+function fmtYear(y){return y<0?Math.abs(y)+" BCE":y+" CE";}
+function eraForYear(y){let e=ERAS[0];for(const er of ERAS)if(y>=er.y)e=er;return e.n;}
+function beliefsAtYear(y){return BELIEFS.filter(b=>b.s<=y&&b.e>=y);}
+function yearToSlider(y){return((y-MIN_YEAR)/(MAX_YEAR-MIN_YEAR))*1000;}
+function sliderToYear(v){return Math.round(MIN_YEAR+(v/1000)*(MAX_YEAR-MIN_YEAR));}
+function $(id){return document.getElementById(id);}
+
+/* ---------- renderDensityBar ---------- */
+function renderDensityBar(){
+  const canvas=$("density-bar");
+  if(!canvas)return;
+  const ctx=canvas.getContext("2d");
+  const w=canvas.parentElement.clientWidth;
+  canvas.width=w; canvas.height=14;
+  ctx.clearRect(0,0,w,14);
+  const steps=200;
+  for(let i=0;i<steps;i++){
+    const y=sliderToYear((i/steps)*1000);
+    const active=beliefsAtYear(y);
+    const intensity=Math.min(active.length/25,1);
+    ctx.fillStyle=`rgba(232,152,32,${0.05+intensity*0.5})`;
+    ctx.fillRect((i/steps)*w,0,w/steps+1,14);
+  }
+}
+
+/* ---------- setYear ---------- */
+function setYear(y){
+  curYear=Math.max(MIN_YEAR,Math.min(MAX_YEAR,y));
+  $("tl-year").textContent=fmtYear(curYear);
+  $("year-display").textContent=fmtYear(curYear);
+  const era=eraForYear(curYear);
+  $("era-display").textContent=era;
+  $("tl-era-label").textContent=era;
+  $("tl-slider").value=yearToSlider(curYear);
+  renderMap();
+}
+
+/* ---------- renderLensDD ---------- */
+function renderLensDD(){
+  const bar=$("lens-bar");
+  bar.innerHTML="";
+  LENSES.forEach(l=>{
+    const pill=document.createElement("button");
+    pill.className="lens-pill"+(l.id===curLens?" active":"");
+    pill.textContent=l.ico+" "+l.n;
+    pill.onclick=()=>{curLens=l.id;renderLensDD();if(curBelief)renderDrawer(curBelief);};
+    pill.setAttribute("aria-pressed",l.id===curLens?"true":"false");
+    bar.appendChild(pill);
+  });
+}
+
+/* ---------- renderWorldMap (D3/TopoJSON) ---------- */
+function renderWorldMap(topo){
+  const svg=d3.select("#map-svg");
+  const projection=d3.geoNaturalEarth1().scale(160).translate([500,280]);
+  const path=d3.geoPath().projection(projection);
+  const land=topojson.feature(topo,topo.objects.countries||topo.objects.land);
+  svg.select("#map-layer").selectAll("path").remove();
+  svg.select("#map-layer").selectAll("path")
+    .data(land.features||[land])
+    .enter().append("path")
+    .attr("d",path)
+    .attr("class","land")
+    .attr("fill","var(--land)")
+    .attr("stroke","var(--bdr2)")
+    .attr("stroke-width",0.4);
+}
+
+/* ---------- renderMap (markers, labels, connections) ---------- */
+function renderMap(){
+  const svg=d3.select("#map-svg");
+  const active=beliefsAtYear(curYear);
+  const activeIds=new Set(active.map(b=>b.id));
+
+  /* Markers */
+  const mg=svg.select("#markers-group");
+  mg.selectAll("*").remove();
+  active.forEach(b=>{
+    const col=FAMILY_COL[b.family]||b.col;
+    const g=mg.append("g").attr("class","marker").attr("transform",`translate(${b.x},${b.y})`)
+      .attr("data-id",b.id)
+      .on("click",()=>openBelief(b.id))
+      .on("mouseenter",(ev)=>showTooltip(ev,b))
+      .on("mouseleave",hideTooltip);
+    g.append("circle").attr("r",b.sz*6).attr("fill",col).attr("opacity",0.18);
+    g.append("circle").attr("r",b.sz*3).attr("fill",col).attr("opacity",0.7);
+    if(curBelief&&curBelief.id===b.id) g.classed("active-marker",true);
+  });
+
+  /* Labels */
+  const lg=svg.select("#labels-group");
+  lg.selectAll("*").remove();
+  active.forEach(b=>{
+    lg.append("text").attr("class","marker-label")
+      .attr("x",b.x).attr("y",b.y+b.sz*3+9)
+      .text(b.n);
+  });
+
+  /* Connections */
+  const cg=svg.select("#connections-group");
+  cg.selectAll("*").remove();
+  CONNECTIONS.forEach(c=>{
+    const fa=BELIEFS.find(b=>b.id===c.from);
+    const ta=BELIEFS.find(b=>b.id===c.to);
+    if(!fa||!ta)return;
+    if(!activeIds.has(fa.id)||!activeIds.has(ta.id))return;
+    cg.append("line").attr("class","connection-line")
+      .attr("x1",fa.x).attr("y1",fa.y)
+      .attr("x2",ta.x).attr("y2",ta.y);
+  });
+}
+
+/* ---------- renderDrawer ---------- */
+function renderDrawer(b){
+  curBelief=b;
+  const panel=$("info-panel");
+  panel.classList.remove("collapsed");
+  $("panel-title").textContent=b.n;
+  $("panel-subtitle").textContent=`${b.type} · ${b.region} · ${fmtYear(b.s)} – ${fmtYear(b.e)}`;
+
+  /* Meta tags */
+  const meta=$("panel-meta");
+  meta.innerHTML="";
+  [{l:"Family",v:b.family},{l:"Adherents",v:b.adherents},{l:"Founder",v:b.founder}].forEach(t=>{
+    const span=document.createElement("span");
+    span.className="meta-tag";
+    span.textContent=t.l+": "+t.v;
+    meta.appendChild(span);
+  });
+
+  /* Lens body */
+  const body=$("panel-body");
+  body.innerHTML="";
+  if(curLens==="overview"){
+    LENSES.forEach(l=>{
+      if(!b.d[l.id])return;
+      const sec=document.createElement("div");
+      sec.className="lens-section fade-in";
+      sec.innerHTML=`<div class="lens-section-title"><span class="ico">${l.ico}</span>${l.n}</div><div class="lens-section-body">${b.d[l.id]}</div>`;
+      body.appendChild(sec);
+    });
+  } else {
+    const l=LENSES.find(l=>l.id===curLens);
+    if(l&&b.d[l.id]){
+      const sec=document.createElement("div");
+      sec.className="lens-section fade-in";
+      sec.innerHTML=`<div class="lens-section-title"><span class="ico">${l.ico}</span>${l.n}</div><div class="lens-section-body">${b.d[l.id]}</div>`;
+      body.appendChild(sec);
+    } else {
+      body.innerHTML=`<p style="color:var(--txt-dim);font-style:italic;">No ${curLens} data for this tradition.</p>`;
+    }
+  }
+
+  /* Related connections */
+  const related=CONNECTIONS.filter(c=>c.from===b.id||c.to===b.id);
+  if(related.length){
+    const sec=document.createElement("div");
+    sec.className="lens-section fade-in";
+    let html='<div class="lens-section-title"><span class="ico">🔗</span>Connections</div><div class="lens-section-body">';
+    related.forEach(c=>{
+      const other=c.from===b.id?c.to:c.from;
+      const ob=BELIEFS.find(x=>x.id===other);
+      if(ob) html+=`<div style="margin-bottom:4px;"><a href="#" onclick="event.preventDefault();openBelief('${ob.id}')" style="color:var(--link);">${ob.n}</a> — <span style="color:var(--txt-dim);font-size:0.85rem;">${c.label}</span></div>`;
+    });
+    html+='</div>';
+    sec.innerHTML=html;
+    body.appendChild(sec);
+  }
+
+  renderMap();
+}
+
 </script>
 </body>
 </html>
