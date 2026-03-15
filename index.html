@@ -127,23 +127,31 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--txt);font-fami
 .card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
 .tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;padding:2px 8px;border:1px solid var(--bdr2);border-radius:2px}
 .card-coming{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-top:8px}
+.card-go{display:inline-block;margin-top:10px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;text-decoration:none;border:1px solid var(--bdr);padding:4px 14px;border-radius:3px;transition:all .15s}
+.card-go:hover{background:var(--amber-x);border-color:var(--amber-b)}
 
-/* ── EXPANDABLE DETAIL ── */
-.card-detail{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
-.card.open .card-detail{max-height:600px}
-.card-detail-inner{padding-top:14px;margin-top:12px;border-top:1px solid var(--bdr2)}
-.detail-hook{font-size:14px;line-height:1.75;color:var(--txt2);margin-bottom:14px;font-style:italic}
-.detail-section-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:6px}
-.detail-list{list-style:none;margin-bottom:14px}
-.detail-list li{font-size:13px;color:var(--txt2);padding:3px 0;padding-left:14px;position:relative;line-height:1.5}
-.detail-list li::before{content:'·';position:absolute;left:0;color:var(--amber-b);font-weight:700}
-.detail-complexity{display:flex;align-items:center;gap:8px;margin-top:10px}
-.detail-complexity-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase}
+/* ── DETAIL MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--panel);border:1px solid var(--bdr);border-radius:6px;padding:28px 32px;max-width:520px;width:calc(100% - 40px);max-height:calc(100vh - 80px);overflow-y:auto;position:relative;box-shadow:0 16px 48px rgba(0,0,0,.6)}
+.modal-close{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1;padding:4px;transition:color .15s}
+.modal-close:hover{color:var(--amber-b)}
+.modal-ico{font-size:28px;margin-bottom:8px}
+.modal-nm{font-family:'Cinzel Decorative',serif;font-size:18px;font-weight:700;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px}
+.modal-tagline{font-size:14px;color:var(--txt2);margin-bottom:6px}
+.modal-badge{display:inline-block;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:2px 8px;border-radius:10px;border:1px solid;margin-bottom:16px}
+.modal-hook{font-size:14px;line-height:1.75;color:var(--txt2);margin-bottom:16px;font-style:italic}
+.modal-section-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:6px}
+.modal-list{list-style:none;margin-bottom:16px}
+.modal-list li{font-size:13px;color:var(--txt2);padding:3px 0;padding-left:14px;position:relative;line-height:1.5}
+.modal-list li::before{content:'·';position:absolute;left:0;color:var(--amber-b);font-weight:700}
+.modal-complexity{display:flex;align-items:center;gap:8px;margin-top:10px;margin-bottom:16px}
+.modal-complexity-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase}
 .complexity-dots{display:flex;gap:3px}
 .complexity-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--bdr);background:transparent}
 .complexity-dot.filled{background:var(--amber-b);border-color:var(--amber-b)}
-.card-link{display:inline-block;margin-top:12px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;text-decoration:none;border:1px solid var(--bdr);padding:6px 16px;border-radius:3px;transition:all .15s}
-.card-link:hover{background:var(--amber-x);border-color:var(--amber-b)}
+.modal-link{display:inline-block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;text-decoration:none;border:1px solid var(--bdr);padding:8px 20px;border-radius:3px;transition:all .15s}
+.modal-link:hover{background:var(--amber-x);border-color:var(--amber-b)}
 
 /* ── FOOTER ── */
 .hub-footer{text-align:center;padding:32px 0 24px;border-top:1px solid var(--bdr2);margin-top:24px}
@@ -165,6 +173,8 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--txt);font-fami
   .hero-tagline{font-size:14px}
   .card-grid{grid-template-columns:1fr}
   .main{padding:56px 14px 32px}
+  .modal{padding:20px 18px;max-width:100%;width:calc(100% - 24px)}
+  .modal-nm{font-size:15px}
 }
 </style>
 </head>
@@ -189,6 +199,14 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--txt);font-fami
   </section>
 
   <div id="card-grid-main"></div>
+
+  <!-- Detail modal -->
+  <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
 
   <footer class="hub-footer">
     <div class="hub-footer-org">Polyglyph Analytica</div>
@@ -357,18 +375,12 @@ function renderCatalogue(){
 
     const badgeClass = a.status === 'live' ? 'badge-live' : a.status === 'building' ? 'badge-building' : 'badge-forthcoming';
     const badgeText = a.status.toUpperCase();
-    const isClickable = a.status === 'live' || a.status === 'building';
     const tags = a.tags.map(t => `<span class="tag">${t}</span>`).join('');
     const comingSoon = a.status === 'forthcoming' ? '<div class="card-coming">Coming Soon</div>' : '';
-
-    // Build detail panel
-    const features = a.features ? a.features.map(f => `<li>${f}</li>`).join('') : '';
-    const lenses = a.lenses ? a.lenses.map(l => `<li>${l}</li>`).join('') : '';
-    const dots = Array.from({length:5},(_, i) => `<span class="complexity-dot${i < a.complexity ? ' filled' : ''}"></span>`).join('');
-    const linkBtn = a.href ? `<a class="card-link" href="${a.href}" onclick="event.stopPropagation()">Open Atlas →</a>` : '';
+    const goLink = a.href ? `<a class="card-go" href="${a.href}" onclick="event.stopPropagation()">Open Atlas →</a>` : '';
 
     html += `
-      <div class="card" data-id="${a.id}" onclick="toggleCard(this)" role="button" tabindex="0" aria-expanded="false">
+      <div class="card" data-id="${a.id}" onclick="openModal('${a.id}')" role="button" tabindex="0">
         <span class="card-badge ${badgeClass}">${badgeText}</span>
         <div class="card-top">
           <span class="card-ico">${a.ico}</span>
@@ -379,50 +391,50 @@ function renderCatalogue(){
         </div>
         <div class="card-tags">${tags}</div>
         ${comingSoon}
-        <div class="card-detail">
-          <div class="card-detail-inner">
-            <div class="detail-hook">${a.hook}</div>
-            <div class="detail-section-lbl">Core Features</div>
-            <ul class="detail-list">${features}</ul>
-            <div class="detail-section-lbl">Unique Lenses</div>
-            <ul class="detail-list">${lenses}</ul>
-            <div class="detail-complexity">
-              <span class="detail-complexity-lbl">Build Complexity</span>
-              <div class="complexity-dots">${dots}</div>
-            </div>
-            ${linkBtn}
-          </div>
-        </div>
+        ${goLink}
       </div>`;
   });
   html += '</div>'; // close last grid
   container.innerHTML = html;
 }
 
-function toggleCard(el){
-  const wasOpen = el.classList.contains('open');
-  // Close all
-  document.querySelectorAll('.card.open').forEach(c => {
-    c.classList.remove('open');
-    c.setAttribute('aria-expanded','false');
-  });
-  if(!wasOpen){
-    el.classList.add('open');
-    el.setAttribute('aria-expanded','true');
-  }
+function openModal(id){
+  const a = ATLASES.find(x => x.id === id);
+  if(!a) return;
+  const badgeClass = a.status === 'live' ? 'badge-live' : a.status === 'building' ? 'badge-building' : 'badge-forthcoming';
+  const features = a.features ? a.features.map(f => `<li>${f}</li>`).join('') : '';
+  const lenses = a.lenses ? a.lenses.map(l => `<li>${l}</li>`).join('') : '';
+  const dots = Array.from({length:5},(_, i) => `<span class="complexity-dot${i < a.complexity ? ' filled' : ''}"></span>`).join('');
+  const linkBtn = a.href ? `<a class="modal-link" href="${a.href}">Open Atlas →</a>` : '';
+
+  document.getElementById('modal-body').innerHTML = `
+    <div class="modal-ico">${a.ico}</div>
+    <div class="modal-nm" id="modal-title">${a.nm}</div>
+    <div class="modal-tagline">${a.tagline}</div>
+    <span class="modal-badge ${badgeClass}">${a.status.toUpperCase()}</span>
+    <div class="modal-hook">${a.hook}</div>
+    <div class="modal-section-lbl">Core Features</div>
+    <ul class="modal-list">${features}</ul>
+    <div class="modal-section-lbl">Unique Lenses</div>
+    <ul class="modal-list">${lenses}</ul>
+    <div class="modal-complexity">
+      <span class="modal-complexity-lbl">Build Complexity</span>
+      <div class="complexity-dots">${dots}</div>
+    </div>
+    ${linkBtn}`;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
 }
 
 // Keyboard support
 document.addEventListener('keydown', e => {
   if(e.key === 'Enter' && e.target.classList.contains('card')){
-    toggleCard(e.target);
+    openModal(e.target.dataset.id);
   }
-  if(e.key === 'Escape'){
-    document.querySelectorAll('.card.open').forEach(c => {
-      c.classList.remove('open');
-      c.setAttribute('aria-expanded','false');
-    });
-  }
+  if(e.key === 'Escape') closeModal();
 });
 
 // ── THEME ──
