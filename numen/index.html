@@ -1042,6 +1042,10 @@ button:focus:not(:focus-visible) { outline: none; }
   <span class="tl-label" id="tl-era-label">Modern Pluralism</span>
 </footer>
 
+<!-- D3 & TopoJSON (must load before main script) -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+
 <script>
 /* ============================================================
    NUMEN — The Atlas of Belief — JavaScript
@@ -1570,10 +1574,6 @@ function init(){
 
 document.addEventListener("DOMContentLoaded",init);
 </script>
-
-<!-- D3 & TopoJSON -->
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 
 </body>
 </html>
