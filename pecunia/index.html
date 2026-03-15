@@ -1585,7 +1585,7 @@ button {
       <g id="markerGroup"></g>
     </svg>
     <!-- Zoom controls -->
-    <div class="zoom-controls">
+    <div class="zoom-controls" role="group" aria-label="Map zoom controls">
       <button class="zoom-btn" onclick="zoomIn()" aria-label="Zoom in" title="Zoom in">+</button>
       <button class="zoom-btn" onclick="zoomOut()" aria-label="Zoom out" title="Zoom out">&minus;</button>
       <button class="zoom-btn" onclick="zoomReset()" aria-label="Reset zoom" title="Reset zoom">&#8634;</button>
@@ -1608,7 +1608,7 @@ button {
 </main>
 
 <!-- Stats Bar -->
-<div class="stats-bar" id="statsBar">
+<div class="stats-bar" id="statsBar" aria-live="polite" aria-atomic="true">
   <div class="stat-item">Active: <span class="stat-value" id="statActive">0</span></div>
   <div class="stat-item">Total: <span class="stat-value" id="statTotal">0</span></div>
   <div class="stat-item">Era: <span class="stat-value" id="statEra">--</span></div>
@@ -1616,13 +1616,13 @@ button {
 </div>
 
 <!-- Search Overlay -->
-<div class="search-overlay" id="searchOverlay">
-  <div class="search-box">
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search monetary history" aria-modal="true">
+  <div class="search-box" role="search">
     <div class="search-input-row">
-      <input class="search-input" id="searchInput" type="text" placeholder="Search currencies, institutions, events..." autocomplete="off" aria-label="Search monetary history">
+      <input class="search-input" id="searchInput" type="search" placeholder="Search currencies, institutions, events..." autocomplete="off" aria-label="Search monetary history">
       <button class="search-close" onclick="closeSearch()" aria-label="Close search">&times;</button>
     </div>
-    <div class="search-results" id="searchResults">
+    <div class="search-results" id="searchResults" role="listbox" aria-label="Search results">
       <div class="search-empty">Type to search across all monetary entries...</div>
     </div>
   </div>
