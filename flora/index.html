@@ -1046,6 +1046,454 @@ const TRANSMISSIONS=[
   {id:"t10",n:"Medicinal Plant Trade",plants:["opium","aloe","quinine","ginger","turmeric"],era:-1000,desc:"Ancient trade networks for healing plants across Eurasia."}
 ];
 
+/* ============================================================
+   PHASE 3 — CORE JAVASCRIPT
+   ============================================================ */
+
+/* --- State --- */
+let curYear=-10000, selPlant=null, curLens=["overview"], curMode="explore";
+let compareA=null,compareB=null;
+let zoomK=1,panX=0,panY=0;
+let playing=false, playTimer=null;
+let lensOpen=false, burgerOpen=false;
+
+/* --- Utility --- */
+function fmt(y){
+  if(y<=0)return Math.abs(y).toLocaleString()+' BCE';
+  return y+' CE';
+}
+function eraName(y){
+  let name=ERAS[0].n;
+  for(let i=ERAS.length-1;i>=0;i--){if(y>=ERAS[i].y){name=ERAS[i].n;break;}}
+  return name;
+}
+function active(p){return p.s<=curYear&&p.e>=curYear;}
+
+/* --- Projection support --- */
+function plantPt(p){
+  if(!p)return[500,260];
+  if(window._proj&&typeof p.lon==='number'&&typeof p.lat==='number'){
+    try{const pt=window._proj([p.lon,p.lat]);if(pt&&isFinite(pt[0]))return pt;}catch(e){}
+  }
+  return[p.x||500,p.y||260];
+}
+
+/* --- Timeline mapping --- */
+function sliderToYear(v){
+  let t=v/1000;
+  // Non-linear: first 50% covers -10000 to 0, next 50% covers 0 to 2025
+  if(t<=0.5){return Math.round(-10000+t*2*10000);}
+  return Math.round((t-0.5)*2*2025);
+}
+function yearToSlider(y){
+  if(y<=0)return((y+10000)/20000)*1000;
+  return 500+(y/2025)*500;
+}
+function setYear(y){
+  curYear=y;
+  document.getElementById('timeline-slider').value=yearToSlider(y);
+  document.getElementById('year-display').textContent=fmt(y);
+  document.getElementById('era-display').textContent=eraName(y);
+  renderMap();
+  if(selPlant)renderDrawerContent();
+}
+function onSliderInput(v){setYear(sliderToYear(Number(v)));}
+
+/* --- Play/Pause --- */
+function togglePlay(){
+  playing=!playing;
+  document.getElementById('play-btn').innerHTML=playing?'&#9646;&#9646;':'&#9654;';
+  if(playing){
+    playTimer=setInterval(()=>{
+      let next=curYear+50;
+      if(next>2025){next=-10000;playing=false;document.getElementById('play-btn').innerHTML='&#9654;';clearInterval(playTimer);}
+      setYear(next);
+    },80);
+  }else{clearInterval(playTimer);}
+}
+
+/* --- Render World Map (D3 + TopoJSON) --- */
+function renderWorldMap(world){
+  const W=1000,H=520;
+  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
+  window._proj=proj;
+  const pathGen=d3.geoPath().projection(proj);
+  const land=topojson.feature(world,world.objects.land);
+  const graticule=d3.geoGraticule()();
+  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
+  let g=document.getElementById('map-layer');
+  g.innerHTML=
+    `<path d="${pathGen(graticule)||''}" fill="none" stroke="var(--bdr2)" stroke-width=".3"/>`+
+    `<path d="${pathGen(land)||''}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>`+
+    `<path d="${pathGen(borders)||''}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
+}
+
+/* --- Render Map Markers, Connections, Transmissions --- */
+function renderMap(){
+  const mg=document.getElementById('markers');
+  const cg=document.getElementById('connections');
+  const tg=document.getElementById('transmissions');
+  let mh='',ch='',th='';
+
+  PLANTS.forEach(p=>{
+    const pt=plantPt(p);
+    const act=active(p);
+    const sel=selPlant&&selPlant.id===p.id;
+    const r=(p.sz||1)*5;
+    const cls='plant-marker'+(act?'':' inactive')+(sel?' selected':'');
+    mh+=`<g class="${cls}" transform="translate(${pt[0]},${pt[1]})" onclick="plantClick('${p.id}')"
+          onmouseenter="showTip(event,'${p.n}')" onmouseleave="hideTip()">`;
+    if(act)mh+=`<circle class="pulse-ring" cx="0" cy="0" r="${r}" stroke="${p.col}"/>`;
+    if(sel)mh+=`<circle cx="0" cy="0" r="${r+4}" fill="none" stroke="${p.col}" stroke-width="1.5" filter="url(#glow)"/>`;
+    mh+=`<circle class="marker-circle" cx="0" cy="0" r="${r}" fill="${p.col}" fill-opacity="${act?0.85:0.2}"/>`;
+    mh+=`<text class="marker-label" y="${r+10}">${p.n}</text>`;
+    mh+=`</g>`;
+  });
+
+  if(curMode==='explore'||curMode==='threads'){
+    CONNECTIONS.forEach(c=>{
+      const a=PLANTS.find(p=>p.id===c.from), b=PLANTS.find(p=>p.id===c.to);
+      if(!a||!b)return;
+      const pa=plantPt(a),pb=plantPt(b);
+      const hi=selPlant&&(selPlant.id===c.from||selPlant.id===c.to);
+      const vis=active(a)&&active(b);
+      if(vis)ch+=`<line class="connection-line${hi?' highlight':''}" x1="${pa[0]}" y1="${pa[1]}" x2="${pb[0]}" y2="${pb[1]}"/>`;
+    });
+  }
+
+  if(curMode==='threads'){
+    TRANSMISSIONS.forEach(tr=>{
+      if(curYear<tr.era)return;
+      const pts=tr.plants.map(id=>PLANTS.find(p=>p.id===id)).filter(Boolean).map(plantPt);
+      if(pts.length<2)return;
+      let d='M'+pts[0][0]+','+pts[0][1];
+      for(let i=1;i<pts.length;i++)d+='L'+pts[i][0]+','+pts[i][1];
+      th+=`<path class="transmission-path visible" d="${d}" data-name="${tr.n}"/>`;
+    });
+  }
+
+  mg.innerHTML=mh;
+  cg.innerHTML=ch;
+  tg.innerHTML=th;
+}
+
+/* --- Density Bar (sparkline) --- */
+function renderDensityBar(){
+  const c=document.getElementById('density-bar');
+  const ctx=c.getContext('2d');
+  const W=c.offsetWidth||c.width, H=c.offsetHeight||c.height;
+  c.width=W;c.height=H;
+  const bins=100;
+  const counts=new Array(bins).fill(0);
+  PLANTS.forEach(p=>{
+    const s=Math.max(0,Math.floor(yearToSlider(p.s)/1000*bins));
+    const e=Math.min(bins-1,Math.floor(yearToSlider(p.e)/1000*bins));
+    for(let i=s;i<=e;i++)counts[i]++;
+  });
+  const mx=Math.max(...counts,1);
+  const style=getComputedStyle(document.documentElement);
+  const accentColor=style.getPropertyValue('--accent').trim()||'#4a9e3f';
+  ctx.clearRect(0,0,W,H);
+  const bw=W/bins;
+  for(let i=0;i<bins;i++){
+    const h=(counts[i]/mx)*H;
+    ctx.fillStyle=accentColor;
+    ctx.globalAlpha=0.35;
+    ctx.fillRect(i*bw,H-h,bw-0.5,h);
+  }
+  ctx.globalAlpha=1;
+}
+
+/* --- Plant Click / Selection --- */
+function plantClick(id){
+  const p=PLANTS.find(x=>x.id===id);
+  if(!p)return;
+  if(curMode==='compare'){
+    if(!compareA){compareA=p;renderCompare();}
+    else if(!compareB){compareB=p;renderCompare();}
+    else{compareA=p;compareB=null;renderCompare();}
+    renderMap();return;
+  }
+  selPlant=p;
+  renderMap();
+  openDrawer(p);
+}
+function navigateToPlant(id){
+  const p=PLANTS.find(x=>x.id===id);
+  if(!p)return;
+  selPlant=p;
+  renderMap();
+  openDrawer(p);
+}
+
+/* --- Drawer --- */
+function openDrawer(p){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawer-title').textContent=p.n;
+  document.getElementById('drawer-subtitle').textContent=p.family+' \u2022 '+p.type;
+  renderDrawerContent();
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  selPlant=null;
+  renderMap();
+}
+function renderDrawerContent(){
+  if(!selPlant)return;
+  const p=selPlant;
+  let h='';
+  // Meta
+  h+=`<div class="drawer-meta">
+    <div class="meta-item"><div class="meta-label">ORIGIN</div><div class="meta-value">${p.origin}</div></div>
+    <div class="meta-item"><div class="meta-label">REGION</div><div class="meta-value">${p.region}</div></div>
+    <div class="meta-item"><div class="meta-label">DOMESTICATED</div><div class="meta-value">${fmt(p.s)}</div></div>
+    <div class="meta-item"><div class="meta-label">FAMILY</div><div class="meta-value">${p.family}</div></div>
+  </div>`;
+  // Lens content
+  const lensMap={
+    overview:'overview',cultivation:'cultivation',spread:'spread',uses:'uses',
+    cultural:'cultural',science:'science',ecology:'ecology',economics:'trade',
+    medicine:'science',mythology:'cultural',cuisine:'uses',genetics:'science'
+  };
+  curLens.forEach(lid=>{
+    const lens=LENSES.find(l=>l.id===lid);
+    if(!lens)return;
+    const key=lensMap[lid]||'overview';
+    const txt=p.d[key]||'No data available for this lens.';
+    h+=`<div class="drawer-section fade-in">
+      <div class="drawer-section-title">${lens.ico} ${lens.n}</div>
+      <div class="drawer-section-body">${txt}</div>
+    </div>`;
+  });
+  // Related connections
+  const related=CONNECTIONS.filter(c=>c.from===p.id||c.to===p.id);
+  if(related.length){
+    h+=`<div class="drawer-section"><div class="drawer-section-title">\ud83d\udd17 Connections</div><div class="drawer-section-body">`;
+    related.forEach(c=>{
+      const otherId=c.from===p.id?c.to:c.from;
+      const other=PLANTS.find(x=>x.id===otherId);
+      if(other)h+=`<div style="cursor:pointer;padding:4px 0;color:var(--accent)" onclick="navigateToPlant('${otherId}')">\u2192 ${other.n} &mdash; ${c.label}</div>`;
+    });
+    h+=`</div></div>`;
+  }
+  // Transmissions
+  const chains=TRANSMISSIONS.filter(t=>t.plants.includes(p.id));
+  if(chains.length){
+    h+=`<div class="drawer-section"><div class="drawer-section-title">\ud83c\udf10 Trade Routes & Exchanges</div><div class="drawer-section-body">`;
+    chains.forEach(t=>{
+      h+=`<div style="padding:4px 0"><strong>${t.n}</strong> (${fmt(t.era)}): ${t.desc}</div>`;
+    });
+    h+=`</div></div>`;
+  }
+  document.getElementById('drawer-content').innerHTML=h;
+}
+
+/* --- Lens Dropdown --- */
+function renderLensDD(){
+  let h='';
+  LENSES.forEach(l=>{
+    const act=curLens.includes(l.id)?'active':'';
+    h+=`<div class="lens-item ${act}" role="option" onclick="toggleLens('${l.id}')">
+      <span class="ico">${l.ico}</span>${l.n}</div>`;
+  });
+  document.getElementById('lens-dd').innerHTML=h;
+}
+function toggleLensDD(){
+  lensOpen=!lensOpen;
+  document.getElementById('lens-dd').classList.toggle('open',lensOpen);
+  if(lensOpen)renderLensDD();
+}
+function toggleLens(id){
+  const idx=curLens.indexOf(id);
+  if(idx>=0&&curLens.length>1)curLens.splice(idx,1);
+  else if(idx<0)curLens.push(id);
+  // Update button label
+  const primary=LENSES.find(l=>l.id===curLens[0]);
+  if(primary){
+    document.getElementById('lens-ico').textContent=primary.ico;
+    document.getElementById('lens-name').textContent=primary.n+(curLens.length>1?' +'+( curLens.length-1):'');
+  }
+  renderLensDD();
+  if(selPlant)renderDrawerContent();
+}
+
+/* --- Mode Switching --- */
+function setMode(m){
+  curMode=m;
+  document.querySelectorAll('.mode-btn').forEach(b=>{
+    b.classList.toggle('active',b.dataset.mode===m);
+  });
+  document.getElementById('compare-panel').classList.toggle('open',m==='compare');
+  if(m!=='compare'){document.getElementById('drawer').classList.remove('open');}
+  if(m==='compare'){compareA=null;compareB=null;renderCompare();}
+  renderMap();
+}
+
+/* --- Compare Mode --- */
+function renderCompare(){
+  const pa=document.getElementById('compare-a');
+  const pb=document.getElementById('compare-b');
+  pa.innerHTML=compareA?buildCompareCol(compareA):'<p style="color:var(--txt-dim);padding:20px">Click a plant on the map to compare.</p>';
+  pb.innerHTML=compareB?buildCompareCol(compareB):'<p style="color:var(--txt-dim);padding:20px">Click a second plant to compare.</p>';
+  document.getElementById('compare-panel').classList.add('open');
+}
+function buildCompareCol(p){
+  let h=`<h3>${p.n}</h3>`;
+  h+=`<div class="meta-item" style="margin-bottom:8px"><div class="meta-label">ORIGIN</div><div class="meta-value">${p.origin} (${fmt(p.s)})</div></div>`;
+  h+=`<div class="meta-item" style="margin-bottom:8px"><div class="meta-label">FAMILY</div><div class="meta-value">${p.family} \u2022 ${p.type}</div></div>`;
+  const keys=['overview','cultivation','spread','uses','cultural','science','ecology','trade'];
+  keys.forEach(k=>{
+    if(p.d[k])h+=`<div class="drawer-section"><div class="drawer-section-title">${k.toUpperCase()}</div><div class="drawer-section-body">${p.d[k]}</div></div>`;
+  });
+  return h;
+}
+
+/* --- Zoom & Pan --- */
+function applyTransform(){
+  const svg=document.getElementById('map-svg');
+  const inner=svg.querySelector('defs').nextElementSibling;
+  // Apply transform to all child groups
+  ['continents','map-layer','connections','transmissions','markers'].forEach(id=>{
+    const g=document.getElementById(id);
+    if(g)g.setAttribute('transform',`translate(${panX},${panY}) scale(${zoomK})`);
+  });
+}
+
+(function setupZoomPan(){
+  const mc=document.getElementById('map-container');
+  let dragging=false,lastX,lastY;
+
+  mc.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const delta=e.deltaY>0?0.9:1.1;
+    const newK=Math.max(0.5,Math.min(8,zoomK*delta));
+    // Zoom toward mouse
+    const rect=mc.getBoundingClientRect();
+    const svg=document.getElementById('map-svg');
+    const svgRect=svg.getBoundingClientRect();
+    const mx=(e.clientX-svgRect.left)/svgRect.width*1000;
+    const my=(e.clientY-svgRect.top)/svgRect.height*520;
+    const ratio=newK/zoomK;
+    panX=mx-(mx-panX)*ratio;
+    panY=my-(my-panY)*ratio;
+    zoomK=newK;
+    applyTransform();
+  },{passive:false});
+
+  mc.addEventListener('pointerdown',e=>{
+    if(e.button!==0)return;
+    dragging=true;lastX=e.clientX;lastY=e.clientY;
+    mc.classList.add('dragging');
+    mc.setPointerCapture(e.pointerId);
+  });
+  mc.addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    const svg=document.getElementById('map-svg');
+    const svgRect=svg.getBoundingClientRect();
+    const sx=1000/svgRect.width*zoomK;
+    const sy=520/svgRect.height*zoomK;
+    panX+=(e.clientX-lastX)/svgRect.width*1000;
+    panY+=(e.clientY-lastY)/svgRect.height*520;
+    lastX=e.clientX;lastY=e.clientY;
+    applyTransform();
+  });
+  mc.addEventListener('pointerup',e=>{
+    dragging=false;
+    mc.classList.remove('dragging');
+  });
+
+  // Touch pinch support
+  let lastDist=0;
+  mc.addEventListener('touchstart',e=>{
+    if(e.touches.length===2){
+      lastDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+    }
+  },{passive:true});
+  mc.addEventListener('touchmove',e=>{
+    if(e.touches.length===2){
+      const dist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      if(lastDist>0){
+        const ratio=dist/lastDist;
+        zoomK=Math.max(0.5,Math.min(8,zoomK*ratio));
+        applyTransform();
+      }
+      lastDist=dist;
+    }
+  },{passive:true});
+})();
+
+/* --- Tooltip --- */
+function showTip(e,text){
+  const tip=document.getElementById('tooltip');
+  tip.textContent=text;
+  tip.style.display='block';
+  tip.style.left=(e.clientX+12)+'px';
+  tip.style.top=(e.clientY-30)+'px';
+}
+function hideTip(){
+  document.getElementById('tooltip').style.display='none';
+}
+
+/* --- Theme --- */
+function applyTheme(){
+  const saved=localStorage.getItem('flora-theme');
+  if(saved)document.documentElement.setAttribute('data-theme',saved);
+}
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute('data-theme');
+  const next=cur==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',next);
+  localStorage.setItem('flora-theme',next);
+  setTimeout(()=>{renderDensityBar();},100);
+}
+
+/* --- Burger Menu --- */
+function toggleBurger(){
+  burgerOpen=!burgerOpen;
+  document.getElementById('burger-menu').classList.toggle('open',burgerOpen);
+}
+function closeBurger(){
+  burgerOpen=false;
+  document.getElementById('burger-menu').classList.remove('open');
+}
+
+/* --- About Modal --- */
+function showAbout(){
+  document.getElementById('about-overlay').classList.add('open');
+}
+function closeAbout(){
+  document.getElementById('about-overlay').classList.remove('open');
+}
+
+/* --- Init --- */
+function init(){
+  applyTheme();
+  setYear(-10000);
+  renderDensityBar();
+  renderLensDD();
+
+  // Fetch TopoJSON world map
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(r=>r.json()).then(world=>{renderWorldMap(world);renderMap();})
+    .catch(()=>console.warn('Map data unavailable'));
+
+  // Close dropdowns on outside click
+  document.addEventListener('click',e=>{
+    if(lensOpen&&!e.target.closest('#lens-container')){
+      lensOpen=false;
+      document.getElementById('lens-dd').classList.remove('open');
+    }
+    if(burgerOpen&&!e.target.closest('#burger-menu')&&!e.target.closest('#burger-btn')){
+      closeBurger();
+    }
+  });
+
+  // Resize handler
+  window.addEventListener('resize',()=>{renderDensityBar();});
+}
+
+init();
+
 </script>
 </body>
 </html>
