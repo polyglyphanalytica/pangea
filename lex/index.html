@@ -452,6 +452,7 @@ main {
 }
 
 .map-container:active { cursor: grabbing; }
+.map-container { touch-action: none; }
 
 .map-container svg {
   width: 100%;
@@ -1045,6 +1046,23 @@ main {
   .header-right .view-tabs { display: none; }
 }
 
+/* --- Focus Styles for Accessibility --- */
+button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.view-tab:focus-visible, .burger-link:focus-visible, .lens-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* --- Selection --- */
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
 /* --- Animations --- */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -1073,7 +1091,7 @@ main {
 <div id="app">
 
   <!-- ===== HEADER ===== -->
-  <header>
+  <header role="banner">
     <div class="header-left">
       <div class="logo" onclick="init()" title="Lex — The Atlas of Law & Justice">LEX</div>
       <span class="logo-sub">The Atlas of Law</span>
@@ -1105,7 +1123,7 @@ main {
   </header>
 
   <!-- ===== MAIN CONTENT ===== -->
-  <main>
+  <main role="main">
     <!-- Map View -->
     <div class="map-container" id="mapContainer">
       <svg id="mapSvg" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet">
@@ -1167,7 +1185,7 @@ main {
   </main>
 
   <!-- ===== TIMELINE BAR ===== -->
-  <div class="timeline-bar">
+  <div class="timeline-bar" role="navigation" aria-label="Timeline navigation">
     <span class="timeline-label">Timeline</span>
     <button class="timeline-play" id="playBtn" onclick="togglePlay()" aria-label="Play timeline">▶</button>
     <div class="timeline-slider-wrap">
@@ -2842,4 +2860,6 @@ window.addEventListener("resize", () => {
 /* Start */
 init();
 
-
+</script>
+</body>
+</html>
