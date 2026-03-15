@@ -1977,6 +1977,869 @@ const TRANSMISSIONS = [
    chain:["mexican-constitution","weimar","udhr","indian-constitution","apartheid-end"]}
 ];
 
-</script>
-</body>
-</html>
+/* ======================================================
+   STATE
+   ====================================================== */
+let currentYear = -1754;
+let currentLens = "overview";
+let currentLaw = null;
+let currentView = "explore";
+let playing = false;
+let playTimer = null;
+
+/* Zoom / Pan state */
+let vx = 0, vy = 0, vw = 1000, vh = 520;
+let dragging = false, dragStart = {x:0,y:0}, viewStart = {x:0,y:0};
+let pinchDist = 0;
+
+/* ======================================================
+   UTILITIES
+   ====================================================== */
+function fmt(y) {
+  if (y < 0) return Math.abs(y) + " BCE";
+  if (y === 0) return "1 CE";
+  return y + " CE";
+}
+
+function eraName(y) {
+  for (let i = ERAS.length - 1; i >= 0; i--) {
+    if (y >= ERAS[i].s) return ERAS[i].n;
+  }
+  return ERAS[0].n;
+}
+
+function eraColor(y) {
+  for (let i = ERAS.length - 1; i >= 0; i--) {
+    if (y >= ERAS[i].s) return ERAS[i].col;
+  }
+  return ERAS[0].col;
+}
+
+function active(l) {
+  return (!l.e || l.s <= currentYear) && (l.e ? l.e >= currentYear : l.s <= currentYear);
+}
+
+function visible(l) {
+  return l.s <= currentYear;
+}
+
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+/* ======================================================
+   SLIDER <-> YEAR MAPPING
+   Nonlinear: more space for modern era
+   ====================================================== */
+const Y_MIN = -2100, Y_MAX = 2025;
+
+function sliderToYear(v) {
+  const t = v / 1000;
+  /* Use a power curve to give more resolution to recent eras */
+  const curved = t * t * (3 - 2 * t); /* smoothstep */
+  return Math.round(Y_MIN + (Y_MAX - Y_MIN) * curved);
+}
+
+function yearToSlider(y) {
+  const t = (y - Y_MIN) / (Y_MAX - Y_MIN);
+  /* Inverse smoothstep approximation */
+  let lo = 0, hi = 1;
+  for (let i = 0; i < 20; i++) {
+    const mid = (lo + hi) / 2;
+    const mapped = mid * mid * (3 - 2 * mid);
+    if (mapped < t) lo = mid; else hi = mid;
+  }
+  return Math.round(((lo + hi) / 2) * 1000);
+}
+
+function setYear(y) {
+  currentYear = clamp(y, Y_MIN, Y_MAX);
+  document.getElementById("yearDisplay").textContent = fmt(currentYear);
+  document.getElementById("eraDisplay").textContent = eraName(currentYear);
+  document.getElementById("eraDisplay").style.color = eraColor(currentYear);
+  document.getElementById("timelineYear").textContent = fmt(currentYear);
+  document.getElementById("timelineSlider").value = yearToSlider(currentYear);
+  renderMap();
+}
+
+function onSliderInput(v) {
+  setYear(sliderToYear(Number(v)));
+}
+
+/* ======================================================
+   PLAY / ANIMATE TIMELINE
+   ====================================================== */
+function togglePlay() {
+  playing = !playing;
+  document.getElementById("playBtn").textContent = playing ? "⏸" : "▶";
+  if (playing) {
+    if (currentYear >= Y_MAX) currentYear = Y_MIN;
+    playTimer = setInterval(() => {
+      let step = 10;
+      if (currentYear > 1500) step = 5;
+      if (currentYear > 1900) step = 2;
+      if (currentYear > 2000) step = 1;
+      currentYear += step;
+      if (currentYear >= Y_MAX) {
+        currentYear = Y_MAX;
+        playing = false;
+        clearInterval(playTimer);
+        document.getElementById("playBtn").textContent = "▶";
+      }
+      setYear(currentYear);
+    }, 80);
+  } else {
+    clearInterval(playTimer);
+  }
+}
+
+/* ======================================================
+   WORLD MAP — simplified continent outlines
+   ====================================================== */
+function renderWorldMap() {
+  const g = document.getElementById("continents");
+  g.innerHTML = "";
+
+  const continents = [
+    /* North America */
+    {d:"M 80 90 L 120 70 L 180 65 L 220 80 L 260 90 L 270 110 L 280 130 L 275 150 L 260 165 L 255 180 L 260 200 L 250 215 L 235 220 L 230 240 L 220 250 L 200 245 L 185 235 L 170 220 L 155 200 L 140 185 L 130 170 L 115 155 L 100 145 L 90 130 L 80 115 Z"},
+    /* South America */
+    {d:"M 230 270 L 250 265 L 270 275 L 290 285 L 300 310 L 310 330 L 315 355 L 310 380 L 300 400 L 290 415 L 280 430 L 270 440 L 260 445 L 255 435 L 250 420 L 245 400 L 240 380 L 235 360 L 230 340 L 225 320 L 222 300 L 225 280 Z"},
+    /* Europe */
+    {d:"M 420 75 L 440 70 L 460 68 L 480 72 L 500 80 L 510 85 L 510 100 L 505 115 L 500 125 L 495 140 L 490 150 L 480 155 L 470 160 L 460 170 L 450 175 L 440 180 L 430 178 L 420 172 L 415 160 L 418 145 L 420 130 L 425 115 L 425 100 L 422 85 Z"},
+    /* Africa */
+    {d:"M 430 195 L 450 185 L 470 185 L 490 190 L 510 200 L 530 210 L 545 225 L 548 245 L 545 265 L 540 285 L 535 305 L 525 325 L 515 345 L 505 365 L 495 380 L 485 395 L 475 405 L 465 410 L 455 405 L 450 390 L 448 370 L 445 350 L 440 330 L 435 310 L 430 290 L 425 270 L 420 250 L 418 230 L 420 210 Z"},
+    /* Asia */
+    {d:"M 510 60 L 550 55 L 590 50 L 640 55 L 690 60 L 730 70 L 760 80 L 790 90 L 810 105 L 815 120 L 810 140 L 800 155 L 785 170 L 770 185 L 755 195 L 740 205 L 720 215 L 700 220 L 680 225 L 660 230 L 640 235 L 620 240 L 600 245 L 580 240 L 560 230 L 545 215 L 535 200 L 525 185 L 515 170 L 510 155 L 508 140 L 510 120 L 512 100 L 510 80 Z"},
+    /* Oceania / Australia */
+    {d:"M 760 350 L 780 340 L 810 335 L 840 340 L 860 350 L 870 365 L 870 385 L 860 400 L 845 410 L 825 415 L 800 410 L 780 400 L 765 385 L 758 370 Z"},
+    /* Antarctica hint */
+    {d:"M 200 500 L 350 495 L 500 498 L 650 495 L 800 500 L 800 520 L 200 520 Z"}
+  ];
+
+  continents.forEach(c => {
+    const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+    path.setAttribute("d", c.d);
+    path.setAttribute("class","continent");
+    g.appendChild(path);
+  });
+
+  /* Graticule lines */
+  const gratG = document.createElementNS("http://www.w3.org/2000/svg","g");
+  gratG.setAttribute("opacity","0.08");
+  gratG.setAttribute("stroke","var(--muted)");
+  gratG.setAttribute("stroke-width","0.3");
+  gratG.setAttribute("fill","none");
+  /* Horizontal lines (latitudes) */
+  for (let y = 65; y <= 500; y += 65) {
+    const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+    line.setAttribute("x1","0"); line.setAttribute("y1",y);
+    line.setAttribute("x2","1000"); line.setAttribute("y2",y);
+    gratG.appendChild(line);
+  }
+  /* Vertical lines (longitudes) */
+  for (let x = 100; x <= 900; x += 100) {
+    const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+    line.setAttribute("x1",x); line.setAttribute("y1","0");
+    line.setAttribute("x2",x); line.setAttribute("y2","520");
+    gratG.appendChild(line);
+  }
+  g.insertBefore(gratG, g.firstChild);
+}
+
+/* ======================================================
+   RENDER MAP MARKERS
+   ====================================================== */
+function renderMap() {
+  const mg = document.getElementById("markers");
+  const cg = document.getElementById("connections");
+  mg.innerHTML = "";
+  cg.innerHTML = "";
+
+  const visibleLaws = LAWS.filter(l => visible(l));
+
+  /* Draw connections */
+  CONNECTIONS.forEach(c => {
+    const fromL = LAWS.find(l => l.id === c.from);
+    const toL = LAWS.find(l => l.id === c.to);
+    if (!fromL || !toL) return;
+    if (!visible(fromL) || !visible(toL)) return;
+
+    const line = document.createElementNS("http://www.w3.org/2000/svg","path");
+    const mx = (fromL.x + toL.x) / 2;
+    const my = (fromL.y + toL.y) / 2 - 15;
+    line.setAttribute("d", `M ${fromL.x} ${fromL.y} Q ${mx} ${my} ${toL.x} ${toL.y}`);
+    line.setAttribute("class","connection-line");
+    line.setAttribute("stroke", fromL.col);
+
+    /* Tooltip on hover */
+    line.addEventListener("mouseenter", (e) => showTooltip(e, c.label, `${fromL.n} → ${toL.n}`));
+    line.addEventListener("mouseleave", hideTooltip);
+    cg.appendChild(line);
+  });
+
+  /* Draw markers */
+  visibleLaws.forEach(l => {
+    const g = document.createElementNS("http://www.w3.org/2000/svg","g");
+    g.setAttribute("class", "law-marker" + (currentLaw === l.id ? " active" : ""));
+    g.setAttribute("transform", `translate(${l.x},${l.y})`);
+
+    const isActive = active(l);
+    const r = (l.sz || 1) * 5;
+    const opacity = isActive ? 1 : 0.4;
+
+    /* Glow ring for active law */
+    if (currentLaw === l.id) {
+      const glow = document.createElementNS("http://www.w3.org/2000/svg","circle");
+      glow.setAttribute("r", r + 6);
+      glow.setAttribute("fill","none");
+      glow.setAttribute("stroke", l.col);
+      glow.setAttribute("stroke-width","1");
+      glow.setAttribute("opacity","0.4");
+      glow.setAttribute("class","pulse-ring");
+      g.appendChild(glow);
+    }
+
+    /* Outer glow */
+    if (isActive) {
+      const outer = document.createElementNS("http://www.w3.org/2000/svg","circle");
+      outer.setAttribute("r", r + 3);
+      outer.setAttribute("fill", l.col);
+      outer.setAttribute("opacity","0.15");
+      g.appendChild(outer);
+    }
+
+    /* Main circle */
+    const circle = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    circle.setAttribute("r", r);
+    circle.setAttribute("fill", l.col);
+    circle.setAttribute("opacity", opacity);
+    circle.setAttribute("stroke", currentLaw === l.id ? "var(--amber)" : "none");
+    circle.setAttribute("stroke-width", currentLaw === l.id ? "2" : "0");
+    g.appendChild(circle);
+
+    /* Label */
+    const text = document.createElementNS("http://www.w3.org/2000/svg","text");
+    text.setAttribute("y", -(r + 4));
+    text.textContent = l.n;
+    g.appendChild(text);
+
+    /* Interaction */
+    g.addEventListener("click", (e) => { e.stopPropagation(); lawClick(l.id); });
+    g.addEventListener("mouseenter", (e) => showTooltip(e, l.n, `${l.region} · ${fmt(l.s)}`));
+    g.addEventListener("mouseleave", hideTooltip);
+    mg.appendChild(g);
+  });
+}
+
+/* ======================================================
+   TOOLTIP
+   ====================================================== */
+function showTooltip(e, title, detail) {
+  const tt = document.getElementById("tooltip");
+  document.getElementById("tooltipTitle").textContent = title;
+  document.getElementById("tooltipDetail").textContent = detail || "";
+  tt.classList.add("visible");
+  positionTooltip(e);
+}
+
+function positionTooltip(e) {
+  const tt = document.getElementById("tooltip");
+  const x = e.clientX + 14;
+  const y = e.clientY + 14;
+  tt.style.left = Math.min(x, window.innerWidth - 260) + "px";
+  tt.style.top = Math.min(y, window.innerHeight - 80) + "px";
+}
+
+function hideTooltip() {
+  document.getElementById("tooltip").classList.remove("visible");
+}
+
+document.addEventListener("mousemove", (e) => {
+  if (document.getElementById("tooltip").classList.contains("visible")) {
+    positionTooltip(e);
+  }
+});
+
+/* ======================================================
+   LAW CLICK / INFO PANEL
+   ====================================================== */
+function lawClick(id) {
+  currentLaw = id;
+  const panel = document.getElementById("infoPanel");
+  panel.classList.remove("collapsed");
+  panel.classList.add("show");
+  renderDrawer();
+  renderMap();
+}
+
+function navigateToLaw(id) {
+  const law = LAWS.find(l => l.id === id);
+  if (!law) return;
+  if (law.s > currentYear) setYear(law.s);
+  switchView("explore");
+  lawClick(id);
+  /* Center on the law */
+  const svg = document.getElementById("mapSvg");
+  vx = law.x - vw / 2;
+  vy = law.y - vh / 2;
+  vx = clamp(vx, -200, 1200 - vw);
+  vy = clamp(vy, -100, 620 - vh);
+  svg.setAttribute("viewBox", `${vx} ${vy} ${vw} ${vh}`);
+}
+
+function closePanel() {
+  const panel = document.getElementById("infoPanel");
+  panel.classList.add("collapsed");
+  panel.classList.remove("show");
+  currentLaw = null;
+  renderMap();
+}
+
+/* ======================================================
+   DRAWER / INFO PANEL CONTENT
+   ====================================================== */
+function renderDrawer() {
+  const law = LAWS.find(l => l.id === currentLaw);
+  if (!law) return;
+
+  document.getElementById("infoTitle").textContent = law.n;
+  renderDrawerMeta(law);
+  renderDrawerContent(law);
+}
+
+function renderDrawerMeta(law) {
+  const meta = document.getElementById("infoMeta");
+  meta.innerHTML = "";
+  const tags = [
+    {label: law.region},
+    {label: law.type},
+    {label: fmt(law.s) + (law.e ? " – " + fmt(law.e) : "")},
+    {label: law.tradition},
+    {label: law.jurisdiction}
+  ];
+  tags.forEach(t => {
+    const tag = document.createElement("span");
+    tag.className = "info-tag";
+    tag.textContent = t.label;
+    meta.appendChild(tag);
+  });
+}
+
+function renderDrawerContent(law) {
+  const body = document.getElementById("infoBody");
+  body.innerHTML = "";
+
+  if (!law.d) {
+    body.innerHTML = '<div class="info-placeholder"><span class="ico">⚖️</span><p>No detailed information available.</p></div>';
+    return;
+  }
+
+  /* If single lens selected, show just that */
+  if (currentLens !== "overview") {
+    const lens = LENSES.find(l => l.id === currentLens);
+    const content = law.d[currentLens];
+    if (content) {
+      const section = document.createElement("div");
+      section.className = "info-section fade-in";
+      section.innerHTML = `
+        <div class="info-section-title">${lens.ico} ${lens.n}</div>
+        <div class="info-section-text">${content}</div>
+      `;
+      body.appendChild(section);
+    } else {
+      body.innerHTML = '<div class="info-placeholder"><p>No information for this lens.</p></div>';
+    }
+
+    /* Also show connections */
+    renderDrawerConnections(law, body);
+    return;
+  }
+
+  /* Overview: show all lenses that have data */
+  LENSES.forEach(lens => {
+    if (lens.id === "overview") return;
+    const content = law.d[lens.id];
+    if (!content) return;
+    const section = document.createElement("div");
+    section.className = "info-section fade-in";
+    section.innerHTML = `
+      <div class="info-section-title">${lens.ico} ${lens.n}</div>
+      <div class="info-section-text">${content}</div>
+    `;
+    body.appendChild(section);
+  });
+
+  renderDrawerConnections(law, body);
+}
+
+function renderDrawerConnections(law, body) {
+  /* Show connections */
+  const related = CONNECTIONS.filter(c => c.from === law.id || c.to === law.id);
+  if (related.length === 0) return;
+
+  const section = document.createElement("div");
+  section.className = "info-section fade-in";
+  let html = '<div class="info-section-title">🔗 Connections</div>';
+  related.forEach(c => {
+    const otherId = c.from === law.id ? c.to : c.from;
+    const other = LAWS.find(l => l.id === otherId);
+    if (!other) return;
+    const direction = c.from === law.id ? "→" : "←";
+    html += `<div style="margin:4px 0;cursor:pointer;color:var(--accent)" onclick="navigateToLaw('${otherId}')">
+      ${direction} <strong>${other.n}</strong> — ${c.label}
+    </div>`;
+  });
+  section.innerHTML = html;
+  body.appendChild(section);
+
+  /* Show which threads include this law */
+  const threads = TRANSMISSIONS.filter(t => t.chain.includes(law.id));
+  if (threads.length > 0) {
+    const tSection = document.createElement("div");
+    tSection.className = "info-section fade-in";
+    let tHtml = '<div class="info-section-title">📜 Legal Threads</div>';
+    threads.forEach(t => {
+      tHtml += `<div style="margin:4px 0;cursor:pointer;color:var(--accent)" onclick="switchView('threads')">
+        <strong>${t.n}</strong> — ${t.desc}
+      </div>`;
+    });
+    tSection.innerHTML = tHtml;
+    body.appendChild(tSection);
+  }
+}
+
+/* ======================================================
+   LENS DROPDOWN
+   ====================================================== */
+function renderLensDD() {
+  const menu = document.getElementById("lensMenu");
+  const isOpen = menu.classList.contains("open");
+
+  if (isOpen) {
+    menu.classList.remove("open");
+    return;
+  }
+
+  menu.innerHTML = "";
+  LENSES.forEach(lens => {
+    const item = document.createElement("div");
+    item.className = "lens-item" + (currentLens === lens.id ? " active" : "");
+    item.innerHTML = `<span class="ico">${lens.ico}</span> ${lens.n}`;
+    item.onclick = () => toggleLens(lens.id);
+    menu.appendChild(item);
+  });
+  menu.classList.add("open");
+}
+
+function toggleLens(id) {
+  currentLens = id;
+  const lens = LENSES.find(l => l.id === id);
+  const btn = document.querySelector(".lens-btn");
+  btn.querySelector(".ico").textContent = lens.ico;
+  const labelSpan = btn.querySelector(".lens-label");
+  if (labelSpan) labelSpan.textContent = lens.n;
+  document.getElementById("lensMenu").classList.remove("open");
+  if (currentLaw) renderDrawer();
+}
+
+/* Close lens menu when clicking outside */
+document.addEventListener("click", (e) => {
+  const dd = document.getElementById("lensDropdown");
+  if (!dd.contains(e.target)) {
+    document.getElementById("lensMenu").classList.remove("open");
+  }
+});
+
+/* ======================================================
+   DENSITY BAR (sparkline of law frequency)
+   ====================================================== */
+function renderDensityBar() {
+  const canvas = document.getElementById("densityCanvas");
+  const ctx = canvas.getContext("2d");
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * (window.devicePixelRatio || 1);
+  canvas.height = rect.height * (window.devicePixelRatio || 1);
+  ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+  const w = rect.width, h = rect.height;
+
+  /* Bucket laws into time bins */
+  const bins = 200;
+  const counts = new Array(bins).fill(0);
+  LAWS.forEach(l => {
+    const t = (l.s - Y_MIN) / (Y_MAX - Y_MIN);
+    const bin = Math.floor(clamp(t, 0, 0.999) * bins);
+    counts[bin]++;
+  });
+
+  const maxCount = Math.max(...counts, 1);
+  const barW = w / bins;
+
+  ctx.clearRect(0, 0, w, h);
+  counts.forEach((count, i) => {
+    if (count === 0) return;
+    const barH = (count / maxCount) * h * 0.9;
+    const t = i / bins;
+    /* Color by era */
+    const year = Y_MIN + t * (Y_MAX - Y_MIN);
+    ctx.fillStyle = eraColor(year);
+    ctx.globalAlpha = 0.5;
+    ctx.fillRect(i * barW, h - barH, barW + 0.5, barH);
+  });
+
+  /* Draw current position indicator */
+  ctx.globalAlpha = 0.8;
+  const pos = ((currentYear - Y_MIN) / (Y_MAX - Y_MIN)) * w;
+  ctx.fillStyle = "var(--txt)";
+  ctx.fillRect(pos - 0.5, 0, 1, h);
+  ctx.globalAlpha = 1;
+}
+
+/* ======================================================
+   ZOOM & PAN
+   ====================================================== */
+function initZoomPan() {
+  const container = document.getElementById("mapContainer");
+  const svg = document.getElementById("mapSvg");
+
+  /* Wheel zoom */
+  container.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const factor = e.deltaY > 0 ? 1.15 : 0.87;
+
+    /* Get mouse position in SVG coordinates */
+    const rect = svg.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) / rect.width;
+    const my = (e.clientY - rect.top) / rect.height;
+
+    const newW = clamp(vw * factor, 200, 1400);
+    const newH = clamp(vh * factor, 104, 728);
+
+    /* Zoom toward cursor */
+    vx = vx + (vw - newW) * mx;
+    vy = vy + (vh - newH) * my;
+    vw = newW;
+    vh = newH;
+
+    vx = clamp(vx, -400, 1400 - vw);
+    vy = clamp(vy, -200, 720 - vh);
+
+    svg.setAttribute("viewBox", `${vx} ${vy} ${vw} ${vh}`);
+  }, {passive: false});
+
+  /* Mouse drag */
+  container.addEventListener("mousedown", (e) => {
+    if (e.target.closest(".law-marker")) return;
+    dragging = true;
+    dragStart = {x: e.clientX, y: e.clientY};
+    viewStart = {x: vx, y: vy};
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+    const rect = svg.getBoundingClientRect();
+    const scaleX = vw / rect.width;
+    const scaleY = vh / rect.height;
+    vx = viewStart.x - (e.clientX - dragStart.x) * scaleX;
+    vy = viewStart.y - (e.clientY - dragStart.y) * scaleY;
+    vx = clamp(vx, -400, 1400 - vw);
+    vy = clamp(vy, -200, 720 - vh);
+    svg.setAttribute("viewBox", `${vx} ${vy} ${vw} ${vh}`);
+  });
+
+  window.addEventListener("mouseup", () => { dragging = false; });
+
+  /* Touch events */
+  container.addEventListener("touchstart", (e) => {
+    if (e.touches.length === 1) {
+      dragging = true;
+      dragStart = {x: e.touches[0].clientX, y: e.touches[0].clientY};
+      viewStart = {x: vx, y: vy};
+    } else if (e.touches.length === 2) {
+      dragging = false;
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      pinchDist = Math.sqrt(dx * dx + dy * dy);
+    }
+  }, {passive: true});
+
+  container.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+    if (e.touches.length === 1 && dragging) {
+      const rect = svg.getBoundingClientRect();
+      const scaleX = vw / rect.width;
+      const scaleY = vh / rect.height;
+      vx = viewStart.x - (e.touches[0].clientX - dragStart.x) * scaleX;
+      vy = viewStart.y - (e.touches[0].clientY - dragStart.y) * scaleY;
+      vx = clamp(vx, -400, 1400 - vw);
+      vy = clamp(vy, -200, 720 - vh);
+      svg.setAttribute("viewBox", `${vx} ${vy} ${vw} ${vh}`);
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const newDist = Math.sqrt(dx * dx + dy * dy);
+      const factor = pinchDist / newDist;
+
+      const newW = clamp(vw * factor, 200, 1400);
+      const newH = clamp(vh * factor, 104, 728);
+      vx = vx + (vw - newW) * 0.5;
+      vy = vy + (vh - newH) * 0.5;
+      vw = newW;
+      vh = newH;
+      vx = clamp(vx, -400, 1400 - vw);
+      vy = clamp(vy, -200, 720 - vh);
+
+      svg.setAttribute("viewBox", `${vx} ${vy} ${vw} ${vh}`);
+      pinchDist = newDist;
+    }
+  }, {passive: false});
+
+  container.addEventListener("touchend", () => { dragging = false; });
+
+  /* Click on empty space to deselect */
+  container.addEventListener("click", (e) => {
+    if (!e.target.closest(".law-marker")) {
+      closePanel();
+    }
+  });
+}
+
+/* ======================================================
+   THEME
+   ====================================================== */
+function applyTheme() {
+  const saved = localStorage.getItem("lex-theme");
+  if (saved) {
+    document.documentElement.setAttribute("data-theme", saved);
+  }
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme");
+  const next = current === "dark" ? "light" : (current === "light" ? "dark" : "dark");
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("lex-theme", next);
+  renderDensityBar();
+}
+
+/* ======================================================
+   BURGER MENU
+   ====================================================== */
+function toggleBurger() {
+  const overlay = document.getElementById("burgerOverlay");
+  const drawer = document.getElementById("burgerDrawer");
+  const isOpen = drawer.classList.contains("open");
+  if (isOpen) {
+    closeBurger();
+  } else {
+    overlay.classList.add("open");
+    drawer.classList.add("open");
+  }
+}
+
+function closeBurger() {
+  document.getElementById("burgerOverlay").classList.remove("open");
+  document.getElementById("burgerDrawer").classList.remove("open");
+}
+
+/* ======================================================
+   VIEW SWITCHING (Explore / Threads / Compare)
+   ====================================================== */
+function switchView(view) {
+  currentView = view;
+
+  /* Update tabs */
+  document.querySelectorAll(".view-tab").forEach(tab => {
+    tab.classList.toggle("active", tab.dataset.view === view);
+  });
+
+  /* Update burger links */
+  document.querySelectorAll(".burger-link[onclick*='switchView']").forEach(link => {
+    const match = link.getAttribute("onclick").match(/'(\w+)'/);
+    if (match) link.classList.toggle("active", match[1] === view);
+  });
+
+  /* Show/hide containers */
+  const mapContainer = document.getElementById("mapContainer");
+  const threadsContainer = document.getElementById("threadsContainer");
+  const compareContainer = document.getElementById("compareContainer");
+  const infoPanel = document.getElementById("infoPanel");
+
+  mapContainer.style.display = view === "explore" ? "" : "none";
+  threadsContainer.classList.toggle("active", view === "threads");
+  compareContainer.classList.toggle("active", view === "compare");
+
+  if (view !== "explore") {
+    infoPanel.classList.add("collapsed");
+    infoPanel.classList.remove("show");
+  }
+
+  if (view === "threads") renderThreads();
+  if (view === "compare") renderCompareSelects();
+}
+
+/* ======================================================
+   THREADS VIEW
+   ====================================================== */
+function renderThreads() {
+  const container = document.getElementById("threadsContainer");
+  container.innerHTML = "";
+
+  const header = document.createElement("div");
+  header.style.cssText = "margin-bottom:20px;";
+  header.innerHTML = `<h2 style="font-family:var(--font-heading);color:var(--accent);margin-bottom:6px;">Legal Threads</h2>
+    <p style="color:var(--muted);font-size:0.9rem;">Trace how key legal concepts evolved and spread across civilizations.</p>`;
+  container.appendChild(header);
+
+  TRANSMISSIONS.forEach(t => {
+    const card = document.createElement("div");
+    card.className = "thread-card";
+
+    let chainHtml = '';
+    t.chain.forEach((id, i) => {
+      const law = LAWS.find(l => l.id === id);
+      if (!law) return;
+      if (i > 0) chainHtml += '<span style="color:var(--muted);margin:0 2px;">→</span>';
+      chainHtml += `<span class="thread-node" onclick="event.stopPropagation();navigateToLaw('${id}')">${law.n}</span>`;
+    });
+
+    card.innerHTML = `
+      <div class="thread-title">${t.n}</div>
+      <div class="thread-desc">${t.desc}</div>
+      <div class="thread-chain">${chainHtml}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+/* ======================================================
+   COMPARE VIEW
+   ====================================================== */
+function renderCompareSelects() {
+  const selA = document.getElementById("compareA");
+  const selB = document.getElementById("compareB");
+
+  const currentA = selA.value;
+  const currentB = selB.value;
+
+  [selA, selB].forEach(sel => {
+    const val = sel.value;
+    sel.innerHTML = '<option value="">Select a legal system...</option>';
+    LAWS.slice().sort((a, b) => a.n.localeCompare(b.n)).forEach(l => {
+      const opt = document.createElement("option");
+      opt.value = l.id;
+      opt.textContent = `${l.n} (${fmt(l.s)})`;
+      sel.appendChild(opt);
+    });
+    sel.value = val || "";
+  });
+
+  selA.value = currentA;
+  selB.value = currentB;
+  renderCompare();
+}
+
+function renderCompare() {
+  const idA = document.getElementById("compareA").value;
+  const idB = document.getElementById("compareB").value;
+  const bodyA = document.getElementById("compareBodyA");
+  const bodyB = document.getElementById("compareBodyB");
+
+  bodyA.innerHTML = idA ? renderCompareColumn(idA) : '<div class="info-placeholder"><span class="ico">⚖️</span><p>Select a legal system to compare.</p></div>';
+  bodyB.innerHTML = idB ? renderCompareColumn(idB) : '<div class="info-placeholder"><span class="ico">⚖️</span><p>Select a legal system to compare.</p></div>';
+}
+
+function renderCompareColumn(id) {
+  const law = LAWS.find(l => l.id === id);
+  if (!law) return '';
+
+  let html = `<h3 style="font-family:var(--font-heading);color:var(--accent);margin-bottom:8px;cursor:pointer;" onclick="navigateToLaw('${id}')">${law.n}</h3>`;
+  html += `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">`;
+  html += `<span class="info-tag">${law.region}</span>`;
+  html += `<span class="info-tag">${law.type}</span>`;
+  html += `<span class="info-tag">${fmt(law.s)}</span>`;
+  html += `<span class="info-tag">${law.tradition}</span>`;
+  html += `</div>`;
+
+  LENSES.forEach(lens => {
+    if (lens.id === "overview") return;
+    const content = law.d ? law.d[lens.id] : null;
+    if (!content) return;
+    html += `<div class="info-section">
+      <div class="info-section-title">${lens.ico} ${lens.n}</div>
+      <div class="info-section-text">${content}</div>
+    </div>`;
+  });
+
+  return html;
+}
+
+/* ======================================================
+   ABOUT MODAL
+   ====================================================== */
+function showAbout() {
+  document.getElementById("aboutModal").classList.add("open");
+}
+
+function closeAbout() {
+  document.getElementById("aboutModal").classList.remove("open");
+}
+
+/* Close modal on overlay click */
+document.getElementById("aboutModal").addEventListener("click", (e) => {
+  if (e.target === document.getElementById("aboutModal")) closeAbout();
+});
+
+/* ======================================================
+   KEYBOARD ACCESSIBILITY
+   ====================================================== */
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeAbout();
+    closeBurger();
+    document.getElementById("lensMenu").classList.remove("open");
+  }
+  if (e.key === "ArrowLeft" && currentView === "explore") {
+    let step = 20;
+    if (currentYear > 1500) step = 10;
+    if (currentYear > 1900) step = 5;
+    setYear(currentYear - step);
+  }
+  if (e.key === "ArrowRight" && currentView === "explore") {
+    let step = 20;
+    if (currentYear > 1500) step = 10;
+    if (currentYear > 1900) step = 5;
+    setYear(currentYear + step);
+  }
+  if (e.key === " " && currentView === "explore") {
+    e.preventDefault();
+    togglePlay();
+  }
+});
+
+/* ======================================================
+   INIT
+   ====================================================== */
+function init() {
+  applyTheme();
+  renderWorldMap();
+  setYear(-1754);
+  renderDensityBar();
+  renderMap();
+
+  /* Reset view */
+  currentLaw = null;
+  closePanel();
+  switchView("explore");
+
+  /* Set up zoom/pan */
+  initZoomPan();
+}
+
+/* Handle resize */
+window.addEventListener("resize", () => {
+  renderDensityBar();
+});
+
+/* Start */
+init();
+
+
