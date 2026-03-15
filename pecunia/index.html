@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pecunia — The Money Atlas | 50 Monetary Milestones, 10,000 Years of Economic History</title>
+<title>Pecunia — Money & Economics Atlas</title>
 
 <!-- Primary SEO -->
-<meta name="description" content="Explore 50 monetary milestones across 10,000 years of economic history on an interactive world map. Navigate a continuous timeline from the first barley payments to cryptocurrency, with interpretive lenses, financial innovation chains, and civilizational fingerprints.">
-<meta name="keywords" content="money history, economic history, currency, interactive map, monetary systems, financial history, trade, banking, gold standard, cryptocurrency">
+<meta name="description" content="Explore 50 monetary systems and economic milestones across 8,000 years of financial history on an interactive world map. Navigate a continuous timeline from Mesopotamian silver to cryptocurrency, with 20 interpretive lenses, economic transmissions, What-If scenarios, and heritage modes.">
+<meta name="keywords" content="money history, economics atlas, currency history, financial history, interactive map, trade routes, banking history, economic education">
 <meta name="author" content="Polyglyph Analytica">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://polyglyphanalytica.github.io/pecunia/">
@@ -15,28 +15,23 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://polyglyphanalytica.github.io/pecunia/">
-<meta property="og:title" content="Pecunia — The Money Atlas">
-<meta property="og:description" content="50 monetary milestones. 10,000 years. Every coin, currency, and financial revolution that shaped the modern economy — mapped, connected, and explorable.">
-<meta property="og:image" content="https://polyglyphanalytica.github.io/pecunia/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:title" content="Pecunia — Money & Economics Atlas">
+<meta property="og:description" content="50 monetary systems. 8,000 years. Every coin, currency, and financial revolution that shaped the modern economy — mapped, connected, and explorable.">
 <meta property="og:site_name" content="Pecunia">
 <meta property="og:locale" content="en_US">
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@polyglyphanalytica">
-<meta name="twitter:title" content="Pecunia — The Money Atlas">
-<meta name="twitter:description" content="50 monetary milestones. 10,000 years. Every coin, currency, and financial revolution that shaped the modern economy — mapped, connected, and explorable.">
-<meta name="twitter:image" content="https://polyglyphanalytica.github.io/pecunia/og-image.png">
+<meta name="twitter:title" content="Pecunia — Money & Economics Atlas">
+<meta name="twitter:description" content="50 monetary systems. 8,000 years. Every coin, currency, and financial revolution that shaped the modern economy — mapped, connected, and explorable.">
 
 <!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Pecunia — The Money Atlas",
-  "description": "An interactive economic history application exploring 50 monetary milestones across 10,000 years. Features a real geographic map, continuous timeline, interpretive lenses, financial innovation chains, and civilizational fingerprint charts.",
+  "name": "Pecunia — Money & Economics Atlas",
+  "description": "An interactive economic history application exploring 50 monetary systems across 8,000 years. Features a real geographic map, continuous timeline, 20 interpretive lenses, economic transmissions, What-If scenarios, and heritage modes.",
   "url": "https://polyglyphanalytica.github.io/pecunia/",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Web Browser",
@@ -48,16 +43,7 @@
   "author": {
     "@type": "Organization",
     "name": "Polyglyph Analytica"
-  },
-  "featureList": [
-    "50 monetary milestones from barley payments to Bitcoin",
-    "10,000-year interactive timeline",
-    "12 interpretive lenses including Trade Networks, Banking, Crises, Innovation",
-    "Financial innovation transmission tracking",
-    "8-axis monetary fingerprint radar charts",
-    "Side-by-side comparison mode",
-    "Thread mode tracing financial innovation chains"
-  ]
+  }
 }
 </script>
 
@@ -70,19 +56,19 @@
 
 /* ── DARK THEME (default) ── */
 :root{
-  --bg:#04060a;
-  --panel:#080c14;
-  --panel2:#0e1420;
+  --bg:#02040a;
+  --panel:#070b12;
+  --panel2:#0c1018;
   --ocean-start:#0a1628;--ocean-end:#061020;
-  --land:#1e3a2a;--land-s:#2a4c34;
-  --gold:#d4a820;--gold-b:#e8c040;--gold-d:#3a2a08;
-  --gold-x:rgba(212,168,32,0.14);--gold-xx:rgba(212,168,32,0.08);
-  --txt:#f0e8d4;--txt2:#dcd0b0;--txt3:#b8a070;
-  --bdr:rgba(212,168,32,0.22);--bdr2:rgba(212,168,32,0.10);
-  --hint:rgba(220,208,176,0.65);
-  --tl-bg:rgba(4,6,10,0.99);
-  --hdr-bg:rgba(4,6,10,0.97);
-  --conn-bdr:rgba(212,168,32,0.10);
+  --land:#2a4a18;--land-s:#3a6020;
+  --amber:#e89820;--amber-b:#f0b040;--amber-d:#3a2204;
+  --amber-x:rgba(232,152,32,0.14);--amber-xx:rgba(232,152,32,0.08);
+  --txt:#f2e8d5;--txt2:#e0d4b4;--txt3:#c8aa78;
+  --bdr:rgba(232,152,32,0.22);--bdr2:rgba(232,152,32,0.10);
+  --hint:rgba(224,212,180,0.65);
+  --tl-bg:rgba(2,4,10,0.99);
+  --hdr-bg:rgba(2,4,10,0.97);
+  --conn-bdr:rgba(232,152,32,0.10);
   --shadow:rgba(0,0,0,0.6);
 }
 
@@ -93,14 +79,14 @@
   --panel2:#ddd4c0;
   --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
   --land:#8ca860;--land-s:#7a9850;
-  --gold:#6a4400;--gold-b:#7a5200;--gold-d:#f0d8a0;
-  --gold-x:rgba(106,68,0,0.10);--gold-xx:rgba(106,68,0,0.06);
+  --amber:#4a2c00;--amber-b:#5a3800;--amber-d:#f0d8a0;
+  --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
   --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
-  --bdr:rgba(106,68,0,0.28);--bdr2:rgba(106,68,0,0.14);
+  --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
   --hint:rgba(30,18,6,0.6);
   --tl-bg:rgba(236,228,214,0.99);
   --hdr-bg:rgba(236,228,214,0.97);
-  --conn-bdr:rgba(106,68,0,0.12);
+  --conn-bdr:rgba(122,78,0,0.12);
   --shadow:rgba(0,0,0,0.18);
 }
 
@@ -109,14 +95,14 @@
     --bg:#f0ebe0;--panel:#e8e0d0;--panel2:#ddd4c0;
     --ocean-start:#b8cce0;--ocean-end:#a8bcd4;
     --land:#8ca860;--land-s:#7a9850;
-    --gold:#6a4400;--gold-b:#7a5200;--gold-d:#f0d8a0;
-    --gold-x:rgba(106,68,0,0.10);--gold-xx:rgba(106,68,0,0.06);
+    --amber:#4a2c00;--amber-b:#5a3800;--amber-d:#f0d8a0;
+    --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
     --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
-    --bdr:rgba(106,68,0,0.28);--bdr2:rgba(106,68,0,0.14);
+    --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
     --hint:rgba(30,18,6,0.6);
     --tl-bg:rgba(236,228,214,0.99);
     --hdr-bg:rgba(236,228,214,0.97);
-    --conn-bdr:rgba(106,68,0,0.12);
+    --conn-bdr:rgba(122,78,0,0.12);
     --shadow:rgba(0,0,0,0.18);
   }
 }
@@ -126,14 +112,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 /* ── HEADER ── */
 .hdr{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--hdr-bg);gap:12px}
 .hdr-left{display:flex;align-items:baseline;gap:0;min-width:0}
-.logo-t{font-family:'Cinzel Decorative',serif;font-size:20px;font-weight:700;color:var(--gold-b);letter-spacing:3px;white-space:nowrap}
+.logo-t{font-family:'Cinzel Decorative',serif;font-size:20px;font-weight:700;color:var(--amber-b);letter-spacing:3px;white-space:nowrap}
 .logo-s{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-left:10px;white-space:nowrap}
 .era-disp{text-align:center;font-family:'Cinzel',serif;flex-shrink:0}
-.era-y{font-size:22px;font-weight:600;color:var(--gold-b);letter-spacing:1px}
+.era-y{font-size:22px;font-weight:600;color:var(--amber-b);letter-spacing:1px}
 .era-n{font-size:12px;letter-spacing:1.5px;color:var(--txt2);margin-top:1px;text-transform:uppercase;font-weight:600}
 .hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .cnt-disp{text-align:right;font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--txt3)}
-.cnt-n{font-size:22px;font-weight:600;color:var(--gold);display:block;line-height:1}
+.cnt-n{font-size:22px;font-weight:600;color:var(--amber);display:block;line-height:1}
+.theme-btn{background:none;border:1px solid var(--bdr);padding:4px 8px;cursor:pointer;font-size:13px;color:var(--txt2);border-radius:3px;transition:all .15s;flex-shrink:0}
+.theme-btn:hover{background:var(--amber-x);color:var(--amber-b)}
 
 /* ── MAIN LAYOUT ── */
 .main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
@@ -144,51 +132,51 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 /* ── DESKTOP PANEL ── */
 .info-panel{width:320px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;padding:18px 18px 28px;position:relative}
 .info-close{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;line-height:1;padding:4px;float:right;margin:-2px -2px 0 0}
-.info-close:hover{color:var(--gold-b)}
-.info-nm{font-family:'Cinzel Decorative',serif;font-size:16px;font-weight:700;color:var(--gold-b);margin-bottom:3px;clear:both}
+.info-close:hover{color:var(--amber-b)}
+.info-nm{font-family:'Cinzel Decorative',serif;font-size:16px;font-weight:700;color:var(--amber-b);margin-bottom:3px;clear:both}
 .info-sb{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt2);text-transform:uppercase;margin-bottom:10px}
 .info-dates{display:flex;gap:6px;margin-bottom:14px;align-items:center}
-.info-dt{padding:5px 12px;border:1px solid var(--bdr);font-family:'Cinzel',serif;font-size:13.5px;color:var(--gold-b)}
+.info-dt{padding:5px 12px;border:1px solid var(--bdr);font-family:'Cinzel',serif;font-size:13.5px;color:var(--amber-b)}
 .info-arr{color:var(--txt2);font-size:12px}
 
 /* ── LENS DROPDOWN ── */
 .lens-dd-wrap{border:1px solid var(--bdr);margin-bottom:14px}
-.lens-dd-hdr{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;cursor:pointer;user-select:none;background:var(--gold-xx);border-bottom:1px solid transparent;transition:background .15s}
-.lens-dd-hdr:hover{background:var(--gold-x)}
+.lens-dd-hdr{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;cursor:pointer;user-select:none;background:var(--amber-xx);border-bottom:1px solid transparent;transition:background .15s}
+.lens-dd-hdr:hover{background:var(--amber-x)}
 .lens-dd-hdr.open{border-bottom-color:var(--bdr)}
 .lens-dd-title{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2.5px;color:var(--txt2);text-transform:uppercase;flex-shrink:0}
-.lens-dd-summary{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.5px;color:var(--gold-b);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;padding:0 6px}
+.lens-dd-summary{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.5px;color:var(--amber-b);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;padding:0 6px}
 .lens-dd-arrow{color:var(--txt2);font-size:10px;transition:transform .18s;flex-shrink:0}
 .lens-dd-arrow.open{transform:rotate(180deg)}
 .lens-dd-list{display:none;max-height:260px;overflow-y:auto}
 .lens-dd-list.open{display:block}
 .lens-row{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--bdr2);transition:background .15s}
 .lens-row:last-child{border-bottom:none}
-.lens-row:hover{background:var(--gold-x)}
-.lens-row-chk{width:13px;height:13px;border:1px solid var(--bdr);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gold-b);line-height:1}
-.lens-row-chk.on{background:var(--gold-x);border-color:var(--gold-b)}
+.lens-row:hover{background:var(--amber-x)}
+.lens-row-chk{width:13px;height:13px;border:1px solid var(--bdr);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--amber-b);line-height:1}
+.lens-row-chk.on{background:var(--amber-x);border-color:var(--amber-b)}
 .lens-row-ico{font-size:14px;width:16px;text-align:center;flex-shrink:0;color:var(--txt2)}
 .lens-row-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.5px;color:var(--txt2)}
-.lens-row.on .lens-row-lbl{color:var(--gold-b);font-weight:600}
+.lens-row.on .lens-row-lbl{color:var(--amber-b);font-weight:600}
 .lens-row-sep{border-bottom:1px solid var(--bdr);margin-bottom:2px}
-.lens-dd-close-btn{text-align:center;padding:10px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:var(--gold-b);border-top:1px solid var(--bdr);cursor:pointer;text-transform:uppercase;transition:background .15s}
-.lens-dd-close-btn:hover{background:var(--gold-x)}
+.lens-dd-close-btn{text-align:center;padding:10px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:var(--amber-b);border-top:1px solid var(--bdr);cursor:pointer;text-transform:uppercase;transition:background .15s}
+.lens-dd-close-btn:hover{background:var(--amber-x)}
 
 /* ── DRAWER CONTENT ── */
 .lens-section{margin-bottom:18px}
 .lens-section-hdr{display:flex;align-items:center;gap:7px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--bdr)}
 .lens-section-ico{font-size:12px;color:var(--txt2)}
-.lens-section-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--gold-b);text-transform:uppercase;font-weight:600}
+.lens-section-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--amber-b);text-transform:uppercase;font-weight:600}
 .info-div{border:none;border-top:1px solid var(--bdr);margin:12px 0}
 .info-txt{font-size:17.5px;line-height:1.95;color:var(--txt);font-style:italic}
 .overview-arc{font-size:17.5px;line-height:1.95;color:var(--txt)}
 .overview-arc p{margin-bottom:14px}
 .civ-span-bar{height:3px;background:var(--bdr2);position:relative;margin:14px 0 6px;border-radius:2px}
-.civ-span-fill{position:absolute;top:0;height:100%;background:var(--gold-b);border-radius:2px;opacity:.8}
+.civ-span-fill{position:absolute;top:0;height:100%;background:var(--amber-b);border-radius:2px;opacity:.8}
 .civ-span-lbls{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--txt3)}
 .conn-hdr{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin:18px 0 8px;font-weight:600}
 .conn-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--conn-bdr);font-size:16px;color:var(--txt2);cursor:pointer;transition:color .15s}
-.conn-item:hover{color:var(--gold-b)}
+.conn-item:hover{color:var(--amber-b)}
 .conn-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 
 /* ── TIMELINE ── */
@@ -196,8 +184,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .tl-lbls{display:flex;justify-content:space-between;margin-bottom:5px}
 .tl-lbl{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.8px;color:var(--txt3);text-transform:uppercase;font-weight:600}
 .tl-trk{position:relative;height:5px;background:var(--bdr);border-radius:3px}
-.tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--gold-b);border-radius:3px;pointer-events:none;opacity:.7}
-.tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--gold-b);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--gold),0 0 20px rgba(212,168,32,.3);pointer-events:none;transition:left .04s linear}
+.tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--amber-b);border-radius:3px;pointer-events:none;opacity:.7}
+.tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--amber-b);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--amber),0 0 20px rgba(232,152,32,.3);pointer-events:none;transition:left .04s linear}
 input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0;cursor:pointer;transform:translateY(-50%);margin:0;z-index:2}
 .hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--hint);display:flex;align-items:center;justify-content:center;padding:0 8px;white-space:nowrap;overflow:hidden}
 #map-hint-text{pointer-events:none;overflow:hidden;text-overflow:ellipsis}
@@ -213,7 +201,8 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   .logo-t{font-size:16px;letter-spacing:2px}
   .era-y{font-size:18px}
   .era-n{font-size:10px;letter-spacing:1.5px}
-  .main{top:52px!important;bottom:0;flex-direction:column}
+  .main{top:52px!important}
+  .main{bottom:0;flex-direction:column}
   .map-tl-col{width:100%}
   .map-c{flex:0 0 42vh;width:100%}
   .info-panel{flex:1;width:100%;border-left:none;border-top:1px solid var(--bdr);overflow-y:auto;padding:0 16px 16px;border-radius:0}
@@ -244,48 +233,50 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
 }
 
 /* ── ACCESSIBILITY ── */
-:focus-visible{outline:2px solid var(--gold-b);outline-offset:2px;border-radius:2px}
-.conn-item:focus-visible{outline:2px solid var(--gold-b);outline-offset:2px}
-.lens-row:focus-visible{outline:2px solid var(--gold-b);outline-offset:-2px}
-button:focus-visible{outline:2px solid var(--gold-b);outline-offset:2px}
-.skip-link{position:absolute;top:-40px;left:0;background:var(--gold-b);color:var(--bg);padding:8px 16px;z-index:9999;font-family:'Cinzel',serif;font-size:11px;text-decoration:none}
+:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px;border-radius:2px}
+.conn-item:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
+.lens-row:focus-visible{outline:2px solid var(--amber-b);outline-offset:-2px}
+button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--amber-b);color:var(--bg);padding:8px 16px;z-index:9999;font-family:'Cinzel',serif;font-size:11px;text-decoration:none}
 .skip-link:focus{top:0}
 
 /* ── THREAD PANEL ── */
 .thread-panel{position:fixed;top:52px;left:0;right:0;z-index:400;background:var(--panel);max-height:0;overflow:hidden;transition:max-height .32s cubic-bezier(.4,0,.2,1)}
-.thread-panel.open{border-bottom:1px solid var(--bdr);box-shadow:0 6px 24px var(--shadow);max-height:70vh}
+.thread-panel.open{border-bottom:1px solid var(--bdr);box-shadow:0 6px 24px var(--shadow)}
+.thread-panel.open{max-height:70vh}
 .thread-panel-inner{padding:16px 20px 20px;overflow-y:auto;max-height:calc(70vh - 1px)}
 .thread-panel-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
 .thread-panel-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase}
 .thread-close-btn{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1;padding:4px;transition:color .15s}
-.thread-close-btn:hover{color:var(--gold-b)}
+.thread-close-btn:hover{color:var(--amber-b)}
 .thread-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px}
 .thread-concept-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:9px 12px;text-align:left;cursor:pointer;border-radius:3px;transition:all .15s}
-.thread-concept-btn:hover{background:var(--gold-x);border-color:var(--bdr)}
+.thread-concept-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
 .thread-concept-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.8px;color:var(--txt2);display:block;margin-bottom:4px}
 .thread-concept-chain{font-size:11px;color:var(--txt3);line-height:1.5}
-.thread-back-btn{background:none;border:none;padding:0;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold-b);text-transform:uppercase;transition:opacity .15s}
+.thread-back-btn{background:none;border:none;padding:0;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;transition:opacity .15s}
 .thread-back-btn:hover{opacity:.7}
-.thread-active-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--gold-b);margin:10px 0 14px}
+.thread-active-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);margin:10px 0 14px}
 .thread-steps-grid{display:flex;flex-direction:column;align-items:center;padding:4px 0 16px}
 .thread-step{width:min(360px,90%);text-align:center;padding:10px 14px;border:1px solid var(--bdr2);border-radius:4px;font-size:12.5px;color:var(--txt2);background:var(--panel2)}
-.thread-step-yr{font-family:'Cinzel',serif;font-size:9.5px;color:var(--gold-b);margin-bottom:4px}
+.thread-step-yr{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);margin-bottom:4px}
 .thread-step-txt{line-height:1.6;color:var(--txt2)}
-.thread-step-civ{font-family:'Cinzel',serif;font-size:9.5px;color:var(--gold-b);margin-bottom:4px}
-.thread-chain-link{display:flex;flex-direction:column;align-items:center;padding:2px 0;color:var(--gold-b);opacity:.6}
-.thread-chain-line{width:1px;height:8px;background:var(--gold-b);opacity:.4}
+.thread-step-civ{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);margin-bottom:4px}
+.thread-chain-link{display:flex;flex-direction:column;align-items:center;padding:2px 0;color:var(--amber-b);opacity:.6}
+.thread-chain-line{width:1px;height:8px;background:var(--amber-b);opacity:.4}
 
 /* ── COMPARE MODE ── */
 .compare-wrap{display:flex;gap:0;height:100%;width:100%}
 .compare-col{flex:1;min-width:0;overflow-y:auto;padding:16px;border-right:1px solid var(--bdr)}
 .compare-col:last-child{border-right:none}
-.compare-col-hdr{font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--gold-b);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.compare-col-hdr{font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
 .compare-remove{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:2px}
-.compare-remove:hover{color:var(--gold-b)}
+.compare-remove:hover{color:var(--amber-b)}
 .compare-prompt{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--txt3);font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:20px;opacity:.6}
+.compare-diff{background:var(--amber-xx);border-left:2px solid var(--amber-b);padding:6px 8px;margin-bottom:2px}
 
 /* ── SHARE TOAST ── */
-.share-toast{position:fixed;bottom:108px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--panel);border:1px solid var(--bdr);padding:8px 18px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:var(--gold-b);text-transform:uppercase;border-radius:20px;opacity:0;transition:all .3s;pointer-events:none;z-index:500;white-space:nowrap}
+.share-toast{position:fixed;bottom:108px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--panel);border:1px solid var(--bdr);padding:8px 18px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:var(--amber-b);text-transform:uppercase;border-radius:20px;opacity:0;transition:all .3s;pointer-events:none;z-index:500;white-space:nowrap}
 .share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ── FINGERPRINT CHART ── */
@@ -308,19 +299,49 @@ button:focus-visible{outline:2px solid var(--gold-b);outline-offset:2px}
 /* ── DENSITY SPARKLINE ── */
 #density-bar{height:18px;width:100%;display:block;margin-bottom:1px}
 
-/* ── MAP ZOOM ── */
-#wsvg{transition:none;touch-action:none;user-select:none;-webkit-user-select:none}
-.map-zoom-ctrl{position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px;z-index:50}
-.map-zoom-btn{width:28px;height:28px;background:var(--panel);border:1px solid var(--bdr);color:var(--gold-b);font-size:16px;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;transition:all .15s}
-.map-zoom-btn:hover{background:var(--panel2);border-color:var(--gold)}
-.cluster-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold-b);background:var(--panel);border:1px solid var(--bdr);padding:4px 12px;border-radius:20px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:51}
-.cluster-hint.show{opacity:1}
+/* ── WHAT-IF MODE ── */
+.whatif-civ-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:7px 10px;text-align:left;cursor:pointer;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.5px;color:var(--txt2);margin-bottom:3px;border-radius:2px;transition:all .15s;display:flex;align-items:center;justify-content:space-between}
+.whatif-civ-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.whatif-civ-btn.selected{background:rgba(212,168,32,.12);border-color:#d4a820;color:#d4a820}
+.whatif-result{margin-top:12px;padding:12px;border:1px solid var(--bdr);border-radius:3px;background:var(--panel2)}
+.whatif-chain{padding:6px 0;border-bottom:1px solid var(--bdr2);font-size:12px;color:var(--txt2)}
+.whatif-chain:last-child{border-bottom:none}
+.whatif-chain.lost{color:#d4a820;text-decoration:line-through;opacity:.6}
+.whatif-intro{font-size:13px;line-height:1.7;color:var(--txt2);font-style:italic;margin-bottom:12px}
+
+/* ── HERITAGE MODE ── */
+.heritage-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+.heritage-btn{background:none;border:1px solid var(--bdr2);padding:8px 6px;cursor:pointer;font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.5px;color:var(--txt2);border-radius:2px;transition:all .15s;text-align:center}
+.heritage-btn:hover{background:var(--amber-x);border-color:var(--bdr)}
+.heritage-btn.active{background:var(--amber-x);border-color:var(--amber-b);color:var(--amber-b)}
+.heritage-civ{padding:5px 0;border-bottom:1px solid var(--bdr2);font-size:12.5px;cursor:pointer;transition:color .15s}
+.heritage-civ:hover{color:var(--amber-b)}
+.heritage-civ-nm{font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b);display:block;margin-bottom:2px}
+.heritage-civ-why{font-size:11px;color:var(--txt3)}
+
+/* ── MAP ZOOM TRANSITION ── */
+#wsvg{transition:none}
 
 /* ── CLUSTER PICKER ── */
-#cluster-picker{position:fixed;z-index:900;background:var(--panel);border:1px solid var(--bdr);border-radius:6px;min-width:180px;max-width:260px;max-height:320px;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.6);display:none}
+#cluster-picker{
+  position:fixed;z-index:900;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:6px;
+  min-width:180px;max-width:260px;max-height:320px;overflow-y:auto;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);
+  display:none;
+}
 #cluster-picker.open{display:block}
-#cluster-picker-hdr{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);padding:8px 12px 6px;border-bottom:1px solid var(--bdr2);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
-.cluster-item{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--bdr2);transition:background .12s}
+#cluster-picker-hdr{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
+  color:var(--txt3);padding:8px 12px 6px;
+  border-bottom:1px solid var(--bdr2);text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.cluster-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;
+  cursor:pointer;border-bottom:1px solid var(--bdr2);
+  transition:background .12s;
+}
 .cluster-item:last-child{border-bottom:none}
 .cluster-item:hover,.cluster-item:active{background:var(--panel2)}
 .cluster-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#d4a820}
@@ -329,243 +350,61 @@ button:focus-visible{outline:2px solid var(--gold-b);outline-offset:2px}
 
 /* ── BURGER MENU ── */
 .burger-wrap{position:relative}
-.burger-btn{background:none;border:1px solid var(--bdr);color:var(--gold-b);cursor:pointer;width:34px;height:34px;border-radius:3px;display:flex;align-items:center;justify-content:center;transition:all .15s;padding:0}
-.burger-btn:hover{background:var(--panel2);border-color:var(--gold)}
-.burger-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel);border:1px solid var(--bdr);border-radius:4px;min-width:196px;box-shadow:0 8px 32px var(--shadow);z-index:800;display:none;flex-direction:column;overflow:hidden}
+.burger-btn{background:none;border:1px solid var(--bdr);color:var(--amber-b);cursor:pointer;
+  width:34px;height:34px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;padding:0}
+.burger-btn:hover{background:var(--panel2);border-color:var(--amber)}
+.burger-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:4px;min-width:196px;
+  box-shadow:0 8px 32px var(--shadow);z-index:800;
+  display:none;flex-direction:column;overflow:hidden}
 .burger-menu.open{display:flex}
-.burger-item{display:flex;align-items:center;gap:10px;padding:12px 16px;background:none;border:none;color:var(--txt2);cursor:pointer;text-align:left;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.5px;width:100%;transition:background .12s;white-space:nowrap}
+.burger-item{display:flex;align-items:center;gap:10px;padding:12px 16px;
+  background:none;border:none;color:var(--txt2);cursor:pointer;text-align:left;
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:.5px;width:100%;
+  transition:background .12s;white-space:nowrap}
 .burger-item:hover,.burger-item:active{background:var(--panel2);color:var(--txt)}
-.burger-item.active,.burger-item.burger-mode.active{background:var(--gold-x);color:var(--gold-b)}
+.burger-item.active,.burger-item.burger-mode.active{background:var(--amber-x);color:var(--amber-b)}
+.burger-item-badge{margin-left:auto;font-size:9px;color:var(--amber-b);
+  font-family:'Cinzel',serif;letter-spacing:1px;display:none}
+.burger-item-badge.on{display:inline}
 .burger-divider{height:1px;background:var(--bdr2);margin:2px 0}
 
+/* ── MAP ZOOM/PAN ── */
+#wsvg{touch-action:none;user-select:none;-webkit-user-select:none}
+.map-zoom-ctrl{position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px;z-index:50}
+.map-zoom-btn{width:28px;height:28px;background:var(--panel);border:1px solid var(--bdr);color:var(--amber-b);
+  font-size:16px;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;transition:all .15s}
+.map-zoom-btn:hover{background:var(--panel2);border-color:var(--amber)}
+.cluster-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);
+  background:var(--panel);border:1px solid var(--bdr);padding:4px 12px;border-radius:20px;
+  opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:51}
+.cluster-hint.show{opacity:1}
+
 /* ── PULL TO REFRESH ── */
-#ptr-indicator{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;align-items:center;justify-content:center;gap:10px;height:0;overflow:hidden;background:var(--panel);border-bottom:1px solid var(--bdr);transition:height .2s ease,opacity .2s ease;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;opacity:0;pointer-events:none}
+#ptr-indicator{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  height:0;overflow:hidden;background:var(--panel);
+  border-bottom:1px solid var(--bdr);
+  transition:height .2s ease,opacity .2s ease;
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;
+  color:var(--txt3);text-transform:uppercase;opacity:0;
+  pointer-events:none;
+}
 #ptr-indicator.pulling{height:52px;opacity:1}
-#ptr-indicator.ready{color:var(--gold-b)}
+#ptr-indicator.ready{color:var(--amber-b)}
 #ptr-indicator.refreshing{height:52px;opacity:1}
-#ptr-spinner{width:16px;height:16px;border:2px solid var(--bdr);border-top-color:var(--gold-b);border-radius:50%;transition:transform .25s ease;flex-shrink:0}
-#ptr-indicator.refreshing #ptr-spinner{animation:ptr-spin .7s linear infinite}
+#ptr-spinner{
+  width:16px;height:16px;border:2px solid var(--bdr);
+  border-top-color:var(--amber-b);border-radius:50%;
+  transition:transform .25s ease;flex-shrink:0;
+}
+#ptr-indicator.refreshing #ptr-spinner{
+  animation:ptr-spin .7s linear infinite;
+}
 @keyframes ptr-spin{to{transform:rotate(360deg)}}
 </style>
 </head>
-<body>
-
-<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to monetary system panel</button>
-<header class="hdr" role="banner">
-  <div class="hdr-left">
-    <span class="logo-t">PECUNIA</span>
-    <span class="logo-s">The Money Atlas</span>
-  </div>
-  <div class="era-disp">
-    <div class="era-y" id="era-y">3500 BCE</div>
-    <div class="era-n" id="era-n">EARLY COMMODITY MONEY</div>
-  </div>
-  <div class="hdr-right">
-    <div class="cnt-disp">
-      <span class="cnt-n" id="cnt-n">2</span>
-      systems active
-    </div>
-    <div class="burger-wrap" id="burger-wrap">
-      <button class="burger-btn" id="burger-btn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
-        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <line x1="0" y1="7" x2="18" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <line x1="0" y1="13" x2="18" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <div class="burger-menu" id="burger-menu" role="menu">
-        <a class="burger-item" href="../index.html" role="menuitem" style="text-decoration:none">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          <span>The Pangea Project</span>
-        </a>
-        <div class="burger-divider"></div>
-        <button class="burger-item burger-mode active" id="btn-explore" onclick="setMode('explore');closeBurger()" role="menuitem" aria-pressed="true">
-          <span>◉</span><span>Explore</span>
-        </button>
-        <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⟳</span><span>Threads</span>
-        </button>
-        <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⊞</span><span>Compare</span>
-        </button>
-        <div class="burger-divider"></div>
-        <button class="burger-item" id="menu-theme" onclick="toggleTheme();closeBurger()" role="menuitem">
-          <span>◑</span>
-          <span>Toggle Theme</span>
-        </button>
-        <div class="burger-divider"></div>
-        <button class="burger-item" onclick="showAbout();closeBurger()" role="menuitem">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span>About</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</header>
-
-<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Financial innovation chains">
-  <div class="thread-panel-inner">
-    <div class="thread-panel-bar">
-      <span class="thread-panel-title" id="thread-panel-title">Innovation Threads</span>
-      <div style="display:flex;align-items:center;gap:12px">
-        <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">← All Threads</button>
-        <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">✕</button>
-      </div>
-    </div>
-    <div id="thread-concept-list"></div>
-    <div id="thread-active-steps" style="display:none"></div>
-  </div>
-</div>
-
-<div class="share-toast" id="share-toast">Link copied to clipboard</div>
-
-<div class="main">
-  <div class="map-tl-col">
-  <div class="map-c">
-    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with monetary system markers" style="cursor:pointer">
-      <defs>
-        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#b8901a" flood-opacity=".85"/>
-        </filter>
-        <filter id="glow2" x="-100%" y="-100%" width="300%" height="300%">
-          <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#b8901a" flood-opacity=".5"/>
-        </filter>
-      </defs>
-
-      <rect width="1000" height="520" fill="var(--bg)"/>
-
-      <g stroke="rgba(180,140,20,.04)" stroke-width=".5" fill="none">
-        <line x1="0" y1="120" x2="1000" y2="120"/>
-        <line x1="0" y1="195" x2="1000" y2="195"/>
-        <line x1="0" y1="265" x2="1000" y2="265"/>
-        <line x1="0" y1="335" x2="1000" y2="335"/>
-        <line x1="0" y1="405" x2="1000" y2="405"/>
-        <line x1="200" y1="0" x2="200" y2="520"/>
-        <line x1="400" y1="0" x2="400" y2="520"/>
-        <line x1="600" y1="0" x2="600" y2="520"/>
-        <line x1="800" y1="0" x2="800" y2="520"/>
-      </g>
-      <line x1="0" y1="265" x2="1000" y2="265" stroke="rgba(180,140,20,.10)" stroke-width=".8" stroke-dasharray="3,7"/>
-
-      <g id="map-layer"></g>
-      <g id="conn-layer"></g>
-      <g id="thread-layer"></g>
-      <g id="mark-layer"></g>
-      <g id="label-layer" pointer-events="none"></g>
-    </svg>
-    <div class="hint" id="map-hint">
-      <span id="map-hint-text">TAP A MONETARY SYSTEM  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
-      <button id="map-reset-btn" onclick="resetMapZoom()" style="display:none;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--gold-b);background:none;border:1px solid var(--bdr);padding:2px 8px;border-radius:10px;cursor:pointer;margin-left:10px;white-space:nowrap">⊙ RESET ZOOM</button>
-    </div>
-  </div>
-  <div class="tl-wrap" role="navigation" aria-label="Timeline">
-  <svg id="density-bar" aria-label="Monetary system density over time"></svg>
-  <div class="tl-lbls">
-    <span class="tl-lbl">8000 BCE</span>
-    <span class="tl-lbl">3000 BCE</span>
-    <span class="tl-lbl">1000 BCE</span>
-    <span class="tl-lbl">1 CE</span>
-    <span class="tl-lbl">1000 CE</span>
-    <span class="tl-lbl">1800 CE</span>
-    <span class="tl-lbl">2024 CE</span>
-  </div>
-  <div class="tl-trk">
-    <div class="tl-fill" id="tl-fill"></div>
-    <div class="tl-thumb" id="tl-thumb"></div>
-    <input type="range" class="tl-range" id="tl" min="0" max="1000" value="0" step="1" aria-label="Timeline year" aria-valuemin="-8000" aria-valuemax="2024" aria-valuenow="-8000">
-  </div>
-</div>
-  </div>
-
-  <div class="info-panel" id="info-panel" role="complementary" aria-label="Monetary system details">
-    <div id="drawer-top"></div>
-    <div id="drawer-content"></div>
-  </div>
-  <button class="mob-map-btn hidden" id="mob-map-btn" onclick="closeMobileSheet()">◎ Map</button>
-</div>
-
-<div id="cluster-picker" role="dialog" aria-label="Select monetary system">
-  <div id="cluster-picker-hdr">
-    <span>Select monetary system</span>
-    <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">✕</button>
-  </div>
-  <div id="cluster-list"></div>
-</div>
-
-<div id="about-modal" role="dialog" aria-modal="true" aria-label="About Pecunia" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center">
-  <div style="background:var(--panel);border:1px solid var(--bdr);border-radius:6px;padding:28px 32px;max-width:420px;width:calc(100% - 40px);position:relative;box-shadow:0 16px 48px rgba(0,0,0,.6)">
-    <button onclick="closeAbout()" aria-label="Close" style="position:absolute;top:12px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1">✕</button>
-    <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--gold-b);letter-spacing:2px;margin-bottom:4px">PECUNIA</div>
-    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">The Money Atlas</div>
-    <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:12px">
-      Created by <a href="https://polyglyphanalytica.com" target="_blank" rel="noopener" style="color:var(--gold-b);text-decoration:underline;text-underline-offset:3px">Polyglyph Analytica</a> &copy; <span id="about-year"></span>
-    </p>
-    <p style="font-size:12px;line-height:1.7;color:var(--txt3)">
-      Offered under the MIT License. Permission is granted to use, copy, modify, and distribute this software, with attribution, without warranties of any kind.
-    </p>
-  </div>
-</div>
-
-<div id="ptr-indicator" aria-hidden="true">
-  <div id="ptr-spinner"></div>
-  <span id="ptr-label">Pull to refresh</span>
-</div>
-
-<script>
-// ══════════════════════════════════════════════════════
-// PECUNIA — DATA & LOGIC
-// ══════════════════════════════════════════════════════
-
-// ── LENSES ──
-const LENSES=[
-  {id:'banking',    ico:'⌂', lbl:'Banking & Finance',       col:'#5a7a8a'},
-  {id:'commodity',  ico:'◈', lbl:'Commodity & Backing',      col:'#8a7030'},
-  {id:'crises',     ico:'↯', lbl:'Crises & Collapses',       col:'#a04040'},
-  {id:'cultural',   ico:'◎', lbl:'Cultural Significance',    col:'#7a5080'},
-  {id:'figures',    ico:'★', lbl:'Figures & Architects',     col:'#8a6020'},
-  {id:'innovation', ico:'⚙', lbl:'Innovation & Technology',  col:'#608050'},
-  {id:'institutional',ico:'⚑',lbl:'Institutional Framework', col:'#4a7faa'},
-  {id:'legacy',     ico:'∞', lbl:'Legacy & Modern Impact',   col:'#7890a8'},
-  {id:'political',  ico:'⚖', lbl:'Political Economy',        col:'#5a9a60'},
-  {id:'social',     ico:'⊗', lbl:'Social Impact',            col:'#c06090'},
-  {id:'trade',      ico:'⟳', lbl:'Trade Networks',            col:'#4a8870'},
-  {id:'theory',     ico:'Ψ', lbl:'Theory & Philosophy',      col:'#7060a8'},
-];
-
-// ── ERAS ──
-const ERAS=[
-  {y:-8000,n:'PRE-MONETARY EXCHANGE'},
-  {y:-3000,n:'EARLY COMMODITY MONEY'},
-  {y:-1000,n:'FIRST COINAGES'},
-  {y:-500,n:'CLASSICAL MONETARY SYSTEMS'},
-  {y:0,n:'IMPERIAL CURRENCIES'},
-  {y:500,n:'MEDIEVAL MONETARY ORDERS'},
-  {y:1000,n:'COMMERCIAL REVOLUTION'},
-  {y:1400,n:'EARLY BANKING ERA'},
-  {y:1600,n:'MERCANTILE AGE'},
-  {y:1700,n:'FINANCIAL REVOLUTION'},
-  {y:1800,n:'GOLD STANDARD ERA'},
-  {y:1900,n:'MODERN MONETARY SYSTEMS'},
-  {y:1945,n:'BRETTON WOODS ERA'},
-  {y:1971,n:'FIAT CURRENCY AGE'},
-  {y:2000,n:'DIGITAL FINANCE ERA'},
-  {y:2009,n:'CRYPTOCURRENCY AGE'},
-];
-
-// ── FINGERPRINT AXES ──
-const FP_LABELS=['Innovation','Reach','Longevity','Stability','Trade Vol.','Institutional','Cultural','Modern Rel.'];
-const FP_KEYS=['innov','reach','lon','stab','trade','inst','cult','modern'];
-
-// ── MONETARY SYSTEMS DATA ──
-// Placeholder — filled in Phase 2A/2B/2C
-const CIVS=[
-];
-
-// ── TRANSMISSIONS ──
-// Placeholder — filled in Phase 2C
-const TRANSMISSIONS=[
-];
-
-</script>
-</body>
-</html>
