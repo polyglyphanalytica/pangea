@@ -127,6 +127,8 @@ html,body{width:100%;height:100%;background:var(--bg);color:var(--txt);font-fami
 .card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
 .tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;padding:2px 8px;border:1px solid var(--bdr2);border-radius:2px}
 .card-coming{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-top:8px}
+.card-go{display:inline-block;margin-top:10px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;text-decoration:none;border:1px solid var(--bdr);padding:4px 14px;border-radius:3px;transition:all .15s}
+.card-go:hover{background:var(--amber-x);border-color:var(--amber-b)}
 
 /* ── DETAIL MODAL ── */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);align-items:center;justify-content:center}
@@ -375,6 +377,7 @@ function renderCatalogue(){
     const badgeText = a.status.toUpperCase();
     const tags = a.tags.map(t => `<span class="tag">${t}</span>`).join('');
     const comingSoon = a.status === 'forthcoming' ? '<div class="card-coming">Coming Soon</div>' : '';
+    const goLink = a.href ? `<a class="card-go" href="${a.href}" onclick="event.stopPropagation()">Open Atlas →</a>` : '';
 
     html += `
       <div class="card" data-id="${a.id}" onclick="openModal('${a.id}')" role="button" tabindex="0">
@@ -388,6 +391,7 @@ function renderCatalogue(){
         </div>
         <div class="card-tags">${tags}</div>
         ${comingSoon}
+        ${goLink}
       </div>`;
   });
   html += '</div>'; // close last grid
