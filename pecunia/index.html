@@ -520,7 +520,7 @@ button {
   top: var(--header-h);
   left: 0;
   right: 0;
-  bottom: var(--timeline-h);
+  bottom: calc(var(--timeline-h) + 28px);
   overflow: hidden;
   background: var(--map-water);
 }
@@ -1158,6 +1158,326 @@ button {
   margin-top: 16px;
   letter-spacing: 0.2em;
 }
+
+/* ============================================================
+   SEARCH OVERLAY
+   ============================================================ */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 400;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+  backdrop-filter: blur(6px);
+}
+
+.search-overlay.open {
+  display: flex;
+}
+
+.search-box {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  width: 90%;
+  max-width: 520px;
+  box-shadow: var(--shadow-lg);
+}
+
+.search-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.search-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--txt);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--txt-muted);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+.search-close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: var(--txt-dim);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.search-close:hover {
+  background: var(--accent-glow);
+  color: var(--txt);
+}
+
+.search-results {
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: background var(--transition);
+}
+
+.search-result-item:hover {
+  background: var(--accent-glow);
+}
+
+.search-result-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.search-result-name {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--txt);
+}
+
+.search-result-meta {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--txt-dim);
+  margin-left: auto;
+}
+
+.search-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--txt-muted);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+}
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar {
+  position: fixed;
+  bottom: var(--timeline-h);
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: var(--panel);
+  border-top: 1px solid var(--panel-border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 18px;
+  z-index: 85;
+  opacity: 0.85;
+}
+
+.stat-item {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--txt-dim);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-value {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ============================================================
+   MINI MAP LEGEND
+   ============================================================ */
+.map-legend {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  z-index: 50;
+  opacity: 0.9;
+  max-width: 180px;
+}
+
+.map-legend-title {
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  color: var(--txt-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--txt-dim);
+}
+
+/* ============================================================
+   ZOOM CONTROLS
+   ============================================================ */
+.zoom-controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 50;
+}
+
+.zoom-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  color: var(--txt-dim);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.zoom-btn:hover {
+  background: var(--accent-glow);
+  color: var(--txt);
+  border-color: var(--accent-dim);
+}
+
+/* ============================================================
+   TOOLTIP
+   ============================================================ */
+.map-tooltip {
+  position: fixed;
+  background: var(--panel);
+  border: 1px solid var(--accent-dim);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  pointer-events: none;
+  z-index: 300;
+  max-width: 240px;
+  display: none;
+  box-shadow: var(--shadow);
+}
+
+.map-tooltip.visible {
+  display: block;
+}
+
+.tooltip-name {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.tooltip-detail {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--txt-dim);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   ERA INDICATOR PIPS
+   ============================================================ */
+.era-pips {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  display: flex;
+  pointer-events: none;
+}
+
+.era-pip {
+  height: 100%;
+  opacity: 0.5;
+}
+
+/* ============================================================
+   ADDITIONAL RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .stats-bar {
+    display: none;
+  }
+
+  .map-legend {
+    display: none;
+  }
+
+  .zoom-controls {
+    top: 8px;
+    right: 8px;
+  }
+
+  .zoom-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .search-box {
+    margin: 0 8px;
+    padding: 14px 16px;
+  }
+
+  .zoom-controls {
+    display: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -1191,6 +1511,7 @@ button {
   </div>
 
   <div class="header-right">
+    <button class="timeline-btn" onclick="openSearch()" aria-label="Search" title="Search (Ctrl+K)" style="font-size:1rem">&#128269;</button>
     <button class="burger-btn" id="burgerBtn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false">
       <span class="burger-line"></span>
       <span class="burger-line"></span>
@@ -1263,8 +1584,49 @@ button {
       <!-- Money markers -->
       <g id="markerGroup"></g>
     </svg>
+    <!-- Zoom controls -->
+    <div class="zoom-controls">
+      <button class="zoom-btn" onclick="zoomIn()" aria-label="Zoom in" title="Zoom in">+</button>
+      <button class="zoom-btn" onclick="zoomOut()" aria-label="Zoom out" title="Zoom out">&minus;</button>
+      <button class="zoom-btn" onclick="zoomReset()" aria-label="Reset zoom" title="Reset zoom">&#8634;</button>
+    </div>
+    <!-- Map legend -->
+    <div class="map-legend" id="mapLegend">
+      <div class="map-legend-title">Legend</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#d4a820"></div><span class="legend-label">Coin / Currency</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c8a870"></div><span class="legend-label">Paper Money</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#60a0c8"></div><span class="legend-label">Institution</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#cc4444"></div><span class="legend-label">Crisis / Bubble</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f7931a"></div><span class="legend-label">Digital / Crypto</span></div>
+    </div>
+    <!-- Tooltip -->
+    <div class="map-tooltip" id="mapTooltip">
+      <div class="tooltip-name" id="tooltipName"></div>
+      <div class="tooltip-detail" id="tooltipDetail"></div>
+    </div>
   </div>
 </main>
+
+<!-- Stats Bar -->
+<div class="stats-bar" id="statsBar">
+  <div class="stat-item">Active: <span class="stat-value" id="statActive">0</span></div>
+  <div class="stat-item">Total: <span class="stat-value" id="statTotal">0</span></div>
+  <div class="stat-item">Era: <span class="stat-value" id="statEra">--</span></div>
+  <div class="stat-item">Connections: <span class="stat-value" id="statConns">0</span></div>
+</div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <div class="search-input-row">
+      <input class="search-input" id="searchInput" type="text" placeholder="Search currencies, institutions, events..." autocomplete="off" aria-label="Search monetary history">
+      <button class="search-close" onclick="closeSearch()" aria-label="Close search">&times;</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <div class="search-empty">Type to search across all monetary entries...</div>
+    </div>
+  </div>
+</div>
 
 <!-- Info Panel / Drawer -->
 <aside class="info-panel" id="infoPanel" role="complementary" aria-label="Currency details">
@@ -1310,20 +1672,57 @@ button {
 <!-- About Modal -->
 <div class="modal-overlay" id="aboutModal">
   <div class="modal">
-    <div class="modal-title">🪙 Pecunia — The Atlas of Money</div>
+    <div class="modal-title">Pecunia -- The Atlas of Money</div>
     <p class="modal-text">
       Pecunia is an interactive atlas of monetary history, tracing the evolution of money from
       ancient barter systems to modern digital currencies. Explore how currencies, financial
-      innovations, and economic ideas spread across civilizations and continents.
+      innovations, and economic ideas spread across civilizations and continents over five
+      millennia of human history.
     </p>
     <p class="modal-text">
-      Use the timeline to travel through 5,000 years of monetary history. Click markers to learn
-      about individual currencies. Switch lenses to view different aspects — from innovation and
-      trade to crises and regulation.
+      <strong>How to Use:</strong>
     </p>
     <p class="modal-text">
-      Part of <strong>The Pangea Project</strong> — exploring the interconnected history of
-      human civilization through interactive maps.
+      <strong>Timeline:</strong> Use the slider at the bottom to travel through time, from
+      3000 BCE to 2025 CE. Press play to animate through history, or use arrow keys to step
+      through the centuries. The density bar above the slider shows periods of high monetary
+      activity.
+    </p>
+    <p class="modal-text">
+      <strong>Map:</strong> Click any gold marker to explore its history in the info panel.
+      Scroll to zoom; click and drag to pan. Dashed lines show connections between related
+      monetary systems. Use the zoom controls in the top-right corner.
+    </p>
+    <p class="modal-text">
+      <strong>Lenses:</strong> Switch between twelve different analytical lenses in the header
+      to view different aspects of monetary history -- from innovation and trade to crises
+      and regulation.
+    </p>
+    <p class="modal-text">
+      <strong>Threads:</strong> Open the menu and select Threads to follow narrative chains
+      through monetary history, such as the evolution of coinage or the rise of digital money.
+    </p>
+    <p class="modal-text">
+      <strong>Compare:</strong> Select Compare mode to place two currencies side by side and
+      examine their similarities and differences.
+    </p>
+    <p class="modal-text">
+      <strong>Search:</strong> Press Ctrl+K or click the search icon to find any currency,
+      institution, or event by name.
+    </p>
+    <p class="modal-text">
+      <strong>Keyboard Shortcuts:</strong> Arrow keys (timeline), Space (play/pause),
+      +/- (zoom), T (threads), C (compare), E (explore), Ctrl+K (search), Escape (close).
+    </p>
+    <p class="modal-text" style="margin-top:12px;border-top:1px solid var(--panel-border);padding-top:12px">
+      Part of <strong>The Pangea Project</strong> -- exploring the interconnected history of
+      human civilization through interactive maps. Pecunia covers over 55 monetary entries
+      spanning coins, paper money, banking institutions, financial crises, and digital
+      currencies, connected by 15 direct links and 10 narrative threads.
+    </p>
+    <p class="modal-text" style="font-size:0.82rem;color:var(--txt-muted)">
+      Map data: Natural Earth via TopoJSON. Visualization: D3.js.
+      All historical content is for educational purposes.
     </p>
     <button class="modal-close" onclick="closeAbout()">Close</button>
   </div>
@@ -1395,7 +1794,84 @@ const MONEYS=[
 {id:"argentine-peso-crisis",n:"Argentine Peso Crisis",s:2001,e:2002,lon:-58.4,lat:-34.6,x:310,y:370,col:"#cc6622",sz:1.0,region:"Argentina",type:"Crisis",issuer:"Argentine government",material:"N/A",d:{overview:"Collapse of Argentina's currency board peg to the dollar caused economic devastation.",innovation:"Demonstrated the fragility of fixed exchange rate regimes under fiscal stress.",spread:"Triggered regional contagion across Latin American financial markets.",economics:"GDP fell by over ten percent and poverty rates doubled within a year.",legacy:"Argentina's repeated defaults made it a cautionary tale of monetary mismanagement.",figures:"President de la Rua resigned amid riots; Domingo Cavallo designed the failed peg.",decline:"Forced devaluation of seventy percent destroyed savings and trust in institutions."}},
 {id:"zimbabwe-hyperinflation",n:"Zimbabwe Hyperinflation",s:2007,e:2009,lon:31.05,lat:-17.83,x:540,y:330,col:"#aa2222",sz:1.0,region:"Zimbabwe",type:"Crisis",issuer:"Reserve Bank of Zimbabwe",material:"Paper",d:{overview:"Hyperinflation reached an estimated seventy-nine billion percent monthly at its peak in 2008.",innovation:"Produced the hundred-trillion-dollar banknote, the largest denomination ever printed.",spread:"Confined to Zimbabwe but became a global symbol of monetary collapse.",economics:"Destroyed the domestic economy and forced dollarization of everyday transactions.",legacy:"Textbook case study in the consequences of unchecked money printing.",figures:"Reserve Bank governor Gideon Gono oversaw the catastrophic monetary expansion.",decline:"Zimbabwe abandoned its currency entirely in 2009, adopting the US dollar and rand."}},
 {id:"cbdc",n:"Central Bank Digital Currency (CBDC)",s:2020,e:2025,lon:116.4,lat:39.9,x:735,y:210,col:"#8040c0",sz:1.1,region:"Global",type:"Digital Currency",issuer:"Various central banks",material:"Digital",d:{overview:"Digital form of sovereign currency issued directly by central banks to the public.",innovation:"Combines the trust of central bank money with the efficiency of digital payments.",spread:"Over one hundred nations are researching or piloting CBDCs as of 2024.",economics:"Could reshape monetary transmission, financial inclusion, and cross-border payments.",legacy:"Represents the next evolution of state-issued money in the digital age.",figures:"People's Bank of China leads with the digital yuan; ECB is developing the digital euro.",decline:"Privacy concerns and disintermediation of commercial banks pose adoption challenges."}},
-{id:"stablecoin",n:"Stablecoins",s:2014,e:2025,lon:-122.4,lat:37.8,x:200,y:210,col:"#28a088",sz:1.0,region:"Global (digital)",type:"Cryptocurrency",issuer:"Various private issuers",material:"Digital",d:{overview:"Cryptocurrencies designed to maintain a stable value by pegging to fiat currencies or assets.",innovation:"Bridged the gap between volatile crypto markets and stable fiat-denominated value.",spread:"Total stablecoin market cap exceeded one hundred fifty billion dollars by 2024.",economics:"Serve as critical infrastructure for DeFi lending, trading, and remittances.",legacy:"Forced regulators worldwide to develop new frameworks for digital money.",figures:"Tether, Circle (USDC), and MakerDAO (DAI) are the dominant issuers.",decline:"Regulatory crackdowns and de-pegging events like Terra's collapse exposed systemic risks."}}
+{id:"stablecoin",n:"Stablecoins",s:2014,e:2025,lon:-122.4,lat:37.8,x:200,y:210,col:"#28a088",sz:1.0,region:"Global (digital)",type:"Cryptocurrency",issuer:"Various private issuers",material:"Digital",d:{overview:"Cryptocurrencies designed to maintain a stable value by pegging to fiat currencies or assets.",innovation:"Bridged the gap between volatile crypto markets and stable fiat-denominated value.",spread:"Total stablecoin market cap exceeded one hundred fifty billion dollars by 2024.",economics:"Serve as critical infrastructure for DeFi lending, trading, and remittances.",legacy:"Forced regulators worldwide to develop new frameworks for digital money.",figures:"Tether, Circle (USDC), and MakerDAO (DAI) are the dominant issuers.",decline:"Regulatory crackdowns and de-pegging events like Terra's collapse exposed systemic risks."}},
+{id:"south-korean-won",n:"South Korean Won",
+ s:1945,e:2025,lon:126.98,lat:37.57,x:770,y:215,
+ col:"#003478",sz:1.0,region:"South Korea",type:"Banknote/Coin",
+ issuer:"Bank of Korea",material:"Paper/Coin",
+ d:{overview:"Currency of South Korea, reflecting the nation's transformation into an economic powerhouse.",
+    innovation:"South Korea's rapid industrialization made the won one of Asia's most traded currencies.",
+    spread:"Significant in Asian financial markets and global electronics trade.",
+    economics:"Supported the Miracle on the Han River economic transformation from poverty to prosperity.",
+    legacy:"South Korea's financial development model has been studied worldwide.",
+    figures:"Park Chung-hee's economic reforms laid the foundation for Korea's financial growth.",
+    decline:"Vulnerable to capital flight during Asian and global financial crises."}},
+{id:"mexican-peso",n:"Mexican Peso",
+ s:1821,e:2025,lon:-99.13,lat:19.43,x:225,y:250,
+ col:"#006847",sz:1.0,region:"Mexico",type:"Banknote/Coin",
+ issuer:"Banco de Mexico",material:"Polymer/Coin",
+ d:{overview:"Currency of Mexico, descended from the Spanish colonial piece of eight.",
+    innovation:"Mexico pioneered polymer banknotes in the Americas for durability and security.",
+    spread:"Major currency in Latin American trade and closely linked to the US dollar.",
+    economics:"The 1994 Tequila Crisis forced major structural monetary reforms.",
+    legacy:"Heir to the most globally circulated coin of the early modern period.",
+    figures:"Banco de Mexico gained independence in 1993 to ensure monetary stability.",
+    decline:"Periodic devaluations and inflation have eroded long-term purchasing power."}},
+{id:"nigerian-naira",n:"Nigerian Naira",
+ s:1973,e:2025,lon:3.39,lat:6.45,x:497,y:280,
+ col:"#008751",sz:0.9,region:"Nigeria",type:"Banknote/Coin",
+ issuer:"Central Bank of Nigeria",material:"Paper/Polymer",
+ d:{overview:"Currency of Africa's largest economy, tied closely to oil revenues.",
+    innovation:"Nigeria introduced an eNaira CBDC in 2021, among the first in Africa.",
+    spread:"Dominant currency in West African regional trade and commerce.",
+    economics:"Oil price fluctuations cause dramatic exchange rate volatility for the naira.",
+    legacy:"The eNaira pilot provides lessons for CBDC implementation across developing nations.",
+    figures:"Central Bank governors have shaped monetary policy amid competing political pressures.",
+    decline:"Chronic foreign exchange shortages and parallel market premiums undermine confidence."}},
+{id:"saudi-riyal",n:"Saudi Riyal",
+ s:1932,e:2025,lon:46.72,lat:24.71,x:560,y:245,
+ col:"#006C35",sz:0.9,region:"Saudi Arabia",type:"Banknote/Coin",
+ issuer:"Saudi Arabian Monetary Authority",material:"Paper/Coin",
+ d:{overview:"Currency of Saudi Arabia, pegged to the US dollar and anchored by oil wealth.",
+    innovation:"Fixed dollar peg since 1986 has provided remarkable exchange rate stability.",
+    spread:"Key currency in Gulf Cooperation Council trade and Islamic finance markets.",
+    economics:"Oil revenues denominated in dollars support the peg and sovereign wealth fund.",
+    legacy:"Central to the petrodollar system that underpins global dollar demand.",
+    figures:"King Abdulaziz established the Saudi monetary system during national unification.",
+    decline:"Diversification away from oil dependence poses long-term questions for the peg."}},
+{id:"turkish-lira",n:"Turkish Lira",
+ s:1923,e:2025,lon:32.86,lat:39.93,x:530,y:210,
+ col:"#E30A17",sz:0.9,region:"Turkey",type:"Banknote/Coin",
+ issuer:"Central Bank of Turkey",material:"Paper/Coin",
+ d:{overview:"Currency of Turkey, experiencing dramatic depreciation in recent years.",
+    innovation:"Turkey redenominated in 2005, removing six zeros to restore confidence.",
+    spread:"Important regional currency bridging European and Middle Eastern financial systems.",
+    economics:"Unorthodox monetary policy of cutting rates during inflation caused severe depreciation.",
+    legacy:"Illustrates the consequences of political interference in central bank independence.",
+    figures:"President Erdogan's insistence on low rates despite high inflation defined recent policy.",
+    decline:"Lost over eighty percent of its value against the dollar between 2018 and 2023."}},
+{id:"philippine-peso",n:"Philippine Peso",
+ s:1852,e:2025,lon:121,lat:14.6,x:770,y:258,
+ col:"#0038A8",sz:0.8,region:"Philippines",type:"Banknote/Coin",
+ issuer:"Bangko Sentral ng Pilipinas",material:"Paper/Coin",
+ d:{overview:"Currency of the Philippines, rooted in the Spanish colonial peso system.",
+    innovation:"GCash and Maya mobile payment platforms have rapidly digitized Philippine finance.",
+    spread:"Remittances from overseas Filipino workers make the peso globally significant.",
+    economics:"Overseas remittances account for nearly ten percent of Philippine GDP.",
+    legacy:"The peso name reflects centuries of Spanish colonial monetary influence in Asia.",
+    figures:"The Bangko Sentral ng Pilipinas was reconstituted in 1993 for greater independence.",
+    decline:"Periodic depreciation reflects the country's trade deficits and external vulnerabilities."}},
+{id:"thai-baht",n:"Thai Baht",
+ s:1897,e:2025,lon:100.5,lat:13.75,x:730,y:258,
+ col:"#A51931",sz:0.9,region:"Thailand",type:"Banknote/Coin",
+ issuer:"Bank of Thailand",material:"Paper/Coin",
+ d:{overview:"Currency of Thailand whose speculative attack in 1997 triggered the Asian Financial Crisis.",
+    innovation:"Thailand's recovery led to stronger foreign reserve management across Asia.",
+    spread:"Important currency in Southeast Asian trade and tourism industries.",
+    economics:"The 1997 baht devaluation cascaded into the worst Asian financial crisis in decades.",
+    legacy:"Asian nations built massive foreign reserves after 1997 to prevent future crises.",
+    figures:"Finance Minister Thanong Bidaya was forced to float the baht on July 2, 1997.",
+    decline:"The 1997 crisis caused GDP to contract by over ten percent in a single year."}}
 ];
 
 /* --- Connections (15) --- */
@@ -1417,18 +1893,58 @@ const CONNECTIONS=[
 {from:"2008-crisis",to:"quantitative-easing",label:"Crisis triggers unconventional policy"}
 ];
 
-/* --- Transmissions (10) --- */
+/* --- Transmissions (thematic narrative chains) --- */
 const TRANSMISSIONS=[
-{from:"lydian-stater",to:"chinese-cash",label:"Coinage concept east and west",y:-500},
-{from:"jiaozi",to:"assignat",label:"Paper money idea reaches Europe",y:1700},
-{from:"spanish-real",to:"chinese-cash",label:"Silver trade via Manila galleons",y:1570},
-{from:"bank-of-england",to:"federal-reserve",label:"Central banking crosses the Atlantic",y:1913},
-{from:"gold-standard",to:"bretton-woods",label:"Gold-backed international system",y:1944},
-{from:"us-dollar",to:"petrodollar",label:"Oil priced in dollars globally",y:1974},
-{from:"swift",to:"bitcoin",label:"Decentralized alternative to SWIFT",y:2009},
-{from:"credit-card",to:"m-pesa",label:"Electronic payments go mobile",y:2007},
-{from:"2008-crisis",to:"bitcoin",label:"Crisis inspires decentralized money",y:2009},
-{from:"euro",to:"cbdc",label:"Sovereign digital currency evolution",y:2020}
+{id:"t-coinage",
+ n:"Birth of Coinage",
+ d:"From Lydian electrum to Greek silver to Roman denarii -- the invention that changed commerce forever.",
+ y:-610,
+ chain:["lydian-stater","greek-drachma","persian-daric","roman-denarius"]},
+{id:"t-paper",
+ n:"Paper Money Revolution",
+ d:"From Song Dynasty China to Revolutionary France to modern banknotes -- paper transforms money.",
+ y:1024,
+ chain:["jiaozi","assignat","british-pound","federal-reserve"]},
+{id:"t-gold",
+ n:"Rise and Fall of Gold",
+ d:"Gold coins to the gold standard to fiat -- the arc of metallic money.",
+ y:309,
+ chain:["byzantine-solidus","venetian-ducat","gold-standard","bretton-woods","nixon-shock"]},
+{id:"t-dollar",
+ n:"Rise of the Dollar",
+ d:"From the Spanish piece of eight to global reserve currency dominance.",
+ y:1497,
+ chain:["spanish-real","continental-dollar","us-dollar","bretton-woods","petrodollar"]},
+{id:"t-banking",
+ n:"Banking Evolution",
+ d:"From Templar letters of credit to modern central banks -- the institutional backbone of money.",
+ y:1150,
+ chain:["templar-banking","medici-bank","bank-of-amsterdam","bank-of-england","federal-reserve"]},
+{id:"t-african",
+ n:"Money in Africa",
+ d:"From cowrie shells and manillas to mobile money -- Africa's diverse monetary journey.",
+ y:-3000,
+ chain:["cowrie-shell","manilla","cfa-franc","m-pesa"]},
+{id:"t-bubbles",
+ n:"Speculative Bubbles",
+ d:"History's greatest financial manias and the crashes that followed them.",
+ y:1637,
+ chain:["tulip-mania","south-sea-bubble","great-depression","2008-crisis"]},
+{id:"t-crypto",
+ n:"Digital Money Revolution",
+ d:"From credit cards to mobile payments to cryptocurrency -- the digitization of value.",
+ y:1950,
+ chain:["credit-card","venmo-paypal","bitcoin","ethereum","tether"]},
+{id:"t-islamic",
+ n:"Islamic Monetary Tradition",
+ d:"From golden dinars to hawala networks to petrodollars -- Islamic finance through the ages.",
+ y:696,
+ chain:["islamic-dinar","hawala","petrodollar"]},
+{id:"t-hyperinflation",
+ n:"Hyperinflation Episodes",
+ d:"When money printing goes wrong -- cautionary tales from four centuries.",
+ y:1789,
+ chain:["assignat","continental-dollar","weimar-hyperinflation","zimbabwe-hyperinflation"]}
 ];
 
 /* --- State --- */
@@ -1475,7 +1991,14 @@ function getVisibleConnections(y){
 }
 
 function getVisibleTransmissions(y){
-  return TRANSMISSIONS.filter(t=>y>=t.y);
+  return TRANSMISSIONS.filter(function(t){
+    if(t.y!==undefined) return y>=t.y;
+    if(t.chain&&t.chain.length){
+      var first=MONEYS.find(function(m){return m.id===t.chain[0];});
+      return first&&y>=first.s;
+    }
+    return false;
+  });
 }
 
 function moneyPt(m){
@@ -1544,8 +2067,26 @@ function renderMap(){
     connG.appendChild(line);
   });
 
-  // Transmissions
+  // Transmissions (chain-based or from/to)
   trans.forEach(t=>{
+    if(t.chain&&t.chain.length>=2){
+      // Draw chain as connected arcs
+      for(var ci=0;ci<t.chain.length-1;ci++){
+        var ca=MONEYS.find(m=>m.id===t.chain[ci]);
+        var cb=MONEYS.find(m=>m.id===t.chain[ci+1]);
+        if(!ca||!cb) continue;
+        var cpa=pos(ca),cpb=pos(cb);
+        var cmx=(cpa.x+cpb.x)/2,cmy=Math.min(cpa.y,cpb.y)-20;
+        var cpath=document.createElementNS("http://www.w3.org/2000/svg","path");
+        cpath.setAttribute("d","M"+cpa.x+","+cpa.y+" Q"+cmx+","+cmy+" "+cpb.x+","+cpb.y);
+        cpath.setAttribute("class","transmission-path visible animated");
+        var ctitle=document.createElementNS("http://www.w3.org/2000/svg","title");
+        ctitle.textContent=t.n||t.label||"";cpath.appendChild(ctitle);
+        transG.appendChild(cpath);
+      }
+      return;
+    }
+    // Fallback: from/to format
     const a=MONEYS.find(m=>m.id===t.from);
     const b=MONEYS.find(m=>m.id===t.to);
     if(!a||!b) return;
@@ -1599,8 +2140,10 @@ function renderMap(){
     txt.textContent=m.n;
     g.appendChild(txt);
 
-    g.addEventListener("click",()=>selectMoney(m));
-    g.addEventListener("keydown",ev=>{if(ev.key==="Enter")selectMoney(m);});
+    g.addEventListener("click",function(){selectMoney(m);});
+    g.addEventListener("keydown",function(ev){if(ev.key==="Enter")selectMoney(m);});
+    g.addEventListener("mouseenter",function(ev){showTooltip(m,ev);});
+    g.addEventListener("mouseleave",function(){hideTooltip();});
     markerG.appendChild(g);
   });
 
@@ -1659,14 +2202,56 @@ function renderDrawer(m){
     }
   }
 
+  // Mini timeline bar for this entry
+  var totalSpan=5025; // -3000 to 2025
+  var startPct=((m.s+3000)/totalSpan)*100;
+  var widthPct=((m.e-m.s)/totalSpan)*100;
+  if(widthPct<0.5) widthPct=0.5;
+  bodyHTML+=`<div class="info-section">`;
+  bodyHTML+=`<div class="info-section-title">Timeline Span</div>`;
+  bodyHTML+=`<div style="position:relative;height:14px;background:var(--panel-border);border-radius:3px;margin:6px 0;overflow:hidden">`;
+  bodyHTML+=`<div style="position:absolute;left:${startPct}%;width:${widthPct}%;height:100%;background:${m.col||'var(--accent)'};border-radius:3px;opacity:0.8"></div>`;
+  bodyHTML+=`</div>`;
+  bodyHTML+=`<div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--txt-muted)">`;
+  bodyHTML+=`<span>3000 BCE</span><span>1 CE</span><span>2025 CE</span>`;
+  bodyHTML+=`</div>`;
+  bodyHTML+=`</div>`;
+
+  // Duration calculation
+  var duration=m.e-m.s;
+  if(duration>0){
+    bodyHTML+=`<div class="info-section">`;
+    bodyHTML+=`<div class="info-section-title">Duration</div>`;
+    bodyHTML+=`<p class="info-section-text">${duration} years (${fmtYear(m.s)} to ${fmtYear(m.e)})</p>`;
+    bodyHTML+=`</div>`;
+  }
+
   // Related connections
-  const related=CONNECTIONS.filter(c=>c.from===m.id||c.to===m.id);
+  var related=CONNECTIONS.filter(function(c){return c.from===m.id||c.to===m.id;});
   if(related.length>0){
     bodyHTML+=`<div class="info-section"><div class="info-section-title">Connections</div>`;
-    related.forEach(c=>{
-      const other=c.from===m.id?c.to:c.from;
-      const om=MONEYS.find(x=>x.id===other);
-      if(om) bodyHTML+=`<p class="info-section-text" style="cursor:pointer;color:var(--accent)" onclick="selectMoney(MONEYS.find(x=>x.id==='${other}'))">→ ${om.n}: ${c.label}</p>`;
+    related.forEach(function(c){
+      var other=c.from===m.id?c.to:c.from;
+      var om=MONEYS.find(function(x){return x.id===other;});
+      if(om){
+        bodyHTML+=`<p class="info-section-text" style="cursor:pointer;color:var(--accent)" `;
+        bodyHTML+=`onclick="selectMoney(MONEYS.find(function(x){return x.id==='${other}';}))">`;
+        bodyHTML+=`\u2192 ${om.n}: ${c.label}</p>`;
+      }
+    });
+    bodyHTML+=`</div>`;
+  }
+
+  // Related threads
+  var relThreads=TRANSMISSIONS.filter(function(t){
+    if(t.chain) return t.chain.indexOf(m.id)>=0;
+    return t.from===m.id||t.to===m.id;
+  });
+  if(relThreads.length>0){
+    bodyHTML+=`<div class="info-section"><div class="info-section-title">Part of Threads</div>`;
+    relThreads.forEach(function(t){
+      bodyHTML+=`<p class="info-section-text" style="cursor:pointer;color:var(--accent)" `;
+      bodyHTML+=`onclick="setMode('threads')">\u{1F9F5} ${t.n||t.label}</p>`;
     });
     bodyHTML+=`</div>`;
   }
@@ -1723,6 +2308,7 @@ function setYear(y){
   const era=getEra(curYear);
   document.getElementById("eraDisplay").textContent=era.n+" Era";
   renderMap();
+  updateStats();
 }
 
 function stepYear(delta){
@@ -1771,6 +2357,7 @@ function renderDensityBar(){
    ============================================================ */
 function selectMoney(m){
   curMoney=m;
+  if(m) window.location.hash=m.id;
   renderMap();
   renderDrawer(m);
 }
@@ -1934,27 +2521,33 @@ function showThreads(){
   const body=document.getElementById("infoPanelBody");
 
   title.textContent="Monetary Threads";
-  meta.innerHTML=`<span class="meta-tag primary">Narrative Chains</span>`;
-
-  const threads=[
-    {title:"The Coinage Revolution",desc:"From Lydian staters to global denominations.",chain:["lydian-stater","greek-drachma","roman-denarius","byzantine-solidus"]},
-    {title:"Paper Money's Journey",desc:"From Song Dynasty China to modern banknotes.",chain:["jiaozi","assignat","british-pound","us-dollar"]},
-    {title:"Rise of Central Banking",desc:"Institutional evolution of monetary authority.",chain:["medici-bank","bank-of-amsterdam","bank-of-england","federal-reserve"]},
-    {title:"Digital Money Revolution",desc:"From credit cards to cryptocurrency.",chain:["credit-card","venmo-paypal","bitcoin","cbdc"]},
-    {title:"Crises That Shaped Finance",desc:"Bubbles, crashes, and their aftermath.",chain:["tulip-mania","south-sea-bubble","great-depression","2008-crisis"]}
-  ];
+  meta.innerHTML='<span class="meta-tag primary">Narrative Chains</span><span class="meta-tag">'+TRANSMISSIONS.length+' threads</span>';
 
   let html="";
-  threads.forEach(t=>{
-    html+=`<div class="thread-item"><div class="thread-title">${t.title}</div><div class="thread-desc">${t.desc}</div><div class="thread-chain">`;
-    t.chain.forEach((id,i)=>{
-      const m=MONEYS.find(x=>x.id===id);
-      if(m){
-        html+=`<span class="thread-node" onclick="selectMoney(MONEYS.find(x=>x.id==='${id}'));setMode('explore')">${m.n}</span>`;
-        if(i<t.chain.length-1) html+=`<span class="thread-arrow">→</span>`;
-      }
-    });
-    html+=`</div></div>`;
+  TRANSMISSIONS.forEach(function(t){
+    var tTitle=t.n||t.label||"Thread";
+    var tDesc=t.d||t.label||"";
+    html+='<div class="thread-item">';
+    html+='<div class="thread-title">'+tTitle+'</div>';
+    html+='<div class="thread-desc">'+tDesc+'</div>';
+    html+='<div class="thread-chain">';
+    // Support both chain-array and from/to formats
+    if(t.chain&&t.chain.length){
+      t.chain.forEach(function(id,i){
+        var m=MONEYS.find(function(x){return x.id===id;});
+        if(m){
+          html+='<span class="thread-node" onclick="selectMoney(MONEYS.find(function(x){return x.id===\''+id+'\';}));setMode(\'explore\')">'+m.n+'</span>';
+          if(i<t.chain.length-1) html+='<span class="thread-arrow">\u2192</span>';
+        }
+      });
+    } else if(t.from&&t.to){
+      var a=MONEYS.find(function(x){return x.id===t.from;});
+      var b=MONEYS.find(function(x){return x.id===t.to;});
+      if(a) html+='<span class="thread-node" onclick="selectMoney(MONEYS.find(function(x){return x.id===\''+t.from+'\';}));setMode(\'explore\')">'+a.n+'</span>';
+      html+='<span class="thread-arrow">\u2192</span>';
+      if(b) html+='<span class="thread-node" onclick="selectMoney(MONEYS.find(function(x){return x.id===\''+t.to+'\';}));setMode(\'explore\')">'+b.n+'</span>';
+    }
+    html+='</div></div>';
   });
 
   body.innerHTML=html;
@@ -2008,27 +2601,383 @@ function pickCompare(id){
 }
 
 /* ============================================================
+   ZOOM BUTTON HANDLERS
+   ============================================================ */
+function zoomIn(){
+  mapZoom=Math.min(8,mapZoom*1.3);
+  applyTransform();
+}
+
+function zoomOut(){
+  mapZoom=Math.max(0.5,mapZoom/1.3);
+  applyTransform();
+}
+
+function zoomReset(){
+  mapZoom=1;
+  mapPanX=0;
+  mapPanY=0;
+  applyTransform();
+}
+
+/* ============================================================
+   SEARCH FUNCTIONALITY
+   ============================================================ */
+function openSearch(){
+  document.getElementById("searchOverlay").classList.add("open");
+  var inp=document.getElementById("searchInput");
+  inp.value="";
+  inp.focus();
+  renderSearchResults("");
+}
+
+function closeSearch(){
+  document.getElementById("searchOverlay").classList.remove("open");
+}
+
+function renderSearchResults(query){
+  var container=document.getElementById("searchResults");
+  if(!query||query.length<1){
+    container.innerHTML='<div class="search-empty">Type to search across all monetary entries...</div>';
+    return;
+  }
+  var q=query.toLowerCase();
+  var results=MONEYS.filter(function(m){
+    return m.n.toLowerCase().indexOf(q)>=0 ||
+           m.region.toLowerCase().indexOf(q)>=0 ||
+           m.type.toLowerCase().indexOf(q)>=0 ||
+           (m.issuer&&m.issuer.toLowerCase().indexOf(q)>=0) ||
+           (m.material&&m.material.toLowerCase().indexOf(q)>=0) ||
+           (m.d.overview&&m.d.overview.toLowerCase().indexOf(q)>=0);
+  });
+
+  if(results.length===0){
+    container.innerHTML='<div class="search-empty">No results for "'+query+'"</div>';
+    return;
+  }
+
+  var html="";
+  results.forEach(function(m){
+    html+='<div class="search-result-item" onclick="searchSelect(\''+m.id+'\')">';
+    html+='<div class="search-result-dot" style="background:'+m.col+'"></div>';
+    html+='<div><div class="search-result-name">'+m.n+'</div>';
+    html+='<div class="search-result-meta">'+m.region+' \u00B7 '+m.type+'</div></div>';
+    html+='<div class="search-result-meta">'+fmtYear(m.s)+'</div>';
+    html+='</div>';
+  });
+  container.innerHTML=html;
+}
+
+function searchSelect(id){
+  var m=MONEYS.find(function(x){return x.id===id;});
+  if(!m) return;
+  closeSearch();
+  // Navigate timeline to the money's start date
+  setYear(m.s);
+  selectMoney(m);
+}
+
+// Search input handler
+document.getElementById("searchInput").addEventListener("input",function(e){
+  renderSearchResults(e.target.value);
+});
+
+// Close search on overlay click
+document.getElementById("searchOverlay").addEventListener("click",function(e){
+  if(e.target===e.currentTarget) closeSearch();
+});
+
+/* ============================================================
+   TOOLTIP HANDLERS
+   ============================================================ */
+function showTooltip(m,evt){
+  var tip=document.getElementById("mapTooltip");
+  document.getElementById("tooltipName").textContent=m.n;
+  document.getElementById("tooltipDetail").textContent=
+    fmtYear(m.s)+" \u2014 "+fmtYear(m.e)+" \u00B7 "+m.region;
+  tip.style.left=(evt.clientX+14)+"px";
+  tip.style.top=(evt.clientY-10)+"px";
+  tip.classList.add("visible");
+}
+
+function hideTooltip(){
+  document.getElementById("mapTooltip").classList.remove("visible");
+}
+
+/* ============================================================
+   STATS BAR UPDATE
+   ============================================================ */
+function updateStats(){
+  var vis=getVisibleMoneys(curYear);
+  var conns=getVisibleConnections(curYear);
+  var era=getEra(curYear);
+  var el;
+  el=document.getElementById("statActive"); if(el) el.textContent=vis.length;
+  el=document.getElementById("statTotal"); if(el) el.textContent=MONEYS.length;
+  el=document.getElementById("statEra"); if(el) el.textContent=era.n;
+  el=document.getElementById("statConns"); if(el) el.textContent=conns.length;
+}
+
+/* ============================================================
+   NAVIGATE TO MONEY (from URL hash)
+   ============================================================ */
+function navigateToMoney(id){
+  var m=MONEYS.find(function(x){return x.id===id;});
+  if(!m) return;
+  setYear(m.s);
+  selectMoney(m);
+}
+
+/* ============================================================
+   ERA PIPS IN TIMELINE
+   ============================================================ */
+function renderEraPips(){
+  var container=document.querySelector(".timeline-slider-container");
+  if(!container) return;
+  var existing=container.querySelector(".era-pips");
+  if(existing) existing.remove();
+
+  var pips=document.createElement("div");
+  pips.className="era-pips";
+  var total=5025; // -3000 to 2025
+
+  ERAS.forEach(function(era,i){
+    var nextY=(i<ERAS.length-1)?ERAS[i+1].y:2025;
+    var start=era.y+3000;
+    var end=nextY+3000;
+    var pip=document.createElement("div");
+    pip.className="era-pip";
+    pip.style.flex=((end-start)/total);
+    // Use a gold-tinted color with varying opacity
+    var hue=30+i*25;
+    pip.style.background="hsla("+hue+",60%,50%,0.3)";
+    pip.title=era.n;
+    pips.appendChild(pip);
+  });
+
+  container.insertBefore(pips,container.firstChild);
+}
+
+/* ============================================================
    KEYBOARD SHORTCUTS
    ============================================================ */
-document.addEventListener("keydown",e=>{
+document.addEventListener("keydown",function(e){
+  // Check if we're in a text input
+  if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA"){
+    if(e.key==="Escape") closeSearch();
+    return;
+  }
+
   if(e.key==="Escape"){
-    closePanel();closeBurger();closeAbout();
+    closePanel();closeBurger();closeAbout();closeSearch();
     document.getElementById("lensDropdown").classList.remove("open");
   }
   if(e.key==="ArrowLeft") stepYear(-50);
   if(e.key==="ArrowRight") stepYear(50);
   if(e.key===" "&&document.activeElement===document.body){e.preventDefault();togglePlay();}
+  if((e.ctrlKey||e.metaKey)&&e.key==="k"){e.preventDefault();openSearch();}
+  if(e.key==="+"||e.key==="=") zoomIn();
+  if(e.key==="-") zoomOut();
+  if(e.key==="0") zoomReset();
+  if(e.key==="t"||e.key==="T"){setMode("threads");closeBurger();}
+  if(e.key==="c"||e.key==="C"){setMode("compare");closeBurger();}
+  if(e.key==="e"||e.key==="E"){setMode("explore");closeBurger();}
 });
 
 // Close lens dropdown on outside click
-document.addEventListener("click",e=>{
-  const lc=document.querySelector(".lens-container");
+document.addEventListener("click",function(e){
+  var lc=document.querySelector(".lens-container");
   if(lc&&!lc.contains(e.target)){
     document.getElementById("lensDropdown").classList.remove("open");
     document.getElementById("lensBtn").classList.remove("open");
     document.getElementById("lensBtn").setAttribute("aria-expanded","false");
   }
 });
+
+/* ============================================================
+   RANDOM MONEY EXPLORER
+   ============================================================ */
+function randomMoney(){
+  var vis=getVisibleMoneys(curYear);
+  if(vis.length===0) vis=MONEYS;
+  var m=vis[Math.floor(Math.random()*vis.length)];
+  setYear(Math.max(m.s,Math.min(m.e,curYear)));
+  selectMoney(m);
+}
+
+/* ============================================================
+   SUMMARY STATISTICS GENERATOR
+   ============================================================ */
+function getSummaryStats(){
+  var stats={
+    totalEntries: MONEYS.length,
+    totalConnections: CONNECTIONS.length,
+    totalTransmissions: TRANSMISSIONS.length,
+    totalLenses: LENSES.length,
+    totalEras: ERAS.length,
+    byType: {},
+    byRegion: {},
+    oldestEntry: null,
+    newestEntry: null,
+    longestRunning: null
+  };
+
+  var oldest=Infinity, newest=-Infinity, longestDur=0;
+
+  MONEYS.forEach(function(m){
+    // Count by type
+    var t=m.type||"Unknown";
+    stats.byType[t]=(stats.byType[t]||0)+1;
+
+    // Count by region
+    var r=m.region||"Unknown";
+    stats.byRegion[r]=(stats.byRegion[r]||0)+1;
+
+    // Track extremes
+    if(m.s<oldest){oldest=m.s;stats.oldestEntry=m;}
+    if(m.e>newest){newest=m.e;stats.newestEntry=m;}
+
+    var dur=m.e-m.s;
+    if(dur>longestDur){longestDur=dur;stats.longestRunning=m;}
+  });
+
+  return stats;
+}
+
+/* ============================================================
+   EXPORT DATA (for debugging / analysis)
+   ============================================================ */
+function exportVisibleData(){
+  var vis=getVisibleMoneys(curYear);
+  var data=vis.map(function(m){
+    return {
+      name:m.n,
+      start:fmtYear(m.s),
+      end:fmtYear(m.e),
+      region:m.region,
+      type:m.type,
+      issuer:m.issuer,
+      material:m.material
+    };
+  });
+  console.table(data);
+  return data;
+}
+
+/* ============================================================
+   FOCUS / ACCESSIBILITY HELPERS
+   ============================================================ */
+function focusFirstMarker(){
+  var first=document.querySelector(".money-marker");
+  if(first) first.focus();
+}
+
+function handleMarkerKeyNav(e){
+  if(e.key==="Tab"){
+    // Allow tab navigation through markers
+    return;
+  }
+  if(e.key==="Home"){
+    e.preventDefault();
+    setYear(-3000);
+  }
+  if(e.key==="End"){
+    e.preventDefault();
+    setYear(2025);
+  }
+  if(e.key==="PageUp"){
+    e.preventDefault();
+    stepYear(-500);
+  }
+  if(e.key==="PageDown"){
+    e.preventDefault();
+    stepYear(500);
+  }
+}
+
+// Add marker key nav to the map container
+document.getElementById("mapContainer").addEventListener("keydown",handleMarkerKeyNav);
+
+/* ============================================================
+   PRINT-FRIENDLY STYLES (injected on demand)
+   ============================================================ */
+function addPrintStyles(){
+  if(document.getElementById("printStyles")) return;
+  var style=document.createElement("style");
+  style.id="printStyles";
+  style.textContent=[
+    "@media print {",
+    "  .header, .timeline, .burger-menu, .stats-bar,",
+    "  .zoom-controls, .map-legend, .loading-overlay,",
+    "  .search-overlay, .modal-overlay { display: none !important; }",
+    "  .main { position: static; height: auto; }",
+    "  .info-panel { position: static; transform: none;",
+    "    width: 100%; max-width: 100%; border: none;",
+    "    box-shadow: none; }",
+    "  .info-panel.open { display: block; }",
+    "  body { overflow: auto; height: auto; }",
+    "}"
+  ].join("\n");
+  document.head.appendChild(style);
+}
+addPrintStyles();
+
+/* ============================================================
+   LOCAL STORAGE: REMEMBER THEME PREFERENCE
+   ============================================================ */
+function loadThemePreference(){
+  try {
+    var saved=localStorage.getItem("pecunia-theme");
+    if(saved==="light"){
+      document.documentElement.setAttribute("data-theme","light");
+      var toggle=document.getElementById("themeToggle");
+      if(toggle){toggle.classList.add("light");toggle.setAttribute("aria-checked","true");}
+    }
+  } catch(e){}
+}
+
+function saveThemePreference(){
+  try {
+    var theme=document.documentElement.getAttribute("data-theme")||"dark";
+    localStorage.setItem("pecunia-theme",theme);
+  } catch(e){}
+}
+
+// Load theme on startup
+loadThemePreference();
+
+/* ============================================================
+   ENHANCED THEME TOGGLE (with persistence)
+   ============================================================ */
+var _originalToggleTheme=toggleTheme;
+toggleTheme=function(){
+  _originalToggleTheme();
+  saveThemePreference();
+};
+
+/* ============================================================
+   CONNECTION HIGHLIGHT ON HOVER
+   ============================================================ */
+function highlightConnections(moneyId){
+  document.querySelectorAll(".connection-line").forEach(function(line){
+    if(line.getAttribute("data-from")===moneyId||
+       line.getAttribute("data-to")===moneyId){
+      line.classList.add("active");
+    } else {
+      line.classList.remove("active");
+    }
+  });
+}
+
+function clearConnectionHighlights(){
+  document.querySelectorAll(".connection-line").forEach(function(line){
+    line.classList.remove("active");
+  });
+  // Re-highlight selected money connections if any
+  if(curMoney){
+    highlightConnections(curMoney.id);
+  }
+}
 
 /* ============================================================
    INIT
@@ -2045,18 +2994,33 @@ async function init(){
 
   setYear(-3000);
   renderDensityBar();
+  renderEraPips();
   initPanZoom();
+  updateStats();
+
+  // Check URL hash for deep linking
+  if(window.location.hash){
+    var hashId=window.location.hash.slice(1);
+    setTimeout(function(){navigateToMoney(hashId);},200);
+  }
 
   // Hide loading overlay
-  setTimeout(()=>{
-    const lo=document.getElementById("loadingOverlay");
+  setTimeout(function(){
+    var lo=document.getElementById("loadingOverlay");
     lo.classList.add("hidden");
-    setTimeout(()=>lo.style.display="none",600);
+    setTimeout(function(){lo.style.display="none";},600);
   },800);
 }
 
 // Resize handler
-window.addEventListener("resize",()=>{renderDensityBar();});
+window.addEventListener("resize",function(){renderDensityBar();});
+
+// Hash change handler for deep linking
+window.addEventListener("hashchange",function(){
+  if(window.location.hash){
+    navigateToMoney(window.location.hash.slice(1));
+  }
+});
 
 // Start
 init();
