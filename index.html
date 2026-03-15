@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pangea Project — One Earth</title>
+
+<!-- Primary SEO -->
+<meta name="description" content="The Pangea Project: a collection of single-file interactive HTML atlases covering geography, history, language, money, music, science, and culture — one file at a time.">
+<meta name="keywords" content="interactive atlas, world history, human knowledge, civilizations, music, language, trade, philosophy, writing systems, architecture">
+<meta name="author" content="Polyglyph Analytica">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://polyglyph.github.io/pangea/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Pangea Project">
+<meta property="og:title" content="The Pangea Project — One Earth">
+<meta property="og:description" content="Every domain of human knowledge. One file at a time. A collection of interactive HTML atlases covering civilizations, music, language, money, science, and culture.">
+<meta property="og:url" content="https://polyglyph.github.io/pangea/">
+<meta property="og:image" content="https://polyglyph.github.io/pangea/og/pangea.png">
+
+<!-- Twitter/X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@polyglyph">
+<meta name="twitter:title" content="The Pangea Project — One Earth">
+<meta name="twitter:description" content="Every domain of human knowledge. One file at a time. A collection of interactive HTML atlases.">
+<meta name="twitter:image" content="https://polyglyph.github.io/pangea/og/pangea.png">
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "The Pangea Project — One Earth",
+  "description": "A collection of single-file interactive HTML atlases covering every domain of human knowledge — geography, history, language, money, music, science, and culture.",
+  "url": "https://polyglyph.github.io/pangea/",
+  "author": { "@type": "Organization", "name": "Polyglyph Analytica" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ── DARK THEME (default) ── */
+:root{
+  --bg:#02040a;
+  --panel:#070b12;
+  --panel2:#0c1018;
+  --amber:#e89820;--amber-b:#f0b040;--amber-d:#3a2204;
+  --amber-x:rgba(232,152,32,0.14);--amber-xx:rgba(232,152,32,0.08);
+  --txt:#f2e8d5;--txt2:#c4aa80;--txt3:#8a7254;
+  --bdr:rgba(232,152,32,0.22);--bdr2:rgba(232,152,32,0.10);
+  --shadow:rgba(0,0,0,0.6);
+  --hdr-bg:rgba(2,4,10,0.97);
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"]{
+  --bg:#f0ebe0;
+  --panel:#e8e0d0;
+  --panel2:#ddd4c0;
+  --amber:#7a4e00;--amber-b:#8a5800;--amber-d:#f0d8a0;
+  --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
+  --txt:#1a1206;--txt2:#3a2a10;--txt3:#6a5030;
+  --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
+  --shadow:rgba(0,0,0,0.18);
+  --hdr-bg:rgba(236,228,214,0.97);
+}
+
+@media(prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#f0ebe0;--panel:#e8e0d0;--panel2:#ddd4c0;
+    --amber:#7a4e00;--amber-b:#8a5800;--amber-d:#f0d8a0;
+    --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
+    --txt:#1a1206;--txt2:#3a2a10;--txt3:#6a5030;
+    --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
+    --shadow:rgba(0,0,0,0.18);
+    --hdr-bg:rgba(236,228,214,0.97);
+  }
+}
+
+html,body{width:100%;height:100%;background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif}
+
+/* ── HEADER ── */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--hdr-bg);border-bottom:1px solid var(--bdr2)}
+.hdr-left{display:flex;align-items:baseline;gap:0;min-width:0}
+.logo-t{font-family:'Cinzel Decorative',serif;font-size:18px;font-weight:700;color:var(--amber-b);letter-spacing:3px;white-space:nowrap}
+.logo-s{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-left:10px;white-space:nowrap}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.theme-btn{background:none;border:1px solid var(--bdr);padding:4px 8px;cursor:pointer;font-size:13px;color:var(--txt2);border-radius:3px;transition:all .15s;flex-shrink:0}
+.theme-btn:hover{background:var(--amber-x);color:var(--amber-b)}
+
+/* ── MAIN ── */
+.main{padding:72px 20px 40px;max-width:1100px;margin:0 auto;overflow-y:auto;height:100%}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:40px 0 32px}
+.hero-title{font-family:'Cinzel Decorative',serif;font-size:28px;font-weight:700;color:var(--amber-b);letter-spacing:4px;margin-bottom:8px}
+.hero-sub{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px}
+.hero-tagline{font-size:16px;line-height:1.7;color:var(--txt2);max-width:580px;margin:0 auto;font-style:italic}
+
+/* ── TIER HEADERS ── */
+.tier-hdr{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin:32px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--bdr2);display:flex;align-items:center;gap:10px}
+.tier-hdr::after{content:'';flex:1;height:1px;background:var(--bdr2)}
+
+/* ── CARD GRID ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:8px}
+
+/* ── CARDS ── */
+.card{background:var(--panel);border:1px solid var(--bdr2);border-radius:4px;padding:16px 18px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--bdr);background:var(--panel2);transform:translateY(-1px);box-shadow:0 4px 16px var(--shadow)}
+.card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+.card-ico{font-size:24px;flex-shrink:0;line-height:1}
+.card-title-wrap{flex:1;min-width:0}
+.card-nm{font-family:'Cinzel Decorative',serif;font-size:14px;font-weight:700;color:var(--amber-b);letter-spacing:1.5px;margin-bottom:2px}
+.card-tagline{font-size:13px;color:var(--txt2);line-height:1.5}
+.card-badge{position:absolute;top:12px;right:14px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:2px 8px;border-radius:10px;border:1px solid}
+.badge-live{color:#4a9;border-color:rgba(68,170,136,0.4);background:rgba(68,170,136,0.1)}
+.badge-building{color:#e89820;border-color:rgba(232,152,32,0.3);background:rgba(232,152,32,0.08)}
+.badge-forthcoming{color:var(--txt3);border-color:var(--bdr2);background:var(--amber-xx)}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;padding:2px 8px;border:1px solid var(--bdr2);border-radius:2px}
+.card-coming{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-top:8px}
+
+/* ── EXPANDABLE DETAIL ── */
+.card-detail{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1)}
+.card.open .card-detail{max-height:600px}
+.card-detail-inner{padding-top:14px;margin-top:12px;border-top:1px solid var(--bdr2)}
+.detail-hook{font-size:14px;line-height:1.75;color:var(--txt2);margin-bottom:14px;font-style:italic}
+.detail-section-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:6px}
+.detail-list{list-style:none;margin-bottom:14px}
+.detail-list li{font-size:13px;color:var(--txt2);padding:3px 0;padding-left:14px;position:relative;line-height:1.5}
+.detail-list li::before{content:'·';position:absolute;left:0;color:var(--amber-b);font-weight:700}
+.detail-complexity{display:flex;align-items:center;gap:8px;margin-top:10px}
+.detail-complexity-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase}
+.complexity-dots{display:flex;gap:3px}
+.complexity-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--bdr);background:transparent}
+.complexity-dot.filled{background:var(--amber-b);border-color:var(--amber-b)}
+.card-link{display:inline-block;margin-top:12px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;text-decoration:none;border:1px solid var(--bdr);padding:6px 16px;border-radius:3px;transition:all .15s}
+.card-link:hover{background:var(--amber-x);border-color:var(--amber-b)}
+
+/* ── FOOTER ── */
+.hub-footer{text-align:center;padding:32px 0 24px;border-top:1px solid var(--bdr2);margin-top:24px}
+.hub-footer-org{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:6px}
+.hub-footer-copy{font-size:12px;color:var(--txt3)}
+
+/* ── ACCESSIBILITY ── */
+:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px;border-radius:2px}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--amber-b);color:var(--bg);padding:8px 16px;z-index:9999;font-family:'Cinzel',serif;font-size:11px;text-decoration:none}
+.skip-link:focus{top:0}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .logo-s{display:none}
+  .hdr{padding:8px 12px}
+  .logo-t{font-size:14px;letter-spacing:2px}
+  .hero{padding:28px 0 20px}
+  .hero-title{font-size:20px;letter-spacing:2px}
+  .hero-tagline{font-size:14px}
+  .card-grid{grid-template-columns:1fr}
+  .main{padding:56px 14px 32px}
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#card-grid-main">Skip to atlas catalogue</a>
+<header class="hdr" role="banner">
+  <div class="hdr-left">
+    <span class="logo-t">THE PANGEA PROJECT</span>
+    <span class="logo-s">One Earth</span>
+  </div>
+  <div class="hdr-right">
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">◑</button>
+  </div>
+</header>
+
+<div class="main">
+  <section class="hero">
+    <h1 class="hero-title">THE PANGEA PROJECT</h1>
+    <div class="hero-sub">One Earth</div>
+    <p class="hero-tagline">Every domain of human knowledge. One file at a time.</p>
+  </section>
+
+  <div id="card-grid-main"></div>
+
+  <footer class="hub-footer">
+    <div class="hub-footer-org">Polyglyph Analytica</div>
+    <div class="hub-footer-copy">&copy; <span id="footer-year"></span>. All atlases offered under the MIT License.</div>
+  </footer>
+</div>
+
+<script>
+const ATLASES = [
+  // ── Tier 0: Live ──
+  {tier:0,tierName:'Live',id:'civilitas',nm:'Civilitas',ico:'🌍',tagline:'100 civilizations. 65,000 years.',status:'live',
+    tags:['CIVILIZATIONS','TIMELINE','LENSES'],
+    hook:'The foundational atlas. Civilitas maps 100 civilizations across 65,000 years of human history on an interactive world map — from the first Aboriginal Australian settlements to the digital age. Navigate a continuous timeline with 30 interpretive lenses, cultural transmission threads, What-If scenarios, and a Herstory mode tracing women who shaped every civilization.',
+    features:['Interactive world map with D3 + TopoJSON','65,000-year continuous timeline scrubber','30 interpretive lenses (Economy, Military, Gender, Art, Collapse…)','Cultural transmission threads across civilizations','What-If historical scenarios','Heritage ancestry mapping','Herstory mode — women who shaped every civilization','Civilizational fingerprint radar charts','Synthesized musical themes per civilization'],
+    lenses:['Art & Architecture','Collapse & Resilience','Economy','Gender & Women','Military','Philosophy & Ethics','Religion & Ritual','Science & Math','Trade Routes','Tragedies','Justice & Law','Figures & Icons','Memory & Identity'],
+    complexity:5,href:'civilitas/index.html'},
+
+  {tier:0,tierName:'Live',id:'anthrophone',nm:'Anthrophone',ico:'🎵',tagline:'Every instrument. Every culture. One map.',status:'building',
+    tags:['INSTRUMENTS','CLASSIFICATION','SOUND'],
+    hook:'Named for the Greek anthropos (human) + phone (sound). Anthrophone maps musical instruments across every culture and continent, classified by the Hornbostel-Sachs system. From bone flutes to electronic synthesizers — every way humanity has made music, in one interactive atlas.',
+    features:['Hornbostel-Sachs classification tree as interactive SVG','World map of instrument geographic origins','Instrument detail panel with history, construction, and cultural context','Audio samples embedded per instrument family','Timeline of instrument invention and diffusion'],
+    lenses:['Sacred vs Secular','Extinct Instruments','Colonial Appropriation','Electronic Descendants','Cross-Cultural Parallel Invention'],
+    complexity:4,href:'anthrophone/index.html'},
+
+  // ── Tier I: Natural ──
+  {tier:1,tierName:'Natural',id:'cosmos',nm:'Cosmos',ico:'🌌',tagline:'From the Planck length to the cosmic web.',status:'forthcoming',
+    tags:['SCALE','PHYSICS','UNIVERSE'],
+    hook:'Cosmos is a logarithmic journey from the smallest measurable distance (10⁻³⁵ m) to the observable universe (10²⁷ m) — 62 orders of magnitude rendered as a single interactive continuum. Each scale reveals phenomena invisible at any other: quarks, atoms, cells, humans, planets, galaxies, and the cosmic web.',
+    features:['Logarithmic scale slider spanning 62 orders of magnitude','Annotated phenomena at each scale','Comparative size visualizations','Timeline of human understanding at each scale','Key experiments and instruments per scale'],
+    lenses:['Discovery timeline — when each scale became visible','Energy lens — power at each scale','Density lens — matter concentration','Human body — where biology sits on the continuum','Instruments — tools that opened each scale'],
+    complexity:3},
+
+  {tier:1,tierName:'Natural',id:'flora',nm:'Flora',ico:'🌿',tagline:'The plants that made civilisation.',status:'forthcoming',
+    tags:['PLANTS','AGRICULTURE','BOTANY'],
+    hook:'Named for the Roman goddess of flowers and spring. Flora maps the plants without which civilisation could not exist — wheat, rice, maize, cotton, tea, tobacco, rubber, opium — tracing their domestication, trade, and the empires built on their cultivation.',
+    features:['World map of crop origins and diffusion routes','Domestication timeline per species','Economic impact index per plant','Colonial extraction and plantation systems','Biodiversity and extinction risk tracker'],
+    lenses:['Domestication mode — wild ancestor to crop','Empire mode — which plants built which empires','Famine mode — crop failures that changed history','Medicine mode — plants as pharmacy','Extinction mode — what we are losing'],
+    complexity:4},
+
+  {tier:1,tierName:'Natural',id:'lingua',nm:'Lingua',ico:'🗣',tagline:'7,000 languages. Half will die this century.',status:'forthcoming',
+    tags:['LANGUAGES','FAMILIES','EXTINCTION'],
+    hook:'Lingua maps every living language on Earth — from Mandarin\'s 900 million speakers to the last speakers of Ainu, Livonian, and hundreds more. Half of the world\'s 7,000 languages will fall silent by 2100. This atlas makes each one visible.',
+    features:['World map of language distribution by family','Language family tree visualisation','Endangerment status per language (UNESCO scale)','Speaker population over time','Script and writing system associations'],
+    lenses:['Family tree — genetic relationships','Endangerment — the languages dying now','Colonial erasure — what was silenced and how','Creole & pidgin — contact languages','Revival — languages brought back from the edge'],
+    complexity:4},
+
+  // ── Tier II: Systems ──
+  {tier:2,tierName:'Systems',id:'pecunia',nm:'Pecunia',ico:'⚖',tagline:'Money, credit, and every crash since.',status:'forthcoming',
+    tags:['MONEY','CREDIT','COLLAPSE'],
+    hook:'Named for the Latin pecunia (money, from pecus, cattle — the first currency). Pecunia traces money from Mesopotamian clay tokens through gold coins, paper notes, central banks, and cryptocurrency — and every financial crash, bubble, and systemic failure along the way.',
+    features:['Timeline of monetary systems by region','Crash and bubble navigator','Currency evolution visualisation','Central bank establishment dates','Debt-to-GDP historical tracker'],
+    lenses:['Crash mode — every financial crisis mapped','Debasement — how currencies lose value','Innovation — new forms of money','Inequality — who money serves','Sovereignty — money as political power'],
+    complexity:4},
+
+  {tier:2,tierName:'Systems',id:'via',nm:'Via',ico:'⛵',tagline:'Every trade route from sail to container.',status:'forthcoming',
+    tags:['TRADE','ROUTES','COMMERCE'],
+    hook:'Latin for "road" or "way." Via maps every significant trade route in human history — from the Silk Road and trans-Saharan caravan trails to the containerised shipping lanes of today. Each route carries not just goods but ideas, diseases, languages, and genetic material.',
+    features:['Animated trade route map with flow indicators','Commodity tracker per route','Timeline of route activity','Volume and economic impact estimates','Cultural exchange indicators per route'],
+    lenses:['Commodity mode — follow a single good (silk, spice, oil)','Disease mode — what travelled with the traders','Cultural mode — ideas and religions along routes','Power mode — who controlled the chokepoints','Modern mode — container shipping and air freight'],
+    complexity:4},
+
+  {tier:2,tierName:'Systems',id:'contagium',nm:'Contagium',ico:'🦠',tagline:'Every epidemic. Spread, death, rupture.',status:'forthcoming',
+    tags:['EPIDEMICS','PANDEMICS','DISEASE'],
+    hook:'Latin for "contagion." Contagium maps every significant epidemic and pandemic in recorded history — from the Plague of Athens to COVID-19. Each event traced by pathogen, spread pattern, mortality, and the social ruptures it caused.',
+    features:['Animated spread maps per epidemic','Mortality comparisons across centuries','Pathogen classification system','Public health response timeline','Social and political consequences tracker'],
+    lenses:['Spread mode — animated geographic diffusion','Mortality mode — comparative death tolls','Response mode — how societies reacted','Rupture mode — what each epidemic broke','Zoonotic mode — animal-to-human jumps'],
+    complexity:4},
+
+  {tier:2,tierName:'Systems',id:'terminus',nm:'Terminus',ico:'📐',tagline:'Every border. Who drew it. What it cost.',status:'forthcoming',
+    tags:['BORDERS','TERRITORY','SOVEREIGNTY'],
+    hook:'Named for the Roman god of boundaries. Terminus maps every significant border change in recorded history — from the earliest city-state boundaries to the partition lines drawn in colonial offices. Who drew each line, why, and what it cost the people it divided.',
+    features:['Animated border change map by year','Border dispute tracker','Colonial partition visualisation','Referendum and secession events','Disputed territory status board'],
+    lenses:['Colonial mode — borders drawn by foreign powers','River mode — natural boundaries vs arbitrary lines','Conflict mode — borders that caused wars','Ethnic mode — peoples divided by borders','Living disputes — borders contested today'],
+    complexity:5},
+
+  {tier:2,tierName:'Systems',id:'insurgo',nm:'Insurgō',ico:'🔥',tagline:'Every revolution. Spark, spread, survival.',status:'forthcoming',
+    tags:['REVOLUTIONS','UPRISINGS','RESISTANCE'],
+    hook:'Latin: "I rise up." Insurgō maps every significant revolution, uprising, and mass protest in recorded history — from slave revolts in Rome to the Arab Spring. Each event traced from spark through spread to outcome: victory, compromise, or crushing defeat.',
+    features:['World map of revolutionary events by date','Spark-spread-outcome narrative per event','Revolutionary contagion animations','Ideological classification system','Success and failure analysis'],
+    lenses:['Contagion mode — how revolutions spread','Ideology mode — what the revolutionaries wanted','Repression mode — how states responded','Outcome mode — what actually changed','Women mode — women in revolutionary movements'],
+    complexity:4},
+
+  {tier:2,tierName:'Systems',id:'exodus',nm:'Exōdus',ico:'🧭',tagline:'300,000 years of human movement.',status:'forthcoming',
+    tags:['MIGRATION','DIASPORA','MOVEMENT'],
+    hook:'Greek: "a going out." Exōdus maps 300,000 years of human migration — from the first out-of-Africa dispersals to today\'s refugee flows. Every great movement of peoples: forced and free, ancient and modern, celebrated and mourned.',
+    features:['Animated migration flow map','Push-pull factor analysis per movement','Diaspora distribution maps','Refugee crisis tracker','Genetic migration evidence overlay'],
+    lenses:['Genetic mode — DNA evidence of ancient migrations','Forced mode — slavery, expulsion, ethnic cleansing','Economic mode — labour migration patterns','Climate mode — migrations driven by environment','Living mode — refugee and displacement crises today'],
+    complexity:4},
+
+  // ── Tier III: Culture ──
+  {tier:3,tierName:'Culture',id:'sophia',nm:'Sophia',ico:'🏛',tagline:'Every school of thought. Mapped.',status:'forthcoming',
+    tags:['PHILOSOPHY','IDEAS','THOUGHT'],
+    hook:'Greek: "wisdom." Sophia maps every significant philosophical tradition in human history — from the pre-Socratics and the Hundred Schools of Thought to postmodernism and effective altruism. Ideas traced by origin, transmission, conflict, and legacy.',
+    features:['World map of philosophical schools by origin','Idea transmission network visualisation','Timeline of philosophical movements','Key texts and thinkers per tradition','Influence graph across traditions'],
+    lenses:['Transmission mode — how ideas travelled','Conflict mode — philosophical debates and schisms','Political mode — philosophy and power','Ethics mode — competing moral frameworks','Living mode — philosophical traditions active today'],
+    complexity:3},
+
+  {tier:3,tierName:'Culture',id:'graphe',nm:'Graphē',ico:'𓂀',tagline:'100 scripts, from cuneiform to emoji.',status:'forthcoming',
+    tags:['WRITING','SCRIPTS','LITERACY'],
+    hook:'Greek: "writing." Graphē maps every writing system in human history — from Sumerian cuneiform and Egyptian hieroglyphs to the Latin alphabet, Chinese characters, and emoji. 100 scripts, their inventors, their spread, and the civilizations they enabled.',
+    features:['World map of script distribution','Script family tree visualisation','Character evolution animations','Decipherment history per script','Literacy rate overlay by era'],
+    lenses:['Family mode — genetic relationships between scripts','Decipherment mode — scripts cracked and still unread','Death mode — scripts no longer in use','Adaptation mode — how scripts were borrowed and modified','Digital mode — scripts in the Unicode era'],
+    complexity:4},
+
+  {tier:3,tierName:'Culture',id:'structura',nm:'Structura',ico:'🏗',tagline:'The built ideas that outlasted their makers.',status:'forthcoming',
+    tags:['ARCHITECTURE','BUILDINGS','DESIGN'],
+    hook:'Latin: "a fitting together." Structura maps the built environment across all of human history — from Göbekli Tepe to Burj Khalifa. Not a catalogue of buildings but an atlas of architectural ideas: why humans built what they built, and what survived.',
+    features:['World map of architectural landmarks by era','Architectural style timeline','Construction technique evolution','Material innovation tracker','Preservation and destruction status'],
+    lenses:['Power mode — architecture as political statement','Sacred mode — temples, churches, mosques, shrines','Innovation mode — structural engineering breakthroughs','Destruction mode — what was lost and how','Living mode — vernacular architecture traditions'],
+    complexity:3},
+
+  {tier:3,tierName:'Culture',id:'ludus',nm:'Lūdus',ico:'♟',tagline:'Play as a mirror of civilisation.',status:'forthcoming',
+    tags:['GAMES','PLAY','SPORT'],
+    hook:'Latin: "game, play, school." Lūdus maps the games humanity has played across every culture and century — from the Royal Game of Ur to esports. Board games, card games, sports, gambling, children\'s play — each one a mirror of its civilization\'s values.',
+    features:['World map of game origins','Game family tree (e.g., chess variants)','Rules complexity timeline','Cultural significance analysis','Survival and extinction tracker'],
+    lenses:['Strategy mode — games of pure thought','Chance mode — dice, cards, gambling','Physical mode — sport and bodily competition','Children mode — play as developmental mirror','Digital mode — video games and esports'],
+    complexity:3},
+
+  {tier:3,tierName:'Culture',id:'pigmentum',nm:'Pigmentum',ico:'🎨',tagline:'The colours that were once impossible.',status:'forthcoming',
+    tags:['COLOUR','PIGMENTS','ART'],
+    hook:'Latin: "pigment, paint." Pigmentum maps the history of colour — from ochre cave paintings to synthetic dyes. Each pigment traced from mineral source or chemical invention through trade to the art and industries it transformed. Tyrian purple, ultramarine, chrome yellow, mauve — colours that were once worth more than gold.',
+    features:['Colour timeline from prehistory to synthetic chemistry','Pigment source map (mineral, plant, animal, synthetic)','Trade route overlay for precious pigments','Price history per pigment','Art movement associations'],
+    lenses:['Trade mode — pigments as luxury commodities','Chemistry mode — how colours were made','Art mode — pigments and the paintings they enabled','Toxic mode — the poisonous colours','Synthetic mode — the chemical revolution in colour'],
+    complexity:3},
+
+  // ── Tier IV: Hidden ──
+  {tier:4,tierName:'Hidden',id:'kryptos',nm:'Kryptós',ico:'🔐',tagline:'Caesar to quantum. The arms race of secrecy.',status:'forthcoming',
+    tags:['CRYPTOGRAPHY','CIPHERS','SECRECY'],
+    hook:'Greek: "hidden." Kryptós maps the history of secret communication — from Caesar ciphers and the Enigma machine to RSA encryption and quantum key distribution. The eternal arms race between codemakers and codebreakers, and the wars, diplomacies, and revolutions that turned on a broken cipher.',
+    features:['Timeline of cryptographic systems','Interactive cipher demonstrations','Codebreaking event navigator','Encryption strength visualisation','Key historical intercepts'],
+    lenses:['War mode — ciphers that decided conflicts','Mathematics mode — the theory behind the codes','Machine mode — from Enigma to quantum computers','Espionage mode — spies and their ciphers','Modern mode — encryption in daily life'],
+    complexity:3},
+
+  {tier:4,tierName:'Hidden',id:'utopia',nm:'Utopia',ico:'🏙',tagline:'Planned cities. Why they almost all fail.',status:'forthcoming',
+    tags:['PLANNED CITIES','COMMUNES','UTOPIA'],
+    hook:'Greek: "no place" (ou-topos) or "good place" (eu-topos). Utopia maps every significant attempt to build a perfect community from scratch — from Robert Owen\'s New Harmony to Brasília, Auroville, and NEOM. Why they were built, what they promised, and why they almost all failed.',
+    features:['World map of planned cities and communes','Foundation-to-outcome timeline per project','Ideological classification system','Population and survival tracker','Architectural plan comparisons'],
+    lenses:['Ideology mode — what each utopia believed','Failure mode — why they fell apart','Survival mode — the ones that lasted','Architecture mode — the built vision','Living mode — planned communities active today'],
+    complexity:3},
+
+  {tier:4,tierName:'Hidden',id:'vindica',nm:'Vindica',ico:'✊',tagline:'The fight for women\'s rights. Every wave.',status:'forthcoming',
+    tags:['SUFFRAGE','WAVES','RIGHTS','BACKLASH','GLOBAL'],
+    hook:'Named for Mary Wollstonecraft\'s A Vindication of the Rights of Woman (1792) — the foundational text of modern feminism. Vindica maps the complete geography of women\'s political organisation from the first suffrage campaigns to the fourth wave, country by country, right by right, setback by setback.',
+    features:['World map of women\'s suffrage by country, animated by date','Rights acquisition timeline: vote, property, divorce, bodily autonomy, workplace equality, political office','Wave navigator: First / Second / Third / Fourth Wave','Key texts, manifestos, and legislation per era','Backlash events — rights granted then rescinded'],
+    lenses:['Wave mode — geographic spread of each feminist wave','Legal rights index — composite score per country over time','Backlash mode — where rights were won then lost','Intersectionality mode — race, class, and gender rights divergence','What-If mode — ERA (1972), Iran (1979), and other turning points','Living struggle — countries where basic rights remain contested today'],
+    complexity:4},
+];
+
+const TIER_LABELS = {0:'Tier 0 — Live',1:'Tier I — Natural',2:'Tier II — Systems',3:'Tier III — Culture',4:'Tier IV — Hidden'};
+
+function renderCatalogue(){
+  const container = document.getElementById('card-grid-main');
+  let html = '';
+  let currentTier = -1;
+
+  ATLASES.forEach((a,idx) => {
+    if(a.tier !== currentTier){
+      currentTier = a.tier;
+      html += `<div class="tier-hdr">${TIER_LABELS[currentTier]}</div><div class="card-grid">`;
+      if(idx > 0) {
+        // close previous grid before opening new tier
+        const insertPos = html.lastIndexOf('<div class="tier-hdr">');
+        html = html.substring(0, insertPos) + '</div>' + html.substring(insertPos);
+      }
+    }
+
+    const badgeClass = a.status === 'live' ? 'badge-live' : a.status === 'building' ? 'badge-building' : 'badge-forthcoming';
+    const badgeText = a.status.toUpperCase();
+    const isClickable = a.status === 'live' || a.status === 'building';
+    const tags = a.tags.map(t => `<span class="tag">${t}</span>`).join('');
+    const comingSoon = a.status === 'forthcoming' ? '<div class="card-coming">Coming Soon</div>' : '';
+
+    // Build detail panel
+    const features = a.features ? a.features.map(f => `<li>${f}</li>`).join('') : '';
+    const lenses = a.lenses ? a.lenses.map(l => `<li>${l}</li>`).join('') : '';
+    const dots = Array.from({length:5},(_, i) => `<span class="complexity-dot${i < a.complexity ? ' filled' : ''}"></span>`).join('');
+    const linkBtn = a.href ? `<a class="card-link" href="${a.href}" onclick="event.stopPropagation()">Open Atlas →</a>` : '';
+
+    html += `
+      <div class="card" data-id="${a.id}" onclick="toggleCard(this)" role="button" tabindex="0" aria-expanded="false">
+        <span class="card-badge ${badgeClass}">${badgeText}</span>
+        <div class="card-top">
+          <span class="card-ico">${a.ico}</span>
+          <div class="card-title-wrap">
+            <div class="card-nm">${a.nm}</div>
+            <div class="card-tagline">${a.tagline}</div>
+          </div>
+        </div>
+        <div class="card-tags">${tags}</div>
+        ${comingSoon}
+        <div class="card-detail">
+          <div class="card-detail-inner">
+            <div class="detail-hook">${a.hook}</div>
+            <div class="detail-section-lbl">Core Features</div>
+            <ul class="detail-list">${features}</ul>
+            <div class="detail-section-lbl">Unique Lenses</div>
+            <ul class="detail-list">${lenses}</ul>
+            <div class="detail-complexity">
+              <span class="detail-complexity-lbl">Build Complexity</span>
+              <div class="complexity-dots">${dots}</div>
+            </div>
+            ${linkBtn}
+          </div>
+        </div>
+      </div>`;
+  });
+  html += '</div>'; // close last grid
+  container.innerHTML = html;
+}
+
+function toggleCard(el){
+  const wasOpen = el.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.card.open').forEach(c => {
+    c.classList.remove('open');
+    c.setAttribute('aria-expanded','false');
+  });
+  if(!wasOpen){
+    el.classList.add('open');
+    el.setAttribute('aria-expanded','true');
+  }
+}
+
+// Keyboard support
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter' && e.target.classList.contains('card')){
+    toggleCard(e.target);
+  }
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.card.open').forEach(c => {
+      c.classList.remove('open');
+      c.setAttribute('aria-expanded','false');
+    });
+  }
+});
+
+// ── THEME ──
+function applyTheme(t){
+  document.documentElement.dataset.theme = t;
+  document.getElementById('theme-btn').textContent = t === 'dark' ? '◑' : '◐';
+  localStorage.setItem('pangea-theme', t);
+}
+function toggleTheme(){
+  const cur = document.documentElement.dataset.theme ||
+    (window.matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark');
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+(function(){
+  const saved = localStorage.getItem('pangea-theme');
+  if(saved){ applyTheme(saved); }
+  else {
+    const sys = window.matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark';
+    document.documentElement.dataset.theme = sys;
+    document.getElementById('theme-btn').textContent = sys === 'dark' ? '◑' : '◐';
+  }
+})();
+
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+renderCatalogue();
+</script>
+</body>
+</html>
