@@ -1329,9 +1329,9 @@ button {
   </div>
 </div>
 
-<!-- D3 + TopoJSON (must load before main script) -->
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<!-- D3 + TopoJSON -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 
 <script>
 // Pecunia — The Atlas of Money
@@ -1488,32 +1488,21 @@ function lonLatToXY(lon,lat){
 /* ============================================================
    RENDER WORLD MAP (D3 / TopoJSON)
    ============================================================ */
-function renderWorldMap(topo){
-  const svg=d3.select("#mapSvg");
-  const w=1000,h=520;
-  projection=d3.geoNaturalEarth1().fitSize([w,h],topojson.feature(topo,topo.objects.countries||topo.objects.land));
-  pathGen=d3.geoPath().projection(projection);
-
-  const mapLayer=svg.select("#map-layer");
-  mapLayer.selectAll("*").remove();
-
-  // Water background
-  mapLayer.append("rect").attr("width",w).attr("height",h).attr("fill","var(--map-water)");
-
-  // Graticule
-  const grat=d3.geoGraticule();
-  mapLayer.append("path").datum(grat()).attr("d",pathGen)
-    .attr("fill","none").attr("stroke","var(--bdr2)").attr("stroke-width",0.3);
-
-  // Land
-  const land=topojson.feature(topo,topo.objects.countries||topo.objects.land);
-  mapLayer.selectAll("path.land").data(land.features||[land]).enter()
-    .append("path").attr("class","land").attr("d",pathGen)
-    .attr("fill","var(--land)").attr("stroke","var(--land-s)").attr("stroke-width",0.4);
-
-  // Sphere outline
-  mapLayer.append("path").datum({type:"Sphere"}).attr("d",pathGen)
-    .attr("fill","none").attr("stroke","var(--bdr2)").attr("stroke-width",0.8);
+function renderWorldMap(world){
+  const W=1000,H=520;
+  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
+  window._proj=proj;
+  projection=proj;
+  const pathG=d3.geoPath().projection(proj);
+  pathGen=pathG;
+  const land=topojson.feature(world,world.objects.land);
+  const graticule=d3.geoGraticule()();
+  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
+  let g=document.getElementById('map-layer');
+  g.innerHTML=
+    `<path d="${pathG(graticule)||''}" fill="none" stroke="var(--bdr2)" stroke-width=".3"/>`+
+    `<path d="${pathG(land)||''}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>`+
+    `<path d="${pathG(borders)||''}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
 }
 
 /* ============================================================
