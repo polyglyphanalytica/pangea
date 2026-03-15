@@ -877,6 +877,10 @@ html, body {
   </div>
 </div>
 
+<!-- D3 + TopoJSON CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+
 <script>
 /* ============================================================
    PHASE 2 — DATA CONSTANTS
@@ -1007,7 +1011,7 @@ const PLANTS=[
  d:{overview:"Called the 'Queen of Spices,' cardamom is the third most expensive spice after saffron and vanilla.",cultivation:"Shade-loving perennial in tropical forests; hand-harvested pods dried before splitting.",spread:"From India's Western Ghats to the Arab world by 700 BCE; now grown in Guatemala.",uses:"Chai tea, coffee flavoring (Arabic coffee), desserts, curries, traditional medicine.",cultural:"Essential in Middle Eastern hospitality (Arabic coffee); Ayurvedic medicine for digestion.",science:"Cineole is the main aromatic compound; studied for oral health and antioxidant properties.",ecology:"Thrives under forest canopy; cardamom cultivation can preserve tropical forest cover.",trade:"Guatemala surpassed India as top producer; global market worth ~$5 billion."}},
 {id:"jute",n:"Jute",s:-3000,e:2025,lon:89,lat:23,x:655,y:240,col:"#b09060",sz:0.8,region:"Bengal",family:"Malvaceae",type:"Industrial",origin:"Indian Subcontinent",
  d:{overview:"Jute is the 'golden fiber,' second only to cotton among natural fibers by production volume.",cultivation:"Annual plant in hot humid climates; stems retted (soaked) to extract bast fibers.",spread:"Indigenous to Bengal region; became globally important during British colonial era.",uses:"Burlap sacks, carpet backing, geotextiles, composite materials, packaging; eco-friendly plastic alternative.",cultural:"Bangladesh's economy historically dependent on jute; called 'golden fiber' for its color and value.",science:"Biodegradable and renewable; jute fiber composites studied as automotive and construction materials.",ecology:"Jute cultivation improves soil fertility; absorbs CO2 faster than trees during growth.",trade:"Bangladesh and India produce 95% of world jute; demand rising as alternative to plastic packaging."}},
-{id:"cinchona",n:"Willow",s:-3000,e:2025,lon:35,lat:40,x:557,y:205,col:"#70a070",sz:0.7,region:"Europe/W Asia",family:"Salicaceae",type:"Medicinal",origin:"Europe",
+{id:"willow",n:"Willow",s:-3000,e:2025,lon:35,lat:40,x:557,y:205,col:"#70a070",sz:0.7,region:"Europe/W Asia",family:"Salicaceae",type:"Medicinal",origin:"Europe",
  d:{overview:"Willow bark was humanity's original aspirin, used for pain and fever relief since Sumerian times.",cultivation:"Fast-growing deciduous tree near water; bark stripped for medicinal use; coppiced for biomass.",spread:"Used across ancient Europe, Egypt, and China; Hippocrates prescribed it around 400 BCE.",uses:"Aspirin precursor (salicin), basket weaving, cricket bats, charcoal for gunpowder, biomass energy.",cultural:"Weeping willow symbolizes mourning; Celtic druids considered it sacred; poetic symbol of sorrow.",science:"Salicin converted to salicylic acid in the body; Bayer synthesized aspirin (acetylsalicylic acid) in 1897.",ecology:"Willows stabilize riverbanks; rapid growth makes them excellent for phytoremediation and biomass.",trade:"Limited commercial trade; willow biomass grown for renewable energy in Northern Europe."}},
 {id:"rose",n:"Rose",s:-3000,e:2025,lon:55,lat:35,x:585,y:210,col:"#e06080",sz:0.8,region:"Persia",family:"Rosaceae",type:"Ornamental/Medicinal",origin:"Central Asia/Persia",
  d:{overview:"Roses have been cultivated for beauty and fragrance for over 5,000 years across civilizations.",cultivation:"Perennial shrub; thousands of cultivars from miniature to climbing; grafted onto hardy rootstock.",spread:"From Persia and China to Rome, medieval Europe, and worldwide via horticultural trade.",uses:"Cut flowers, rose water, rose oil (attar), rose hip tea, jam, perfumery, cosmetics.",cultural:"Symbol of love and secrecy (sub rosa); War of the Roses; Portland named 'City of Roses.'",science:"Rose genome sequenced; complex hybridization history; 30,000+ cultivar varieties registered.",ecology:"Wild roses support pollinators; rose hips provide winter food for birds.",trade:"Netherlands dominates cut flower trade; Bulgaria and Turkey lead rose oil production."}},
@@ -1490,6 +1494,18 @@ function init(){
 
   // Resize handler
   window.addEventListener('resize',()=>{renderDensityBar();});
+
+  // Keyboard accessibility
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){
+      closeAbout();closeBurger();closeDrawer();
+      if(lensOpen){lensOpen=false;document.getElementById('lens-dd').classList.remove('open');}
+    }
+    if(e.key==='ArrowLeft'){setYear(Math.max(-10000,curYear-100));}
+    if(e.key==='ArrowRight'){setYear(Math.min(2025,curYear+100));}
+    if(e.key===' '&&document.activeElement===document.body){e.preventDefault();togglePlay();}
+    if(e.key==='t'&&!e.ctrlKey&&!e.metaKey&&document.activeElement===document.body)toggleTheme();
+  });
 }
 
 init();
