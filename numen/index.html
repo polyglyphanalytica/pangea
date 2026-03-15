@@ -2,1578 +2,536 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Numen — The Atlas of Belief</title>
-<meta name="description" content="Numen — The Atlas of Belief: An interactive map of humanity's religious and spiritual traditions across 10,000 years of history. Explore beliefs, practices, sacred texts, and the transmission of ideas.">
-<meta name="keywords" content="religion, beliefs, spirituality, world religions, history, atlas, comparative religion, sacred texts">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numen — The Atlas of Belief | 50 Traditions, 10,000 Years of Faith</title>
+
+<!-- Primary SEO -->
+<meta name="description" content="Explore 50 religious and spiritual traditions across 10,000 years of human history on an interactive world map. Navigate a continuous timeline from ancient animism to modern movements, with 12 interpretive lenses, belief transmissions, and civilizational fingerprints.">
+<meta name="keywords" content="world religions map, interactive religion, beliefs, spirituality, comparative religion, sacred texts, history, theology, faith traditions">
 <meta name="author" content="The Pangea Project">
+<meta name="robots" content="index, follow">
 <link rel="canonical" href="https://polyglyphanalytica.github.io/pangea/numen/">
 
-<!-- Open Graph -->
+<!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Numen — The Atlas of Belief">
-<meta property="og:description" content="An interactive atlas of humanity's religious and spiritual traditions across 10,000 years of history.">
 <meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/numen/">
-<meta property="og:site_name" content="The Pangea Project">
+<meta property="og:title" content="Numen — The Atlas of Belief">
+<meta property="og:description" content="50 traditions. 10,000 years. Every religion, philosophy, and spiritual movement that shaped how humanity understands the sacred — mapped, connected, and explorable.">
 <meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/numen/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Numen">
+<meta property="og:locale" content="en_US">
 
-<!-- Twitter Card -->
+<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@polyglyphanalytica">
 <meta name="twitter:title" content="Numen — The Atlas of Belief">
-<meta name="twitter:description" content="An interactive atlas of humanity's religious and spiritual traditions across 10,000 years.">
+<meta name="twitter:description" content="50 traditions. 10,000 years. Every religion, philosophy, and spiritual movement that shaped how humanity understands the sacred — mapped, connected, and explorable.">
 <meta name="twitter:image" content="https://polyglyphanalytica.github.io/pangea/numen/og-image.png">
 
-<!-- Schema.org -->
+<!-- Structured Data -->
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Numen — The Atlas of Belief",
-  "description":"An interactive atlas of humanity's religious and spiritual traditions across 10,000 years of history.",
-  "url":"https://polyglyphanalytica.github.io/pangea/numen/",
-  "applicationCategory":"Education",
-  "operatingSystem":"Any",
-  "author":{"@type":"Organization","name":"The Pangea Project"}
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Numen — The Atlas of Belief",
+  "description": "An interactive world religion and spirituality application exploring 50 traditions across 10,000 years. Features a real geographic map, continuous timeline, 12 interpretive lenses, belief transmissions, and civilizational fingerprint charts.",
+  "url": "https://polyglyphanalytica.github.io/pangea/numen/",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "The Pangea Project"
+  },
+  "featureList": [
+    "50 religious and spiritual traditions mapped worldwide",
+    "10,000-year interactive timeline",
+    "12 interpretive lenses including Sacred Texts, Ritual, Ethics, and Cosmology",
+    "Belief transmission tracking across traditions",
+    "Tradition fingerprint radar charts",
+    "Explore, Threads, and Compare modes"
+  ],
+  "about": {
+    "@type": "Thing",
+    "name": "World Religions",
+    "description": "The full arc of human religious and spiritual expression from prehistoric animism to contemporary new religious movements"
+  }
 }
 </script>
 
 <!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
 
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   NUMEN — THE ATLAS OF BELIEF
-   Pangea Design System — Dark / Light Theme
-   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box}
 
-/* ---------- CSS Variables (Dark default) ---------- */
-:root {
-  --bg: #02040a;
-  --panel: #070b12;
-  --panel-border: #1a1e2a;
-  --amber: #e89820;
-  --txt: #f2e8d5;
-  --txt-dim: #9a8e7a;
-  --accent: #c8a8e8;
-  --accent-dim: #7a5e9a;
-  --link: #e8c878;
-  --danger: #d04040;
-  --success: #40b060;
-  --overlay: rgba(2,4,10,0.85);
-  --radius: 6px;
-  --shadow: 0 2px 16px rgba(0,0,0,0.4);
-  --font-heading: 'Cinzel', serif;
-  --font-decorative: 'Cinzel Decorative', serif;
-  --font-body: 'Crimson Pro', serif;
-  --map-land: #181e28;
-  --map-water: #050810;
-  --map-border: #2a3040;
-  --glow: 0 0 12px rgba(232,152,32,0.35);
-  --header-h: 54px;
-  --timeline-h: 64px;
-  --land:#2a4a18;--land-s:#3a6020;
-  --bdr2:rgba(200,200,200,0.12);
+/* ── DARK THEME (default) ── */
+:root{
+  --bg:#04030a;
+  --panel:#0a0812;
+  --panel2:#100e18;
+  --ocean-start:#0a1228;--ocean-end:#060a20;
+  --land:#2a3a28;--land-s:#3a4a30;
+  --accent:#c8a8e8;--accent-b:#d4b8f0;--accent-d:#2a1840;
+  --accent-x:rgba(200,168,232,0.14);--accent-xx:rgba(200,168,232,0.08);
+  --txt:#f0e8f5;--txt2:#dcd0e8;--txt3:#a898b8;
+  --bdr:rgba(200,168,232,0.22);--bdr2:rgba(200,168,232,0.10);
+  --hint:rgba(220,208,232,0.65);
+  --tl-bg:rgba(4,3,10,0.99);
+  --hdr-bg:rgba(4,3,10,0.97);
+  --conn-bdr:rgba(200,168,232,0.10);
+  --shadow:rgba(0,0,0,0.6);
 }
 
-[data-theme="light"] {
-  --bg: #f0ebe0;
-  --panel: #e8e0d0;
-  --panel-border: #c8c0a8;
-  --amber: #4a2c00;
-  --txt: #1a1206;
-  --txt-dim: #6a5e48;
-  --accent: #5a3080;
-  --accent-dim: #8a6aaa;
-  --link: #6a4800;
-  --overlay: rgba(240,235,224,0.9);
-  --map-land: #d8d0c0;
-  --map-water: #c8c0b0;
-  --map-border: #a8a090;
-  --glow: 0 0 12px rgba(74,44,0,0.25);
-  --shadow: 0 2px 16px rgba(0,0,0,0.1);
-  --land:#8ca860;--land-s:#7a9850;
-  --bdr2:rgba(100,100,100,0.2);
+/* ── LIGHT THEME ── */
+[data-theme="light"]{
+  --bg:#f0eaf5;
+  --panel:#e8e0f0;
+  --panel2:#ddd4e8;
+  --ocean-start:#b8c4e0;--ocean-end:#a8b8d8;
+  --land:#8ca068;--land-s:#7a9058;
+  --accent:#5a2880;--accent-b:#6a3898;--accent-d:#e8d8f8;
+  --accent-x:rgba(90,40,128,0.10);--accent-xx:rgba(90,40,128,0.06);
+  --txt:#1a0e26;--txt2:#1a0e26;--txt3:#3a2850;
+  --bdr:rgba(90,40,128,0.28);--bdr2:rgba(90,40,128,0.14);
+  --hint:rgba(26,14,38,0.6);
+  --tl-bg:rgba(236,228,242,0.99);
+  --hdr-bg:rgba(236,228,242,0.97);
+  --conn-bdr:rgba(90,40,128,0.12);
+  --shadow:rgba(0,0,0,0.18);
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #f0ebe0;
-    --panel: #e8e0d0;
-    --panel-border: #c8c0a8;
-    --amber: #4a2c00;
-    --txt: #1a1206;
-    --txt-dim: #6a5e48;
-    --accent: #5a3080;
-    --accent-dim: #8a6aaa;
-    --link: #6a4800;
-    --overlay: rgba(240,235,224,0.9);
-    --map-land: #d8d0c0;
-    --map-water: #c8c0b0;
-    --map-border: #a8a090;
-    --glow: 0 0 12px rgba(74,44,0,0.25);
-    --shadow: 0 2px 16px rgba(0,0,0,0.1);
-    --land:#8ca860;--land-s:#7a9850;
-    --bdr2:rgba(100,100,100,0.2);
+@media(prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#f0eaf5;--panel:#e8e0f0;--panel2:#ddd4e8;
+    --ocean-start:#b8c4e0;--ocean-end:#a8b8d8;
+    --land:#8ca068;--land-s:#7a9058;
+    --accent:#5a2880;--accent-b:#6a3898;--accent-d:#e8d8f8;
+    --accent-x:rgba(90,40,128,0.10);--accent-xx:rgba(90,40,128,0.06);
+    --txt:#1a0e26;--txt2:#1a0e26;--txt3:#3a2850;
+    --bdr:rgba(90,40,128,0.28);--bdr2:rgba(90,40,128,0.14);
+    --hint:rgba(26,14,38,0.6);
+    --tl-bg:rgba(236,228,242,0.99);
+    --hdr-bg:rgba(236,228,242,0.97);
+    --conn-bdr:rgba(90,40,128,0.12);
+    --shadow:rgba(0,0,0,0.18);
   }
 }
 
-/* ---------- Reset ---------- */
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-
-html {
-  font-size: 15px;
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--txt);
-  line-height: 1.6;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
-}
-
-/* ---------- Scrollbar ---------- */
-::-webkit-scrollbar { width:6px; }
-::-webkit-scrollbar-track { background:var(--panel); }
-::-webkit-scrollbar-thumb { background:var(--txt-dim); border-radius:3px; }
-::-webkit-scrollbar-thumb:hover { background:var(--amber); }
-
-/* ---------- Selection ---------- */
-::selection { background:var(--amber); color:var(--bg); }
-
-/* ---------- Typography ---------- */
-h1,h2,h3,h4 { font-family:var(--font-heading); font-weight:600; line-height:1.3; }
-
-a { color:var(--link); text-decoration:none; transition:color 0.2s; }
-a:hover { color:var(--amber); }
-
-/* ---------- Header ---------- */
-#header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: var(--header-h);
-  background: var(--panel);
-  border-bottom: 1px solid var(--panel-border);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  z-index: 100;
-  gap: 12px;
-}
-
-#header .logo {
-  font-family: var(--font-decorative);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--amber);
-  letter-spacing: 0.12em;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-#header .subtitle {
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  color: var(--txt-dim);
-  font-style: italic;
-  white-space: nowrap;
-}
-
-#header .era-display {
-  font-family: var(--font-heading);
-  font-size: 0.82rem;
-  color: var(--accent);
-  margin-left: auto;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#header .year-display {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  color: var(--amber);
-  white-space: nowrap;
-  min-width: 70px;
-  text-align: right;
-}
-
-/* ---------- Burger Menu ---------- */
-.burger-btn {
-  background: none;
-  border: none;
-  color: var(--txt);
-  font-size: 1.4rem;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: var(--radius);
-  transition: background 0.2s;
-  line-height: 1;
-}
-.burger-btn:hover { background: rgba(232,152,32,0.15); }
-
-#burger-menu {
-  position: fixed;
-  top: var(--header-h);
-  right: 0;
-  width: 280px;
-  max-height: calc(100vh - var(--header-h));
-  background: var(--panel);
-  border-left: 1px solid var(--panel-border);
-  border-bottom: 1px solid var(--panel-border);
-  box-shadow: var(--shadow);
-  z-index: 120;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
-  overflow-y: auto;
-  border-radius: 0 0 0 var(--radius);
-}
-
-#burger-menu.open {
-  transform: translateX(0);
-}
-
-#burger-menu .menu-section {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--panel-border);
-}
-
-#burger-menu .menu-section:last-child {
-  border-bottom: none;
-}
-
-#burger-menu .menu-title {
-  font-family: var(--font-heading);
-  font-size: 0.7rem;
-  color: var(--txt-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 8px;
-}
-
-#burger-menu .menu-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--txt);
-  transition: background 0.2s, color 0.2s;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-}
-.menu-item:hover { background: rgba(232,152,32,0.12); color: var(--amber); }
-.menu-item .ico { font-size: 1.1rem; width: 24px; text-align: center; }
-
-/* ---------- Main Layout ---------- */
-#main {
-  position: fixed;
-  top: var(--header-h);
-  left: 0;
-  right: 0;
-  bottom: var(--timeline-h);
-  display: flex;
-  overflow: hidden;
-}
-
-/* ---------- Map Container ---------- */
-#map-container {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  cursor: grab;
-  background: var(--map-water);
-}
-
-#map-container:active { cursor: grabbing; }
-
-#map-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* ---------- Map Markers ---------- */
-.marker {
-  cursor: pointer;
-  transition: transform 0.2s, filter 0.2s;
-}
-.marker:hover {
-  filter: brightness(1.3);
-}
-.marker.active-marker {
-  animation: markerPulse 1.8s infinite;
-}
-@keyframes markerPulse {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.5) drop-shadow(0 0 6px var(--amber)); }
-}
-
-.marker-label {
-  font-family: var(--font-heading);
-  font-size: 7px;
-  fill: var(--txt);
-  pointer-events: none;
-  text-anchor: middle;
-  opacity: 0.85;
-}
-
-/* Land paths */
-.land {
-  fill: var(--map-land);
-  stroke: var(--map-border);
-  stroke-width: 0.5;
-}
-
-/* Connection lines */
-.connection-line {
-  stroke: var(--accent);
-  stroke-width: 0.8;
-  stroke-dasharray: 4 3;
-  opacity: 0.4;
-  fill: none;
-}
-
-/* ---------- Lens Dropdown ---------- */
-#lens-bar {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  z-index: 30;
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-#lens-select {
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  background: var(--panel);
-  color: var(--amber);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  padding: 5px 10px;
-  cursor: pointer;
-  outline: none;
-}
-#lens-select:focus { border-color: var(--amber); }
-#lens-select option { background: var(--panel); color: var(--txt); }
-
-.lens-pill {
-  font-family: var(--font-heading);
-  font-size: 0.65rem;
-  padding: 3px 10px;
-  border-radius: 20px;
-  border: 1px solid var(--panel-border);
-  background: var(--panel);
-  color: var(--txt-dim);
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.lens-pill:hover { border-color: var(--amber); color: var(--amber); }
-.lens-pill.active { border-color: var(--amber); color: var(--amber); background: rgba(232,152,32,0.1); }
-
-/* ---------- Info Panel / Drawer ---------- */
-#info-panel {
-  width: 360px;
-  min-width: 300px;
-  max-width: 420px;
-  background: var(--panel);
-  border-left: 1px solid var(--panel-border);
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0;
-  transition: transform 0.35s ease, opacity 0.3s;
-  z-index: 20;
-}
-
-#info-panel.collapsed {
-  transform: translateX(100%);
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
-#info-panel .panel-header {
-  position: sticky;
-  top: 0;
-  background: var(--panel);
-  padding: 14px 16px 10px;
-  border-bottom: 1px solid var(--panel-border);
-  z-index: 5;
-}
-
-#info-panel .panel-title {
-  font-family: var(--font-decorative);
-  font-size: 1.15rem;
-  color: var(--amber);
-  margin-bottom: 2px;
-}
-
-#info-panel .panel-subtitle {
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  color: var(--txt-dim);
-  font-style: italic;
-}
-
-#info-panel .panel-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.meta-tag {
-  font-family: var(--font-heading);
-  font-size: 0.62rem;
-  padding: 2px 8px;
-  border-radius: 12px;
-  border: 1px solid var(--panel-border);
-  color: var(--txt-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-#info-panel .panel-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: none;
-  border: none;
-  color: var(--txt-dim);
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: var(--radius);
-  transition: color 0.2s, background 0.2s;
-}
-#info-panel .panel-close:hover { color: var(--amber); background: rgba(232,152,32,0.1); }
-
-#info-panel .panel-body {
-  padding: 12px 16px 20px;
-}
-
-.lens-section {
-  margin-bottom: 16px;
-}
-
-.lens-section-title {
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.lens-section-title .ico { font-size: 0.85rem; }
-
-.lens-section-body {
-  font-family: var(--font-body);
-  font-size: 0.92rem;
-  color: var(--txt);
-  line-height: 1.6;
-}
-
-/* ---------- Compare View ---------- */
-#compare-view {
-  display: none;
-  position: fixed;
-  top: var(--header-h);
-  left: 0; right: 0;
-  bottom: var(--timeline-h);
-  background: var(--bg);
-  z-index: 50;
-  overflow-y: auto;
-  padding: 20px;
-}
-
-#compare-view.active { display: block; }
-
-.compare-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.compare-col {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  padding: 16px;
-}
-
-.compare-col h3 {
-  font-family: var(--font-decorative);
-  font-size: 1.05rem;
-  color: var(--amber);
-  margin-bottom: 12px;
-  text-align: center;
-}
-
-.compare-select {
-  width: 100%;
-  font-family: var(--font-heading);
-  font-size: 0.82rem;
-  background: var(--bg);
-  color: var(--txt);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  padding: 6px 10px;
-  margin-bottom: 12px;
-}
-
-/* ---------- Threads View ---------- */
-#threads-view {
-  display: none;
-  position: fixed;
-  top: var(--header-h);
-  left: 0; right: 0;
-  bottom: var(--timeline-h);
-  background: var(--bg);
-  z-index: 50;
-  overflow-y: auto;
-  padding: 20px;
-}
-
-#threads-view.active { display: block; }
-
-.thread-card {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-.thread-card:hover { border-color: var(--accent); }
-
-.thread-card h3 {
-  font-family: var(--font-heading);
-  font-size: 0.95rem;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.thread-chain {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  align-items: center;
-  margin-top: 8px;
-}
-
-.thread-node {
-  font-family: var(--font-heading);
-  font-size: 0.65rem;
-  padding: 2px 8px;
-  border-radius: 10px;
-  background: rgba(200,168,232,0.12);
-  color: var(--accent);
-  border: 1px solid var(--accent-dim);
-}
-
-.thread-arrow {
-  color: var(--txt-dim);
-  font-size: 0.7rem;
-}
-
-/* ---------- About Modal ---------- */
-#about-modal {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--overlay);
-  z-index: 200;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-#about-modal.active { display: flex; }
-
-.about-content {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius);
-  max-width: 560px;
-  width: 100%;
-  padding: 28px;
-  position: relative;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.about-content h2 {
-  font-family: var(--font-decorative);
-  font-size: 1.3rem;
-  color: var(--amber);
-  margin-bottom: 12px;
-}
-
-.about-content p {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  color: var(--txt);
-  margin-bottom: 10px;
-  line-height: 1.65;
-}
-
-.about-close {
-  position: absolute;
-  top: 14px; right: 14px;
-  background: none;
-  border: none;
-  color: var(--txt-dim);
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-.about-close:hover { color: var(--amber); }
-
-/* ---------- Timeline Bar ---------- */
-#timeline {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: var(--timeline-h);
-  background: var(--panel);
-  border-top: 1px solid var(--panel-border);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  gap: 12px;
-  z-index: 100;
-}
-
-#timeline .tl-label {
-  font-family: var(--font-heading);
-  font-size: 0.72rem;
-  color: var(--txt-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-}
-
-#timeline .tl-year {
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  color: var(--amber);
-  min-width: 72px;
-  text-align: center;
-  white-space: nowrap;
-}
-
-#timeline .tl-slider-wrap {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-#timeline input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--panel-border);
-  outline: none;
-  cursor: pointer;
-}
-
-#timeline input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--amber);
-  border: 2px solid var(--bg);
-  box-shadow: var(--glow);
-  cursor: pointer;
-}
-
-#timeline input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--amber);
-  border: 2px solid var(--bg);
-  box-shadow: var(--glow);
-  cursor: pointer;
-}
-
-#density-bar {
-  width: 100%;
-  height: 14px;
-  display: block;
-}
-
-#timeline .tl-play {
-  background: none;
-  border: 1px solid var(--panel-border);
-  color: var(--amber);
-  font-size: 0.95rem;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: var(--radius);
-  transition: background 0.2s;
-}
-#timeline .tl-play:hover { background: rgba(232,152,32,0.12); }
-
-/* ---------- Floating Controls ---------- */
-.float-controls {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  z-index: 25;
-}
-
-.float-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius);
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  color: var(--txt);
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, color 0.2s;
-}
-.float-btn:hover { background: rgba(232,152,32,0.12); color: var(--amber); }
-
-/* ---------- Tooltip ---------- */
-#tooltip {
-  position: fixed;
-  background: var(--panel);
-  border: 1px solid var(--amber);
-  border-radius: var(--radius);
-  padding: 6px 10px;
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  color: var(--txt);
-  pointer-events: none;
-  z-index: 300;
-  display: none;
-  max-width: 220px;
-  box-shadow: var(--shadow);
-}
-
-/* ---------- Loading ---------- */
-.loading-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  transition: opacity 0.6s;
-}
-.loading-overlay.fade { opacity: 0; pointer-events: none; }
-
-.loading-symbol {
-  font-size: 3rem;
-  animation: spin 3s linear infinite;
-  margin-bottom: 16px;
-}
-@keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
-
-.loading-text {
-  font-family: var(--font-decorative);
-  font-size: 1.1rem;
-  color: var(--amber);
-  letter-spacing: 0.1em;
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 900px) {
-  #info-panel {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 320px;
-    min-width: 0;
-    box-shadow: var(--shadow);
-  }
-  #info-panel.collapsed {
-    transform: translateX(100%);
-  }
-}
-
-@media (max-width: 640px) {
-  #header .subtitle { display: none; }
-  #header .era-display { font-size: 0.72rem; }
-
-  #info-panel {
-    width: 100%;
-    max-width: 100%;
-    border-left: none;
-    border-top: 1px solid var(--panel-border);
-  }
-
-  #burger-menu { width: 100%; }
-
-  .compare-grid {
-    grid-template-columns: 1fr;
-  }
-
-  #timeline { padding: 0 10px; gap: 8px; }
-  #timeline .tl-label { display: none; }
-
-  #lens-bar {
-    top: 4px;
-    left: 4px;
-  }
-  .lens-pill { font-size: 0.58rem; padding: 2px 7px; }
-}
-
-@media (max-width: 420px) {
-  #header { padding: 0 10px; gap: 8px; }
-  #header .logo { font-size: 1.1rem; }
-  #header .year-display { font-size: 0.75rem; min-width: 55px; }
-
-  #info-panel .panel-title { font-size: 1rem; }
-}
-
-/* ---------- Animations ---------- */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in { animation: fadeIn 0.35s ease; }
-
-/* ---------- Focus / Accessibility ---------- */
-:focus-visible {
-  outline: 2px solid var(--amber);
-  outline-offset: 2px;
-}
-
-button:focus:not(:focus-visible) { outline: none; }
-
-/* Screen reader only */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
-}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif}
+
+/* ── HEADER ── */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--hdr-bg);gap:12px}
+.hdr-left{display:flex;align-items:baseline;gap:0;min-width:0}
+.logo-t{font-family:'Cinzel Decorative',serif;font-size:20px;font-weight:700;color:var(--accent-b);letter-spacing:3px;white-space:nowrap}
+.logo-s{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-left:10px;white-space:nowrap}
+.era-disp{text-align:center;font-family:'Cinzel',serif;flex-shrink:0}
+.era-y{font-size:22px;font-weight:600;color:var(--accent-b);letter-spacing:1px}
+.era-n{font-size:12px;letter-spacing:1.5px;color:var(--txt2);margin-top:1px;text-transform:uppercase;font-weight:600}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.cnt-disp{text-align:right;font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--txt3)}
+.cnt-n{font-size:22px;font-weight:600;color:var(--accent);display:block;line-height:1}
+.theme-btn{background:none;border:1px solid var(--bdr);padding:4px 8px;cursor:pointer;font-size:13px;color:var(--txt2);border-radius:3px;transition:all .15s;flex-shrink:0}
+.theme-btn:hover{background:var(--accent-x);color:var(--accent-b)}
+
+/* ── MAIN LAYOUT ── */
+.main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
+.map-c{flex:1;position:relative;overflow:hidden;min-width:0;min-height:0}
+.map-tl-col{display:flex;flex-direction:column;flex:1;min-width:0}
+#wsvg{width:100%;height:100%}
+
+/* ── DESKTOP PANEL ── */
+.info-panel{width:320px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;padding:18px 18px 28px;position:relative}
+.info-close{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;line-height:1;padding:4px;float:right;margin:-2px -2px 0 0}
+.info-close:hover{color:var(--accent-b)}
+.info-nm{font-family:'Cinzel Decorative',serif;font-size:16px;font-weight:700;color:var(--accent-b);margin-bottom:3px;clear:both}
+.info-sb{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt2);text-transform:uppercase;margin-bottom:10px}
+.info-dates{display:flex;gap:6px;margin-bottom:14px;align-items:center}
+.info-dt{padding:5px 12px;border:1px solid var(--bdr);font-family:'Cinzel',serif;font-size:13.5px;color:var(--accent-b)}
+.info-arr{color:var(--txt2);font-size:12px}
+
+/* ── LENS DROPDOWN ── */
+.lens-dd-wrap{border:1px solid var(--bdr);margin-bottom:14px}
+.lens-dd-hdr{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;cursor:pointer;user-select:none;background:var(--accent-xx);border-bottom:1px solid transparent;transition:background .15s}
+.lens-dd-hdr:hover{background:var(--accent-x)}
+.lens-dd-hdr.open{border-bottom-color:var(--bdr)}
+.lens-dd-title{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2.5px;color:var(--txt2);text-transform:uppercase;flex-shrink:0}
+.lens-dd-summary{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.5px;color:var(--accent-b);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;padding:0 6px}
+.lens-dd-arrow{color:var(--txt2);font-size:10px;transition:transform .18s;flex-shrink:0}
+.lens-dd-arrow.open{transform:rotate(180deg)}
+.lens-dd-list{display:none;max-height:260px;overflow-y:auto}
+.lens-dd-list.open{display:block}
+.lens-row{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--bdr2);transition:background .15s}
+.lens-row:last-child{border-bottom:none}
+.lens-row:hover{background:var(--accent-x)}
+.lens-row-chk{width:13px;height:13px;border:1px solid var(--bdr);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--accent-b);line-height:1}
+.lens-row-chk.on{background:var(--accent-x);border-color:var(--accent-b)}
+.lens-row-ico{font-size:14px;width:16px;text-align:center;flex-shrink:0;color:var(--txt2)}
+.lens-row-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.5px;color:var(--txt2)}
+.lens-row.on .lens-row-lbl{color:var(--accent-b);font-weight:600}
+.lens-row-sep{border-bottom:1px solid var(--bdr);margin-bottom:2px}
+.lens-dd-close-btn{text-align:center;padding:10px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:var(--accent-b);border-top:1px solid var(--bdr);cursor:pointer;text-transform:uppercase;transition:background .15s}
+.lens-dd-close-btn:hover{background:var(--accent-x)}
+
+/* ── DRAWER CONTENT ── */
+.lens-section{margin-bottom:18px}
+.lens-section-hdr{display:flex;align-items:center;gap:7px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--bdr)}
+.lens-section-ico{font-size:12px;color:var(--txt2)}
+.lens-section-lbl{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--accent-b);text-transform:uppercase;font-weight:600}
+.info-div{border:none;border-top:1px solid var(--bdr);margin:12px 0}
+.info-txt{font-size:17.5px;line-height:1.95;color:var(--txt);font-style:italic}
+.overview-arc{font-size:17.5px;line-height:1.95;color:var(--txt)}
+.overview-arc p{margin-bottom:14px}
+.civ-span-bar{height:3px;background:var(--bdr2);position:relative;margin:14px 0 6px;border-radius:2px}
+.civ-span-fill{position:absolute;top:0;height:100%;background:var(--accent-b);border-radius:2px;opacity:.8}
+.civ-span-lbls{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--txt3)}
+.conn-hdr{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin:18px 0 8px;font-weight:600}
+.conn-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--conn-bdr);font-size:16px;color:var(--txt2);cursor:pointer;transition:color .15s}
+.conn-item:hover{color:var(--accent-b)}
+.conn-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* ── TIMELINE ── */
+.tl-wrap{position:relative;height:88px;background:var(--tl-bg);border-top:1px solid var(--bdr);padding:8px 20px 14px;flex-shrink:0}
+.tl-lbls{display:flex;justify-content:space-between;margin-bottom:5px}
+.tl-lbl{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.8px;color:var(--txt3);text-transform:uppercase;font-weight:600}
+.tl-trk{position:relative;height:5px;background:var(--bdr);border-radius:3px}
+.tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--accent-b);border-radius:3px;pointer-events:none;opacity:.7}
+.tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--accent-b);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--accent),0 0 20px rgba(200,168,232,.3);pointer-events:none;transition:left .04s linear}
+input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0;cursor:pointer;transform:translateY(-50%);margin:0;z-index:2}
+.hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--hint);display:flex;align-items:center;justify-content:center;padding:0 8px;white-space:nowrap;overflow:hidden}
+#map-hint-text{pointer-events:none;overflow:hidden;text-overflow:ellipsis}
+
+/* ── MOB MAP BUTTON ── */
+.mob-map-btn{display:none}
+
+/* ── PORTRAIT MOBILE ── */
+@media(max-width:768px) and (orientation:portrait){
+  .logo-s{display:none}
+  .cnt-disp{display:none}
+  .hdr{padding:8px 12px}
+  .logo-t{font-size:16px;letter-spacing:2px}
+  .era-y{font-size:18px}
+  .era-n{font-size:10px;letter-spacing:1.5px}
+  .main{top:52px!important;bottom:0;flex-direction:column}
+  .map-tl-col{width:100%}
+  .map-c{flex:0 0 42vh;width:100%}
+  .info-panel{flex:1;width:100%;border-left:none;border-top:1px solid var(--bdr);overflow-y:auto;padding:0 16px 16px;border-radius:0}
+  .tl-wrap{height:76px;padding:6px 14px 10px}
+  .tl-lbl{font-size:9px;letter-spacing:.8px}
+  .hint{font-size:8px;letter-spacing:.8px}
+  .lens-dd-list{max-height:180px}
+  .info-txt,.overview-arc{font-size:16px;line-height:1.82}
+  .lens-row-lbl{font-size:13px}
+}
+
+/* ── LANDSCAPE MOBILE ── */
+@media(max-width:900px) and (orientation:landscape){
+  .logo-s{display:none}
+  .hdr{padding:6px 14px}
+  .logo-t{font-size:15px;letter-spacing:2px}
+  .era-y{font-size:15px}
+  .hint{font-size:7px;letter-spacing:.5px;white-space:normal;text-align:center;line-height:1.4}
+  .tl-wrap{height:68px;padding:4px 12px 8px}
+  .tl-lbl{font-size:8px}
+  .info-panel{width:280px}
+}
+
+@keyframes ring-pulse{0%{r:5;opacity:.7}100%{r:26;opacity:0}}
+
+/* Touch devices */
+@media(pointer:coarse){
+  #mark-layer g[role="button"]{cursor:pointer}
+}
+
+/* ── ACCESSIBILITY ── */
+:focus-visible{outline:2px solid var(--accent-b);outline-offset:2px;border-radius:2px}
+.conn-item:focus-visible{outline:2px solid var(--accent-b);outline-offset:2px}
+.lens-row:focus-visible{outline:2px solid var(--accent-b);outline-offset:-2px}
+button:focus-visible{outline:2px solid var(--accent-b);outline-offset:2px}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--accent-b);color:var(--bg);padding:8px 16px;z-index:9999;font-family:'Cinzel',serif;font-size:11px;text-decoration:none}
+.skip-link:focus{top:0}
+
+/* ── THREAD PANEL ── */
+.thread-panel{
+  position:fixed;top:52px;left:0;right:0;z-index:400;
+  background:var(--panel);
+  max-height:0;overflow:hidden;
+  transition:max-height .32s cubic-bezier(.4,0,.2,1);
+}
+.thread-panel.open{border-bottom:1px solid var(--bdr);box-shadow:0 6px 24px var(--shadow);max-height:70vh}
+.thread-panel-inner{padding:16px 20px 20px;overflow-y:auto;max-height:calc(70vh - 1px)}
+.thread-panel-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.thread-panel-title{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase}
+.thread-close-btn{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1;padding:4px;transition:color .15s}
+.thread-close-btn:hover{color:var(--accent-b)}
+.thread-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px}
+.thread-concept-btn{width:100%;background:none;border:1px solid var(--bdr2);padding:9px 12px;text-align:left;cursor:pointer;border-radius:3px;transition:all .15s}
+.thread-concept-btn:hover{background:var(--accent-x);border-color:var(--bdr)}
+.thread-concept-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.8px;color:var(--txt2);display:block;margin-bottom:4px}
+.thread-concept-chain{font-size:11px;color:var(--txt3);line-height:1.5}
+.thread-back-btn{background:none;border:none;padding:0;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--accent-b);text-transform:uppercase;transition:opacity .15s}
+.thread-back-btn:hover{opacity:.7}
+.thread-active-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--accent-b);margin:10px 0 14px}
+.thread-steps-grid{display:flex;flex-direction:column;align-items:center;padding:4px 0 16px}
+.thread-step{width:min(360px,90%);text-align:center;padding:10px 14px;border:1px solid var(--bdr2);border-radius:4px;font-size:12.5px;color:var(--txt2);background:var(--panel2)}
+.thread-step-yr{font-family:'Cinzel',serif;font-size:9.5px;color:var(--accent-b);margin-bottom:4px}
+.thread-step-txt{line-height:1.6;color:var(--txt2)}
+.thread-step-civ{font-family:'Cinzel',serif;font-size:9.5px;color:var(--accent-b);margin-bottom:4px}
+.thread-chain-link{display:flex;flex-direction:column;align-items:center;padding:2px 0;color:var(--accent-b);opacity:.6}
+.thread-chain-line{width:1px;height:8px;background:var(--accent-b);opacity:.4}
+
+/* ── COMPARE MODE ── */
+.compare-wrap{display:flex;gap:0;height:100%;width:100%}
+.compare-col{flex:1;min-width:0;overflow-y:auto;padding:16px;border-right:1px solid var(--bdr)}
+.compare-col:last-child{border-right:none}
+.compare-col-hdr{font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--accent-b);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.compare-remove{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:2px}
+.compare-remove:hover{color:var(--accent-b)}
+.compare-prompt{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--txt3);font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:20px;opacity:.6}
+
+/* ── SHARE TOAST ── */
+.share-toast{position:fixed;bottom:108px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--panel);border:1px solid var(--bdr);padding:8px 18px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:var(--accent-b);text-transform:uppercase;border-radius:20px;opacity:0;transition:all .3s;pointer-events:none;z-index:500;white-space:nowrap}
+.share-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── FINGERPRINT CHART ── */
+.fp-wrap{margin:14px 0 6px}
+.fp-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:8px}
+.fp-svg{display:block;margin:0 auto}
+.fp-label{font-family:'Cinzel',serif;font-size:8px;fill:var(--txt3)}
+.fp-poly{fill:rgba(200,168,232,.18);stroke:#c8a8e8;stroke-width:1.2}
+.fp-grid{fill:none;stroke:var(--bdr);stroke-width:.5}
+
+/* ── CONTEMPORARY BAR ── */
+.contemp-wrap{margin:12px 0 4px}
+.contemp-bar-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;cursor:pointer;transition:opacity .15s}
+.contemp-bar-row:hover{opacity:.75}
+.contemp-bar-nm{font-family:'Cinzel',serif;font-size:8.5px;color:var(--txt3);width:80px;flex-shrink:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.contemp-bar-track{flex:1;height:5px;background:var(--bdr2);border-radius:2px;position:relative}
+.contemp-bar-fill{position:absolute;top:0;height:100%;border-radius:2px;opacity:.7}
+.contemp-bar-yr{font-family:'Cinzel',serif;font-size:7.5px;color:var(--txt3);white-space:nowrap;width:60px;text-align:right;flex-shrink:0}
+
+/* ── DENSITY SPARKLINE ── */
+#density-bar{height:18px;width:100%;display:block;margin-bottom:1px}
+
+/* ── MAP ZOOM/PAN ── */
+#wsvg{touch-action:none;user-select:none;-webkit-user-select:none;transition:none}
+.map-zoom-ctrl{position:absolute;bottom:8px;right:8px;display:flex;flex-direction:column;gap:3px;z-index:50}
+.map-zoom-btn{width:28px;height:28px;background:var(--panel);border:1px solid var(--bdr);color:var(--accent-b);
+  font-size:16px;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;transition:all .15s}
+.map-zoom-btn:hover{background:var(--panel2);border-color:var(--accent)}
+.cluster-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--accent-b);
+  background:var(--panel);border:1px solid var(--bdr);padding:4px 12px;border-radius:20px;
+  opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:51}
+.cluster-hint.show{opacity:1}
+
+/* ── CLUSTER PICKER ── */
+#cluster-picker{
+  position:fixed;z-index:900;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:6px;
+  min-width:180px;max-width:260px;max-height:320px;overflow-y:auto;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);
+  display:none;
+}
+#cluster-picker.open{display:block}
+#cluster-picker-hdr{
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
+  color:var(--txt3);padding:8px 12px 6px;
+  border-bottom:1px solid var(--bdr2);text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.cluster-item{
+  display:flex;align-items:center;gap:10px;padding:9px 12px;
+  cursor:pointer;border-bottom:1px solid var(--bdr2);
+  transition:background .12s;
+}
+.cluster-item:last-child{border-bottom:none}
+.cluster-item:hover,.cluster-item:active{background:var(--panel2)}
+.cluster-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cluster-item-nm{font-family:'Cinzel',serif;font-size:13px;color:var(--txt);flex:1}
+
+/* ── BURGER MENU ── */
+.burger-wrap{position:relative}
+.burger-btn{background:none;border:1px solid var(--bdr);color:var(--accent-b);cursor:pointer;
+  width:34px;height:34px;border-radius:3px;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;padding:0}
+.burger-btn:hover{background:var(--panel2);border-color:var(--accent)}
+.burger-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel);
+  border:1px solid var(--bdr);border-radius:4px;min-width:196px;
+  box-shadow:0 8px 32px var(--shadow);z-index:800;
+  display:none;flex-direction:column;overflow:hidden}
+.burger-menu.open{display:flex}
+.burger-item{display:flex;align-items:center;gap:10px;padding:12px 16px;
+  background:none;border:none;color:var(--txt2);cursor:pointer;text-align:left;
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:.5px;width:100%;
+  transition:background .12s;white-space:nowrap}
+.burger-item:hover,.burger-item:active{background:var(--panel2);color:var(--txt)}
+.burger-item.active,.burger-item.burger-mode.active{background:var(--accent-x);color:var(--accent-b)}
+.burger-divider{height:1px;background:var(--bdr2);margin:2px 0}
 </style>
 </head>
 <body>
 
-<!-- Loading -->
-<div class="loading-overlay" id="loading">
-  <div class="loading-symbol">🕊️</div>
-  <div class="loading-text">NUMEN</div>
-</div>
-
-<!-- Tooltip -->
-<div id="tooltip"></div>
-
-<!-- Header -->
-<header id="header">
-  <span class="logo" onclick="resetView()" tabindex="0" role="button" aria-label="Numen home">NUMEN</span>
-  <span class="subtitle">The Atlas of Belief</span>
-  <span class="era-display" id="era-display">Modern Pluralism</span>
-  <span class="year-display" id="year-display">2025 CE</span>
-  <button class="burger-btn" id="burger-btn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false">☰</button>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to belief panel</button>
+<header class="hdr" role="banner">
+  <div class="hdr-left">
+    <span class="logo-t">NUMEN</span>
+    <span class="logo-s">The Atlas of Belief</span>
+  </div>
+  <div class="era-disp">
+    <div class="era-y" id="era-y">3000 BCE</div>
+    <div class="era-n" id="era-n">ANCIENT WORLD</div>
+  </div>
+  <div class="hdr-right">
+    <div class="cnt-disp">
+      <span class="cnt-n" id="cnt-n">2</span>
+      traditions active
+    </div>
+    <div class="burger-wrap" id="burger-wrap">
+      <button class="burger-btn" id="burger-btn" onclick="toggleBurger()" aria-label="Menu" aria-expanded="false" aria-haspopup="true">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="1" x2="18" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="0" y1="7" x2="18" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="0" y1="13" x2="18" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="burger-menu" id="burger-menu" role="menu">
+        <a class="burger-item" href="../index.html" role="menuitem" style="text-decoration:none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>The Pangea Project</span>
+        </a>
+        <div class="burger-divider"></div>
+        <button class="burger-item burger-mode active" id="btn-explore" onclick="setMode('explore');closeBurger()" role="menuitem" aria-pressed="true">
+          <span>&#9673;</span><span>Explore</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>&#10227;</span><span>Threads</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>&#8862;</span><span>Compare</span>
+        </button>
+        <div class="burger-divider"></div>
+        <button class="burger-item" id="menu-theme" onclick="toggleTheme();closeBurger()" role="menuitem">
+          <span>&#9681;</span>
+          <span>Toggle Theme</span>
+        </button>
+        <div class="burger-divider"></div>
+        <button class="burger-item" onclick="showAbout();closeBurger()" role="menuitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>About</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </header>
 
-<!-- Burger Menu -->
-<nav id="burger-menu" role="navigation" aria-label="Main menu">
-  <div class="menu-section">
-    <div class="menu-title">Navigation</div>
-    <a class="menu-item" href="../">
-      <span class="ico">🌍</span> Back to Pangea
-    </a>
+<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Belief transmissions">
+  <div class="thread-panel-inner">
+    <div class="thread-panel-bar">
+      <span class="thread-panel-title" id="thread-panel-title">Belief Threads</span>
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">&larr; All Threads</button>
+        <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">&#10005;</button>
+      </div>
+    </div>
+    <div id="thread-concept-list"></div>
+    <div id="thread-active-steps" style="display:none"></div>
   </div>
-  <div class="menu-section">
-    <div class="menu-title">Views</div>
-    <button class="menu-item" onclick="showExplore()">
-      <span class="ico">🗺️</span> Explore Map
-    </button>
-    <button class="menu-item" onclick="showThreads()">
-      <span class="ico">🧵</span> Concept Threads
-    </button>
-    <button class="menu-item" onclick="showCompare()">
-      <span class="ico">⚖️</span> Compare Traditions
-    </button>
-  </div>
-  <div class="menu-section">
-    <div class="menu-title">Settings</div>
-    <button class="menu-item" onclick="toggleTheme()">
-      <span class="ico" id="theme-ico">🌙</span> <span id="theme-label">Toggle Light Mode</span>
-    </button>
-  </div>
-  <div class="menu-section">
-    <button class="menu-item" onclick="showAbout()">
-      <span class="ico">ℹ️</span> About Numen
-    </button>
-  </div>
-</nav>
+</div>
 
-<!-- Main Content -->
-<main id="main">
-  <!-- Map -->
-  <div id="map-container">
-    <div id="lens-bar"></div>
-    <svg id="map-svg" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet">
+<div class="share-toast" id="share-toast">Link copied to clipboard</div>
+
+<div class="main">
+  <div class="map-tl-col">
+  <div class="map-c">
+    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with belief tradition markers" style="cursor:pointer">
       <defs>
-        <radialGradient id="markerGlow">
-          <stop offset="0%" stop-color="var(--amber)" stop-opacity="0.4"/>
-          <stop offset="100%" stop-color="var(--amber)" stop-opacity="0"/>
-        </radialGradient>
+        <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+          <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#9070c0" flood-opacity=".85"/>
+        </filter>
+        <filter id="glow2" x="-100%" y="-100%" width="300%" height="300%">
+          <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#9070c0" flood-opacity=".5"/>
+        </filter>
       </defs>
-      <g id="world-group">
-        <g id="map-layer"></g>
-        <g id="land-group"></g>
-        <g id="connections-group"></g>
-        <g id="markers-group"></g>
-        <g id="labels-group"></g>
+
+      <rect width="1000" height="520" fill="var(--bg)"/>
+
+      <!-- Grid -->
+      <g stroke="rgba(168,136,200,.04)" stroke-width=".5" fill="none">
+        <line x1="0" y1="120" x2="1000" y2="120"/>
+        <line x1="0" y1="195" x2="1000" y2="195"/>
+        <line x1="0" y1="265" x2="1000" y2="265"/>
+        <line x1="0" y1="335" x2="1000" y2="335"/>
+        <line x1="0" y1="405" x2="1000" y2="405"/>
+        <line x1="200" y1="0" x2="200" y2="520"/>
+        <line x1="400" y1="0" x2="400" y2="520"/>
+        <line x1="600" y1="0" x2="600" y2="520"/>
+        <line x1="800" y1="0" x2="800" y2="520"/>
       </g>
+      <!-- Equator -->
+      <line x1="0" y1="265" x2="1000" y2="265" stroke="rgba(168,136,200,.10)" stroke-width=".8" stroke-dasharray="3,7"/>
+
+      <!-- Continents -->
+      <g id="map-layer"></g>
+      <!-- Connection lines -->
+      <g id="conn-layer"></g>
+      <!-- Thread paths -->
+      <g id="thread-layer"></g>
+      <!-- Markers -->
+      <g id="mark-layer"></g>
+      <!-- Labels -->
+      <g id="label-layer" pointer-events="none"></g>
     </svg>
-    <div class="float-controls">
-      <button class="float-btn" onclick="zoomIn()" aria-label="Zoom in" title="Zoom in">+</button>
-      <button class="float-btn" onclick="zoomOut()" aria-label="Zoom out" title="Zoom out">−</button>
-      <button class="float-btn" onclick="resetZoom()" aria-label="Reset view" title="Reset view">⟳</button>
+    <div class="hint" id="map-hint">
+      <span id="map-hint-text">TAP A TRADITION  &middot;  PINCH TO ZOOM  &middot;  DRAG TO PAN</span>
+      <button id="map-reset-btn" onclick="resetMapZoom()" style="display:none;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--accent-b);background:none;border:1px solid var(--bdr);padding:2px 8px;border-radius:10px;cursor:pointer;margin-left:10px;white-space:nowrap">&#8857; RESET ZOOM</button>
     </div>
   </div>
-
-  <!-- Info Panel -->
-  <aside id="info-panel" class="collapsed" aria-label="Belief details">
-    <div class="panel-header">
-      <button class="panel-close" onclick="closePanel()" aria-label="Close panel">✕</button>
-      <div class="panel-title" id="panel-title">Select a Tradition</div>
-      <div class="panel-subtitle" id="panel-subtitle"></div>
-      <div class="panel-meta" id="panel-meta"></div>
-    </div>
-    <div class="panel-body" id="panel-body">
-      <p style="color:var(--txt-dim);font-style:italic;">Click on a marker to explore a tradition.</p>
-    </div>
-  </aside>
-</main>
-
-<!-- Compare View -->
-<div id="compare-view">
-  <div style="text-align:center;margin-bottom:16px;">
-    <h2 style="font-family:var(--font-decorative);color:var(--amber);font-size:1.2rem;">Compare Traditions</h2>
-    <button class="menu-item" onclick="showExplore()" style="display:inline-flex;margin-top:8px;width:auto;">
-      <span class="ico">←</span> Back to Map
-    </button>
+  <div class="tl-wrap" role="navigation" aria-label="Timeline">
+  <svg id="density-bar" aria-label="Belief density over time"></svg>
+  <div class="tl-lbls">
+    <span class="tl-lbl">8000 BCE</span>
+    <span class="tl-lbl">3000 BCE</span>
+    <span class="tl-lbl">1000 BCE</span>
+    <span class="tl-lbl">1 CE</span>
+    <span class="tl-lbl">1000 CE</span>
+    <span class="tl-lbl">2025 CE</span>
   </div>
-  <div class="compare-grid" id="compare-grid"></div>
-</div>
-
-<!-- Threads View -->
-<div id="threads-view">
-  <div style="text-align:center;margin-bottom:16px;">
-    <h2 style="font-family:var(--font-decorative);color:var(--accent);font-size:1.2rem;">Concept Threads</h2>
-    <p style="color:var(--txt-dim);font-size:0.88rem;max-width:600px;margin:8px auto;">Trace how religious ideas and practices have been transmitted across traditions and centuries.</p>
-    <button class="menu-item" onclick="showExplore()" style="display:inline-flex;margin-top:8px;width:auto;">
-      <span class="ico">←</span> Back to Map
-    </button>
-  </div>
-  <div id="threads-list"></div>
-</div>
-
-<!-- About Modal -->
-<div id="about-modal">
-  <div class="about-content">
-    <button class="about-close" onclick="closeAbout()" aria-label="Close">✕</button>
-    <h2>Numen — The Atlas of Belief</h2>
-    <p>Numen maps humanity's religious and spiritual traditions across 10,000 years of history. From prehistoric animism to modern pluralism, explore how beliefs emerged, spread, and influenced one another.</p>
-    <p>The name <em>Numen</em> derives from the Latin word for divine power or spirit — the sense of a sacred presence that pervades the world's many traditions.</p>
-    <p>Navigate the timeline to see which traditions were active in each era. Use lenses to explore different aspects: beliefs, practices, sacred texts, key figures, and more. Compare traditions side by side or trace conceptual threads across cultures.</p>
-    <p style="color:var(--txt-dim);font-size:0.85rem;margin-top:16px;">Part of <a href="../">The Pangea Project</a>. All descriptions aim for academic neutrality and respectful representation of every tradition.</p>
+  <div class="tl-trk">
+    <div class="tl-fill" id="tl-fill"></div>
+    <div class="tl-thumb" id="tl-thumb"></div>
+    <input type="range" class="tl-range" id="tl" min="0" max="1000" value="0" step="1" aria-label="Timeline year" aria-valuemin="-8000" aria-valuemax="2025" aria-valuenow="-8000">
   </div>
 </div>
+  </div><!-- /map-tl-col -->
 
-<!-- Timeline -->
-<footer id="timeline" aria-label="Timeline controls">
-  <span class="tl-label">Era</span>
-  <button class="tl-play" id="tl-play" onclick="togglePlay()" aria-label="Play timeline">▶</button>
-  <span class="tl-year" id="tl-year">2025 CE</span>
-  <div class="tl-slider-wrap">
-    <input type="range" id="tl-slider" min="0" max="1000" value="1000"
-           oninput="onSliderInput(this.value)" aria-label="Timeline slider">
-    <canvas id="density-bar" height="14"></canvas>
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Belief details">
+    <div id="drawer-top"></div>
+    <div id="drawer-content"></div>
   </div>
-  <span class="tl-label" id="tl-era-label">Modern Pluralism</span>
-</footer>
+  <button class="mob-map-btn hidden" id="mob-map-btn" onclick="closeMobileSheet()">&#9678; Map</button>
+</div>
 
-<!-- D3 & TopoJSON (must load before main script) -->
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<div id="cluster-picker">
+  <div id="cluster-picker-hdr">Select a tradition <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px">&times;</button></div>
+  <div id="cluster-list"></div>
+</div>
 
 <script>
-/* ============================================================
-   NUMEN — The Atlas of Belief — JavaScript
-   ============================================================ */
+// ══════════════════════════════════════════════════════
+// NUMEN — THE ATLAS OF BELIEF
+// Data + Rendering Engine
+// ══════════════════════════════════════════════════════
 
-/* ---------- Lenses ---------- */
-const LENSES=[{id:"overview",n:"Overview",ico:"📋"},{id:"beliefs",n:"Core Beliefs",ico:"✦"},{id:"practices",n:"Practices",ico:"🙏"},{id:"spread",n:"Spread",ico:"🗺"},{id:"schisms",n:"Schisms",ico:"⚡"},{id:"texts",n:"Sacred Texts",ico:"📜"},{id:"figures",n:"Key Figures",ico:"👤"},{id:"modern",n:"Modern Status",ico:"📊"},{id:"cosmology",n:"Cosmology",ico:"🌌"},{id:"ethics",n:"Ethics",ico:"⚖"},{id:"art",n:"Art & Architecture",ico:"🏛"},{id:"persecution",n:"Persecution",ico:"⛓"}];
-
-/* ---------- Eras ---------- */
-const ERAS=[{y:-10000,n:"Prehistoric Animism"},{y:-3000,n:"Ancient Polytheism"},{y:-800,n:"Axial Age"},{y:0,n:"Classical Synthesis"},{y:500,n:"Medieval Faith"},{y:1500,n:"Reformation"},{y:1700,n:"Enlightenment"},{y:1900,n:"Modern Pluralism"}];
-
-/* ---------- Beliefs (first 25) ---------- */
-const BELIEFS=[
-{id:"animism",n:"Animism",s:-10000,e:2025,lon:20,lat:5,x:510,y:275,col:"#a070c0",sz:1.4,region:"Global",family:"Pagan",type:"Primal Tradition",founder:"None (emergent)",adherents:"300M+",d:{overview:"The belief that all natural entities — animals, plants, rivers, mountains — possess a spiritual essence.",beliefs:"All things are animated by spirits; nature is sacred and interconnected.",practices:"Offerings to nature spirits, ancestor veneration, ritual dance, and storytelling.",spread:"Present in every inhabited continent since prehistory.",schisms:"No formal schisms; manifests differently across every culture.",texts:"Oral traditions passed through generations of elders and shamans.",figures:"No singular founders; local shamans and elders serve as spiritual guides.",modern:"Persists in indigenous communities worldwide and influences neo-pagan movements."}},
-{id:"shamanism",n:"Shamanism",s:-8000,e:2025,lon:90,lat:55,x:720,y:170,col:"#a070c0",sz:1.2,region:"Central Asia",family:"Pagan",type:"Primal Tradition",founder:"None (emergent)",adherents:"100M+",d:{overview:"A practice centered on shamans who enter altered states to communicate with the spirit world.",beliefs:"The shaman can journey between physical and spiritual realms to heal and guide.",practices:"Drumming, trance journeys, spirit possession, herbal healing, and divination.",spread:"Originated in Siberia and spread across Asia, the Americas, and Africa.",schisms:"Regional variations rather than formal divisions; Siberian, Korean, and Amazonian forms differ greatly.",texts:"Oral traditions; no canonical scripture.",figures:"Regional practitioners; Mircea Eliade popularized the academic study of shamanism.",modern:"Revived in neo-shamanic movements; traditional forms persist among Siberian and indigenous peoples."}},
-{id:"egyptian",n:"Egyptian Religion",s:-3100,e:-30,lon:31,lat:27,x:530,y:245,col:"#a070c0",sz:1.3,region:"North Africa",family:"Pagan",type:"Ancient Polytheism",founder:"None (state religion)",adherents:"Extinct",d:{overview:"The polytheistic religion of ancient Egypt, centered on maintaining cosmic order (Ma'at) through ritual and worship.",beliefs:"A pantheon of gods governing nature and afterlife; the soul's judgment before Osiris.",practices:"Temple rituals, mummification, elaborate funerary rites, and daily offerings to the gods.",spread:"Confined largely to the Nile Valley and its sphere of political influence.",schisms:"Akhenaten's brief monotheistic Atenism was a radical but short-lived departure.",texts:"Book of the Dead, Pyramid Texts, Coffin Texts, and temple inscriptions.",figures:"Akhenaten, Imhotep, and the priestly class of Amun at Thebes.",modern:"Extinct as a living religion; Kemeticism is a modern reconstructionist movement."}},
-{id:"sumerian",n:"Sumerian Religion",s:-3500,e:-1750,lon:44,lat:31,x:555,y:235,col:"#a070c0",sz:1.1,region:"Mesopotamia",family:"Pagan",type:"Ancient Polytheism",founder:"None (state religion)",adherents:"Extinct",d:{overview:"The religion of ancient Sumer, among the earliest recorded belief systems with a complex pantheon.",beliefs:"Gods controlled natural forces; humans were created to serve the gods.",practices:"Temple offerings, hymns, sacred marriage rituals, and divination through liver reading.",spread:"Influenced Akkadian, Babylonian, and Assyrian religions throughout Mesopotamia.",schisms:"Evolved into Babylonian religion rather than splitting formally.",texts:"Epic of Gilgamesh, Enuma Elish, hymns of Enheduanna.",figures:"Enheduanna (earliest named author), priest-kings of Ur, and temple priestesses.",modern:"Extinct; survives only through archaeological and textual scholarship."}},
-{id:"zoroastrianism",n:"Zoroastrianism",s:-1500,e:2025,lon:52,lat:33,x:575,y:230,col:"#6090d0",sz:1.2,region:"Persia",family:"Abrahamic",type:"Revealed Religion",founder:"Zoroaster",adherents:"120K",d:{overview:"One of the world's oldest monotheistic religions, founded by the prophet Zoroaster in ancient Persia.",beliefs:"Cosmic struggle between Ahura Mazda (good) and Angra Mainyu (evil); truth and righteousness prevail.",practices:"Tending sacred fires, prayers five times daily, the Navjote initiation ceremony.",spread:"State religion of three Persian empires; deeply influenced Judaism, Christianity, and Islam.",schisms:"Zurvanism was an ancient heterodox sect; Ilm-e-Kshnoom is a modern mystical school.",texts:"The Avesta, including the Gathas composed by Zoroaster himself.",figures:"Zoroaster (Zarathustra), Cyrus the Great, and the Magi priest class.",modern:"Small but enduring community of Parsis in India and Zoroastrians in Iran."}},
-{id:"hinduism",n:"Hinduism",s:-2000,e:2025,lon:78,lat:22,x:665,y:255,col:"#f0c040",sz:1.7,region:"South Asia",family:"Dharmic",type:"World Religion",founder:"None (evolved tradition)",adherents:"1.2B",d:{overview:"The world's oldest major religion, a diverse family of traditions united by shared concepts of dharma, karma, and moksha.",beliefs:"Brahman as ultimate reality; cycle of rebirth (samsara); liberation (moksha) through multiple paths.",practices:"Puja worship, yoga, meditation, pilgrimage, festivals like Diwali and Holi.",spread:"Originated in the Indus Valley; spread to Southeast Asia through trade and cultural exchange.",schisms:"Diverse schools: Shaivism, Vaishnavism, Shaktism, and Smartism coexist within the tradition.",texts:"Vedas, Upanishads, Bhagavad Gita, Ramayana, Mahabharata, and Puranas.",figures:"Krishna, Rama, Shankara, Ramanuja, Swami Vivekananda, and Mahatma Gandhi.",modern:"1.2 billion adherents; third-largest religion globally with growing diaspora communities."}},
-{id:"buddhism",n:"Buddhism",s:-528,e:2025,lon:84,lat:27,x:680,y:250,col:"#f0c040",sz:1.6,region:"South Asia",family:"Dharmic",type:"World Religion",founder:"Siddhartha Gautama",adherents:"520M",d:{overview:"Founded in 5th century BCE India, teaching the path to enlightenment through the Four Noble Truths.",beliefs:"Four Noble Truths, Eightfold Path, and the pursuit of Nirvana.",practices:"Meditation, mindfulness, monasticism, and pilgrimage.",spread:"Spread via Silk Road to East and Southeast Asia.",schisms:"Split into Theravada, Mahayana, and Vajrayana traditions.",texts:"Tripitaka, Heart Sutra, Lotus Sutra, Dhammapada.",figures:"Gautama Buddha, Nagarjuna, Bodhidharma, Dalai Lama.",modern:"520 million adherents; Western mindfulness movement growing."}},
-{id:"jainism",n:"Jainism",s:-600,e:2025,lon:73,lat:22,x:655,y:255,col:"#f0c040",sz:1.0,region:"South Asia",family:"Dharmic",type:"World Religion",founder:"Mahavira (24th Tirthankara)",adherents:"4.5M",d:{overview:"An ancient Indian religion emphasizing non-violence (ahimsa), truth, and ascetic self-discipline.",beliefs:"Non-violence as the highest duty; karma as physical particles binding the soul; liberation through asceticism.",practices:"Strict vegetarianism, fasting, meditation, non-attachment, and careful avoidance of harm to all beings.",spread:"Primarily confined to India, with diaspora communities in East Africa, Europe, and North America.",schisms:"Split into Digambara (sky-clad) and Shvetambara (white-clad) sects over monastic practice.",texts:"Agamas (Shvetambara canon), Tattvartha Sutra, and Samayasara.",figures:"Mahavira, Rishabhadeva (first Tirthankara), Acharya Kundakunda, and Virchand Gandhi.",modern:"4.5 million adherents in India; diaspora communities maintain temples worldwide."}},
-{id:"sikhism",n:"Sikhism",s:1469,e:2025,lon:75,lat:31,x:660,y:235,col:"#f0c040",sz:1.3,region:"South Asia",family:"Dharmic",type:"World Religion",founder:"Guru Nanak",adherents:"30M",d:{overview:"A monotheistic religion founded in 15th-century Punjab, emphasizing equality, service, and devotion to one God.",beliefs:"One formless God (Ik Onkar); equality of all people; karma and reincarnation; divine grace.",practices:"Daily prayer, community kitchen (langar), wearing the Five Ks, and congregational worship.",spread:"Centered in Punjab; significant diaspora in Britain, Canada, the United States, and Australia.",schisms:"Namdhari and Nirankari movements diverged in the 19th century; mainstream Khalsa Sikhi predominates.",texts:"Guru Granth Sahib, the eternal living Guru containing hymns from Sikh Gurus and other saints.",figures:"Guru Nanak, Guru Gobind Singh, Maharaja Ranjit Singh, and Bhai Mardana.",modern:"30 million adherents; fifth-largest world religion with vibrant diaspora communities."}},
-{id:"judaism",n:"Judaism",s:-1800,e:2025,lon:35,lat:31,x:540,y:235,col:"#6090d0",sz:1.5,region:"Middle East",family:"Abrahamic",type:"World Religion",founder:"Abraham / Moses",adherents:"15M",d:{overview:"The oldest Abrahamic religion, rooted in the covenant between God and the people of Israel.",beliefs:"Monotheism; covenant with God; Torah as divine law; ethical responsibility and justice.",practices:"Sabbath observance, prayer, kosher dietary laws, circumcision, and festival celebrations.",spread:"Originated in Canaan; dispersed globally through the Jewish diaspora after Roman exile.",schisms:"Orthodox, Conservative, Reform, and Reconstructionist movements reflect varying approaches to tradition.",texts:"Torah (Pentateuch), Tanakh (Hebrew Bible), Talmud, Midrash, and Zohar.",figures:"Abraham, Moses, King David, Maimonides, Rashi, and Theodor Herzl.",modern:"15 million adherents worldwide; the State of Israel is the Jewish national homeland."}},
-{id:"christianity",n:"Christianity",s:30,e:2025,lon:35,lat:32,x:540,y:233,col:"#6090d0",sz:1.8,region:"Middle East",family:"Abrahamic",type:"World Religion",founder:"Jesus of Nazareth",adherents:"2.4B",d:{overview:"The world's largest religion, centered on the life, teachings, death, and resurrection of Jesus Christ.",beliefs:"Jesus as Son of God and savior; the Trinity; salvation through grace; resurrection and eternal life.",practices:"Prayer, baptism, Eucharist, worship services, charity, and pilgrimage.",spread:"From Roman Palestine across the Roman Empire, then to all continents through missions and colonialism.",schisms:"Great Schism (1054) split East and West; Reformation (1517) created Protestant denominations.",texts:"The Bible (Old and New Testaments), including the Gospels, Epistles, and Revelation.",figures:"Jesus Christ, Paul the Apostle, Augustine, Martin Luther, and Pope Francis.",modern:"2.4 billion adherents; the largest global religion spanning every continent."}},
-{id:"islam",n:"Islam",s:610,e:2025,lon:40,lat:24,x:548,y:250,col:"#6090d0",sz:1.8,region:"Middle East",family:"Abrahamic",type:"World Religion",founder:"Prophet Muhammad",adherents:"1.9B",d:{overview:"A monotheistic Abrahamic religion founded in 7th-century Arabia through the revelations given to Prophet Muhammad.",beliefs:"One God (Allah); Muhammad as the final prophet; Five Pillars; predestination and the Day of Judgment.",practices:"Five daily prayers (salat), fasting during Ramadan, almsgiving (zakat), and pilgrimage to Mecca (hajj).",spread:"Rapidly expanded across the Middle East, North Africa, Central Asia, and Southeast Asia.",schisms:"Sunni-Shia split over succession to Muhammad; Sufi mysticism developed as an inner dimension.",texts:"The Quran (revealed scripture) and Hadith (sayings and actions of Muhammad).",figures:"Prophet Muhammad, Abu Bakr, Ali ibn Abi Talib, Al-Ghazali, and Ibn Arabi.",modern:"1.9 billion adherents; second-largest world religion and fastest-growing by birth rate."}},
-{id:"bahai",n:"Baha'i Faith",s:1844,e:2025,lon:51,lat:33,x:572,y:230,col:"#6090d0",sz:1.0,region:"Middle East",family:"Abrahamic",type:"World Religion",founder:"Baha'u'llah",adherents:"8M",d:{overview:"A religion founded in 19th-century Persia teaching the unity of God, religion, and humanity.",beliefs:"Progressive revelation; unity of all religions; oneness of humanity; elimination of prejudice.",practices:"Daily prayer, fasting, pilgrimage, participation in Nineteen Day Feasts, and community service.",spread:"From Persia to virtually every country through organized teaching plans and migration.",schisms:"Minor heterodox groups exist but the main community remains organizationally unified.",texts:"Kitab-i-Aqdas, Kitab-i-Iqan, Hidden Words, and the extensive writings of Baha'u'llah.",figures:"The Bab, Baha'u'llah, Abdu'l-Baha, Shoghi Effendi, and the Universal House of Justice.",modern:"8 million adherents in over 200 countries; one of the most geographically widespread religions."}},
-{id:"confucianism",n:"Confucianism",s:-551,e:2025,lon:117,lat:36,x:775,y:225,col:"#e05050",sz:1.4,region:"East Asia",family:"East Asian",type:"Philosophical Tradition",founder:"Confucius (Kong Qiu)",adherents:"6M+",d:{overview:"A Chinese philosophical and ethical system emphasizing social harmony, filial piety, and virtuous governance.",beliefs:"Ren (benevolence), li (ritual propriety), filial piety, and the rectification of names.",practices:"Ancestor veneration, study of classics, ritual propriety, and moral self-cultivation.",spread:"From China to Korea, Japan, and Vietnam, shaping governance and education across East Asia.",schisms:"Neo-Confucianism emerged in the Song dynasty; New Confucianism is a modern reinterpretation.",texts:"Analects, Mencius, Great Learning, Doctrine of the Mean (the Four Books).",figures:"Confucius, Mencius, Xunzi, Zhu Xi, and Wang Yangming.",modern:"Deeply embedded in East Asian culture; revived in China as cultural heritage and civic philosophy."}},
-{id:"taoism",n:"Taoism",s:-500,e:2025,lon:104,lat:33,x:750,y:230,col:"#e05050",sz:1.3,region:"East Asia",family:"East Asian",type:"Philosophical Tradition",founder:"Laozi (traditional)",adherents:"12M+",d:{overview:"A Chinese tradition emphasizing living in harmony with the Tao, the fundamental nature of the universe.",beliefs:"The Tao as the source of all things; wu wei (effortless action); yin-yang balance; naturalness.",practices:"Meditation, tai chi, qigong, feng shui, alchemy, and temple rituals.",spread:"Primarily in China with influence across East Asia and growing interest in the West.",schisms:"Philosophical Taoism (Daojia) and religious Taoism (Daojiao) developed as distinct strands.",texts:"Tao Te Ching by Laozi, Zhuangzi, and the Daozang (Taoist canon).",figures:"Laozi, Zhuangzi, Zhang Daoling, and the Eight Immortals of legend.",modern:"12 million formal adherents; Taoist philosophy influences martial arts, medicine, and environmentalism worldwide."}},
-{id:"shinto",n:"Shinto",s:-660,e:2025,lon:137,lat:36,x:810,y:225,col:"#e05050",sz:1.2,region:"East Asia",family:"East Asian",type:"Ethnic Religion",founder:"None (indigenous)",adherents:"100M",d:{overview:"The indigenous spirituality of Japan, centered on kami (spirits) inhabiting natural phenomena and ancestors.",beliefs:"Kami pervade nature; ritual purity is essential; harmony with nature and community.",practices:"Shrine worship, purification rites, matsuri festivals, offering of sake and food to kami.",spread:"Indigenous to Japan; rarely practiced outside Japanese cultural contexts.",schisms:"State Shinto was dismantled after WWII; Sect Shinto comprises various organized movements.",texts:"Kojiki and Nihon Shoki are mythological histories rather than doctrinal scriptures.",figures:"Emperor Jimmu (mythological), Motoori Norinaga, and shrine priests across generations.",modern:"100 million visitors to shrines annually; deeply woven into Japanese cultural identity."}},
-{id:"greek_religion",n:"Greek Religion",s:-1200,e:400,lon:24,lat:38,x:525,y:220,col:"#a070c0",sz:1.2,region:"Mediterranean",family:"Pagan",type:"Ancient Polytheism",founder:"None (cultural)",adherents:"Extinct",d:{overview:"The polytheistic religion of ancient Greece, centered on the Olympian gods and civic ritual.",beliefs:"Twelve Olympian gods governing aspects of life; fate, hubris, and divine justice.",practices:"Animal sacrifice, oracles (Delphi), mystery initiations (Eleusis), athletic festivals, and theater.",spread:"Throughout the Greek world, colonies, and Hellenistic kingdoms from Spain to Afghanistan.",schisms:"Mystery cults (Eleusinian, Orphic, Dionysian) offered alternative paths alongside civic religion.",texts:"Homer's Iliad and Odyssey, Hesiod's Theogony, Homeric Hymns, and Orphic texts.",figures:"Homer, Hesiod, Pythia of Delphi, and the priestly families of major temples.",modern:"Extinct as a continuous tradition; Hellenism is a modern reconstructionist movement."}},
-{id:"roman_religion",n:"Roman Religion",s:-753,e:380,lon:12,lat:42,x:505,y:215,col:"#a070c0",sz:1.2,region:"Mediterranean",family:"Pagan",type:"Ancient Polytheism",founder:"None (state religion)",adherents:"Extinct",d:{overview:"The polytheistic state religion of ancient Rome, blending native Italic, Etruscan, and Greek elements.",beliefs:"Gods as guardians of the state; pax deorum (peace of the gods) maintained through correct ritual.",practices:"State sacrifices, augury, household worship of Lares and Penates, and triumphal ceremonies.",spread:"Expanded with the Roman Empire across Europe, North Africa, and the Near East.",schisms:"Mystery cults (Mithras, Isis, Cybele) competed with traditional practice before Christianity prevailed.",texts:"No sacred scripture; Ovid's Fasti and Varro's writings document religious practice.",figures:"Numa Pompilius (legendary founder of rites), the Vestal Virgins, and the Pontifex Maximus.",modern:"Extinct; Roman Reconstructionism (Religio Romana) exists as a modern revival."}},
-{id:"norse",n:"Norse Religion",s:-800,e:1100,lon:12,lat:60,x:505,y:175,col:"#a070c0",sz:1.1,region:"Northern Europe",family:"Pagan",type:"Ethnic Religion",founder:"None (cultural)",adherents:"Extinct",d:{overview:"The pre-Christian religion of the Scandinavian and Germanic peoples, centered on the Aesir and Vanir gods.",beliefs:"A cosmos of nine worlds on Yggdrasil; Ragnarok as the prophesied end and renewal of the world.",practices:"Blot sacrificial feasts, seidr magic, runic divination, and funerary ship burials.",spread:"Scandinavia, Iceland, and Germanic territories; carried by Vikings to Britain and beyond.",schisms:"No formal sects; regional variations existed between Scandinavian, Anglo-Saxon, and Continental forms.",texts:"Poetic Edda, Prose Edda by Snorri Sturluson, and runic inscriptions.",figures:"Snorri Sturluson (chronicler), legendary figures like Ragnar Lothbrok, and the volva seers.",modern:"Extinct historically; Asatru and Heathenry are modern reconstructionist movements."}},
-{id:"celtic",n:"Celtic Religion",s:-800,e:500,lon:-4,lat:52,x:490,y:190,col:"#a070c0",sz:1.0,region:"Western Europe",family:"Pagan",type:"Ethnic Religion",founder:"None (cultural)",adherents:"Extinct",d:{overview:"The polytheistic religion of the ancient Celtic peoples, deeply tied to nature, the land, and the Otherworld.",beliefs:"Sacred groves and springs; the Otherworld accessible at liminal times; head cult and triple deities.",practices:"Druidic rituals, seasonal festivals (Samhain, Beltane, Imbolc, Lughnasadh), and votive offerings.",spread:"From Central Europe across Gaul, Britain, Ireland, and Iberia during the Iron Age.",schisms:"No formal divisions; regional variations between Gaulish, Brythonic, and Gaelic traditions.",texts:"Oral tradition; Irish mythological cycles recorded by Christian monks centuries later.",figures:"The Druids as a priestly class; legendary figures like Cu Chulainn and the Tuatha De Danann.",modern:"Extinct; Celtic Reconstructionism and Druidry are modern revival movements."}},
-{id:"yoruba",n:"Yoruba Religion",s:-500,e:2025,lon:4,lat:8,x:498,y:270,col:"#e08040",sz:1.2,region:"West Africa",family:"African",type:"Ethnic Religion",founder:"None (cultural)",adherents:"40M+",d:{overview:"The traditional religion of the Yoruba people, centered on orishas (divine spirits) and Olodumare (supreme God).",beliefs:"Olodumare as supreme creator; orishas govern aspects of life; destiny (ori) and reincarnation.",practices:"Divination through Ifa, animal sacrifice, drumming, dance, possession rituals, and initiation.",spread:"From West Africa (Nigeria, Benin) to the Americas through the Atlantic slave trade.",schisms:"Diaspora forms include Santeria (Cuba), Candomble (Brazil), and Vodou (Haiti) as syncretic offshoots.",texts:"Odu Ifa (256 divination chapters) transmitted orally by babalawos (diviners).",figures:"Orunmila (deity of wisdom), Oduduwa (legendary ancestor), and babalawo diviners.",modern:"40 million practitioners in West Africa; millions more in diaspora traditions across the Americas."}},
-{id:"aztec",n:"Aztec Religion",s:1200,e:1521,lon:-99,lat:19,x:210,y:260,col:"#40b080",sz:1.1,region:"Mesoamerica",family:"Americas",type:"Ancient Polytheism",founder:"None (state religion)",adherents:"Extinct",d:{overview:"The state religion of the Aztec Empire, centered on cosmic cycles, blood sacrifice, and the sun god Huitzilopochtli.",beliefs:"The Fifth Sun requires nourishment through sacrifice; cyclical destruction and renewal of the cosmos.",practices:"Human and animal sacrifice, elaborate temple rituals, the tonalpohualli calendar, and flower wars.",spread:"Central Mexico under the Aztec Triple Alliance from the 14th to 16th centuries.",schisms:"No formal schisms; absorbed deities from conquered peoples into an expanding pantheon.",texts:"Codices (Borgia, Mendoza) and post-conquest accounts like the Florentine Codex.",figures:"Tlacaelel (imperial ideologist), Moctezuma II, and the tlamacazqui priestly class.",modern:"Extinct after Spanish conquest; elements survive in Mexican folk Catholicism and Mexica revivalism."}},
-{id:"maya_religion",n:"Maya Religion",s:-2000,e:1697,lon:-90,lat:17,x:220,y:265,col:"#40b080",sz:1.1,region:"Mesoamerica",family:"Americas",type:"Ancient Polytheism",founder:"None (cultural)",adherents:"Extinct (syncretic survival)",d:{overview:"The religion of the ancient Maya civilization, integrating astronomy, kingship, and elaborate ritual.",beliefs:"A layered cosmos of thirteen heavens and nine underworlds; divine kingship; cyclical time.",practices:"Bloodletting rituals, ballgame ceremonies, astronomical observations, and elaborate cave rituals.",spread:"The Yucatan Peninsula, Guatemala, Belize, Honduras, and El Salvador over three millennia.",schisms:"Regional variations between Classic lowland and highland traditions rather than formal divisions.",texts:"Popol Vuh (K'iche' creation epic), the Dresden Codex, and monumental inscriptions.",figures:"K'inich Janaab Pakal of Palenque, the Hero Twins of the Popol Vuh, and ajaw priest-kings.",modern:"Elements survive in contemporary Maya spirituality blended with Catholic practice in Guatemala and Mexico."}},
-{id:"aboriginal",n:"Aboriginal Dreamtime",s:-10000,e:2025,lon:134,lat:-25,x:800,y:320,col:"#e08040",sz:1.1,region:"Oceania",family:"Pagan",type:"Indigenous Tradition",founder:"None (indigenous)",adherents:"500K+",d:{overview:"The spiritual traditions of Aboriginal Australians, centered on the Dreaming — a timeless era of creation.",beliefs:"Ancestral beings shaped the land during the Dreaming; the land itself is sacred and alive.",practices:"Songlines (ceremonial routes), corroborees (ceremonies), rock art, and initiation rites.",spread:"Indigenous to Australia; the oldest continuous spiritual tradition on Earth.",schisms:"No formal divisions; hundreds of distinct Aboriginal nations each hold unique Dreaming stories.",texts:"Oral tradition transmitted through song, dance, and art across at least 65,000 years.",figures:"No singular founders; elders maintain and transmit Dreaming knowledge within each nation.",modern:"Approximately 500,000 Aboriginal Australians maintain aspects of Dreaming traditions today."}},
-{id:"stoicism",n:"Stoicism",s:-300,e:2025,lon:28,lat:37,x:530,y:222,col:"#a070c0",sz:1.0,region:"Mediterranean",family:"Pagan",type:"Philosophical Tradition",founder:"Zeno of Citium",adherents:"Modern revival",d:{overview:"An ancient Greek philosophical school teaching virtue, reason, and acceptance of what one cannot control.",beliefs:"Virtue is the sole good; live according to nature and reason; the universe is rationally ordered.",practices:"Daily reflection, journaling, negative visualization, and disciplined self-examination.",spread:"From Athens throughout the Roman Empire; embraced by emperors and enslaved persons alike.",schisms:"Early, Middle, and Late Stoa represent evolving emphases rather than formal breaks.",texts:"Meditations (Marcus Aurelius), Discourses (Epictetus), Letters (Seneca).",figures:"Zeno of Citium, Epictetus, Seneca, Marcus Aurelius, and Chrysippus.",modern:"Major modern revival as a secular philosophy of resilience; Stoic Week attracts global participants."}},
-{id:"inca_religion",n:"Inca Religion",s:1200,e:1572,lon:-72,lat:-13,x:260,y:300,col:"#40b080",sz:1.0,region:"South America",family:"Americas",type:"Ancient Polytheism",founder:"None (state religion)",adherents:"Extinct (syncretic survival)",d:{overview:"The state religion of the Inca Empire centered on Inti (the sun god) and the sacred landscape.",beliefs:"The Sapa Inca as divine descendant of Inti; huacas (sacred places) pervade the landscape.",practices:"Capacocha child offerings, ancestor mummification, divination, and ceque line pilgrimages.",spread:"Along the Andes from Ecuador to Chile under the Tawantinsuyu empire.",schisms:"No formal schisms; integrated conquered peoples' deities into the state cult.",texts:"No writing system; oral tradition preserved through quipu knot records.",figures:"Pachacuti (empire builder), Mama Ocllo, and the Villac Umu high priest.",modern:"Extinct formally; Andean folk Catholicism preserves elements like Inti Raymi festivals."}},
-{id:"slavic",n:"Slavic Religion",s:-500,e:1100,lon:30,lat:52,x:530,y:190,col:"#a070c0",sz:1.0,region:"Eastern Europe",family:"Pagan",type:"Ethnic Religion",founder:"None (cultural)",adherents:"Extinct",d:{overview:"The pre-Christian polytheistic religion of the Slavic peoples, venerating nature deities and ancestors.",beliefs:"Gods of thunder (Perun), fertility (Mokosh), and the underworld (Veles); animistic worldview.",practices:"Seasonal festivals, sacred bonfires, idol worship, and offerings at natural shrines.",spread:"Eastern, Western, and Southern Slavic territories from the Baltic to the Balkans.",schisms:"Regional variations rather than formal divisions; ended with Christianization by the 12th century.",texts:"No surviving sacred texts; reconstructed from chronicles, folklore, and archaeological finds.",figures:"Perun and Veles as chief deities; Prince Vladimir oversaw Christianization of the Kievan Rus.",modern:"Extinct; Rodnovery is a modern Slavic neopagan reconstructionist movement."}},
-{id:"manichaeism",n:"Manichaeism",s:240,e:1400,lon:64,lat:33,x:600,y:230,col:"#a070c0",sz:1.0,region:"Persia",family:"Pagan",type:"Syncretic Religion",founder:"Mani",adherents:"Extinct",d:{overview:"A dualistic religion founded by the prophet Mani, blending Zoroastrian, Christian, and Buddhist elements.",beliefs:"Cosmic battle between Light and Darkness; the soul is a particle of light trapped in matter.",practices:"Strict asceticism, vegetarianism, fasting, hymn singing, and confession rituals.",spread:"From Persia across the Roman Empire to China, becoming a world religion before its suppression.",schisms:"Eastern (Central Asian) and Western (Roman) branches developed distinct liturgical traditions.",texts:"Mani's writings including the Shabuhragan and the Living Gospel, mostly lost.",figures:"Mani, Augustine of Hippo (former adherent), and the Uyghur khagans who adopted it.",modern:"Extinct by the 15th century; one of history's most widespread but ultimately vanished religions."}},
-{id:"gnosticism",n:"Gnosticism",s:100,e:400,lon:31,lat:30,x:530,y:238,col:"#a070c0",sz:0.9,region:"Mediterranean",family:"Pagan",type:"Esoteric Tradition",founder:"Various teachers",adherents:"Extinct (influence survives)",d:{overview:"A diverse set of ancient religious movements emphasizing secret knowledge (gnosis) for spiritual liberation.",beliefs:"The material world is flawed, created by a lesser demiurge; the true God is transcendent and unknowable.",practices:"Initiatory rituals, meditation on sacred texts, and contemplation of divine emanations.",spread:"Flourished across the Roman Empire in the 2nd-3rd centuries before orthodox Christian suppression.",schisms:"Valentinianism, Sethianism, and Mandaeism represent distinct Gnostic schools.",texts:"Nag Hammadi library including the Gospel of Thomas, Gospel of Philip, and Apocryphon of John.",figures:"Valentinus, Basilides, Simon Magus, and the authors of the Nag Hammadi texts.",modern:"Extinct as organized movements; Mandaeism survives; Gnostic ideas influence modern esotericism."}},
-{id:"druze",n:"Druze",s:1017,e:2025,lon:36,lat:34,x:543,y:228,col:"#6090d0",sz:0.9,region:"Middle East",family:"Abrahamic",type:"Esoteric Religion",founder:"Hamza ibn Ali",adherents:"1M",d:{overview:"A monotheistic esoteric faith originating from Ismaili Islam, emphasizing reincarnation and inner wisdom.",beliefs:"Strict monotheism; reincarnation of souls; Al-Hakim bi-Amr Allah as a divine manifestation.",practices:"Closed community with no conversion; Thursday evening prayer meetings; ethical living and honesty.",spread:"Concentrated in Lebanon, Syria, Israel, and Jordan since the 11th century.",schisms:"The Druze community has remained remarkably unified with no major sectarian divisions.",texts:"Rasa'il al-Hikma (Epistles of Wisdom), accessible only to the initiated (uqqal).",figures:"Hamza ibn Ali, Al-Hakim bi-Amr Allah, and the spiritual leaders known as ajawid.",modern:"Approximately 1 million adherents concentrated in the Levant with small diaspora communities."}},
-{id:"sufism",n:"Sufism",s:750,e:2025,lon:48,lat:32,x:562,y:232,col:"#6090d0",sz:1.1,region:"Middle East",family:"Abrahamic",type:"Mystical Tradition",founder:"Various masters",adherents:"150M+",d:{overview:"The mystical dimension of Islam, seeking direct personal experience of the Divine through love and devotion.",beliefs:"Union with God through spiritual purification; the heart as the seat of divine knowledge.",practices:"Dhikr (remembrance of God), whirling dance, poetry recitation, and master-disciple relationships.",spread:"From early Islamic centers across the entire Muslim world, especially popular in South Asia and Turkey.",schisms:"Numerous tariqa orders (Qadiriyya, Naqshbandiyya, Mevlevi) with distinct practices and lineages.",texts:"Poetry of Rumi, works of Ibn Arabi, Al-Ghazali's Revival of the Religious Sciences.",figures:"Rumi, Ibn Arabi, Al-Ghazali, Rabia al-Adawiyya, and Mansur al-Hallaj.",modern:"Over 150 million practitioners; Rumi is the best-selling poet in the United States."}},
-{id:"kabbalah",n:"Kabbalah",s:1100,e:2025,lon:33,lat:33,x:538,y:230,col:"#6090d0",sz:0.9,region:"Middle East",family:"Abrahamic",type:"Mystical Tradition",founder:"Various rabbis",adherents:"Unknown",d:{overview:"The mystical and esoteric tradition within Judaism, exploring the hidden dimensions of Torah and creation.",beliefs:"Ten sefirot (divine emanations) structure reality; Ein Sof as the infinite, unknowable God.",practices:"Meditation on Hebrew letters, study of the Zohar, prayer with mystical intention (kavanah).",spread:"Developed in Provence and Spain; spread through Safed, Eastern Europe (Hasidism), and the modern world.",schisms:"Lurianic and Cordoverian schools represent distinct systematic approaches to Kabbalistic thought.",texts:"The Zohar, Sefer Yetzirah, Bahir, and the writings of Isaac Luria.",figures:"Shimon bar Yochai (traditional), Moses de Leon, Isaac Luria, and the Baal Shem Tov.",modern:"Integral to Hasidic Judaism; popularized in secular culture through the Kabbalah Centre."}},
-{id:"zen",n:"Zen Buddhism",s:520,e:2025,lon:120,lat:32,x:785,y:232,col:"#f0c040",sz:1.1,region:"East Asia",family:"Dharmic",type:"Buddhist School",founder:"Bodhidharma",adherents:"20M+",d:{overview:"A school of Mahayana Buddhism emphasizing meditation (zazen) and direct insight into one's true nature.",beliefs:"Buddha-nature is inherent in all beings; enlightenment through direct experience, not scripture alone.",practices:"Seated meditation (zazen), koan study, mindful work, tea ceremony, and calligraphy.",spread:"From China (Chan) to Japan, Korea (Seon), and Vietnam (Thien), then to the West in the 20th century.",schisms:"Rinzai (koan emphasis) and Soto (shikantaza — just sitting) are the main Japanese lineages.",texts:"Platform Sutra, Blue Cliff Record, Mumonkan (Gateless Gate), and Shobogenzo by Dogen.",figures:"Bodhidharma, Huineng, Dogen, Hakuin, and D.T. Suzuki (Western transmission).",modern:"20 million practitioners; deeply influential in Western mindfulness, art, and design aesthetics."}},
-{id:"tibetan_buddhism",n:"Tibetan Buddhism",s:640,e:2025,lon:90,lat:30,x:710,y:237,col:"#f0c040",sz:1.1,region:"Central Asia",family:"Dharmic",type:"Buddhist School",founder:"Padmasambhava",adherents:"20M",d:{overview:"A form of Vajrayana Buddhism blending Indian tantra with indigenous Bon elements in the Tibetan plateau.",beliefs:"Buddha-nature; bodhisattva ideal; tantric transformation of poisons into wisdom; tulku reincarnation.",practices:"Mantra recitation, visualization, mandala creation, prostrations, and debate among monks.",spread:"Tibet, Mongolia, Bhutan, Nepal, and parts of Russia (Buryatia, Kalmykia, Tuva).",schisms:"Four main schools: Nyingma, Kagyu, Sakya, and Gelug (led by the Dalai Lama).",texts:"Kangyur and Tengyur (Tibetan Buddhist canon), Tibetan Book of the Dead (Bardo Thodol).",figures:"Padmasambhava, Tsongkhapa, Milarepa, and the successive Dalai Lamas.",modern:"20 million adherents; global visibility through the Dalai Lama and Tibetan diaspora."}},
-{id:"korean_shamanism",n:"Korean Shamanism",s:-2000,e:2025,lon:127,lat:37,x:795,y:222,col:"#e05050",sz:0.9,region:"East Asia",family:"East Asian",type:"Ethnic Religion",founder:"None (indigenous)",adherents:"Unknown (millions)",d:{overview:"The indigenous shamanic tradition of Korea, known as Muism or Sinism, centered on mudang priestesses.",beliefs:"Spirits (shin) of ancestors, nature, and the dead require appeasement and communication.",practices:"Gut rituals performed by mudang shamans with dance, trance, song, and colorful costumes.",spread:"Endemic to the Korean peninsula; influenced by and coexisting with Buddhism and Confucianism.",schisms:"No formal divisions; regional styles differ between northern and southern Korean shamanic practice.",texts:"Oral tradition; myths recorded in the Samguk Yusa and shamanic song cycles.",figures:"Mudang (female shamans), Princess Bari (mythological first shaman), and ritual specialists.",modern:"Persists in South Korea as Intangible Cultural Heritage; gut rituals performed regularly."}},
-{id:"polynesian",n:"Polynesian Religion",s:-1500,e:2025,lon:-150,lat:-15,x:145,y:300,col:"#e08040",sz:1.0,region:"Oceania",family:"Pagan",type:"Indigenous Tradition",founder:"None (cultural)",adherents:"Revival movements",d:{overview:"The shared spiritual traditions of Polynesian peoples, centered on mana, tapu, and ancestral navigation.",beliefs:"Mana as sacred power; tapu (taboo) as spiritual restriction; gods like Tangaroa, Tu, and Rongo.",practices:"Navigation by stars, temple (marae) rituals, tattoo as sacred art, hula and chant.",spread:"Across the Polynesian Triangle from Hawaii to New Zealand to Easter Island.",schisms:"Each island group developed distinct pantheons while sharing core concepts of mana and tapu.",texts:"Oral traditions; the Kumulipo (Hawaiian creation chant) and Maori whakapapa genealogies.",figures:"Maui (trickster demigod), Tu (god of war), navigators who settled the Pacific islands.",modern:"Revival movements in Hawaii, New Zealand, and Tahiti reclaim traditional spiritual practices."}},
-{id:"tengrism",n:"Tengrism",s:-3000,e:2025,lon:90,lat:47,x:710,y:195,col:"#a070c0",sz:1.0,region:"Central Asia",family:"Pagan",type:"Ethnic Religion",founder:"None (indigenous)",adherents:"Revival",d:{overview:"The ancient sky-god religion of the Turkic and Mongol peoples of the Central Asian steppe.",beliefs:"Tengri (Eternal Blue Sky) as supreme deity; harmony between heaven, earth, and humanity.",practices:"Sky worship, animal sacrifice, shamanic rituals, ovoo cairn veneration, and horse-centered ceremonies.",spread:"Across the Eurasian steppe from Hungary to Manchuria under Turkic and Mongol empires.",schisms:"No formal divisions; absorbed into Islam and Buddhism over centuries of conversion.",texts:"Orkhon inscriptions; otherwise oral tradition recorded in later chronicles.",figures:"Genghis Khan (devoted Tengrist), Bilge Khagan, and traditional Mongol shamans.",modern:"Revival movements in Mongolia, Turkey, Kyrgyzstan, and among diaspora Turkic peoples."}},
-{id:"quaker",n:"Quakerism",s:1652,e:2025,lon:-2,lat:54,x:488,y:188,col:"#6090d0",sz:0.8,region:"Western Europe",family:"Abrahamic",type:"Christian Denomination",founder:"George Fox",adherents:"380K",d:{overview:"A Christian movement emphasizing the Inner Light of God in every person and silent worship.",beliefs:"Direct experience of God without intermediaries; equality of all persons; peace testimony.",practices:"Unprogrammed silent worship, consensus decision-making, and social justice activism.",spread:"From England to colonial America; global missions established in Kenya, Bolivia, and elsewhere.",schisms:"Liberal, Conservative, and Evangelical branches differ on theology and worship style.",texts:"George Fox's Journal, Robert Barclay's Apology, and the Bible.",figures:"George Fox, Margaret Fell, William Penn, John Woolman, and Lucretia Mott.",modern:"380,000 members worldwide; known for pacifism, prison reform, and social justice advocacy."}},
-{id:"methodist",n:"Methodism",s:1738,e:2025,lon:-2,lat:52,x:488,y:192,col:"#6090d0",sz:1.0,region:"Western Europe",family:"Abrahamic",type:"Christian Denomination",founder:"John Wesley",adherents:"80M",d:{overview:"A Protestant Christian movement emphasizing personal holiness, social gospel, and methodical devotion.",beliefs:"Prevenient grace; personal salvation through faith; sanctification; social holiness.",practices:"Class meetings, hymn singing, circuit riding, charitable work, and temperance advocacy.",spread:"From England to America, then globally through missionary work across Africa and Asia.",schisms:"African Methodist Episcopal, Wesleyan, Free Methodist, and United Methodist are major branches.",texts:"The Bible, John Wesley's sermons, and Charles Wesley's hymns.",figures:"John Wesley, Charles Wesley, Francis Asbury, and Phoebe Palmer.",modern:"80 million members in 138 countries; the United Methodist Church is the largest body."}},
-{id:"pentecostalism",n:"Pentecostalism",s:1901,e:2025,lon:-95,lat:33,x:215,y:230,col:"#6090d0",sz:1.3,region:"North America",family:"Abrahamic",type:"Christian Denomination",founder:"Charles Parham / William Seymour",adherents:"280M",d:{overview:"A Christian movement emphasizing baptism in the Holy Spirit, speaking in tongues, and divine healing.",beliefs:"Baptism of the Holy Spirit with evidence of speaking in tongues; gifts of the Spirit active today.",practices:"Ecstatic worship, glossolalia, faith healing, prophecy, and exorcism.",spread:"From Azusa Street Revival (1906) to become the fastest-growing Christian movement worldwide.",schisms:"Classical Pentecostal, Charismatic, and Neo-Charismatic waves represent successive expansions.",texts:"The Bible, with emphasis on Acts of the Apostles and Paul's letters on spiritual gifts.",figures:"William Seymour, Charles Parham, Aimee Semple McPherson, and David Yonggi Cho.",modern:"280 million adherents; especially strong growth in Africa, Latin America, and Asia."}},
-{id:"mormonism",n:"Mormonism",s:1830,e:2025,lon:-112,lat:41,x:195,y:215,col:"#6090d0",sz:1.0,region:"North America",family:"Abrahamic",type:"New Religious Movement",founder:"Joseph Smith",adherents:"17M",d:{overview:"A restorationist Christian movement founded on additional scripture revealed to Joseph Smith in 19th-century America.",beliefs:"Continuing revelation; the Book of Mormon as scripture; celestial marriage; three degrees of glory.",practices:"Temple ordinances, missionary service, tithing, Word of Wisdom health code, and genealogy.",spread:"From New York to Utah; global missionary program established congregations in 160+ countries.",schisms:"Community of Christ and various fundamentalist groups separated from the main LDS Church.",texts:"Book of Mormon, Doctrine and Covenants, Pearl of Great Price, and the Bible.",figures:"Joseph Smith, Brigham Young, and successive prophets of the LDS Church.",modern:"17 million members worldwide; headquartered in Salt Lake City with a global missionary force."}},
-{id:"jehovahs_witnesses",n:"Jehovah's Witnesses",s:1870,e:2025,lon:-80,lat:40,x:235,y:215,col:"#6090d0",sz:0.9,region:"North America",family:"Abrahamic",type:"Christian Denomination",founder:"Charles Taze Russell",adherents:"8.7M",d:{overview:"A non-trinitarian Christian denomination known for door-to-door evangelism and millennial expectations.",beliefs:"Jehovah as God's name; Jesus as God's first creation; imminent Armageddon; paradise earth.",practices:"Kingdom Hall meetings, door-to-door preaching, Bible study, and refusal of blood transfusions.",spread:"From Pennsylvania worldwide through an organized global preaching work in 240 lands.",schisms:"Bible Students movement continued separately after doctrinal disputes in the early 20th century.",texts:"The Bible (New World Translation), Watchtower and Awake! publications.",figures:"Charles Taze Russell, Joseph Rutherford, and the Governing Body.",modern:"8.7 million active publishers; known for conscientious objection and political neutrality."}},
-{id:"scientology",n:"Scientology",s:1954,e:2025,lon:-118,lat:34,x:185,y:230,col:"#c0c0c0",sz:0.8,region:"North America",family:"New",type:"New Religious Movement",founder:"L. Ron Hubbard",adherents:"Disputed (20K–10M)",d:{overview:"A set of beliefs and practices created by L. Ron Hubbard focused on spiritual rehabilitation through auditing.",beliefs:"The thetan (immortal spirit) is burdened by engrams; clearing leads to spiritual freedom.",practices:"Auditing sessions using an E-meter, study of Hubbard's writings, and progressive levels of initiation.",spread:"From the United States to international Celebrity Centres and organizations in dozens of countries.",schisms:"Free Zone and independent Scientologists practice outside the official Church organization.",texts:"Dianetics, the writings and lectures of L. Ron Hubbard spanning millions of words.",figures:"L. Ron Hubbard (founder), David Miscavige (current leader), and various celebrity adherents.",modern:"Membership disputed; the Church maintains significant real estate holdings and legal presence."}},
-{id:"wicca",n:"Wicca",s:1954,e:2025,lon:-1,lat:51,x:490,y:192,col:"#c0c0c0",sz:0.8,region:"Western Europe",family:"New",type:"New Religious Movement",founder:"Gerald Gardner",adherents:"1M+",d:{overview:"A modern pagan witchcraft religion drawing on pre-Christian traditions, ceremonial magic, and nature worship.",beliefs:"The Goddess and God as dual divinity; the Wheel of the Year; the Wiccan Rede ('harm none').",practices:"Sabbat and esbat rituals, casting circles, herbalism, divination, and spellwork.",spread:"From England to North America and Australia; now practiced in diverse forms globally.",schisms:"Gardnerian, Alexandrian, Dianic, and eclectic Wicca represent distinct lineages and approaches.",texts:"Book of Shadows (liturgical), works of Gerald Gardner, Doreen Valiente, and Starhawk.",figures:"Gerald Gardner, Doreen Valiente, Alex Sanders, Starhawk, and Scott Cunningham.",modern:"Over 1 million practitioners; part of the broader neopagan and earth spirituality movement."}},
-{id:"rastafari",n:"Rastafari",s:1930,e:2025,lon:-77,lat:18,x:240,y:262,col:"#c0c0c0",sz:0.9,region:"Caribbean",family:"New",type:"New Religious Movement",founder:"Leonard Howell and others",adherents:"1M+",d:{overview:"An Afrocentric spiritual movement from Jamaica venerating Haile Selassie I as the returned messiah.",beliefs:"Haile Selassie as Jah incarnate; Africa (Zion) as the promised land; Babylon as oppressive Western society.",practices:"Reasoning sessions, Nyabinghi drumming, ital dietary laws, sacramental use of cannabis, and dreadlocks.",spread:"From Jamaica to the wider Caribbean, Africa, Europe, and globally through reggae music.",schisms:"Nyabinghi, Bobo Ashanti, and Twelve Tribes of Israel are the main mansions (orders).",texts:"The Bible (especially the King James Version), the Holy Piby, and the Kebra Nagast.",figures:"Haile Selassie I, Marcus Garvey (prophet figure), Leonard Howell, and Bob Marley.",modern:"Over 1 million adherents worldwide; cultural influence far exceeds its numerical size through reggae."}},
-{id:"new_age",n:"New Age",s:1970,e:2025,lon:-118,lat:34,x:185,y:232,col:"#c0c0c0",sz:0.9,region:"Global",family:"New",type:"Spiritual Movement",founder:"No single founder",adherents:"Tens of millions",d:{overview:"A decentralized spiritual movement blending Eastern mysticism, Western esotericism, and self-help psychology.",beliefs:"Holistic interconnectedness; higher consciousness; channeling; crystal healing; the Age of Aquarius.",practices:"Meditation, yoga, crystal therapy, astrology, channeling, and energy healing (Reiki).",spread:"Emerged in Western counterculture; globalized through publishing, retreats, and digital platforms.",schisms:"No formal structure to split; an umbrella encompassing countless independent practitioners and teachers.",texts:"No canon; influential works include those by Shirley MacLaine, Deepak Chopra, and Eckhart Tolle.",figures:"Helena Blavatsky (precursor), Ram Dass, Deepak Chopra, Eckhart Tolle, and Marianne Williamson.",modern:"Tens of millions engaged in various practices; a multi-billion-dollar wellness and publishing industry."}},
-{id:"secular_humanism",n:"Secular Humanism",s:1850,e:2025,lon:-74,lat:41,x:243,y:215,col:"#c0c0c0",sz:1.0,region:"Global",family:"New",type:"Philosophical Tradition",founder:"No single founder",adherents:"500M+ (nonreligious)",d:{overview:"A philosophical stance affirming human reason, ethics, and naturalism without reliance on supernatural belief.",beliefs:"Human dignity and reason as the basis for ethics; science as the best path to knowledge.",practices:"Ethical deliberation, scientific inquiry, humanist ceremonies (weddings, funerals), and community service.",spread:"Rooted in Enlightenment thought; organized movements in Europe, North America, and India.",schisms:"Secular and religious humanism; positive and negative atheism represent varying emphases.",texts:"Humanist Manifesto I-III, works of Bertrand Russell, Carl Sagan, and the Amsterdam Declaration.",figures:"Robert Ingersoll, Bertrand Russell, Carl Sagan, Paul Kurtz, and the Humanist associations.",modern:"The nonreligious are the fastest-growing demographic in many countries; 500 million+ identify as such."}},
-{id:"unitarian",n:"Unitarian Universalism",s:1825,e:2025,lon:-71,lat:42,x:248,y:213,col:"#c0c0c0",sz:0.8,region:"North America",family:"New",type:"Liberal Religion",founder:"Merged traditions",adherents:"800K",d:{overview:"A liberal religion affirming the inherent worth of every person and drawing wisdom from all traditions.",beliefs:"Seven Principles including dignity, justice, and the free search for truth; no required creed.",practices:"Worship incorporating readings from diverse traditions, social justice activism, and religious education.",spread:"From New England Unitarianism and American Universalism to congregations in 20+ countries.",schisms:"Emerged from the merger of Unitarian and Universalist churches in 1961; internal diversity is a feature.",texts:"No single scripture; draws from the Bible, Buddhist sutras, humanist texts, and poetry.",figures:"William Ellery Channing, Hosea Ballou, Ralph Waldo Emerson, and Susan B. Anthony.",modern:"800,000 members; known for progressive values, LGBTQ+ inclusion, and interfaith engagement."}},
-{id:"cao_dai",n:"Cao Dai",s:1926,e:2025,lon:107,lat:11,x:755,y:272,col:"#c0c0c0",sz:0.8,region:"Southeast Asia",family:"New",type:"Syncretic Religion",founder:"Ngo Van Chieu",adherents:"4M",d:{overview:"A syncretic Vietnamese religion blending Buddhism, Taoism, Confucianism, Christianity, and spiritism.",beliefs:"One supreme God (Cao Dai); all religions share a common origin; the Third Epoch of revelation.",practices:"Prayer, meditation, vegetarianism, seances, and elaborate ceremonies in the Holy See temple.",spread:"Centered in southern Vietnam, especially Tay Ninh province, with small diaspora communities.",schisms:"Several denominations emerged after the founder's death; the Tay Ninh Holy See is the largest body.",texts:"Cao Dai scriptures received through spirit seances and compiled into canonical texts.",figures:"Ngo Van Chieu, Pham Cong Tac, and spiritual figures including Victor Hugo and Sun Yat-sen.",modern:"4 million adherents primarily in Vietnam; the Holy See temple in Tay Ninh is a major landmark."}}
-];
-
-/* ---------- Connections (influence links) ---------- */
-const CONNECTIONS=[
-{from:"zoroastrianism",to:"judaism",label:"Influenced eschatology and angelology"},
-{from:"judaism",to:"christianity",label:"Parent tradition"},
-{from:"christianity",to:"islam",label:"Abrahamic lineage"},
-{from:"judaism",to:"islam",label:"Abrahamic lineage"},
-{from:"hinduism",to:"buddhism",label:"Originated within Vedic culture"},
-{from:"hinduism",to:"jainism",label:"Shared Shramana origins"},
-{from:"buddhism",to:"zen",label:"Chan/Zen school transmission"},
-{from:"buddhism",to:"tibetan_buddhism",label:"Vajrayana transmission to Tibet"},
-{from:"greek_religion",to:"roman_religion",label:"Mythological adoption and adaptation"},
-{from:"confucianism",to:"korean_shamanism",label:"Cultural overlay and coexistence"},
-{from:"islam",to:"sufism",label:"Mystical inner dimension"},
-{from:"judaism",to:"kabbalah",label:"Mystical inner tradition"},
-{from:"christianity",to:"gnosticism",label:"Heterodox esoteric reinterpretation"},
-{from:"yoruba",to:"rastafari",label:"African spiritual heritage in diaspora"},
-{from:"islam",to:"bahai",label:"Emerged from Shia Islam"}
-];
-
-/* ---------- Transmissions (concept threads) ---------- */
-const TRANSMISSIONS=[
-{id:"t_mono",n:"Rise of Monotheism",desc:"The emergence of one-God theology from Akhenaten through Zoroaster, Judaism, Christianity, and Islam.",chain:["egyptian","zoroastrianism","judaism","christianity","islam","bahai"]},
-{id:"t_meditate",n:"Meditation Traditions",desc:"Contemplative practices traveling from India along the Silk Road to East Asia and the modern West.",chain:["hinduism","buddhism","zen","tibetan_buddhism"]},
-{id:"t_mystical",n:"Mystical Currents",desc:"Inner esoteric traditions that emerged within mainstream religions seeking direct divine experience.",chain:["hinduism","kabbalah","sufism","gnosticism"]},
-{id:"t_reform",n:"Christian Reformation",desc:"The splintering of Western Christianity from Catholic unity through successive reform movements.",chain:["christianity","quaker","methodist","pentecostalism"]},
-{id:"t_dharmic",n:"Dharmic Traditions",desc:"The family of religions arising from the Indian subcontinent sharing concepts of karma and liberation.",chain:["hinduism","buddhism","jainism","sikhism"]},
-{id:"t_african_diaspora",n:"African Diaspora Spirituality",desc:"West African religious practices carried across the Atlantic and transformed in the Americas.",chain:["yoruba","rastafari"]},
-{id:"t_axial",n:"Axial Age Awakening",desc:"The parallel emergence of philosophical and ethical traditions across Eurasia around 500 BCE.",chain:["zoroastrianism","judaism","buddhism","confucianism","taoism","greek_religion","stoicism"]},
-{id:"t_new_movements",n:"Modern New Religions",desc:"The proliferation of new religious movements in the 19th and 20th centuries.",chain:["mormonism","bahai","scientology","wicca","cao_dai"]},
-{id:"t_nature",n:"Nature Spirituality",desc:"The thread of nature-centered spirituality from prehistoric animism to modern earth religions.",chain:["animism","shamanism","celtic","shinto","wicca"]},
-{id:"t_silk_road",n:"Silk Road Religions",desc:"Faiths transmitted along the great trade routes connecting East and West.",chain:["zoroastrianism","manichaeism","buddhism","islam"]}
-];
-
-/* ============================================================
-   RENDERING — Utilities & Core Functions
-   ============================================================ */
-
-/* ---------- State ---------- */
-let curYear=2025, curLens="overview", curBelief=null, playing=false, playTimer=null;
-let compareA=null, compareB=null;
-const FAMILY_COL={Dharmic:"#f0c040",Abrahamic:"#6090d0","East Asian":"#e05050",Pagan:"#a070c0",African:"#e08040",Americas:"#40b080",New:"#c0c0c0"};
-const MIN_YEAR=-10000, MAX_YEAR=2025;
-
-/* ---------- Utility ---------- */
-function fmtYear(y){return y<0?Math.abs(y)+" BCE":y+" CE";}
-function eraForYear(y){let e=ERAS[0];for(const er of ERAS)if(y>=er.y)e=er;return e.n;}
-function beliefsAtYear(y){return BELIEFS.filter(b=>b.s<=y&&b.e>=y);}
-function yearToSlider(y){return((y-MIN_YEAR)/(MAX_YEAR-MIN_YEAR))*1000;}
-function sliderToYear(v){return Math.round(MIN_YEAR+(v/1000)*(MAX_YEAR-MIN_YEAR));}
-function $(id){return document.getElementById(id);}
-
-/* ---------- renderDensityBar ---------- */
-function renderDensityBar(){
-  const canvas=$("density-bar");
-  if(!canvas)return;
-  const ctx=canvas.getContext("2d");
-  const w=canvas.parentElement.clientWidth;
-  canvas.width=w; canvas.height=14;
-  ctx.clearRect(0,0,w,14);
-  const steps=200;
-  for(let i=0;i<steps;i++){
-    const y=sliderToYear((i/steps)*1000);
-    const active=beliefsAtYear(y);
-    const intensity=Math.min(active.length/25,1);
-    ctx.fillStyle=`rgba(232,152,32,${0.05+intensity*0.5})`;
-    ctx.fillRect((i/steps)*w,0,w/steps+1,14);
-  }
-}
-
-/* ---------- setYear ---------- */
-function setYear(y){
-  curYear=Math.max(MIN_YEAR,Math.min(MAX_YEAR,y));
-  $("tl-year").textContent=fmtYear(curYear);
-  $("year-display").textContent=fmtYear(curYear);
-  const era=eraForYear(curYear);
-  $("era-display").textContent=era;
-  $("tl-era-label").textContent=era;
-  $("tl-slider").value=yearToSlider(curYear);
-  renderMap();
-}
-
-/* ---------- renderLensDD ---------- */
-function renderLensDD(){
-  const bar=$("lens-bar");
-  bar.innerHTML="";
-  LENSES.forEach(l=>{
-    const pill=document.createElement("button");
-    pill.className="lens-pill"+(l.id===curLens?" active":"");
-    pill.textContent=l.ico+" "+l.n;
-    pill.onclick=()=>{curLens=l.id;renderLensDD();if(curBelief)renderDrawer(curBelief);};
-    pill.setAttribute("aria-pressed",l.id===curLens?"true":"false");
-    bar.appendChild(pill);
-  });
-}
-
-/* ---------- renderWorldMap (D3/TopoJSON) ---------- */
-function renderWorldMap(topo){
-  const svg=d3.select("#map-svg");
-  const projection=d3.geoNaturalEarth1().scale(160).translate([500,280]);
-  const path=d3.geoPath().projection(projection);
-  const land=topojson.feature(topo,topo.objects.countries||topo.objects.land);
-  svg.select("#map-layer").selectAll("path").remove();
-  svg.select("#map-layer").selectAll("path")
-    .data(land.features||[land])
-    .enter().append("path")
-    .attr("d",path)
-    .attr("class","land")
-    .attr("fill","var(--land)")
-    .attr("stroke","var(--bdr2)")
-    .attr("stroke-width",0.4);
-}
-
-/* ---------- renderMap (markers, labels, connections) ---------- */
-function renderMap(){
-  const svg=d3.select("#map-svg");
-  const active=beliefsAtYear(curYear);
-  const activeIds=new Set(active.map(b=>b.id));
-
-  /* Markers */
-  const mg=svg.select("#markers-group");
-  mg.selectAll("*").remove();
-  active.forEach(b=>{
-    const col=FAMILY_COL[b.family]||b.col;
-    const g=mg.append("g").attr("class","marker").attr("transform",`translate(${b.x},${b.y})`)
-      .attr("data-id",b.id)
-      .on("click",()=>openBelief(b.id))
-      .on("mouseenter",(ev)=>showTooltip(ev,b))
-      .on("mouseleave",hideTooltip);
-    g.append("circle").attr("r",b.sz*6).attr("fill",col).attr("opacity",0.18);
-    g.append("circle").attr("r",b.sz*3).attr("fill",col).attr("opacity",0.7);
-    if(curBelief&&curBelief.id===b.id) g.classed("active-marker",true);
-  });
-
-  /* Labels */
-  const lg=svg.select("#labels-group");
-  lg.selectAll("*").remove();
-  active.forEach(b=>{
-    lg.append("text").attr("class","marker-label")
-      .attr("x",b.x).attr("y",b.y+b.sz*3+9)
-      .text(b.n);
-  });
-
-  /* Connections */
-  const cg=svg.select("#connections-group");
-  cg.selectAll("*").remove();
-  CONNECTIONS.forEach(c=>{
-    const fa=BELIEFS.find(b=>b.id===c.from);
-    const ta=BELIEFS.find(b=>b.id===c.to);
-    if(!fa||!ta)return;
-    if(!activeIds.has(fa.id)||!activeIds.has(ta.id))return;
-    cg.append("line").attr("class","connection-line")
-      .attr("x1",fa.x).attr("y1",fa.y)
-      .attr("x2",ta.x).attr("y2",ta.y);
-  });
-}
-
-/* ---------- renderDrawer ---------- */
-function renderDrawer(b){
-  curBelief=b;
-  const panel=$("info-panel");
-  panel.classList.remove("collapsed");
-  $("panel-title").textContent=b.n;
-  $("panel-subtitle").textContent=`${b.type} · ${b.region} · ${fmtYear(b.s)} – ${fmtYear(b.e)}`;
-
-  /* Meta tags */
-  const meta=$("panel-meta");
-  meta.innerHTML="";
-  [{l:"Family",v:b.family},{l:"Adherents",v:b.adherents},{l:"Founder",v:b.founder}].forEach(t=>{
-    const span=document.createElement("span");
-    span.className="meta-tag";
-    span.textContent=t.l+": "+t.v;
-    meta.appendChild(span);
-  });
-
-  /* Lens body */
-  const body=$("panel-body");
-  body.innerHTML="";
-  if(curLens==="overview"){
-    LENSES.forEach(l=>{
-      if(!b.d[l.id])return;
-      const sec=document.createElement("div");
-      sec.className="lens-section fade-in";
-      sec.innerHTML=`<div class="lens-section-title"><span class="ico">${l.ico}</span>${l.n}</div><div class="lens-section-body">${b.d[l.id]}</div>`;
-      body.appendChild(sec);
-    });
-  } else {
-    const l=LENSES.find(l=>l.id===curLens);
-    if(l&&b.d[l.id]){
-      const sec=document.createElement("div");
-      sec.className="lens-section fade-in";
-      sec.innerHTML=`<div class="lens-section-title"><span class="ico">${l.ico}</span>${l.n}</div><div class="lens-section-body">${b.d[l.id]}</div>`;
-      body.appendChild(sec);
-    } else {
-      body.innerHTML=`<p style="color:var(--txt-dim);font-style:italic;">No ${curLens} data for this tradition.</p>`;
-    }
-  }
-
-  /* Related connections */
-  const related=CONNECTIONS.filter(c=>c.from===b.id||c.to===b.id);
-  if(related.length){
-    const sec=document.createElement("div");
-    sec.className="lens-section fade-in";
-    let html='<div class="lens-section-title"><span class="ico">🔗</span>Connections</div><div class="lens-section-body">';
-    related.forEach(c=>{
-      const other=c.from===b.id?c.to:c.from;
-      const ob=BELIEFS.find(x=>x.id===other);
-      if(ob) html+=`<div style="margin-bottom:4px;"><a href="#" onclick="event.preventDefault();openBelief('${ob.id}')" style="color:var(--link);">${ob.n}</a> — <span style="color:var(--txt-dim);font-size:0.85rem;">${c.label}</span></div>`;
-    });
-    html+='</div>';
-    sec.innerHTML=html;
-    body.appendChild(sec);
-  }
-
-  renderMap();
-}
-
-/* ============================================================
-   INTERACTION — Click Handlers, Zoom/Pan, Views
-   ============================================================ */
-
-/* ---------- Open / Close Belief ---------- */
-function openBelief(id){
-  const b=BELIEFS.find(x=>x.id===id);
-  if(!b)return;
-  renderDrawer(b);
-  closeBurger();
-}
-
-function closePanel(){
-  $("info-panel").classList.add("collapsed");
-  curBelief=null;
-  renderMap();
-}
-
-/* ---------- Tooltip ---------- */
-function showTooltip(ev,b){
-  const tt=$("tooltip");
-  tt.style.display="block";
-  tt.textContent=`${b.n} · ${b.type} · ${b.adherents}`;
-  const rect=ev.target.getBoundingClientRect?ev.target.getBoundingClientRect():{left:ev.pageX,top:ev.pageY};
-  tt.style.left=(rect.left+20)+"px";
-  tt.style.top=(rect.top-10)+"px";
-}
-function hideTooltip(){$("tooltip").style.display="none";}
-
-/* ---------- Zoom / Pan ---------- */
-let zoomLevel=1, panX=0, panY=0, dragging=false, dragStart={x:0,y:0};
-
-function applyTransform(){
-  const g=document.getElementById("world-group");
-  if(g) g.setAttribute("transform",`translate(${panX},${panY}) scale(${zoomLevel})`);
-}
-
-function zoomIn(){zoomLevel=Math.min(zoomLevel*1.3,8);applyTransform();}
-function zoomOut(){zoomLevel=Math.max(zoomLevel/1.3,0.5);applyTransform();}
-function resetZoom(){zoomLevel=1;panX=0;panY=0;applyTransform();}
-
-function initPan(){
-  const mc=$("map-container");
-  mc.addEventListener("mousedown",e=>{
-    if(e.target.closest(".marker")||e.target.closest(".float-btn"))return;
-    dragging=true;dragStart={x:e.clientX-panX,y:e.clientY-panY};
-  });
-  window.addEventListener("mousemove",e=>{
-    if(!dragging)return;
-    panX=e.clientX-dragStart.x; panY=e.clientY-dragStart.y;
-    applyTransform();
-  });
-  window.addEventListener("mouseup",()=>{dragging=false;});
-  mc.addEventListener("wheel",e=>{
-    e.preventDefault();
-    if(e.deltaY<0)zoomIn(); else zoomOut();
-  },{passive:false});
-}
-
-/* ---------- Timeline Slider ---------- */
-function onSliderInput(v){setYear(sliderToYear(Number(v)));}
-
-function togglePlay(){
-  playing=!playing;
-  $("tl-play").textContent=playing?"⏸":"▶";
-  if(playing){
-    playTimer=setInterval(()=>{
-      let next=curYear+25;
-      if(next>MAX_YEAR){next=MIN_YEAR;}
-      setYear(next);
-    },120);
-  } else {
-    clearInterval(playTimer);
-  }
-}
-
-/* ---------- Theme Toggle ---------- */
-function toggleTheme(){
-  const html=document.documentElement;
-  const cur=html.getAttribute("data-theme");
-  const next=cur==="light"?"dark":"light";
-  html.setAttribute("data-theme",next);
-  $("theme-ico").textContent=next==="light"?"☀️":"🌙";
-  $("theme-label").textContent=next==="light"?"Toggle Dark Mode":"Toggle Light Mode";
-}
-
-/* ---------- Burger Menu ---------- */
-function toggleBurger(){
-  const m=$("burger-menu");
-  m.classList.toggle("open");
-  $("burger-btn").setAttribute("aria-expanded",m.classList.contains("open"));
-}
-function closeBurger(){
-  $("burger-menu").classList.remove("open");
-  $("burger-btn").setAttribute("aria-expanded","false");
-}
-
-/* ---------- About Modal ---------- */
-function showAbout(){
-  $("about-modal").classList.add("active");
-  closeBurger();
-}
-function closeAbout(){$("about-modal").classList.remove("active");}
-$("about-modal").addEventListener("click",e=>{
-  if(e.target===$("about-modal"))closeAbout();
-});
-
-/* ---------- Explore / Threads / Compare Views ---------- */
-function showExplore(){
-  $("compare-view").classList.remove("active");
-  $("threads-view").classList.remove("active");
-  $("main").style.display="flex";
-  closeBurger();
-}
-
-function showThreads(){
-  $("main").style.display="none";
-  $("compare-view").classList.remove("active");
-  $("threads-view").classList.add("active");
-  renderThreads();
-  closeBurger();
-}
-
-function renderThreads(){
-  const list=$("threads-list");
-  list.innerHTML="";
-  TRANSMISSIONS.forEach(t=>{
-    const card=document.createElement("div");
-    card.className="thread-card fade-in";
-    let chainHTML='<div class="thread-chain">';
-    t.chain.forEach((id,i)=>{
-      const b=BELIEFS.find(x=>x.id===id);
-      if(b){
-        chainHTML+=`<span class="thread-node">${b.n}</span>`;
-        if(i<t.chain.length-1)chainHTML+='<span class="thread-arrow">→</span>';
-      }
-    });
-    chainHTML+='</div>';
-    card.innerHTML=`<h3>${t.n}</h3><p style="color:var(--txt-dim);font-size:0.88rem;">${t.desc}</p>${chainHTML}`;
-    card.onclick=()=>{
-      showExplore();
-      const first=BELIEFS.find(x=>x.id===t.chain[0]);
-      if(first)openBelief(first.id);
-    };
-    list.appendChild(card);
-  });
-}
-
-function showCompare(){
-  $("main").style.display="none";
-  $("threads-view").classList.remove("active");
-  $("compare-view").classList.add("active");
-  renderCompare();
-  closeBurger();
-}
-
-function renderCompare(){
-  const grid=$("compare-grid");
-  grid.innerHTML="";
-  [["compareA","Left"],["compareB","Right"]].forEach(([key,label])=>{
-    const col=document.createElement("div");
-    col.className="compare-col";
-    col.innerHTML=`<h3>${label}</h3>`;
-    const sel=document.createElement("select");
-    sel.className="compare-select";
-    sel.innerHTML='<option value="">— Select —</option>'+BELIEFS.map(b=>`<option value="${b.id}">${b.n}</option>`).join("");
-    sel.value=(key==="compareA"?compareA:compareB)||"";
-    sel.onchange=()=>{
-      if(key==="compareA")compareA=sel.value; else compareB=sel.value;
-      renderCompareContent(col,sel.value);
-    };
-    col.appendChild(sel);
-    const content=document.createElement("div");
-    content.className="compare-content";
-    col.appendChild(content);
-    grid.appendChild(col);
-    const val=key==="compareA"?compareA:compareB;
-    if(val)renderCompareContent(col,val);
-  });
-}
-
-function renderCompareContent(col,id){
-  const content=col.querySelector(".compare-content");
-  content.innerHTML="";
-  const b=BELIEFS.find(x=>x.id===id);
-  if(!b)return;
-  LENSES.forEach(l=>{
-    if(!b.d[l.id])return;
-    const sec=document.createElement("div");
-    sec.className="lens-section";
-    sec.innerHTML=`<div class="lens-section-title"><span class="ico">${l.ico}</span>${l.n}</div><div class="lens-section-body">${b.d[l.id]}</div>`;
-    content.appendChild(sec);
-  });
-}
-
-/* ---------- Reset View ---------- */
-function resetView(){
-  closePanel();
-  showExplore();
-  setYear(2025);
-  curLens="overview";
-  renderLensDD();
-  resetZoom();
-}
-
-/* ============================================================
-   INIT — Load D3/TopoJSON and Bootstrap
-   ============================================================ */
-function init(){
-  renderLensDD();
-  renderDensityBar();
-  setYear(2025);
-  initPan();
-
-  /* Load world map via TopoJSON */
-  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
-    .then(r=>r.json())
-    .then(topo=>{
-      renderWorldMap(topo);
-      renderMap();
-      /* Fade loading */
-      setTimeout(()=>{
-        const lo=$("loading");
-        lo.classList.add("fade");
-        setTimeout(()=>lo.style.display="none",600);
-      },400);
-    })
-    .catch(()=>{
-      /* Fallback: render without land */
-      renderMap();
-      const lo=$("loading");
-      lo.classList.add("fade");
-      setTimeout(()=>lo.style.display="none",600);
-    });
-
-  /* Resize density bar */
-  window.addEventListener("resize",renderDensityBar);
-
-  /* Keyboard nav */
-  document.addEventListener("keydown",e=>{
-    if(e.key==="Escape"){closePanel();closeAbout();closeBurger();}
-    if(e.key==="ArrowLeft"){setYear(curYear-50);}
-    if(e.key==="ArrowRight"){setYear(curYear+50);}
-  });
-}
-
-document.addEventListener("DOMContentLoaded",init);
+// PLACEHOLDER — data and functions will follow in subsequent phases
 </script>
-
 </body>
 </html>
