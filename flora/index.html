@@ -785,7 +785,7 @@ html, body {
   <div id="subtitle">The Atlas of Plants</div>
   <span id="era-display">Pre-Agriculture</span>
   <span id="year-display">10 000 BCE</span>
-  <button id="burger-btn" aria-label="Open menu" onclick="toggleBurger()">&#9776;</button>
+  <button id="burger-btn" aria-label="Open menu" aria-expanded="false" onclick="toggleBurger()">&#9776;</button>
 </header>
 
 <!-- ========== BURGER MENU ========== -->
@@ -802,7 +802,7 @@ html, body {
 
 <!-- ========== LENS DROPDOWN ========== -->
 <div id="lens-container">
-  <button id="lens-btn" onclick="toggleLensDD()" aria-label="Select lens">
+  <button id="lens-btn" onclick="toggleLensDD()" aria-label="Select lens" aria-expanded="false" aria-haspopup="listbox">
     <span id="lens-ico">&#127807;</span>
     <span id="lens-name">Overview</span>
     <span style="font-size:10px">&#9660;</span>
@@ -1231,6 +1231,7 @@ function renderLensDD(){
 function toggleLensDD(){
   lensOpen=!lensOpen;
   document.getElementById('lens-dd').classList.toggle('open',lensOpen);
+  document.getElementById('lens-btn').setAttribute('aria-expanded',lensOpen);
   if(lensOpen)renderLensDD();
 }
 function toggleLens(id){
@@ -1381,6 +1382,7 @@ function toggleTheme(){
 function toggleBurger(){
   burgerOpen=!burgerOpen;
   document.getElementById('burger-menu').classList.toggle('open',burgerOpen);
+  document.getElementById('burger-btn').setAttribute('aria-expanded',burgerOpen);
 }
 function closeBurger(){
   burgerOpen=false;
