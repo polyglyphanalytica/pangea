@@ -1322,6 +1322,258 @@ function renderDrawer(b){
   renderMap();
 }
 
+/* ============================================================
+   INTERACTION — Click Handlers, Zoom/Pan, Views
+   ============================================================ */
+
+/* ---------- Open / Close Belief ---------- */
+function openBelief(id){
+  const b=BELIEFS.find(x=>x.id===id);
+  if(!b)return;
+  renderDrawer(b);
+  closeBurger();
+}
+
+function closePanel(){
+  $("info-panel").classList.add("collapsed");
+  curBelief=null;
+  renderMap();
+}
+
+/* ---------- Tooltip ---------- */
+function showTooltip(ev,b){
+  const tt=$("tooltip");
+  tt.style.display="block";
+  tt.textContent=`${b.n} · ${b.type} · ${b.adherents}`;
+  const rect=ev.target.getBoundingClientRect?ev.target.getBoundingClientRect():{left:ev.pageX,top:ev.pageY};
+  tt.style.left=(rect.left+20)+"px";
+  tt.style.top=(rect.top-10)+"px";
+}
+function hideTooltip(){$("tooltip").style.display="none";}
+
+/* ---------- Zoom / Pan ---------- */
+let zoomLevel=1, panX=0, panY=0, dragging=false, dragStart={x:0,y:0};
+
+function applyTransform(){
+  const g=document.getElementById("world-group");
+  if(g) g.setAttribute("transform",`translate(${panX},${panY}) scale(${zoomLevel})`);
+}
+
+function zoomIn(){zoomLevel=Math.min(zoomLevel*1.3,8);applyTransform();}
+function zoomOut(){zoomLevel=Math.max(zoomLevel/1.3,0.5);applyTransform();}
+function resetZoom(){zoomLevel=1;panX=0;panY=0;applyTransform();}
+
+function initPan(){
+  const mc=$("map-container");
+  mc.addEventListener("mousedown",e=>{
+    if(e.target.closest(".marker")||e.target.closest(".float-btn"))return;
+    dragging=true;dragStart={x:e.clientX-panX,y:e.clientY-panY};
+  });
+  window.addEventListener("mousemove",e=>{
+    if(!dragging)return;
+    panX=e.clientX-dragStart.x; panY=e.clientY-dragStart.y;
+    applyTransform();
+  });
+  window.addEventListener("mouseup",()=>{dragging=false;});
+  mc.addEventListener("wheel",e=>{
+    e.preventDefault();
+    if(e.deltaY<0)zoomIn(); else zoomOut();
+  },{passive:false});
+}
+
+/* ---------- Timeline Slider ---------- */
+function onSliderInput(v){setYear(sliderToYear(Number(v)));}
+
+function togglePlay(){
+  playing=!playing;
+  $("tl-play").textContent=playing?"⏸":"▶";
+  if(playing){
+    playTimer=setInterval(()=>{
+      let next=curYear+25;
+      if(next>MAX_YEAR){next=MIN_YEAR;}
+      setYear(next);
+    },120);
+  } else {
+    clearInterval(playTimer);
+  }
+}
+
+/* ---------- Theme Toggle ---------- */
+function toggleTheme(){
+  const html=document.documentElement;
+  const cur=html.getAttribute("data-theme");
+  const next=cur==="light"?"dark":"light";
+  html.setAttribute("data-theme",next);
+  $("theme-ico").textContent=next==="light"?"☀️":"🌙";
+  $("theme-label").textContent=next==="light"?"Toggle Dark Mode":"Toggle Light Mode";
+}
+
+/* ---------- Burger Menu ---------- */
+function toggleBurger(){
+  const m=$("burger-menu");
+  m.classList.toggle("open");
+  $("burger-btn").setAttribute("aria-expanded",m.classList.contains("open"));
+}
+function closeBurger(){
+  $("burger-menu").classList.remove("open");
+  $("burger-btn").setAttribute("aria-expanded","false");
+}
+
+/* ---------- About Modal ---------- */
+function showAbout(){
+  $("about-modal").classList.add("active");
+  closeBurger();
+}
+function closeAbout(){$("about-modal").classList.remove("active");}
+$("about-modal").addEventListener("click",e=>{
+  if(e.target===$("about-modal"))closeAbout();
+});
+
+/* ---------- Explore / Threads / Compare Views ---------- */
+function showExplore(){
+  $("compare-view").classList.remove("active");
+  $("threads-view").classList.remove("active");
+  $("main").style.display="flex";
+  closeBurger();
+}
+
+function showThreads(){
+  $("main").style.display="none";
+  $("compare-view").classList.remove("active");
+  $("threads-view").classList.add("active");
+  renderThreads();
+  closeBurger();
+}
+
+function renderThreads(){
+  const list=$("threads-list");
+  list.innerHTML="";
+  TRANSMISSIONS.forEach(t=>{
+    const card=document.createElement("div");
+    card.className="thread-card fade-in";
+    let chainHTML='<div class="thread-chain">';
+    t.chain.forEach((id,i)=>{
+      const b=BELIEFS.find(x=>x.id===id);
+      if(b){
+        chainHTML+=`<span class="thread-node">${b.n}</span>`;
+        if(i<t.chain.length-1)chainHTML+='<span class="thread-arrow">→</span>';
+      }
+    });
+    chainHTML+='</div>';
+    card.innerHTML=`<h3>${t.n}</h3><p style="color:var(--txt-dim);font-size:0.88rem;">${t.desc}</p>${chainHTML}`;
+    card.onclick=()=>{
+      showExplore();
+      const first=BELIEFS.find(x=>x.id===t.chain[0]);
+      if(first)openBelief(first.id);
+    };
+    list.appendChild(card);
+  });
+}
+
+function showCompare(){
+  $("main").style.display="none";
+  $("threads-view").classList.remove("active");
+  $("compare-view").classList.add("active");
+  renderCompare();
+  closeBurger();
+}
+
+function renderCompare(){
+  const grid=$("compare-grid");
+  grid.innerHTML="";
+  [["compareA","Left"],["compareB","Right"]].forEach(([key,label])=>{
+    const col=document.createElement("div");
+    col.className="compare-col";
+    col.innerHTML=`<h3>${label}</h3>`;
+    const sel=document.createElement("select");
+    sel.className="compare-select";
+    sel.innerHTML='<option value="">— Select —</option>'+BELIEFS.map(b=>`<option value="${b.id}">${b.n}</option>`).join("");
+    sel.value=(key==="compareA"?compareA:compareB)||"";
+    sel.onchange=()=>{
+      if(key==="compareA")compareA=sel.value; else compareB=sel.value;
+      renderCompareContent(col,sel.value);
+    };
+    col.appendChild(sel);
+    const content=document.createElement("div");
+    content.className="compare-content";
+    col.appendChild(content);
+    grid.appendChild(col);
+    const val=key==="compareA"?compareA:compareB;
+    if(val)renderCompareContent(col,val);
+  });
+}
+
+function renderCompareContent(col,id){
+  const content=col.querySelector(".compare-content");
+  content.innerHTML="";
+  const b=BELIEFS.find(x=>x.id===id);
+  if(!b)return;
+  LENSES.forEach(l=>{
+    if(!b.d[l.id])return;
+    const sec=document.createElement("div");
+    sec.className="lens-section";
+    sec.innerHTML=`<div class="lens-section-title"><span class="ico">${l.ico}</span>${l.n}</div><div class="lens-section-body">${b.d[l.id]}</div>`;
+    content.appendChild(sec);
+  });
+}
+
+/* ---------- Reset View ---------- */
+function resetView(){
+  closePanel();
+  showExplore();
+  setYear(2025);
+  curLens="overview";
+  renderLensDD();
+  resetZoom();
+}
+
+/* ============================================================
+   INIT — Load D3/TopoJSON and Bootstrap
+   ============================================================ */
+function init(){
+  renderLensDD();
+  renderDensityBar();
+  setYear(2025);
+  initPan();
+
+  /* Load world map via TopoJSON */
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+    .then(r=>r.json())
+    .then(topo=>{
+      renderWorldMap(topo);
+      renderMap();
+      /* Fade loading */
+      setTimeout(()=>{
+        const lo=$("loading");
+        lo.classList.add("fade");
+        setTimeout(()=>lo.style.display="none",600);
+      },400);
+    })
+    .catch(()=>{
+      /* Fallback: render without land */
+      renderMap();
+      const lo=$("loading");
+      lo.classList.add("fade");
+      setTimeout(()=>lo.style.display="none",600);
+    });
+
+  /* Resize density bar */
+  window.addEventListener("resize",renderDensityBar);
+
+  /* Keyboard nav */
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){closePanel();closeAbout();closeBurger();}
+    if(e.key==="ArrowLeft"){setYear(curYear-50);}
+    if(e.key==="ArrowRight"){setYear(curYear+50);}
+  });
+}
+
+document.addEventListener("DOMContentLoaded",init);
 </script>
+
+<!-- D3 & TopoJSON -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+
 </body>
 </html>
