@@ -1646,6 +1646,805 @@ const TRANSMISSIONS = [
   {id:"propaganda",n:"Information Warfare",path:["napoleonic","ww1","ww2","ukraine"],
    desc:"From Napoleon's bulletins to social media and cyber warfare in the modern era."}
 ];
+
+/* ═══════════════════════════════════════════════════════════
+   CORE APPLICATION STATE
+   ═══════════════════════════════════════════════════════════ */
+let state = {
+  year: 2000,
+  selectedWar: null,
+  compareWar: null,
+  activeLenses: ["overview"],
+  mode: "explore",       // explore | threads | compare
+  theme: null,           // null = system, "dark", "light"
+  zoom: 1,
+  panX: 0,
+  panY: 0,
+  isPanning: false,
+  panStartX: 0,
+  panStartY: 0,
+  panStartPanX: 0,
+  panStartPanY: 0,
+  playing: false,
+  playInterval: null
+};
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITY FUNCTIONS
+   ═══════════════════════════════════════════════════════════ */
+
+/** Format year as BCE/CE string */
+function fmt(y) {
+  if (y < 0) return Math.abs(y) + " BCE";
+  if (y === 0) return "1 BCE";
+  return y + " CE";
+}
+
+/** Get era name for a given year */
+function eraName(y) {
+  for (let i = ERAS.length - 1; i >= 0; i--) {
+    if (y >= ERAS[i].s) return ERAS[i].n;
+  }
+  return ERAS[0].n;
+}
+
+/** Check if a war is "active" (ongoing) at the current timeline year */
+function active(w) {
+  return state.year >= w.s && state.year <= w.e;
+}
+
+/** Convert slider value (0-5025) to year (-3000 to 2025) */
+function sliderToYear(v) {
+  return Math.round(v - 3000);
+}
+
+/** Convert year to slider value */
+function yearToSlider(y) {
+  return y + 3000;
+}
+
+/** Find a war by ID */
+function warById(id) {
+  return WARS.find(w => w.id === id);
+}
+
+/** Clamp a value between min and max */
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, v));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SVG WORLD MAP (simplified continent outlines)
+   ═══════════════════════════════════════════════════════════ */
+
+const WORLD_PATHS = [
+  // North America
+  "M 60 120 L 80 80 L 130 70 L 170 75 L 200 90 L 230 100 L 260 120 L 280 150 L 270 180 L 250 200 L 240 230 L 230 240 L 210 250 L 190 240 L 160 230 L 140 220 L 120 200 L 100 180 L 80 170 L 60 150 Z",
+  // Central America & Caribbean
+  "M 190 245 L 210 255 L 220 270 L 225 280 L 215 285 L 200 280 L 190 270 Z",
+  // South America
+  "M 230 285 L 260 280 L 290 290 L 310 310 L 320 340 L 315 370 L 300 400 L 280 430 L 270 440 L 265 430 L 260 400 L 250 380 L 240 350 L 235 330 L 230 310 Z",
+  // Europe
+  "M 410 80 L 430 75 L 460 80 L 490 90 L 510 100 L 520 110 L 510 130 L 500 150 L 490 165 L 475 170 L 460 175 L 445 180 L 435 190 L 425 195 L 415 190 L 410 180 L 405 160 L 400 140 L 405 120 L 410 100 Z",
+  // Africa
+  "M 420 220 L 450 210 L 480 215 L 510 225 L 540 240 L 550 260 L 555 290 L 550 320 L 540 350 L 525 375 L 510 390 L 495 380 L 485 360 L 480 340 L 475 310 L 460 290 L 445 270 L 430 250 L 420 235 Z",
+  // Middle East
+  "M 520 180 L 545 185 L 570 195 L 590 210 L 580 230 L 560 240 L 540 235 L 525 225 L 518 210 L 515 195 Z",
+  // Central Asia / Russia
+  "M 520 70 L 580 60 L 640 55 L 700 60 L 760 70 L 800 80 L 830 90 L 850 100 L 840 120 L 810 130 L 770 135 L 730 140 L 690 145 L 650 150 L 620 155 L 590 160 L 560 155 L 540 145 L 525 130 L 520 110 Z",
+  // South Asia (India)
+  "M 620 200 L 650 195 L 680 210 L 690 240 L 680 270 L 660 290 L 640 280 L 630 260 L 620 240 L 615 220 Z",
+  // Southeast Asia
+  "M 700 240 L 730 235 L 755 250 L 760 270 L 750 285 L 730 280 L 715 270 L 705 260 Z",
+  // East Asia (China/Japan/Korea)
+  "M 710 140 L 740 130 L 770 135 L 800 150 L 810 170 L 800 195 L 780 210 L 760 220 L 740 225 L 720 220 L 710 200 L 705 180 L 708 160 Z",
+  // Japan (islands)
+  "M 820 160 L 830 155 L 835 170 L 830 185 L 822 195 L 818 185 L 815 170 Z",
+  // Indonesia / Maritime SEA
+  "M 720 300 L 740 295 L 770 298 L 800 305 L 810 310 L 795 318 L 770 315 L 745 312 L 725 308 Z",
+  // Australia
+  "M 770 340 L 810 335 L 850 345 L 870 365 L 865 390 L 845 405 L 815 410 L 790 400 L 775 380 L 770 360 Z",
+  // New Zealand
+  "M 885 395 L 890 390 L 895 400 L 892 415 L 885 420 L 882 410 Z",
+  // Greenland
+  "M 280 40 L 310 35 L 340 40 L 350 55 L 340 70 L 315 75 L 290 65 L 280 50 Z",
+  // UK/Ireland
+  "M 415 105 L 425 100 L 430 110 L 430 125 L 425 130 L 418 125 L 415 115 Z"
+];
+
+function renderWorldMap() {
+  const g = document.getElementById("landGroup");
+  g.innerHTML = "";
+  WORLD_PATHS.forEach(d => {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", d);
+    path.setAttribute("class", "land");
+    g.appendChild(path);
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAP RENDERING
+   ═══════════════════════════════════════════════════════════ */
+
+function renderMap() {
+  const mg = document.getElementById("markersGroup");
+  const lg = document.getElementById("labelsGroup");
+  mg.innerHTML = "";
+  lg.innerHTML = "";
+
+  WARS.forEach(w => {
+    const isActive = active(w);
+    const isSelected = state.selectedWar === w.id;
+    const baseR = w.sz * 4;
+
+    // Pulse ring for active wars
+    if (isActive) {
+      const pulse = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      pulse.setAttribute("cx", w.x);
+      pulse.setAttribute("cy", w.y);
+      pulse.setAttribute("r", baseR + 3);
+      pulse.setAttribute("class", "war-pulse");
+      pulse.style.animationDelay = (Math.random() * 2) + "s";
+      mg.appendChild(pulse);
+    }
+
+    // Main marker
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", w.x);
+    circle.setAttribute("cy", w.y);
+    circle.setAttribute("r", isSelected ? baseR + 2 : baseR);
+    circle.setAttribute("fill", w.col);
+    circle.setAttribute("class", "war-marker" + (isSelected ? " war-glow" : ""));
+    circle.setAttribute("opacity", isActive ? "0.9" : "0.25");
+    circle.setAttribute("data-id", w.id);
+    circle.setAttribute("tabindex", "0");
+    circle.setAttribute("role", "button");
+    circle.setAttribute("aria-label", w.n + " (" + fmt(w.s) + (w.s !== w.e ? " – " + fmt(w.e) : "") + ")");
+
+    circle.addEventListener("click", () => warClick(w.id));
+    circle.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); warClick(w.id); }
+    });
+    mg.appendChild(circle);
+
+    // Label for selected or active wars at higher zoom
+    if (isSelected || (isActive && state.zoom > 1.3)) {
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", w.x);
+      text.setAttribute("y", w.y - baseR - 3);
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("class", "war-label");
+      if (isSelected) text.style.fontWeight = "700";
+      text.textContent = w.n;
+      lg.appendChild(text);
+    }
+  });
+
+  renderConnections();
+  renderTransmissions();
+}
+
+function renderConnections() {
+  const g = document.getElementById("connectionsGroup");
+  g.innerHTML = "";
+  if (state.mode !== "explore") return;
+
+  CONNECTIONS.forEach(c => {
+    const from = warById(c.from);
+    const to = warById(c.to);
+    if (!from || !to) return;
+    // Only show connections for selected war
+    if (state.selectedWar && (c.from === state.selectedWar || c.to === state.selectedWar)) {
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", from.x);
+      line.setAttribute("y1", from.y);
+      line.setAttribute("x2", to.x);
+      line.setAttribute("y2", to.y);
+      line.setAttribute("class", "connection-line");
+      line.setAttribute("opacity", "0.5");
+      g.appendChild(line);
+    }
+  });
+}
+
+function renderTransmissions() {
+  const g = document.getElementById("transmissionsGroup");
+  g.innerHTML = "";
+  if (state.mode !== "threads") return;
+
+  TRANSMISSIONS.forEach(t => {
+    for (let i = 0; i < t.path.length - 1; i++) {
+      const from = warById(t.path[i]);
+      const to = warById(t.path[i + 1]);
+      if (!from || !to) continue;
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", from.x);
+      line.setAttribute("y1", from.y);
+      line.setAttribute("x2", to.x);
+      line.setAttribute("y2", to.y);
+      line.setAttribute("class", "transmission-line");
+      g.appendChild(line);
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INFO PANEL / DRAWER
+   ═══════════════════════════════════════════════════════════ */
+
+function renderDrawer() {
+  const panel = document.getElementById("infoPanel");
+  const placeholder = document.getElementById("panelPlaceholder");
+  const content = document.getElementById("panelContent");
+
+  if (!state.selectedWar) {
+    placeholder.style.display = "flex";
+    content.style.display = "none";
+    content.innerHTML = "";
+    return;
+  }
+
+  placeholder.style.display = "none";
+  content.style.display = "block";
+  renderDrawerContent();
+
+  // On mobile, open the panel
+  if (window.innerWidth <= 900) {
+    panel.classList.add("mobile-open");
+    panel.classList.remove("collapsed");
+  }
+}
+
+function renderDrawerContent() {
+  const w = warById(state.selectedWar);
+  if (!w) return;
+  const content = document.getElementById("panelContent");
+
+  let html = "";
+
+  // Header
+  html += '<div class="panel-header">';
+  html += '<div class="panel-title">' + escHtml(w.n) + '</div>';
+  html += '<div class="panel-subtitle">' + fmt(w.s) + (w.s !== w.e ? " – " + fmt(w.e) : "") + '</div>';
+  html += '</div>';
+
+  // Meta tags
+  html += '<div class="panel-meta">';
+  html += '<span class="meta-tag">' + escHtml(w.region) + '</span>';
+  html += '<span class="meta-tag">' + escHtml(w.type) + '</span>';
+  html += '<span class="meta-tag">' + escHtml(w.casualties) + '</span>';
+  if (w.parties) {
+    w.parties.forEach(p => {
+      html += '<span class="meta-tag">' + escHtml(p) + '</span>';
+    });
+  }
+  html += '</div>';
+
+  // Lens sections
+  html += '<div class="panel-body">';
+  state.activeLenses.forEach(lensId => {
+    const lens = LENSES.find(l => l.id === lensId);
+    if (!lens) return;
+    const text = w.d[lensId];
+    if (!text) return;
+    html += '<div class="lens-section">';
+    html += '<div class="lens-section-title">' + lens.ico + " " + escHtml(lens.n) + '</div>';
+    html += '<div class="lens-section-body">' + escHtml(text) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Related conflicts
+  const related = CONNECTIONS.filter(c => c.from === w.id || c.to === w.id);
+  if (related.length > 0) {
+    html += '<div class="panel-body" style="border-top:1px solid var(--border);padding-top:0.75rem">';
+    html += '<div class="lens-section-title">🔗 Related Conflicts</div>';
+    related.forEach(c => {
+      const otherId = c.from === w.id ? c.to : c.from;
+      const other = warById(otherId);
+      if (!other) return;
+      html += '<button class="burger-item" onclick="warClick(\'' + otherId + '\')" style="padding:0.3rem 0.4rem;font-size:0.85rem">';
+      html += '<span class="ico" style="font-size:0.8rem">⚔️</span> ' + escHtml(other.n) + ' <span style="color:var(--muted);font-size:0.75rem">(' + escHtml(c.label) + ')</span>';
+      html += '</button>';
+    });
+    html += '</div>';
+  }
+
+  content.innerHTML = html;
+}
+
+function escHtml(s) {
+  const div = document.createElement("div");
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LENS DROPDOWN
+   ═══════════════════════════════════════════════════════════ */
+
+function renderLensDD() {
+  const menu = document.getElementById("lensDDMenu");
+  let html = "";
+  LENSES.forEach(l => {
+    const isActive = state.activeLenses.includes(l.id);
+    html += '<button class="lens-dd-item' + (isActive ? " active" : "") + '" onclick="toggleLens(\'' + l.id + '\')" role="menuitem">';
+    html += '<span class="ico">' + l.ico + '</span> ' + escHtml(l.n);
+    html += '<span class="check">✓</span>';
+    html += '</button>';
+  });
+  menu.innerHTML = html;
+}
+
+function toggleLens(id) {
+  const idx = state.activeLenses.indexOf(id);
+  if (idx >= 0) {
+    if (state.activeLenses.length > 1) {
+      state.activeLenses.splice(idx, 1);
+    }
+  } else {
+    state.activeLenses.push(id);
+  }
+  renderLensDD();
+  renderDrawer();
+}
+
+function toggleLensDD() {
+  const menu = document.getElementById("lensDDMenu");
+  menu.classList.toggle("open");
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TIMELINE
+   ═══════════════════════════════════════════════════════════ */
+
+function setYear(y) {
+  state.year = clamp(y, -3000, 2025);
+  document.getElementById("timeSlider").value = yearToSlider(state.year);
+  document.getElementById("yearLabel").textContent = fmt(state.year);
+  document.getElementById("eraDisplay").textContent = eraName(state.year);
+  renderMap();
+}
+
+function renderDensityBar() {
+  const svg = document.getElementById("densityBar");
+  const bins = 100;
+  const binWidth = 5025 / bins;
+  const counts = new Array(bins).fill(0);
+
+  WARS.forEach(w => {
+    const s = yearToSlider(w.s);
+    const e = yearToSlider(w.e);
+    for (let i = 0; i < bins; i++) {
+      const binStart = i * binWidth;
+      const binEnd = (i + 1) * binWidth;
+      if (s < binEnd && e >= binStart) counts[i]++;
+    }
+  });
+
+  const maxC = Math.max(...counts, 1);
+  let html = "";
+  for (let i = 0; i < bins; i++) {
+    const h = (counts[i] / maxC) * 14;
+    const x = (i / bins) * 500;
+    const w = 500 / bins;
+    html += '<rect class="density-bar" x="' + x + '" y="' + (16 - h) + '" width="' + (w - 0.5) + '" height="' + h + '"/>';
+  }
+  svg.innerHTML = html;
+}
+
+function togglePlay() {
+  state.playing = !state.playing;
+  const btn = document.getElementById("playBtn");
+  if (state.playing) {
+    btn.textContent = "⏸";
+    state.playInterval = setInterval(() => {
+      if (state.year >= 2025) {
+        togglePlay();
+        return;
+      }
+      setYear(state.year + 5);
+    }, 100);
+  } else {
+    btn.textContent = "▶";
+    clearInterval(state.playInterval);
+    state.playInterval = null;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   WAR SELECTION & NAVIGATION
+   ═══════════════════════════════════════════════════════════ */
+
+function warClick(id) {
+  if (state.mode === "compare") {
+    if (!state.selectedWar) {
+      state.selectedWar = id;
+    } else if (state.selectedWar !== id) {
+      state.compareWar = id;
+      renderCompare();
+    }
+  } else {
+    state.selectedWar = (state.selectedWar === id) ? null : id;
+    state.compareWar = null;
+  }
+  renderMap();
+  renderDrawer();
+}
+
+function navigateToWar(id) {
+  const w = warById(id);
+  if (!w) return;
+  state.selectedWar = id;
+
+  // Center on the war's location
+  const svg = document.getElementById("mainMap");
+  const rect = svg.getBoundingClientRect();
+  const svgW = rect.width;
+  const svgH = rect.height;
+
+  state.zoom = 2.5;
+  state.panX = -(w.x * state.zoom - svgW / 2);
+  state.panY = -(w.y * state.zoom - svgH / 2);
+
+  applyTransform();
+  setYear(w.s);
+  renderMap();
+  renderDrawer();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COMPARE MODE
+   ═══════════════════════════════════════════════════════════ */
+
+function renderCompare() {
+  const panel = document.getElementById("comparePanel");
+  if (!state.selectedWar || !state.compareWar) {
+    panel.classList.remove("open");
+    panel.innerHTML = "";
+    return;
+  }
+
+  const w1 = warById(state.selectedWar);
+  const w2 = warById(state.compareWar);
+  if (!w1 || !w2) return;
+
+  panel.classList.add("open");
+
+  const fields = [
+    ["Period", fmt(w1.s) + " – " + fmt(w1.e), fmt(w2.s) + " – " + fmt(w2.e)],
+    ["Region", w1.region, w2.region],
+    ["Type", w1.type, w2.type],
+    ["Casualties", w1.casualties, w2.casualties],
+    ["Parties", w1.parties.join(", "), w2.parties.join(", ")]
+  ];
+
+  let html = '<div class="compare-col">';
+  html += '<div class="compare-col-title">' + escHtml(w1.n) + '</div>';
+  fields.forEach(f => {
+    html += '<div class="compare-row"><span class="compare-label">' + f[0] + '</span><span class="compare-val">' + escHtml(f[1]) + '</span></div>';
+  });
+  html += '</div>';
+  html += '<div class="compare-divider"></div>';
+  html += '<div class="compare-col">';
+  html += '<div class="compare-col-title">' + escHtml(w2.n) + '</div>';
+  fields.forEach(f => {
+    html += '<div class="compare-row"><span class="compare-label">' + f[0] + '</span><span class="compare-val">' + escHtml(f[2]) + '</span></div>';
+  });
+  html += '</div>';
+  html += '<button onclick="closeCompare()" style="position:absolute;top:0.5rem;right:0.75rem;font-size:1.2rem;color:var(--muted)">✕</button>';
+
+  panel.innerHTML = html;
+}
+
+function closeCompare() {
+  state.compareWar = null;
+  document.getElementById("comparePanel").classList.remove("open");
+  document.getElementById("comparePanel").innerHTML = "";
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ZOOM & PAN
+   ═══════════════════════════════════════════════════════════ */
+
+function applyTransform() {
+  const g = document.getElementById("mainMap");
+  const inner = g.querySelector("#landGroup").parentElement;
+  // Apply transform to all child groups via a wrapping transform on the SVG viewBox approach
+  // Instead, we transform the SVG element itself
+  g.style.transformOrigin = "0 0";
+  g.style.transform = "scale(" + state.zoom + ") translate(" + (state.panX / state.zoom) + "px, " + (state.panY / state.zoom) + "px)";
+}
+
+function handleWheel(e) {
+  e.preventDefault();
+  const delta = e.deltaY > 0 ? 0.9 : 1.1;
+  const newZoom = clamp(state.zoom * delta, 0.5, 8);
+
+  // Zoom toward cursor
+  const svg = document.getElementById("mainMap");
+  const rect = svg.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  const zoomRatio = newZoom / state.zoom;
+  state.panX = mx - zoomRatio * (mx - state.panX);
+  state.panY = my - zoomRatio * (my - state.panY);
+  state.zoom = newZoom;
+
+  applyTransform();
+}
+
+function handleMouseDown(e) {
+  if (e.button !== 0) return;
+  // Don't start pan if clicking on a marker
+  if (e.target.classList.contains("war-marker")) return;
+  state.isPanning = true;
+  state.panStartX = e.clientX;
+  state.panStartY = e.clientY;
+  state.panStartPanX = state.panX;
+  state.panStartPanY = state.panY;
+}
+
+function handleMouseMove(e) {
+  if (!state.isPanning) return;
+  state.panX = state.panStartPanX + (e.clientX - state.panStartX);
+  state.panY = state.panStartPanY + (e.clientY - state.panStartY);
+  applyTransform();
+}
+
+function handleMouseUp() {
+  state.isPanning = false;
+}
+
+// Touch support
+let touchStartDist = 0;
+let touchStartZoom = 1;
+
+function handleTouchStart(e) {
+  if (e.touches.length === 1) {
+    const t = e.touches[0];
+    if (e.target.classList.contains("war-marker")) return;
+    state.isPanning = true;
+    state.panStartX = t.clientX;
+    state.panStartY = t.clientY;
+    state.panStartPanX = state.panX;
+    state.panStartPanY = state.panY;
+  } else if (e.touches.length === 2) {
+    state.isPanning = false;
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    touchStartDist = Math.sqrt(dx * dx + dy * dy);
+    touchStartZoom = state.zoom;
+  }
+}
+
+function handleTouchMove(e) {
+  e.preventDefault();
+  if (e.touches.length === 1 && state.isPanning) {
+    const t = e.touches[0];
+    state.panX = state.panStartPanX + (t.clientX - state.panStartX);
+    state.panY = state.panStartPanY + (t.clientY - state.panStartY);
+    applyTransform();
+  } else if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const newZoom = clamp(touchStartZoom * (dist / touchStartDist), 0.5, 8);
+    state.zoom = newZoom;
+    applyTransform();
+  }
+}
+
+function handleTouchEnd() {
+  state.isPanning = false;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   THEME
+   ═══════════════════════════════════════════════════════════ */
+
+function applyTheme() {
+  const root = document.documentElement;
+  if (state.theme) {
+    root.setAttribute("data-theme", state.theme);
+  } else {
+    root.removeAttribute("data-theme");
+  }
+  const isDark = state.theme === "dark" || (!state.theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  document.getElementById("themeIco").textContent = isDark ? "🌙" : "☀️";
+  document.getElementById("themeLabel").textContent = isDark ? "Dark Mode" : "Light Mode";
+}
+
+function toggleTheme() {
+  const isDark = state.theme === "dark" || (!state.theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  state.theme = isDark ? "light" : "dark";
+  localStorage.setItem("bellum-theme", state.theme);
+  applyTheme();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BURGER MENU
+   ═══════════════════════════════════════════════════════════ */
+
+function toggleBurger() {
+  const btn = document.getElementById("burgerBtn");
+  const menu = document.getElementById("burgerMenu");
+  const isOpen = menu.classList.toggle("open");
+  btn.classList.toggle("open", isOpen);
+  btn.setAttribute("aria-expanded", isOpen);
+}
+
+function closeBurger() {
+  document.getElementById("burgerMenu").classList.remove("open");
+  document.getElementById("burgerBtn").classList.remove("open");
+  document.getElementById("burgerBtn").setAttribute("aria-expanded", "false");
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODES
+   ═══════════════════════════════════════════════════════════ */
+
+function setMode(mode) {
+  state.mode = mode;
+  state.compareWar = null;
+  closeCompare();
+
+  // Update burger menu active states
+  document.querySelectorAll(".burger-item[data-mode]").forEach(item => {
+    item.classList.toggle("active", item.getAttribute("data-mode") === mode);
+  });
+
+  closeBurger();
+  renderMap();
+
+  // Show threads info if in threads mode and no war selected
+  if (mode === "threads" && !state.selectedWar) {
+    renderThreadsPanel();
+  } else {
+    renderDrawer();
+  }
+}
+
+function renderThreadsPanel() {
+  const placeholder = document.getElementById("panelPlaceholder");
+  const content = document.getElementById("panelContent");
+  placeholder.style.display = "none";
+  content.style.display = "block";
+
+  let html = '<div class="panel-header">';
+  html += '<div class="panel-title">🔗 Military Innovation Threads</div>';
+  html += '<div class="panel-subtitle">Trace how military innovations spread across conflicts</div>';
+  html += '</div>';
+  html += '<div class="panel-body">';
+
+  TRANSMISSIONS.forEach(t => {
+    html += '<div class="lens-section">';
+    html += '<div class="lens-section-title">' + escHtml(t.n) + '</div>';
+    html += '<div class="lens-section-body">' + escHtml(t.desc) + '</div>';
+    html += '<div style="margin-top:0.3rem;display:flex;flex-wrap:wrap;gap:0.25rem">';
+    t.path.forEach((wId, i) => {
+      const w = warById(wId);
+      if (!w) return;
+      html += '<button class="meta-tag" style="cursor:pointer;background:none" onclick="warClick(\'' + wId + '\')">' + escHtml(w.n) + '</button>';
+      if (i < t.path.length - 1) html += '<span style="color:var(--accent);font-size:0.8rem">→</span>';
+    });
+    html += '</div>';
+    html += '</div>';
+  });
+
+  html += '</div>';
+  content.innerHTML = html;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ABOUT MODAL
+   ═══════════════════════════════════════════════════════════ */
+
+function showAbout() {
+  document.getElementById("aboutOverlay").classList.add("open");
+  closeBurger();
+}
+
+function closeAbout() {
+  document.getElementById("aboutOverlay").classList.remove("open");
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INITIALIZATION
+   ═══════════════════════════════════════════════════════════ */
+
+function init() {
+  // Load theme
+  const savedTheme = localStorage.getItem("bellum-theme");
+  if (savedTheme) state.theme = savedTheme;
+  applyTheme();
+
+  // Render world map
+  renderWorldMap();
+
+  // Render density bar
+  renderDensityBar();
+
+  // Render lens dropdown
+  renderLensDD();
+
+  // Set initial year
+  setYear(state.year);
+
+  // Render map
+  renderMap();
+  renderDrawer();
+
+  // ── Event Listeners ──
+
+  // Timeline slider
+  document.getElementById("timeSlider").addEventListener("input", function() {
+    setYear(sliderToYear(+this.value));
+  });
+
+  // Play button
+  document.getElementById("playBtn").addEventListener("click", togglePlay);
+
+  // Lens dropdown toggle
+  document.getElementById("lensBtn").addEventListener("click", function(e) {
+    e.stopPropagation();
+    toggleLensDD();
+  });
+
+  // Burger menu
+  document.getElementById("burgerBtn").addEventListener("click", toggleBurger);
+
+  // Close dropdown/menu on outside click
+  document.addEventListener("click", function(e) {
+    const lensMenu = document.getElementById("lensDDMenu");
+    if (!e.target.closest(".lens-dropdown")) {
+      lensMenu.classList.remove("open");
+    }
+    if (!e.target.closest(".burger-menu") && !e.target.closest(".burger-btn")) {
+      closeBurger();
+    }
+  });
+
+  // About overlay close on backdrop click
+  document.getElementById("aboutOverlay").addEventListener("click", function(e) {
+    if (e.target === this) closeAbout();
+  });
+
+  // Zoom and pan
+  const mapContainer = document.getElementById("mapContainer");
+  mapContainer.addEventListener("wheel", handleWheel, {passive: false});
+  mapContainer.addEventListener("mousedown", handleMouseDown);
+  window.addEventListener("mousemove", handleMouseMove);
+  window.addEventListener("mouseup", handleMouseUp);
+
+  // Touch events
+  mapContainer.addEventListener("touchstart", handleTouchStart, {passive: true});
+  mapContainer.addEventListener("touchmove", handleTouchMove, {passive: false});
+  mapContainer.addEventListener("touchend", handleTouchEnd);
+
+  // Keyboard: Escape to close panels
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") {
+      closeAbout();
+      closeBurger();
+      document.getElementById("lensDDMenu").classList.remove("open");
+      // Close mobile panel
+      document.getElementById("infoPanel").classList.remove("mobile-open");
+    }
+  });
+
+  // Close mobile panel button (tap outside on mobile)
+  mapContainer.addEventListener("click", function(e) {
+    if (window.innerWidth <= 900 && !e.target.classList.contains("war-marker")) {
+      document.getElementById("infoPanel").classList.remove("mobile-open");
+    }
+  });
+}
+
+// Start the application
+document.addEventListener("DOMContentLoaded", init);
 </script>
 </body>
 </html>
