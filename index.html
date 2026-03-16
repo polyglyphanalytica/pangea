@@ -168,21 +168,33 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
   text-transform:uppercase;background:var(--panel);padding:2px 12px;
   border:1px solid var(--bdr2);border-radius:2px;white-space:nowrap;
   transition:opacity 0.3s}
-.drift-timeline{width:100%;max-width:700px;margin:12px auto 0;display:flex;
-  align-items:center;gap:12px;justify-content:center}
+.drift-tl-wrap{width:100%;max-width:700px;margin:16px auto 0;
+  background:var(--panel);border:1px solid var(--bdr2);border-radius:4px;
+  padding:10px 20px 14px;position:relative}
+.drift-tl-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .drift-play{background:none;border:1px solid var(--bdr);color:var(--amber-b);
-  width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;
+  width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;
   align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
 .drift-play:hover{background:var(--panel2);border-color:var(--amber)}
-.drift-play svg{width:14px;height:14px}
-.drift-range{flex:1;max-width:500px;-webkit-appearance:none;appearance:none;
-  height:3px;background:var(--bdr2);border-radius:2px;outline:none;cursor:pointer}
-.drift-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;
-  border-radius:50%;background:var(--amber-b);cursor:pointer;border:none}
-.drift-range::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
-  background:var(--amber-b);cursor:pointer;border:none}
-.drift-year{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;
-  color:var(--txt3);min-width:80px;text-align:left}
+.drift-play svg{width:12px;height:12px}
+.drift-tl-era{font-family:'Cinzel',serif;font-size:12px;letter-spacing:1px;
+  color:var(--amber-b);font-weight:600;flex:1;text-align:center}
+.drift-tl-year{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;
+  color:var(--txt3);min-width:60px;text-align:right;flex-shrink:0}
+.drift-tl-lbls{display:flex;justify-content:space-between;margin-bottom:5px}
+.drift-tl-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.5px;
+  color:var(--txt3);text-transform:uppercase}
+.drift-tl-trk{position:relative;height:5px;background:var(--bdr2);border-radius:3px}
+.drift-tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--amber-b);
+  border-radius:3px;pointer-events:none;opacity:.7;width:0%}
+.drift-tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--amber-b);
+  border-radius:50%;transform:translate(-50%,-50%);
+  box-shadow:0 0 10px var(--amber),0 0 20px rgba(232,152,32,.3);
+  pointer-events:none;left:0%}
+input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;
+  cursor:pointer;margin:0;z-index:2;-webkit-appearance:none;appearance:none}
+.drift-tl-hint{text-align:center;margin-top:6px;font-family:'Cinzel',serif;
+  font-size:9px;letter-spacing:1.5px;color:var(--txt3);opacity:.6;text-transform:uppercase}
 
 /* ── HOW ITS GOING DIVIDER ── */
 .going-section{text-align:center;padding:56px 0 40px;margin-bottom:48px;
@@ -252,6 +264,11 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
   .hero-stats{gap:20px}
   .card-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
   .content{padding:76px 14px 48px}
+  .drift-tl-wrap{padding:8px 12px 10px}
+  .drift-tl-lbl{font-size:7px;letter-spacing:.3px}
+  .drift-tl-era{font-size:10px}
+  .drift-tl-year{font-size:9px}
+  .drift-tl-hint{font-size:8px}
 }
 @media(max-width:380px){
   .card-grid{grid-template-columns:1fr 1fr}
@@ -349,12 +366,27 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
       </svg>
       <div class="drift-era-label" id="drift-era">Pangaea — 335 Mya</div>
     </div>
-    <div class="drift-timeline">
-      <button class="drift-play" id="drift-play" aria-label="Play continental drift animation" title="Play">
-        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
-      </button>
-      <input type="range" class="drift-range" id="drift-range" min="0" max="100" value="0" aria-label="Continental drift timeline">
-      <span class="drift-year" id="drift-year">335 Mya</span>
+    <div class="drift-tl-wrap" role="navigation" aria-label="Geological timeline">
+      <div class="drift-tl-top">
+        <button class="drift-play" id="drift-play" aria-label="Play continental drift animation" title="Play">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
+        </button>
+        <span class="drift-tl-era" id="drift-era-top">Pangaea</span>
+        <span class="drift-tl-year" id="drift-year">335 Mya</span>
+      </div>
+      <div class="drift-tl-lbls">
+        <span class="drift-tl-lbl">335 Mya</span>
+        <span class="drift-tl-lbl">200 Mya</span>
+        <span class="drift-tl-lbl">100 Mya</span>
+        <span class="drift-tl-lbl">50 Mya</span>
+        <span class="drift-tl-lbl">Present</span>
+      </div>
+      <div class="drift-tl-trk">
+        <div class="drift-tl-fill" id="drift-fill"></div>
+        <div class="drift-tl-thumb" id="drift-thumb"></div>
+        <input type="range" class="drift-range" id="drift-range" min="0" max="100" value="0" step="1" aria-label="Geological timeline">
+      </div>
+      <div class="drift-tl-hint">Drag to explore &middot; Press play to animate</div>
     </div>
   </div>
 
@@ -1262,27 +1294,30 @@ document.addEventListener('keydown',function(e){
   const rangeEl=document.getElementById('drift-range');
   const yearEl=document.getElementById('drift-year');
   const eraEl=document.getElementById('drift-era');
+  const eraTopEl=document.getElementById('drift-era-top');
+  const fillEl=document.getElementById('drift-fill');
+  const thumbEl=document.getElementById('drift-thumb');
   if(!playBtn||!rangeEl)return;
 
-  // Continent positions: [pangaea-tx, pangaea-ty, modern-tx, modern-ty]
-  // Offsets from their drawn SVG positions to simulate drift
+  // Continent offsets: pangaea position → modern (0,0)
   const driftData={
-    'c-na':{px:120,py:40, mx:0,my:0},      // North America drifts west
-    'c-sa':{px:80,py:-20, mx:0,my:0},       // South America drifts west
-    'c-eu':{px:-10,py:20, mx:0,my:0},       // Europe stays roughly
-    'c-af':{px:10,py:-15, mx:0,my:0},       // Africa drifts slightly
-    'c-as':{px:-40,py:20, mx:0,my:0},       // Asia drifts east
-    'c-au':{px:-60,py:-40, mx:0,my:0},      // Australia drifts SE
-    'c-an':{px:20,py:-40, mx:0,my:0}        // Antarctica drifts south
+    'c-na':{px:120,py:40, mx:0,my:0},
+    'c-sa':{px:80,py:-20, mx:0,my:0},
+    'c-eu':{px:-10,py:20, mx:0,my:0},
+    'c-af':{px:10,py:-15, mx:0,my:0},
+    'c-as':{px:-40,py:20, mx:0,my:0},
+    'c-au':{px:-60,py:-40, mx:0,my:0},
+    'c-an':{px:20,py:-40, mx:0,my:0}
   };
 
   const eras=[
-    {max:5,  name:'Pangaea — 335 Mya', year:'335 Mya'},
-    {max:25, name:'Pangaea Breaking — 200 Mya', year:'200 Mya'},
-    {max:50, name:'Laurasia & Gondwana — 150 Mya', year:'150 Mya'},
-    {max:75, name:'Continents Separating — 100 Mya', year:'100 Mya'},
-    {max:90, name:'Near-Modern — 50 Mya', year:'50 Mya'},
-    {max:100,name:'Present Day', year:'Present'}
+    {max:5,  name:'Pangaea',              year:'335 Mya'},
+    {max:20, name:'Pangaea Rifting',       year:'250 Mya'},
+    {max:40, name:'Laurasia & Gondwana',   year:'200 Mya'},
+    {max:60, name:'Gondwana Breaking',     year:'150 Mya'},
+    {max:80, name:'Continents Separating', year:'100 Mya'},
+    {max:92, name:'Near-Modern Positions',  year:'50 Mya'},
+    {max:100,name:'Present Day',           year:'Present'}
   ];
 
   function getEra(v){
@@ -1290,32 +1325,38 @@ document.addEventListener('keydown',function(e){
     return eras[eras.length-1];
   }
 
+  function updateTimeline(pct){
+    if(fillEl) fillEl.style.width=pct+'%';
+    if(thumbEl) thumbEl.style.left=pct+'%';
+  }
+
   function applyDrift(pct){
-    const t=pct/100; // 0=pangaea, 1=modern
+    const t=pct/100;
     Object.keys(driftData).forEach(id=>{
       const el=document.getElementById(id);
       if(!el)return;
       const d=driftData[id];
-      // Interpolate from pangaea offset to modern (0,0)
       const tx=d.px*(1-t)+d.mx*t;
       const ty=d.py*(1-t)+d.my*t;
       el.style.transform='translate('+tx+'px,'+ty+'px)';
     });
     const era=getEra(pct);
-    if(eraEl)eraEl.textContent=era.name;
-    if(yearEl)yearEl.textContent=era.year;
+    if(eraEl) eraEl.textContent=era.name+' — '+era.year;
+    if(eraTopEl) eraTopEl.textContent=era.name;
+    if(yearEl) yearEl.textContent=era.year;
+    updateTimeline(pct);
   }
 
-  // Initialize at Pangaea position
+  // Initialize at Pangaea
   applyDrift(0);
 
   let animId=null;
   let playing=false;
   let animStart=null;
-  const DURATION=6000; // 6 seconds for full animation
+  const DURATION=8000; // 8 seconds
 
   function animFrame(ts){
-    if(!animStart)animStart=ts;
+    if(!animStart) animStart=ts;
     const elapsed=ts-animStart;
     const pct=Math.min(100,elapsed/DURATION*100);
     rangeEl.value=pct;
@@ -1328,13 +1369,10 @@ document.addEventListener('keydown',function(e){
   }
 
   function startAnim(){
-    // Add transition class for smooth animation
     document.querySelectorAll('.continent').forEach(c=>c.classList.add('animating'));
     playing=true;
     animStart=null;
-    // If at end, restart
     if(parseInt(rangeEl.value)>=99) rangeEl.value=0;
-    // Adjust start time to account for current position
     const curPct=parseInt(rangeEl.value);
     animStart=performance.now()-curPct/100*DURATION;
     playBtn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
@@ -1345,7 +1383,6 @@ document.addEventListener('keydown',function(e){
     playing=false;
     if(animId){cancelAnimationFrame(animId);animId=null;}
     playBtn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>';
-    // Remove transition class
     setTimeout(()=>{
       document.querySelectorAll('.continent').forEach(c=>c.classList.remove('animating'));
     },50);
