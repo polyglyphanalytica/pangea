@@ -213,7 +213,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
 .hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--hint);display:flex;align-items:center;justify-content:center;padding:0 8px;white-space:nowrap;overflow:hidden}
 #map-hint-text{pointer-events:none;overflow:hidden;text-overflow:ellipsis}
 
-/* ── SHEET HANDLE ── */
+/* ── SHEET HANDLE — hidden by default, shown only when drawer is expanded ── */
 .drawer-handle{display:none}
 
 /* ── MOB MAP BUTTON ── */
@@ -264,8 +264,8 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
     z-index:100;
   }
 
-  /* Drag handle — always visible on mobile */
-  .drawer-handle{
+  /* Drag handle — only visible when drawer is expanded */
+  .mob-open .drawer-handle{
     display:flex;
     align-items:center;
     justify-content:center;
@@ -279,14 +279,14 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
     background:var(--panel);
     border-radius:12px 12px 0 0;
   }
-  .drawer-handle::before{
+  .mob-open .drawer-handle::before{
     content:'';
     width:36px;height:4px;
     border-radius:2px;
     background:var(--bdr);
     transition:background .15s;
   }
-  .drawer-handle:active::before{
+  .mob-open .drawer-handle:active::before{
     background:var(--amber-b);
   }
 
