@@ -214,6 +214,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
 #map-hint-text{pointer-events:none;overflow:hidden;text-overflow:ellipsis}
 
 /* ── SHEET HANDLE ── */
+.drawer-handle{display:none}
 
 /* ── MOB MAP BUTTON ── */
 .mob-map-btn{display:none}
@@ -227,34 +228,85 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   .era-y{font-size:18px}
   .era-n{font-size:10px;letter-spacing:1.5px}
   .main{top:52px!important}
-  /* Map takes top ~42%, drawer fixed below it, timeline at bottom */
   .main{
     bottom:0;
     flex-direction:column;
+    position:fixed;
   }
   .map-tl-col{
     width:100%;
+    flex:1;
+    min-height:0;
   }
   .map-c{
-    flex:0 0 42vh;
-    width:100%;
-  }
-  .info-panel{
     flex:1;
     width:100%;
+    min-height:0;
+  }
+
+  /* Drawer overlays bottom of map area */
+  .info-panel{
+    position:absolute;
+    left:0;right:0;
+    bottom:0;
+    width:100%;
     border-left:none;
-    border-top:1px solid var(--bdr);
+    border-top:none;
+    border-radius:12px 12px 0 0;
     overflow-y:auto;
     padding:0 16px 16px;
-    border-radius:0;
+    background:var(--panel);
+    box-shadow:0 -4px 24px rgba(0,0,0,.4);
+    z-index:100;
+    /* Default: collapsed below view, just showing handle */
+    transform:translateY(100%);
+    transition:transform .35s cubic-bezier(0.25,0.1,0.25,1);
+    max-height:calc(100% - 52px);
+    will-change:transform;
   }
-  .tl-wrap{height:76px;padding:6px 14px 10px}
+  .info-panel.mob-open{
+    /* Creep up to cover 50% of the viewport below header */
+    transform:translateY(0);
+    height:50vh;
+  }
+  .info-panel.mob-collapsed{
+    /* Collapsed — just handle visible at bottom of map */
+    transform:translateY(calc(100% - 32px));
+  }
 
+  /* Drag handle */
+  .drawer-handle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 0 6px;
+    cursor:grab;
+    touch-action:none;
+    user-select:none;
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--panel);
+    border-radius:12px 12px 0 0;
+  }
+  .drawer-handle::before{
+    content:'';
+    width:36px;height:4px;
+    border-radius:2px;
+    background:var(--bdr);
+    transition:background .15s;
+  }
+  .drawer-handle:active::before{
+    background:var(--amber-b);
+  }
+
+  .tl-wrap{height:76px;padding:6px 14px 10px}
   .tl-lbl{font-size:9px;letter-spacing:.8px}
   .hint{font-size:8px;letter-spacing:.8px}
   .lens-dd-list{max-height:180px}
   .info-txt,.overview-arc{font-size:16px;line-height:1.82}
   .lens-row-lbl{font-size:13px}
+  .mob-map-btn{display:none!important}
 }
 
 /* ── LANDSCAPE MOBILE (≤768px, landscape) — desktop layout ── */
@@ -678,10 +730,10 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
   </div><!-- /map-tl-col -->
 
   <div class="info-panel" id="info-panel" role="complementary" aria-label="Civilization details">
+    <div class="drawer-handle" id="drawer-handle" aria-label="Drag to resize"></div>
     <div id="drawer-top"></div>
     <div id="drawer-content"></div>
   </div>
-  <button class="mob-map-btn hidden" id="mob-map-btn" onclick="closeMobileSheet()">◎ Map</button>
 </div>
 
 
@@ -7228,16 +7280,118 @@ function toggleTheme(){
   }
 })();
 
-// ── MOBILE SHEET ──
-const isMobile=()=>window.innerWidth<=768;
+// ── MOBILE DRAWER ──
+const isMobile=()=>window.innerWidth<=768 && window.matchMedia('(orientation:portrait)').matches;
+const _drawer=document.getElementById('info-panel');
+const _handle=document.getElementById('drawer-handle');
+let _drawerOpen=false;
+let _drawerDragging=false;
+let _drawerStartY=0;
+let _drawerStartH=0;
+const DRAWER_MIN=32; // collapsed: just handle visible
+const DRAWER_HANDLE_H=32;
+
+function getDrawerMax(){
+  // 50% of viewport below header
+  return Math.round(window.innerHeight*0.5);
+}
+
 function openMobileSheet(){
   if(!isMobile())return;
-  document.getElementById('info-panel').classList.add('mob-open');
-  document.getElementById('mob-map-btn').classList.remove('hidden');
+  _drawerOpen=true;
+  const panel=_drawer;
+  panel.classList.remove('mob-collapsed');
+  panel.classList.add('mob-open');
+  // Set height to 50vh
+  panel.style.height=getDrawerMax()+'px';
+  panel.style.transform='translateY(0)';
 }
+
 function closeMobileSheet(){
-  document.getElementById('info-panel').classList.remove('mob-open');
-  document.getElementById('mob-map-btn').classList.add('hidden');
+  _drawerOpen=false;
+  const panel=_drawer;
+  panel.classList.remove('mob-open');
+  panel.classList.add('mob-collapsed');
+  panel.style.height=getDrawerMax()+'px';
+  panel.style.transform='translateY(calc(100% - '+DRAWER_HANDLE_H+'px))';
+}
+
+// ── DRAWER DRAG HANDLER ──
+if(_handle){
+  let _touchId=null;
+  _handle.addEventListener('touchstart',function(e){
+    if(!isMobile())return;
+    e.preventDefault();
+    const t=e.changedTouches[0];
+    _touchId=t.identifier;
+    _drawerDragging=true;
+    _drawerStartY=t.clientY;
+    _drawerStartH=_drawer.offsetHeight-(parseInt(_drawer.style.transform.match(/translateY\((.+?)\)/)?.[1])||0);
+    // Measure current visible height
+    const rect=_drawer.getBoundingClientRect();
+    const parentRect=_drawer.parentElement.getBoundingClientRect();
+    _drawerStartH=parentRect.bottom-rect.top;
+    _drawer.style.transition='none';
+  },{passive:false});
+
+  _handle.addEventListener('touchmove',function(e){
+    if(!_drawerDragging||!isMobile())return;
+    const t=Array.from(e.changedTouches).find(x=>x.identifier===_touchId);
+    if(!t)return;
+    e.preventDefault();
+    const dy=_drawerStartY-t.clientY; // positive = dragging up
+    let newH=_drawerStartH+dy;
+    const maxH=getDrawerMax();
+    // Clamp: minimum is just handle, maximum is 50vh
+    newH=Math.max(DRAWER_HANDLE_H,Math.min(maxH,newH));
+    // Translate the panel so newH pixels are visible
+    const totalH=maxH;
+    _drawer.style.height=totalH+'px';
+    const translateY=totalH-newH;
+    _drawer.style.transform='translateY('+translateY+'px)';
+  },{passive:false});
+
+  function endDrag(e){
+    if(!_drawerDragging)return;
+    _drawerDragging=false;
+    _drawer.style.transition='';
+    // Snap: if visible height > 40% of max, snap open. Otherwise snap collapsed.
+    const rect=_drawer.getBoundingClientRect();
+    const parentRect=_drawer.parentElement.getBoundingClientRect();
+    const visH=parentRect.bottom-rect.top;
+    const maxH=getDrawerMax();
+    if(visH>maxH*0.3){
+      openMobileSheet();
+    }else{
+      closeMobileSheet();
+    }
+  }
+  _handle.addEventListener('touchend',endDrag);
+  _handle.addEventListener('touchcancel',endDrag);
+
+  // Mouse drag for desktop testing
+  _handle.addEventListener('mousedown',function(e){
+    if(!isMobile())return;
+    _drawerDragging=true;
+    _drawerStartY=e.clientY;
+    const rect=_drawer.getBoundingClientRect();
+    const parentRect=_drawer.parentElement.getBoundingClientRect();
+    _drawerStartH=parentRect.bottom-rect.top;
+    _drawer.style.transition='none';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!_drawerDragging||!isMobile())return;
+    const dy=_drawerStartY-e.clientY;
+    let newH=_drawerStartH+dy;
+    const maxH=getDrawerMax();
+    newH=Math.max(DRAWER_HANDLE_H,Math.min(maxH,newH));
+    _drawer.style.height=maxH+'px';
+    _drawer.style.transform='translateY('+(maxH-newH)+'px)';
+  });
+  document.addEventListener('mouseup',function(){
+    if(_drawerDragging)endDrag();
+  });
 }
 
 // ── TIMELINE FILL ──
