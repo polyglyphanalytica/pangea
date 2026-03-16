@@ -6438,50 +6438,54 @@ function renderWhatIfPaths(){
 
   let out='<defs><marker id="wi-arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#e8251a" opacity=".7"/></marker></defs>';
 
-  // Direct broken paths — animated red fading lines
+  // Direct broken paths — animated red dashed lines with stroke-dashoffset animation
+  let validDirect=0;
   directOut.forEach((t,i)=>{
     const tc=CIVS.find(x=>x&&x.id===t.to);
     if(!tc)return;
     const [tx,ty]=civPt(tc);
     const mx=(cx+tx)/2, my=Math.min(cy,ty)-40;
+    const delay=(validDirect*0.2).toFixed(1);
+    // Path with SVG animate for opacity fade-in + stroke-dashoffset crawl
     out+=`<path d="M${cx},${cy} Q${mx},${my} ${tx},${ty}"
       stroke="#e8251a" stroke-width="1.6" fill="none" stroke-dasharray="5,4"
-      marker-end="url(#wi-arrow)" opacity="0"
-      id="wi-direct-${i}" style="transition:opacity .5s"/>`;
+      marker-end="url(#wi-arrow)" opacity="0" id="wi-direct-${i}">
+      <animate attributeName="opacity" from="0" to="0.85" dur="0.5s" begin="${delay}s" fill="freeze"/>
+      <animate attributeName="stroke-dashoffset" from="50" to="0" dur="1s" begin="${delay}s" fill="freeze"/>
+    </path>`;
     // Label concept at midpoint
     out+=`<text x="${mx}" y="${my-8}" font-family="Cinzel,serif" font-size="9"
-      fill="#e8251a" text-anchor="middle" opacity="0"
-      id="wi-lbl-${i}" style="transition:opacity .5s">${t.concept}</text>`;
+      fill="#e8251a" text-anchor="middle" opacity="0" id="wi-lbl-${i}">
+      <animate attributeName="opacity" from="0" to="0.9" dur="0.4s" begin="${(parseFloat(delay)+0.15).toFixed(2)}s" fill="freeze"/>
+    </text>`;
+    // Text content must be set after to avoid XSS-like issues with template strings
+    validDirect++;
   });
 
   // Downstream broken paths — dimmer orange dashes
+  const downDelay=(validDirect*0.2+0.4).toFixed(1);
   downstream.forEach((t,j)=>{
     const fc=CIVS.find(x=>x&&x.id===t.from),tc=CIVS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
     const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-24;
     out+=`<path d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
-      stroke="#c06020" stroke-width="0.8" fill="none" stroke-dasharray="3,6"
-      opacity="0" id="wi-down-${j}" style="transition:opacity .5s"/>`;
+      stroke="#c06020" stroke-width="0.8" fill="none" stroke-dasharray="3,6" opacity="0" id="wi-down-${j}">
+      <animate attributeName="opacity" from="0" to="0.45" dur="0.6s" begin="${downDelay}s" fill="freeze"/>
+    </path>`;
   });
 
   layer.innerHTML=out;
 
-  // Animate in sequentially
-  directOut.forEach((_,i)=>{
-    setTimeout(()=>{
-      const p=document.getElementById('wi-direct-'+i);
-      const l=document.getElementById('wi-lbl-'+i);
-      if(p)p.style.opacity='0.85';
-      if(l)l.style.opacity='0.9';
-    },i*180);
+  // Set text content separately for label safety
+  validDirect=0;
+  directOut.forEach((t,i)=>{
+    const tc=CIVS.find(x=>x&&x.id===t.to);
+    if(!tc)return;
+    const lbl=document.getElementById('wi-lbl-'+i);
+    if(lbl)lbl.textContent=t.concept;
+    validDirect++;
   });
-  setTimeout(()=>{
-    downstream.forEach((_,j)=>{
-      const p=document.getElementById('wi-down-'+j);
-      if(p)p.style.opacity='0.45';
-    });
-  },directOut.length*180+200);
 }
 
 // Per-civ "what would not exist" summary
@@ -6508,7 +6512,7 @@ function renderWhatIfDrawer(){
     dc.innerHTML=`
     <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">What If?</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Remove a civilization from history. Red lines animate on the map as the transmission chain breaks. The drawer shows every idea and technology the world would lose.
+      Remove a civilization from history. Red lines animate on the map as the transmission chain breaks. See below for every idea and technology the world would lose.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Tap a marker on the map — or try one of these</div>
     ${[
