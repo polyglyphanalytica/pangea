@@ -130,11 +130,12 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
 .content{max-width:1200px;margin:0 auto;padding:88px 20px 60px}
 
 /* ── HERO ── */
-.hero{text-align:center;padding:40px 0 48px;border-bottom:1px solid var(--bdr2);margin-bottom:48px}
+.hero{text-align:center;padding:40px 0 48px;border-bottom:1px solid var(--bdr2);margin-bottom:0}
 .hero-sup{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;
   color:var(--txt3);text-transform:uppercase;margin-bottom:12px}
 .hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(24px,5vw,48px);
-  font-weight:700;color:var(--amber-b);letter-spacing:3px;margin-bottom:8px;line-height:1.2}
+  font-weight:700;color:var(--amber-b);letter-spacing:3px;margin-bottom:8px;line-height:1.2;
+  word-spacing:0.08em}
 .hero-sub{font-family:'Cinzel',serif;font-size:clamp(11px,1.5vw,14px);
   letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px}
 .hero-desc{font-size:17px;line-height:1.8;color:var(--txt2);
@@ -145,6 +146,53 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
   color:var(--amber-b);display:block;line-height:1}
 .hero-stat-l{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
   color:var(--txt3);text-transform:uppercase;margin-top:3px}
+
+/* ── CONTINENTAL DRIFT HERO ── */
+.drift-section{padding:48px 0 56px;text-align:center}
+.drift-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;
+  color:var(--txt3);text-transform:uppercase;margin-bottom:6px}
+.drift-heading{font-family:'Cinzel Decorative',serif;font-size:clamp(18px,3vw,28px);
+  font-weight:700;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px}
+.drift-sub{font-family:'Crimson Pro',serif;font-size:15px;color:var(--txt2);
+  font-style:italic;margin-bottom:24px}
+.drift-canvas{position:relative;width:100%;max-width:700px;margin:0 auto;
+  aspect-ratio:2/1;overflow:hidden;border:1px solid var(--bdr2);
+  border-radius:4px;background:var(--panel)}
+.drift-canvas svg{width:100%;height:100%}
+.drift-canvas .continent{fill:var(--amber-d);stroke:var(--amber);stroke-width:0.5;
+  transition:none;opacity:0.85}
+.drift-canvas .continent.animating{transition:transform 4s cubic-bezier(0.25,0.1,0.25,1)}
+.drift-canvas .ocean-grid line{stroke:var(--bdr2);stroke-width:0.3}
+.drift-era-label{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--amber-b);
+  text-transform:uppercase;background:var(--panel);padding:2px 12px;
+  border:1px solid var(--bdr2);border-radius:2px;white-space:nowrap;
+  transition:opacity 0.3s}
+.drift-timeline{width:100%;max-width:700px;margin:12px auto 0;display:flex;
+  align-items:center;gap:12px;justify-content:center}
+.drift-play{background:none;border:1px solid var(--bdr);color:var(--amber-b);
+  width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.drift-play:hover{background:var(--panel2);border-color:var(--amber)}
+.drift-play svg{width:14px;height:14px}
+.drift-range{flex:1;max-width:500px;-webkit-appearance:none;appearance:none;
+  height:3px;background:var(--bdr2);border-radius:2px;outline:none;cursor:pointer}
+.drift-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;
+  border-radius:50%;background:var(--amber-b);cursor:pointer;border:none}
+.drift-range::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+  background:var(--amber-b);cursor:pointer;border:none}
+.drift-year{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;
+  color:var(--txt3);min-width:80px;text-align:left}
+
+/* ── HOW ITS GOING DIVIDER ── */
+.going-section{text-align:center;padding:56px 0 40px;margin-bottom:48px;
+  border-bottom:1px solid var(--bdr2)}
+.going-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;
+  color:var(--txt3);text-transform:uppercase;margin-bottom:6px}
+.going-heading{font-family:'Cinzel Decorative',serif;font-size:clamp(18px,3vw,28px);
+  font-weight:700;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px}
+.going-sub{font-family:'Crimson Pro',serif;font-size:15px;color:var(--txt2);
+  font-style:italic;margin-bottom:0}
 
 /* ── SECTION HEADER ── */
 .section-hdr{margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--bdr2)}
@@ -257,7 +305,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
     <div class="hero-desc">An ambitious project to tell the story of our planet in maps.</div>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-n">75</span>
+        <span class="hero-stat-n">76</span>
         <span class="hero-stat-l">Atlases</span>
       </div>
       <div class="hero-stat">
@@ -265,6 +313,56 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
         <span class="hero-stat-l">Themes</span>
       </div>
     </div>
+  </div>
+
+  <!-- HOW IT STARTED — CONTINENTAL DRIFT -->
+  <div class="drift-section">
+    <div class="drift-label">How It Started</div>
+    <div class="drift-heading">Pangaea</div>
+    <div class="drift-sub">335 million years of continental drift — from one landmass to seven.</div>
+    <div class="drift-canvas" id="drift-canvas">
+      <svg viewBox="0 0 700 350" id="drift-svg" xmlns="http://www.w3.org/2000/svg">
+        <!-- ocean grid -->
+        <g class="ocean-grid" opacity="0.4">
+          <line x1="0" y1="87.5" x2="700" y2="87.5"/><line x1="0" y1="175" x2="700" y2="175"/>
+          <line x1="0" y1="262.5" x2="700" y2="262.5"/>
+          <line x1="175" y1="0" x2="175" y2="350"/><line x1="350" y1="0" x2="350" y2="350"/>
+          <line x1="525" y1="0" x2="525" y2="350"/>
+        </g>
+        <!-- Continents — simplified polygons -->
+        <g id="drift-continents">
+          <!-- North America -->
+          <polygon id="c-na" class="continent" points="160,70 210,55 240,65 250,90 245,130 230,150 200,155 180,140 155,120 140,100 145,80"/>
+          <!-- South America -->
+          <polygon id="c-sa" class="continent" points="220,170 240,165 255,185 260,220 255,260 240,285 225,280 215,250 210,220 215,190"/>
+          <!-- Europe -->
+          <polygon id="c-eu" class="continent" points="330,65 370,55 390,60 395,80 385,95 365,100 340,95 325,85"/>
+          <!-- Africa -->
+          <polygon id="c-af" class="continent" points="320,120 360,110 385,125 395,160 390,200 375,235 350,250 330,240 315,210 310,170 315,140"/>
+          <!-- Asia -->
+          <polygon id="c-as" class="continent" points="400,50 460,35 520,45 550,70 555,110 540,140 510,150 470,145 440,130 415,105 405,75"/>
+          <!-- Australia -->
+          <polygon id="c-au" class="continent" points="510,200 545,195 565,210 570,235 555,250 530,252 515,240 505,220"/>
+          <!-- Antarctica -->
+          <polygon id="c-an" class="continent" points="280,305 330,295 380,300 410,310 400,330 350,340 300,335 270,320"/>
+        </g>
+      </svg>
+      <div class="drift-era-label" id="drift-era">Pangaea — 335 Mya</div>
+    </div>
+    <div class="drift-timeline">
+      <button class="drift-play" id="drift-play" aria-label="Play continental drift animation" title="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
+      </button>
+      <input type="range" class="drift-range" id="drift-range" min="0" max="100" value="0" aria-label="Continental drift timeline">
+      <span class="drift-year" id="drift-year">335 Mya</span>
+    </div>
+  </div>
+
+  <!-- HOW IT'S GOING -->
+  <div class="going-section">
+    <div class="going-label">How It's Going</div>
+    <div class="going-heading">The Atlases</div>
+    <div class="going-sub">Every domain of human knowledge. One atlas at a time.</div>
   </div>
 
   <!-- ═══════════════════════════════════════════ -->
@@ -580,6 +678,14 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
           <div class="card-tagline">War is the context for most of human history. Examine it.</div>
           <div class="card-tags"><span class="tag">War</span><span class="tag">Military</span><span class="tag">Casualties</span></div>
         </a>
+      </div>
+
+      <div class="card card--forthcoming">
+        <span class="card-icon">👑</span>
+        <div class="card-name">Dynastia</div>
+        <div class="card-tagline">Every family that held power long enough to call it inheritance.</div>
+        <div class="card-tags"><span class="tag">Dynasties</span><span class="tag">Succession</span><span class="tag">Lineage</span></div>
+        <span class="coming-soon">Coming Soon</span>
       </div>
 
       <div class="card card--forthcoming">
@@ -1148,6 +1254,111 @@ document.addEventListener('keydown',function(e){
 (function(){
   const fy=document.getElementById('footer-year');
   if(fy)fy.textContent=new Date().getFullYear();
+})();
+
+// ── CONTINENTAL DRIFT ANIMATION ───────────────────────────────────────────
+(function(){
+  const playBtn=document.getElementById('drift-play');
+  const rangeEl=document.getElementById('drift-range');
+  const yearEl=document.getElementById('drift-year');
+  const eraEl=document.getElementById('drift-era');
+  if(!playBtn||!rangeEl)return;
+
+  // Continent positions: [pangaea-tx, pangaea-ty, modern-tx, modern-ty]
+  // Offsets from their drawn SVG positions to simulate drift
+  const driftData={
+    'c-na':{px:120,py:40, mx:0,my:0},      // North America drifts west
+    'c-sa':{px:80,py:-20, mx:0,my:0},       // South America drifts west
+    'c-eu':{px:-10,py:20, mx:0,my:0},       // Europe stays roughly
+    'c-af':{px:10,py:-15, mx:0,my:0},       // Africa drifts slightly
+    'c-as':{px:-40,py:20, mx:0,my:0},       // Asia drifts east
+    'c-au':{px:-60,py:-40, mx:0,my:0},      // Australia drifts SE
+    'c-an':{px:20,py:-40, mx:0,my:0}        // Antarctica drifts south
+  };
+
+  const eras=[
+    {max:5,  name:'Pangaea — 335 Mya', year:'335 Mya'},
+    {max:25, name:'Pangaea Breaking — 200 Mya', year:'200 Mya'},
+    {max:50, name:'Laurasia & Gondwana — 150 Mya', year:'150 Mya'},
+    {max:75, name:'Continents Separating — 100 Mya', year:'100 Mya'},
+    {max:90, name:'Near-Modern — 50 Mya', year:'50 Mya'},
+    {max:100,name:'Present Day', year:'Present'}
+  ];
+
+  function getEra(v){
+    for(const e of eras) if(v<=e.max) return e;
+    return eras[eras.length-1];
+  }
+
+  function applyDrift(pct){
+    const t=pct/100; // 0=pangaea, 1=modern
+    Object.keys(driftData).forEach(id=>{
+      const el=document.getElementById(id);
+      if(!el)return;
+      const d=driftData[id];
+      // Interpolate from pangaea offset to modern (0,0)
+      const tx=d.px*(1-t)+d.mx*t;
+      const ty=d.py*(1-t)+d.my*t;
+      el.style.transform='translate('+tx+'px,'+ty+'px)';
+    });
+    const era=getEra(pct);
+    if(eraEl)eraEl.textContent=era.name;
+    if(yearEl)yearEl.textContent=era.year;
+  }
+
+  // Initialize at Pangaea position
+  applyDrift(0);
+
+  let animId=null;
+  let playing=false;
+  let animStart=null;
+  const DURATION=6000; // 6 seconds for full animation
+
+  function animFrame(ts){
+    if(!animStart)animStart=ts;
+    const elapsed=ts-animStart;
+    const pct=Math.min(100,elapsed/DURATION*100);
+    rangeEl.value=pct;
+    applyDrift(pct);
+    if(pct<100){
+      animId=requestAnimationFrame(animFrame);
+    }else{
+      stopAnim();
+    }
+  }
+
+  function startAnim(){
+    // Add transition class for smooth animation
+    document.querySelectorAll('.continent').forEach(c=>c.classList.add('animating'));
+    playing=true;
+    animStart=null;
+    // If at end, restart
+    if(parseInt(rangeEl.value)>=99) rangeEl.value=0;
+    // Adjust start time to account for current position
+    const curPct=parseInt(rangeEl.value);
+    animStart=performance.now()-curPct/100*DURATION;
+    playBtn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+    animId=requestAnimationFrame(animFrame);
+  }
+
+  function stopAnim(){
+    playing=false;
+    if(animId){cancelAnimationFrame(animId);animId=null;}
+    playBtn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>';
+    // Remove transition class
+    setTimeout(()=>{
+      document.querySelectorAll('.continent').forEach(c=>c.classList.remove('animating'));
+    },50);
+  }
+
+  playBtn.addEventListener('click',function(){
+    if(playing) stopAnim(); else startAnim();
+  });
+
+  rangeEl.addEventListener('input',function(){
+    if(playing) stopAnim();
+    applyDrift(parseInt(this.value));
+  });
 })();
 </script>
 
