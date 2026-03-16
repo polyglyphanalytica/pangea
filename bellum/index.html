@@ -883,6 +883,7 @@ function renderDrawerContent(){
 // DRAWER (main panel renderer)
 // ══════════════════════════════════════════════════════
 function renderDrawer(){
+  if(mode==='compare'){renderCompareDrawer();return;}
   const dc=document.getElementById('drawer-content');
   if(!sel){
     document.getElementById('drawer-top').innerHTML='';
@@ -1051,8 +1052,7 @@ function renderWorldMap(world){
 // ══════════════════════════════════════════════════════
 // FINGERPRINT RADAR CHART
 // ══════════════════════════════════════════════════════
-const FP_LABELS=['Military','Commerce','Arts','Science','Reach','Longevity'];
-const FP_KEYS=['mil','com','art','sci','reach','lon'];
+// FP_LABELS and FP_KEYS already declared above
 
 function renderFingerprint(c){
   if(!c.fp)return'';
@@ -1080,7 +1080,7 @@ function renderFingerprint(c){
   }).join(' ');
   svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
   // Labels
-  const SHORT=['Military','Commerce','Arts','Science','Reach','Longevity'];
+  const SHORT=FP_LABELS;
   angles.forEach((a,i)=>{
     const lr=R+26;
     const lx=cx+lr*Math.cos(a);

@@ -872,6 +872,253 @@ function itemClick(id){
   navigateToItem(id);
 }
 
+// ══════════════════════════════════════════════════════
+// DRAWER CONTENT
+// ══════════════════════════════════════════════════════
+function renderDrawerContent(){
+  const c=sel;
+  const dc=document.getElementById('drawer-content');
+  if(!dc)return;
+  if(!c) return;
+  let body='';
+  if(!lenses.size){
+    body=`<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}${renderFingerprint(c)}`;
+  } else {
+    body=[...lenses].map(id=>{
+      const L=LENSES.find(l=>l.id===id);
+      if(!L)return'';
+      return`<div class="lens-section">
+        <div class="lens-section-hdr">
+          <span class="lens-section-ico">${L.ico}</span>
+          <span class="lens-section-lbl">${L.lbl}</span>
+        </div>
+        <div class="info-txt">${c.d[id]||'No data for this lens.'}</div>
+      </div>`;
+    }).join('');
+  }
+  const col=lenses.size?getLensCol():OVERVIEW_COL;
+  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
+  const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
+    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
+    const isA=actIds.has(id);
+    const badge=isA?'ACTIVE':'→ JUMP';
+    const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
+    return`<button class="conn-item" tabindex="0"
+        aria-label="${tip}"
+        onclick="navigateToItem('${id}')"
+        style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
+      <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
+      <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
+      <span style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:1px;color:${isA?'var(--amber-b)':'var(--amber)'};white-space:nowrap">${badge}</span>
+    </button>`;
+  }).join(''):'';
+  dc.innerHTML=body+connHTML;
+}
+
+// ══════════════════════════════════════════════════════
+// DRAWER (main panel renderer)
+// ══════════════════════════════════════════════════════
+function renderDrawer(){
+  if(mode==='compare'){renderCompareDrawer();return;}
+  const dc=document.getElementById('drawer-content');
+  if(!sel){
+    document.getElementById('drawer-top').innerHTML='';
+    dc.innerHTML=`
+    <div style="padding:4px 0 16px">
+
+      <div style="font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--amber-b);letter-spacing:2px;margin-bottom:2px">NUMEN</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Atlas of Belief</div>
+
+      <div style="font-size:13.5px;line-height:1.85;color:var(--txt2);margin-bottom:18px">
+        20 belief systems. 12,000 years. Every faith, philosophy, and spiritual tradition that shaped human civilisation — mapped, connected, and explorable. From the earliest animistic practices to the digital-age movements of the 21st century, rendered on a real geographic projection and navigable across a continuous timeline.
+      </div>
+
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">The Map</div>
+      <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
+        Drag the <span style="color:var(--amber-b)">timeline</span> at the bottom across 12,000 years — belief systems emerge and evolve in real time. <span style="color:#9070c0">Violet markers</span> show active traditions. Tap any to open its full profile and explore its connections.
+      </div>
+
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">20 Lenses</div>
+      <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
+        Apply a <span style="color:var(--amber-b)">lens</span> to read all of spiritual history through a single idea — Cosmology, Ethics, Ritual, Art, Mysticism, Scripture, and 14 more. Compare any two belief systems side by side under the same lens.
+      </div>
+
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Each belief profile includes</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:18px;font-size:11.5px">
+        ${[['◈','20 interpretive lenses'],['⟳','Belief connections'],['◎','Belief fingerprint chart'],['↗','Contemporary traditions'],['⊞','Side-by-side comparison'],['⬡','Belief arc overview']].map(([ico,lbl])=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--bdr2);border-radius:2px;color:var(--txt2)"><span style="color:var(--amber-b);font-size:13px">${ico}</span>${lbl}</div>`).join('')}
+      </div>
+
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Pivotal moments to try</div>
+      ${(()=>{
+        const ALL=[
+          [-10000,'Dawn of Animism','The first spiritual expressions — humanity communes with nature and ancestors'],
+          [-3000,'Egyptian Religion','Solar theology and the afterlife — pharaohs build monuments to eternity'],
+          [-1500,'Vedic Hinduism','The Rigveda is composed — the oldest surviving religious text takes shape'],
+          [-563,'Birth of Buddhism','Siddhartha Gautama seeks enlightenment beneath the Bodhi tree'],
+          [-551,'Confucius','The Master teaches ren, li, and the Way — ethics become philosophy'],
+          [33,'Christianity Begins','From a crucifixion in Jerusalem, a faith that will reshape the world'],
+          [622,'The Hijra','Muhammad journeys to Medina — Islam\'s calendar begins'],
+          [1469,'Sikhism Founded','Guru Nanak proclaims one God and the equality of all people'],
+          [1844,'Bahá\'í Faith','A new world religion emerges from Persia — unity of humanity'],
+          [1900,'Global Encounter','Religions meet in the modern age — dialogue, conflict, and synthesis']
+        ];
+        const shuffled=[...ALL].sort(()=>Math.random()-.5);
+        return shuffled.slice(0,5).map(([yr,title,desc])=>`
+        <div onclick="setYear(${yr});"
+          style="padding:8px 0;border-bottom:1px solid var(--bdr2);cursor:pointer;transition:opacity .15s"
+          onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
+            <span style="font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b)">${yr<0?Math.abs(yr)+' BCE':yr+' CE'}</span>
+            <span style="font-size:12.5px;color:var(--txt2)">${title}</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--txt3);font-style:italic">${desc}</div>
+        </div>`).join('');
+      })()}`;
+    document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
+    return;
+  }
+  const c=sel;
+  const dc2=document.getElementById('drawer-content');
+
+  let itemHdr=`<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:2px">
+      <div class="info-nm" style="margin-bottom:0">${c.nm}</div>
+      <button class="info-close" onclick="closeInfo()" style="position:static;flex-shrink:0;margin-top:2px">✕</button>
+    </div>
+    <div class="info-sb">${c.sb}</div>
+    <div class="info-dates">
+      <div class="info-dt">${fmt(c.s)}</div>
+      <span class="info-arr">→</span>
+      <div class="info-dt">${fmt(c.e)}</div>
+    </div>`;
+
+  let body='';
+  if(!lenses.size){
+    body=`<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}${renderFingerprint(c)}`;
+  } else {
+    body=[...lenses].map(id=>{
+      const L=LENSES.find(l=>l.id===id);
+      if(!L)return'';
+      return`<div class="lens-section">
+        <div class="lens-section-hdr">
+          <span class="lens-section-ico">${L.ico}</span>
+          <span class="lens-section-lbl">${L.lbl}</span>
+        </div>
+        <div class="info-txt">${c.d[id]||'No data for this lens.'}</div>
+      </div>`;
+    }).join('');
+  }
+
+  const col=lenses.size?getLensCol():OVERVIEW_COL;
+  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
+  const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
+    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
+    const isA=actIds.has(id);
+    const badge=isA?'ACTIVE':'→ JUMP';
+    const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
+    return`<button class="conn-item" tabindex="0"
+        aria-label="${tip}"
+        onclick="navigateToItem('${id}')"
+        style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
+      <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
+      <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
+      <span style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:1px;color:${isA?'var(--amber-b)':'var(--amber)'};white-space:nowrap">${badge}</span>
+    </button>`;
+  }).join(''):'';
+
+  dc2.innerHTML=itemHdr+'<div id="lens-position-hook" style="padding:8px 0 2px"></div><hr class="info-div"><div id="drawer-lens-body">'+body+connHTML+'</div>';
+  renderLensDD();
+  document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════════════════
+// CLOSE INFO
+// ══════════════════════════════════════════════════════
+function closeInfo(){sel=null;lenses.clear();lensDD=false;renderDrawer();renderMap();closeMobileSheet();}
+
+// ══════════════════════════════════════════════════════
+// SET YEAR
+// ══════════════════════════════════════════════════════
+function setYear(y){
+  year=parseInt(y);
+  const sl=document.getElementById('tl');
+  const sliderVal=yearToSlider(year);
+  if(sl.value!=sliderVal) sl.value=sliderVal;
+  const pct=sliderVal/10;
+  document.getElementById('tl-thumb').style.left=pct+'%';
+  updateTlFill(pct);
+  const tlEl=document.getElementById('tl');
+  tlEl.setAttribute('aria-valuenow',sliderVal);
+  tlEl.setAttribute('aria-valuetext',fmt(year));
+  document.getElementById('era-y').textContent=fmt(year);
+  document.getElementById('era-n').textContent=eraName(year);
+  document.getElementById('cnt-n').textContent=ITEMS.filter(c=>active(c)).length;
+  renderMap();
+  if(sel&&!active(sel))closeInfo();
+  else renderDrawer();
+}
+
+// ══════════════════════════════════════════════════════
+// WORLD MAP (D3 / TopoJSON)
+// ══════════════════════════════════════════════════════
+function renderWorldMap(world){
+  const svg=document.getElementById('wsvg');
+  const W=1000,H=520;
+  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
+  window._proj=proj;
+  const pathGen=d3.geoPath().projection(proj);
+  const land=topojson.feature(world,world.objects.land);
+  const countries=topojson.feature(world,world.objects.countries);
+  const isDark=()=>document.documentElement.dataset.theme!=='light';
+  let g=document.getElementById('map-layer');
+  const graticule=d3.geoGraticule()();
+  const gratPath=pathGen(graticule)||'';
+  const landPath=pathGen(land)||'';
+  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
+  const borderPath=pathGen(borders)||'';
+  g.innerHTML=
+    `<path d="${gratPath}" fill="none" stroke="var(--bdr2)" stroke-width=".3"/>` +
+    `<path id="land-path" d="${landPath}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>` +
+    `<path d="${borderPath}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
+}
+
+// ══════════════════════════════════════════════════════
+// FINGERPRINT RADAR CHART
+// ══════════════════════════════════════════════════════
+function renderFingerprint(c){
+  if(!c.fp)return'';
+  const W=360,H=300,cx=W/2,cy=H/2+10,R=88;
+  const n=FP_LABELS.length;
+  const angles=FP_LABELS.map((_,i)=>(i*2*Math.PI/n)-Math.PI/2);
+
+  let svg=`<svg class="fp-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
+  [2,4,6,8,10].forEach(level=>{
+    const r=R*(level/10);
+    const pts=angles.map(a=>`${cx+r*Math.cos(a)},${cy+r*Math.sin(a)}`).join(' ');
+    svg+=`<polygon points="${pts}" class="fp-grid"/>`;
+  });
+  angles.forEach(a=>{
+    svg+=`<line x1="${cx}" y1="${cy}" x2="${(cx+R*Math.cos(a)).toFixed(1)}" y2="${(cy+R*Math.sin(a)).toFixed(1)}" class="fp-grid"/>`;
+  });
+  const vals=FP_KEYS.map(k=>c.fp[k]||0);
+  const dataPts=angles.map((a,i)=>{
+    const r=R*(vals[i]/10);
+    return`${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`;
+  }).join(' ');
+  svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
+  const SHORT=FP_LABELS;
+  angles.forEach((a,i)=>{
+    const lr=R+26;
+    const lx=cx+lr*Math.cos(a);
+    const ly=cy+lr*Math.sin(a);
+    const cosA=Math.cos(a);
+    const anchor=cosA>0.15?'start':cosA<-0.15?'end':'middle';
+    const dy=Math.sin(a)>0.15?4:Math.sin(a)<-0.15?-4:4;
+    svg+=`<text x="${lx.toFixed(1)}" y="${(ly+dy).toFixed(1)}" text-anchor="${anchor}" class="fp-label">${SHORT[i]}</text>`;
+  });
+  svg+='</svg>';
+  return`<div class="fp-wrap"><div class="fp-title">Belief Fingerprint</div>${svg}</div>`;
+}
+
 // ── DENSITY BAR ──
 function renderDensityBar(){
   const svg=document.getElementById('density-bar');
