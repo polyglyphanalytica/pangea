@@ -540,29 +540,6 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
 body.herstory .burger-item.burger-mode.active{background:rgba(192,96,160,.12);color:#c060a0}
 body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 
-/* ── PULL TO REFRESH ── */
-#ptr-indicator{
-  position:fixed;top:0;left:0;right:0;z-index:9999;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  height:0;overflow:hidden;background:var(--panel);
-  border-bottom:1px solid var(--bdr);
-  transition:height .2s ease,opacity .2s ease;
-  font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;
-  color:var(--txt3);text-transform:uppercase;opacity:0;
-  pointer-events:none;
-}
-#ptr-indicator.pulling{height:52px;opacity:1}
-#ptr-indicator.ready{color:var(--amber-b)}
-#ptr-indicator.refreshing{height:52px;opacity:1}
-#ptr-spinner{
-  width:16px;height:16px;border:2px solid var(--bdr);
-  border-top-color:var(--amber-b);border-radius:50%;
-  transition:transform .25s ease;flex-shrink:0;
-}
-#ptr-indicator.refreshing #ptr-spinner{
-  animation:ptr-spin .7s linear infinite;
-}
-@keyframes ptr-spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -7368,83 +7345,5 @@ function updateTlFill(pct){
   </div>
 </div>
 
-<!-- Pull-to-refresh indicator -->
-<div id="ptr-indicator" aria-hidden="true">
-  <div id="ptr-spinner"></div>
-  <span id="ptr-label">Pull to refresh</span>
-</div>
-
-<script>
-(function(){
-  const THRESHOLD = 72;   // px of pull needed to trigger refresh
-  const MAX_PULL   = 100; // px cap for visual drag
-  let startY = 0, currentPull = 0, active = false, triggered = false;
-
-  const ind    = document.getElementById('ptr-indicator');
-  const spinner= document.getElementById('ptr-spinner');
-  const label  = document.getElementById('ptr-label');
-
-  function canPull(){
-    // Allow PTR whenever any scrollable container is at its top (or we're on the map)
-    const panel = document.getElementById('info-panel');
-    if(panel && panel.scrollTop > 4) return false;
-    return true;
-  }
-
-  document.addEventListener('touchstart', function(e){
-    if(e.touches.length !== 1) return;
-    startY = e.touches[0].clientY;
-    currentPull = 0;
-    triggered = false;
-    active = canPull();
-  }, {passive:true});
-
-  document.addEventListener('touchmove', function(e){
-    if(!active) return;
-    const dy = e.touches[0].clientY - startY;
-    if(dy <= 0){ active=false; resetIndicator(); return; }
-
-    currentPull = Math.min(dy * 0.55, MAX_PULL);
-    const pct = Math.min(currentPull / THRESHOLD, 1);
-
-    ind.style.height = (currentPull * 0.75) + 'px';
-    ind.style.opacity = Math.min(pct * 1.4, 1);
-    spinner.style.transform = `rotate(${pct * 300}deg)`;
-
-    if(currentPull >= THRESHOLD){
-      ind.classList.add('ready');
-      label.textContent = 'Release to refresh';
-    } else {
-      ind.classList.remove('ready');
-      label.textContent = 'Pull to refresh';
-    }
-    ind.classList.add('pulling');
-    ind.classList.remove('refreshing');
-  }, {passive:true});
-
-  document.addEventListener('touchend', function(){
-    if(!active){ resetIndicator(); return; }
-    if(currentPull >= THRESHOLD){
-      // Show refreshing state then reload
-      ind.classList.add('refreshing');
-      ind.classList.remove('pulling','ready');
-      ind.style.height = '52px';
-      ind.style.opacity = '1';
-      label.textContent = 'Refreshing…';
-      setTimeout(function(){ location.reload(); }, 500);
-    } else {
-      resetIndicator();
-    }
-    active = false;
-  }, {passive:true});
-
-  function resetIndicator(){
-    ind.style.height = '0';
-    ind.style.opacity = '0';
-    ind.classList.remove('pulling','ready','refreshing');
-    label.textContent = 'Pull to refresh';
-  }
-})();
-</script>
 </body>
 </html>
