@@ -189,14 +189,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
   pointer-events:none;left:0%}
 input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;
   cursor:pointer;margin:0;z-index:2;-webkit-appearance:none;appearance:none}
-.drift-tl-events{position:relative;height:18px;margin-top:4px}
-.drift-evt{position:absolute;transform:translateX(-50%);font-family:'Cinzel',serif;
-  font-size:7px;letter-spacing:.3px;color:var(--txt3);white-space:nowrap;
-  opacity:.7;cursor:default;transition:opacity .15s,color .15s}
-.drift-evt:hover{opacity:1;color:var(--amber-b)}
-.drift-evt::before{content:'';position:absolute;top:-6px;left:50%;width:1px;height:4px;
-  background:var(--txt3);opacity:.4}
-.drift-tl-hint{text-align:center;margin-top:4px;font-family:'Cinzel',serif;
+.drift-tl-hint{text-align:center;margin-top:6px;font-family:'Cinzel',serif;
   font-size:9px;letter-spacing:1.5px;color:var(--txt3);opacity:.6;text-transform:uppercase}
 
 /* ── HOW ITS GOING DIVIDER ── */
@@ -272,8 +265,6 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
   .drift-tl-era{font-size:10px}
   .drift-tl-year{font-size:9px}
   .drift-tl-hint{font-size:8px}
-  .drift-evt{font-size:6px}
-  .drift-tl-events{height:14px}
 }
 @media(max-width:380px){
   .card-grid{grid-template-columns:1fr 1fr}
@@ -451,7 +442,6 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
         <div class="drift-tl-thumb" id="drift-thumb"></div>
         <input type="range" class="drift-range" id="drift-range" min="0" max="1000" value="0" step="1" aria-label="Geological timeline">
       </div>
-      <div class="drift-tl-events" id="drift-events"></div>
       <div class="drift-tl-hint">Drag to explore &middot; Press play to animate</div>
     </div>
   </div>
@@ -1375,7 +1365,6 @@ document.addEventListener('keydown',function(e){
   const oceanLayer=document.getElementById('drift-ocean-layer');
   const shelfLayer=document.getElementById('drift-shelf-layer');
   const volcanoLayer=document.getElementById('drift-volcano-layer');
-  const eventsEl=document.getElementById('drift-events');
   if(!playBtn||!rangeEl)return;
 
   // ── MULTI-KEYFRAME PALEOGEOGRAPHIC DATA ──
@@ -1479,31 +1468,6 @@ document.addEventListener('keydown',function(e){
     {max:1000,name:'Present Day',           year:'Present'}
   ];
 
-  // ── GEOLOGICAL EVENT MARKERS ──
-  const geoEvents=[
-    {pos:0,   label:'Pangaea forms'},
-    {pos:15,  label:'First dinosaurs'},
-    {pos:30,  label:'Central Atlantic rift'},
-    {pos:40,  label:'Laurasia/Gondwana split'},
-    {pos:55,  label:'South Atlantic opens'},
-    {pos:65,  label:'India breaks from Gondwana'},
-    {pos:70,  label:'Cretaceous peak'},
-    {pos:76,  label:'K-Pg extinction'},
-    {pos:82,  label:'India collides with Asia'},
-    {pos:88,  label:'Himalayas rise'},
-    {pos:95,  label:'Ice ages begin'},
-    {pos:100, label:'Present'}
-  ];
-  if(eventsEl){
-    geoEvents.forEach(ev=>{
-      const d=document.createElement('span');
-      d.className='drift-evt';
-      d.style.left=ev.pos+'%';
-      d.textContent=ev.label;
-      d.title=ev.label;
-      eventsEl.appendChild(d);
-    });
-  }
 
   // ── RIFT LINES ── Mid-ocean ridges that form between separating continents
   const rifts=[
