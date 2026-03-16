@@ -228,7 +228,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   .era-y{font-size:18px}
   .era-n{font-size:10px;letter-spacing:1.5px}
   .main{top:52px!important}
-  /* Map takes top half, drawer below timeline */
+  /* Map takes top ~42vh, timeline 76px, drawer fills the rest (~50%) */
   .main{
     bottom:0;
     flex-direction:column;
@@ -236,39 +236,35 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   }
   .map-tl-col{
     width:100%;
-    flex:1;
-    min-height:0;
   }
   .map-c{
-    flex:1;
+    flex:0 0 42vh;
     width:100%;
-    min-height:0;
   }
   .info-panel{
+    flex:1;
+    width:100%;
+    border-left:none;
+    border-top:1px solid var(--bdr);
+    overflow-y:auto;
+    padding:0 16px 16px;
+    border-radius:0;
+    min-height:50%;
+  }
+  /* Expanded: overlay covers timeline + half map */
+  .info-panel.mob-open{
     position:absolute;
     left:0;right:0;
     bottom:0;
-    width:100%;
-    border-left:none;
+    top:21vh;
     border-top:none;
     border-radius:12px 12px 0 0;
-    overflow-y:auto;
-    padding:0 16px 16px;
     background:var(--panel);
-    box-shadow:0 -4px 24px rgba(0,0,0,.12);
-    z-index:100;
-    /* Default: collapsed — only handle visible above timeline */
-    height:50vh;
-    transform:translateY(calc(100% - 28px));
-    transition:transform .35s cubic-bezier(.25,.1,.25,1);
-    will-change:transform;
-  }
-  .info-panel.mob-open{
-    transform:translateY(0);
     box-shadow:0 -4px 24px rgba(0,0,0,.4);
+    z-index:100;
   }
 
-  /* Drag handle */
+  /* Drag handle — always visible on mobile */
   .drawer-handle{
     display:flex;
     align-items:center;
@@ -7283,35 +7279,27 @@ function openMobileSheet(){
   if(!isMobile())return;
   _drawerOpen=true;
   _drawer.classList.add('mob-open');
-  _drawer.style.transform='';
+  _drawer.style.top='';
 }
 
 function closeMobileSheet(){
+  if(!isMobile()&&!_drawerOpen)return;
   _drawerOpen=false;
   _drawer.classList.remove('mob-open');
-  _drawer.style.transform='';
+  _drawer.style.top='';
 }
 
 // ── DRAWER DRAG TO SNAP ──
 if(_handle){
-  let _touchId=null,_startY=0,_startTx=0,_dragging=false;
-
-  function getTxPx(){
-    // Current translateY in px
-    const m=getComputedStyle(_drawer).transform;
-    if(!m||m==='none')return 0;
-    const vals=m.match(/matrix\((.+)\)/);
-    if(!vals)return 0;
-    return parseFloat(vals[1].split(',')[5])||0;
-  }
+  let _touchId=null,_startY=0,_startTop=0,_dragging=false;
 
   _handle.addEventListener('touchstart',function(e){
-    if(!isMobile())return;
+    if(!isMobile()||!_drawerOpen)return;
     const t=e.changedTouches[0];
     _touchId=t.identifier;
     _dragging=true;
     _startY=t.clientY;
-    _startTx=getTxPx();
+    _startTop=_drawer.getBoundingClientRect().top-52; // relative to .main top (header=52px)
     _drawer.style.transition='none';
   },{passive:true});
 
@@ -7320,26 +7308,27 @@ if(_handle){
     const t=Array.from(e.changedTouches).find(x=>x.identifier===_touchId);
     if(!t)return;
     e.preventDefault();
-    const dy=t.clientY-_startY; // positive = dragging down
-    const h=_drawer.offsetHeight;
-    const minTx=0; // fully open
-    const maxTx=h-28; // collapsed, just handle visible
-    const newTx=Math.max(minTx,Math.min(maxTx,_startTx+dy));
-    _drawer.style.transform='translateY('+newTx+'px)';
+    const dy=t.clientY-_startY;
+    // Clamp: min top = 21vh worth of px, max top = halfway point (50% of .main)
+    const mainH=window.innerHeight-52;
+    const minTop=window.innerHeight*0.21;
+    const maxTop=mainH*0.5;
+    const newTop=Math.max(minTop,Math.min(maxTop,_startTop+dy));
+    _drawer.style.top=newTop+'px';
   },{passive:false});
 
   function endDrag(){
     if(!_dragging)return;
     _dragging=false;
     _drawer.style.transition='';
-    // Snap threshold: if more than 40% visible, snap open; otherwise collapse
-    const tx=getTxPx();
-    const h=_drawer.offsetHeight;
-    const visibleFrac=1-(tx/h);
-    if(visibleFrac>0.35){
-      openMobileSheet();
-    }else{
+    // Snap: if dragged past 40% of .main height, snap to collapsed (flex layout)
+    const mainH=window.innerHeight-52;
+    const curTop=_drawer.getBoundingClientRect().top-52;
+    if(curTop>mainH*0.4){
       closeMobileSheet();
+    }else{
+      _drawer.style.top='';
+      openMobileSheet();
     }
   }
   _handle.addEventListener('touchend',endDrag);
