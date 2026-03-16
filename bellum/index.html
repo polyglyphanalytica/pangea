@@ -531,3 +531,44 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </div>
 
 <script>
+// ── LENSES ──
+const LENSES=[
+  {id:'overview',    ico:'◎', lbl:'Strategic Overview',     col:'#c84040'},
+  {id:'strategy',    ico:'⚔', lbl:'Strategy & Tactics',     col:'#b83030'},
+  {id:'weapons',     ico:'⚒', lbl:'Weapons & Technology',   col:'#8a6020'},
+  {id:'leadership',  ico:'★', lbl:'Leadership',              col:'#d4a820'},
+  {id:'casualties',  ico:'†', lbl:'Casualties & Cost',       col:'#a04040'},
+  {id:'naval',       ico:'⚓', lbl:'Naval Warfare',           col:'#4a7faa'},
+  {id:'siege',       ico:'⊞', lbl:'Siege Warfare',           col:'#5a7a8a'},
+  {id:'cavalry',     ico:'◇', lbl:'Cavalry & Mobility',      col:'#8a7040'},
+  {id:'infantry',    ico:'⊕', lbl:'Infantry',                col:'#606060'},
+  {id:'logistics',   ico:'⟳', lbl:'Logistics & Supply',      col:'#4a8870'},
+  {id:'intelligence',ico:'◈', lbl:'Intelligence & Espionage',col:'#7060a8'},
+  {id:'propaganda',  ico:'⚑', lbl:'Propaganda & Morale',     col:'#b05580'},
+  {id:'civilians',   ico:'⊗', lbl:'Civilians & Occupation',  col:'#906040'},
+  {id:'aftermath',   ico:'⚖', lbl:'Aftermath & Peace',       col:'#5a9a60'},
+  {id:'causes',      ico:'↯', lbl:'Causes & Origins',        col:'#c06090'},
+  {id:'alliances',   ico:'≡', lbl:'Alliances & Diplomacy',   col:'#3a9fc0'},
+  {id:'guerrilla',   ico:'↑', lbl:'Guerrilla & Asymmetric',  col:'#b06020'},
+  {id:'legacy',      ico:'∞', lbl:'Legacy',                  col:'#7890a8'},
+  {id:'figures',     ico:'Ψ', lbl:'Key Figures',             col:'#8a6020'},
+  {id:'women',       ico:'♀', lbl:'Women in War',            col:'#9b6fd4'},
+];
+
+const ERAS=[
+  {y:-1300,n:'CHARIOT WARFARE'},
+  {y:-800, n:'HOPLITE & LEGION AGE'},
+  {y:-334, n:'HELLENISTIC WARFARE'},
+  {y:-264, n:'ROMAN MILITARY DOMINANCE'},
+  {y:500,  n:'MEDIEVAL WARFARE'},
+  {y:1337, n:'LATE MEDIEVAL WARFARE'},
+  {y:1500, n:'GUNPOWDER AGE'},
+  {y:1700, n:'AGE OF EMPIRE'},
+  {y:1800, n:'INDUSTRIAL WARFARE'},
+  {y:1914, n:'WORLD WARS ERA'},
+  {y:1945, n:'NUCLEAR AGE'},
+  {y:1991, n:'ASYMMETRIC WARFARE'},
+];
+
+const FP_LABELS=['Scale','Duration','Innovation','Casualties','Geopolitical','Legacy'];
+const FP_KEYS=['scale','dur','innov','cas','geo','leg'];
