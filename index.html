@@ -189,14 +189,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
   pointer-events:none;left:0%}
 input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;
   cursor:pointer;margin:0;z-index:2;-webkit-appearance:none;appearance:none}
-.drift-tl-events{position:relative;height:18px;margin-top:4px}
-.drift-evt{position:absolute;transform:translateX(-50%);font-family:'Cinzel',serif;
-  font-size:7px;letter-spacing:.3px;color:var(--txt3);white-space:nowrap;
-  opacity:.7;cursor:default;transition:opacity .15s,color .15s}
-.drift-evt:hover{opacity:1;color:var(--amber-b)}
-.drift-evt::before{content:'';position:absolute;top:-6px;left:50%;width:1px;height:4px;
-  background:var(--txt3);opacity:.4}
-.drift-tl-hint{text-align:center;margin-top:4px;font-family:'Cinzel',serif;
+.drift-tl-hint{text-align:center;margin-top:6px;font-family:'Cinzel',serif;
   font-size:9px;letter-spacing:1.5px;color:var(--txt3);opacity:.6;text-transform:uppercase}
 
 /* ── HOW ITS GOING DIVIDER ── */
@@ -267,13 +260,16 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
   .hero-stats{gap:20px}
   .card-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
   .content{padding:76px 14px 48px}
-  .drift-tl-wrap{padding:8px 12px 10px}
+  .drift-section{padding:28px 0 36px}
+  .drift-canvas{border-radius:3px}
+  .drift-tl-wrap{padding:8px 12px 10px;border-radius:3px}
   .drift-tl-lbl{font-size:7px;letter-spacing:.3px}
   .drift-tl-era{font-size:10px}
   .drift-tl-year{font-size:9px}
-  .drift-tl-hint{font-size:8px}
-  .drift-evt{font-size:6px}
-  .drift-tl-events{height:14px}
+  .drift-tl-hint{font-size:7px;letter-spacing:1px}
+  .drift-era-label{font-size:9px;letter-spacing:1.5px;padding:2px 8px}
+  .drift-heading{font-size:20px}
+  .drift-sub{font-size:13px;margin-bottom:16px}
 }
 @media(max-width:380px){
   .card-grid{grid-template-columns:1fr 1fr}
@@ -394,36 +390,222 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
         <!-- Continental shelves (blurred glow behind continents) -->
         <g id="drift-shelf-layer" filter="url(#shelf-glow)"></g>
 
-        <!-- Continents — realistic simplified outlines -->
+        <!-- Continents — detailed outlines mapped to viewBox 800x400 -->
+        <!-- Mapping: lon -170..190 → x 0..800, lat 82..-72 → y 0..400 (equirectangular) -->
         <g id="drift-continents">
-          <!-- Africa — the anchor continent, barely moves -->
-          <path id="c-af" d="M410,130 L425,118 440,115 452,120 458,132 462,148 468,158 472,175
-            470,195 465,215 458,232 448,248 435,258 425,262 418,255 408,240 400,225
-            395,208 392,190 390,172 392,155 398,140 Z" fill="#3a2204" stroke="#e89820" stroke-width="0.6" opacity="0.9"/>
-          <!-- South America — fits against Africa's west coast -->
-          <path id="c-sa" d="M245,170 L260,162 272,168 278,180 282,195 280,215 276,235
-            270,255 262,272 252,282 242,278 235,265 230,248 228,230 230,212
-            232,195 236,182 Z" fill="#3a2204" stroke="#e89820" stroke-width="0.6" opacity="0.9"/>
-          <!-- North America -->
-          <path id="c-na" d="M160,80 L180,65 200,58 222,55 240,60 255,70 262,82 258,95
-            250,108 248,125 240,138 228,148 215,152 200,150 185,142 172,132
-            162,120 155,108 152,95 Z" fill="#3a2204" stroke="#e89820" stroke-width="0.6" opacity="0.9"/>
-          <!-- Europe — small, detailed -->
-          <path id="c-eu" d="M370,68 L385,60 400,58 415,62 425,70 428,80 422,90
-            412,96 400,98 388,95 378,88 372,78 Z" fill="#3a2204" stroke="#e89820" stroke-width="0.6" opacity="0.9"/>
-          <!-- Asia — largest mass -->
-          <path id="c-as" d="M440,45 L465,38 490,35 520,38 545,45 565,55 580,68
-            588,85 590,105 585,125 575,140 558,150 540,155 518,152 498,148
-            480,140 465,128 455,112 448,95 442,78 440,60 Z" fill="#3a2204" stroke="#e89820" stroke-width="0.6" opacity="0.9"/>
-          <!-- India — small triangular subcontinent -->
-          <path id="c-in" d="M478,155 L490,148 500,155 502,170 498,185 490,198
-            482,195 476,182 474,168 Z" fill="#3a2204" stroke="#e89820" stroke-width="0.6" opacity="0.9"/>
-          <!-- Australia -->
-          <path id="c-au" d="M580,215 L600,208 618,212 630,222 635,238 628,252
-            615,258 600,260 588,255 578,245 575,232 Z" fill="#3a2204" stroke="#e89820" stroke-width="0.6" opacity="0.9"/>
-          <!-- Antarctica — wide at bottom -->
-          <path id="c-an" d="M280,340 L320,328 360,322 400,320 440,325 470,332
-            480,342 470,355 430,362 380,365 330,362 295,355 278,348 Z" fill="#3a2204" stroke="#e89820" stroke-width="0.6" opacity="0.9"/>
+
+          <!-- AFRICA -->
+          <path id="c-af" d="
+            M 418,116 L 421,112 424,108 428,106 433,105 437,106 440,108
+            442,107 445,105 448,106 452,108 454,112 453,115 450,117
+            452,120 456,122 460,124 463,128 465,132 466,136
+            468,140 470,145 471,150 472,155 472,160 471,165
+            470,168 472,172 474,176 475,180 476,185 475,190
+            474,195 472,200 470,204 468,208 466,212 464,216
+            462,220 459,224 456,228 453,231 450,234 447,238
+            444,242 441,245 438,248 434,250 431,252 428,254
+            425,255 422,254 420,252 418,248 416,244 414,240
+            412,236 410,232 408,228 406,224 405,220 404,216
+            403,212 402,208 402,204 402,200 402,196 402,192
+            403,188 404,184 405,180 406,176 406,172 406,168
+            407,164 408,160 409,156 410,152 411,148 412,144
+            413,140 414,136 415,132 416,128 417,124 418,120 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+
+          <!-- SOUTH AMERICA -->
+          <path id="c-sa" d="
+            M 262,164 L 265,162 268,160 271,159 274,160 276,162
+            278,164 280,167 282,170 284,172 285,175 286,178
+            288,182 289,186 290,190 290,194 290,198 290,202
+            289,206 288,210 286,214 284,218 282,222 280,226
+            278,230 276,234 274,238 272,242 270,246 268,250
+            266,254 264,258 262,262 260,266 258,269 256,272
+            254,274 252,276 250,278 248,280 246,281 244,282
+            242,282 240,280 239,278 238,276 237,273 237,270
+            237,266 238,262 240,258 241,254 243,250 244,246
+            246,242 247,238 248,234 248,230 248,226 247,222
+            247,218 247,214 247,210 247,206 248,202 248,198
+            249,194 250,190 251,186 252,182 253,178 254,174
+            256,170 258,167 260,165 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+
+          <!-- NORTH AMERICA -->
+          <path id="c-na" d="
+            M 108,50 L 112,48 116,46 120,44 125,42 130,40
+            136,38 142,37 148,36 154,36 160,36 166,37
+            172,38 178,40 182,42 186,44 188,47 190,50
+            191,54 190,58 188,62 185,66 182,68 178,70
+            175,72 172,74 170,76 168,79 166,82 165,86
+            164,90 163,94 163,98 164,102 166,106 168,110
+            170,113 172,116 175,118 178,120 182,122 186,124
+            188,128 190,132 191,136 190,140 188,142 185,144
+            182,145 178,146 174,146 170,145 166,144 162,142
+            158,140 154,138 150,136 146,134 142,132 138,130
+            134,128 130,126 126,124 122,122 118,120 114,118
+            110,116 106,114 102,112 100,110 98,108 96,106
+            94,103 93,100 92,96 92,92 92,88 93,84
+            94,80 96,76 98,72 100,68 102,64 104,60
+            106,56 108,52 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+
+          <!-- GREENLAND -->
+          <path id="c-gl" d="
+            M 220,24 L 226,22 232,20 238,20 244,22 248,24
+            250,28 250,32 248,36 245,38 242,40 238,42
+            234,42 230,40 226,38 222,36 220,32 219,28 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+
+          <!-- EUROPE (with Scandinavia, Iberia, Italy, British Isles) -->
+          <path id="c-eu" d="
+            M 392,52 L 395,48 398,46 402,44 406,43 410,42
+            414,42 418,43 422,44 426,46 430,48 434,50
+            436,52 438,55 440,58 442,62 443,65 442,68
+            440,70 438,72 436,74 433,76 430,78 427,80
+            424,82 421,84 418,86 416,88 414,90 412,92
+            410,94 408,95 406,96 404,97 402,98 400,97
+            398,96 396,94 394,92 393,90 392,88 390,86
+            388,84 387,82 386,80 385,78 384,76 384,74
+            384,72 384,70 385,68 386,66 387,64 388,62
+            389,60 390,58 391,56 392,54 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+          <!-- Iberian Peninsula -->
+          <path id="c-ib" d="
+            M 388,86 L 385,88 382,90 380,92 379,95 380,98
+            382,100 385,102 388,103 391,102 394,100 396,98
+            397,96 396,94 394,92 392,90 390,88 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+          <!-- Italian Peninsula -->
+          <path id="c-it" d="
+            M 412,92 L 414,95 416,98 417,101 418,104 417,107
+            416,109 414,110 412,109 411,107 410,104 410,101
+            410,98 411,95 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+          <!-- British Isles -->
+          <path id="c-bi" d="
+            M 380,58 L 383,56 385,54 387,56 388,59 387,62
+            385,64 383,66 381,67 379,66 378,64 378,62 379,60 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+
+          <!-- ASIA (mainland) -->
+          <path id="c-as" d="
+            M 442,42 L 448,38 454,35 460,33 466,32 472,32
+            478,33 484,34 490,36 496,38 502,40 508,42
+            514,44 520,46 526,48 532,50 538,52 544,54
+            550,56 556,58 562,60 566,62 570,64 574,66
+            578,68 582,70 585,72 588,74 590,76 592,78
+            594,82 596,86 598,90 599,94 600,98 600,102
+            600,106 599,110 597,114 594,118 590,120 586,122
+            582,124 578,125 574,126 570,128 566,130
+            562,132 558,134 554,135 550,136 546,136
+            542,136 538,136 534,134 530,132 526,130
+            522,128 518,126 514,124 510,122 506,120
+            502,118 498,116 494,114 490,112 486,110
+            482,108 478,106 474,104 470,102 466,100
+            462,98 458,96 454,94 452,92 450,88
+            448,84 446,80 444,76 443,72 442,68
+            442,64 442,60 442,56 442,50 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+
+          <!-- Arabian Peninsula -->
+          <path id="c-ar" d="
+            M 450,110 L 454,108 458,107 462,108 465,110 467,113
+            468,116 468,120 466,124 464,128 461,130 458,131
+            455,130 452,128 450,125 449,122 448,118 449,114 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+
+          <!-- INDIA -->
+          <path id="c-in" d="
+            M 488,128 L 492,126 496,124 500,124 504,126
+            506,130 508,134 509,138 510,142 510,146
+            510,150 509,154 508,158 506,162 504,166
+            502,170 500,174 498,177 496,178 494,178
+            492,176 490,174 488,170 486,166 484,162
+            483,158 482,154 482,150 482,146 483,142
+            484,138 486,134 487,130 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+
+          <!-- SE ASIA / MALAY PENINSULA -->
+          <path id="c-sea" d="
+            M 568,132 L 572,130 576,132 578,136 580,140
+            582,144 583,148 582,152 580,156 578,158
+            576,160 574,158 572,155 570,152 568,148
+            567,144 566,140 566,136 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+
+          <!-- JAPAN -->
+          <path id="c-jp" d="
+            M 616,74 L 620,72 623,74 625,78 626,82 624,86
+            622,90 619,92 616,94 614,92 612,88 612,84
+            613,80 614,76 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+
+          <!-- AUSTRALIA -->
+          <path id="c-au" d="
+            M 578,222 L 582,218 586,215 590,213 594,212
+            598,212 602,213 606,214 610,216 614,218
+            618,220 622,222 625,225 628,228 630,232
+            632,236 632,240 632,244 630,248 628,252
+            626,255 622,258 618,260 614,262 610,264
+            606,265 602,266 598,266 594,264 590,262
+            586,260 582,258 580,254 578,250 576,246
+            575,242 574,238 574,234 576,230 578,226 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+          <!-- Tasmania -->
+          <path id="c-tas" d="
+            M 614,272 L 618,270 622,272 623,276 621,279
+            618,280 615,279 613,276 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+          <!-- New Zealand -->
+          <path id="c-nz" d="
+            M 652,262 L 654,258 657,256 659,258 660,262
+            659,266 657,270 655,274 653,276 651,274
+            650,270 650,266 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+
+          <!-- ANTARCTICA -->
+          <path id="c-an" d="
+            M 180,365 L 195,360 210,356 225,352 240,349
+            255,347 270,345 285,344 300,343 315,342
+            330,342 345,342 360,342 375,343 390,344
+            405,345 420,347 435,349 450,352 465,355
+            480,358 495,362 510,366 520,370 525,374
+            520,378 510,382 495,384 480,386 465,387
+            450,388 435,388 420,388 405,387 390,386
+            375,385 360,384 345,384 330,384 315,384
+            300,385 285,386 270,386 255,386 240,385
+            225,384 210,382 195,378 185,374 180,370 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
+
+          <!-- CENTRAL AMERICA bridge -->
+          <path id="c-ca" d="
+            M 190,140 L 194,138 198,139 201,142 203,146
+            205,150 207,154 209,157 211,159 213,160
+            216,162 218,164 219,162 218,158 216,154
+            214,150 212,146 210,142 208,139 205,136
+            202,134 199,132 196,134 193,136 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+
+          <!-- MADAGASCAR -->
+          <path id="c-mad" d="
+            M 476,228 L 479,225 482,226 484,230 484,236
+            483,242 481,246 478,248 476,246 474,242
+            474,238 474,234 475,230 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+
+          <!-- INDONESIA / BORNEO -->
+          <path id="c-indo" d="
+            M 584,162 L 588,160 592,161 596,163 600,165
+            604,167 607,170 609,173 608,176 605,178
+            601,179 597,178 593,176 590,174 587,172
+            585,169 584,166 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+          <!-- Papua New Guinea -->
+          <path id="c-png" d="
+            M 618,172 L 622,170 626,169 630,170 634,172
+            637,175 638,178 636,181 633,182 629,182
+            625,181 621,179 619,176 Z
+          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
+
         </g>
 
         <!-- Volcanic hotspot particles -->
@@ -451,7 +633,6 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
         <div class="drift-tl-thumb" id="drift-thumb"></div>
         <input type="range" class="drift-range" id="drift-range" min="0" max="1000" value="0" step="1" aria-label="Geological timeline">
       </div>
-      <div class="drift-tl-events" id="drift-events"></div>
       <div class="drift-tl-hint">Drag to explore &middot; Press play to animate</div>
     </div>
   </div>
@@ -1375,67 +1556,158 @@ document.addEventListener('keydown',function(e){
   const oceanLayer=document.getElementById('drift-ocean-layer');
   const shelfLayer=document.getElementById('drift-shelf-layer');
   const volcanoLayer=document.getElementById('drift-volcano-layer');
-  const eventsEl=document.getElementById('drift-events');
   if(!playBtn||!rangeEl)return;
 
   // ── MULTI-KEYFRAME PALEOGEOGRAPHIC DATA ──
-  // Each continent has keyframes at: t=0 (Pangaea 335Mya), 0.25 (200Mya), 0.5 (150Mya), 0.75 (65Mya), 1.0 (present)
-  // Values: [translateX, translateY, rotation in degrees]
+  // t=0 (Pangaea 335Mya), 0.25 (200Mya), 0.5 (150Mya), 0.75 (65Mya), 1.0 (present)
+  // tx/ty = translation offset from present-day SVG position, r = rotation degrees
+  // Small islands/peninsulas inherit their parent continent's motion
   const keyframes={
-    'c-af': [ // Africa — barely moves, anchor continent
-      {t:0, tx:40, ty:-25, r:8},
-      {t:0.25, tx:25, ty:-15, r:5},
+    'c-af': [ // Africa — anchor continent, barely moves
+      {t:0, tx:40, ty:-25, r:10},
+      {t:0.25, tx:25, ty:-15, r:6},
       {t:0.5, tx:15, ty:-8, r:3},
       {t:0.75, tx:5, ty:-3, r:1},
       {t:1, tx:0, ty:0, r:0}
     ],
-    'c-sa': [ // South America — peels away from Africa, drifts west
-      {t:0, tx:145, ty:-28, r:35},
-      {t:0.25, tx:95, ty:-20, r:22},
-      {t:0.5, tx:55, ty:-12, r:12},
-      {t:0.75, tx:18, ty:-4, r:4},
+    'c-mad': [ // Madagascar — locked to Africa then drifts slightly east
+      {t:0, tx:28, ty:-30, r:10},
+      {t:0.25, tx:18, ty:-18, r:6},
+      {t:0.5, tx:8, ty:-8, r:2},
+      {t:0.75, tx:2, ty:-2, r:0},
       {t:1, tx:0, ty:0, r:0}
     ],
-    'c-na': [ // North America — swings west and north, rotates counter-clockwise
-      {t:0, tx:155, ty:28, r:22},
+    'c-sa': [ // South America — peels west from Africa, famous jigsaw fit
+      {t:0, tx:148, ty:-30, r:38},
+      {t:0.25, tx:100, ty:-22, r:25},
+      {t:0.5, tx:58, ty:-14, r:14},
+      {t:0.75, tx:18, ty:-5, r:4},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-na': [ // North America — swings NW from Pangaea
+      {t:0, tx:160, ty:30, r:24},
+      {t:0.25, tx:110, ty:20, r:16},
+      {t:0.5, tx:62, ty:12, r:9},
+      {t:0.75, tx:20, ty:4, r:2},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-gl': [ // Greenland — follows NA but slightly independent
+      {t:0, tx:140, ty:35, r:20},
+      {t:0.25, tx:95, ty:24, r:14},
+      {t:0.5, tx:55, ty:14, r:8},
+      {t:0.75, tx:16, ty:4, r:2},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-ca': [ // Central America — follows NA
+      {t:0, tx:155, ty:25, r:22},
       {t:0.25, tx:105, ty:18, r:15},
       {t:0.5, tx:60, ty:10, r:8},
-      {t:0.75, tx:20, ty:3, r:2},
+      {t:0.75, tx:18, ty:3, r:2},
       {t:1, tx:0, ty:0, r:0}
     ],
-    'c-eu': [ // Europe — rotates slightly, drifts east
-      {t:0, tx:-30, ty:22, r:-12},
-      {t:0.25, tx:-18, ty:14, r:-8},
+    'c-eu': [ // Europe — rotates CW slightly, was against NA
+      {t:0, tx:-35, ty:25, r:-15},
+      {t:0.25, tx:-22, ty:16, r:-10},
+      {t:0.5, tx:-12, ty:9, r:-5},
+      {t:0.75, tx:-3, ty:2, r:-1},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-ib': [ // Iberia — follows Europe
+      {t:0, tx:-32, ty:22, r:-14},
+      {t:0.25, tx:-20, ty:14, r:-9},
       {t:0.5, tx:-10, ty:8, r:-4},
       {t:0.75, tx:-3, ty:2, r:-1},
       {t:1, tx:0, ty:0, r:0}
     ],
-    'c-as': [ // Asia — swings north-east
-      {t:0, tx:-60, ty:30, r:-10},
-      {t:0.25, tx:-38, ty:20, r:-7},
+    'c-it': [ // Italy — follows Europe, slight extra rotation
+      {t:0, tx:-28, ty:20, r:-18},
+      {t:0.25, tx:-18, ty:13, r:-12},
+      {t:0.5, tx:-10, ty:7, r:-6},
+      {t:0.75, tx:-3, ty:2, r:-2},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-bi': [ // British Isles — follows Europe
+      {t:0, tx:-34, ty:24, r:-14},
+      {t:0.25, tx:-21, ty:15, r:-9},
+      {t:0.5, tx:-11, ty:8, r:-5},
+      {t:0.75, tx:-3, ty:2, r:-1},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-as': [ // Asia — swings east, largest motion
+      {t:0, tx:-65, ty:35, r:-12},
+      {t:0.25, tx:-42, ty:24, r:-8},
+      {t:0.5, tx:-22, ty:14, r:-4},
+      {t:0.75, tx:-7, ty:4, r:-1},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-ar': [ // Arabia — locked to Africa, then separates
+      {t:0, tx:38, ty:-22, r:10},
+      {t:0.25, tx:24, ty:-14, r:6},
+      {t:0.5, tx:12, ty:-6, r:3},
+      {t:0.75, tx:3, ty:-1, r:1},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-jp': [ // Japan — follows Asia
+      {t:0, tx:-60, ty:32, r:-10},
+      {t:0.25, tx:-38, ty:22, r:-7},
       {t:0.5, tx:-20, ty:12, r:-4},
-      {t:0.75, tx:-6, ty:4, r:-1},
+      {t:0.75, tx:-6, ty:3, r:-1},
       {t:1, tx:0, ty:0, r:0}
     ],
-    'c-in': [ // India — dramatic northward journey, major rotation
-      {t:0, tx:10, ty:100, r:-55},
-      {t:0.25, tx:5, ty:80, r:-42},
-      {t:0.5, tx:-2, ty:55, r:-28},
-      {t:0.75, tx:-5, ty:20, r:-10},
+    'c-sea': [ // SE Asia — follows Asia
+      {t:0, tx:-58, ty:30, r:-10},
+      {t:0.25, tx:-36, ty:20, r:-7},
+      {t:0.5, tx:-18, ty:10, r:-3},
+      {t:0.75, tx:-5, ty:3, r:-1},
       {t:1, tx:0, ty:0, r:0}
     ],
-    'c-au': [ // Australia — breaks from Antarctica, drifts NE with rotation
-      {t:0, tx:-100, ty:55, r:-48},
-      {t:0.25, tx:-78, ty:45, r:-38},
-      {t:0.5, tx:-52, ty:30, r:-25},
+    'c-in': [ // India — dramatic northward journey from Gondwana to Asia
+      {t:0, tx:8, ty:108, r:-60},
+      {t:0.25, tx:4, ty:85, r:-45},
+      {t:0.5, tx:-2, ty:58, r:-30},
+      {t:0.75, tx:-4, ty:18, r:-8},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-au': [ // Australia — breaks from Antarctica, drifts NE
+      {t:0, tx:-105, ty:58, r:-50},
+      {t:0.25, tx:-82, ty:48, r:-40},
+      {t:0.5, tx:-55, ty:32, r:-26},
       {t:0.75, tx:-18, ty:10, r:-8},
       {t:1, tx:0, ty:0, r:0}
     ],
+    'c-tas': [ // Tasmania — follows Australia
+      {t:0, tx:-102, ty:55, r:-48},
+      {t:0.25, tx:-80, ty:46, r:-38},
+      {t:0.5, tx:-53, ty:30, r:-24},
+      {t:0.75, tx:-17, ty:9, r:-7},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-nz': [ // New Zealand — follows Australia loosely
+      {t:0, tx:-95, ty:52, r:-45},
+      {t:0.25, tx:-75, ty:42, r:-35},
+      {t:0.5, tx:-48, ty:28, r:-22},
+      {t:0.75, tx:-15, ty:8, r:-6},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-png': [ // Papua New Guinea — follows Australia
+      {t:0, tx:-100, ty:54, r:-48},
+      {t:0.25, tx:-78, ty:44, r:-38},
+      {t:0.5, tx:-52, ty:30, r:-24},
+      {t:0.75, tx:-16, ty:9, r:-7},
+      {t:1, tx:0, ty:0, r:0}
+    ],
+    'c-indo': [ // Indonesia — between Asia and Australia
+      {t:0, tx:-80, ty:42, r:-35},
+      {t:0.25, tx:-58, ty:32, r:-26},
+      {t:0.5, tx:-35, ty:20, r:-16},
+      {t:0.75, tx:-10, ty:6, r:-4},
+      {t:1, tx:0, ty:0, r:0}
+    ],
     'c-an': [ // Antarctica — drifts south to pole
-      {t:0, tx:30, ty:-55, r:5},
-      {t:0.25, tx:20, ty:-38, r:3},
-      {t:0.5, tx:12, ty:-22, r:2},
-      {t:0.75, tx:4, ty:-8, r:1},
+      {t:0, tx:35, ty:-60, r:6},
+      {t:0.25, tx:22, ty:-42, r:4},
+      {t:0.5, tx:14, ty:-25, r:2},
+      {t:0.75, tx:5, ty:-8, r:1},
       {t:1, tx:0, ty:0, r:0}
     ]
   };
@@ -1479,31 +1751,6 @@ document.addEventListener('keydown',function(e){
     {max:1000,name:'Present Day',           year:'Present'}
   ];
 
-  // ── GEOLOGICAL EVENT MARKERS ──
-  const geoEvents=[
-    {pos:0,   label:'Pangaea forms'},
-    {pos:15,  label:'First dinosaurs'},
-    {pos:30,  label:'Central Atlantic rift'},
-    {pos:40,  label:'Laurasia/Gondwana split'},
-    {pos:55,  label:'South Atlantic opens'},
-    {pos:65,  label:'India breaks from Gondwana'},
-    {pos:70,  label:'Cretaceous peak'},
-    {pos:76,  label:'K-Pg extinction'},
-    {pos:82,  label:'India collides with Asia'},
-    {pos:88,  label:'Himalayas rise'},
-    {pos:95,  label:'Ice ages begin'},
-    {pos:100, label:'Present'}
-  ];
-  if(eventsEl){
-    geoEvents.forEach(ev=>{
-      const d=document.createElement('span');
-      d.className='drift-evt';
-      d.style.left=ev.pos+'%';
-      d.textContent=ev.label;
-      d.title=ev.label;
-      eventsEl.appendChild(d);
-    });
-  }
 
   // ── RIFT LINES ── Mid-ocean ridges that form between separating continents
   const rifts=[
