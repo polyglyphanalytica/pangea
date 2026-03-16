@@ -228,6 +228,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   .era-y{font-size:18px}
   .era-n{font-size:10px;letter-spacing:1.5px}
   .main{top:52px!important}
+  /* Map takes top half, drawer below timeline */
   .main{
     bottom:0;
     flex-direction:column;
@@ -243,8 +244,6 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
     width:100%;
     min-height:0;
   }
-
-  /* Drawer overlays bottom of map area */
   .info-panel{
     position:absolute;
     left:0;right:0;
@@ -256,22 +255,17 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
     overflow-y:auto;
     padding:0 16px 16px;
     background:var(--panel);
-    box-shadow:0 -4px 24px rgba(0,0,0,.4);
+    box-shadow:0 -4px 24px rgba(0,0,0,.12);
     z-index:100;
-    /* Default: collapsed below view, just showing handle */
-    transform:translateY(100%);
-    transition:transform .35s cubic-bezier(0.25,0.1,0.25,1);
-    max-height:calc(100% - 52px);
+    /* Default: collapsed — only handle visible above timeline */
+    height:50vh;
+    transform:translateY(calc(100% - 28px));
+    transition:transform .35s cubic-bezier(.25,.1,.25,1);
     will-change:transform;
   }
   .info-panel.mob-open{
-    /* Creep up to cover 50% of the viewport below header */
     transform:translateY(0);
-    height:50vh;
-  }
-  .info-panel.mob-collapsed{
-    /* Collapsed — just handle visible at bottom of map */
-    transform:translateY(calc(100% - 32px));
+    box-shadow:0 -4px 24px rgba(0,0,0,.4);
   }
 
   /* Drag handle */
@@ -306,7 +300,6 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   .lens-dd-list{max-height:180px}
   .info-txt,.overview-arc{font-size:16px;line-height:1.82}
   .lens-row-lbl{font-size:13px}
-  .mob-map-btn{display:none!important}
 }
 
 /* ── LANDSCAPE MOBILE (≤768px, landscape) — desktop layout ── */
@@ -7285,82 +7278,65 @@ const isMobile=()=>window.innerWidth<=768 && window.matchMedia('(orientation:por
 const _drawer=document.getElementById('info-panel');
 const _handle=document.getElementById('drawer-handle');
 let _drawerOpen=false;
-let _drawerDragging=false;
-let _drawerStartY=0;
-let _drawerStartH=0;
-const DRAWER_MIN=32; // collapsed: just handle visible
-const DRAWER_HANDLE_H=32;
-
-function getDrawerMax(){
-  // 50% of viewport below header
-  return Math.round(window.innerHeight*0.5);
-}
 
 function openMobileSheet(){
   if(!isMobile())return;
   _drawerOpen=true;
-  const panel=_drawer;
-  panel.classList.remove('mob-collapsed');
-  panel.classList.add('mob-open');
-  // Set height to 50vh
-  panel.style.height=getDrawerMax()+'px';
-  panel.style.transform='translateY(0)';
+  _drawer.classList.add('mob-open');
+  _drawer.style.transform='';
 }
 
 function closeMobileSheet(){
   _drawerOpen=false;
-  const panel=_drawer;
-  panel.classList.remove('mob-open');
-  panel.classList.add('mob-collapsed');
-  panel.style.height=getDrawerMax()+'px';
-  panel.style.transform='translateY(calc(100% - '+DRAWER_HANDLE_H+'px))';
+  _drawer.classList.remove('mob-open');
+  _drawer.style.transform='';
 }
 
-// ── DRAWER DRAG HANDLER ──
+// ── DRAWER DRAG TO SNAP ──
 if(_handle){
-  let _touchId=null;
+  let _touchId=null,_startY=0,_startTx=0,_dragging=false;
+
+  function getTxPx(){
+    // Current translateY in px
+    const m=getComputedStyle(_drawer).transform;
+    if(!m||m==='none')return 0;
+    const vals=m.match(/matrix\((.+)\)/);
+    if(!vals)return 0;
+    return parseFloat(vals[1].split(',')[5])||0;
+  }
+
   _handle.addEventListener('touchstart',function(e){
     if(!isMobile())return;
-    e.preventDefault();
     const t=e.changedTouches[0];
     _touchId=t.identifier;
-    _drawerDragging=true;
-    _drawerStartY=t.clientY;
-    _drawerStartH=_drawer.offsetHeight-(parseInt(_drawer.style.transform.match(/translateY\((.+?)\)/)?.[1])||0);
-    // Measure current visible height
-    const rect=_drawer.getBoundingClientRect();
-    const parentRect=_drawer.parentElement.getBoundingClientRect();
-    _drawerStartH=parentRect.bottom-rect.top;
+    _dragging=true;
+    _startY=t.clientY;
+    _startTx=getTxPx();
     _drawer.style.transition='none';
-  },{passive:false});
+  },{passive:true});
 
   _handle.addEventListener('touchmove',function(e){
-    if(!_drawerDragging||!isMobile())return;
+    if(!_dragging||!isMobile())return;
     const t=Array.from(e.changedTouches).find(x=>x.identifier===_touchId);
     if(!t)return;
     e.preventDefault();
-    const dy=_drawerStartY-t.clientY; // positive = dragging up
-    let newH=_drawerStartH+dy;
-    const maxH=getDrawerMax();
-    // Clamp: minimum is just handle, maximum is 50vh
-    newH=Math.max(DRAWER_HANDLE_H,Math.min(maxH,newH));
-    // Translate the panel so newH pixels are visible
-    const totalH=maxH;
-    _drawer.style.height=totalH+'px';
-    const translateY=totalH-newH;
-    _drawer.style.transform='translateY('+translateY+'px)';
+    const dy=t.clientY-_startY; // positive = dragging down
+    const h=_drawer.offsetHeight;
+    const minTx=0; // fully open
+    const maxTx=h-28; // collapsed, just handle visible
+    const newTx=Math.max(minTx,Math.min(maxTx,_startTx+dy));
+    _drawer.style.transform='translateY('+newTx+'px)';
   },{passive:false});
 
-  function endDrag(e){
-    if(!_drawerDragging)return;
-    _drawerDragging=false;
+  function endDrag(){
+    if(!_dragging)return;
+    _dragging=false;
     _drawer.style.transition='';
-    // Snap: if visible height > 40% of max, snap open. Otherwise snap collapsed.
-    const rect=_drawer.getBoundingClientRect();
-    const parentRect=_drawer.parentElement.getBoundingClientRect();
-    const visH=parentRect.bottom-rect.top;
-    const maxH=getDrawerMax();
-    if(visH>maxH*0.3){
+    // Snap threshold: if more than 40% visible, snap open; otherwise collapse
+    const tx=getTxPx();
+    const h=_drawer.offsetHeight;
+    const visibleFrac=1-(tx/h);
+    if(visibleFrac>0.35){
       openMobileSheet();
     }else{
       closeMobileSheet();
@@ -7368,30 +7344,6 @@ if(_handle){
   }
   _handle.addEventListener('touchend',endDrag);
   _handle.addEventListener('touchcancel',endDrag);
-
-  // Mouse drag for desktop testing
-  _handle.addEventListener('mousedown',function(e){
-    if(!isMobile())return;
-    _drawerDragging=true;
-    _drawerStartY=e.clientY;
-    const rect=_drawer.getBoundingClientRect();
-    const parentRect=_drawer.parentElement.getBoundingClientRect();
-    _drawerStartH=parentRect.bottom-rect.top;
-    _drawer.style.transition='none';
-    e.preventDefault();
-  });
-  document.addEventListener('mousemove',function(e){
-    if(!_drawerDragging||!isMobile())return;
-    const dy=_drawerStartY-e.clientY;
-    let newH=_drawerStartH+dy;
-    const maxH=getDrawerMax();
-    newH=Math.max(DRAWER_HANDLE_H,Math.min(maxH,newH));
-    _drawer.style.height=maxH+'px';
-    _drawer.style.transform='translateY('+(maxH-newH)+'px)';
-  });
-  document.addEventListener('mouseup',function(){
-    if(_drawerDragging)endDrag();
-  });
 }
 
 // ── TIMELINE FILL ──
