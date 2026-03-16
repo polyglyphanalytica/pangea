@@ -872,291 +872,7 @@ function itemClick(id){
   navigateToItem(id);
 }
 
-// ══════════════════════════════════════════════════════
-// PART 2 — DRAWER, FINGERPRINT, SPAN BAR, DENSITY, MAP
-// ══════════════════════════════════════════════════════
-
-function renderDrawerContent(){
-  const c=sel;
-  const dc=document.getElementById('drawer-content');
-  if(!dc)return;
-  if(!c)return;
-  let body='';
-  if(!lenses.size){
-    body=`<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}${renderFingerprint(c)}`;
-  } else {
-    body=[...lenses].map(id=>{
-      const L=LENSES.find(l=>l.id===id);
-      if(!L)return'';
-      return`<div class="lens-section">
-        <div class="lens-section-hdr">
-          <span class="lens-section-ico">${L.ico}</span>
-          <span class="lens-section-lbl">${L.lbl}</span>
-        </div>
-        <div class="info-txt">${c.d[id]||'No data for this lens.'}</div>
-      </div>`;
-    }).join('');
-  }
-  const col=lenses.size?getLensCol():OVERVIEW_COL;
-  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
-  const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
-    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
-    const isA=actIds.has(id);
-    const badge=isA?'ACTIVE':'→ JUMP';
-    const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
-    return`<button class="conn-item" tabindex="0"
-        aria-label="${tip}"
-        onclick="navigateToItem('${id}')"
-        style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
-      <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
-      <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
-      <span style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:1px;color:${isA?'var(--amber-b)':'var(--amber)'};white-space:nowrap">${badge}</span>
-    </button>`;
-  }).join(''):'';
-  dc.innerHTML=body+connHTML;
-}
-
-function renderDrawer(){
-  const dc=document.getElementById('drawer-content');
-  if(!sel){
-    document.getElementById('drawer-top').innerHTML='';
-    dc.innerHTML=`
-    <div style="padding:4px 0 16px">
-
-      <div style="font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--amber-b);letter-spacing:2px;margin-bottom:2px">NUMEN</div>
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Atlas of Belief</div>
-
-      <div style="font-size:13.5px;line-height:1.85;color:var(--txt2);margin-bottom:18px">
-        20 belief systems. 12,000 years. Every religion, philosophy, and spiritual tradition that shaped how humanity understands the sacred — mapped, connected, and explorable. From animism's earliest stirrings to the modern world's great faiths, rendered on a real geographic projection and navigable across a continuous timeline.
-      </div>
-
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">The Map</div>
-      <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-        Drag the <span style="color:var(--amber-b)">timeline</span> at the bottom across 12,000 years — belief systems emerge and evolve in real time. <span style="color:#e8251a">Red markers</span> show active traditions. Tap any to open its full profile and explore its connections.
-      </div>
-
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Lenses</div>
-      <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-        Apply a <span style="color:var(--amber-b)">lens</span> to read all of belief through a single idea — Cosmology, Ethics, Ritual, Sacred Texts, Mysticism, and more.
-      </div>
-
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Each belief profile includes</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:18px;font-size:11.5px">
-        ${[['◈','Interpretive lenses'],['⟳','Concept transmissions'],['◎','Belief fingerprint chart'],['↗','Contemporary traditions'],['⬡','Sacred geography'],['◉','Historical timeline']].map(([ico,lbl])=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--bdr2);border-radius:2px;color:var(--txt2)"><span style="color:var(--amber-b);font-size:13px">${ico}</span>${lbl}</div>`).join('')}
-      </div>
-
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Pivotal moments to try</div>
-      ${(()=>{
-        const ALL=[
-          [-10000,'Animism Begins','Humanity\'s first spiritual expressions emerge alongside settled life'],
-          [-1500,'Vedic Hymns Composed','The oldest religious texts still in continuous use are written in Sanskrit'],
-          [-563,'The Buddha\'s Enlightenment','Under the Bodhi tree, Siddhartha Gautama achieves nirvana and begins to teach'],
-          [-551,'Confucius Born','The teacher who shaped East Asian ethics, governance, and family life for millennia'],
-          [-500,'The Axial Age','Philosophy erupts simultaneously across the world — Greece, India, China, Persia'],
-          [30,'Christianity Begins','A crucifixion in Jerusalem ignites a faith that will reshape the Western world'],
-          [622,'The Hijra','Muhammad\'s journey from Mecca to Medina founds Islam and a new calendar'],
-          [1469,'Guru Nanak Born','Sikhism emerges in Punjab, blending devotion with radical egalitarianism'],
-          [1517,'Protestant Reformation','Luther challenges the Church and fractures Western Christianity forever'],
-          [1844,'Bahá\'í Faith Founded','A new world religion emerges in Persia, preaching unity of all faiths'],
-        ];
-        const shuffled=[...ALL].sort(()=>Math.random()-.5);
-        return shuffled.slice(0,5).map(([yr,title,desc])=>`
-        <div onclick="setYear(${yr});"
-          style="padding:8px 0;border-bottom:1px solid var(--bdr2);cursor:pointer;transition:opacity .15s"
-          onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
-            <span style="font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b)">${yr<0?Math.abs(yr)+' BCE':yr+' CE'}</span>
-            <span style="font-size:12.5px;color:var(--txt2)">${title}</span>
-          </div>
-          <div style="font-size:11.5px;color:var(--txt3);font-style:italic">${desc}</div>
-        </div>`).join('');
-      })()}
-    </div>`;
-    document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
-    return;
-  }
-  const c=sel;
-  const dc2=document.getElementById('drawer-content');
-
-  let itemHdr=`<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:2px">
-      <div class="info-nm" style="margin-bottom:0">${c.nm}</div>
-      <button class="info-close" onclick="closeInfo()" style="position:static;flex-shrink:0;margin-top:2px">✕</button>
-    </div>
-    <div class="info-sb">${c.sb}</div>
-    <div class="info-dates">
-      <div class="info-dt">${fmt(c.s)}</div>
-      <span class="info-arr">→</span>
-      <div class="info-dt">${fmt(c.e)}</div>
-    </div>`;
-
-  let body='';
-  if(!lenses.size){
-    body=`<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}${renderFingerprint(c)}`;
-  } else {
-    body=[...lenses].map(id=>{
-      const L=LENSES.find(l=>l.id===id);
-      if(!L)return'';
-      return`<div class="lens-section">
-        <div class="lens-section-hdr">
-          <span class="lens-section-ico">${L.ico}</span>
-          <span class="lens-section-lbl">${L.lbl}</span>
-        </div>
-        <div class="info-txt">${c.d[id]||'No data for this lens.'}</div>
-      </div>`;
-    }).join('');
-  }
-
-  const col=lenses.size?getLensCol():OVERVIEW_COL;
-  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
-  const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
-    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
-    const isA=actIds.has(id);
-    const badge=isA?'ACTIVE':'→ JUMP';
-    const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
-    return`<button class="conn-item" tabindex="0"
-        aria-label="${tip}"
-        onclick="navigateToItem('${id}')"
-        style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
-      <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
-      <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
-      <span style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:1px;color:${isA?'var(--amber-b)':'var(--amber)'};white-space:nowrap">${badge}</span>
-    </button>`;
-  }).join(''):'';
-
-  dc2.innerHTML=itemHdr+'<div id="lens-position-hook" style="padding:8px 0 2px"></div><hr class="info-div"><div id="drawer-lens-body">'+body+connHTML+'</div>';
-  renderLensDD();
-  document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
-}
-
-function closeInfo(){sel=null;lenses.clear();lensDD=false;renderDrawer();renderMap();}
-
-function setYear(y){
-  year=parseInt(y);
-  const sl=document.getElementById('tl');
-  const sliderVal=yearToSlider(year);
-  if(sl.value!=sliderVal) sl.value=sliderVal;
-  const pct=sliderVal/10;
-  document.getElementById('tl-thumb').style.left=pct+'%';
-  const tlEl=document.getElementById('tl');
-  tlEl.setAttribute('aria-valuenow',sliderVal);
-  tlEl.setAttribute('aria-valuetext',fmt(year));
-  document.getElementById('era-y').textContent=fmt(year);
-  document.getElementById('era-n').textContent=eraName(year);
-  document.getElementById('cnt-n').textContent=ITEMS.filter(c=>active(c)).length;
-  renderMap();
-  if(sel&&!active(sel))closeInfo();
-  else renderDrawer();
-}
-
-function renderWorldMap(world){
-  const svg=document.getElementById('wsvg');
-  const W=1000,H=520;
-  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
-  window._proj=proj;
-  const pathGen=d3.geoPath().projection(proj);
-  const land=topojson.feature(world,world.objects.land);
-  const countries=topojson.feature(world,world.objects.countries);
-  const isDark=()=>document.documentElement.dataset.theme!=='light';
-  let g=document.getElementById('map-layer');
-  const graticule=d3.geoGraticule()();
-  const gratPath=pathGen(graticule)||'';
-  const landPath=pathGen(land)||'';
-  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
-  const borderPath=pathGen(borders)||'';
-  g.innerHTML=
-    `<path d="${gratPath}" fill="none" stroke="var(--bdr2)" stroke-width=".3"/>` +
-    `<path id="land-path" d="${landPath}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>` +
-    `<path d="${borderPath}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
-}
-
-// ══════════════════════════════════════════════════════
-// BELIEF FINGERPRINT RADAR CHART
-// ══════════════════════════════════════════════════════
-function renderFingerprint(c){
-  if(!c.fp)return'';
-  const W=360,H=300,cx=W/2,cy=H/2+10,R=88;
-  const n=FP_LABELS.length;
-  const angles=FP_LABELS.map((_,i)=>(i*2*Math.PI/n)-Math.PI/2);
-
-  let svg=`<svg class="fp-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
-  [2,4,6,8,10].forEach(level=>{
-    const r=R*(level/10);
-    const pts=angles.map(a=>`${cx+r*Math.cos(a)},${cy+r*Math.sin(a)}`).join(' ');
-    svg+=`<polygon points="${pts}" class="fp-grid"/>`;
-  });
-  angles.forEach(a=>{
-    svg+=`<line x1="${cx}" y1="${cy}" x2="${(cx+R*Math.cos(a)).toFixed(1)}" y2="${(cy+R*Math.sin(a)).toFixed(1)}" class="fp-grid"/>`;
-  });
-  const vals=FP_KEYS.map(k=>c.fp[k]||0);
-  const dataPts=angles.map((a,i)=>{
-    const r=R*(vals[i]/10);
-    return`${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`;
-  }).join(' ');
-  svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
-  const SHORT=FP_LABELS;
-  angles.forEach((a,i)=>{
-    const lr=R+26;
-    const lx=cx+lr*Math.cos(a);
-    const ly=cy+lr*Math.sin(a);
-    const cosA=Math.cos(a);
-    const anchor=cosA>0.15?'start':cosA<-0.15?'end':'middle';
-    const dy=Math.sin(a)>0.15?4:Math.sin(a)<-0.15?-4:4;
-    svg+=`<text x="${lx.toFixed(1)}" y="${(ly+dy).toFixed(1)}" text-anchor="${anchor}" class="fp-label">${SHORT[i]}</text>`;
-  });
-  svg+='</svg>';
-  return`<div class="fp-wrap"><div class="fp-title">Belief Fingerprint</div>${svg}</div>`;
-}
-
-// ══════════════════════════════════════════════════════
-// ENHANCED SPAN BAR WITH CONTEMPORARIES
-// ══════════════════════════════════════════════════════
-function renderEnhancedSpanBar(c){
-  const MIN=-10000,MAX=2024,total=MAX-MIN;
-  const left=Math.max(0,(c.s-MIN)/total*100);
-  const width=Math.min(100-left,(c.e-c.s)/total*100);
-
-  const overlap=ITEMS.filter(x=>x.id!==c.id&&x.s<c.e&&x.e>c.s)
-    .map(x=>{
-      const overlapStart=Math.max(x.s,c.s);
-      const overlapEnd=Math.min(x.e,c.e);
-      return{...x,overlapYrs:overlapEnd-overlapStart};
-    })
-    .sort((a,b)=>b.overlapYrs-a.overlapYrs)
-    .slice(0,4);
-
-  const colors=['#e89820','#4a8870','#4a7faa','#9b6fd4'];
-
-  let bars=overlap.map((x,i)=>{
-    const xl=Math.max(0,(x.s-MIN)/total*100);
-    const xw=Math.min(100-xl,(x.e-x.s)/total*100);
-    const ol=Math.max(xl,left);
-    const or_=Math.min(xl+xw,left+width);
-    const ow=Math.max(0,or_-ol);
-    return`<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
-      <div class="contemp-bar-nm">${x.nm}</div>
-      <div class="contemp-bar-track">
-        <div class="contemp-bar-fill" style="left:${(ol-left).toFixed(1)}%;width:${ow.toFixed(1)}%;background:${colors[i]}"></div>
-      </div>
-      <div class="contemp-bar-yr">${fmt(x.s)}–${fmt(x.e)}</div>
-    </div>`;
-  }).join('');
-
-  const mainBar=`<div class="civ-span-bar" title="${fmt(c.s)} to ${fmt(c.e)}">
-    <div class="civ-span-fill" style="left:${left.toFixed(1)}%;width:${width.toFixed(1)}%"></div>
-  </div>
-  <div class="civ-span-lbls"><span>${fmt(c.s)}</span><span style="color:var(--txt3);font-size:8px">${c.e-c.s} years</span><span>${fmt(c.e)}</span></div>`;
-
-  const contemp=overlap.length?`<div class="contemp-wrap">
-    <div class="fp-title" style="margin-top:10px">Active at the same time</div>
-    ${bars}
-  </div>`:'';
-
-  return mainBar+contemp;
-}
-
-// ══════════════════════════════════════════════════════
-// TIMELINE DENSITY SPARKLINE
-// ══════════════════════════════════════════════════════
+// ── DENSITY BAR ──
 function renderDensityBar(){
   const svg=document.getElementById('density-bar');
   if(!svg)return;
@@ -1180,6 +896,687 @@ function renderDensityBar(){
     return`${x.toFixed(1)},${y.toFixed(1)}`;
   });
   const poly=`0,18 ${pts.join(' ')} ${W},18`;
-  svg.innerHTML=`<polygon points="${poly}" fill="rgba(232,152,32,.25)" stroke="rgba(232,152,32,.5)" stroke-width=".5"/>
+  svg.innerHTML=`<polygon points="${poly}" fill="rgba(144,112,192,.25)" stroke="rgba(144,112,192,.5)" stroke-width=".5"/>
     <line x1="0" y1="18" x2="${W}" y2="18" stroke="var(--bdr2)" stroke-width=".5"/>`;
 }
+
+// ── ENHANCED SPAN BAR ──
+function renderEnhancedSpanBar(c){
+  const MIN=-10000,MAX=2024,total=MAX-MIN;
+  const left=Math.max(0,(c.s-MIN)/total*100);
+  const width=Math.min(100-left,(c.e-c.s)/total*100);
+  const overlap=ITEMS.filter(x=>x.id!==c.id&&x.s<c.e&&x.e>c.s)
+    .map(x=>{
+      const overlapStart=Math.max(x.s,c.s);
+      const overlapEnd=Math.min(x.e,c.e);
+      return{...x,overlapYrs:overlapEnd-overlapStart};
+    })
+    .sort((a,b)=>b.overlapYrs-a.overlapYrs)
+    .slice(0,4);
+  const colors=['#9070c0','#4a8870','#4a7faa','#c060a0'];
+  let bars=overlap.map((x,i)=>{
+    const xl=Math.max(0,(x.s-MIN)/total*100);
+    const xw=Math.min(100-xl,(x.e-x.s)/total*100);
+    const ol=Math.max(xl,left);
+    const or_=Math.min(xl+xw,left+width);
+    const ow=Math.max(0,or_-ol);
+    return`<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
+      <div class="contemp-bar-nm">${x.nm}</div>
+      <div class="contemp-bar-track">
+        <div class="contemp-bar-fill" style="left:${(ol-left).toFixed(1)}%;width:${ow.toFixed(1)}%;background:${colors[i]}"></div>
+      </div>
+      <div class="contemp-bar-yr">${fmt(x.s)}–${fmt(x.e)}</div>
+    </div>`;
+  }).join('');
+  const mainBar=`<div class="civ-span-bar" title="${fmt(c.s)} to ${fmt(c.e)}">
+    <div class="civ-span-fill" style="left:${left.toFixed(1)}%;width:${width.toFixed(1)}%"></div>
+  </div>
+  <div class="civ-span-lbls"><span>${fmt(c.s)}</span><span style="color:var(--txt3);font-size:8px">${c.e-c.s} years</span><span>${fmt(c.e)}</span></div>`;
+  const contemp=overlap.length?`<div class="contemp-wrap">
+    <div class="fp-title" style="margin-top:10px">Active at the same time</div>
+    ${bars}
+  </div>`:'';
+  return mainBar+contemp;
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+function init(){
+  renderDensityBar();
+  document.getElementById('tl').addEventListener('input',e=>setYear(sliderToYear(e.target.value)));
+  decodeState();
+  renderDrawer();
+  document.getElementById('tl').value=yearToSlider(year);
+  setYear(year);
+  if(activeThread&&mode==='threads'){
+    setTimeout(()=>{
+      setMode('threads');
+      activateThread(activeThread);
+    },1000);
+  }
+
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(r=>r.json())
+    .then(world=>{
+      renderWorldMap(world);
+      renderMap();
+    })
+    .catch(()=>console.warn('World map data unavailable — using fallback'));
+  initMapInteraction();
+}
+
+// ── MODE MANAGEMENT ──
+function setMode(m){
+  mode=m;
+  ['explore','threads','compare'].forEach(id=>{
+    const b=document.getElementById('btn-'+id);
+    if(b){b.classList.toggle('active',id===m);b.setAttribute('aria-pressed',id===m);}
+  });
+  const tp=document.getElementById('thread-panel');
+  if(tp)tp.classList.toggle('open',m==='threads');
+  if(m==='threads'){
+    renderThreadConceptList();
+  }
+  if(m!=='threads'){
+    activeThread=null;
+    document.getElementById('thread-layer').innerHTML='';
+  }
+  if(m==='compare'&&!sel2){
+    renderDrawer();
+  }
+  if(m==='explore'&&sel2){sel2=null;}
+  renderMap();
+  renderDrawer();
+  updateURL();
+}
+
+// ── THREAD VIEW ──
+function getUniqueConcepts(){
+  const seen=new Set();
+  return TRANSMISSIONS.filter(t=>{if(seen.has(t.concept))return false;seen.add(t.concept);return true;})
+    .map(t=>t.concept);
+}
+
+function getChain(concept){
+  return TRANSMISSIONS.filter(t=>t.concept===concept).sort((a,b)=>a.year-b.year);
+}
+
+function renderThreadConceptList(){
+  const list=document.getElementById('thread-concept-list');
+  const steps=document.getElementById('thread-active-steps');
+  const title=document.getElementById('thread-panel-title');
+  const backBtn=document.getElementById('thread-back-btn');
+  if(!list)return;
+
+  if(activeThread){
+    list.style.display='none';
+    if(steps)steps.style.display='block';
+    if(backBtn)backBtn.style.display='inline-block';
+    if(title)title.textContent=activeThread;
+  } else {
+    list.style.display='block';
+    if(steps){steps.style.display='none';steps.innerHTML='';}
+    if(backBtn)backBtn.style.display='none';
+    if(title)title.textContent='Concept Threads';
+    const concepts=getUniqueConcepts();
+    list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
+      const chain=getChain(c);
+      return`<button class="thread-concept-btn" onclick="activateThread('${c.replace(/'/g,"\\'")}')" >
+        <span class="thread-concept-name">${c}</span>
+        <span class="thread-concept-chain">${chain.map(t=>{
+          const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+          return(fc?fc.nm:'?')+' → '+(tc?tc.nm:'?');
+        }).join('<br>')}</span>
+      </button>`;
+    }).join('')+'</div>';
+  }
+}
+
+function activateThread(concept){
+  activeThread=concept;
+  renderThreadConceptList();
+  renderThreadSteps(concept);
+  renderThreadPaths(concept);
+  const inner=document.querySelector('.thread-panel-inner');
+  if(inner)setTimeout(()=>inner.scrollTop=0,0);
+}
+
+function closeThread(){
+  activeThread=null;
+  renderThreadConceptList();
+  document.getElementById('thread-layer').innerHTML='';
+}
+
+function renderThreadSteps(concept){
+  const steps=document.getElementById('thread-active-steps');
+  if(!steps)return;
+  const chain=getChain(concept);
+  if(!chain.length){steps.innerHTML='';return;}
+  const LINK=`<div class="thread-chain-link">
+    <div class="thread-chain-line"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+    </svg>
+    <div class="thread-chain-line"></div>
+  </div>`;
+  const items=chain.map(t=>{
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+    return`<div class="thread-step">
+      <div class="thread-step-yr">${fmt(t.year)}</div>
+      <div class="thread-step-civ">${fc?fc.nm:'?'} → ${tc?tc.nm:'?'}</div>
+      <div class="thread-step-txt">${t.desc}</div>
+    </div>`;
+  });
+  steps.innerHTML='<div class="thread-steps-grid">'+
+    items.join(LINK)+
+    '</div>';
+}
+
+let _threadAnim=null;
+function renderThreadPaths(concept){
+  const layer=document.getElementById('thread-layer');
+  if(!layer)return;
+  const chain=getChain(concept);
+  if(!chain.length){layer.innerHTML='';return;}
+  if(_threadAnim){clearTimeout(_threadAnim);_threadAnim=null;}
+
+  let out='<defs><marker id="tarrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c090e0" opacity=".9"/></marker></defs>';
+  const drawn=[];
+  chain.forEach(t=>{
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+    if(!fc||!tc)return;
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
+    const mx=(fx+tx)/2,my=Math.min(fy,ty)-44;
+    out+=`<path id="tp-${t.id}" d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
+      stroke="#c090e0" stroke-width="1.8" fill="none" stroke-dasharray="6,4"
+      marker-end="url(#tarrow)" opacity="0" style="transition:opacity .4s"/>`;
+    out+=`<circle id="tc-${t.id}" cx="${tx}" cy="${ty}" r="7" fill="#c090e0" opacity="0" style="transition:opacity .4s"/>`;
+    const lx=(fx+tx)/2,ly=my-10;
+    out+=`<text id="tl-${t.id}" x="${lx}" y="${ly}"
+      font-family="Cinzel,serif" font-size="10" fill="#c090e0"
+      text-anchor="middle" opacity="0" style="transition:opacity .4s">${fmt(t.year)}</text>`;
+    const nm=tc?tc.nm:'';
+    out+=`<text id="tn-${t.id}" x="${tx}" y="${ty+22}"
+      font-family="Cinzel,serif" font-size="9.5" fill="#c090e0"
+      text-anchor="middle" opacity="0" style="transition:opacity .4s">${nm}</text>`;
+    drawn.push(t.id);
+  });
+  layer.innerHTML=out;
+
+  drawn.forEach((id,i)=>{
+    setTimeout(()=>{
+      ['tp','tc','tl','tn'].forEach(prefix=>{
+        const el=document.getElementById(prefix+'-'+id);
+        if(el)el.style.opacity=prefix==='tc'?'0.9':'0.85';
+      });
+    },i*700);
+  });
+}
+
+// ── COMPARE MODE ──
+function addToCompare(id){
+  const c=ITEMS.find(x=>x&&x.id===id);
+  if(!c)return;
+  if(!sel){sel=c;mode='compare';}
+  else{sel2=c;mode='compare';}
+  setMode('compare');
+  renderDrawer();
+  renderMap();
+}
+
+function renderCompareDrawer(){
+  const dc=document.getElementById('drawer-content');
+  const dt=document.getElementById('drawer-top');
+  if(dt)dt.innerHTML='';
+  if(!sel&&!sel2){
+    dc.innerHTML=`<div class="compare-prompt">
+      <div>&#x229e;</div>
+      <div>Select two belief systems on the map to compare them side by side</div>
+    </div>`;
+    return;
+  }
+  const renderCol=(c,slot)=>{
+    if(!c)return`<div class="compare-col">
+      <div class="compare-prompt" style="height:200px"><div>Click a belief system on the map to add it here</div></div>
+    </div>`;
+    const body=lenses.size?[...lenses].map(lid=>{
+      const L=LENSES.find(l=>l.id===lid);
+      if(!L)return'';
+      return`<div class="lens-section">
+        <div class="lens-section-hdr">
+          <span class="lens-section-ico">${L.ico}</span>
+          <span class="lens-section-lbl">${L.lbl}</span>
+        </div>
+        <div class="info-txt">${c.d[lid]||'No data.'}</div>
+      </div>`;
+    }).join(''):
+    `<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}`;
+    return`<div class="compare-col">
+      <div class="compare-col-hdr">
+        <span>${c.nm}</span>
+        <button class="compare-remove" onclick="${slot===1?'sel=null':'sel2=null'};renderCompareDrawer();renderMap()" aria-label="Remove">&#x2715;</button>
+      </div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:10px;text-transform:uppercase">${c.sb}</div>
+      <div class="info-dates" style="margin-bottom:14px">
+        <div class="info-dt">${fmt(c.s)}</div>
+        <span class="info-arr">→</span>
+        <div class="info-dt">${fmt(c.e)}</div>
+      </div>
+      ${body}
+    </div>`;
+  };
+  const lensBar=`<div style="padding:12px 0 10px;border-bottom:1px solid var(--bdr);margin-bottom:12px">${renderLensDDInline()}</div>`;
+  dc.innerHTML=`<div>${lensBar}<div class="compare-wrap">${renderCol(sel,1)}${renderCol(sel2,2)}</div></div>`;
+}
+
+function renderLensDDInline(){
+  const arcOn=!lenses.size;
+  const rows=LENSES.map(l=>{
+    const on=lenses.has(l.id);
+    return`<div class="lens-row${on?' on':''}" onclick="toggleLens('${l.id}');if(mode==='compare')renderCompareDrawer();">
+      <div class="lens-row-chk${on?' on':''}">${on?'&#x2713;':''}</div>
+      <span class="lens-row-ico">${l.ico}</span>
+      <span class="lens-row-lbl">${l.lbl}</span>
+    </div>`;
+  }).join('');
+  return`<div class="lens-dd-wrap">
+    <div class="lens-dd-hdr${lensDD?' open':''}" onclick="toggleLensDD()">
+      <span class="lens-dd-title">Lens</span>
+      <span class="lens-dd-summary">${lensLabel()}</span>
+      <span class="lens-dd-arrow${lensDD?' open':''}">&#x25be;</span>
+    </div>
+    <div class="lens-dd-list${lensDD?' open':''}" id="lens-dd-list">
+      <div class="lens-row${arcOn?' on':''}" onclick="lenses.clear();lensDD=false;if(mode==='compare')renderCompareDrawer();else renderDrawerContent();">
+        <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'&#x2713;':''}</div>
+        <span class="lens-row-ico">&#x25ce;</span>
+        <span class="lens-row-lbl">Belief Arc</span>
+      </div>
+      <div class="lens-row-sep"></div>${rows}
+      <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done &#x25b4;</div>
+    </div>
+  </div>`;
+}
+
+// ── URL STATE ──
+function encodeState(){
+  const params=new URLSearchParams();
+  params.set('y',year);
+  if(sel)params.set('c',sel.id);
+  if(sel2)params.set('c2',sel2.id);
+  if(lenses.size)params.set('l',[...lenses].join(','));
+  if(mode!=='explore')params.set('m',mode);
+  if(activeThread)params.set('t',activeThread);
+  return params.toString();
+}
+
+function decodeState(){
+  let hash='';
+  try{hash=window.location.hash.replace('#','');}catch(e){return;}
+  if(!hash)return;
+  try{
+    const params=new URLSearchParams(hash);
+    if(params.get('y')){
+      const y=parseInt(params.get('y'));
+      year=y;
+      document.getElementById('tl').value=y;
+    }
+    if(params.get('c')){sel=ITEMS.find(x=>x&&x.id===params.get('c'))||null;}
+    if(params.get('c2')){sel2=ITEMS.find(x=>x&&x.id===params.get('c2'))||null;}
+    if(params.get('l')){params.get('l').split(',').forEach(id=>lenses.add(id));}
+    if(params.get('m'))mode=params.get('m');
+    if(params.get('t'))activeThread=params.get('t');
+  }catch(e){console.warn('Failed to decode state',e);}
+}
+
+function updateURL(){
+  try{
+    const state=encodeState();
+    if(history.replaceState&&window.location.href!=='about:srcdoc'){
+      history.replaceState(null,'',state?'#'+state:'#');
+    }
+  }catch(e){/* sandboxed iframe — URL state unavailable */}
+}
+
+function shareState(){
+  let url='';
+  try{url=window.location.href.split('#')[0]+'#'+encodeState();}
+  catch(e){url='#'+encodeState();}
+
+  const itemName=sel?sel.nm:null;
+  const shareTitle='Numen — The Atlas of Belief';
+  const shareText=itemName
+    ? `Explore ${itemName} on Numen — belief systems across 12,000 years of human spiritual history`
+    : 'Numen — belief systems across 12,000 years of human spiritual history, all in one map';
+
+  if(navigator.share){
+    navigator.share({title:shareTitle,text:shareText,url:url})
+      .catch(err=>{
+        if(err.name!=='AbortError') copyToClipboard(url);
+      });
+    return;
+  }
+  copyToClipboard(url);
+}
+
+function copyToClipboard(url){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(()=>showToast()).catch(()=>legacyCopy(url));
+  } else {
+    legacyCopy(url);
+  }
+}
+
+function legacyCopy(url){
+  const ta=document.createElement('textarea');
+  ta.value=url;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');showToast();}catch(e){}
+  document.body.removeChild(ta);
+}
+
+function showToast(){
+  const t=document.getElementById('share-toast');
+  if(!t)return;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// ══════════════════════════════════════════
+// MAP ZOOM
+// ══════════════════════════════════════════
+const VB_DEFAULT=[0,0,1000,520];
+let _vbCurrent=[0,0,1000,520],_vbAnim=null;
+
+function animateViewBox(target,duration=600){
+  if(_vbAnim)cancelAnimationFrame(_vbAnim);
+  const svg=document.getElementById('wsvg');
+  if(!svg)return;
+  const start=[..._vbCurrent];
+  const t0=performance.now();
+  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+  function frame(now){
+    const raw=Math.min(1,(now-t0)/duration);
+    const p=ease(raw);
+    const vb=start.map((s,i)=>s+(target[i]-s)*p);
+    svg.setAttribute('viewBox',vb.join(' '));
+    _vbCurrent=[...vb];
+    if(raw<1)_vbAnim=requestAnimationFrame(frame);
+    else{_vbCurrent=[...target];_vbAnim=null;}
+  }
+  _vbAnim=requestAnimationFrame(frame);
+}
+
+function zoomToItem(c){
+  if(!window._proj)return;
+  const [cx,cy]=itemPt(c);
+  const zw=300,zh=156;
+  const x=Math.max(0,Math.min(1000-zw,cx-zw/2));
+  const y=Math.max(0,Math.min(520-zh,cy-zh/2));
+  animateViewBox([x,y,zw,zh],600);
+}
+
+function zoomOut(){
+  animateViewBox(VB_DEFAULT,500);
+}
+
+// ══════════════════════════════════════════
+// MAP INTERACTION
+// ══════════════════════════════════════════
+let _vbX=0,_vbY=0,_vbH=520;
+let _dragging=false,_wasDragging=false,_lastX=0,_lastY=0,_dragDist=0;
+let _pinchDist=0;
+const VB_MIN_W=150,VB_MAX_W=1000;
+
+function _applyVB(){
+  const svg=document.getElementById('wsvg');
+  if(svg) svg.setAttribute('viewBox',`${_vbX} ${_vbY} ${_vbW} ${_vbH}`);
+  renderMap();
+}
+
+function zoomMap(factor,cx,cy){
+  cx=cx??(_vbX+_vbW/2);
+  cy=cy??(_vbY+_vbH/2);
+  const newW=Math.max(VB_MIN_W,Math.min(VB_MAX_W,_vbW/factor));
+  const newH=newW*(520/1000);
+  const scale=newW/_vbW;
+  _vbX=cx-(cx-_vbX)*scale;
+  _vbY=cy-(cy-_vbY)*scale;
+  _vbW=newW;_vbH=newH;
+  _clampVB();
+  _applyVB();
+  _updateZoomHint();
+}
+
+function _clampVB(){
+  _vbX=Math.max(0,Math.min(1000-_vbW,_vbX));
+  _vbY=Math.max(0,Math.min(520-_vbH,_vbY));
+}
+
+function _updateZoomHint(){
+  const btn=document.getElementById('map-reset-btn');
+  if(btn) btn.style.display=_vbW<999?'inline-block':'none';
+}
+
+function resetMapZoom(){
+  _vbX=0;_vbY=0;_vbW=1000;_vbH=520;
+  _applyVB();
+  const btn=document.getElementById('map-reset-btn');
+  if(btn) btn.style.display='none';
+}
+
+function _svgScale(rect){
+  return Math.min(rect.width/_vbW,rect.height/_vbH);
+}
+function _svgOffsets(rect,scale){
+  return[(rect.width-_vbW*scale)/2,(rect.height-_vbH*scale)/2];
+}
+
+function screenToSVG(clientX,clientY){
+  const svg=document.getElementById('wsvg');
+  const rect=svg.getBoundingClientRect();
+  const s=_svgScale(rect);
+  const [xOff,yOff]=_svgOffsets(rect,s);
+  return[
+    _vbX+(clientX-rect.left-xOff)/s,
+    _vbY+(clientY-rect.top-yOff)/s
+  ];
+}
+
+function mapClick(e){
+  const svg=document.getElementById('wsvg');
+  if(!svg||!window._proj)return;
+  const rect=svg.getBoundingClientRect();
+  const s=_svgScale(rect);
+  const [xOff,yOff]=_svgOffsets(rect,s);
+  const sx=_vbX+(e.clientX-rect.left-xOff)/s;
+  const sy=_vbY+(e.clientY-rect.top-yOff)/s;
+  const threshold=(_vbW/1000)*18;
+  const hits=ITEMS.filter(c=>{
+    if(!active(c))return false;
+    const [cx,cy]=itemPt(c);
+    return Math.hypot(cx-sx,cy-sy)<threshold;
+  });
+  if(hits.length===1){itemClick(hits[0].id);}
+  else if(hits.length>1){
+    const nearest=hits.reduce((a,b)=>{
+      const [ax,ay]=itemPt(a),[bx,by]=itemPt(b);
+      return Math.hypot(ax-sx,ay-sy)<Math.hypot(bx-sx,by-sy)?a:b;
+    });
+    itemClick(nearest.id);
+  }
+}
+
+function _onWheel(e){
+  e.preventDefault();
+  const [svgX,svgY]=screenToSVG(e.clientX,e.clientY);
+  const factor=e.deltaY<0?1.15:1/1.15;
+  zoomMap(factor,svgX,svgY);
+}
+
+function _onMouseDown(e){
+  if(e.button!==0)return;
+  _dragging=true;_wasDragging=false;_dragDist=0;_lastX=e.clientX;_lastY=e.clientY;
+}
+function _onMouseMove(e){
+  if(!_dragging)return;
+  const svg=document.getElementById('wsvg');
+  const rect=svg.getBoundingClientRect();
+  const s=_svgScale(rect);
+  const dx=(e.clientX-_lastX)/s;
+  const dy=(e.clientY-_lastY)/s;
+  _dragDist+=Math.abs(dx)+Math.abs(dy);
+  if(_dragDist>3)_wasDragging=true;
+  _vbX-=dx;_vbY-=dy;
+  _clampVB();_applyVB();
+  _lastX=e.clientX;_lastY=e.clientY;
+}
+function _onMouseUp(){if(_dragDist>5)_wasDragging=true;_dragging=false;_dragDist=0;}
+
+let _touches={};
+let _tapStartX=0,_tapStartY=0,_tapMoved=false,_touchFiredAt=0;
+function _onTouchStart(e){
+  Array.from(e.changedTouches).forEach(t=>{_touches[t.identifier]={x:t.clientX,y:t.clientY};});
+  if(Object.keys(_touches).length===1){
+    const t=e.changedTouches[0];
+    _lastX=t.clientX;_lastY=t.clientY;
+    _tapStartX=t.clientX;_tapStartY=t.clientY;_tapMoved=false;
+  } else if(Object.keys(_touches).length===2){
+    const pts=Object.values(_touches);
+    _pinchDist=Math.hypot(pts[1].x-pts[0].x,pts[1].y-pts[0].y);
+    _tapMoved=true;
+  }
+}
+function _onTouchMove(e){
+  e.preventDefault();
+  const keys=Object.keys(_touches);
+  Array.from(e.changedTouches).forEach(t=>{if(_touches[t.identifier])_touches[t.identifier]={x:t.clientX,y:t.clientY};});
+  if(keys.length===1){
+    const t=e.changedTouches[0];
+    if(Math.hypot(t.clientX-_tapStartX,t.clientY-_tapStartY)>8)_tapMoved=true;
+    const svg=document.getElementById('wsvg');
+    const rect=svg.getBoundingClientRect();
+    const s=_svgScale(rect);
+    const dx=(t.clientX-_lastX)/s;
+    const dy=(t.clientY-_lastY)/s;
+    _vbX-=dx;_vbY-=dy;
+    _clampVB();_applyVB();
+    _lastX=t.clientX;_lastY=t.clientY;
+  } else if(keys.length===2){
+    const pts=Object.values(_touches);
+    const newDist=Math.hypot(pts[1].x-pts[0].x,pts[1].y-pts[0].y);
+    if(_pinchDist>0){
+      const midX=(pts[0].x+pts[1].x)/2;
+      const midY=(pts[0].y+pts[1].y)/2;
+      const [svgX,svgY]=screenToSVG(midX,midY);
+      zoomMap(newDist/_pinchDist,svgX,svgY);
+    }
+    _pinchDist=newDist;
+  }
+}
+function _onTouchEnd(e){
+  const wasMulti=Object.keys(_touches).length>=2;
+  Array.from(e.changedTouches).forEach(t=>{delete _touches[t.identifier];});
+  _pinchDist=0;
+  if(!wasMulti&&!_tapMoved&&e.changedTouches.length===1){
+    _touchFiredAt=Date.now();
+    mapClick(e.changedTouches[0]);
+  }
+  _tapMoved=false;
+}
+
+function initMapInteraction(){
+  const svg=document.getElementById('wsvg');
+  if(!svg)return;
+  svg.addEventListener('wheel',_onWheel,{passive:false});
+  svg.addEventListener('mousedown',_onMouseDown);
+  window.addEventListener('mousemove',_onMouseMove);
+  window.addEventListener('mouseup',_onMouseUp);
+  svg.addEventListener('touchstart',_onTouchStart,{passive:false});
+  svg.addEventListener('touchmove',_onTouchMove,{passive:false});
+  svg.addEventListener('touchend',_onTouchEnd,{passive:false});
+  svg.addEventListener('click',function(e){if(_wasDragging){_wasDragging=false;return;}if(Date.now()-(_touchFiredAt||0)<500)return;mapClick(e);});
+}
+
+// ── MOBILE SHEET ──
+const isMobile=()=>window.innerWidth<=768;
+function openMobileSheet(){
+  if(!isMobile())return;
+  document.getElementById('info-panel').classList.add('mob-open');
+  document.getElementById('mob-map-btn').classList.remove('hidden');
+}
+function closeMobileSheet(){
+  document.getElementById('info-panel').classList.remove('mob-open');
+  document.getElementById('mob-map-btn').classList.add('hidden');
+}
+
+// ── THEME ──
+function applyTheme(t){
+  document.documentElement.dataset.theme=t;
+  const _tb=document.getElementById('theme-btn');if(_tb)_tb.textContent=t==='dark'?'◑':'◐';
+  localStorage.setItem('pangea-theme',t);
+  localStorage.setItem('numen-theme',t);
+}
+function toggleTheme(){
+  const cur=document.documentElement.dataset.theme||
+    (window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
+  applyTheme(cur==='dark'?'light':'dark');
+}
+(function(){
+  const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('numen-theme');
+  if(saved){applyTheme(saved);}
+  else{
+    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+    document.documentElement.dataset.theme=sys;
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
+  }
+})();
+
+// ── BURGER MENU ──
+function toggleBurger(){
+  const m=document.getElementById('burger-menu');
+  const btn=document.getElementById('burger-btn');
+  if(!m)return;
+  const open=m.classList.toggle('open');
+  btn.setAttribute('aria-expanded',open);
+}
+function closeBurger(){
+  const m=document.getElementById('burger-menu');
+  const btn=document.getElementById('burger-btn');
+  if(m){m.classList.remove('open');}
+  if(btn){btn.setAttribute('aria-expanded','false');}
+}
+document.addEventListener('click',function(e){
+  const wrap=document.getElementById('burger-wrap');
+  if(wrap&&!wrap.contains(e.target))closeBurger();
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape')closeBurger();
+  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
+    const tag=document.activeElement&&document.activeElement.tagName;
+    if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT')return;
+    e.preventDefault();
+    const tl=document.getElementById('tl');
+    if(!tl)return;
+    const step=e.shiftKey?10:e.ctrlKey||e.metaKey?50:1;
+    const dir=e.key==='ArrowRight'?1:-1;
+    const newVal=Math.max(0,Math.min(1000,parseInt(tl.value)+dir*step));
+    tl.value=newVal;
+    setYear(sliderToYear(newVal));
+  }
+});
+
+// ── TIMELINE FILL ──
+function updateTlFill(pct){
+  const f=document.getElementById('tl-fill');
+  if(f)f.style.width=pct+'%';
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+</body>
+</html>
