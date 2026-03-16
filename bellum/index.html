@@ -1173,3 +1173,692 @@ function renderDensityBar(){
   svg.innerHTML=`<polygon points="${poly}" fill="rgba(200,64,64,.25)" stroke="rgba(200,64,64,.5)" stroke-width=".5"/>
     <line x1="0" y1="18" x2="${W}" y2="18" stroke="var(--bdr2)" stroke-width=".5"/>`;
 }
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+function init(){
+  renderDensityBar();
+  document.getElementById('tl').addEventListener('input',e=>setYear(sliderToYear(e.target.value)));
+  decodeState();
+  renderDrawer();
+  document.getElementById('tl').value=yearToSlider(year);
+  setYear(year);
+  if(activeThread&&mode==='threads'){
+    setTimeout(()=>{
+      setMode('threads');
+      activateThread(activeThread);
+    },1000);
+  }
+
+  // Load world topojson
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(r=>r.json())
+    .then(world=>{
+      renderWorldMap(world);
+      renderMap(); // re-render markers with correct projection
+    })
+    .catch(()=>console.warn('World map data unavailable — using fallback'));
+  initMapInteraction();
+}
+
+
+// ══════════════════════════════════════════════════════
+// MODE MANAGEMENT
+// ══════════════════════════════════════════════════════
+function setMode(m){
+  mode=m;
+  ['explore','threads','compare'].forEach(id=>{
+    const b=document.getElementById('btn-'+id);
+    if(b){b.classList.toggle('active',id===m);b.setAttribute('aria-pressed',id===m);}
+  });
+  const tp=document.getElementById('thread-panel');
+  if(tp)tp.classList.toggle('open',m==='threads');
+  if(m==='threads'){
+    renderThreadConceptList();
+  }
+  if(m!=='threads'){
+    activeThread=null;
+    document.getElementById('thread-layer').innerHTML='';
+  }
+  if(m==='compare'&&!sel2){
+    // show compare prompt
+    renderDrawer();
+  }
+  if(m==='explore'&&sel2){sel2=null;}
+  renderMap();
+  renderDrawer();
+  updateURL();
+}
+
+// ══════════════════════════════════════════════════════
+// THREAD VIEW
+// ══════════════════════════════════════════════════════
+function getUniqueConcepts(){
+  const seen=new Set();
+  return TRANSMISSIONS.filter(t=>{if(seen.has(t.concept))return false;seen.add(t.concept);return true;})
+    .map(t=>t.concept);
+}
+
+function getChain(concept){
+  return TRANSMISSIONS.filter(t=>t.concept===concept).sort((a,b)=>a.year-b.year);
+}
+
+function renderThreadConceptList(){
+  const list=document.getElementById('thread-concept-list');
+  const steps=document.getElementById('thread-active-steps');
+  const title=document.getElementById('thread-panel-title');
+  const backBtn=document.getElementById('thread-back-btn');
+  if(!list)return;
+
+  if(activeThread){
+    // Concept list hidden, steps visible
+    list.style.display='none';
+    if(steps)steps.style.display='block';
+    if(backBtn)backBtn.style.display='inline-block';
+    if(title)title.textContent=activeThread;
+  } else {
+    // Show concept grid, hide steps
+    list.style.display='block';
+    if(steps){steps.style.display='none';steps.innerHTML='';}
+    if(backBtn)backBtn.style.display='none';
+    if(title)title.textContent='Concept Threads';
+    const concepts=getUniqueConcepts();
+    list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
+      const chain=getChain(c);
+      return`<button class="thread-concept-btn" onclick="activateThread('${c.replace(/'/g,"\\'")}')" >
+        <span class="thread-concept-name">${c}</span>
+        <span class="thread-concept-chain">${chain.map(t=>{
+          const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+          return(fc?fc.nm:'?')+' → '+(tc?tc.nm:'?');
+        }).join('<br>')}</span>
+      </button>`;
+    }).join('')+'</div>';
+  }
+}
+
+function activateThread(concept){
+  activeThread=concept;
+  renderThreadConceptList();
+  renderThreadSteps(concept);
+  renderThreadPaths(concept);
+  // Scroll the inner wrapper back to top
+  const inner=document.querySelector('.thread-panel-inner');
+  if(inner)setTimeout(()=>inner.scrollTop=0,0);
+}
+
+function closeThread(){
+  activeThread=null;
+  renderThreadConceptList();
+  document.getElementById('thread-layer').innerHTML='';
+}
+
+function renderThreadSteps(concept){
+  const steps=document.getElementById('thread-active-steps');
+  if(!steps)return;
+  const chain=getChain(concept);
+  if(!chain.length){steps.innerHTML='';return;}
+  const LINK=`<div class="thread-chain-link">
+    <div class="thread-chain-line"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+    </svg>
+    <div class="thread-chain-line"></div>
+  </div>`;
+  const items=chain.map(t=>{
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+    return`<div class="thread-step">
+      <div class="thread-step-yr">${fmt(t.year)}</div>
+      <div class="thread-step-civ">${fc?fc.nm:'?'} → ${tc?tc.nm:'?'}</div>
+      <div class="thread-step-txt">${t.desc}</div>
+    </div>`;
+  });
+  steps.innerHTML='<div class="thread-steps-grid">'+
+    items.join(LINK)+
+    '</div>';
+}
+
+let _threadAnim=null;
+function renderThreadPaths(concept){
+  const layer=document.getElementById('thread-layer');
+  if(!layer)return;
+  const chain=getChain(concept);
+  if(!chain.length){layer.innerHTML='';return;}
+  if(_threadAnim){clearTimeout(_threadAnim);_threadAnim=null;}
+
+  // Build SVG: arrowhead marker + paths + dots + labels
+  let out='<defs><marker id="tarrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f0d060" opacity=".9"/></marker></defs>';
+  const drawn=[];
+  chain.forEach(t=>{
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+    if(!fc||!tc)return;
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
+    const mx=(fx+tx)/2,my=Math.min(fy,ty)-44;
+    // Path with arrowhead
+    out+=`<path id="tp-${t.id}" d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
+      stroke="#f0d060" stroke-width="1.8" fill="none" stroke-dasharray="6,4"
+      marker-end="url(#tarrow)" opacity="0" style="transition:opacity .4s"/>`;
+    // Glow dot at destination
+    out+=`<circle id="tc-${t.id}" cx="${tx}" cy="${ty}" r="7" fill="#f0d060" opacity="0" style="transition:opacity .4s"/>`;
+    // Year + name label mid-path
+    const lx=(fx+tx)/2,ly=my-10;
+    out+=`<text id="tl-${t.id}" x="${lx}" y="${ly}"
+      font-family="Cinzel,serif" font-size="10" fill="#f0d060"
+      text-anchor="middle" opacity="0" style="transition:opacity .4s">${fmt(t.year)}</text>`;
+    const nm=tc?tc.nm:'';
+    out+=`<text id="tn-${t.id}" x="${tx}" y="${ty+22}"
+      font-family="Cinzel,serif" font-size="9.5" fill="#f0d060"
+      text-anchor="middle" opacity="0" style="transition:opacity .4s">${nm}</text>`;
+    drawn.push(t.id);
+  });
+  layer.innerHTML=out;
+
+  // Animate each step sequentially
+  drawn.forEach((id,i)=>{
+    setTimeout(()=>{
+      ['tp','tc','tl','tn'].forEach(prefix=>{
+        const el=document.getElementById(prefix+'-'+id);
+        if(el)el.style.opacity=prefix==='tc'?'0.9':'0.85';
+      });
+    },i*700);
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// COMPARE MODE
+// ══════════════════════════════════════════════════════
+function addToCompare(id){
+  const c=ITEMS.find(x=>x&&x.id===id);
+  if(!c)return;
+  if(!sel){sel=c;mode='compare';}
+  else{sel2=c;mode='compare';}
+  setMode('compare');
+  renderDrawer();
+  renderMap();
+}
+
+function renderCompareDrawer(){
+  const dc=document.getElementById('drawer-content');
+  const dt=document.getElementById('drawer-top');
+  if(dt)dt.innerHTML='';
+  if(!sel&&!sel2){
+    dc.innerHTML=`<div class="compare-prompt">
+      <div>⊞</div>
+      <div>Select two conflicts on the map to compare them side by side</div>
+    </div>`;
+    return;
+  }
+  const renderCol=(c,slot)=>{
+    if(!c)return`<div class="compare-col">
+      <div class="compare-prompt" style="height:200px"><div>Click a conflict on the map to add it here</div></div>
+    </div>`;
+    const body=lenses.size?[...lenses].map(lid=>{
+      const L=LENSES.find(l=>l.id===lid);
+      if(!L)return'';
+      return`<div class="lens-section">
+        <div class="lens-section-hdr">
+          <span class="lens-section-ico">${L.ico}</span>
+          <span class="lens-section-lbl">${L.lbl}</span>
+        </div>
+        <div class="info-txt">${c.d[lid]||'No data.'}</div>
+      </div>`;
+    }).join(''):
+    `<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}`;
+    return`<div class="compare-col">
+      <div class="compare-col-hdr">
+        <span>${c.nm}</span>
+        <button class="compare-remove" onclick="${slot===1?'sel=null':'sel2=null'};renderCompareDrawer();renderMap()" aria-label="Remove">✕</button>
+      </div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:10px;text-transform:uppercase">${c.sb}</div>
+      <div class="info-dates" style="margin-bottom:14px">
+        <div class="info-dt">${fmt(c.s)}</div>
+        <span class="info-arr">→</span>
+        <div class="info-dt">${fmt(c.e)}</div>
+      </div>
+      ${body}
+    </div>`;
+  };
+  // Lens selector at top spanning both cols
+  const lensBar=`<div style="padding:12px 0 10px;border-bottom:1px solid var(--bdr);margin-bottom:12px">${renderLensDDInline()}</div>`;
+  dc.innerHTML=`<div>${lensBar}<div class="compare-wrap">${renderCol(sel,1)}${renderCol(sel2,2)}</div></div>`;
+}
+
+function renderLensDDInline(){
+  const arcOn=!lenses.size;
+  const rows=LENSES.map(l=>{
+    const on=lenses.has(l.id);
+    return`<div class="lens-row${on?' on':''}" onclick="toggleLens('${l.id}');if(mode==='compare')renderCompareDrawer();">
+      <div class="lens-row-chk${on?' on':''}">${on?'✓':''}</div>
+      <span class="lens-row-ico">${l.ico}</span>
+      <span class="lens-row-lbl">${l.lbl}</span>
+    </div>`;
+  }).join('');
+  return`<div class="lens-dd-wrap">
+    <div class="lens-dd-hdr${lensDD?' open':''}" onclick="toggleLensDD()">
+      <span class="lens-dd-title">Lens</span>
+      <span class="lens-dd-summary">${lensLabel()}</span>
+      <span class="lens-dd-arrow${lensDD?' open':''}">▾</span>
+    </div>
+    <div class="lens-dd-list${lensDD?' open':''}" id="lens-dd-list">
+      <div class="lens-row${arcOn?' on':''}" onclick="lenses.clear();lensDD=false;if(mode==='compare')renderCompareDrawer();else renderDrawerContent();">
+        <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
+        <span class="lens-row-ico">◎</span>
+        <span class="lens-row-lbl">Conflict Arc</span>
+      </div>
+      <div class="lens-row-sep"></div>${rows}
+      <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done ▴</div>
+    </div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════════
+// URL STATE
+// ══════════════════════════════════════════════════════
+function encodeState(){
+  const params=new URLSearchParams();
+  params.set('y',year);
+  if(sel)params.set('c',sel.id);
+  if(sel2)params.set('c2',sel2.id);
+  if(lenses.size)params.set('l',[...lenses].join(','));
+  if(mode!=='explore')params.set('m',mode);
+  if(activeThread)params.set('t',activeThread);
+  return params.toString();
+}
+
+function decodeState(){
+  let hash='';
+  try{hash=window.location.hash.replace('#','');}catch(e){return;}
+  if(!hash)return;
+  try{
+    const params=new URLSearchParams(hash);
+    if(params.get('y')){
+      const y=parseInt(params.get('y'));
+      year=y;
+      document.getElementById('tl').value=y;
+    }
+    if(params.get('c')){sel=ITEMS.find(x=>x&&x.id===params.get('c'))||null;}
+    if(params.get('c2')){sel2=ITEMS.find(x=>x&&x.id===params.get('c2'))||null;}
+    if(params.get('l')){params.get('l').split(',').forEach(id=>lenses.add(id));}
+    if(params.get('m'))mode=params.get('m');
+    if(params.get('t'))activeThread=params.get('t');
+  }catch(e){console.warn('Failed to decode state',e);}
+}
+
+function updateURL(){
+  try{
+    const state=encodeState();
+    if(history.replaceState&&window.location.href!=='about:srcdoc'){
+      history.replaceState(null,'',state?'#'+state:'#');
+    }
+  }catch(e){/* sandboxed iframe — URL state unavailable */}
+}
+
+function shareState(){
+  let url='';
+  try{url=window.location.href.split('#')[0]+'#'+encodeState();}
+  catch(e){url='#'+encodeState();}
+
+  const itemName=sel?sel.nm:null;
+  const shareTitle='Bellum — The Atlas of Conflict';
+  const shareText=itemName
+    ? `Explore ${itemName} on Bellum — wars and conflicts mapped across 3,300 years`
+    : 'Bellum — wars and conflicts mapped across 3,300 years of human history';
+
+  // Use native share sheet on devices that support it (iOS, Android, modern desktop)
+  if(navigator.share){
+    navigator.share({title:shareTitle,text:shareText,url:url})
+      .catch(err=>{
+        // User cancelled or share failed — fall back to clipboard silently
+        if(err.name!=='AbortError') copyToClipboard(url);
+      });
+    return;
+  }
+  // Desktop fallback: clipboard
+  copyToClipboard(url);
+}
+
+function copyToClipboard(url){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(()=>showToast()).catch(()=>legacyCopy(url));
+  } else {
+    legacyCopy(url);
+  }
+}
+
+function legacyCopy(url){
+  const ta=document.createElement('textarea');
+  ta.value=url;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');showToast();}catch(e){}
+  document.body.removeChild(ta);
+}
+
+function showToast(){
+  const t=document.getElementById('share-toast');
+  if(!t)return;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// ══════════════════════════════════════════════════════
+// MAP ZOOM ANIMATION
+// ══════════════════════════════════════════════════════
+const VB_DEFAULT=[0,0,1000,520];
+let _vbCurrent=[0,0,1000,520],_vbAnim=null;
+
+function animateViewBox(target,duration=600){
+  if(_vbAnim)cancelAnimationFrame(_vbAnim);
+  const svg=document.getElementById('wsvg');
+  if(!svg)return;
+  const start=[..._vbCurrent];
+  const t0=performance.now();
+  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+  function frame(now){
+    const raw=Math.min(1,(now-t0)/duration);
+    const p=ease(raw);
+    const vb=start.map((s,i)=>s+(target[i]-s)*p);
+    svg.setAttribute('viewBox',vb.join(' '));
+    _vbCurrent=[...vb];
+    if(raw<1)_vbAnim=requestAnimationFrame(frame);
+    else{_vbCurrent=[...target];_vbAnim=null;}
+  }
+  _vbAnim=requestAnimationFrame(frame);
+}
+
+function zoomToItem(c){
+  if(!window._proj)return;
+  const [cx,cy]=itemPt(c);
+  const zw=300,zh=156; // zoomed viewport size (same aspect ratio)
+  const x=Math.max(0,Math.min(1000-zw,cx-zw/2));
+  const y=Math.max(0,Math.min(520-zh,cy-zh/2));
+  animateViewBox([x,y,zw,zh],600);
+}
+
+function zoomOut(){
+  animateViewBox(VB_DEFAULT,500);
+}
+
+// ══════════════════════════════════════════════════════
+// MAP ZOOM / PAN
+// ══════════════════════════════════════════════════════
+let _vbX=0,_vbY=0,_vbH=520;
+let _dragging=false,_wasDragging=false,_lastX=0,_lastY=0,_dragDist=0;
+let _pinchDist=0;
+const VB_MIN_W=150, VB_MAX_W=1000;
+
+function _applyVB(){
+  const svg=document.getElementById('wsvg');
+  if(svg) svg.setAttribute('viewBox',`${_vbX} ${_vbY} ${_vbW} ${_vbH}`);
+  renderMap();
+}
+
+function zoomMap(factor, cx, cy){
+  cx = cx ?? (_vbX + _vbW/2);
+  cy = cy ?? (_vbY + _vbH/2);
+  const newW = Math.max(VB_MIN_W, Math.min(VB_MAX_W, _vbW/factor));
+  const newH = newW * (520/1000);
+  const scale = newW/_vbW;
+  _vbX = cx - (cx-_vbX)*scale;
+  _vbY = cy - (cy-_vbY)*scale;
+  _vbW = newW; _vbH = newH;
+  _clampVB();
+  _applyVB();
+  _updateZoomHint();
+}
+
+function resetMapZoom(){
+  _vbX=0;_vbY=0;_vbW=1000;_vbH=520;
+  _applyVB();
+  const btn=document.getElementById('map-reset-btn');
+  if(btn) btn.style.display='none';
+}
+
+function _clampVB(){
+  _vbX = Math.max(0, Math.min(1000-_vbW, _vbX));
+  _vbY = Math.max(0, Math.min(520-_vbH, _vbY));
+}
+
+function _updateZoomHint(){
+  const btn=document.getElementById('map-reset-btn');
+  if(btn) btn.style.display=_vbW<999?'inline-block':'none';
+}
+
+// Screen → SVG coords accounting for current viewBox
+function _svgScale(rect){
+  return Math.min(rect.width/_vbW, rect.height/_vbH);
+}
+function _svgOffsets(rect, scale){
+  return [(rect.width -_vbW*scale)/2, (rect.height-_vbH*scale)/2];
+}
+
+function screenToSVG(clientX, clientY){
+  const svg=document.getElementById('wsvg');
+  const rect=svg.getBoundingClientRect();
+  const s=_svgScale(rect);
+  const [xOff,yOff]=_svgOffsets(rect,s);
+  return [
+    _vbX + (clientX-rect.left-xOff)/s,
+    _vbY + (clientY-rect.top -yOff)/s
+  ];
+}
+
+function mapClick(e){
+  try{
+    if(_wasDragging){_wasDragging=false;return;}
+    const src=e.touches?.[0]||e.changedTouches?.[0]||e;
+    const clientX=src.clientX, clientY=src.clientY;
+    const [svgX,svgY]=screenToSVG(clientX,clientY);
+    const isTouch='ontouchstart' in window||navigator.maxTouchPoints>0;
+    const zr=1000/_vbW;
+    const thresh=(isTouch?55:35)/zr;
+    const activeSet=window.ids_cache||new Set(ITEMS.filter(c=>c&&active(c)).map(c=>c.id));
+    const candidates=[];
+    ITEMS.forEach(c=>{
+      if(!c||!c.id||!activeSet.has(c.id))return;
+      const pt=itemPt(c);
+      if(!pt||!isFinite(pt[0])||!isFinite(pt[1]))return;
+      const d=Math.sqrt((pt[0]-svgX)**2+(pt[1]-svgY)**2);
+      if(d<thresh)candidates.push({c,d,pt});
+    });
+    if(!candidates.length)return;
+    candidates.sort((a,b)=>a.d-b.d);
+    const nearest=candidates[0];
+    itemClick(nearest.c.id);
+  }catch(err){console.warn('mapClick err:',err);}
+}
+
+// Mouse wheel zoom
+function _onWheel(e){
+  e.preventDefault();
+  const [svgX,svgY]=screenToSVG(e.clientX,e.clientY);
+  const factor = e.deltaY<0 ? 1.15 : 1/1.15;
+  zoomMap(factor, svgX, svgY);
+}
+
+// Mouse drag pan
+function _onMouseDown(e){
+  if(e.button!==0)return;
+  _dragging=true;_wasDragging=false;_dragDist=0; _lastX=e.clientX; _lastY=e.clientY;
+}
+function _onMouseMove(e){
+  if(!_dragging)return;
+  const svg=document.getElementById('wsvg');
+  const rect=svg.getBoundingClientRect();
+  const s=_svgScale(rect);
+  const dx=(e.clientX-_lastX)/s;
+  const dy=(e.clientY-_lastY)/s;
+  _dragDist+=Math.abs(dx)+Math.abs(dy);
+  if(_dragDist>3)_wasDragging=true;
+  _vbX-=dx; _vbY-=dy;
+  _clampVB(); _applyVB();
+  _lastX=e.clientX; _lastY=e.clientY;
+}
+function _onMouseUp(){ if(_dragDist>5)_wasDragging=true; _dragging=false; _dragDist=0; }
+
+// Touch events
+let _touches={};
+let _tapStartX=0,_tapStartY=0,_tapMoved=false,_touchFiredAt=0;
+function _onTouchStart(e){
+  Array.from(e.changedTouches).forEach(t=>{ _touches[t.identifier]={x:t.clientX,y:t.clientY}; });
+  if(Object.keys(_touches).length===1){
+    const t=e.changedTouches[0];
+    _lastX=t.clientX; _lastY=t.clientY;
+    _tapStartX=t.clientX; _tapStartY=t.clientY; _tapMoved=false;
+  } else if(Object.keys(_touches).length===2){
+    const pts=Object.values(_touches);
+    _pinchDist=Math.hypot(pts[1].x-pts[0].x, pts[1].y-pts[0].y);
+    _tapMoved=true; // multi-touch cancels tap
+  }
+}
+function _onTouchMove(e){
+  e.preventDefault();
+  const keys=Object.keys(_touches);
+  Array.from(e.changedTouches).forEach(t=>{ if(_touches[t.identifier]) _touches[t.identifier]={x:t.clientX,y:t.clientY}; });
+  
+  if(keys.length===1){
+    // Single finger pan
+    const t=e.changedTouches[0];
+    if(Math.hypot(t.clientX-_tapStartX, t.clientY-_tapStartY)>8) _tapMoved=true;
+    const svg=document.getElementById('wsvg');
+    const rect=svg.getBoundingClientRect();
+    const s=_svgScale(rect);
+    const dx=(t.clientX-_lastX)/s;
+    const dy=(t.clientY-_lastY)/s;
+    _vbX-=dx; _vbY-=dy;
+    _clampVB(); _applyVB();
+    _lastX=t.clientX; _lastY=t.clientY;
+  } else if(keys.length===2){
+    // Pinch zoom
+    const pts=Object.values(_touches);
+    const newDist=Math.hypot(pts[1].x-pts[0].x, pts[1].y-pts[0].y);
+    if(_pinchDist>0){
+      const midX=(pts[0].x+pts[1].x)/2;
+      const midY=(pts[0].y+pts[1].y)/2;
+      const [svgX,svgY]=screenToSVG(midX,midY);
+      zoomMap(newDist/_pinchDist, svgX, svgY);
+    }
+    _pinchDist=newDist;
+  }
+}
+function _onTouchEnd(e){
+  const wasMulti=Object.keys(_touches).length>=2;
+  Array.from(e.changedTouches).forEach(t=>{ delete _touches[t.identifier]; });
+  _pinchDist=0;
+  if(!wasMulti && !_tapMoved && e.changedTouches.length===1){
+    _touchFiredAt=Date.now();
+    mapClick(e);
+  }
+  _tapMoved=false;
+}
+
+// ══════════════════════════════════════════════════════
+// MAP INTERACTION INIT
+// ══════════════════════════════════════════════════════
+function initMapInteraction(){
+  const svg=document.getElementById('wsvg');
+  if(!svg)return;
+  svg.addEventListener('wheel',_onWheel,{passive:false});
+  svg.addEventListener('mousedown',_onMouseDown);
+  window.addEventListener('mousemove',_onMouseMove);
+  window.addEventListener('mouseup',_onMouseUp);
+  svg.addEventListener('touchstart',_onTouchStart,{passive:false});
+  svg.addEventListener('touchmove',_onTouchMove,{passive:false});
+  svg.addEventListener('touchend',_onTouchEnd,{passive:false});
+  svg.addEventListener('click',function(e){if(_wasDragging){_wasDragging=false;return;}if(Date.now()-(_touchFiredAt||0)<500)return;mapClick(e);});
+}
+
+// ══════════════════════════════════════════════════════
+// MOBILE SHEET
+// ══════════════════════════════════════════════════════
+const isMobile=()=>window.innerWidth<=768;
+function openMobileSheet(){
+  if(!isMobile())return;
+  document.getElementById('info-panel').classList.add('mob-open');
+  document.getElementById('mob-map-btn').classList.remove('hidden');
+}
+function closeMobileSheet(){
+  document.getElementById('info-panel').classList.remove('mob-open');
+  document.getElementById('mob-map-btn').classList.add('hidden');
+}
+
+// ══════════════════════════════════════════════════════
+// THEME
+// ══════════════════════════════════════════════════════
+function applyTheme(t){
+  document.documentElement.dataset.theme=t;
+  const _tb=document.getElementById('theme-btn');if(_tb)_tb.textContent=t==='dark'?'◑':'◐';
+  localStorage.setItem('pangea-theme',t);
+  localStorage.setItem('bellum-theme',t);
+}
+function toggleTheme(){
+  const cur=document.documentElement.dataset.theme||
+    (window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
+  applyTheme(cur==='dark'?'light':'dark');
+}
+
+(function(){
+  const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('bellum-theme');
+  if(saved){applyTheme(saved);}
+  else{
+    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+    document.documentElement.dataset.theme=sys;
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
+  }
+})();
+
+// ══════════════════════════════════════════════════════
+// BURGER MENU
+// ══════════════════════════════════════════════════════
+function toggleBurger(){
+  const m=document.getElementById('burger-menu');
+  const btn=document.getElementById('burger-btn');
+  if(!m)return;
+  const open=m.classList.toggle('open');
+  btn.setAttribute('aria-expanded',open);
+}
+function closeBurger(){
+  const m=document.getElementById('burger-menu');
+  const btn=document.getElementById('burger-btn');
+  if(m){m.classList.remove('open');}
+  if(btn){btn.setAttribute('aria-expanded','false');}
+}
+
+// Close burger on outside click
+document.addEventListener('click',function(e){
+  const wrap=document.getElementById('burger-wrap');
+  if(wrap&&!wrap.contains(e.target))closeBurger();
+});
+
+// Keyboard navigation
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeBurger();}
+  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
+    const tag=document.activeElement&&document.activeElement.tagName;
+    if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT')return;
+    e.preventDefault();
+    const tl=document.getElementById('tl');
+    if(!tl)return;
+    const step=e.shiftKey?10:e.ctrlKey||e.metaKey?50:1;
+    const dir=e.key==='ArrowRight'?1:-1;
+    const newVal=Math.max(0,Math.min(1000,parseInt(tl.value)+dir*step));
+    tl.value=newVal;
+    setYear(sliderToYear(newVal));
+  }
+});
+
+// ══════════════════════════════════════════════════════
+// TIMELINE FILL
+// ══════════════════════════════════════════════════════
+function updateTlFill(pct){
+  const f=document.getElementById('tl-fill');
+  if(f)f.style.width=pct+'%';
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+</body>
+</html>
