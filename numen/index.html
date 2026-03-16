@@ -630,3 +630,244 @@ const TRANSMISSIONS=[
   {id:14, concept:'Mission Strategy', from:'christianity', to:'buddhism', year:250, desc:'The Ashoka-era Buddhist missionary model — sending monks along trade routes to spread the dharma peacefully — prefigured and may have influenced early Christian missionary patterns in the Roman Empire.'},
   {id:15, concept:'Philosophical Theology', from:'greek', to:'christianity', year:200, desc:'Greek philosophical concepts — Platonic Forms, Aristotelian logic, Stoic ethics — were adopted by early Church Fathers to articulate Christian theology, creating the synthesis of faith and reason that defined Western religious thought.'},
 ];
+
+// ── STATE ──
+let year=-10000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
+const OVERVIEW_COL='#9070c0';
+let _vbW=1000;
+
+function fmt(y){return y<0?`${Math.abs(y)} BCE`:y===0?'1 CE':`${y} CE`}
+function eraName(y){let n=ERAS[0].n;for(const e of ERAS){if(y>=e.y)n=e.n;}return n;}
+function active(c){return year>=c.s&&year<=c.e}
+function getLensCol(){
+  if(!lenses.size)return OVERVIEW_COL;
+  const L=LENSES.find(l=>l.id===[...lenses][0]);
+  return L?L.col:OVERVIEW_COL;
+}
+
+function toggleLensDD(){
+  lensDD=!lensDD;
+  document.getElementById('lens-dd-list').classList.toggle('open',lensDD);
+  document.getElementById('lens-dd-hdr').classList.toggle('open',lensDD);
+  document.getElementById('lens-dd-arrow').classList.toggle('open',lensDD);
+}
+
+function lensLabel(){
+  if(!lenses.size)return'Belief Arc';
+  const names=[...lenses].map(id=>{const L=LENSES.find(l=>l.id===id);return L?L.lbl:'';});
+  if(names.length===1)return names[0];
+  if(names.length<=3)return names.join(' · ');
+  return names.slice(0,2).join(' · ')+` +${names.length-2}`;
+}
+
+function renderLensDD(){
+  const hook=document.getElementById('lens-position-hook');
+  const dt=hook||document.getElementById('drawer-top');
+  if(!dt)return;
+  if(hook){
+    hook.style.cssText='padding:8px 0 4px';
+    const drawerTop=document.getElementById('drawer-top');
+    if(drawerTop)drawerTop.innerHTML='';
+  }
+  const arcOn=!lenses.size;
+  const rows=LENSES.map(l=>{
+    const on=lenses.has(l.id);
+    return`<div class="lens-row${on?' on':''}" onclick="toggleLens('${l.id}')">
+      <div class="lens-row-chk${on?' on':''}">${on?'✓':''}</div>
+      <span class="lens-row-ico">${l.ico}</span>
+      <span class="lens-row-lbl">${l.lbl}</span>
+    </div>`;
+  }).join('');
+  dt.innerHTML=`<div class="lens-dd-wrap">
+    <div class="lens-dd-hdr${lensDD?' open':''}" id="lens-dd-hdr" onclick="toggleLensDD()">
+      <span class="lens-dd-title">Lens</span>
+      <span class="lens-dd-summary">${lensLabel()}</span>
+      <span class="lens-dd-arrow${lensDD?' open':''}" id="lens-dd-arrow">▾</span>
+    </div>
+    <div class="lens-dd-list${lensDD?' open':''}" id="lens-dd-list">
+      <div class="lens-row${arcOn?' on':''}" onclick="toggleLens('__arc__')">
+        <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
+        <span class="lens-row-ico">◎</span>
+        <span class="lens-row-lbl">Belief Arc</span>
+      </div>
+      <div class="lens-row-sep"></div>
+      ${rows}
+      <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done ▴</div>
+    </div>
+  </div>`;
+}
+
+function toggleLens(id){
+  if(id==='__arc__'){lenses.clear();}
+  else{
+    if(lenses.has(id))lenses.delete(id);
+    else lenses.add(id);
+  }
+  renderLensDD();
+  if(sel){
+    const c=sel;
+    let body='';
+    if(!lenses.size){
+      body=`<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}`;
+    } else {
+      body=[...lenses].map(lid=>{
+        const L=LENSES.find(l=>l.id===lid);
+        if(!L)return'';
+        return`<div class="lens-section">
+          <div class="lens-section-hdr">
+            <span class="lens-section-ico">${L.ico}</span>
+            <span class="lens-section-lbl">${L.lbl}</span>
+          </div>
+          <div class="info-txt">${c.d[lid]||'No data for this lens.'}</div>
+        </div>`;
+      }).join('');
+    }
+    const col=lenses.size?getLensCol():OVERVIEW_COL;
+    const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
+    const connHTML=c.conns.length?`<div class="conn-hdr" id="conn-hdr">Historical connections</div>`+c.conns.map(cid=>{
+      const o=ITEMS.find(x=>x&&x.id===cid);if(!o)return'';
+      const isA=actIds.has(cid);
+      const badge=isA?'ACTIVE':'→ JUMP';
+      const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
+      return`<button class="conn-item" tabindex="0"
+          aria-label="${tip}"
+          onclick="navigateToItem('${cid}')"
+          style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
+        <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
+        <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
+        <span style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:1px;color:${isA?'var(--amber-b)':'var(--amber)'};white-space:nowrap">${badge}</span>
+      </button>`;
+    }).join(''):'';
+    const lensDiv=document.getElementById('drawer-lens-body');
+    if(lensDiv) lensDiv.innerHTML=body+connHTML;
+  }
+  renderMap();
+}
+
+// ── NON-LINEAR TIMELINE ──
+// Slider 0-1000 maps to year via two segments:
+// 0-100   → -10000 to -3000 (deep prehistory, 10% of slider)
+// 100-1000 → -3000 to 2024  (recorded history, 90% of slider)
+function sliderToYear(v){
+  v=parseInt(v);
+  if(v<=100){
+    return Math.round(-10000+((-3000-(-10000))*(v/100)));
+  } else {
+    return Math.round(-3000+((2024-(-3000))*((v-100)/900)));
+  }
+}
+function yearToSlider(yr){
+  yr=parseInt(yr);
+  if(yr<=-3000){
+    return Math.round(100*((yr-(-10000))/(-3000-(-10000))));
+  } else {
+    return Math.round(100+900*((yr-(-3000))/(2024-(-3000))));
+  }
+}
+
+function itemPt(c){
+  if(!c)return[500,260];
+  if(!window._proj)return[c.x||500,c.y||260];
+  if(typeof c.lon!=='number'||typeof c.lat!=='number')return[c.x||500,c.y||260];
+  try{const pt=window._proj([c.lon,c.lat]);return pt&&isFinite(pt[0])&&isFinite(pt[1])?pt:[c.x||500,c.y||260];}
+  catch(e){return[c.x||500,c.y||260];}
+}
+
+function renderMap(){
+  const ids=new Set(ITEMS.filter(c=>active(c)).map(c=>c.id));
+  window.ids_cache=ids;
+  const col=lenses.size?getLensCol():OVERVIEW_COL;
+
+  const drawn=new Set();
+  let cl='';
+  ITEMS.forEach(c=>{
+    if(!ids.has(c.id))return;
+    c.conns.forEach(id=>{
+      const k=[c.id,id].sort().join('-');
+      if(drawn.has(k)||!ids.has(id))return;
+      drawn.add(k);
+      const o=ITEMS.find(x=>x&&x.id===id);
+      if(!o)return;
+      const [cx,cy]=itemPt(c),[ox,oy]=itemPt(o);
+      const mx=(cx+ox)/2,my=Math.min(cy,oy)-28;
+      cl+=`<path d="M${cx},${cy} Q${mx},${my} ${ox},${oy}" stroke="${OVERVIEW_COL}" stroke-width=".8" fill="none" stroke-dasharray="3,5" opacity="${sel?0.1:0.25}"/>`;
+    });
+  });
+  document.getElementById('conn-layer').innerHTML=cl;
+
+  let rings='', dots='', ll='';
+  const itemData=ITEMS.map(c=>{
+    const on=ids.has(c.id);
+    const isSel=sel&&sel.id===c.id;
+    const mcol=isSel?'#f0d060':OVERVIEW_COL;
+    const op=on?1:0.06;
+    const [cx,cy]=itemPt(c);
+    return {c,on,isSel,mcol,op,cx,cy};
+  });
+  // Pass 1: decorative rings
+  itemData.filter(Boolean).forEach(({c,on,isSel,mcol,op,cx,cy})=>{
+    const _zr=1000/_vbW;
+    const _rR=Math.max(4,(16/_zr)).toFixed(1);
+    const _pR=Math.max(2,(6/_zr)).toFixed(1);
+    const _pMax=Math.max(5,(16/_zr)).toFixed(1);
+    rings+=`<g opacity="${op}" pointer-events="none">
+      <circle cx="${cx}" cy="${cy}" r="${_rR}" fill="none" stroke="${mcol}" stroke-width=".5" opacity=".15"/>
+      <circle cx="${cx}" cy="${cy}" r="${(Math.max(3,10/_zr)).toFixed(1)}" fill="${mcol}" fill-opacity=".06"/>
+      ${on?`<circle cx="${cx}" cy="${cy}" r="${_pR}" fill="${mcol}" opacity=".45">
+        <animate attributeName="r" values="${_pR};${_pMax};${_pR}" dur="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".45;0;.45" dur="2.8s" repeatCount="indefinite"/>
+      </circle>`:''}
+    </g>`;
+  });
+  // Pass 2: clickable dots
+  const sorted=[...itemData].filter(Boolean).sort((a,b)=>a.isSel?1:b.isSel?-1:0);
+  sorted.forEach(({c,on,isSel,mcol,op,cx,cy})=>{
+    if(on){
+      const zr=1000/_vbW;
+      const dotR=Math.max(2, (isSel?9:7)/zr);
+      const ringR=Math.max(3, 16/zr);
+      const pulseMax=Math.max(8, 16/zr);
+      dots+=`<g role="button" tabindex="0" data-item="${c.id}"
+          aria-label="${c.nm} — click to explore"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();itemClick('${c.id}')}"
+          opacity="${op}" pointer-events="none">
+          <circle cx="${cx}" cy="${cy}" r="${dotR.toFixed(1)}"
+            fill="${mcol}" filter="url(#glow${isSel?'2':''})"
+          />
+        </g>`;
+      ll+=`<text x="${cx}" y="${cy+26}" font-family="Cinzel,serif" font-size="11"
+        letter-spacing="1" fill="${isSel?'#f0d060':OVERVIEW_COL}"
+        text-anchor="middle" pointer-events="none">${c.nm}</text>`;
+    } else {
+      dots+=`<circle cx="${cx}" cy="${cy}" r="4" fill="${mcol}" opacity=".12" pointer-events="none"/>`;
+    }
+  });
+  document.getElementById('mark-layer').innerHTML=rings+dots;
+  document.getElementById('label-layer').innerHTML=ll;
+}
+
+function navigateToItem(id){
+  const c=ITEMS.find(x=>x&&x.id===id);
+  if(!c)return;
+  if(mode==='compare'){
+    if(!sel){sel=c;}
+    else if(!sel2&&sel.id!==c.id){sel2=c;}
+    else{sel=c;sel2=null;}
+    renderDrawer();renderMap();updateURL();
+    openMobileSheet();
+    return;
+  }
+  if(!active(c)){
+    const targetYear=c.s;
+    document.getElementById('tl').value=yearToSlider(targetYear);
+    setYear(targetYear);
+  }
+  sel=c;lensDD=false;
+  renderDrawer();renderMap();updateURL();
+  openMobileSheet();
+  document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
+}
+
+function itemClick(id){
+  navigateToItem(id);
+}
