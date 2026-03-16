@@ -570,3 +570,45 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
 </div>
 
 <script>
+// ── LENSES ──
+const LENSES=[
+  {id:'overview',    ico:'◎', lbl:'Belief Arc',              col:'#9070c0'},
+  {id:'theology',    ico:'✦', lbl:'Theology & Doctrine',     col:'#7060a8'},
+  {id:'texts',       ico:'◈', lbl:'Sacred Texts',            col:'#8a6020'},
+  {id:'ritual',      ico:'⊕', lbl:'Ritual & Practice',       col:'#c8881c'},
+  {id:'mysticism',   ico:'∞', lbl:'Mysticism & Meditation',  col:'#5a7a8a'},
+  {id:'art',         ico:'◉', lbl:'Art & Architecture',       col:'#4a8870'},
+  {id:'music',       ico:'♪', lbl:'Sacred Music',             col:'#b05580'},
+  {id:'ethics',      ico:'⚖', lbl:'Ethics & Morality',       col:'#5a9a60'},
+  {id:'conversion',  ico:'⟳', lbl:'Mission & Conversion',    col:'#b06020'},
+  {id:'persecution', ico:'†', lbl:'Persecution & Martyrdom',  col:'#a04040'},
+  {id:'schisms',     ico:'↯', lbl:'Schisms & Reform',         col:'#c06090'},
+  {id:'women',       ico:'♀', lbl:'Women & Gender',           col:'#9b6fd4'},
+  {id:'sacred',      ico:'⊗', lbl:'Sacred Places',            col:'#4a7faa'},
+  {id:'afterlife',   ico:'⚑', lbl:'Afterlife & Eschatology',  col:'#906040'},
+  {id:'cosmology',   ico:'◇', lbl:'Cosmology & Creation',     col:'#3a9fc0'},
+  {id:'philosophy',  ico:'Ψ', lbl:'Philosophy & Thought',     col:'#7890a8'},
+  {id:'politics',    ico:'⊞', lbl:'Political Influence',      col:'#606060'},
+  {id:'legacy',      ico:'★', lbl:'Legacy',                   col:'#8a7040'},
+  {id:'figures',     ico:'≡', lbl:'Key Figures',              col:'#d4a820'},
+  {id:'dialogue',    ico:'↑', lbl:'Interfaith Dialogue',      col:'#608050'},
+];
+
+const ERAS=[
+  {y:-10000,n:'ANIMISM & SHAMANISM'},
+  {y:-3000, n:'POLYTHEISTIC AGE'},
+  {y:-1500, n:'VEDIC PERIOD'},
+  {y:-800,  n:'AXIAL AGE'},
+  {y:-500,  n:'CLASSICAL RELIGIONS'},
+  {y:0,     n:'RISE OF CHRISTIANITY'},
+  {y:500,   n:'MEDIEVAL FAITH'},
+  {y:622,   n:'RISE OF ISLAM'},
+  {y:1000,  n:'HIGH MEDIEVAL RELIGION'},
+  {y:1500,  n:'REFORMATION ERA'},
+  {y:1700,  n:'ENLIGHTENMENT'},
+  {y:1850,  n:'MODERN SPIRITUALITY'},
+  {y:1950,  n:'GLOBAL INTERFAITH ERA'},
+];
+
+const FP_LABELS=['Global Reach','Philosophical Depth','Ritual Complexity','Artistic Legacy','Political Influence','Textual Tradition'];
+const FP_KEYS=['reach','phil','ritual','art','pol','text'];
