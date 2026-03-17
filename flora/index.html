@@ -471,6 +471,10 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
           <span>Toggle Theme</span>
         </button>
         <div class="burger-divider"></div>
+        <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" role="menuitem">
+          <span style="font-size:15px">&#9792;</span><span>Herstory</span><span class="burger-item-badge" id="herstory-badge"></span>
+        </button>
+        <div class="burger-divider"></div>
         <button class="burger-item" onclick="showAbout();closeBurger()" role="menuitem">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <span>About</span>
