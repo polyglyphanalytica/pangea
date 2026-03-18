@@ -3462,7 +3462,7 @@ function renderMap() {
         <animate attributeName="opacity" from=".7" to="0" dur="1.4s" repeatCount="indefinite"/>
       </circle>`;
     }
-    dots += `<g role="button" tabindex="${on ? 0 : -1}" aria-label="${c.nm}" onclick="itemClick(event,'${c.id}')" onkeydown="if(event.key==='Enter'||event.key===' ')itemClick(event,'${c.id}')">
+    dots += `<g role="button" tabindex="${on ? 0 : -1}" aria-label="${c.nm}" onclick="mapClick(event);event.stopPropagation()" onkeydown="if(event.key==='Enter'||event.key===' ')navigateToItem('${c.id}')">
       <circle cx="${x}" cy="${y}" r="${isSel || isSel2 ? 8 : 5}" fill="${mcol}" opacity="${op}" stroke="${isSel ? '#f0d060' : 'var(--bg)'}" stroke-width="${isSel ? 1.5 : .8}"/>
     </g>`;
     if (on) {
