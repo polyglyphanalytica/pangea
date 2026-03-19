@@ -192,6 +192,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
 
 /* ── MOB MAP BUTTON ── */
 .mob-map-btn{display:none}
+.hidden{display:none!important}
 
 /* ── SHEET HANDLE — hidden by default, shown only when drawer is expanded ── */
 .drawer-handle{display:none}
@@ -273,6 +274,25 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   .lens-dd-list{max-height:180px}
   .info-txt,.overview-arc{font-size:16px;line-height:1.82}
   .lens-row-lbl{font-size:13px}
+  .mob-map-btn{
+    display:block;
+    position:fixed;
+    bottom:calc(88px + 12px);
+    left:50%;
+    transform:translateX(-50%);
+    z-index:150;
+    background:var(--panel);
+    border:1px solid var(--bdr);
+    color:var(--amber-b);
+    font-family:'Cinzel',serif;
+    font-size:10px;
+    letter-spacing:2px;
+    padding:6px 18px;
+    border-radius:20px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .mob-map-btn.hidden{display:none!important}
 }
 
 /* ── LANDSCAPE MOBILE ── */
@@ -4674,28 +4694,84 @@ function screenToSVG(clientX,clientY){
   ];
 }
 
+// ── CLUSTER PICKER ──
+function showClusterPicker(items, screenX, screenY){
+  const picker=document.getElementById('cluster-picker');
+  const list=document.getElementById('cluster-list');
+  if(!picker||!list)return;
+  picker._openedAt=Date.now();
+  list.innerHTML=items.map(c=>`
+    <div class="cluster-item" onclick="closeClusterPicker();itemClick('${c.id}')">
+      <div class="cluster-item-dot" style="background:${herstory?'#c060a0':'#e89820'}"></div>
+      <div>
+        <div class="cluster-item-nm">${c.nm}</div>
+        <div class="cluster-item-sb">${c.sb||''}</div>
+      </div>
+    </div>`).join('');
+
+  const MARGIN=12;
+  picker.style.left='-9999px';
+  picker.style.top='-9999px';
+  picker.style.width=Math.min(260,window.innerWidth-MARGIN*2)+'px';
+  picker.classList.add('open');
+
+  const pw=picker.offsetWidth;
+  const ph=picker.offsetHeight;
+  const vw=window.innerWidth;
+  const vh=window.innerHeight;
+
+  let left=screenX+10;
+  let top=screenY-24;
+  if(left+pw+MARGIN>vw) left=screenX-pw-10;
+  left=Math.max(MARGIN,Math.min(left,vw-pw-MARGIN));
+  top=Math.max(MARGIN,Math.min(top,vh-ph-MARGIN));
+  picker.style.left=left+'px';
+  picker.style.top=top+'px';
+}
+function closeClusterPicker(){
+  const p=document.getElementById('cluster-picker');
+  if(p) p.classList.remove('open');
+}
+
+document.addEventListener('click',function(e){
+  const picker=document.getElementById('cluster-picker');
+  if(picker&&picker.classList.contains('open')&&!picker.contains(e.target)
+    &&(!picker._openedAt||Date.now()-picker._openedAt>350))
+    closeClusterPicker();
+});
+
 function mapClick(e){
-  const svg=document.getElementById('wsvg');
-  if(!svg||!window._proj)return;
-  const rect=svg.getBoundingClientRect();
-  const s=_svgScale(rect);
-  const [xOff,yOff]=_svgOffsets(rect,s);
-  const sx=_vbX+(e.clientX-rect.left-xOff)/s;
-  const sy=_vbY+(e.clientY-rect.top-yOff)/s;
-  const threshold=(_vbW/1000)*18;
-  const hits=ITEMS.filter(c=>{
-    if(!active(c))return false;
-    const [cx,cy]=itemPt(c);
-    return Math.hypot(cx-sx,cy-sy)<threshold;
-  });
-  if(hits.length===1){itemClick(hits[0].id);}
-  else if(hits.length>1){
-    const nearest=hits.reduce((a,b)=>{
-      const [ax,ay]=itemPt(a),[bx,by]=itemPt(b);
-      return Math.hypot(ax-sx,ay-sy)<Math.hypot(bx-sx,by-sy)?a:b;
+  try{
+    if(_wasDragging){_wasDragging=false;return;}
+    const src=e.touches?.[0]||e.changedTouches?.[0]||e;
+    const clientX=src.clientX, clientY=src.clientY;
+    const [svgX,svgY]=screenToSVG(clientX,clientY);
+    const isTouch='ontouchstart' in window||navigator.maxTouchPoints>0;
+    const zr=1000/_vbW;
+    const thresh=(isTouch?55:35)/zr;
+    const activeSet=window.ids_cache||new Set(ITEMS.filter(c=>c&&active(c)).map(c=>c.id));
+    const candidates=[];
+    ITEMS.forEach(c=>{
+      if(!c||!c.id||!activeSet.has(c.id))return;
+      const pt=itemPt(c);
+      if(!pt||!isFinite(pt[0])||!isFinite(pt[1]))return;
+      const d=Math.sqrt((pt[0]-svgX)**2+(pt[1]-svgY)**2);
+      if(d<thresh)candidates.push({c,d,pt});
     });
-    itemClick(nearest.id);
-  }
+    if(!candidates.length)return;
+    candidates.sort((a,b)=>a.d-b.d);
+    const nearest=candidates[0];
+    const second=candidates[1];
+    const isZoomedIn=zr>=2;
+    const neighbourDist=second?Math.sqrt((nearest.pt[0]-second.pt[0])**2+(nearest.pt[1]-second.pt[1])**2):Infinity;
+    const clusterSep=35/zr;
+    const isCluster=!isZoomedIn&&(candidates.length>=3||neighbourDist<clusterSep);
+    if(isCluster){
+      showClusterPicker(candidates.map(x=>x.c),clientX,clientY);
+    } else {
+      itemClick(nearest.c.id);
+    }
+  }catch(err){console.warn('mapClick err:',err);}
 }
 
 function _onWheel(e){
@@ -4811,13 +4887,14 @@ function closeMobileSheet(){
 
 // ── DRAWER DRAG TO SNAP ──
 if(_handle){
-  let _touchId=null,_startY=0,_startTop=0,_dragging=false;
+  let _touchId=null,_startY=0,_startTop=0,_dragging=false,_dragMoved=false;
 
   _handle.addEventListener('touchstart',function(e){
     if(!isMobile()||!_drawerOpen)return;
     const t=e.changedTouches[0];
     _touchId=t.identifier;
     _dragging=true;
+    _dragMoved=false;
     _startY=t.clientY;
     _startTop=_drawer.getBoundingClientRect().top-52;
     _drawer.style.transition='none';
@@ -4827,8 +4904,10 @@ if(_handle){
     if(!_dragging||!isMobile())return;
     const t=Array.from(e.changedTouches).find(x=>x.identifier===_touchId);
     if(!t)return;
-    e.preventDefault();
     const dy=t.clientY-_startY;
+    if(Math.abs(dy)<4)return; // ignore micro-movement
+    _dragMoved=true;
+    e.preventDefault();
     const mainH=window.innerHeight-52;
     const minTop=window.innerHeight*0.21;
     const maxTop=mainH*0.5;
@@ -4840,6 +4919,12 @@ if(_handle){
     if(!_dragging)return;
     _dragging=false;
     _drawer.style.transition='';
+    if(!_dragMoved){
+      // Pure tap on handle — collapse the drawer
+      closeMobileSheet();
+      return;
+    }
+    // Drag ended — snap based on position
     const mainH=window.innerHeight-52;
     const curTop=_drawer.getBoundingClientRect().top-52;
     if(curTop>mainH*0.4){
@@ -4851,6 +4936,12 @@ if(_handle){
   }
   _handle.addEventListener('touchend',endDrag);
   _handle.addEventListener('touchcancel',endDrag);
+
+  // Also handle mouse click on handle (desktop / non-touch testing)
+  _handle.addEventListener('click',function(){
+    if(!isMobile())return;
+    closeMobileSheet();
+  });
 }
 
 // ── THEME ──
