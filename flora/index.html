@@ -380,20 +380,43 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
           <rect y="10" width="16" height="2" rx="1" fill="currentColor"/>
         </svg>
       </button>
-      <nav class="burger-menu" id="burger-menu" aria-label="Atlas navigation">
-        <button class="burger-item burger-mode active" id="menu-explore" onclick="setMode('explore');closeBurger()" aria-label="Explore mode">◎ Explore</button>
-        <button class="burger-item burger-mode" id="menu-threads" onclick="setMode('threads');closeBurger()" aria-label="Dispersal Chains mode">⟳ Dispersal Chains</button>
-        <button class="burger-item burger-mode" id="menu-compare" onclick="setMode('compare');closeBurger()" aria-label="Compare mode">⊞ Compare</button>
-        <button class="burger-item burger-mode" id="menu-whatif" onclick="setMode('whatif');closeBurger()" aria-label="What-If mode">✦ What-If</button>
-        <button class="burger-item burger-mode" id="menu-heritage" onclick="setMode('heritage');closeBurger()" aria-label="Origins mode">◉ Origins</button>
+      <div class="burger-menu" id="burger-menu" role="menu">
+        <a class="burger-item" href="../index.html" role="menuitem" style="text-decoration:none">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>The Pangea Project</span>
+        </a>
         <div class="burger-divider"></div>
-        <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" aria-label="Toggle Herstory mode">♀ Herstory <span class="burger-item-badge" id="herstory-badge"></span></button>
+        <button class="burger-item burger-mode active" id="btn-explore" onclick="setMode('explore');closeBurger()" role="menuitem" aria-pressed="true">
+          <span>◉</span><span>Explore</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>⟳</span><span>Dispersal Chains</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>⊞</span><span>Compare</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-whatif" onclick="setMode('whatif');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>⟁</span><span>What-If</span>
+        </button>
+        <button class="burger-item burger-mode" id="btn-heritage" onclick="setMode('heritage');closeBurger()" role="menuitem" aria-pressed="false">
+          <span>⌂</span><span>Origins</span>
+        </button>
+        <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" role="menuitem">
+          <span style="font-size:15px">♀</span>
+          <span>Herstory</span>
+          <span class="burger-item-badge" id="herstory-badge"></span>
+        </button>
         <div class="burger-divider"></div>
-        <button class="burger-item" onclick="shareState();closeBurger()" aria-label="Share this view">⇪ Share</button>
-        <button class="burger-item" onclick="showAbout();closeBurger()" aria-label="About Flora">ℹ About</button>
+        <button class="burger-item" id="menu-theme" onclick="toggleTheme();closeBurger()" role="menuitem">
+          <span>◑</span>
+          <span>Toggle Theme</span>
+        </button>
         <div class="burger-divider"></div>
-        <a class="burger-item" href="../index.html" aria-label="Back to Pangea homepage">← Pangea</a>
-      </nav>
+        <button class="burger-item" onclick="showAbout();closeBurger()" role="menuitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>About</span>
+        </button>
+      </div>
     </div>
   </div>
 </header>
@@ -3775,11 +3798,10 @@ function closeInfo() {
 // ══════════════════════════════════════════════════════
 function setMode(m) {
   mode = m;
-  // Update burger items
-  document.querySelectorAll('.burger-mode').forEach(btn => btn.classList.remove('active'));
-  const modeMap = { explore: 'menu-explore', threads: 'menu-threads', compare: 'menu-compare', whatif: 'menu-whatif', heritage: 'menu-heritage' };
-  const el = document.getElementById(modeMap[m]);
-  if (el) el.classList.add('active');
+  ['explore','threads','compare','whatif','heritage'].forEach(id => {
+    const b = document.getElementById('btn-' + id);
+    if (b) { b.classList.toggle('active', id === m); b.setAttribute('aria-pressed', id === m); }
+  });
   // Reset mode-specific state
   if (m !== 'threads') { activeThread = null; document.getElementById('thread-layer').innerHTML = ''; }
   if (m !== 'compare') { sel2 = null; }
