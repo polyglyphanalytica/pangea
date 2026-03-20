@@ -37,7 +37,49 @@ def load_state():
     if not STATE_FILE.exists():
         print("ERROR: pangea_state.json not found.", file=sys.stderr)
         sys.exit(1)
-    return json.loads(STATE_FILE.read_text())
+    state = json.loads(STATE_FILE.read_text())
+    state = prioritise_building(state)
+    return state
+
+
+def prioritise_building(state):
+    """Move any atlas marked card--building on the homepage to the front of the queue."""
+    index_path = Path("index.html")
+    if not index_path.exists():
+        return state
+
+    html = index_path.read_text(encoding="utf-8")
+    queue = state.get("queue", [])
+
+    # Find all atlas directory names that have card--building on the homepage.
+    # The pattern is: card--building ... href="ATLAS/index.html"
+    import re
+    building_hrefs = re.findall(
+        r'card--building[\s\S]*?href="([^/]+)/index\.html"',
+        html
+    )
+    building_keys = []
+    for href in building_hrefs:
+        key = href.lower().replace("-", "_").replace(" ", "_")
+        # Also try exact match
+        if key in state["atlases"] and key in queue:
+            building_keys.append(key)
+        elif href in state["atlases"] and href in queue:
+            building_keys.append(href)
+
+    if not building_keys:
+        return state
+
+    # Reorder queue: building atlases first, then the rest
+    rest = [a for a in queue if a not in building_keys]
+    new_queue = building_keys + rest
+
+    if new_queue != queue:
+        state["queue"] = new_queue
+        save_state(state)
+        print(f"Prioritised building atlases: {building_keys}")
+
+    return state
 
 
 def save_state(s):
