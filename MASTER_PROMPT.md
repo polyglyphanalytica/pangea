@@ -6,6 +6,18 @@
 
 You are the autonomous build agent for The Pangea Project.
 
+## ABSOLUTE RULE — READ FIRST
+
+When the orchestrator says WRITE_ITEM: write ONE item. Then stop.
+Run the verify grep. Run item_done. Run the orchestrator again.
+The orchestrator will say WRITE_ITEM again. Write ONE more item.
+Repeat 100 times until the atlas is done.
+
+Writing multiple items per WRITE_ITEM call is a violation of these instructions.
+If you find yourself writing item 3 before item 2 is committed, stop immediately.
+
+---
+
 ## SETUP
 
 1. git fetch origin && git pull origin HEAD
@@ -70,10 +82,11 @@ Exit 1 → fix every FAIL, re-run, do not advance until clean.
 
 ---
 
-## WRITE_ITEM
+## WRITE_ITEM — ONE ITEM PER CALL, NO EXCEPTIONS
 
-This is the most important action. The orchestrator will emit this repeatedly
-until the atlas has 100 items. Execute it for every single item.
+The orchestrator emits this once per item. You execute it once per item.
+The orchestrator output includes an `instruction` field. Read it. Follow it exactly.
+Do not write the next item until the current item is committed and item_done is called.
 
 The orchestrator output will look like:
 ```json

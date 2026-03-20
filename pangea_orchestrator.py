@@ -120,14 +120,16 @@ def get_next_action(state):
                 "target": target,
                 "map": info.get("map", "world")
             }
-        return {
-            "action": "WRITE_ITEM",
-            "atlas": atlas,
-            "item_number": real_count + 1,
-            "items_so_far": real_count,
-            "target": target,
-            "remaining": target - real_count
-        }
+        n = real_count + 1
+        # Print imperative directly so agent has no decision gap
+        print(
+            f"WRITE_ITEM {n}/{target} for {atlas}. ONE item only.\n"
+            f"1. Append ONE item to the ITEMS array in {atlas}/index.html\n"
+            f"2. grep -c '^{{id:\'' {atlas}/index.html  →  must equal {n}\n"
+            f"3. git add {atlas}/index.html && git commit -m '{atlas}: item {n}/{target}'\n"
+            f"4. python3 pangea_orchestrator.py item_done {atlas}"
+        )
+        return None
 
     return {
         "action": "EXECUTE_PHASE",
@@ -171,13 +173,18 @@ def cmd_item_done(atlas):
     state["atlases"][atlas] = info
     save_state(state)
     target = info.get("target", 100)
-    print(json.dumps({
-        "status": "item_recorded",
-        "atlas": atlas,
-        "items": real_count,
-        "target": target,
-        "remaining": target - real_count
-    }))
+    remaining = target - real_count
+    if remaining <= 0:
+        print(f"ITEMS COMPLETE: {real_count}/{target}. Now execute: python3 pangea_orchestrator.py advance {atlas} DATA")
+    else:
+        n = real_count + 1
+        print(
+            f"item_recorded {real_count}/{target}. {remaining} remaining.\n"
+            f"NOW WRITE ITEM {n}. ONE item. Append to ITEMS array in {atlas}/index.html.\n"
+            f"Verify: grep -c '^{{id:\'' {atlas}/index.html must equal {n}.\n"
+            f"Then commit: git add {atlas}/index.html && git commit -m '{atlas}: item {n}/{target}'\n"
+            f"Then run: python3 pangea_orchestrator.py item_done {atlas}"
+        )
 
 
 def cmd_golive(atlas):
@@ -256,7 +263,9 @@ def cmd_verify():
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        print(json.dumps(get_next_action(load_state()), indent=2))
+        result = get_next_action(load_state())
+        if result is not None:
+            print(json.dumps(result, indent=2))
     elif sys.argv[1] == "advance" and len(sys.argv) == 4:
         cmd_advance(sys.argv[2], sys.argv[3])
     elif sys.argv[1] == "item_done" and len(sys.argv) == 3:
