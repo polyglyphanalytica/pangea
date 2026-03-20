@@ -354,7 +354,7 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to plant panel</button>
 
 <!-- ── HEADER ── -->
 <header class="hdr" role="banner">
@@ -484,7 +484,7 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
   </div>
 
   <!-- ── INFO PANEL ── -->
-  <aside class="info-panel" id="info-panel" aria-label="Plant information panel">
+  <aside class="info-panel" id="info-panel" aria-label="Plant information panel" tabindex="-1">
     <div class="drawer-handle" id="drawer-handle" aria-hidden="true"></div>
     <div id="drawer-top"></div>
     <div id="drawer-content"></div>
