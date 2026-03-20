@@ -707,9 +707,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'acoustics',ico:'\u2299',lbl:'Acoustics',col:'#e89820'},
+{id:'construction',ico:'\u2692',lbl:'Construction',col:'#d4782a'},
+{id:'cultural_exchange',ico:'\u2740',lbl:'Cultural Exchange',col:'#7a9848'},
+{id:'ensembles',ico:'\u2637',lbl:'Ensembles',col:'#6a88b8'},
+{id:'evolution',ico:'\u21BB',lbl:'Evolution',col:'#b87830'},
+{id:'gender',ico:'\u26A4',lbl:'Gender & Access',col:'#c060a0'},
+{id:'innovation',ico:'\u2606',lbl:'Innovation',col:'#d4a840'},
+{id:'makers',ico:'\u270B',lbl:'Makers & Builders',col:'#8a7040'},
+{id:'materials',ico:'\u25A8',lbl:'Materials',col:'#a08850'},
+{id:'notation',ico:'\u266B',lbl:'Notation',col:'#9078a8'},
+{id:'oral_tradition',ico:'\u2767',lbl:'Oral Tradition',col:'#b89060'},
+{id:'pedagogy',ico:'\u270D',lbl:'Pedagogy',col:'#7890a0'},
+{id:'performance',ico:'\u2605',lbl:'Performance',col:'#c89030'},
+{id:'recording',ico:'\u25C9',lbl:'Recording',col:'#607890'},
+{id:'repertoire',ico:'\u2669',lbl:'Repertoire',col:'#a87838'},
+{id:'revival',ico:'\u2740',lbl:'Revival',col:'#6a9850'},
+{id:'ritual',ico:'\u2721',lbl:'Ritual & Ceremony',col:'#a07048'},
+{id:'social_role',ico:'\u2302',lbl:'Social Role',col:'#8888a0'},
+{id:'symbolism',ico:'\u2318',lbl:'Symbolism',col:'#9868a0'},
+{id:'trade',ico:'\u2696',lbl:'Trade & Commerce',col:'#c0a040'}
+];
 
-const ERAS=[];
+const ERAS=[
+{y:-40000,n:'DEEP PREHISTORY'},
+{y:-10000,n:'NEOLITHIC DAWN'},
+{y:-3500,n:'BRONZE AGE'},
+{y:-1200,n:'IRON AGE'},
+{y:-500,n:'CLASSICAL ANTIQUITY'},
+{y:200,n:'LATE ANTIQUITY'},
+{y:500,n:'EARLY MEDIEVAL'},
+{y:900,n:'HIGH MEDIEVAL'},
+{y:1300,n:'LATE MEDIEVAL'},
+{y:1500,n:'RENAISSANCE'},
+{y:1600,n:'BAROQUE ERA'},
+{y:1750,n:'CLASSICAL ERA'},
+{y:1820,n:'ROMANTIC ERA'},
+{y:1900,n:'MODERN ERA'},
+{y:1945,n:'POST-WAR ERA'},
+{y:1970,n:'ELECTRONIC AGE'},
+{y:2000,n:'DIGITAL AGE'}
+];
 
 const ITEMS=[
 {id:'bone_flute',nm:'Bone Flute',sb:'Aerophone · Hohle Fels, Germany · c.40,000 BCE',s:-40000,e:2024,lon:9.76,lat:48.38,fp:{rng:3,vol:2,cpx:2,prt:9,age:10,inf:8},conns:['pan_flute','recorder','ney','bansuri'],overview:'The bone flutes of Hohle Fels and Geißenklösterle in southern Germany — carved from vulture wing bones and mammoth ivory around 40,000 years ago — are the oldest known musical instruments. They prove that Homo sapiens arriving in Europe already possessed a fully developed musical culture. The five-hole Hohle Fels flute plays a pentatonic scale with remarkable accuracy, demonstrating sophisticated acoustic understanding tens of thousands of years before writing. Bone flutes establish that music is not a late cultural luxury but a fundamental human behaviour as old as figurative art itself.',d:{acoustics:'The Hohle Fels flute produces a breathy, overtone-rich tone shaped by the natural bore of a griffon vulture radius bone. The five finger holes are spaced to produce intervals close to a pentatonic scale, suggesting deliberate tuning rather than arbitrary placement. Acoustic analysis shows the flute\'s range spans roughly one octave with stable pitch in the lower register.',construction:'Carved from the radius bone of a griffon vulture (Gyps fulvus), the maker split the bone lengthwise, hollowed both halves, rejoined them with birch-bark adhesive, and carved five finger holes using flint tools. A V-shaped mouthpiece was notched at one end. The entire process — from bone selection to playable instrument — required planning, material knowledge, and fine motor control.',repertoire:'No notation survives, but ethnographic parallels with bone flutes among indigenous peoples suggest uses including animal mimicry for hunting, trance-induction through repetitive patterns, and social bonding through group performance. The pentatonic scale capacity implies melodic rather than purely rhythmic music.',social_role:'The flutes were found alongside figurative ivory carvings (including the Venus of Hohle Fels and the lion-man of Hohlenstein-Stadel), suggesting music was embedded in the same cultural complex as visual art and symbolic thought. Their presence in communal cave sites implies shared musical performance rather than solitary play.',ritual:'Upper Palaeolithic cave acoustics research shows that painted chambers often have the strongest resonance — suggesting prehistoric people chose sonically rich spaces for ritual. Bone flutes found in such contexts imply music accompanied whatever ceremonies took place in these painted, resonant chambers.',trade:'Mammoth ivory flutes required ivory from animals hunted or scavenged at considerable distance from the cave sites, implying trade networks or extended hunting ranges. Vulture bone flutes used locally available materials. The choice between ivory and bone may reflect status or ritual distinctions.',evolution:'The bone flute is the ancestor of all aerophones. The principle of a tube with finger holes controlling pitch leads directly to the ney, bansuri, pan flute, recorder, and ultimately the modern concert flute. Forty thousand years of continuous development from a single design concept.',pedagogy:'No direct evidence of teaching survives, but the skill required to play a five-hole flute in tune implies intergenerational transmission of musical knowledge — someone taught the player, and someone taught the maker. Music pedagogy may be among humanity\'s oldest educational traditions.',notation:'No notation system existed for tens of thousands of years after the bone flute\'s creation. Music was transmitted entirely through oral tradition and embodied practice. The absence of notation did not prevent the development of complex musical traditions — it simply meant every generation had to learn by listening and doing.',gender:'The gender of bone flute makers and players is unknown. Ethnographic parallels among hunter-gatherer societies show both men and women playing flutes, though some cultures restrict certain instruments by gender. The bone flute predates all known gender-based musical prohibitions.',innovation:'The bone flute represents the earliest known technological innovation in music — the deliberate creation of a pitch-controllable instrument. Before this, music likely involved voice, body percussion, and struck objects. The flute introduced the concept of a manufactured sound-producing tool with tuneable parameters.',materials:'Griffon vulture radius bones were selected for their naturally hollow, thin-walled structure — ideal acoustic tubes requiring minimal modification. Mammoth ivory flutes required far more labour (splitting, hollowing, rejoining) but produced a denser, louder tone. Material choice directly shaped acoustic properties.',performance:'Playing a bone flute requires controlled breath pressure, lip positioning at the notched mouthpiece, and precise finger placement. The five-hole design allows melodic sequences across roughly one octave. Performance was likely seated or standing in cave environments with natural amplification.',recording:'No recording technology existed for the bone flute\'s first 39,900 years. Modern reconstructions by archaeomusicologists (notably Wulf Hein and Friedrich Seeberger) have been recorded and demonstrate a hauntingly pure, breathy tone surprisingly similar to modern bamboo flutes.',cultural_exchange:'The near-simultaneous appearance of bone flutes across multiple sites in the Swabian Jura suggests a shared musical culture among early Aurignacian groups in Europe. Whether this tradition originated in Africa and was carried to Europe, or developed independently, remains debated.',symbolism:'In hunter-gatherer cosmologies documented ethnographically, flutes often symbolise the breath of spirits, the voice of ancestors, or communication between human and animal worlds. The bone flute\'s association with cave art depicting animals and therianthropes supports a symbolic-ritual interpretation.',makers:'The makers of the Hohle Fels flutes were anatomically modern humans of the Aurignacian culture, among the first Homo sapiens to colonise Europe. Their tool kit included sophisticated flint blades, bone points, and ivory-carving tools — the same toolkit that produced the earliest figurative art.',ensembles:'Multiple flutes found at the same sites suggest group performance. Two or more flutes playing together could produce harmonies, call-and-response patterns, or heterophonic textures. Combined with voice and percussion (clapping, stamping), these represent the earliest known musical ensembles.',oral_tradition:'Every aspect of bone flute music — repertoire, technique, tuning, ritual context — was transmitted orally for over 35,000 years before writing existed. This is the longest continuous oral musical tradition in human history, though its specific content is irrecoverably lost.',revival:'Modern reconstructions of Palaeolithic bone flutes by experimental archaeologists have sparked a revival of interest in prehistoric music. Replicas are played in concerts and educational settings. The bone flute has become a symbol of music\'s deep antiquity and universality.'}},
@@ -2281,10 +2320,114 @@ conomy:'Subsistence agriculture (sweet potato, taro, sugarcane) and fishing; the
       migration:'The Polynesian settlement of Rapa Nui around 900 CE represents the eastern limit of Polynesian expansion — 2,000 kilometres beyond any previous Polynesian settlement.'}},
 ];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+// Chain 1: The Bowed String Migration (rebab → vielle → violin → cello)
+{from:'ravanahatha',to:'rebab',concept:'The Bowed String Migration',year:700,desc:'The bowing principle travels from South Asian ravanahatha traditions to the Middle Eastern rebab through trade and cultural contact.'},
+{from:'rebab',to:'vielle',concept:'The Bowed String Migration',year:950,desc:'Arab rebab crosses into medieval Europe via Moorish Spain and Byzantine contact, inspiring the European vielle.'},
+{from:'vielle',to:'violin',concept:'The Bowed String Migration',year:1520,desc:'The medieval vielle evolves through Renaissance experiments into the violin family in northern Italy.'},
+{from:'violin',to:'cello',concept:'The Bowed String Migration',year:1560,desc:'The violin concept is scaled up to create the violoncello, completing the modern string family.'},
+// Chain 2: The Reed Pipe Road (ney → zurna → oboe → bassoon)
+{from:'ney',to:'zurna',concept:'The Reed Pipe Road',year:-2000,desc:'Simple end-blown reed pipes develop into powerful double-reed zurnas across the ancient Near East.'},
+{from:'zurna',to:'oboe',concept:'The Reed Pipe Road',year:1650,desc:'French instrument makers refine the loud outdoor zurna/shawm into the controlled, keyed oboe for indoor orchestral use.'},
+{from:'oboe',to:'bassoon',concept:'The Reed Pipe Road',year:1680,desc:'The double-reed principle is extended to bass range, producing the bassoon as the oboe\'s orchestral partner.'},
+// Chain 3: The Plucked String Route (oud → lute → guitar → electric_guitar)
+{from:'oud',to:'lute',concept:'The Plucked String Route',year:800,desc:'The Arab oud (al-ʿūd) enters Europe through Moorish Spain and the Crusades, gaining frets to become the lute.'},
+{from:'lute',to:'guitar',concept:'The Plucked String Route',year:1600,desc:'The lute\'s dominance fades as the simpler, louder guitar rises in popularity across Spain and Europe.'},
+{from:'guitar',to:'electric_guitar',concept:'The Plucked String Route',year:1931,desc:'Electromagnetic pickups transform the acoustic guitar into the electric guitar, revolutionising popular music.'},
+// Chain 4: The Free Reed Journey (sheng → harmonica → accordion → chromatic_button_accordion)
+{from:'sheng',to:'harmonica',concept:'The Free Reed Journey',year:1821,desc:'Chinese sheng free-reed principle reaches Europe and inspires the development of the mouth harmonica.'},
+{from:'harmonica',to:'accordion',concept:'The Free Reed Journey',year:1829,desc:'Free reed technology is combined with bellows and keyboard to create the accordion in Vienna.'},
+{from:'accordion',to:'chromatic_button_accordion',concept:'The Free Reed Journey',year:1850,desc:'Button layouts replace piano keys, enabling faster chromatic playing and the concert bayan tradition.'},
+// Chain 5: The Keyboard Revolution (pipe_organ → harpsichord → piano → synthesiser)
+{from:'pipe_organ',to:'harpsichord',concept:'The Keyboard Revolution',year:1400,desc:'The organ keyboard concept is applied to plucked strings, creating the portable harpsichord for secular music.'},
+{from:'harpsichord',to:'piano',concept:'The Keyboard Revolution',year:1700,desc:'Cristofori replaces the harpsichord\'s plucking mechanism with hammers, enabling dynamic expression — the pianoforte.'},
+{from:'piano',to:'synthesiser',concept:'The Keyboard Revolution',year:1964,desc:'Robert Moog applies the piano keyboard interface to electronic oscillators, creating the modern synthesiser.'},
+// Chain 6: The Metal Percussion Path (gamelan_gong → steelpan → vibraphone → handpan)
+{from:'gamelan_gong',to:'vibraphone',concept:'The Metal Percussion Path',year:1921,desc:'Metal percussion tuning principles from Southeast Asian gamelan influence the creation of the vibraphone in the US.'},
+{from:'steelpan',to:'handpan',concept:'The Metal Percussion Path',year:2000,desc:'Trinidad steel pan acoustics inspire Swiss inventors to create the Hang, spawning the global handpan movement.'},
+// Chain 7: The Drum Telegraph (frame_drum → djembe → tabla → drum_kit → drum_machine)
+{from:'frame_drum',to:'djembe',concept:'The Drum Telegraph',year:800,desc:'Hand-drumming traditions spread and diversify across West Africa, producing the goblet-shaped djembe.'},
+{from:'djembe',to:'drum_kit',concept:'The Drum Telegraph',year:1918,desc:'Diverse percussion traditions converge in New Orleans as multiple drums are combined into the modern drum kit.'},
+{from:'drum_kit',to:'drum_machine',concept:'The Drum Telegraph',year:1980,desc:'The TR-808 translates acoustic drum patterns into electronic synthesis, redefining rhythm for the digital age.'},
+// Chain 8: The Flute Family Tree (bone_flute → pan_flute → recorder → concert_flute)
+{from:'bone_flute',to:'pan_flute',concept:'The Flute Family Tree',year:-5000,desc:'The single-tube flute concept multiplies into bundled tubes of different lengths — the pan flute.'},
+{from:'bone_flute',to:'recorder',concept:'The Flute Family Tree',year:1300,desc:'The ancient duct-flute principle is refined into the medieval recorder with its standardised fingering system.'},
+{from:'recorder',to:'concert_flute',concept:'The Flute Family Tree',year:1847,desc:'Theobald Boehm transforms the recorder family\'s concept into the modern metal transverse flute with key system.'},
+// Chain 9: The Silk Road Strings (pipa → shamisen → guzheng → koto)
+{from:'pipa',to:'shamisen',concept:'The Silk Road Strings',year:1560,desc:'The Chinese pipa concept travels to Japan via the Ryukyu Islands, becoming the three-stringed shamisen.'},
+{from:'guzheng',to:'koto',concept:'The Silk Road Strings',year:700,desc:'The Chinese guzheng crosses to Japan and evolves into the 13-stringed koto during the Nara period.'},
+{from:'guzheng',to:'gayageum',concept:'The Silk Road Strings',year:500,desc:'Zheng-type zithers spread to the Korean peninsula, where the gayageum develops its distinctive form.'},
+// Chain 10: The Brass Ascent (conch_shell → alphorn → serpent → tuba)
+{from:'conch_shell',to:'alphorn',concept:'The Brass Ascent',year:1400,desc:'Natural horn traditions using animal horns and shells inspire long wooden horns in the Alpine pastoral tradition.'},
+{from:'serpent',to:'tuba',concept:'The Brass Ascent',year:1835,desc:'The serpent\'s bass wind role is filled by the new valved tuba, offering superior intonation and projection.'},
+// Chain 11: The Electronic Frontier (theremin → ondes_martenot → synthesiser → drum_machine)
+{from:'theremin',to:'ondes_martenot',concept:'The Electronic Frontier',year:1928,desc:'Martenot builds on the theremin\'s electronic oscillator concept but adds keyboard control for musical precision.'},
+{from:'ondes_martenot',to:'synthesiser',concept:'The Electronic Frontier',year:1964,desc:'Electronic sound generation evolves from single-voice instruments to Moog\'s modular voltage-controlled synthesiser.'},
+{from:'synthesiser',to:'drum_machine',concept:'The Electronic Frontier',year:1980,desc:'Electronic synthesis is applied specifically to percussion, creating programmable rhythm machines.'},
+// Chain 12: The Thumb Piano Family (mbira → kalimba → steelpan)
+{from:'mbira',to:'kalimba',concept:'The Thumb Piano Family',year:1954,desc:'Hugh Tracey\'s kalimba popularises the African lamellophone principle for international audiences.'},
+// Chain 13: The Harp Lineage (lyre → harp → pedal_harp)
+{from:'lyre',to:'harp',concept:'The Harp Lineage',year:-2000,desc:'The lyre\'s plucked-string principle evolves into the angular harp with strings perpendicular to the soundboard.'},
+{from:'harp',to:'pedal_harp',concept:'The Harp Lineage',year:1720,desc:'Hochbrucker adds pedals to the frame harp, enabling chromatic playing and orchestral integration.'},
+// Chain 14: The Indian String Tradition (sitar → tanpura → sarangi)
+{from:'sitar',to:'tanpura',concept:'The Indian String Tradition',year:1600,desc:'The tanpura evolves as a dedicated drone instrument to support the melodic sitar in Hindustani performance.'},
+// Chain 15: The Overtone Instruments (didgeridoo → jaw_harp → fujara → igil)
+{from:'didgeridoo',to:'jaw_harp',concept:'The Overtone Instruments',year:-3000,desc:'Overtone-based instruments develop independently across cultures — each exploiting the natural harmonic series.'},
+{from:'jaw_harp',to:'fujara',concept:'The Overtone Instruments',year:1500,desc:'The overtone principle finds unique expression in the Slovak fujara\'s extraordinarily long duct-flute design.'},
+{from:'jaw_harp',to:'igil',concept:'The Overtone Instruments',year:500,desc:'Central Asian bowed fiddles like the igil develop alongside throat singing, both exploiting the overtone series.'},
+// Chain 16: The Bass Revolution (double_bass → electric_bass → drum_machine)
+{from:'double_bass',to:'electric_bass',concept:'The Bass Revolution',year:1951,desc:'Leo Fender electrifies the bass function, replacing the cumbersome double bass in popular music ensembles.'},
+{from:'electric_bass',to:'drum_machine',concept:'The Bass Revolution',year:1980,desc:'The TR-808\'s synthesised bass drum becomes the new bass foundation, merging rhythm and bass into one electronic voice.'},
+// Chain 17: The Bagpipe Diaspora (bagpipe → uilleann_pipes → accordion)
+{from:'bagpipe',to:'uilleann_pipes',concept:'The Bagpipe Diaspora',year:1700,desc:'Irish pipers develop the bellows-blown uilleann pipes from the mouth-blown bagpipe tradition.'},
+// Chain 18: The Friction Instruments (glass_harmonica → waterphone)
+{from:'glass_harmonica',to:'waterphone',concept:'The Friction Instruments',year:1968,desc:'The principle of friction-excited resonators inspires new instruments exploiting vibrating metal and water.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'lyre':[{nm:'Sappho of Lesbos',role:'Lyric poet and lyre performer',yr:-600,desc:'Sappho composed and performed lyric poetry accompanied by the lyre on the island of Lesbos around 600 BCE. Her work defined the lyric genre — the word itself derives from her instrument. Her poetry\'s emotional directness and musical sophistication made her the most celebrated woman musician of antiquity.'}],
+'pipe_organ':[{nm:'Hildegard von Bingen',role:'Composer, abbess, and musical visionary',yr:1150,desc:'Hildegard composed over 70 liturgical works including the morality play Ordo Virtutum — the earliest surviving musical drama. Her compositions, written for voices likely accompanied by organ, display extraordinary melodic range and mystical intensity. She is the most recorded medieval composer of any gender.'}],
+'harpsichord':[{nm:'Elisabeth Jacquet de la Guerre',role:'Harpsichordist and composer',yr:1687,desc:'Elisabeth Jacquet de la Guerre was a child prodigy at the court of Louis XIV who became one of France\'s most celebrated harpsichordists and the first Frenchwoman to compose an opera. Her harpsichord suites and cantatas demonstrate mastery equal to any contemporary male composer.'}],
+'piano':[{nm:'Clara Schumann',role:'Concert pianist and composer',yr:1835,desc:'Clara Schumann was one of the most distinguished pianists of the Romantic era, performing across Europe for over 60 years. She championed the works of Robert Schumann and Brahms, composed significant piano works, and taught at the Hoch Conservatory. She redefined the role of the concert pianist.'},
+{nm:'Wanda Landowska',role:'Harpsichord and piano revivalist',yr:1903,desc:'Wanda Landowska spearheaded the 20th-century harpsichord revival, commissioning the Pleyel harpsichord and recording Bach\'s complete Well-Tempered Clavier. Her scholarship and artistry single-handedly re-established the harpsichord as a concert instrument after two centuries of neglect.'}],
+'violin':[{nm:'Maddalena Lombardini Sirmen',role:'Violinist and composer',yr:1760,desc:'Maddalena Lombardini Sirmen was an 18th-century virtuosa who studied with Tartini and performed across Europe. She composed violin concertos, string quartets, and trios — one of the first professional women instrumentalists to achieve international fame.'}],
+'guitar':[{nm:'Sister Rosetta Tharpe',role:'Gospel guitarist and rock pioneer',yr:1938,desc:'Sister Rosetta Tharpe\'s distorted electric guitar playing in the 1930s and 1940s laid the groundwork for rock and roll. Her virtuosic, electrifying performances blurred the line between sacred and secular music and directly influenced Chuck Berry, Little Richard, and Elvis Presley.'}],
+'cello':[{nm:'Jacqueline du Pré',role:'Concert cellist',yr:1962,desc:'Jacqueline du Pré\'s recordings of the Elgar and Dvořák cello concertos are considered among the greatest ever made. Her passionate, physically committed playing style transformed cello performance before multiple sclerosis ended her career at age 28.'}],
+'concert_flute':[{nm:'Jeanne Baxtresser',role:'Principal flutist, New York Philharmonic',yr:1983,desc:'Jeanne Baxtresser served as principal flute of the New York Philharmonic for 15 years — the first woman to hold a principal woodwind position in a major American orchestra. She trained generations of flutists at Juilliard and set the standard for orchestral flute playing.'}],
+'harp':[{nm:'Harpo Marx',role:'Harpist and comedian',yr:1930,desc:'While male, Harpo brought the harp to millions through film. However, the true pioneer was Henriette Renié, who composed the first major harp concerto (1901) and established the French school of harp playing that trained virtually every significant 20th-century harpist.'},
+{nm:'Henriette Renié',role:'Harpist, composer, and pedagogue',yr:1901,desc:'Henriette Renié composed the first major concerto for the harp, wrote essential method books, and taught generations of harpists including Marcel Grandjany. She established the modern French school of harp playing that remains the global standard for harp pedagogy.'}],
+'sitar':[{nm:'Annapurna Devi',role:'Surbahar and sitar master',yr:1950,desc:'Annapurna Devi, daughter of Baba Allauddin Khan and first wife of Ravi Shankar, was considered by many to be the greatest living exponent of the Maihar gharana. She chose near-total withdrawal from public performance but trained many of India\'s finest instrumentalists through private teaching.'}],
+'tabla':[{nm:'Anuradha Pal',role:'Tabla soloist and bandleader',yr:1995,desc:'Anuradha Pal broke barriers as one of India\'s first professional women tabla soloists, performing in a tradition that was exclusively male for centuries. She founded the all-woman percussion ensemble Stree Shakti and has performed worldwide.'}],
+'kora':[{nm:'Sona Jobarteh',role:'Kora virtuosa and educator',yr:2010,desc:'Sona Jobarteh is the first woman from a West African griot family to become a professional kora player — breaking a centuries-old gender prohibition. She founded the Gambia Academy, combining traditional griot education with modern schooling, and performs internationally.'}],
+'ney':[{nm:'Kudsi Ergüner\'s female students',role:'Neyzen performers',yr:2000,desc:'While the ney was historically male-dominated in its Sufi ceremonial context, contemporary women neyzen have emerged through Turkish conservatory programmes and private instruction, performing in both sacred and secular contexts.'}],
+'clarinet':[{nm:'Sabine Meyer',role:'Principal clarinetist',yr:1982,desc:'Sabine Meyer\'s appointment as principal clarinet of the Berlin Philharmonic in 1982 (and the orchestra\'s controversial rejection of her appointment) became a landmark moment in the struggle for gender equality in major orchestras. She became one of the most acclaimed solo clarinetists in the world.'}],
+'saxophone':[{nm:'Elise Hall',role:'Concert saxophonist and patron',yr:1900,desc:'Elise Hall commissioned over 20 works for saxophone from major French composers including d\'Indy, Loeffler, and Debussy (who accepted but never completed his commission). She almost single-handedly created the classical saxophone repertoire through her patronage and performances.'}],
+'electric_guitar':[{nm:'Memphis Minnie',role:'Blues guitarist and singer',yr:1929,desc:'Memphis Minnie was one of the most influential blues guitarists of the 1920s-1950s, male or female. She won blues guitar competitions against Big Bill Broonzy and was among the first to amplify the guitar. Her technique, songwriting, and stage presence influenced generations.'},
+{nm:'Sister Rosetta Tharpe',role:'Electric guitar pioneer',yr:1938,desc:'Sister Rosetta Tharpe played distorted, riff-driven electric guitar in the late 1930s — years before Chuck Berry or Elvis. Her innovative technique on the Gibson SG made her the true godmother of rock and roll, though her contribution was long overlooked.'}],
+'accordion':[{nm:'Yvette Horner',role:'Accordionist and performer',yr:1948,desc:'Yvette Horner was France\'s most famous accordionist, performing for decades at the Tour de France and in concert halls. She demonstrated that the accordion — often dismissed as a folk novelty — was capable of virtuosic concert performance and brought the instrument to millions.'}],
+'synthesiser':[{nm:'Wendy Carlos',role:'Electronic music pioneer',yr:1968,desc:'Wendy Carlos\'s Switched-On Bach (1968) was the first classical album to go platinum and single-handedly demonstrated the synthesiser\'s artistic potential. Her film scores for A Clockwork Orange, The Shining, and Tron defined electronic film music.'},
+{nm:'Delia Derbyshire',role:'Electronic music composer',yr:1963,desc:'Delia Derbyshire realised Ron Grainer\'s Doctor Who theme at the BBC Radiophonic Workshop using pioneering electronic techniques — tape manipulation, oscillators, and musique concrète. Her work pushed the boundaries of electronic sound years before commercial synthesisers existed.'}],
+'theremin':[{nm:'Clara Rockmore',role:'Theremin virtuosa',yr:1934,desc:'Clara Rockmore was the greatest theremin performer in history — her technique, musicality, and precision on an instrument notorious for its difficulty have never been surpassed. She developed the fingering technique still used by thereminists today and premiered works written specifically for her.'}],
+'koto':[{nm:'Keiko Nosaka',role:'Koto innovator and performer',yr:1969,desc:'Keiko Nosaka pioneered the 20-string and 25-string koto, expanding the instrument\'s range and repertoire. She commissioned and premiered hundreds of new works, transforming the koto from a traditional instrument into a vehicle for contemporary concert music.'}],
+'pedal_harp':[{nm:'Lily Laskine',role:'Concert harpist',yr:1934,desc:'Lily Laskine was principal harpist of the Paris Opéra and one of the 20th century\'s most recorded harpists. She premiered works by major French composers and established recording standards for the instrument. Her career spanned over 50 years of distinguished performance.'}],
+'erhu':[{nm:'Song Fei',role:'Erhu virtuosa and innovator',yr:1990,desc:'Song Fei is one of the most acclaimed erhu performers in the world, known for expanding the instrument\'s repertoire through commissions of new works and cross-cultural collaborations. She serves as professor at the Central Conservatory of Music in Beijing.'}],
+'glass_harmonica':[{nm:'Marianne Kirchgessner',role:'Glass harmonica virtuosa',yr:1790,desc:'Marianne Kirchgessner, blind from childhood, became Europe\'s most celebrated glass harmonica player. Mozart composed his Adagio and Rondo K.617 specifically for her — one of the masterpieces of the glass harmonica repertoire. She toured Europe to acclaim for over a decade.'},
+{nm:'Marianne Davies',role:'Glass harmonica performer',yr:1762,desc:'Marianne Davies was among the first to perform on Benjamin Franklin\'s newly invented glass harmonica, touring Europe with her sister and popularising the instrument in aristocratic salons. Her performances introduced the instrument to the musical public.'}],
+'drum_kit':[{nm:'Viola Smith',role:'Jazz and swing drummer',yr:1938,desc:'Viola Smith was a pioneering jazz drummer who played in all-female big bands in the 1930s-40s and wrote a famous article in Down Beat magazine arguing that women could play drums as well as men. She performed professionally past age 100.'},
+{nm:'Cindy Blackman Santana',role:'Jazz and rock drummer',yr:1987,desc:'Cindy Blackman Santana is one of the most respected drummers in jazz and rock, known for her work with Lenny Kravitz and her own jazz ensembles. Her powerful, technically brilliant playing challenges stereotypes about women in percussion.'}],
+'ondes_martenot':[{nm:'Jeanne Loriod',role:'Ondes Martenot virtuosa',yr:1947,desc:'Jeanne Loriod was the greatest ondes Martenot performer in history — Messiaen wrote his most demanding ondes Martenot parts for her, including the Turangalîla-Symphonie. She taught at the Paris Conservatoire and championed the instrument for over 50 years.'}],
+'pipa':[{nm:'Wu Man',role:'Pipa virtuosa and ambassador',yr:1990,desc:'Wu Man is the world\'s foremost pipa ambassador, performing with major Western orchestras, commissioning new works, and collaborating across genres from classical to Silk Road Ensemble projects. She has done more than anyone to bring the pipa to international audiences.'}],
+'guqin':[{nm:'Cai Wenji',role:'Poet, musician, and guqin player',yr:200,desc:'Cai Wenji was a Han dynasty poet and musician celebrated for her guqin artistry. Her composition "Eighteen Songs of a Nomad Flute" is one of the most famous works in Chinese musical literature. She represents the long tradition of women guqin players in Chinese culture.'}],
+'shamisen':[{nm:'Keiko Abe',role:'Marimba and percussion pioneer',yr:1963,desc:'While primarily a marimba virtuosa, the Japanese tradition of women shamisen players is ancient — geisha shamisen performance was a highly refined art. Chikuzan Takahashi\'s student Nagauta performers and modern players like Yoko Nishi continue this tradition.'}],
+'mbira':[{nm:'Stella Chiweshe',role:'Mbira master and performer',yr:1974,desc:'Stella Chiweshe defied Shona tradition by learning the mbira dzavadzimu — a sacred instrument traditionally reserved for men. She became Zimbabwe\'s most famous mbira player, performing worldwide and recording numerous albums. She opened the path for other women mbira players.'}],
+'didgeridoo':[{nm:'Djalu Gurruwiwi\'s female family members',role:'Yidaki cultural keepers',yr:2000,desc:'While didgeridoo playing is traditionally male in many Aboriginal communities, women have always been integral to song cycles and ceremonial music. Contemporary Aboriginal women musicians have begun playing the yidaki publicly, navigating cultural protocols with community guidance.'}],
+'banjo':[{nm:'Rhiannon Giddens',role:'Banjo player, singer, and historian',yr:2005,desc:'Rhiannon Giddens has reclaimed the banjo\'s African-American origins through scholarship and performance, winning a MacArthur Fellowship and Pulitzer Prize for Music. She plays minstrel-era banjo and fiddle, connecting the instrument to its roots in enslaved African musicians\' traditions.'}],
+'balalaika':[{nm:'Various women of the Andreyev Orchestra',role:'Balalaika ensemble performers',yr:1900,desc:'Women have played in Russian balalaika orchestras since the early 20th century, with all-women ensembles performing during World War II to boost morale. Today women are fully integrated in professional balalaika orchestras and folk ensembles.'}],
+'chromatic_button_accordion':[{nm:'Ksenija Sidorova',role:'Concert accordionist',yr:2009,desc:'Ksenija Sidorova is one of the world\'s leading concert accordionists, performing with major orchestras and releasing acclaimed albums on Deutsche Grammophon. She has done more than anyone in her generation to establish the accordion as a serious classical concert instrument.'}],
+'drum_machine':[{nm:'Delia Derbyshire',role:'Electronic music pioneer',yr:1963,desc:'Before drum machines existed, Delia Derbyshire at the BBC Radiophonic Workshop created rhythmic patterns through tape splicing and electronic manipulation that anticipated programmable rhythm. Her techniques laid conceptual groundwork for the drum machine revolution.'},
+{nm:'Suzanne Ciani',role:'Synthesiser and electronic music pioneer',yr:1975,desc:'Suzanne Ciani was a pioneer of commercial electronic music, creating iconic sounds using the Buchla synthesiser. Her work in advertising, film, and album production demonstrated the musical potential of electronic instruments including early drum machines and sequencers.'}]
+};
 
 let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -3431,8 +3574,8 @@ function zoomOut(){
 // ══════════════════════════════════════════════════════
 // FINGERPRINT RADAR CHART
 // ══════════════════════════════════════════════════════
-const FP_LABELS=[];
-const FP_KEYS=[];
+const FP_LABELS=['Range','Volume','Complexity','Portability','Age','Influence'];
+const FP_KEYS=['rng','vol','cpx','prt','age','inf'];
 
 function renderFingerprint(c){
   if(!c.fp)return'';
@@ -3802,7 +3945,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'East Asia':['sheng','erhu','guqin','pipa','guzheng','suona','biwa'],
+'South Asia':['bansuri','tabla','sitar','sarangi','tanpura','ravanahatha'],
+'Southeast Asia':['gamelan_gong','xylophone'],
+'Central Asia & Siberia':['jaw_harp','igil'],
+'Middle East & North Africa':['ney','oud','frame_drum','zurna','rebab','daf'],
+'Sub-Saharan Africa':['djembe','kora','mbira','kalimba','talking_drum','berimbau','conga'],
+'Europe — Western':['pipe_organ','violin','piano','guitar','clarinet','saxophone','cello','concert_flute','harmonica','oboe','viola','bassoon','french_horn','trombone','tuba','recorder','celesta','pedal_harp','lute','vielle','glass_harmonica','serpent','ondes_martenot'],
+'Europe — Eastern & Nordic':['balalaika','nyckelharpa','kantele','chromatic_button_accordion','hurdy_gurdy','fujara'],
+'British Isles & Ireland':['bagpipe','bodhran','uilleann_pipes'],
+'East Asian — Japan & Korea':['shamisen','koto','shakuhachi','gayageum','biwa'],
+'The Americas':['banjo','electric_guitar','drum_kit','synthesiser','ukulele','charango','steelpan','cajon','electric_bass','theremin','handpan','waterphone','hang','drum_machine'],
+'Ancient World':['bone_flute','lyre','harp','conch_shell','pan_flute','didgeridoo']
+};
 
 const HERITAGE_REASONS={};
 
