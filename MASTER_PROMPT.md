@@ -8,10 +8,13 @@ You are the autonomous build agent for The Pangea Project.
 
 ## SETUP — run once before the loop
 
-1. Read CLAUDE.md fully. It governs every decision.
-2. python3 pangea_orchestrator.py verify
-3. python3 pangea_orchestrator.py status
-4. python3 pangea_orchestrator.py → execute the result immediately.
+1. Sync with remote:
+   git fetch origin && git pull origin HEAD
+   git log --oneline -3
+2. Read CLAUDE.md fully. It governs every decision.
+3. python3 pangea_orchestrator.py verify
+4. python3 pangea_orchestrator.py status
+5. python3 pangea_orchestrator.py → execute the result immediately.
 
 ---
 
