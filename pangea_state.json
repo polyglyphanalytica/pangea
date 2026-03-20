@@ -1,0 +1,1101 @@
+{
+  "version": 2,
+  "schema_note": "phase uses CLAUDE.md IDs: 1A/1B/1C/1D/1E/1F/2A/2B/2C/2D/3/4A/4B/4C/5/6/DONE. live=true means homepage card is card--live. map=sky triggers Phase 1E.",
+  "active_atlas": null,
+  "atlases": {
+    "civilitas": {
+      "phase": "DONE",
+      "items": 100,
+      "target": 100,
+      "live": true,
+      "map": "world",
+      "section": "III"
+    },
+    "bellum": {
+      "phase": "DONE",
+      "items": 100,
+      "target": 100,
+      "live": true,
+      "map": "world",
+      "section": "V"
+    },
+    "numen": {
+      "phase": "DONE",
+      "items": 100,
+      "target": 100,
+      "live": true,
+      "map": "world",
+      "section": "IV"
+    },
+    "lex": {
+      "phase": "DONE",
+      "items": 100,
+      "target": 100,
+      "live": true,
+      "map": "world",
+      "section": "VI"
+    },
+    "flora": {
+      "phase": "DONE",
+      "items": 100,
+      "target": 100,
+      "live": true,
+      "map": "world",
+      "section": "I"
+    },
+    "pecunia": {
+      "phase": "DONE",
+      "items": 100,
+      "target": 100,
+      "live": true,
+      "map": "world",
+      "section": "VII"
+    },
+    "cosmos": {
+      "phase": "DONE",
+      "items": 105,
+      "target": 105,
+      "live": false,
+      "map": "sky",
+      "section": "I",
+      "note": "Complete. Needs GO_LIVE only \u2014 homepage card still forthcoming."
+    },
+    "anthrophone": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX"
+    },
+    "dynastia": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "lingua": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "III"
+    },
+    "via": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "clima": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "I"
+    },
+    "aqua": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "I"
+    },
+    "debitum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "sophia": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV"
+    },
+    "manifesto": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VI"
+    },
+    "servitus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "III"
+    },
+    "exodus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "III",
+      "homepage_name": "Ex\u014ddus"
+    },
+    "terminus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "insurgo": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V",
+      "homepage_name": "Insurg\u014d"
+    },
+    "corruptio": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VI"
+    },
+    "vindica": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VI"
+    },
+    "labor": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "machina": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "mercatus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "lucrum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "donum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII",
+      "homepage_name": "D\u014dnum"
+    },
+    "petra": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "I"
+    },
+    "bestia": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "I"
+    },
+    "contagium": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "corpus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "animus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "dolor": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "senex": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "somnia": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "eros": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "sensus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "pharmakeia": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "partus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "nomad": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "III"
+    },
+    "diaspora": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "III"
+    },
+    "nomen": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "III"
+    },
+    "tribu": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "III",
+      "homepage_name": "Trib\u016b"
+    },
+    "graphe": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV",
+      "homepage_name": "Graph\u0113"
+    },
+    "experimenta": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV"
+    },
+    "quantum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV"
+    },
+    "terraincognita": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV",
+      "homepage_name": "Terra Incognita"
+    },
+    "obscura": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV"
+    },
+    "scriptorium": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV"
+    },
+    "augur": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV"
+    },
+    "mathematica": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV"
+    },
+    "techne": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV"
+    },
+    "codex": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IV"
+    },
+    "cruor": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "sicarius": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "trauma": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "arcanum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "kryptos": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V",
+      "homepage_name": "Krypt\u00f3s"
+    },
+    "imperium": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "propaganda": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "tributum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "murus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "armamentum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    },
+    "crimen": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VI"
+    },
+    "martyr": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VI"
+    },
+    "suffragium": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VI"
+    },
+    "terra": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VI"
+    },
+    "nauta": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "faber": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "argentum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "cursus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VII"
+    },
+    "classis": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VIII"
+    },
+    "domus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VIII"
+    },
+    "puer": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VIII"
+    },
+    "ritus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VIII"
+    },
+    "cibus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VIII"
+    },
+    "viaurbis": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VIII",
+      "homepage_name": "Via Urbis"
+    },
+    "vinculum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VIII"
+    },
+    "mundus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VIII"
+    },
+    "nuptiae": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "VIII"
+    },
+    "pigmentum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX"
+    },
+    "structura": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX"
+    },
+    "ludus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX",
+      "homepage_name": "L\u016bdus"
+    },
+    "agon": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX",
+      "homepage_name": "Ag\u014dn"
+    },
+    "inventio": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX"
+    },
+    "mimesis": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX"
+    },
+    "fabula": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX"
+    },
+    "imago": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX"
+    },
+    "memoria": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "IX"
+    },
+    "vox": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "X"
+    },
+    "tempus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "X"
+    },
+    "norma": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "X"
+    },
+    "stella": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "X"
+    },
+    "flumen": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "X"
+    },
+    "venena": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XI"
+    },
+    "occultus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XI"
+    },
+    "ludibrium": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XI"
+    },
+    "monstrum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XI"
+    },
+    "lususnaturae": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XI",
+      "homepage_name": "Lusus Naturae"
+    },
+    "sacra": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XI"
+    },
+    "sepultura": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XI"
+    },
+    "supplicium": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XI"
+    },
+    "mirabilia": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XI"
+    },
+    "finis": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XII"
+    },
+    "futura": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XII"
+    },
+    "utopia": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XII"
+    },
+    "pax": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XII"
+    },
+    "diluvium": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "XII"
+    },
+    "sylva": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "I"
+    },
+    "ignis": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "I"
+    },
+    "spiritus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "I"
+    },
+    "solum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "I"
+    },
+    "intoxicatio": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "vestis": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "fames": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "stigma": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "II"
+    },
+    "exilium": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "III"
+    },
+    "asylum": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "III"
+    },
+    "captivus": {
+      "phase": "1A",
+      "items": 0,
+      "target": 100,
+      "live": false,
+      "map": "world",
+      "section": "V"
+    }
+  },
+  "queue": [
+    "cosmos",
+    "anthrophone",
+    "dynastia",
+    "lingua",
+    "via",
+    "cursus",
+    "clima",
+    "aqua",
+    "solum",
+    "sylva",
+    "ignis",
+    "spiritus",
+    "petra",
+    "bestia",
+    "debitum",
+    "sophia",
+    "codex",
+    "graphe",
+    "experimenta",
+    "quantum",
+    "terraincognita",
+    "obscura",
+    "scriptorium",
+    "augur",
+    "mathematica",
+    "techne",
+    "manifesto",
+    "corruptio",
+    "vindica",
+    "crimen",
+    "martyr",
+    "suffragium",
+    "terra",
+    "servitus",
+    "exodus",
+    "nomad",
+    "diaspora",
+    "nomen",
+    "tribu",
+    "exilium",
+    "asylum",
+    "captivus",
+    "terminus",
+    "insurgo",
+    "cruor",
+    "sicarius",
+    "trauma",
+    "arcanum",
+    "kryptos",
+    "imperium",
+    "propaganda",
+    "tributum",
+    "murus",
+    "armamentum",
+    "labor",
+    "machina",
+    "mercatus",
+    "lucrum",
+    "donum",
+    "nauta",
+    "faber",
+    "argentum",
+    "classis",
+    "domus",
+    "puer",
+    "ritus",
+    "cibus",
+    "viaurbis",
+    "vinculum",
+    "mundus",
+    "nuptiae",
+    "contagium",
+    "corpus",
+    "animus",
+    "dolor",
+    "senex",
+    "somnia",
+    "eros",
+    "sensus",
+    "pharmakeia",
+    "partus",
+    "fames",
+    "intoxicatio",
+    "vestis",
+    "stigma",
+    "pigmentum",
+    "structura",
+    "ludus",
+    "agon",
+    "inventio",
+    "mimesis",
+    "fabula",
+    "imago",
+    "memoria",
+    "vox",
+    "tempus",
+    "norma",
+    "stella",
+    "flumen",
+    "venena",
+    "occultus",
+    "ludibrium",
+    "monstrum",
+    "lususnaturae",
+    "sacra",
+    "sepultura",
+    "supplicium",
+    "mirabilia",
+    "finis",
+    "futura",
+    "utopia",
+    "pax",
+    "diluvium"
+  ],
+  "completed": [
+    "civilitas",
+    "bellum",
+    "numen",
+    "lex",
+    "flora",
+    "pecunia"
+  ],
+  "quota": {
+    "max_phases_per_session": 3,
+    "safe_phases_per_session": 2,
+    "checkpoint_every_n_phases": 1,
+    "note": "One data batch (2A/2B/2C/2D) = 1 phase. Session target: complete one atlas shell OR one data batch, then stop."
+  },
+  "session_log": []
+}
