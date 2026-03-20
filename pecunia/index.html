@@ -586,6 +586,8 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
       <g id="thread-layer"></g>
       <!-- Labels (non-interactive) -->
       <g id="label-layer" pointer-events="none"></g>
+      <!-- Hover tooltip labels -->
+      <g id="hover-label-layer" pointer-events="none"></g>
       <!-- Markers -->
       <g id="mark-layer"></g>
     </svg>
@@ -4419,7 +4421,7 @@ function renderMap(){
     const hasWomen=!!WOMEN[c.id];
     const isWomen=womenMode&&hasWomen;
     const mcol=isSel?'#f0d060':isHeritage?'#4080d0':isWomen?'#c060a0':womenMode&&!hasWomen?'#553344':'#c8881c';
-    const op=on?(womenMode&&!hasWomen?0.15:1):(0.06);
+    const op=on?(womenMode&&!hasWomen?0:1):(0);
     const [cx,cy]=itemPt(c);
     return {c,on,isSel,mcol,op,cx,cy,hasWomen};
   });
@@ -4455,18 +4457,59 @@ function renderMap(){
             fill="${mcol}" filter="url(#glow${isSel?'2':''})"
           />
         </g>`;
-      if(clickable){
+      if(isSel){
         ll+=`<text x="${cx}" y="${cy+26}" font-family="Cinzel,serif" font-size="11"
-        letter-spacing="1" fill="${isSel?'#f0d060':'#c8881c'}"
+        letter-spacing="1" fill="#f0d060"
         text-anchor="middle" pointer-events="none">${c.nm}</text>`;
       }
-    } else {
+    } else if(op>0) {
       dots+=`<circle cx="${cx}" cy="${cy}" r="4" fill="${mcol}" opacity=".12" pointer-events="none"/>`;
     }
   });
   document.getElementById('mark-layer').innerHTML=rings+dots;
   document.getElementById('label-layer').innerHTML=ll;
 }
+
+// ── Hover label (Drift 1) ─────────────────────────────
+function _renderHoverLabel(c){
+  const el=document.getElementById('hover-label-layer');
+  if(!el)return;
+  if(!c){el.innerHTML='';return;}
+  const [cx,cy]=itemPt(c);
+  el.innerHTML=`<g>
+    <rect x="${cx-c.nm.length*4.2-8}" y="${cy-30}" width="${c.nm.length*8.4+16}" height="20"
+      rx="10" fill="var(--bg)" stroke="var(--bdr)" stroke-width=".8" opacity=".92"/>
+    <text x="${cx}" y="${cy-16}" font-family="Cinzel,serif" font-size="11"
+      letter-spacing="1" fill="var(--txt)" text-anchor="middle">${c.nm}</text>
+  </g>`;
+}
+
+(function _initMapHover(){
+  const svg=document.querySelector('.map-svg');
+  if(!svg)return;
+  const HIT=14;
+  svg.addEventListener('mousemove',e=>{
+    const rect=svg.getBoundingClientRect();
+    const scaleX=_vbW/(rect.width||1000);
+    const scaleY=_vbH/(rect.height||520);
+    const mx=(e.clientX-rect.left)*scaleX+_vbX;
+    const my=(e.clientY-rect.top)*scaleY+_vbY;
+    const candidates=ITEMS.filter(c=>{
+      if(!c||!active(c))return false;
+      if(sel&&sel.id===c.id)return false;
+      if(womenMode&&!WOMEN[c.id])return false;
+      return true;
+    });
+    let nearest=null,bestD=HIT*HIT;
+    candidates.forEach(c=>{
+      const [cx,cy]=itemPt(c);
+      const d=(mx-cx)**2+(my-cy)**2;
+      if(d<bestD){bestD=d;nearest=c;}
+    });
+    _renderHoverLabel(nearest||null);
+  });
+  svg.addEventListener('mouseleave',()=>_renderHoverLabel(null));
+})();
 
 function navigateToItem(id){
   const c=ITEMS.find(x=>x&&x.id===id);
@@ -4492,6 +4535,7 @@ function navigateToItem(id){
 
 function itemClick(id){
   if(womenMode&&!WOMEN[id])return;
+  _renderHoverLabel(null);
   navigateToItem(id);
 }
 
@@ -5672,8 +5716,8 @@ function updateTlFill(pct){const f=document.getElementById('tl-fill');if(f)f.sty
 document.addEventListener('DOMContentLoaded',init);
 
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 
 <!-- Cluster picker popup -->
 <div id="cluster-picker" role="dialog" aria-label="Select monetary system">
