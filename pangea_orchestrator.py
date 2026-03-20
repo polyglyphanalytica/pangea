@@ -12,6 +12,7 @@ Usage:
 """
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -41,6 +42,12 @@ def load_state():
 
 def save_state(s):
     STATE_FILE.write_text(json.dumps(s, indent=2))
+
+
+def self_invoke():
+    """Re-exec the orchestrator with no args so output chains automatically."""
+    sys.stdout.flush()
+    os.execv(sys.executable, [sys.executable, __file__])
 
 
 def count_items(atlas):
@@ -160,6 +167,7 @@ def cmd_advance(atlas, completed_phase):
     print(json.dumps({"status": "advanced", "atlas": atlas,
                       "phase_done": completed_phase, "phase_next": info["phase"],
                       "items": real_count}))
+    self_invoke()
 
 
 def cmd_item_done(atlas):
@@ -170,19 +178,23 @@ def cmd_item_done(atlas):
         sys.exit(1)
     real_count = count_items(atlas)
     info["items"] = real_count
-    state["atlases"][atlas] = info
-    save_state(state)
     target = info.get("target", 100)
     remaining = target - real_count
     if remaining <= 0:
-        print(f"ITEMS COMPLETE: {real_count}/{target}. Now execute: python3 pangea_orchestrator.py advance {atlas} DATA")
+        print(f"ITEMS COMPLETE: {real_count}/{target}. Auto-advancing to Phase 3.")
+        info["phase"] = next_phase("DATA", info.get("map", "world"))
+        state["atlases"][atlas] = info
+        save_state(state)
+        self_invoke()
     else:
+        state["atlases"][atlas] = info
+        save_state(state)
         n = real_count + 1
         print(
             f"item_recorded {real_count}/{target}. {remaining} remaining.\n"
             f"NOW WRITE ITEM {n}. ONE item. Append to ITEMS array in {atlas}/index.html.\n"
             f"Verify: grep -c '^{{id:\'' {atlas}/index.html must equal {n}.\n"
-            f"Then commit: git add {atlas}/index.html && git commit -m '{atlas}: item {n}/{target}'\n"
+            f"Commit: git add {atlas}/index.html && git commit -m '{atlas}: item {n}/{target}'\n"
             f"Then run: python3 pangea_orchestrator.py item_done {atlas}"
         )
 
@@ -206,6 +218,7 @@ def cmd_golive(atlas):
     )
     save_state(state)
     print(json.dumps({"status": "live", "atlas": atlas, "items": info["items"]}))
+    self_invoke()
 
 
 def cmd_status():

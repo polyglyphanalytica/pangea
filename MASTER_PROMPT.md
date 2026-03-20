@@ -189,6 +189,7 @@ The orchestrator output will look like:
 - civilitas/index.html or pangea_state.json missing → stop, report.
 
 Do NOT stop for: phase completions, item completions, atlas completions, go-lives.
+The orchestrator chains automatically after advance, item_done, and golive calls.
 
 ---
 
