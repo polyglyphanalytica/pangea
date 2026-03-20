@@ -495,6 +495,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
         <g id="thread-layer"></g>
         <g id="label-layer" pointer-events="none"></g>
         <g id="mark-layer"></g>
+        <g id="hover-label-layer" pointer-events="none"></g>
       </svg>
       <div class="hint" id="map-hint">
         <span id="map-hint-text">TAP A LAW MARKER &middot; PINCH TO ZOOM &middot; DRAG TO PAN</span>
@@ -3922,7 +3923,7 @@ function renderMap(){
     const isHeritage=heritageIds&&heritageIds.has(c.id);
     const womenCount=(WOMEN[c.id]||[]).length;
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
-    const op=on?1:(isHeritage?0.5:0.15);
+    const op=on?(herstory&&!womenCount?0:1):(isHeritage?0.5:0);
     const [cx,cy]=itemPt(c);
 
     // Cluster grouping
@@ -3930,26 +3931,67 @@ function renderMap(){
     if(!byPos[key])byPos[key]=[];
     byPos[key].push(c);
 
-    if(on||isHeritage){
+    if(op>0){
       if(isSel){
         rings+=`<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="14" fill="none" stroke="${mcol}" stroke-width="1.2" opacity=".5" filter="url(#glow2)"/>
           <circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="9" fill="none" stroke="${mcol}" stroke-width="1.5" opacity=".8"/>`;
+        ll+=`<text x="${cx.toFixed(1)}" y="${(cy+20).toFixed(1)}" font-family="Cinzel,serif" font-size="9"
+          letter-spacing="0.5" fill="#f0d060" text-anchor="middle" pointer-events="none" opacity="1">${c.nm}</text>`;
       }
       dots+=`<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${isSel?6:on?5:3.5}" fill="${mcol}" opacity="${op}"
         style="cursor:pointer" filter="${isSel?'url(#glow)':''}"
         onclick="handleMarkerClick('${c.id}',event)"
         aria-label="${c.nm}"/>`;
-      if(isSel||on){
-        ll+=`<text x="${cx.toFixed(1)}" y="${(cy+20).toFixed(1)}" font-family="Cinzel,serif" font-size="9"
-          letter-spacing="0.5" fill="${isSel?'#f0d060':mcol}" text-anchor="middle" pointer-events="none" opacity="${isSel?1:.8}">${c.nm}</text>`;
-      }
-    } else {
-      dots+=`<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="3" fill="${mcol}" opacity=".1" pointer-events="none"/>`;
     }
   });
   document.getElementById('mark-layer').innerHTML=rings+dots;
   document.getElementById('label-layer').innerHTML=ll;
 }
+
+// ══════════════════════════════════════════════════════
+// HOVER LABEL (Drift 1)
+// ══════════════════════════════════════════════════════
+function _renderHoverLabel(c){
+  const g=document.getElementById('hover-label-layer');
+  if(!g)return;
+  if(!c){g.innerHTML='';return;}
+  const [cx,cy]=itemPt(c);
+  g.innerHTML=`<rect x="${(cx-c.nm.length*3.5).toFixed(1)}" y="${(cy-22).toFixed(1)}" width="${(c.nm.length*7+12).toFixed(1)}" height="16" rx="8"
+    fill="var(--bg)" stroke="var(--bdr)" stroke-width=".8" opacity=".92"/>
+    <text x="${cx.toFixed(1)}" y="${(cy-11).toFixed(1)}" font-family="Cinzel,serif" font-size="9"
+      letter-spacing="0.5" fill="var(--txt)" text-anchor="middle" pointer-events="none">${c.nm}</text>`;
+}
+
+// window-level mousemove for hover (separate from drag handler on svg)
+(function(){
+  const HIT=14;
+  let _lastHover=null;
+  window.addEventListener('mousemove',function(e){
+    const svg=document.getElementById('wsvg');
+    if(!svg)return;
+    const r=svg.getBoundingClientRect();
+    // Only fire when cursor is inside the SVG bounds
+    if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom){
+      if(_lastHover){_lastHover=null;_renderHoverLabel(null);}
+      return;
+    }
+    const mx=(e.clientX-r.left)/r.width*1000;
+    const my=(e.clientY-r.top)/r.height*520;
+    const sc=_transform.scale,tx=_transform.x,ty=_transform.y;
+    const svgX=(mx-tx)/sc, svgY=(my-ty)/sc;
+    let best=null,bestD=HIT;
+    ITEMS.forEach(c=>{
+      if(!active(c))return;
+      if(sel&&sel.id===c.id)return;
+      const womenCount=(WOMEN[c.id]||[]).length;
+      if(herstory&&!womenCount)return;
+      const [cx,cy]=itemPt(c);
+      const d=Math.hypot(cx-svgX,cy-svgY);
+      if(d<bestD){bestD=d;best=c;}
+    });
+    if(best!==_lastHover){_lastHover=best;_renderHoverLabel(best);}
+  });
+})();
 
 // ══════════════════════════════════════════════════════
 // CLUSTER / MARKER CLICK
@@ -3984,6 +4026,7 @@ function handleMarkerClick(id,evt){
     return;
   }
   navigateToItem(id);
+  _renderHoverLabel(null);
 }
 function hidePicker(){document.getElementById('cluster-picker').classList.remove('visible');}
 document.addEventListener('click',function(e){
@@ -4625,7 +4668,7 @@ function applyTransform(){
   const svg=document.getElementById('wsvg');
   if(!svg)return;
   const {x,y,scale}=_transform;
-  const layers=['map-layer','conn-layer','thread-layer','label-layer','mark-layer'];
+  const layers=['map-layer','conn-layer','thread-layer','label-layer','mark-layer','hover-label-layer'];
   layers.forEach(id=>{const g=document.getElementById(id);if(g)g.setAttribute('transform',`translate(${x},${y}) scale(${scale})`);});
   document.getElementById('map-reset-btn').style.display=(scale!==1||x!==0||y!==0)?'inline-block':'none';
 }
@@ -4642,7 +4685,7 @@ function initMapInteraction(){
   svg.addEventListener('mousedown',e=>{if(e.button!==0)return;_drag={sx:e.clientX,sy:e.clientY,tx:_transform.x,ty:_transform.y};e.preventDefault();});
   svg.addEventListener('mousemove',e=>{if(!_drag)return;const dx=e.clientX-_drag.sx,dy=e.clientY-_drag.sy;_transform.x=_drag.tx+dx/_transform.scale*(_transform.scale>1?1:1);_transform.y=_drag.ty+dy/_transform.scale*(_transform.scale>1?1:1);applyTransform();});
   svg.addEventListener('mouseup',()=>{_drag=null;});
-  svg.addEventListener('mouseleave',()=>{_drag=null;});
+  svg.addEventListener('mouseleave',()=>{_drag=null;_renderHoverLabel(null);});
 
   svg.addEventListener('wheel',e=>{
     e.preventDefault();
