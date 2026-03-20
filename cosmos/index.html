@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cosmos — The Universe Atlas</title>
-<meta name="description" content="Explore 105 cosmic objects and phenomena across 13.8 billion years of universal history on an interactive sky atlas. Navigate a discovery timeline from ancient naked-eye astronomy to gravitational waves, with 20 interpretive lenses, discovery chains, What-If scenarios, Herstory mode, and Cosmic Address mapping.">
+<meta name="description" content="Explore 112 cosmic objects and phenomena across 13.8 billion years of universal history on an interactive sky atlas. Navigate a discovery timeline from ancient naked-eye astronomy to gravitational waves, with 20 interpretive lenses, discovery chains, What-If scenarios, Herstory mode, and Cosmic Address mapping.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/cosmos/">
 <meta property="og:title" content="Cosmos — The Universe Atlas">
-<meta property="og:description" content="105 cosmic objects. 13.8 billion years. Every star, galaxy, and fundamental force that shaped reality — mapped, connected, and explorable.">
+<meta property="og:description" content="112 cosmic objects. 13.8 billion years. Every star, galaxy, and fundamental force that shaped reality — mapped, connected, and explorable.">
 <meta property="og:site_name" content="The Pangea Project">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cosmos — The Universe Atlas">
-<meta name="twitter:description" content="105 cosmic objects. 13.8 billion years. Every star, galaxy, and fundamental force — mapped, connected, and explorable.">
+<meta name="twitter:description" content="112 cosmic objects. 13.8 billion years. Every star, galaxy, and fundamental force — mapped, connected, and explorable.">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Cosmos — The Universe Atlas","description":"An interactive astronomical atlas exploring 105 cosmic objects across 13.8 billion years. Features a sky atlas, discovery timeline, 20 interpretive lenses, discovery chains, What-If scenarios, Herstory mode, and Cosmic Address mapping.","url":"https://polyglyphanalytica.github.io/pangea/cosmos/","applicationCategory":"EducationalApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"The Pangea Project"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Cosmos — The Universe Atlas","description":"An interactive astronomical atlas exploring 112 cosmic objects across 13.8 billion years. Features a sky atlas, discovery timeline, 20 interpretive lenses, discovery chains, What-If scenarios, Herstory mode, and Cosmic Address mapping.","url":"https://polyglyphanalytica.github.io/pangea/cosmos/","applicationCategory":"EducationalApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"The Pangea Project"}}
 </script>
 <link rel="canonical" href="https://polyglyphanalytica.github.io/pangea/cosmos/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
@@ -372,7 +372,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
     <button onclick="closeAbout()" aria-label="Close" style="position:absolute;top:12px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1">✕</button>
     <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px">COSMOS</div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">The Universe Atlas</div>
-    <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:12px;font-style:italic">105 cosmic objects. 13.8 billion years. Every star, nebula, galaxy, black hole, and fundamental force that shaped reality — mapped, connected, and explorable.</p>
+    <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:12px;font-style:italic">112 cosmic objects. 13.8 billion years. Every star, nebula, galaxy, black hole, and fundamental force that shaped reality — mapped, connected, and explorable.</p>
     <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
       Part of <a href="../index.html" style="color:var(--amber-b);text-decoration:underline;text-underline-offset:3px">The Pangea Project</a> — every domain of human knowledge, one atlas at a time. Each atlas is a single self-contained HTML file — no servers, no databases, no dependencies beyond a browser.
     </p>
@@ -396,16 +396,16 @@ const LENSES=[
   {id:'formation',   lbl:'Formation',         icon:'🌀', desc:'How and when it formed'},
   {id:'gravity',     lbl:'Gravity',           icon:'🌍', desc:'Gravitational effects and dynamics'},
   {id:'legacy',      lbl:'Legacy',            icon:'🏛', desc:'Impact on science and culture'},
-  {id:'lifecycle',   lbl:'Lifecycle',         icon:'🔄', desc:'Stages of existence over time'},
   {id:'life',        lbl:'Life & Habitability',icon:'🌱', desc:'Potential for or relation to life'},
+  {id:'lifecycle',   lbl:'Lifecycle',         icon:'🔄', desc:'Stages of existence over time'},
   {id:'light',       lbl:'Light & Observation',icon:'✨', desc:'How it appears across the spectrum'},
   {id:'missions',    lbl:'Missions',          icon:'🚀', desc:'Spacecraft and observatories'},
   {id:'myth',        lbl:'Myth & Culture',    icon:'🌙', desc:'Stories, names, and human meaning'},
   {id:'observation', lbl:'Observation',       icon:'👁', desc:'How to observe it yourself'},
+  {id:'unknown',     lbl:'Open Questions',    icon:'❓', desc:'What remains unsolved'},
   {id:'perspective', lbl:'Perspective',       icon:'🌌', desc:'Scale and meaning put in context'},
   {id:'scale',       lbl:'Scale',             icon:'📏', desc:'Size, mass, and comparative dimensions'},
   {id:'time',        lbl:'Time',              icon:'⏳', desc:'Age, duration, and history'},
-  {id:'unknown',     lbl:'Open Questions',    icon:'❓', desc:'What remains unsolved'},
   {id:'unlocked',    lbl:'What It Unlocked',  icon:'🗝', desc:'Discoveries and insights it enabled'}
 ];
 
@@ -3527,10 +3527,6 @@ const WOMEN={
 
 // ════════════════════════════════════════════════════
 // COSMOS — The Universe Atlas
-// Adapted from civilitas/index.html per CLAUDE.md §2
-// CIVS→ITEMS  civClick→itemClick  navigateToCiv→navigateToItem
-// "Civilization Arc"→"Cosmic Arc"  "Concept Threads"→"Discovery Chains"
-// "Heritage"→"Cosmic Address"  "civilizations active"→"objects known"
 // Map: sky atlas (RA/Dec) instead of world map. All else verbatim.
 // ════════════════════════════════════════════════════
 
@@ -3572,10 +3568,7 @@ function renderSkyBackground(){
 }
 
 // ══════════════════════════════════════════════════════════════════
-// COSMOS ENGINE — adapted from civilitas/index.html
-// CIVS→ITEMS  civClick→itemClick  navigateToCiv→navigateToItem
-// "Civilization Arc"→"Cosmic Arc"  "Concept Threads"→"Discovery Chains"
-// "Heritage"→"Cosmic Address"  "civilizations active"→"objects known"
+// COSMOS ENGINE
 // ══════════════════════════════════════════════════════════════════
 
 // ── STATE ──

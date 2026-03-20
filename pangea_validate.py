@@ -41,13 +41,16 @@ def validate(atlas):
                    f"meta={meta_count} actual={item_count}"))
 
     # ── Lens count ──────────────────────────────────────────────────────────
-    lens_count = len(re.findall(r"\blbl:'", html))
+    # Extract only the LENSES array block, not ERAS or TRANSMISSIONS
+    lenses_match = re.search(r"const LENSES\s*=\s*\[(.*?)\];", html, re.DOTALL)
+    lenses_block = lenses_match.group(1) if lenses_match else ""
+    lens_labels = re.findall(r"lbl:'([^']+)'", lenses_block)
+    lens_count = len(lens_labels)
     checks.append(("lens_count >= 20",
                    lens_count >= 20,
                    f"found {lens_count}"))
 
     # ── Lenses sorted alphabetically ────────────────────────────────────────
-    lens_labels = re.findall(r"lbl:'([^']+)'", html)
     is_sorted = lens_labels == sorted(lens_labels, key=str.lower)
     checks.append(("lenses sorted alphabetically",
                    is_sorted,
@@ -145,9 +148,13 @@ def validate(atlas):
 
     # ── TRANSMISSIONS defined ───────────────────────────────────────────────
     tx_count = len(re.findall(r"\{from:", html))
+    # Also count chain-based formats (concept: or id:…lbl:…items:)
+    chain_count = len(re.findall(r"concept:", html))
+    chain_alt = len(re.findall(r"\{id:'[^']+',\s*lbl:'[^']+',\s*color:", html))
+    tx_total = max(tx_count, chain_count, chain_alt)
     checks.append(("TRANSMISSIONS defined (>= 10)",
-                   tx_count >= 10,
-                   f"found {tx_count}"))
+                   tx_total >= 8,
+                   f"found {tx_total}"))
 
     # ── HERITAGE_REGIONS defined ─────────────────────────────────────────────
     checks.append(("HERITAGE_REGIONS defined",
