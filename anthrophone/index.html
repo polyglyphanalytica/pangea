@@ -3137,13 +3137,13 @@ function renderCompareDrawer(){
   if(!sel&&!sel2){
     dc.innerHTML=`<div class="compare-prompt">
       <div>⊞</div>
-      <div>Select two civilizations on the map to compare them side by side</div>
+      <div>Select two instruments on the map to compare them side by side</div>
     </div>`;
     return;
   }
   const renderCol=(c,slot)=>{
     if(!c)return`<div class="compare-col">
-      <div class="compare-prompt" style="height:200px"><div>Click a civilization on the map to add it here</div></div>
+      <div class="compare-prompt" style="height:200px"><div>Click an instrument on the map to add it here</div></div>
     </div>`;
     const body=lenses.size?[...lenses].map(lid=>{
       const L=LENSES.find(l=>l.id===lid);
@@ -3615,7 +3615,7 @@ function renderFingerprint(c){
     svg+=`<text x="${lx.toFixed(1)}" y="${(ly+dy).toFixed(1)}" text-anchor="${anchor}" class="fp-label">${SHORT[i]}</text>`;
   });
   svg+='</svg>';
-  return`<div class="fp-wrap"><div class="fp-title">Civilizational Fingerprint</div>${svg}</div>`;
+  return`<div class="fp-wrap"><div class="fp-title">Instrument Fingerprint</div>${svg}</div>`;
 }
 
 // ══════════════════════════════════════════════════════
@@ -3909,7 +3909,7 @@ function renderWhatIfDrawer(){
           <div style="font-size:12.5px;line-height:1.65;color:var(--txt2)">${t.desc}</div>
         </div>`;
       }).join('')
-    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this civilization in the current dataset.</div>`
+    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this instrument in the current dataset.</div>`
   }
 
   ${downstream.length?`
@@ -4121,7 +4121,7 @@ function renderHerstoryDrawer(){
   <button onclick="closeInfo()"
     style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px;transition:opacity .15s"
     onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-    ← All civilizations
+    ← All instruments
   </button>
   <div class="hs-panel-hdr">${c.nm}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:14px">${c.sb}</div>
@@ -4632,7 +4632,7 @@ function updateTlFill(pct){
   <!-- Cluster picker popup -->
   <div id="cluster-picker" role="dialog" aria-label="Select instrument">
     <div id="cluster-picker-hdr">
-      <span>Select civilization</span>
+      <span>Select instrument</span>
       <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">✕</button>
     </div>
     <div id="cluster-list"></div>
