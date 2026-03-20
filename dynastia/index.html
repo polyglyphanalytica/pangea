@@ -546,8 +546,8 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 <button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to civilization panel</button>
 <header class="hdr" role="banner">
   <div class="hdr-left">
-    <span class="logo-t">CIVILITAS</span>
-    <span class="logo-s">The Human Atlas</span>
+    <span class="logo-t">DYNASTIA</span>
+    <span class="logo-s">The Dynasty Atlas</span>
   </div>
   <div class="era-disp">
     <div class="era-y" id="era-y">3500 BCE</div>
@@ -5425,76 +5425,60 @@ function renderDrawer(){
     dc.innerHTML=`
     <div style="padding:4px 0 16px">
 
-      <div style="font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--amber-b);letter-spacing:2px;margin-bottom:2px">CIVILITAS</div>
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Human Atlas</div>
+      <div style="font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--amber-b);letter-spacing:2px;margin-bottom:2px">DYNASTIA</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Dynasty Atlas</div>
 
       <div style="font-size:13.5px;line-height:1.85;color:var(--txt2);margin-bottom:18px">
-        100 civilizations. 65,000 years. Every idea, technology, religion, and political system that made the modern world — mapped, connected, and explorable. From Aboriginal Australia's 65,000-year culture to the present day, rendered on a real geographic projection and navigable across a continuous timeline.
+        100 dynasties. 5,000 years. Every royal house, imperial line, and ruling family that held power long enough to call it inheritance — mapped, connected, and explorable. From the pharaohs of ancient Egypt to the constitutional monarchies of the present day.
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">The Map</div>
       <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-        Drag the <span style="color:var(--amber-b)">timeline</span> at the bottom across 65,000 years — civilizations emerge and collapse in real time. <span style="color:#e8251a">Red markers</span> show active civilizations. Tap any to open its full profile, play its musical signature, and explore its connections.
+        Drag the <span style="color:var(--amber-b)">timeline</span> at the bottom across 5,000 years — dynasties rise and fall in real time. Gold markers show active dynasties. Tap any to open its full profile and explore its connections.
       </div>
 
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">21 Lenses</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">20 Lenses</div>
       <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-        Apply a <span style="color:var(--amber-b)">lens</span> to read all of history through a single idea — Economy, Military, Gender, Slavery, Collapse, Trade Routes, Philosophy, Science, and 13 more. Compare any two civilizations side by side under the same lens.
+        Apply a <span style="color:var(--amber-b)">lens</span> to read all of dynastic history through a single idea — Succession, Diplomacy, Military, Economy, Culture, Religion, and 14 more. Compare any two dynasties side by side under the same lens.
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">5 Modes</div>
       <div style="font-size:12.5px;line-height:1.8;color:var(--txt2);margin-bottom:18px">
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟳ THREADS</span> — Watch ideas travel across civilizations. Animated gold arrows trace the path of Zero, Gunpowder, Buddhism, Coffee, and 16 more concepts across centuries.</div>
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⊞ COMPARE</span> — Tap two civilizations to read them side by side under any lens.</div>
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟁ WHAT IF</span> — Remove a civilization from history. Red arrows on the map show every transmission that would have been lost.</div>
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⌂ HERITAGE</span> — Select your regional background to see your civilizational ancestry highlighted on the map in blue.</div>
-        <div><span style="color:#c060a0;font-family:'Cinzel',serif;font-size:9px">♀ HERSTORY</span> — A mirror dimension tracing the same 65,000 years through the women who shaped every civilisation — rulers, philosophers, warriors, and knowledge-keepers whose contributions history forgot.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟳ SUCCESSION CHAINS</span> — Watch power pass between dynasties. Animated gold arrows trace how one house gave rise to or was overthrown by another.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⊞ COMPARE</span> — Tap two dynasties to read them side by side under any lens.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟁ WHAT IF</span> — Remove a dynasty from history. Red arrows on the map show every succession that would have been lost.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⌂ DYNASTIC HERITAGE</span> — Select your regional background to see your dynastic ancestry highlighted on the map in blue.</div>
+        <div><span style="color:#c060a0;font-family:'Cinzel',serif;font-size:9px">♀ HERSTORY</span> — Tracing 5,000 years through the women who shaped every dynasty — queens, regents, dowagers, and power-brokers whose contributions history forgot.</div>
       </div>
 
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Each civilization profile includes</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Each dynasty profile includes</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:18px;font-size:11.5px">
-        ${[['◈','30 interpretive lenses'],['⟳','Concept transmission chains'],['♪','Synthesized musical theme'],['◎','Civilizational fingerprint chart'],['⊞','Side-by-side comparison'],['⬡','Diplomatic archive'],['↗','Contemporary civilizations'],['⌂','Heritage ancestry'],['♀','Women in Herstory mode'],['◉','What-If impact analysis']].map(([ico,lbl])=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--bdr2);border-radius:2px;color:var(--txt2)"><span style="color:var(--amber-b);font-size:13px">${ico}</span>${lbl}</div>`).join('')}
+        ${[['◈','20 interpretive lenses'],['⟳','Succession chains'],['◎','Dynastic fingerprint chart'],['⊞','Side-by-side comparison'],['⬡','Diplomatic archive'],['↗','Contemporary dynasties'],['⌂','Dynastic heritage'],['♀','Women in Herstory mode'],['◉','What-If impact analysis']].map(([ico,lbl])=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--bdr2);border-radius:2px;color:var(--txt2)"><span style="color:var(--amber-b);font-size:13px">${ico}</span>${lbl}</div>`).join('')}
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Pivotal moments to try</div>
       ${(()=>{
         const ALL=[
-          [-65000,'Aboriginal Australia begins','The oldest continuous culture on earth — 65,000 unbroken years'],
-          [-10000,'The Agricultural Revolution','Humans stop following herds and start growing food — nothing is the same again'],
-          [-3500,'Writing is invented','The Sumerians of Mesopotamia begin storing memory outside the human mind'],
-          [-3100,'Egypt unified under one pharaoh','Upper and Lower Egypt merge — one of the longest-lasting states in history begins'],
-          [-2600,'Indus Valley at its peak','Mohenjo-daro and Harappa are among the world\'s largest cities, with running water'],
-          [-2560,'The Great Pyramid completed','The only surviving Ancient Wonder — built with a precision that still puzzles engineers'],
-          [-1800,'The Code of Hammurabi','The most complete ancient law code — 282 laws carved in stone for all to read'],
-          [-1350,'Akhenaten\'s monotheism','Egypt\'s pharaoh erases all gods but one — the world\'s first state monotheism, then erased itself'],
-          [-1200,'Bronze Age Collapse','Five great civilizations fail within decades of each other — the ancient world\'s extinction event'],
-          [-800,'Homer composes the Iliad','The oral tradition crystallises into the text that will define Western storytelling for 3,000 years'],
-          [-776,'The first Olympic Games','Greeks pause their wars every four years to compete — sport as diplomacy'],
-          [-604,'Laozi writes the Tao Te Ching','Eighty-one short verses that become the foundation of Taoism and influence billions'],
-          [-563,'The Buddha is born','Siddhartha Gautama\'s life and teachings will reshape Asia and eventually the world'],
-          [-551,'Confucius is born','His ideas on duty, family, and governance will shape Chinese civilization for 2,500 years'],
-          [-500,'The Axial Age','Confucius, Buddha, Socrates, and Isaiah are alive simultaneously — humanity\'s great leap'],
-          [-490,'Battle of Marathon','A smaller Athenian force defeats the Persian invasion — democracy survives its first test'],
-          [-334,'Alexander begins his conquest','A 22-year-old Macedonian sets out to conquer the known world — and nearly does'],
-          [-221,'China unified under Qin','The Warring States end; the Great Wall begins; the template for Chinese empire is set'],
-          [-44,'Julius Caesar assassinated','The Roman Republic dies with him — the age of emperors begins'],
-          [33,'Crucifixion of Jesus','A wandering teacher\'s execution becomes the founding moment of Western civilization'],
-          [105,'Paper invented in China','Cai Lun\'s invention will eventually carry every idea in the world'],
-          [306,'Constantine converts to Christianity','The Roman Emperor\'s conversion turns a persecuted sect into the world\'s dominant religion'],
-          [476,'Fall of Western Rome','The empire that defined Europe for 500 years collapses — the medieval world begins'],
-          [610,'Muhammad receives first revelation','In a cave near Mecca, a religion begins that will reshape a third of the world'],
-          [800,'Charlemagne crowned emperor','The Frankish king unites Western Europe — the idea of Europe as a political entity is born'],
-          [1000,'Peak civilizational diversity','More simultaneous civilizations than any other moment in history'],
-          [1066,'Battle of Hastings','The Norman conquest reshapes England — and through it, the English language and common law'],
-          [1206,'Mongol Empire begins','Genghis Khan unites the steppe — within 70 years his descendants will rule from Korea to Poland'],
-          [1347,'Black Death arrives in Europe','The Mongol trade network carries plague from Central Asia — one third of Europe will die'],
-          [1440,'Gutenberg\'s printing press','The first mass-produced book — the information revolution that makes the Reformation possible'],
-          [1492,'Columbus reaches the Americas','Two worlds collide — the beginning of global trade, colonialism, and the modern world'],
-          [1543,'Copernicus publishes','The Earth is not the centre of the universe — science begins its long war with authority'],
-          [1648,'Peace of Westphalia','The Thirty Years\' War ends — the modern system of sovereign nation-states is born'],
-          [1789,'The French Revolution begins','Liberty, Equality, Fraternity — the ideas that will topple monarchies across two centuries'],
-          [1848,'Year of Revolutions','Nineteen countries convulse simultaneously — the modern left-right political divide crystallises'],
-          [1905,'Einstein\'s annus mirabilis','Special relativity, the photoelectric effect, Brownian motion — physics transformed in one year'],
+          [-3100,'First Dynasty of Egypt','Narmer unifies Upper and Lower Egypt — the world\'s first dynasty begins'],
+          [-2334,'Akkadian Empire founded','Sargon of Akkad creates the first multi-ethnic empire and the first hereditary succession'],
+          [-1600,'Shang Dynasty begins','China\'s first historically verified dynasty — bronze, oracle bones, and absolute royal power'],
+          [-1046,'Zhou overthrow the Shang','The Mandate of Heaven is born — a dynasty rules only so long as heaven permits'],
+          [-550,'Achaemenid Persia rises','Cyrus the Great founds the largest empire the world has yet seen — and rules it with tolerance'],
+          [-323,'Alexander dies without heir','The greatest conqueror leaves no succession plan — his empire fractures into rival dynasties'],
+          [-221,'Qin Shi Huang unifies China','One family, one script, one law — the template for Chinese imperial dynasties is set'],
+          [-27,'Augustus founds the Roman Empire','The Julio-Claudian dynasty begins — Rome\'s republic gives way to hereditary imperial power'],
+          [618,'Tang Dynasty begins','China\'s golden age — the dynasty that made the Chinese empire a cultural superpower'],
+          [750,'Abbasid Caliphate established','The dynasty that turned Baghdad into the intellectual capital of the medieval world'],
+          [800,'Charlemagne crowned emperor','The Carolingian dynasty revives the idea of a Western Roman Empire'],
+          [1066,'Norman conquest of England','William the Conqueror founds a dynasty that reshapes English law, language, and monarchy'],
+          [1206,'Mongol Empire begins','Genghis Khan\'s dynasty will rule the largest contiguous land empire in history'],
+          [1368,'Ming Dynasty established','Zhu Yuanzhang overthrows the Mongols — China\'s last ethnic-Han dynasty begins'],
+          [1453,'Ottomans take Constantinople','The dynasty that bridges East and West and rules for six centuries'],
+          [1526,'Mughal Empire founded','Babur establishes the dynasty that will build the Taj Mahal and unite the Indian subcontinent'],
+          [1613,'Romanov dynasty begins','The family that will rule Russia for 304 years — ending in revolution and execution'],
+          [1644,'Qing Dynasty begins','The Manchu conquest — China\'s last imperial dynasty, ruling until 1912'],
+          [1789,'French Revolution begins','The Bourbon dynasty falls — the age of hereditary rule in Europe begins to crumble'],
+          [1917,'Russian Revolution','The Romanov dynasty ends in a cellar in Yekaterinburg — the age of emperors is ending'],
         ];
         const shuffled=[...ALL].sort(()=>Math.random()-.5);
         return shuffled.slice(0,5).map(([yr,title,desc])=>`
@@ -5948,7 +5932,7 @@ function shareState(){
   catch(e){url='#'+encodeState();}
 
   const civName=sel?sel.nm:null;
-  const shareTitle='Civilitas — The Human Atlas';
+  const shareTitle='Dynastia — The Dynasty Atlas';
   const shareText=civName
     ? `Explore ${civName} on Civilitas — 85 civilizations, 65,000 years of human history`
     : 'Civilitas — 85 civilizations, 65,000 years of human history, all in one map';
@@ -6808,7 +6792,7 @@ function renderHerstoryDrawer(){
     dc.innerHTML=`
     <div class="hs-panel-hdr">♀ Herstory</div>
     <div class="hs-panel-sub">
-      A mirror to CIVILITAS — tracing 65,000 years of human history through the women who shaped it. Rulers, philosophers, warriors, artists, and mothers whose contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
+      A mirror to DYNASTIA — tracing 5,000 years of dynastic power through the women who shaped it. Queens, regents, dowagers, power-brokers, and dynasty-founders whose contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
     </div>
     <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
       Tap any civilization on the map to discover the women who shaped it — queens who governed, scholars who wrote, warriors who fought, and spiritual leaders who held communities together.
@@ -7386,11 +7370,11 @@ function updateTlFill(pct){
   </div>
 
 <!-- About modal -->
-<div id="about-modal" role="dialog" aria-modal="true" aria-label="About Civilitas" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center">
+<div id="about-modal" role="dialog" aria-modal="true" aria-label="About Dynastia" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center">
   <div style="background:var(--panel);border:1px solid var(--bdr);border-radius:6px;padding:28px 32px;max-width:420px;width:calc(100% - 40px);position:relative;box-shadow:0 16px 48px rgba(0,0,0,.6)">
     <button onclick="closeAbout()" aria-label="Close" style="position:absolute;top:12px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1">✕</button>
-    <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px">CIVILITAS</div>
-    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">The Human Atlas</div>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px">DYNASTIA</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">The Dynasty Atlas</div>
     <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:12px">
       Created by <a href="https://polyglyphanalytica.com" target="_blank" rel="noopener" style="color:var(--amber-b);text-decoration:underline;text-underline-offset:3px">Polyglyph Analytica</a> &copy; <span id="about-year"></span>
     </p>
