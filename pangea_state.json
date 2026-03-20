@@ -53,18 +53,18 @@
     },
     "cosmos": {
       "phase": "DONE",
-      "items": 105,
+      "items": 112,
       "target": 105,
-      "live": false,
+      "live": true,
       "map": "sky",
       "section": "I",
       "note": "Complete. Needs GO_LIVE only \u2014 homepage card still forthcoming."
     },
     "anthrophone": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 120,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "IX"
     },
@@ -969,8 +969,6 @@
     }
   },
   "queue": [
-    "cosmos",
-    "anthrophone",
     "dynastia",
     "lingua",
     "via",
@@ -1089,7 +1087,9 @@
     "numen",
     "lex",
     "flora",
-    "pecunia"
+    "pecunia",
+    "cosmos",
+    "anthrophone"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -1097,5 +1097,40 @@
     "checkpoint_every_n_phases": 1,
     "note": "One data batch (2A/2B/2C/2D) = 1 phase. Session target: complete one atlas shell OR one data batch, then stop."
   },
-  "session_log": []
+  "session_log": [
+    {
+      "atlas": "cosmos",
+      "phase_done": "GO_LIVE",
+      "items": 112
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "DATA",
+      "phase_next": "3",
+      "items": 100
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 120
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "5",
+      "phase_next": "6",
+      "items": 120
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "6",
+      "phase_next": "DONE",
+      "items": 120
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "GO_LIVE",
+      "items": 120
+    }
+  ]
 }
