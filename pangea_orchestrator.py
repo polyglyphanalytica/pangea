@@ -77,10 +77,40 @@ def next_phase(current, map_type="world"):
     return "DONE"
 
 
+def generate_new_atlas(state):
+    existing = sorted(state["atlases"].keys())
+    print("=" * 60)
+    print("QUEUE EMPTY - GENERATE A NEW ATLAS NOW")
+    print("=" * 60)
+    print(f"All {len(existing)} atlases are built or queued.")
+    print()
+    print("You are Claude. Use your knowledge to invent ONE new atlas.")
+    print("It must not overlap any existing atlas.")
+    print("It must be global, span 5000+ years, have a Herstory angle.")
+    print()
+    print("Existing keys:", ", ".join(existing[:15]), "... (and more)")
+    print()
+    print("When you have an idea, register it with:")
+    cmd = "python3 pangea_orchestrator.py new_atlas KEY NAME SECTION ICON TAGLINE TAGS"
+    print(" ", cmd)
+    print()
+    print("Where:")
+    print("  KEY     = lowercase latin word, no spaces")
+    print("  NAME    = display name")
+    print("  SECTION = roman numeral I through XII")
+    print("  ICON    = single emoji")
+    print("  TAGLINE = quoted sentence max 12 words")
+    print("  TAGS    = quoted comma-separated list e.g. 'Tag1,Tag2,Tag3'")
+    print()
+    print("Run that command now. The loop will continue automatically.")
+
+
 def get_next_action(state):
     queue = state.get("queue", [])
     if not queue:
-        return {"action": "ALL_DONE", "completed": state.get("completed", [])}
+        print("Queue empty — generating new atlas idea via Claude API...")
+        generate_new_atlas(state)
+        return None
 
     atlas = queue[0]
     info = state["atlases"].get(atlas)
@@ -177,9 +207,26 @@ def cmd_item_done(atlas):
         print(f"ERROR: '{atlas}' not found.", file=sys.stderr)
         sys.exit(1)
     real_count = count_items(atlas)
-    info["items"] = real_count
+    prev_count = info.get("items", 0)
     target = info.get("target", 100)
+
+    # HARD CHECK: must have increased by exactly 1
+    added = real_count - prev_count
+    if added == 0:
+        print(f"ERROR: No new item detected. Count is still {real_count}.")
+        print(f"You must write ONE item to {atlas}/index.html before calling item_done.")
+        print(f"The item must start with {{id:\' at the beginning of a line.")
+        print(f"Write the item now, then run: python3 pangea_orchestrator.py item_done {atlas}")
+        sys.exit(1)
+    if added > 1:
+        print(f"VIOLATION: {added} items were written at once. Only 1 is permitted per call.")
+        print(f"Count went from {prev_count} to {real_count}.")
+        print(f"This is not allowed. The instructions say ONE item per commit.")
+        print(f"State has been recorded at {real_count}. Next call must add exactly 1 more.")
+
+    info["items"] = real_count
     remaining = target - real_count
+
     if remaining <= 0:
         print(f"ITEMS COMPLETE: {real_count}/{target}. Auto-advancing to Phase 3.")
         info["phase"] = next_phase("DATA", info.get("map", "world"))
@@ -192,7 +239,8 @@ def cmd_item_done(atlas):
         n = real_count + 1
         print(
             f"item_recorded {real_count}/{target}. {remaining} remaining.\n"
-            f"NOW WRITE ITEM {n}. ONE item. Append to ITEMS array in {atlas}/index.html.\n"
+            f"NOW WRITE ITEM {n}. ONE item only. One. Not two. Not ten. One.\n"
+            f"Append to ITEMS array in {atlas}/index.html.\n"
             f"Verify: grep -c '^{{id:\'' {atlas}/index.html must equal {n}.\n"
             f"Commit: git add {atlas}/index.html && git commit -m '{atlas}: item {n}/{target}'\n"
             f"Then run: python3 pangea_orchestrator.py item_done {atlas}"
@@ -217,7 +265,31 @@ def cmd_golive(atlas):
         {"atlas": atlas, "phase_done": "GO_LIVE", "items": info["items"]}
     )
     save_state(state)
-    print(json.dumps({"status": "live", "atlas": atlas, "items": info["items"]}))
+
+    # Update index.html: flip card--forthcoming → card--live
+    display_name = info.get("homepage_name", atlas.capitalize())
+    index_path = Path("index.html")
+    index_updated = False
+    if index_path.exists():
+        html = index_path.read_text(encoding="utf-8")
+        html, index_updated = update_index_card_to_live(html, atlas, display_name)
+        if index_updated:
+            # Also add to JSON-LD hasPart if not already there
+            hasPart_entry = f'{{"@type":"Dataset","name":"{display_name}","url":"https://polyglyphanalytica.github.io/pangea/{atlas}/"}}' 
+            if hasPart_entry not in html and '"hasPart"' in html:
+                html = html.replace(
+                    '"hasPart":[',
+                    f'"hasPart":[{hasPart_entry},',
+                    1
+                )
+            index_path.write_text(html, encoding="utf-8")
+            subprocess.run(["git", "add", "index.html"], capture_output=True)
+        subprocess.run(["git", "add", f"{atlas}/index.html"], capture_output=True)
+        subprocess.run(["git", "commit", "-m", f"{atlas}: go-live — homepage activated"],
+                       capture_output=True)
+
+    print(json.dumps({"status": "live", "atlas": atlas, "items": info["items"],
+                      "homepage_updated": index_updated}))
     self_invoke()
 
 
@@ -274,6 +346,123 @@ def cmd_verify():
         print("OK — no errors.")
 
 
+
+# ── Roman numeral → section ID map ──────────────────────────────────────────
+SECTION_NUM = {
+    "I":"1","II":"2","III":"3","IV":"4","V":"5","VI":"6",
+    "VII":"7","VIII":"8","IX":"9","X":"10","XI":"11","XII":"12"
+}
+
+
+def insert_card_into_section(html, section_roman, card_html):
+    """Insert a forthcoming card into the correct section grid in index.html.
+    Falls back to inserting before the footer if section not found."""
+    sec_id = SECTION_NUM.get(section_roman.upper(), "")
+    if sec_id:
+        # Find the section and insert before its closing </div>\n  </section>
+        marker = f'aria-labelledby="sec{sec_id}"'
+        idx = html.find(marker)
+        if idx != -1:
+            # Find the closing grid div for this section
+            close = html.find("    </div>\n  </section>", idx)
+            if close != -1:
+                return html[:close] + card_html + "\n" + html[close:]
+    # Fallback: insert before footer
+    for fb in ["\n<footer", "\n\n<footer"]:
+        if fb in html:
+            return html.replace(fb, card_html + "\n" + fb, 1)
+    return html + card_html
+
+
+def update_index_card_to_live(html, atlas, display_name):
+    """Flip a card--forthcoming card to card--live in index.html.
+    Handles both plain name match and homepage_name variants.
+    Returns updated html."""
+    import re
+
+    # Find the card block by atlas display name
+    # Pattern: card--forthcoming ... card-name">NAME< ... </div>\n      </div>
+    pattern = (
+        r'(<div class="card card--forthcoming">)'
+        r'((?:(?!</div>\n    </div>).)*?)'
+        r'(<div class="card-name">' + re.escape(display_name) + r'</div>)'
+        r'((?:(?!</div>\n    </div>).)*?)'
+        r'(<span class="coming-soon">Coming Soon</span>\n      </div>)'
+    )
+    m = re.search(pattern, html, re.DOTALL)
+    if not m:
+        return html, False
+
+    original_block = m.group(0)
+
+    # Build the live card — extract inner content between forthcoming opener and coming-soon span
+    inner_start = m.start(2)
+    inner_end = m.end(4)
+    inner = html[m.start(2):m.end(4)]
+
+    live_card = (
+        f'''<div class="card card--live">\n'''
+        f'''        <span class="status status--live">Live</span>\n'''
+        f'''        <a href="{atlas}/index.html">'''
+        + inner.strip("\n") +
+        f'''\n        </a>\n'''
+        f'''      </div>'''
+    )
+
+    html = html[:m.start()] + live_card + html[m.end():]
+    return html, True
+
+
+def cmd_new_atlas(key, name, section, icon, tagline, tags_str):
+    """Register a new atlas idea invented by Claude Code."""
+    state = load_state()
+
+    key = key.lower().replace(" ", "_").replace("-", "_")
+    if key in state["atlases"]:
+        key = key + "_x"
+
+    state["atlases"][key] = {
+        "phase": "1A",
+        "items": 0,
+        "target": 100,
+        "live": False,
+        "map": "world",
+        "section": section,
+        "homepage_name": name
+    }
+    state["queue"].append(key)
+    save_state(state)
+
+    tags = [t.strip() for t in tags_str.split(",")][:3]
+    tag_html = "".join(f'<span class="tag">{t}</span>' for t in tags)
+    card = (
+        '\n      <div class="card card--forthcoming">\n'
+        f'        <span class="card-icon">{icon}</span>\n'
+        f'        <div class="card-name">{name}</div>\n'
+        f'        <div class="card-tagline">{tagline}</div>\n'
+        f'        <div class="card-tags">{tag_html}</div>\n'
+        '        <span class="coming-soon">Coming Soon</span>\n'
+        '      </div>'
+    )
+
+    index_path = Path("index.html")
+    committed = False
+    if index_path.exists():
+        html = index_path.read_text(encoding="utf-8")
+        html = insert_card_into_section(html, section, card)
+        index_path.write_text(html, encoding="utf-8")
+        subprocess.run(["git", "add", "index.html", "pangea_state.json"], capture_output=True)
+        r = subprocess.run(["git", "commit", "-m", f"feat: new atlas card — {name}"],
+                           capture_output=True, text=True)
+        committed = r.returncode == 0
+
+    print(f"Registered: {name} ({key}) | section {section}")
+    print(f"Homepage card inserted into section {section}: {committed}")
+    print("Now building. Continuing loop.")
+    sys.stdout.flush()
+    self_invoke()
+
+
 if __name__ == "__main__":
     if len(sys.argv) == 1:
         result = get_next_action(load_state())
@@ -289,6 +478,10 @@ if __name__ == "__main__":
         cmd_status()
     elif sys.argv[1] == "verify":
         cmd_verify()
+    elif sys.argv[1] == "new_atlas" and len(sys.argv) >= 7:
+        cmd_new_atlas(sys.argv[2], sys.argv[3], sys.argv[4],
+                      sys.argv[5], sys.argv[6],
+                      sys.argv[7] if len(sys.argv) > 7 else "")
     else:
         print(__doc__)
         sys.exit(1)

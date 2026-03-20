@@ -52,12 +52,39 @@ No colour changes. No Herstory changes. Commit after each. Advance after each.
 Replace only renderWorldMap() and itemPt(). Commit. Advance.
 
 ### Phase 1F
-Set all data arrays to empty stubs in the file:
+Do NOT manually edit the arrays. Run this Python script to clear them reliably:
+
+```bash
+python3 - << 'CLEAREOF'
+import re
+
+path = 'ATLAS/index.html'
+html = open(path, encoding='utf-8').read()
+
+# Clear each array/object regardless of how nested or long it is
+replacements = [
+    (r'const LENSES\s*=\s*\[[\s\S]*?\];', 'const LENSES=[];'),
+    (r'const ERAS\s*=\s*\[[\s\S]*?\];',   'const ERAS=[];'),
+    (r'const FP_LABELS\s*=\s*\[[\s\S]*?\];', 'const FP_LABELS=[];'),
+    (r'const FP_KEYS\s*=\s*\[[\s\S]*?\];',   'const FP_KEYS=[];'),
+    (r'const ITEMS\s*=\s*\[[\s\S]*?\];',      'const ITEMS=[];'),
+    (r'const TRANSMISSIONS\s*=\s*\[[\s\S]*?\];', 'const TRANSMISSIONS=[];'),
+    (r'const HERITAGE_REGIONS\s*=\s*\{[\s\S]*?\};', 'const HERITAGE_REGIONS={};'),
+    (r'const WOMEN\s*=\s*\{[\s\S]*?\};',      'const WOMEN={};'),
+    (r'const DIPLOMATIC\s*=\s*\[[\s\S]*?\];', 'const DIPLOMATIC=[];'),
+]
+
+for pattern, replacement in replacements:
+    html = re.sub(pattern, replacement, html, count=1)
+
+open(path, 'w', encoding='utf-8').write(html)
+print('cleared')
+CLEAREOF
 ```
-const LENSES=[];const ERAS=[];const FP_LABELS=[];const FP_KEYS=[];
-const ITEMS=[];const TRANSMISSIONS=[];const HERITAGE_REGIONS={};const WOMEN={};
-```
-Verify loads with no console errors.
+
+Replace ATLAS with the actual atlas name before running.
+Verify the file loads with no console errors.
+Verify all arrays are empty: grep -c "^{id:'" ATLAS/index.html → must be 0
 Commit: "ATLAS: Phase 1F — shell complete"
 `python3 pangea_orchestrator.py advance ATLAS 1F`
 
@@ -176,8 +203,10 @@ The orchestrator output will look like:
 ## CLEANUP
 `python3 pangea_orchestrator.py golive ATLAS` → continue.
 
-## ALL_DONE
-`python3 pangea_orchestrator.py status` → stop.
+## ALL_DONE (queue empty)
+The orchestrator automatically calls the Claude API to generate a new atlas idea,
+adds it to pangea_state.json and index.html, commits, and continues building.
+The pipeline never stops unless manually interrupted or a real failure occurs.
 
 ---
 
