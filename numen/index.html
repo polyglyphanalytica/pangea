@@ -622,6 +622,8 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
       <g id="thread-layer"></g>
       <!-- Labels (non-interactive) -->
       <g id="label-layer" pointer-events="none"></g>
+      <!-- Hover tooltip label -->
+      <g id="hover-label-layer" pointer-events="none"></g>
       <!-- Religion markers -->
       <g id="mark-layer"></g>
     </svg>
@@ -1453,7 +1455,7 @@ women:'Cihuacoatl (Snake Woman) served as the high priest\'s title and was one o
 conversion:'Aztec religion did not seek converts in any systematic sense, though it absorbed the deities of conquered peoples into the imperial pantheon. The Spanish conquest replaced Aztec religion with Catholicism through force — destroying temples, burning codices, and executing priests. The resulting syncretism, in which indigenous practices survived under Catholic surface, is the tradition\'s most significant post-conquest transformation.'
 }},
 
-{id:'maya_religion',nm:'Maya Religion',sb:'Mesoamerica · The World Tree & Cosmic Order',s:-2000,e:2024,lon:-89.5,lat:17.3,
+{id:'maya_religion',nm:'Maya Religion',sb:'Mesoamerica · The World Tree & Cosmic Order',s:-2000,e:1697,lon:-89.5,lat:17.3,
 fp:{reach:4,phil:8,ritual:9,art:9,pol:8,text:8},conns:['aztec_religion','animism'],
 overview:'Maya religion is one of the most intellectually sophisticated pre-Columbian traditions, characterized by an elaborate cosmological system mapped through the movements of Venus, the sun, and the moon; a hieroglyphic writing system (the most complex in the pre-Columbian Americas); precise astronomical knowledge integrated into a complex calendar system; and a theology centered on the World Tree (Wakah-Chan) and the Hero Twins myth cycle. Maya religion has never ended — contemporary Maya communities maintain living ceremonial traditions.',
 d:{
@@ -3831,12 +3833,13 @@ function renderMap(){
     const isHeritage=heritageIds&&heritageIds.has(c.id);
     const womenCount=(WOMEN[c.id]||[]).length;
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':OVERVIEW_COL;
-    const op=on?(herstory&&!womenCount?.35:1):(heritageIds?(isHeritage?.45:0.06):herstory?.15:0.06);
+    const op=on?(herstory&&!womenCount?0:1):(heritageIds?(isHeritage?.45:0.06):herstory?.15:0);
     const [cx,cy]=itemPt(c);
     return {c,on,isSel,mcol,op,cx,cy};
   });
   // Pass 1: decorative rings
   itemData.filter(Boolean).forEach(({c,on,isSel,mcol,op,cx,cy})=>{
+    if(op===0)return;
     const _zr=1000/_vbW;
     const _rR=Math.max(4,(16/_zr)).toFixed(1);
     const _pR=Math.max(2,(6/_zr)).toFixed(1);
@@ -3853,6 +3856,7 @@ function renderMap(){
   // Pass 2: clickable dots
   const sorted=[...itemData].filter(Boolean).sort((a,b)=>a.isSel?1:b.isSel?-1:0);
   sorted.forEach(({c,on,isSel,mcol,op,cx,cy})=>{
+    if(op===0)return;
     if(on){
       const zr=1000/_vbW;
       const dotR=Math.max(2, (isSel?9:7)/zr);
@@ -3866,11 +3870,13 @@ function renderMap(){
             fill="${mcol}" filter="url(#glow${isSel?'2':''})"
           />
         </g>`;
-      ll+=`<text x="${cx}" y="${cy+26}" font-family="Cinzel,serif" font-size="11"
-        letter-spacing="1" fill="${isSel?'#f0d060':OVERVIEW_COL}"
-        text-anchor="middle" pointer-events="none">${c.nm}</text>`;
-    } else {
-      dots+=`<circle cx="${cx}" cy="${cy}" r="4" fill="${mcol}" opacity=".12" pointer-events="none"/>`;
+      if(isSel){
+        ll+=`<text x="${cx}" y="${cy+26}" font-family="Cinzel,serif" font-size="11"
+          letter-spacing="1" fill="#f0d060"
+          text-anchor="middle" pointer-events="none">${c.nm}</text>`;
+      }
+    } else if(op>0){
+      dots+=`<circle cx="${cx}" cy="${cy}" r="4" fill="${mcol}" opacity="${op}" pointer-events="none"/>`;
     }
   });
   document.getElementById('mark-layer').innerHTML=rings+dots;
@@ -3900,6 +3906,7 @@ function navigateToItem(id){
 }
 
 function itemClick(id){
+  _renderHoverLabel(null);
   navigateToItem(id);
 }
 
@@ -4852,12 +4859,59 @@ function _onTouchEnd(e){
   _tapMoved=false;
 }
 
+// ── DRIFT 1: HOVER-ONLY LABELS ──
+function _renderHoverLabel(c){
+  const el=document.getElementById('hover-label-layer');
+  if(!el)return;
+  if(!c){el.innerHTML='';return;}
+  const [cx,cy]=itemPt(c);
+  const zr=1000/_vbW;
+  const yOff=Math.max(14,20/zr);
+  el.innerHTML=`<text x="${cx}" y="${cy-yOff}" font-family="Cinzel,serif" font-size="10"
+    letter-spacing="1" fill="var(--txt)" text-anchor="middle"
+    style="paint-order:stroke;stroke:var(--bg);stroke-width:3;stroke-linejoin:round"
+    pointer-events="none">${c.nm}</text>`;
+}
+let _hoverItem=null;
+function _onMapMouseMove(e){
+  if(_dragging)return;
+  const svg=document.getElementById('wsvg');
+  if(!svg)return;
+  // Only fire when cursor is over the SVG
+  const rect=svg.getBoundingClientRect();
+  if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom){
+    if(_hoverItem){_hoverItem=null;_renderHoverLabel(null);}
+    return;
+  }
+  const [svgX,svgY]=screenToSVG(e.clientX,e.clientY);
+  const zr=1000/_vbW;
+  const threshold=20/zr;
+  const year_val=year;
+  const candidates=ITEMS.filter(c=>{
+    if(!c)return false;
+    if(sel&&sel.id===c.id)return false; // skip selected — already has persistent label
+    const on=c.s<=year_val&&(!c.e||c.e>=year_val);
+    if(!on)return false;
+    if(herstory&&!(WOMEN[c.id]||[]).length)return false;
+    const [cx,cy]=itemPt(c);
+    return Math.hypot(cx-svgX,cy-svgY)<=threshold;
+  });
+  if(!candidates.length){
+    if(_hoverItem){_hoverItem=null;_renderHoverLabel(null);}
+    return;
+  }
+  candidates.sort((a,b)=>{const [ax,ay]=itemPt(a);const [bx,by]=itemPt(b);return Math.hypot(ax-svgX,ay-svgY)-Math.hypot(bx-svgX,by-svgY);});
+  const hit=candidates[0];
+  if(!_hoverItem||_hoverItem.id!==hit.id){_hoverItem=hit;_renderHoverLabel(hit);}
+}
+
 function initMapInteraction(){
   const svg=document.getElementById('wsvg');
   if(!svg)return;
   svg.addEventListener('wheel',_onWheel,{passive:false});
   svg.addEventListener('mousedown',_onMouseDown);
   window.addEventListener('mousemove',_onMouseMove);
+  window.addEventListener('mousemove',_onMapMouseMove);
   window.addEventListener('mouseup',_onMouseUp);
   svg.addEventListener('touchstart',_onTouchStart,{passive:false});
   svg.addEventListener('touchmove',_onTouchMove,{passive:false});
@@ -5100,7 +5154,7 @@ function clearHeritage(){
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 </body>
 </html>
