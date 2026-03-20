@@ -19,7 +19,7 @@ STATE_FILE = Path("pangea_state.json")
 
 PHASES_ORDERED = [
     "1A", "1B", "1C", "1D", "1E", "1F",
-    "2A", "2B", "2C", "2D",
+    "2A", "2B", "2C", "2D", "2E", "2F", "2G", "2H", "2I", "2J",
     "3",
     "4A", "4B", "4C",
     "5",
@@ -31,7 +31,7 @@ PHASES_ORDERED = [
 SKIP_IF_WORLD_MAP = {"1E", "4A", "4B", "4C"}
 
 # Phases that are data-heavy (use batch-file merge strategy)
-DATA_PHASES = {"2A", "2B", "2C", "2D"}
+DATA_PHASES = {"2A", "2B", "2C", "2D", "2E", "2F", "2G", "2H", "2I", "2J"}
 
 
 def load_state():
