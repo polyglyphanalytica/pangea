@@ -182,9 +182,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .tl-fill{position:absolute;left:0;top:50%;transform:translateY(-50%);height:3px;background:var(--amber);border-radius:1.5px;pointer-events:none;transition:width .05s}
 input[type=range]#tl{width:100%;height:20px;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;position:relative;z-index:2}
 input[type=range]#tl::-webkit-slider-runnable-track{height:3px;background:var(--bdr2);border-radius:1.5px}
-input[type=range]#tl::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--amber-b);border:2px solid var(--bg);margin-top:-6.5px;box-shadow:0 0 6px rgba(232,152,32,.5)}
+input[type=range]#tl::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:transparent;border:none;margin-top:-6.5px;box-shadow:none;opacity:0}
 input[type=range]#tl::-moz-range-track{height:3px;background:var(--bdr2);border-radius:1.5px}
-input[type=range]#tl::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--amber-b);border:2px solid var(--bg)}
+input[type=range]#tl::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:transparent;border:none;opacity:0}
 .hint{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--hint);text-align:center;margin-top:4px;text-transform:uppercase}
 #tl-thumb{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--amber-b);border:2px solid var(--bg);top:50%;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 6px rgba(232,152,32,.5);transition:left .05s;z-index:3}
 
@@ -431,6 +431,7 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
         <g id="conn-layer"></g>
         <g id="thread-layer"></g>
         <g id="label-layer" pointer-events="none"></g>
+        <g id="hover-label-layer" pointer-events="none"></g>
         <g id="mark-layer"></g>
       </svg>
       <button id="map-reset-btn" onclick="resetMapZoom()" aria-label="Reset map zoom">⊡ Reset</button>
@@ -3453,8 +3454,8 @@ function renderMap() {
     const mcol = herstory
       ? (isSel ? '#f0d060' : womenCount ? '#c060a0' : '#884468')
       : isSel ? '#f0d060' : isSel2 ? '#4a9fc0' : isHeritage ? '#4a9fc0' : '#e8251a';
-    const op = on ? (isWhatifLost ? 0.25 : 1) : (isHeritage ? 0.35 : 0);
-    if (!on && !isHeritage) return;
+    const op = on ? (isWhatifLost ? 0.25 : herstory && !womenCount ? 0 : 1) : (heritageIds ? (isHeritage ? 0.45 : 0.06) : herstory ? 0.15 : 0);
+    if (op === 0) return;
     const [x, y] = itemPt(c);
     if (isSel) {
       rings += `<circle cx="${x}" cy="${y}" r="5" fill="none" stroke="${mcol}" stroke-width="1.5" opacity=".9">
@@ -3465,12 +3466,13 @@ function renderMap() {
     dots += `<g role="button" tabindex="${on ? 0 : -1}" aria-label="${c.nm}" onclick="itemClick(event,'${c.id}')" onkeydown="if(event.key==='Enter'||event.key===' ')navigateToItem('${c.id}')">
       <circle cx="${x}" cy="${y}" r="${isSel || isSel2 ? 8 : 5}" fill="${mcol}" opacity="${op}" stroke="${isSel ? '#f0d060' : 'var(--bg)'}" stroke-width="${isSel ? 1.5 : .8}"/>
     </g>`;
-    if (on) {
-      ll += `<text x="${x + 7}" y="${y + 4}" font-family="'Cinzel',serif" font-size="${isSel ? 10 : 8}" fill="var(--hint)" opacity="${isSel ? 1 : .7}" pointer-events="none">${c.nm}</text>`;
+    if (isSel) {
+      ll += `<text x="${x + 7}" y="${y + 4}" font-family="'Cinzel',serif" font-size="10" fill="#f0d060" pointer-events="none">${c.nm}</text>`;
     }
   });
   document.getElementById('mark-layer').innerHTML = rings + dots;
   document.getElementById('label-layer').innerHTML = ll;
+  document.getElementById('hover-label-layer').innerHTML = '';
 }
 
 // ══════════════════════════════════════════════════════
@@ -3504,8 +3506,50 @@ function itemClick(e, id) {
       if (nearby.length > 1) { showClusterPicker(nearby, e.clientX, e.clientY); return; }
     }
   }
+  _renderHoverLabel(null);
   navigateToItem(id);
 }
+
+// ── Hover label (Drift 1: hover-only labels) ──────────────
+function _renderHoverLabel(c) {
+  const layer = document.getElementById('hover-label-layer');
+  if (!layer) return;
+  if (!c) { layer.innerHTML = ''; return; }
+  const [x, y] = itemPt(c);
+  const px = x + 8, py = y - 10;
+  layer.innerHTML =
+    `<rect x="${px - 4}" y="${py - 13}" width="${c.nm.length * 6.6 + 8}" height="17" rx="3"
+       fill="var(--panel2)" stroke="var(--bdr)" stroke-width=".8" opacity=".95"/>
+     <text x="${px}" y="${py - 1}" font-family="'Cinzel',serif" font-size="9.5"
+       fill="var(--txt)" letter-spacing=".3" opacity="1">${c.nm}</text>`;
+}
+
+let _hoverTouch = false;
+document.addEventListener('touchstart', () => { _hoverTouch = true; }, {passive:true, once:true});
+
+function _onMapMouseMove(e) {
+  if (_hoverTouch) return;
+  const svg = document.getElementById('wsvg');
+  if (!svg) return;
+  const rect = svg.getBoundingClientRect();
+  if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+    _renderHoverLabel(null); return;
+  }
+  const mx = (e.clientX - rect.left) * (1000 / rect.width);
+  const my = (e.clientY - rect.top) * (520 / rect.height);
+  const HIT = 12;
+  const activeIds = new Set(ITEMS.filter(c => active(c)).map(c => c.id));
+  let closest = null, bestD = HIT;
+  ITEMS.forEach(c => {
+    if (!activeIds.has(c.id)) return;
+    if (sel && sel.id === c.id) return;
+    const [px, py] = itemPt(c);
+    const d = Math.hypot(px - mx, py - my);
+    if (d < bestD) { bestD = d; closest = c; }
+  });
+  _renderHoverLabel(closest || null);
+}
+window.addEventListener('mousemove', _onMapMouseMove);
 
 function mapClick(e) {
   const svg = document.getElementById('wsvg');
@@ -3522,7 +3566,7 @@ function mapClick(e) {
     return Math.hypot(px - mx, py - my) <= CLUSTER_RADIUS;
   });
   if (nearby.length === 0) { closeInfo(); closeClusterPicker(); return; }
-  if (nearby.length === 1) { navigateToItem(nearby[0].id); return; }
+  if (nearby.length === 1) { _renderHoverLabel(null); navigateToItem(nearby[0].id); return; }
   showClusterPicker(nearby, e.clientX || mx, e.clientY || my);
 }
 
@@ -3688,17 +3732,6 @@ function renderDrawerItem(item) {
     }
   }
 
-  // Herstory
-  let herstoryHTML = '';
-  if (herstory && WOMEN[item.id] && WOMEN[item.id].length) {
-    herstoryHTML = `<div class="conn-hdr" style="color:#c060a0">Herstory</div>` +
-      WOMEN[item.id].map(w => `<div class="herstory-card">
-        <div class="herstory-nm">${w.nm}</div>
-        <div class="herstory-role">${w.role} · ${w.yr ? fmt(w.yr) : ''}</div>
-        <div class="herstory-desc">${w.desc}</div>
-      </div>`).join('');
-  }
-
   // Connections
   const connHTML = item.conns && item.conns.length ? `<div class="conn-hdr" id="conn-hdr">Related plants</div>` +
     item.conns.map(cid => {
@@ -3715,7 +3748,19 @@ function renderDrawerItem(item) {
       </button>`;
     }).join('') : '';
 
-  dc.innerHTML = `<div id="drawer-lens-body">${body}${discHTML}${herstoryHTML}${connHTML}</div>`;
+  // Drift 4: dedicated Herstory panel replaces lens content when active
+  if (herstory && WOMEN[item.id] && WOMEN[item.id].length) {
+    const panelHTML =
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:#c060a0;text-transform:uppercase;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid rgba(192,96,160,.3)">♀ Herstory</div>` +
+      WOMEN[item.id].map(w => `<div class="herstory-card">
+        <div class="herstory-nm">${w.nm}</div>
+        <div class="herstory-role">${w.role} · ${w.yr ? fmt(w.yr) : ''}</div>
+        <div class="herstory-desc">${w.desc}</div>
+      </div>`).join('');
+    dc.innerHTML = `<div id="drawer-lens-body">${panelHTML}${connHTML}</div>`;
+  } else {
+    dc.innerHTML = `<div id="drawer-lens-body">${body}${discHTML}${connHTML}</div>`;
+  }
   const panel = document.getElementById('info-panel');
   if (panel) setTimeout(() => panel.scrollTop = 0, 0);
 }
