@@ -4033,6 +4033,9 @@ function renderMap(){
   }
 
   activeItems.forEach(c=>{
+    // Drift 3: Herstory is a filter — hide items with no WOMEN entries
+    if(herstoryOn&&!WOMEN[c.id])return;
+
     const [px,py]=itemPt(c);
     const isSel=sel&&c.id===sel.id;
     const isSel2=sel2&&c.id===sel2.id;
@@ -4055,11 +4058,11 @@ function renderMap(){
       role="button" aria-label="${c.nm.replace(/"/g,'&quot;')}" tabindex="0"
       data-id="${c.id}"/>`;
 
-    // Label for selected or thread items
-    if(isSel||isSel2||isThread){
+    // Label for selected items only (drift: hover-only labels — thread items do not get persistent labels)
+    if(isSel||isSel2){
       const lx=px+7,ly=py-3;
       labels+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}"
-        font-family="Cinzel,serif" font-size="9" fill="${col}"
+        font-family="Cinzel,serif" font-size="9" fill="#f0d060"
         paint-order="stroke" stroke="var(--bg)" stroke-width="3"
         pointer-events="none">${c.nm}</text>`;
     }
