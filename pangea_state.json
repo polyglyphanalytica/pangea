@@ -61,7 +61,7 @@
       "note": "Complete. Needs GO_LIVE only \u2014 homepage card still forthcoming."
     },
     "anthrophone": {
-      "phase": "1A",
+      "phase": "2A",
       "items": 0,
       "target": 100,
       "live": false,
@@ -1102,6 +1102,36 @@
       "atlas": "cosmos",
       "phase_done": "GO_LIVE",
       "items": 112
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 1
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 1
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 1
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 1
+    },
+    {
+      "atlas": "anthrophone",
+      "phase_done": "1F",
+      "phase_next": "2A",
+      "items": 0
     }
   ]
 }
