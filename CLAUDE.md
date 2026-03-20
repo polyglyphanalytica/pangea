@@ -689,15 +689,67 @@ Always three zones:
 Left: Logo title (Cinzel Decorative, accent colour, 20px) + subtitle (Cinzel, txt3, 13px, uppercase, 3px letter-spacing). The subtitle is hidden on mobile.
 Centre: Current year display (Cinzel, accent-b, 22px) + era name below it (Cinzel, txt2, 12px, uppercase).
 Right: Item count display + burger menu button.
-The burger menu contains (in order):
+The burger menu contains (in exact order):
 Back link → `../index.html` (The Pangea Project)
 Divider
 All 5 mode buttons (with `active` class on current mode)
-The discoverers/herstory toggle button (with badge)
+The Herstory toggle button (with badge) — no divider separating it from modes
 Divider
 Theme toggle button
 Divider
 About button
+13.1 Burger Menu — Exact HTML Structure
+The burger menu wrapper is always a `<div>` (not `<nav>`) with `role="menu"`:
+```html
+<div class="burger-menu" id="burger-menu" role="menu">
+```
+Every item inside uses `role="menuitem"`. The canonical structure (adapt domain labels only):
+```html
+<div class="burger-menu" id="burger-menu" role="menu">
+  <a class="burger-item" href="../index.html" role="menuitem" style="text-decoration:none">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>The Pangea Project</span>
+  </a>
+  <div class="burger-divider"></div>
+  <button class="burger-item burger-mode active" id="btn-explore" onclick="setMode('explore');closeBurger()" role="menuitem" aria-pressed="true">
+    <span>◉</span><span>Explore</span>
+  </button>
+  <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
+    <span>⟳</span><span>[Domain] Chains</span>
+  </button>
+  <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
+    <span>⊞</span><span>Compare</span>
+  </button>
+  <button class="burger-item burger-mode" id="btn-whatif" onclick="setMode('whatif');closeBurger()" role="menuitem" aria-pressed="false">
+    <span>⟁</span><span>What-If</span>
+  </button>
+  <button class="burger-item burger-mode" id="btn-heritage" onclick="setMode('heritage');closeBurger()" role="menuitem" aria-pressed="false">
+    <span>⌂</span><span>[Domain Heritage]</span>
+  </button>
+  <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" role="menuitem">
+    <span style="font-size:15px">♀</span>
+    <span>Herstory</span>
+    <span class="burger-item-badge" id="herstory-badge"></span>
+  </button>
+  <div class="burger-divider"></div>
+  <button class="burger-item" id="menu-theme" onclick="toggleTheme();closeBurger()" role="menuitem">
+    <span>◑</span>
+    <span>Toggle Theme</span>
+  </button>
+  <div class="burger-divider"></div>
+  <button class="burger-item" onclick="showAbout();closeBurger()" role="menuitem">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span>About</span>
+  </button>
+</div>
+```
+Rules that are not obvious from the template:
+Mode button IDs are always `btn-explore`, `btn-threads`, `btn-compare`, `btn-whatif`, `btn-heritage` — the `setMode()` function references these via `getElementById('btn-' + id)`. Do not use `menu-*` prefixed IDs for mode buttons.
+Every button/link uses `<span>` wrappers for icon and label — never inline text like `◎ Explore`. The `gap:10px` in `.burger-item` spaces icon and label correctly only when they are separate inline elements.
+The back link is always the **first** item (top of menu), not the last.
+The Herstory button sits directly below the heritage mode button with **no divider** between them — Herstory is visually grouped with the modes.
+No Share button in the burger menu. Share functionality (`shareState()`) is triggered via URL state or other UI, not the burger.
+The icons for each mode are fixed across all atlases: ◉ Explore, ⟳ Threads, ⊞ Compare, ⟁ What-If, ⌂ Heritage, ♀ Herstory, ◑ Theme. Only the text labels adapt per domain.
 ---
 14. Accessibility
 14.1 Landmarks & ARIA
