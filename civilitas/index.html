@@ -664,12 +664,12 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
       <g id="conn-layer"></g>
       <!-- Thread paths -->
       <g id="thread-layer"></g>
-      <!-- Labels (non-interactive) -->
+      <!-- Selected-item label only -->
       <g id="label-layer" pointer-events="none"></g>
       <!-- Civilization markers -->
       <g id="mark-layer"></g>
-      <!-- Labels (non-interactive) -->
-      <g id="label-layer" pointer-events="none"></g>
+      <!-- Hover tooltip label (sits above markers) -->
+      <g id="hover-label-layer" pointer-events="none"></g>
     </svg>
     <div class="hint" id="map-hint">
       <span id="map-hint-text">TAP A CIVILIZATION  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
@@ -5287,7 +5287,8 @@ function renderMap(){
       TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifCiv);
     const womenCount=(WOMEN[c.id]||[]).length;
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
-    const op=on?(isWhatifLost?.2:1):(heritageInactive?.35:0.06);
+    // Drift 2: inactive items fully hidden (0 not 0.06). Drift 3: herstory items without WOMEN hidden (0 not 0.35).
+    const op=on?(herstory&&!womenCount?0:isWhatifLost?.2:1):(heritageInactive?.35:0);
     const [cx,cy]=civPt(c);
     return {c,on,isSel,mcol,op,cx,cy};
   });
@@ -5323,10 +5324,14 @@ function renderMap(){
             fill="${mcol}" filter="url(#glow${isSel?'2':''})"
           />
         </g>`;
-      ll+=`<text x="${cx}" y="${cy+26}" font-family="Cinzel,serif" font-size="11"
-        letter-spacing="1" fill="${isSel?'#f0d060':'#e8251a'}"
-        text-anchor="middle" pointer-events="none">${c.nm}</text>`;
-    } else {
+      // Drift 1: only selected item gets a persistent label
+      if(isSel){
+        ll+=`<text x="${cx}" y="${cy+26}" font-family="Cinzel,serif" font-size="11"
+          letter-spacing="1" fill="#f0d060"
+          text-anchor="middle" pointer-events="none">${c.nm}</text>`;
+      }
+    } else if(op>0){
+      // Drift 2: ghost dot only when op>0 (heritage-active-but-inactive-era case)
       dots+=`<circle cx="${cx}" cy="${cy}" r="4" fill="${mcol}" opacity=".12" pointer-events="none"/>`;
     }
   });
@@ -5361,6 +5366,7 @@ function navigateToCiv(id){
 }
 
 function civClick(id){
+  _renderHoverLabel(null);
   navigateToCiv(id);
 }
 
@@ -7045,6 +7051,55 @@ function _onMouseMove(e){
 }
 function _onMouseUp(){ if(_dragDist>5)_wasDragging=true; _dragging=false; _dragDist=0; }
 
+// Drift 1: Hover-only labels — render pill tooltip above hovered dot
+function _renderHoverLabel(c){
+  const layer=document.getElementById('hover-label-layer');
+  if(!layer)return;
+  if(!c){layer.innerHTML='';return;}
+  const [cx,cy]=civPt(c);
+  const zr=1000/_vbW;
+  const dotR=Math.max(2,7/zr);
+  const labelY=cy-dotR-8;
+  const pad=8, fh=11;
+  // measure approx width via char count
+  const approxW=Math.max(40, c.nm.length*6.5+pad*2);
+  const rx=approxW/2;
+  layer.innerHTML=`
+    <g>
+      <rect x="${cx-rx}" y="${labelY-fh-pad/2}" width="${approxW}" height="${fh+pad}"
+        rx="4" fill="var(--panel)" stroke="var(--bdr)" stroke-width=".8" opacity=".95"/>
+      <text x="${cx}" y="${labelY}" font-family="Cinzel,serif" font-size="${fh}"
+        letter-spacing="1" fill="var(--txt)" text-anchor="middle" dominant-baseline="auto"
+        pointer-events="none">${c.nm}</text>
+    </g>`;
+}
+
+// Drift 1: mousemove on window — find nearest active civ and show hover label
+function _onMapMouseMove(e){
+  if(_dragging)return;
+  const svg=document.getElementById('wsvg');
+  if(!svg)return;
+  const rect=svg.getBoundingClientRect();
+  // Check if cursor is inside SVG bounds
+  if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom){
+    _renderHoverLabel(null);return;
+  }
+  const [svgX,svgY]=screenToSVG(e.clientX,e.clientY);
+  const zr=1000/_vbW;
+  const thresh=28/zr;
+  const activeSet=window.ids_cache||new Set(CIVS.filter(c=>c&&active(c)).map(c=>c.id));
+  let nearest=null, bestD=thresh;
+  CIVS.forEach(c=>{
+    if(!c||!activeSet.has(c.id))return;
+    if(sel&&sel.id===c.id)return; // skip selected — it already has persistent label
+    const pt=civPt(c);
+    if(!pt||!isFinite(pt[0]))return;
+    const d=Math.hypot(pt[0]-svgX,pt[1]-svgY);
+    if(d<bestD){bestD=d;nearest=c;}
+  });
+  _renderHoverLabel(nearest||null);
+}
+
 // Touch events
 let _touches={};
 let _tapStartX=0,_tapStartY=0,_tapMoved=false,_touchFiredAt=0;
@@ -7109,6 +7164,7 @@ function initMapInteraction(){
   svg.addEventListener('wheel',_onWheel,{passive:false});
   svg.addEventListener('mousedown',_onMouseDown);
   window.addEventListener('mousemove',_onMouseMove);
+  window.addEventListener('mousemove',_onMapMouseMove);
   window.addEventListener('mouseup',_onMouseUp);
   svg.addEventListener('touchstart',_onTouchStart,{passive:false});
   svg.addEventListener('touchmove',_onTouchMove,{passive:false});
@@ -7318,8 +7374,8 @@ function updateTlFill(pct){
   if(f)f.style.width=pct+'%';
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 
   <!-- Cluster picker popup -->
   <div id="cluster-picker" role="dialog" aria-label="Select civilization">
