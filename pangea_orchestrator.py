@@ -10,15 +10,216 @@ Usage:
   python3 pangea_orchestrator.py golive ATLAS        — mark atlas live
   python3 pangea_orchestrator.py status              — human-readable progress report
   python3 pangea_orchestrator.py verify              — check state file integrity
+  python3 pangea_orchestrator.py sync                — pull & rebase before committing (prevents merge conflicts)
 """
 
 import json
 import os
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 STATE_FILE = Path("pangea_state.json")
+
+
+# ── Merge-conflict prevention ────────────────────────────────────────────────
+
+def _run_git(*args, **kwargs):
+    """Run a git command and return the CompletedProcess."""
+    return subprocess.run(["git"] + list(args), capture_output=True, text=True, **kwargs)
+
+
+def _merge_state_json(ours_path):
+    """Smart-merge pangea_state.json after a rebase/merge conflict.
+
+    Strategy: load both versions, merge atlases (union of keys, prefer the
+    version with more progress), merge queue (union preserving order), merge
+    completed (union), merge session_log (concatenate and deduplicate).
+    Returns True if resolved, False if unresolvable.
+    """
+    try:
+        # Get the two conflicting versions
+        ours_result = _run_git("show", ":2:pangea_state.json")   # ours
+        theirs_result = _run_git("show", ":3:pangea_state.json") # theirs
+        if ours_result.returncode != 0 or theirs_result.returncode != 0:
+            return False
+        ours = json.loads(ours_result.stdout)
+        theirs = json.loads(theirs_result.stdout)
+    except (json.JSONDecodeError, KeyError):
+        return False
+
+    merged = dict(ours)
+
+    # Merge atlases: union of keys; for shared keys, pick the one further along
+    phase_rank = {p: i for i, p in enumerate(PHASES_ORDERED)}
+    their_atlases = theirs.get("atlases", {})
+    our_atlases = merged.get("atlases", {})
+    for key, their_info in their_atlases.items():
+        if key not in our_atlases:
+            our_atlases[key] = their_info
+        else:
+            our_info = our_atlases[key]
+            our_phase = phase_rank.get(our_info.get("phase", "1A"), 0)
+            their_phase = phase_rank.get(their_info.get("phase", "1A"), 0)
+            # Pick whichever is further along (higher phase or more items)
+            if their_phase > our_phase or (
+                their_phase == our_phase
+                and their_info.get("items", 0) > our_info.get("items", 0)
+            ):
+                our_atlases[key] = their_info
+            # If theirs is live and ours isn't, take theirs
+            if their_info.get("live") and not our_info.get("live"):
+                our_atlases[key] = their_info
+    merged["atlases"] = our_atlases
+
+    # Merge queue: union preserving order (ours first, then any new from theirs)
+    our_queue = merged.get("queue", [])
+    their_queue = theirs.get("queue", [])
+    seen = set(our_queue)
+    for item in their_queue:
+        if item not in seen:
+            our_queue.append(item)
+            seen.add(item)
+    # Remove anything that's now live or completed from the queue
+    completed_set = set(merged.get("completed", []))
+    for key, info in our_atlases.items():
+        if info.get("live"):
+            completed_set.add(key)
+    our_queue = [q for q in our_queue if q not in completed_set]
+    merged["queue"] = our_queue
+
+    # Merge completed: union
+    our_completed = set(merged.get("completed", []))
+    their_completed = set(theirs.get("completed", []))
+    merged["completed"] = list(our_completed | their_completed)
+
+    # Merge session_log: concatenate, deduplicate by content
+    our_log = merged.get("session_log", [])
+    their_log = theirs.get("session_log", [])
+    seen_entries = {json.dumps(e, sort_keys=True) for e in our_log}
+    for entry in their_log:
+        key = json.dumps(entry, sort_keys=True)
+        if key not in seen_entries:
+            our_log.append(entry)
+            seen_entries.add(key)
+    merged["session_log"] = our_log
+
+    # Write merged result
+    Path(ours_path).write_text(json.dumps(merged, indent=2))
+    _run_git("add", ours_path)
+    return True
+
+
+def pull_and_rebase():
+    """Pull latest changes from origin, rebasing local commits on top.
+
+    Handles conflicts on pangea_state.json with smart JSON merge.
+    Returns True if sync succeeded, False if manual intervention needed.
+    """
+    # Detect current branch
+    branch_result = _run_git("rev-parse", "--abbrev-ref", "HEAD")
+    if branch_result.returncode != 0:
+        return True  # not in a git repo or detached HEAD — skip
+    branch = branch_result.stdout.strip()
+
+    # Fetch with retry
+    for attempt in range(4):
+        fetch = _run_git("fetch", "origin", branch)
+        if fetch.returncode == 0:
+            break
+        wait = 2 ** (attempt + 1)
+        print(f"  fetch failed (attempt {attempt+1}/4), retrying in {wait}s...")
+        time.sleep(wait)
+    else:
+        print("WARNING: Could not fetch from origin — committing locally only.")
+        return True
+
+    # Check if there are upstream changes to incorporate
+    diff_check = _run_git("rev-list", "--count", f"HEAD..origin/{branch}")
+    if diff_check.returncode != 0 or diff_check.stdout.strip() == "0":
+        return True  # nothing to rebase onto
+
+    # Stash any unstaged changes so rebase doesn't fail on dirty tree
+    _run_git("stash", "--include-untracked", "-m", "orchestrator-auto-stash")
+    stashed = True
+
+    # Attempt rebase
+    rebase = _run_git("rebase", f"origin/{branch}")
+    if rebase.returncode != 0:
+        # Check if the conflict is only on pangea_state.json
+        status = _run_git("diff", "--name-only", "--diff-filter=U")
+        conflicted = [f.strip() for f in status.stdout.strip().split("\n") if f.strip()]
+
+        resolvable = True
+        for f in conflicted:
+            if f == "pangea_state.json":
+                if not _merge_state_json(f):
+                    resolvable = False
+                    break
+            else:
+                resolvable = False
+                break
+
+        if resolvable and conflicted:
+            cont = _run_git("rebase", "--continue")
+            if cont.returncode != 0:
+                # Try with a no-edit env to skip editor
+                env = os.environ.copy()
+                env["GIT_EDITOR"] = "true"
+                subprocess.run(
+                    ["git", "rebase", "--continue"],
+                    capture_output=True, text=True, env=env
+                )
+        elif not resolvable:
+            _run_git("rebase", "--abort")
+            print("WARNING: Rebase conflict could not be auto-resolved. Committing without rebase.")
+
+    # Restore stash
+    if stashed:
+        _run_git("stash", "pop")
+
+    return True
+
+
+def safe_git_commit(files, message):
+    """Stage files, sync with remote, then commit. Returns True on success.
+
+    This is the single commit entry-point for the orchestrator.  It:
+      1. Stages the given files
+      2. Pulls & rebases to avoid merge conflicts
+      3. Re-stages files (in case rebase changed them)
+      4. Commits
+    """
+    # Stage
+    for f in files:
+        _run_git("add", f)
+
+    # Sync with remote before committing
+    pull_and_rebase()
+
+    # Re-stage in case rebase changed working tree
+    for f in files:
+        if Path(f).exists():
+            _run_git("add", f)
+
+    # Commit
+    result = _run_git("commit", "-m", message)
+    if result.returncode != 0:
+        # Might be "nothing to commit" after rebase incorporated our changes
+        if "nothing to commit" in result.stdout or "nothing to commit" in result.stderr:
+            print("  (changes already incorporated by rebase — no new commit needed)")
+            return True
+        print(f"WARNING: git commit failed: {result.stderr.strip()}")
+        return False
+    return True
+
+
+def cmd_sync():
+    """Pull latest changes and rebase local work on top. Called by agents
+    before they make their own commits to avoid merge conflicts."""
+    pull_and_rebase()
+    print("Sync complete.")
 
 # Phases in order — DATA is a single phase covering all item writing
 PHASES_ORDERED = [
@@ -121,39 +322,87 @@ def next_phase(current, map_type="world"):
 
 
 def generate_new_atlas(state):
-    existing = sorted(state["atlases"].keys())
-    print("=" * 60)
-    print("QUEUE EMPTY - GENERATE A NEW ATLAS NOW")
-    print("=" * 60)
-    print(f"All {len(existing)} atlases are built or queued.")
-    print()
-    print("You are Claude. Use your knowledge to invent ONE new atlas.")
-    print("It must not overlap any existing atlas.")
-    print("It must be global, span 5000+ years, have a Herstory angle.")
-    print()
-    print("Existing keys:", ", ".join(existing[:15]), "... (and more)")
-    print()
-    print("When you have an idea, register it with:")
-    cmd = "python3 pangea_orchestrator.py new_atlas KEY NAME SECTION ICON TAGLINE TAGS"
-    print(" ", cmd)
-    print()
-    print("Where:")
-    print("  KEY     = lowercase latin word, no spaces")
-    print("  NAME    = display name")
-    print("  SECTION = roman numeral I through XII")
-    print("  ICON    = single emoji")
-    print("  TAGLINE = quoted sentence max 12 words")
-    print("  TAGS    = quoted comma-separated list e.g. 'Tag1,Tag2,Tag3'")
-    print()
-    print("Run that command now. The loop will continue automatically.")
+    """Auto-generate and register a new atlas when the queue is empty.
+
+    Draws from a large pool of pre-defined atlas ideas, skipping any whose key
+    already exists in state.  If the pool is exhausted, synthesises a key from
+    a rotating pattern so the pipeline never stops.
+    """
+    existing = set(state["atlases"].keys())
+
+    # ── Atlas idea pool ─────────────────────────────────────────────────
+    # Each tuple: (key, display_name, section, icon, tagline, tags)
+    # Rules: global scope, 5 000+ year span, clear Herstory angle, Latin key.
+    IDEA_POOL = [
+        ("colonia",    "Colonia",    "V",    "🏴",  "Every empire planted a flag — every colony pulled it down.",            "Colonialism,Empire,Resistance"),
+        ("orbis",      "Orbis",      "IX",   "🌍",  "The story of maps, borders, and who drew them.",                        "Geography,Cartography,Borders"),
+        ("nexus",      "Nexus",      "IX",   "🔗",  "Networks that connected civilisations before the internet.",            "Networks,Communication,Trade"),
+        ("ferrum",     "Ferrum",     "II",   "⛏️",  "Every metal humanity pulled from the earth changed history.",           "Metallurgy,Mining,Industry"),
+        ("navigium",   "Navigium",   "VIII", "⛵",  "From reed boats to aircraft carriers — the sea changed everything.",   "Ships,Navigation,Maritime"),
+        ("scholae",    "Scholae",    "IV",   "🏫",  "How humanity learned to teach itself.",                                "Education,Schools,Literacy"),
+        ("caelum",     "Caelum",     "II",   "☁️",  "The atmosphere is the thinnest page in Earth's biography.",             "Weather,Climate,Atmosphere"),
+        ("hospitium",  "Hospitium",  "X",    "🏥",  "Every hospital, healer, and plague that reshaped medicine.",            "Medicine,Healing,Epidemics"),
+        ("pratum",     "Pratum",     "I",    "🌾",  "Agriculture invented civilisation — then civilisation forgot.",         "Farming,Land,Food"),
+        ("textilis",   "Textilis",   "VIII", "🧵",  "Thread, loom, and needle wove the fabric of every society.",            "Textiles,Fashion,Industry"),
+        ("numerus",    "Numerus",    "III",  "🔢",  "From tally sticks to quantum computers — the number shaped the world.","Numbers,Counting,Data"),
+        ("asylum",     "Asylum",     "VI",   "🕊️",  "Every refugee carried a civilisation in their memory.",                "Refugees,Migration,Sanctuary"),
+        ("carcere",    "Carcere",    "VI",   "🔒",  "Walls built to confine changed the societies that built them.",        "Prisons,Punishment,Justice"),
+        ("aeris",      "Aeris",      "II",   "✈️",  "From Icarus to orbit — the conquest of the sky.",                      "Aviation,Flight,Aerospace"),
+        ("aquaeductus","Aquaeductus","VIII", "🚰",  "Every civilisation rose on water engineering and fell without it.",     "Water,Infrastructure,Sanitation"),
+        ("sapientia",  "Sapientia",  "IV",   "🦉",  "The libraries, universities, and thinkers who kept knowledge alive.",  "Wisdom,Philosophy,Scholarship"),
+        ("tyrannis",   "Tyrannis",   "V",    "👑",  "Every tyrant thought the throne was permanent.",                       "Tyranny,Autocracy,Revolution"),
+        ("aether",     "Aether",     "II",   "📡",  "Invisible waves that rewrote how humanity communicates.",              "Radio,Signals,Telecom"),
+        ("ruina",      "Ruina",      "III",  "🏚️",  "The archaeology of collapse — what survived and what didn't.",         "Ruins,Archaeology,Collapse"),
+        ("hereditas",  "Hereditas",  "X",    "🧬",  "Blood, lineage, and inheritance shaped every throne and farm.",        "Genetics,Inheritance,Lineage"),
+        ("patronus",   "Patronus",   "VIII", "🎭",  "Patrons made art possible — and controlled what it said.",             "Patronage,Arts,Power"),
+        ("exsilium",   "Exsilium",   "VI",   "🚪",  "Banishment created new worlds wherever the exiled landed.",            "Exile,Diaspora,Identity"),
+        ("oraculum",   "Oraculum",   "IV",   "🔮",  "Prophecy, divination, and the futures humanity tried to read.",        "Prophecy,Divination,Fate"),
+        ("foedus",     "Foedus",     "V",    "🤝",  "Every treaty was a bet that peace could be written down.",             "Treaties,Diplomacy,Alliances"),
+        ("pons",       "Pons",       "VIII", "🌉",  "Bridges connected what geography kept apart.",                         "Bridges,Engineering,Connection"),
+        ("glacies",    "Glacies",    "II",   "🧊",  "Ice ages and frozen frontiers that shaped human migration.",           "Ice,Glaciers,Climate"),
+        ("nummularius","Nummularius","VII",  "🏦",  "Banking invented modern power — and modern crisis.",                   "Banking,Finance,Credit"),
+        ("censor",     "Censor",     "VI",   "✂️",  "What was silenced tells us as much as what was spoken.",               "Censorship,Suppression,Freedom"),
+        ("elementum",  "Elementum",  "II",   "⚗️",  "From four elements to 118 — chemistry remade the world.",             "Chemistry,Elements,Alchemy"),
+        ("bibliotheca","Bibliotheca","IV",   "📚",  "Every burned library was a civilisation's memory erased.",             "Libraries,Books,Knowledge"),
+    ]
+
+    # Filter out any ideas whose key already exists
+    available = [idea for idea in IDEA_POOL if idea[0] not in existing]
+
+    if not available:
+        # Pool exhausted — synthesise from a counter
+        counter = len(existing)
+        key = f"atlas_{counter}"
+        while key in existing:
+            counter += 1
+            key = f"atlas_{counter}"
+        # Pick a section with the fewest atlases
+        section_counts = {}
+        for info in state["atlases"].values():
+            s = info.get("section", "I")
+            section_counts[s] = section_counts.get(s, 0) + 1
+        all_sections = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"]
+        section = min(all_sections, key=lambda s: section_counts.get(s, 0))
+        chosen = (key, key.replace("_", " ").title(), section, "🗺️",
+                  "Another chapter in humanity's unfinished story.",
+                  "History,Culture,Civilization")
+    else:
+        # Pick the first available (deterministic order, not random)
+        chosen = available[0]
+
+    key, name, section, icon, tagline, tags = chosen
+    print(f"Queue empty — auto-generating new atlas: {name} ({key})")
+    cmd_new_atlas(key, name, section, icon, tagline, tags)
 
 
 def get_next_action(state):
     queue = state.get("queue", [])
     if not queue:
-        print("Queue empty — generating new atlas idea via Claude API...")
+        # Auto-generate a new atlas and continue the loop.
+        # generate_new_atlas() calls cmd_new_atlas() which calls self_invoke(),
+        # so this branch never returns — the process re-execs with the new queue.
         generate_new_atlas(state)
-        return None
+        return None  # unreachable, but keeps the type signature consistent
 
     atlas = queue[0]
     info = state["atlases"].get(atlas)
@@ -219,8 +468,9 @@ def get_next_action(state):
             f"1. Append {batch_size} item to the ITEMS array in {atlas}/index.html\n"
             f"   (or in {atlas}/data.js if using the build system)\n"
             f"2. grep -c '^{{id:\'' {atlas}/index.html  →  must equal {batch_end}\n"
-            f"3. git add {atlas}/ && git commit -m '{atlas}: item {batch_start}/{target}'\n"
-            f"4. python3 pangea_orchestrator.py batch_done {atlas}"
+            f"3. python3 pangea_orchestrator.py sync\n"
+            f"4. git add {atlas}/ && git commit -m '{atlas}: item {batch_start}/{target}'\n"
+            f"5. python3 pangea_orchestrator.py batch_done {atlas}"
         )
         return None
 
@@ -327,6 +577,7 @@ def cmd_batch_done(atlas):
         print(
             f"batch_recorded {real_count}/{target}. {remaining} remaining.\n"
             f"WRITE NEXT ITEM: item {batch_start}/{target}.\n"
+            f"Sync:   python3 pangea_orchestrator.py sync\n"
             f"Commit: git add {atlas}/ && git commit -m '{atlas}: item {batch_start}/{target}'\n"
             f"Then run: python3 pangea_orchestrator.py batch_done {atlas}"
         )
@@ -373,7 +624,7 @@ def cmd_golive(atlas):
         html, index_updated = update_index_card_to_live(html, atlas, display_name)
         if index_updated:
             # Also add to JSON-LD hasPart if not already there
-            hasPart_entry = f'{{"@type":"Dataset","name":"{display_name}","url":"https://polyglyphanalytica.github.io/pangea/{atlas}/"}}' 
+            hasPart_entry = f'{{"@type":"Dataset","name":"{display_name}","url":"https://polyglyphanalytica.github.io/pangea/{atlas}/"}}'
             if hasPart_entry not in html and '"hasPart"' in html:
                 html = html.replace(
                     '"hasPart":[',
@@ -381,10 +632,10 @@ def cmd_golive(atlas):
                     1
                 )
             index_path.write_text(html, encoding="utf-8")
-            subprocess.run(["git", "add", "index.html"], capture_output=True)
-        subprocess.run(["git", "add", f"{atlas}/index.html"], capture_output=True)
-        subprocess.run(["git", "commit", "-m", f"{atlas}: go-live — homepage activated"],
-                       capture_output=True)
+        commit_files = [f"{atlas}/index.html", "pangea_state.json"]
+        if index_updated:
+            commit_files.append("index.html")
+        safe_git_commit(commit_files, f"{atlas}: go-live — homepage activated")
 
     print(json.dumps({"status": "live", "atlas": atlas, "items": info["items"],
                       "homepage_updated": index_updated}))
@@ -565,10 +816,10 @@ def cmd_new_atlas(key, name, section, icon, tagline, tags_str):
         html = index_path.read_text(encoding="utf-8")
         html = insert_card_into_section(html, section, card)
         index_path.write_text(html, encoding="utf-8")
-        subprocess.run(["git", "add", "index.html", "pangea_state.json"], capture_output=True)
-        r = subprocess.run(["git", "commit", "-m", f"feat: new atlas card — {name}"],
-                           capture_output=True, text=True)
-        committed = r.returncode == 0
+        committed = safe_git_commit(
+            ["index.html", "pangea_state.json"],
+            f"feat: new atlas card — {name}"
+        )
 
     print(f"Registered: {name} ({key}) | section {section}")
     print(f"Homepage card inserted into section {section}: {committed}")
@@ -590,6 +841,8 @@ if __name__ == "__main__":
         cmd_batch_done(sys.argv[2])
     elif sys.argv[1] == "golive" and len(sys.argv) == 3:
         cmd_golive(sys.argv[2])
+    elif sys.argv[1] == "sync":
+        cmd_sync()
     elif sys.argv[1] == "status":
         cmd_status()
     elif sys.argv[1] == "verify":

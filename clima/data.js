@@ -19,7 +19,12 @@ const ATLAS_CONFIG = {
   skip_label: 'Skip to clima panel',
   map_aria: 'World map with clima markers',
   info_aria: 'Clima details',
-  cluster_label: 'Select clima item',
+  cluster_label: 'Select climate event',
+  item_noun_s: 'climate event',
+  item_noun_p: 'climate events',
+  fp_title: 'Climate Fingerprint',
+  heritage_domain: 'climate',
+  herstory_desc: 'scientists, activists, researchers, and leaders whose work on climate shaped our understanding of Earth',
 };
 
 // ── Timeline labels ──

@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """
-Pangea Atlas Validator v2
+Pangea Atlas Validator v3
 =========================
 Runs the full CLAUDE.md Section 18 checklist against an atlas file.
 Exits 0 if ELIGIBLE FOR GO-LIVE, exits 1 if NOT ELIGIBLE.
 
+Also validates the Pangea homepage (index.html) when --homepage is used.
+
 Usage:
   python3 pangea_validate.py ATLAS_NAME
   python3 pangea_validate.py ATLAS_NAME --force   (skip cached result)
+  python3 pangea_validate.py --homepage            (validate homepage only)
 """
 
 import datetime
@@ -80,6 +83,95 @@ def _extract_heritage_item_refs(html):
     return refs
 
 
+def _count_unescaped_apostrophes(items_text):
+    """Count unescaped apostrophes inside single-quoted data strings.
+
+    Walks through lines that look like data (contain key:'value' patterns)
+    and tracks string state to find apostrophes that prematurely close strings.
+    Returns the count of likely-broken apostrophes.
+    """
+    count = 0
+    for line in items_text.split('\n'):
+        # Only check lines that contain data values (key:'...')
+        if ":'" not in line:
+            continue
+        in_string = False
+        i = 0
+        while i < len(line):
+            c = line[i]
+            if c == '\\' and in_string and i + 1 < len(line):
+                i += 2  # skip escaped character
+                continue
+            if c == "'":
+                if not in_string:
+                    in_string = True
+                else:
+                    # Check if this looks like a premature string close
+                    # (followed by a lowercase letter = likely contraction/possessive)
+                    rest = line[i + 1:i + 3]
+                    if rest and rest[0].isalpha() and rest[0].islower():
+                        count += 1
+                        # Stay in string mode (the real close is later)
+                    elif rest and rest[0] == ' ' and len(rest) > 1 and rest[1].islower():
+                        count += 1
+                    else:
+                        in_string = False
+            i += 1
+    return count
+
+
+def _check_js_parse(html, atlas):
+    """Run the inline <script> block through Node.js vm.Script to catch syntax errors."""
+    # Extract the main inline script block (skip JSON-LD)
+    lines = html.split('\n')
+    start = -1
+    end = -1
+    for i, line in enumerate(lines):
+        if line.strip() == '<script>' and start == -1 and i > 100:
+            start = i
+        if start > 0 and line.strip() == '</script>' and i > start + 100:
+            end = i
+            break
+
+    if start == -1 or end == -1:
+        return False, "could not find inline <script> block"
+
+    script = '\n'.join(lines[start + 1:end])
+
+    # Write to temp file and parse with Node.js
+    tmp_path = Path(f"/tmp/_pangea_validate_{atlas}.js")
+    tmp_path.write_text(script, encoding='utf-8')
+
+    result = subprocess.run(
+        ["node", "-e", f"""
+const vm = require('vm');
+const fs = require('fs');
+const script = fs.readFileSync('{tmp_path}', 'utf8');
+try {{
+    new vm.Script(script, {{filename: '{atlas}.js'}});
+    process.exit(0);
+}} catch(e) {{
+    const lineNum = e.stack?.match(/:(\d+)/)?.[1];
+    const fileLine = lineNum ? parseInt(lineNum) + {start + 1} : -1;
+    console.error('line ' + fileLine + ': ' + e.message);
+    process.exit(1);
+}}
+"""],
+        capture_output=True, text=True, timeout=15
+    )
+
+    try:
+        tmp_path.unlink()
+    except OSError:
+        pass
+
+    if result.returncode == 0:
+        return True, "OK"
+    else:
+        detail = result.stderr.strip() or result.stdout.strip() or "parse failed"
+        return False, detail
+
+
 def validate(atlas, force=False):
     p = Path(f"{atlas}/index.html")
     if not p.exists():
@@ -109,6 +201,38 @@ def validate(atlas, force=False):
     html = p.read_text(encoding="utf-8", errors="replace")
     checks = []
     warnings = []  # non-blocking issues
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # CRITICAL: JavaScript parse check (catches ALL syntax errors at once)
+    # ══════════════════════════════════════════════════════════════════════════
+    js_parse_ok, js_parse_detail = _check_js_parse(html, atlas)
+    checks.append(("JavaScript parses without errors", js_parse_ok, js_parse_detail))
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # Structural integrity checks — full-file scans (no data region needed)
+    # ══════════════════════════════════════════════════════════════════════════
+
+    # ── Escaped backticks in template literals ─────────────────────────────
+    escaped_bt = re.findall(r'return\\`', html)
+    checks.append(("no escaped backticks in template literals",
+                   len(escaped_bt) == 0,
+                   f"{len(escaped_bt)} found (return\\` should be return `)" if escaped_bt else "OK"))
+
+    # ── Missing commas between ITEMS array elements ────────────────────────
+    missing_comma = re.findall(r"\}\}\n\{id:", html)
+    checks.append(("no missing commas between ITEMS",
+                   len(missing_comma) == 0,
+                   f"{len(missing_comma)} found (}} not followed by comma before next item)" if missing_comma else "OK"))
+
+    # ── WOMEN object closed correctly ──────────────────────────────────────
+    women_close = re.search(r'const WOMEN\s*=\s*\{', html)
+    if women_close:
+        # Find the matching close — should be }; not ];
+        women_text = html[women_close.start():]
+        bad_women_close = bool(re.search(r'\]\s*;\s*\n\s*let\s+year\b', women_text))
+        checks.append(("WOMEN object closed with }; not ];",
+                       not bad_women_close,
+                       "found ]; closing WOMEN — should be };" if bad_women_close else "OK"))
 
     # ── Item count (inside ITEMS block only) ────────────────────────────────
     # Find the region between 'const ITEMS=[' and 'const TRANSMISSIONS'
@@ -172,11 +296,29 @@ def validate(atlas, force=False):
     empty = len(re.findall(r"(\w+):\s*''", items_text))
     checks.append(("no empty lens strings", empty == 0, f"{empty} found"))
 
-    # ── Unescaped apostrophes ───────────────────────────────────────────────
-    bad_apos = re.findall(r":\s*'[^'\\]*[a-zA-Z]['][a-zA-Z][^']*'", items_text)
+    # ── Double-escaped apostrophes in data strings ────────────────────────
+    # Only scan data regions (ITEMS + TRANSMISSIONS + WOMEN) to avoid
+    # false positives from legitimate JS like replace(/'/g,"\\'")
+    data_regions = items_text
+    tx_block_m = re.search(r'const TRANSMISSIONS\s*=\s*\[[\s\S]*?\];', html)
+    if tx_block_m:
+        data_regions += tx_block_m.group(0)
+    women_block_m = re.search(r'const WOMEN\s*=\s*\{[\s\S]*?\};', html)
+    if women_block_m:
+        data_regions += women_block_m.group(0)
+    double_esc = re.findall(r"\\\\'", data_regions)
+    checks.append(("no double-escaped apostrophes in data",
+                   len(double_esc) == 0,
+                   f"{len(double_esc)} found (\\\\' should be \\')" if double_esc else "OK"))
+
+    # ── Unescaped apostrophes in data strings ───────────────────────────────
+    # The JS parse check above catches these too, but this gives a specific
+    # count and helps agents fix them. Scans all single-quoted data values
+    # in the ITEMS region for apostrophes that would prematurely close the string.
+    bad_apos_count = _count_unescaped_apostrophes(items_text)
     checks.append(("no unescaped apostrophes in data",
-                   len(bad_apos) == 0,
-                   f"{len(bad_apos)} found" if bad_apos else "OK"))
+                   bad_apos_count == 0,
+                   f"{bad_apos_count} found" if bad_apos_count else "OK"))
 
     # ── FP_KEYS ─────────────────────────────────────────────────────────────
     fp_m = re.search(r"const FP_KEYS\s*=\s*\[([^\]]+)\]", html)
@@ -431,10 +573,163 @@ def validate(atlas, force=False):
         sys.exit(1)
 
 
-if __name__ == "__main__":
-    force = "--force" in sys.argv
-    args = [a for a in sys.argv[1:] if a != "--force"]
-    if len(args) != 1:
-        print(__doc__)
+def validate_homepage():
+    """Validate the Pangea homepage (index.html) for structural integrity.
+
+    Checks for issues that break the card grid layout:
+    - Unclosed <a> tags (cause cards to nest inside each other)
+    - Mismatched <a> open/close counts
+    - Card links pointing to wrong atlas directories
+    - Cards with status--live but no <a> link
+    - Cards with <a> links but no </a> close
+    - Stray </a> tags inside forthcoming cards (no matching open)
+    - All live atlas directories actually exist
+    """
+    p = Path("index.html")
+    if not p.exists():
+        print("FAIL   index.html not found")
         sys.exit(1)
-    validate(args[0], force=force)
+
+    html = p.read_text(encoding="utf-8", errors="replace")
+    lines = html.split('\n')
+    checks = []
+
+    # ── Basic HTML structure ───────────────────────────────────────────────
+    a_opens = re.findall(r'<a\s+href="([^"]*)"', html)
+    a_closes = html.count('</a>')
+    checks.append(("all <a> tags closed",
+                   len(a_opens) == a_closes,
+                   f"{len(a_opens)} opens vs {a_closes} closes" if len(a_opens) != a_closes else "OK"))
+
+    # ── Per-card validation ────────────────────────────────────────────────
+    # Extract cards by tracking div nesting depth from each card-open tag
+    unclosed_links = []
+    stray_closes = []
+    wrong_hrefs = []
+    live_no_link = []
+
+    card_starts = list(re.finditer(
+        r'<div class="card card--(live|forthcoming)">', html
+    ))
+
+    for cs in card_starts:
+        card_type = cs.group(1)
+        start = cs.start()
+        card_line = html[:start].count('\n') + 1
+
+        # Walk forward counting div opens/closes to find the matching </div>
+        pos = cs.end()
+        depth = 1
+        while pos < len(html) and depth > 0:
+            next_open = html.find('<div', pos)
+            next_close = html.find('</div>', pos)
+            if next_close == -1:
+                break
+            if next_open != -1 and next_open < next_close:
+                depth += 1
+                pos = next_open + 4
+            else:
+                depth -= 1
+                if depth == 0:
+                    pos = next_close + 6
+                    break
+                pos = next_close + 6
+
+        card_html = html[cs.end():pos]
+
+        # Extract card name
+        name_m = re.search(r'<div class="card-name">([^<]+)</div>', card_html)
+        card_name = name_m.group(1) if name_m else f"unknown@line{card_line}"
+
+        link_opens = re.findall(r'<a\s+href="([^"]*)"', card_html)
+        link_closes = card_html.count('</a>')
+
+        if link_opens and len(link_opens) > link_closes:
+            unclosed_links.append(f"{card_name} (line ~{card_line})")
+
+        if not link_opens and link_closes > 0:
+            stray_closes.append(f"{card_name} (line ~{card_line})")
+
+        # Check live cards have a link
+        if card_type == 'live' and not link_opens:
+            live_no_link.append(f"{card_name} (line ~{card_line})")
+
+        # Check link hrefs point to existing directories
+        for href in link_opens:
+            if href.startswith('#') or href.startswith('http'):
+                continue
+            expected_dir = href.split('/')[0] if '/' in href else ''
+            if expected_dir:
+                target = Path(expected_dir)
+                if not target.exists():
+                    wrong_hrefs.append(f"{card_name} → {href} (dir missing)")
+
+    checks.append(("no unclosed <a> inside cards",
+                   len(unclosed_links) == 0,
+                   f"unclosed: {unclosed_links}" if unclosed_links else "OK"))
+
+    checks.append(("no stray </a> inside cards",
+                   len(stray_closes) == 0,
+                   f"stray: {stray_closes}" if stray_closes else "OK"))
+
+    checks.append(("all card hrefs point to existing dirs",
+                   len(wrong_hrefs) == 0,
+                   f"broken: {wrong_hrefs}" if wrong_hrefs else "OK"))
+
+    if live_no_link:
+        checks.append(("all live cards have links",
+                       False, f"missing: {live_no_link}"))
+
+    # ── Live atlas directories have index.html ─────────────────────────────
+    live_links = []
+    for m in re.finditer(
+        r'<div class="card card--live">[\s\S]*?<a href="([^"]+)"', html
+    ):
+        live_links.append(m.group(1))
+
+    missing_files = []
+    for href in live_links:
+        if not Path(href).exists():
+            missing_files.append(href)
+
+    checks.append(("all live atlas links resolve to files",
+                   len(missing_files) == 0,
+                   f"missing: {missing_files}" if missing_files else "OK"))
+
+    # ── Card grid div nesting ──────────────────────────────────────────────
+    # Quick check: count card-grid opens/closes
+    grid_opens = html.count('class="card-grid"')
+    grid_div_closes = 0
+    # Each card-grid should be properly closed
+    checks.append(("card-grid sections present", grid_opens > 0, f"found {grid_opens}"))
+
+    # ── Print results ──────────────────────────────────────────────────────
+    fails = []
+    for name, passed, detail in checks:
+        status = "PASS" if passed else "FAIL"
+        if not passed:
+            fails.append(name)
+        suffix = f"  [{detail}]" if detail else ""
+        print(f"{status:<4}  {name}{suffix}")
+
+    print()
+    if not fails:
+        print("HOMEPAGE: OK")
+        sys.exit(0)
+    else:
+        print(f"HOMEPAGE: {len(fails)} failures:")
+        for f in fails:
+            print(f"  ✗ {f}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    if "--homepage" in sys.argv:
+        validate_homepage()
+    else:
+        force = "--force" in sys.argv
+        args = [a for a in sys.argv[1:] if a != "--force"]
+        if len(args) != 1:
+            print(__doc__)
+            sys.exit(1)
+        validate(args[0], force=force)
