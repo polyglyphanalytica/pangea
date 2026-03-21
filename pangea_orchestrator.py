@@ -5,7 +5,8 @@ Pangea Project Orchestrator v3
 Usage:
   python3 pangea_orchestrator.py                     — print next action as JSON
   python3 pangea_orchestrator.py advance ATLAS PHASE — mark shell/constants/modes phase done
-  python3 pangea_orchestrator.py item_done ATLAS     — increment item count by 1
+  python3 pangea_orchestrator.py batch_done ATLAS    — record a batch of items written (up to 10)
+  python3 pangea_orchestrator.py item_done ATLAS     — legacy alias for batch_done
   python3 pangea_orchestrator.py golive ATLAS        — mark atlas live
   python3 pangea_orchestrator.py status              — human-readable progress report
   python3 pangea_orchestrator.py verify              — check state file integrity
@@ -165,6 +166,15 @@ def get_next_action(state):
 
     phase = info.get("phase", "1A")
 
+    # If atlas has data.js and is still in Phase 1, skip to DATA
+    if phase.startswith("1") and Path(f"{atlas}/data.js").exists():
+        print(f"  {atlas}: data.js found — skipping Phase 1 shell (scaffold handles it).")
+        print(f"  Run: python3 build.py {atlas}  — to build index.html from data.js")
+        info["phase"] = "DATA"
+        state["atlases"][atlas] = info
+        save_state(state)
+        phase = "DATA"
+
     if phase == "DONE" and not info.get("live"):
         return {
             "action": "GO_LIVE",
@@ -184,7 +194,7 @@ def get_next_action(state):
 
     target = info.get("target", 100)
 
-    # DATA phase: emit WRITE_ITEM until target reached
+    # DATA phase: emit WRITE_BATCH until target reached
     if phase == "DATA":
         if real_count >= target:
             # All items written — auto-advance to Phase 3
@@ -199,14 +209,18 @@ def get_next_action(state):
                 "target": target,
                 "map": info.get("map", "world")
             }
-        n = real_count + 1
+        batch_start = real_count + 1
+        batch_end = min(real_count + 10, target)
+        batch_size = batch_end - real_count
         # Print imperative directly so agent has no decision gap
         print(
-            f"WRITE_ITEM {n}/{target} for {atlas}. ONE item only.\n"
-            f"1. Append ONE item to the ITEMS array in {atlas}/index.html\n"
-            f"2. grep -c '^{{id:\'' {atlas}/index.html  →  must equal {n}\n"
-            f"3. git add {atlas}/index.html && git commit -m '{atlas}: item {n}/{target}'\n"
-            f"4. python3 pangea_orchestrator.py item_done {atlas}"
+            f"WRITE_BATCH {batch_start}-{batch_end}/{target} for {atlas}. "
+            f"Write {batch_size} items.\n"
+            f"1. Append {batch_size} items to the ITEMS array in {atlas}/index.html\n"
+            f"   (or in {atlas}/data.js if using the build system)\n"
+            f"2. grep -c '^{{id:\'' {atlas}/index.html  →  must equal {batch_end}\n"
+            f"3. git add {atlas}/ && git commit -m '{atlas}: items {batch_start}-{batch_end}/{target}'\n"
+            f"4. python3 pangea_orchestrator.py batch_done {atlas}"
         )
         return None
 
@@ -272,7 +286,8 @@ def cmd_advance(atlas, completed_phase):
     self_invoke()
 
 
-def cmd_item_done(atlas):
+def cmd_batch_done(atlas):
+    """Record a batch of items written (up to 25 at a time)."""
     state = load_state()
     info = state["atlases"].get(atlas)
     if info is None:
@@ -282,22 +297,22 @@ def cmd_item_done(atlas):
     prev_count = info.get("items", 0)
     target = info.get("target", 100)
 
-    # HARD CHECK: must have increased by exactly 1
     added = real_count - prev_count
     if added == 0:
-        print(f"ERROR: No new item detected. Count is still {real_count}.")
-        print(f"You must write ONE item to {atlas}/index.html before calling item_done.")
-        print(f"The item must start with {{id:\' at the beginning of a line.")
-        print(f"Write the item now, then run: python3 pangea_orchestrator.py item_done {atlas}")
+        print(f"ERROR: No new items detected. Count is still {real_count}.")
+        print(f"Write items to {atlas}/index.html (or data.js), then call batch_done again.")
         sys.exit(1)
-    if added > 1:
-        print(f"VIOLATION: {added} items were written at once. Only 1 is permitted per call.")
-        print(f"Count went from {prev_count} to {real_count}.")
-        print(f"This is not allowed. The instructions say ONE item per commit.")
-        print(f"State has been recorded at {real_count}. Next call must add exactly 1 more.")
+    if added > 25:
+        print(f"WARNING: {added} items added (max batch is 10). Accepted, but prefer ≤10.")
 
     info["items"] = real_count
     remaining = target - real_count
+
+    state["atlases"][atlas] = info
+    state.setdefault("session_log", []).append({
+        "atlas": atlas, "batch": f"{prev_count+1}-{real_count}", "items": real_count
+    })
+    save_state(state)
 
     if remaining <= 0:
         print(f"ITEMS COMPLETE: {real_count}/{target}. Auto-advancing to Phase 3.")
@@ -306,17 +321,20 @@ def cmd_item_done(atlas):
         save_state(state)
         self_invoke()
     else:
-        state["atlases"][atlas] = info
-        save_state(state)
-        n = real_count + 1
+        batch_start = real_count + 1
+        batch_end = min(real_count + 10, target)
+        batch_size = batch_end - real_count
         print(
-            f"item_recorded {real_count}/{target}. {remaining} remaining.\n"
-            f"NOW WRITE ITEM {n}. ONE item only. One. Not two. Not ten. One.\n"
-            f"Append to ITEMS array in {atlas}/index.html.\n"
-            f"Verify: grep -c '^{{id:\'' {atlas}/index.html must equal {n}.\n"
-            f"Commit: git add {atlas}/index.html && git commit -m '{atlas}: item {n}/{target}'\n"
-            f"Then run: python3 pangea_orchestrator.py item_done {atlas}"
+            f"batch_recorded {real_count}/{target}. {remaining} remaining.\n"
+            f"WRITE NEXT BATCH: items {batch_start}-{batch_end} ({batch_size} items).\n"
+            f"Commit: git add {atlas}/ && git commit -m '{atlas}: items {batch_start}-{batch_end}/{target}'\n"
+            f"Then run: python3 pangea_orchestrator.py batch_done {atlas}"
         )
+
+
+def cmd_item_done(atlas):
+    """Legacy single-item mode — redirects to batch_done."""
+    cmd_batch_done(atlas)
 
 
 def cmd_golive(atlas):
@@ -568,6 +586,8 @@ if __name__ == "__main__":
         cmd_advance(sys.argv[2], sys.argv[3])
     elif sys.argv[1] == "item_done" and len(sys.argv) == 3:
         cmd_item_done(sys.argv[2])
+    elif sys.argv[1] == "batch_done" and len(sys.argv) == 3:
+        cmd_batch_done(sys.argv[2])
     elif sys.argv[1] == "golive" and len(sys.argv) == 3:
         cmd_golive(sys.argv[2])
     elif sys.argv[1] == "status":

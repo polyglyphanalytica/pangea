@@ -148,8 +148,8 @@
       "validated_lenses": 20
     },
     "clima": {
-      "phase": "1B",
-      "items": 100,
+      "phase": "1A",
+      "items": 0,
       "target": 100,
       "live": false,
       "map": "world",
