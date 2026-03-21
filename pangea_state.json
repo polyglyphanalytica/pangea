@@ -143,8 +143,8 @@
       "section": "VII"
     },
     "clima": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "1B",
+      "items": 100,
       "target": 100,
       "live": false,
       "map": "world",
@@ -628,9 +628,9 @@
       "live": true,
       "map": "world",
       "section": "VII",
-      "validated_sha": "eb4f135e103b2fac0df2c87d755d4ee3c0e930cd",
-      "validated_short": "eb4f135",
-      "validated_at": "2026-03-21T15:19:18.365228Z",
+      "validated_sha": "c3b03cb7179d5ba559d8fbe7e704a7ba331a96a6",
+      "validated_short": "c3b03cb",
+      "validated_at": "2026-03-21T15:23:41.656065Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -1390,6 +1390,12 @@
     {
       "atlas": "cursus",
       "phase_done": "GO_LIVE",
+      "items": 100
+    },
+    {
+      "atlas": "clima",
+      "phase_done": "1A",
+      "phase_next": "1B",
       "items": 100
     }
   ]
