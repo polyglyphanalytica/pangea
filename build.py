@@ -246,9 +246,13 @@ def build_atlas(atlas, engine_html=None):
     if year_init_m:
         html = re.sub(r'let year\s*=\s*-?\d+', f'let year={year_init_m.group(1)}', html, count=1)
 
-    slider_m = re.search(r'function sliderToYear\(v\)\{[\s\S]*?\}\s*\nfunction yearToSlider\(yr\)\{[\s\S]*?\}', data_sections)
+    # Match both slider functions — use lookahead for the next function definition
+    # to handle multi-line function bodies with nested braces
+    slider_pat_src = r'function sliderToYear\(v\)\{[\s\S]*?\}\s*\nfunction yearToSlider\(yr\)\{[\s\S]*?\n\}'
+    slider_pat_eng = r'(// .*?slider.*?\n)?function sliderToYear\(v\)\{[\s\S]*?\}\s*\nfunction yearToSlider\(yr\)\{[\s\S]*?\n\}(?=\s*\n\s*function\b)'
+    slider_m = re.search(slider_pat_src, data_sections)
     if slider_m:
-        html = re.sub(r'(// .*?slider.*?\n)?function sliderToYear\(v\)\{[\s\S]*?\}\s*\nfunction yearToSlider\(yr\)\{[\s\S]*?\}',
+        html = re.sub(slider_pat_eng,
                       slider_m.group(0), html, count=1)
 
     # Timeline labels
@@ -262,10 +266,20 @@ def build_atlas(atlas, engine_html=None):
             html, count=1
         )
 
+    # Compute item count early — needed for replacements below
+    item_count = len(re.findall(r"^\{id:'", html, re.MULTILINE))
+
     # ── Fix any remaining civilitas references ──
     if atlas != 'civilitas':
         html = html.replace('navigateToCiv', 'navigateToItem')
         html = html.replace('civClick', 'itemClick')
+        # Replace remaining civilitas-specific strings in welcome drawer & about modal
+        html = html.replace('The Human Atlas', subtitle)
+        html = html.replace('>CIVILITAS<', f'>{name_upper}<')
+        html = html.replace('to CIVILITAS', f'to {name_upper}')
+        # Replace civilitas-specific timeline span references
+        html = html.replace('65,000 years', f'{abs(year_min):,} years' if year_min < 0 else f'{year_max - year_min:,} years')
+        html = html.replace("65,000-year", f'{abs(year_min):,}-year' if year_min < 0 else f'{year_max - year_min:,}-year')
         # Fix share text fallbacks that reference civilitas
         html = re.sub(
             r"Explore \$\{civName\} on Civilitas[^'`]*",
@@ -288,8 +302,121 @@ def build_atlas(atlas, engine_html=None):
         html = html.replace('Civilization details', info_aria)
         html = html.replace('Civilization density', f'{name} density')
 
+        # ── Domain-specific noun replacements for UI text ──
+        # item_noun_s = singular ("climate event"), item_noun_p = plural ("climate events")
+        item_noun_s = config.get('item_noun_s', 'item')
+        item_noun_p = config.get('item_noun_p', 'items')
+        fp_title = config.get('fp_title', f'{name} Fingerprint')
+
+        # Compare mode
+        html = html.replace(
+            'Select two civilizations on the map to compare them side by side',
+            f'Select two {item_noun_p} on the map to compare them side by side')
+        html = html.replace(
+            'Click a civilization on the map to add it here',
+            f'Click a {item_noun_s} on the map to add it here')
+
+        # Fingerprint chart title
+        html = html.replace('Civilizational Fingerprint', fp_title)
+
+        # What-If mode
+        html = html.replace(
+            'Remove a civilization from history',
+            f'Remove a {item_noun_s} from history')
+        html = html.replace(
+            'No outward transmissions recorded for this civilization',
+            f'No outward transmissions recorded for this {item_noun_s}')
+
+        # Heritage mode
+        html = html.replace(
+            'every civilization that shaped your cultural DNA',
+            f'every {item_noun_s} that shaped your {config.get("heritage_domain", "cultural")} heritage')
+        html = html.replace(
+            'your ancestral civilizations',
+            f'your ancestral {item_noun_p}')
+        html = html.replace(
+            'civilizational ancestry',
+            f'{config.get("heritage_domain", "cultural")} ancestry')
+        html = html.replace(
+            'contributing civilizations',
+            f'contributing {item_noun_p}')
+
+        # Herstory mode
+        html = html.replace(
+            'Tap any civilization on the map to discover the women who shaped it',
+            f'Tap any {item_noun_s} on the map to discover the women who shaped it')
+        html = re.sub(
+            r'queens who governed, scholars who wrote, warriors who fought, and spiritual leaders who held communities together',
+            config.get('herstory_desc',
+                       'pioneers, researchers, leaders, and thinkers whose contributions shaped history'),
+            html)
+
+        # Back/navigation text
+        html = html.replace(
+            'All civilizations',
+            f'All {item_noun_p}')
+
+        # HTML comments
+        html = html.replace('Civilization markers', f'{name} markers')
+
+        # JSON-LD feature list — replace civilitas-specific descriptions
+        html = re.sub(
+            r'"100 civilizations from Aboriginal Australia to the present day"',
+            f'"{item_count} {item_noun_p} mapped across history"', html)
+        html = re.sub(
+            r'"Cultural transmission tracking across civilizations"',
+            f'"Transmission tracking across {item_noun_p}"', html)
+        html = re.sub(
+            r'"Herstory mode — women who shaped every civilization"',
+            f'"Herstory mode — women who shaped every {item_noun_s}"', html)
+        html = re.sub(
+            r'"Synthesized musical themes for each civilization"',
+            f'"Interactive exploration of {item_noun_p} across time"', html)
+        html = re.sub(
+            r'"Civilizational fingerprint radar charts"',
+            f'"{fp_title} radar charts"', html)
+
+        # About modal — replace with atlas-specific content if provided
+        about_content = config.get('about_content')
+        if about_content:
+            # Replace the about modal body between the title and the close button
+            html = re.sub(
+                r'(<!-- ABOUT BODY START -->)[\s\S]*?(<!-- ABOUT BODY END -->)',
+                rf'\1\n{about_content}\n\2',
+                html, count=1
+            )
+
+        # ── Welcome drawer content replacement ──
+        # If data.js provides a welcome_content block, replace the entire welcome state
+        welcome_content = config.get('welcome_content')
+        if welcome_content:
+            html = re.sub(
+                r"(if\(!sel\)\{\s*document\.getElementById\('drawer-top'\)\.innerHTML='';\s*dc\.innerHTML=`)[\s\S]*?(`;\s*document\.getElementById\('info-panel'\))",
+                rf'\1\n{welcome_content}\n\2',
+                html, count=1
+            )
+
+        # ── Broad catch-all for remaining UI civiliz* references ──
+        # Only replace in engine code, NOT inside item data lines (which start with {id:').
+        # Split into lines, replace only in non-data lines.
+        lines = html.split('\n')
+        for i, line in enumerate(lines):
+            if line.startswith("{id:'"):
+                continue  # skip item data lines
+            orig = line
+            line = line.replace('civilizational', item_noun_s)
+            line = line.replace('Civilizational', item_noun_s.title())
+            line = line.replace('civilizations', item_noun_p)
+            line = line.replace('civilization', item_noun_s)
+            line = line.replace('Civilizations', item_noun_p.title())
+            line = line.replace('Civilization', item_noun_s.title())
+            line = line.replace('civilisations', item_noun_p)
+            line = line.replace('civilisation', item_noun_s)
+            if line != orig:
+                lines[i] = line
+        html = '\n'.join(lines)
+
     # Fix item count in title
-    item_count = len(re.findall(r"^\{id:'", html, re.MULTILINE))
     html = html.replace('{items}', str(item_count))
 
     # Update meta description item count
