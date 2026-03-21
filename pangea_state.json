@@ -77,10 +77,10 @@
       "section": "V"
     },
     "lingua": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 120,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "III"
     },
@@ -969,7 +969,6 @@
     }
   },
   "queue": [
-    "lingua",
     "via",
     "cursus",
     "clima",
@@ -1089,7 +1088,8 @@
     "pecunia",
     "cosmos",
     "anthrophone",
-    "dynastia"
+    "dynastia",
+    "lingua"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -1184,6 +1184,59 @@
       "atlas": "dynastia",
       "phase_done": "GO_LIVE",
       "items": 100
+    },
+    {
+      "atlas": "lingua",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 120
+    },
+    {
+      "atlas": "lingua",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 120
+    },
+    {
+      "atlas": "lingua",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 120
+    },
+    {
+      "atlas": "lingua",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 120
+    },
+    {
+      "atlas": "lingua",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 120
+    },
+    {
+      "atlas": "lingua",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 120
+    },
+    {
+      "atlas": "lingua",
+      "phase_done": "5",
+      "phase_next": "6",
+      "items": 120
+    },
+    {
+      "atlas": "lingua",
+      "phase_done": "6",
+      "phase_next": "DONE",
+      "items": 120
+    },
+    {
+      "atlas": "lingua",
+      "phase_done": "GO_LIVE",
+      "items": 120
     }
   ]
 }
