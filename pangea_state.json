@@ -85,10 +85,10 @@
       "section": "III"
     },
     "via": {
-      "phase": "3",
-      "items": 100,
+      "phase": "DONE",
+      "items": 116,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "VII"
     },
@@ -969,7 +969,6 @@
     }
   },
   "queue": [
-    "via",
     "cursus",
     "clima",
     "aqua",
@@ -1089,7 +1088,8 @@
     "cosmos",
     "anthrophone",
     "dynastia",
-    "lingua"
+    "lingua",
+    "via"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -1267,6 +1267,29 @@
       "phase_done": "1F",
       "phase_next": "DATA",
       "items": 0
+    },
+    {
+      "atlas": "via",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 116
+    },
+    {
+      "atlas": "via",
+      "phase_done": "5",
+      "phase_next": "6",
+      "items": 116
+    },
+    {
+      "atlas": "via",
+      "phase_done": "6",
+      "phase_next": "DONE",
+      "items": 116
+    },
+    {
+      "atlas": "via",
+      "phase_done": "GO_LIVE",
+      "items": 116
     }
   ]
 }
