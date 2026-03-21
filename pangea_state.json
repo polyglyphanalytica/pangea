@@ -131,7 +131,7 @@
     },
     "via": {
       "phase": "DATA",
-      "items": 0,
+      "items": 30,
       "target": 100,
       "live": false,
       "map": "world",
