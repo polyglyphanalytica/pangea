@@ -86,7 +86,7 @@
     },
     "via": {
       "phase": "DATA",
-      "items": 15,
+      "items": 20,
       "target": 100,
       "live": false,
       "map": "world",
