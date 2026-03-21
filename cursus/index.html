@@ -708,10 +708,38 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+  {id:'cargo',      ico:'⊞', lbl:'Cargo & Freight',          col:'#8a7030'},
+  {id:'conflict',   ico:'✦', lbl:'Conflict & Military',      col:'#b84040'},
+  {id:'culture',    ico:'◈', lbl:'Culture & Society',         col:'#9b6fd4'},
+  {id:'ecology',    ico:'◉', lbl:'Environment & Ecology',     col:'#3a7850'},
+  {id:'economy',    ico:'⚖', lbl:'Economics & Trade',         col:'#5a9a60'},
+  {id:'energy',     ico:'⊙', lbl:'Energy & Power',            col:'#c89020'},
+  {id:'engineering',ico:'⚙', lbl:'Engineering & Design',      col:'#608050'},
+  {id:'exploration',ico:'↗', lbl:'Exploration & Discovery',   col:'#4890a0'},
+  {id:'gender',     ico:'⊗', lbl:'Gender & Women',            col:'#c06090'},
+  {id:'infrastructure',ico:'⌂',lbl:'Infrastructure',          col:'#5a7a8a'},
+  {id:'labour',     ico:'≠', lbl:'Labour & Workers',          col:'#906040'},
+  {id:'law',        ico:'⚖', lbl:'Law & Regulation',          col:'#4a6fa5'},
+  {id:'legacy',     ico:'∞', lbl:'Legacy Today',              col:'#7890a8'},
+  {id:'logistics',  ico:'⟳', lbl:'Logistics & Supply',        col:'#4a8870'},
+  {id:'materials',  ico:'◯', lbl:'Materials & Construction',   col:'#7a5030'},
+  {id:'navigation', ico:'α', lbl:'Navigation & Wayfinding',   col:'#6070b8'},
+  {id:'networks',   ico:'⬡', lbl:'Networks & Routes',         col:'#3a9fc0'},
+  {id:'politics',   ico:'⚑', lbl:'Politics & Power',          col:'#4a7faa'},
+  {id:'safety',     ico:'⊕', lbl:'Safety & Risk',             col:'#b05580'},
+  {id:'speed',      ico:'→', lbl:'Speed & Time',              col:'#8b1a1a'},
+];
 
 
-const ERAS=[];
+const ERAS=[
+  {y:-8000,n:'NEOLITHIC WATERCRAFT'},{y:-4000,n:'ANIMAL POWER'},{y:-3000,n:'SAIL & WHEEL'},
+  {y:-1500,n:'CHARIOT & CARAVAN'},{y:-500,n:'ENGINEERED ROADS'},{y:-200,n:'IMPERIAL HIGHWAYS'},
+  {y:500,n:'MARITIME EXPANSION'},{y:1000,n:'COMPASS & VOYAGING'},{y:1400,n:'AGE OF EXPLORATION'},
+  {y:1600,n:'GLOBAL SHIPPING'},{y:1760,n:'CANAL ERA'},{y:1800,n:'STEAM REVOLUTION'},
+  {y:1860,n:'RAILWAY AGE'},{y:1900,n:'MOTORISATION'},{y:1940,n:'AVIATION & HIGHWAYS'},
+  {y:1960,n:'JET & SPACE AGE'},{y:1990,n:'DIGITAL TRANSPORT'},{y:2010,n:'ELECTRIC & AUTONOMOUS'},
+];
 
 const ITEMS=[
 {id:'dugout_canoe',fp:{spd:2,cap:2,rng:3,eng:3,imp:8,lon:10},
@@ -4783,10 +4811,123 @@ conomy:'Subsistence agriculture (sweet potato, taro, sugarcane) and fishing; the
       migration:'The Polynesian settlement of Rapa Nui around 900 CE represents the eastern limit of Polynesian expansion — 2,000 kilometres beyond any previous Polynesian settlement.'}},
 ];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+  {id:'t1',concept:'Wheel Technology',from:'wheel',to:'chariot',year:-2000,type:'transmitted',desc:'The solid wheel was lightened with spokes, enabling the high-speed chariot that dominated warfare for a millennium.'},
+  {id:'t2',concept:'Wheel Technology',from:'chariot',to:'carriage',year:1500,type:'transmitted',desc:'Chariot suspension and wheel engineering evolved into the sprung carriage that defined elite transport for four centuries.'},
+  {id:'t3',concept:'Wheel Technology',from:'carriage',to:'automobile',year:1885,type:'transmitted',desc:'Carriage engineering — springs, steering, brakes — transferred directly to the first automobiles, which were literally horseless carriages.'},
+  {id:'t4',concept:'Road Engineering',from:'persian_royal_road',to:'roman_roads',year:-300,type:'transmitted',desc:'Roman road engineers studied Persian highways and improved them with layered construction and drainage systems.'},
+  {id:'t5',concept:'Road Engineering',from:'roman_roads',to:'turnpike_road',year:1700,type:'transmitted',desc:'Turnpike engineers rediscovered Roman road-building principles — drainage, layered construction, and engineered surfaces.'},
+  {id:'t6',concept:'Road Engineering',from:'turnpike_road',to:'autobahn',year:1930,type:'transmitted',desc:'Autobahn design built on turnpike principles — controlled access, engineered surfaces, and systematic maintenance.'},
+  {id:'t7',concept:'Road Engineering',from:'autobahn',to:'interstate_highway',year:1956,type:'transmitted',desc:'Eisenhower was inspired by the German Autobahn to create the US Interstate Highway System.'},
+  {id:'t8',concept:'Sail Power',from:'reed_boat',to:'sailing_vessel',year:-3500,type:'transmitted',desc:'The first sails on Nile reed boats evolved into the rigged sailing vessels that would dominate maritime transport for millennia.'},
+  {id:'t9',concept:'Sail Power',from:'sailing_vessel',to:'phoenician_galley',year:-1200,type:'transmitted',desc:'Phoenician shipwrights combined Mediterranean sail technology with superior hull design to create the ancient world\'s finest vessels.'},
+  {id:'t10',concept:'Sail Power',from:'phoenician_galley',to:'dhow',year:600,type:'transmitted',desc:'The lateen sail, perfected in the Mediterranean, was adopted by Indian Ocean dhow builders for monsoon sailing.'},
+  {id:'t11',concept:'Sail Power',from:'dhow',to:'caravel',year:1440,type:'transmitted',desc:'Portuguese shipwrights adapted the dhow\'s lateen rig to create the caravel — the exploration vessel that connected the world.'},
+  {id:'t12',concept:'Steam Revolution',from:'steam_locomotive',to:'stockton_darlington',year:1825,type:'transmitted',desc:'Trevithick\'s steam locomotive technology was refined by George Stephenson for the world\'s first public railway.'},
+  {id:'t13',concept:'Steam Revolution',from:'stockton_darlington',to:'transcontinental_railroad',year:1869,type:'transmitted',desc:'British railway technology crossed the Atlantic, enabling the transcontinental railroad that unified America.'},
+  {id:'t14',concept:'Steam Revolution',from:'steam_locomotive',to:'steamship',year:1819,type:'transmitted',desc:'Steam engine technology from locomotives was adapted for marine propulsion, creating wind-independent ocean transport.'},
+  {id:'t15',concept:'Navigation Science',from:'compass_navigation',to:'caravel',year:1440,type:'transmitted',desc:'The magnetic compass enabled the caravel\'s oceanic voyages — without compass navigation, the Age of Exploration was impossible.'},
+  {id:'t16',concept:'Navigation Science',from:'compass_navigation',to:'gps',year:1978,type:'transmitted',desc:'GPS satellite navigation is the magnetic compass\'s digital successor — providing position anywhere on Earth in all conditions.'},
+  {id:'t17',concept:'High-Speed Rail',from:'shinkansen',to:'tgv',year:1981,type:'transmitted',desc:'Japan\'s Shinkansen proved high-speed rail was viable; France\'s TGV adapted the concept for European distances and conditions.'},
+  {id:'t18',concept:'High-Speed Rail',from:'tgv',to:'china_hsr',year:2008,type:'transmitted',desc:'China imported TGV and Shinkansen technology, then scaled it to build the world\'s largest high-speed rail network.'},
+  {id:'t19',concept:'Canal Innovation',from:'grand_canal',to:'canal_lock',year:984,type:'transmitted',desc:'The pound lock was invented on China\'s Grand Canal, solving the problem of moving boats between different water levels.'},
+  {id:'t20',concept:'Canal Innovation',from:'canal_lock',to:'bridgewater_canal',year:1761,type:'transmitted',desc:'Lock technology from Chinese and Italian canals enabled Britain\'s canal network to cross hilly terrain.'},
+  {id:'t21',concept:'Canal Innovation',from:'bridgewater_canal',to:'erie_canal',year:1825,type:'transmitted',desc:'British canal engineering crossed the Atlantic — the Erie Canal applied British lock technology at American scale.'},
+  {id:'t22',concept:'Canal Innovation',from:'canal_lock',to:'panama_canal',year:1914,type:'transmitted',desc:'Lock technology scaled to oceanic proportions at Panama — the largest locks ever built, lifting ships 26 metres.'},
+  {id:'t23',concept:'Electric Transport',from:'electric_tram',to:'london_underground',year:1890,type:'transmitted',desc:'Electric traction technology, proven on surface trams, was adapted for underground railways — eliminating tunnel smoke.'},
+  {id:'t24',concept:'Electric Transport',from:'electric_tram',to:'electric_car',year:2008,type:'transmitted',desc:'Electric vehicle technology, pioneered by trams in the 1880s, was reinvented for personal transport by Tesla.'},
+  {id:'t25',concept:'Space Transport',from:'apollo_moon',to:'space_shuttle',year:1981,type:'transmitted',desc:'Apollo\'s rocket technology and mission control expertise were adapted for the reusable Space Shuttle programme.'},
+  {id:'t26',concept:'Space Transport',from:'space_shuttle',to:'spacex',year:2010,type:'transmitted',desc:'SpaceX learned from the Shuttle\'s mistakes — choosing simplicity and expendable-then-reusable boosters over complex reusability.'},
+  {id:'t27',concept:'Mass Production',from:'model_t',to:'liberty_ship',year:1941,type:'transmitted',desc:'Ford\'s assembly-line principles were applied to shipbuilding by Henry Kaiser, mass-producing Liberty ships at unprecedented speed.'},
+  {id:'t28',concept:'Containerisation',from:'container_ship',to:'diesel_truck',year:1960,type:'transmitted',desc:'Containerisation linked ships and trucks into a single intermodal system — the container transfers seamlessly from ship to truck.'},
+  {id:'t29',concept:'Digital Transport',from:'gps',to:'ride_hailing',year:2009,type:'transmitted',desc:'GPS-enabled smartphones made ride-hailing possible — Uber could not exist without satellite navigation and mobile computing.'},
+  {id:'t30',concept:'Digital Transport',from:'ride_hailing',to:'autonomous_vehicle',year:2015,type:'transmitted',desc:'Ride-hailing platforms are the natural business model for autonomous vehicles — fleets of self-driving taxis.'},
+];
 
 
-const WOMEN={};
+const WOMEN={
+  automobile:[
+    {nm:'Bertha Benz',yr:1888,role:'First Long-Distance Driver',desc:'Drove 106 km from Mannheim to Pforzheim in her husband\'s Patent-Motorwagen — the first long-distance automobile journey. She solved fuel supply (buying ligroin at a pharmacy), fixed a blocked fuel line with a hatpin, and used a garter to insulate a wire. She proved the car was practical.'},
+    {nm:'Alice Ramsey',yr:1909,role:'First Woman to Drive Across America',desc:'Drove from New York to San Francisco in 59 days — mostly on unpaved roads. Her journey demonstrated that women could handle automobile travel across the toughest terrain. She was inducted into the Automotive Hall of Fame in 2000.'}
+  ],
+  bicycle:[
+    {nm:'Annie Londonderry',yr:1894,role:'First Woman to Cycle Around the World',desc:'Cycled (and used boats and trains) around the world in 15 months, departing Boston and returning to Chicago. She challenged Victorian assumptions about women\'s physical capability and independence.'},
+    {nm:'Kittie Knox',yr:1895,role:'African American Cycling Pioneer',desc:'Defied racial segregation at the League of American Wheelmen\'s national meet in 1895. She was one of the first Black members of the organisation and challenged both racial and gender barriers in cycling.'}
+  ],
+  wright_brothers:[
+    {nm:'Raymonde de Laroche',yr:1910,role:'First Licensed Female Pilot',desc:'Earned the first pilot\'s licence issued to a woman — Fédération Aéronautique Internationale licence No. 36, dated 8 March 1910. She flew in air races and survived multiple crashes before dying in a test flight in 1919.'},
+    {nm:'Harriet Quimby',yr:1911,role:'First American Woman Pilot',desc:'First American woman to earn a pilot\'s licence and first woman to fly across the English Channel (1912). Her achievements were overshadowed by the Titanic disaster, which occurred the same week as her Channel crossing.'}
+  ],
+  dc3:[
+    {nm:'Jacqueline Cochran',yr:1938,role:'Pioneer Aviator and WASP Director',desc:'Won the Bendix Trophy air race (1938), led the Women Airforce Service Pilots (WASPs) during World War II, and was the first woman to break the sound barrier (1953). She held more speed, altitude, and distance records than any pilot of her era.'},
+    {nm:'Cornelia Fort',yr:1941,role:'First American Woman to Encounter Enemy Aircraft',desc:'Was flying instruction near Pearl Harbor on 7 December 1941 when Japanese aircraft attacked. She evaded enemy fire and landed safely. She later joined the WASPs and was killed in a mid-air collision during training in 1943.'}
+  ],
+  jet_airliner:[
+    {nm:'Emily Howell Warner',yr:1973,role:'First US Female Airline Captain',desc:'Became the first woman hired as a pilot by a US scheduled airline (Frontier Airlines, 1973) and the first female airline captain in the US. She flew for 40 years, breaking barriers in one of aviation\'s most male-dominated professions.'}
+  ],
+  apollo_moon:[
+    {nm:'Katherine Johnson',yr:1961,role:'NASA Mathematician',desc:'Calculated the orbital trajectories for Mercury, Gemini, and Apollo missions. John Glenn refused to fly until Katherine Johnson personally verified the electronic computer\'s calculations. Her mathematics made space flight possible.'},
+    {nm:'Margaret Hamilton',yr:1969,role:'Apollo Software Engineer',desc:'Led the team that developed the onboard flight software for Apollo 11. Her software\'s error-handling design prevented an abort during the Moon landing. She coined the term "software engineering" — and proved its importance by saving the mission.'}
+  ],
+  concorde:[
+    {nm:'Barbara Harmer',yr:1993,role:'First Female Concorde Pilot',desc:'Became the first woman qualified to fly Concorde as a first officer with British Airways in 1993. She flew the world\'s fastest airliner until its retirement in 2003, breaking one of aviation\'s last gender barriers.'}
+  ],
+  space_shuttle:[
+    {nm:'Sally Ride',yr:1983,role:'First American Woman in Space',desc:'Flew on STS-7 aboard Challenger, becoming the first American woman in space. She later became a physics professor and advocate for girls in STEM. Her legacy extends from space exploration to education reform.'},
+    {nm:'Mae Jemison',yr:1992,role:'First African American Woman in Space',desc:'Flew on STS-47 aboard Endeavour, becoming the first Black woman in space. A physician, engineer, and Peace Corps volunteer, she represented the diversity that space exploration should embody.'}
+  ],
+  steam_locomotive:[
+    {nm:'Olive Dennis',yr:1920,role:'Railroad Engineer and Comfort Innovator',desc:'Baltimore & Ohio Railroad\'s first female engineer, she invented reclining seats, air conditioning for passenger cars, and stain-resistant upholstery. She revolutionised passenger rail comfort — every modern train seat descends from her designs.'}
+  ],
+  steamship:[
+    {nm:'Victoria Drummond',yr:1922,role:'First British Female Marine Engineer',desc:'Served as a marine engineer throughout World War II, including surviving an attack on her ship off the coast of France. She received the MBE for bravery and was the first woman member of the Institute of Marine Engineers.'}
+  ],
+  sailing_vessel:[
+    {nm:'Jeanne Baret',yr:1766,role:'First Woman to Circumnavigate the Globe',desc:'Disguised as a man, she served as botanist\'s assistant on Bougainville\'s expedition (1766–1769), becoming the first woman to sail around the world. She collected botanical specimens across the Pacific and was eventually discovered but completed the voyage.'}
+  ],
+  clipper_ship:[
+    {nm:'Eleanor Creesy',yr:1851,role:'Clipper Ship Navigator',desc:'Navigated the clipper Flying Cloud on its record-setting 89-day passage from New York to San Francisco — a record that stood for 138 years. She was one of the most skilled navigators of the 19th century, male or female.'}
+  ],
+  electric_car:[
+    {nm:'Mary Barra',yr:2014,role:'CEO of General Motors',desc:'First female CEO of a major automaker, she has led GM\'s transition to electric vehicles with the Ultium platform and the Chevrolet Equinox EV. Under her leadership, GM committed to an all-electric future by 2035.'}
+  ],
+  shinkansen:[
+    {nm:'Noriko Yamamoto',yr:2020,role:'First Female Shinkansen Driver',desc:'Became one of the first women to drive Japan\'s bullet train, breaking a gender barrier in one of the world\'s most prestigious rail services. Her appointment reflected slow but significant progress in Japanese railway employment.'}
+  ],
+  spacex:[
+    {nm:'Gwynne Shotwell',yr:2008,role:'SpaceX President and COO',desc:'Has managed SpaceX\'s operations, launch schedule, and commercial strategy since 2008. She oversees the most successful private launch company in history. Without her operational leadership, SpaceX\'s 300+ successful missions would not have been possible.'}
+  ],
+  hot_air_balloon:[
+    {nm:'Sophie Blanchard',yr:1805,role:'First Professional Female Aeronaut',desc:'Napoleon\'s chief of aerostatics, she made 67 balloon flights — more than any woman of her era. She was killed in 1819 when her hydrogen balloon caught fire from fireworks. She was the first woman to die in an aviation accident.'}
+  ],
+  chinese_junk:[
+    {nm:'Ching Shih',yr:1801,role:'Pirate Commander',desc:'Commanded the largest pirate fleet in history — 1,800 junks and 80,000 pirates. She was so powerful that the Chinese, Portuguese, and British navies could not defeat her. She retired undefeated and lived to old age. The most successful pirate in history was a woman.'}
+  ],
+  london_underground:[
+    {nm:'Mavis Robinson',yr:1978,role:'First Female Tube Train Driver',desc:'Became the first woman to drive a London Underground train in 1978. She operated trains on the District Line. Her appointment opened the door for the hundreds of female drivers who operate the Tube today.'}
+  ],
+  helicopter:[
+    {nm:'Hanna Reitsch',yr:1937,role:'Pioneer Helicopter Pilot',desc:'Among the first helicopter pilots, she demonstrated the Focke-Wulf Fw 61 inside the Berlin Deutschlandhalle in 1938 — the first indoor helicopter flight. She held over 40 aviation records. Her talent was extraordinary; her association with the Nazi regime remains controversial.'}
+  ],
+  transcontinental_railroad:[
+    {nm:'Chinese Women Workers',yr:1865,role:'Support Workers',desc:'While the 15,000+ Chinese workers who built the Central Pacific Railroad were overwhelmingly male, women in Chinese communities along the route provided essential support — cooking, laundry, and medical care. Their labour sustained the workforce that built America\'s most ambitious infrastructure project.'}
+  ],
+  persian_royal_road:[
+    {nm:'Queen Atossa',yr:-500,role:'Persian Royal Traveller',desc:'Wife of Darius I and mother of Xerxes, she used the Royal Road for diplomatic journeys across the Persian Empire. As one of the most powerful women in the ancient world, her travel along the road demonstrated its role in connecting the empire\'s ruling class.'}
+  ],
+  suez_canal:[
+    {nm:'Empress Eugénie',yr:1869,role:'Canal Opening Dignitary',desc:'Empress of France and guest of honour at the Suez Canal opening ceremony. She sailed the first vessel through the canal. While not a builder, her presence symbolised the political significance of the canal and France\'s role in its creation.'}
+  ],
+  pony_express:[
+    {nm:'Station Women',yr:1860,role:'Relay Station Managers',desc:'Women managed several Pony Express relay stations along the route — feeding riders, maintaining horses, and operating isolated outposts. Their work was essential to the system\'s function. The riders got the glory; the station women made it possible.'}
+  ],
+  canal_lock:[
+    {nm:'Female Lock-Keepers',yr:1800,role:'Canal Lock Operators',desc:'Women operated canal locks across Britain\'s inland waterway system — opening and closing gates, managing water levels, and collecting tolls. Lock-keeping was one of the few transport professions open to women in the 18th and 19th centuries.'}
+  ],
+  bus:[
+    {nm:'Rosa Parks',yr:1955,role:'Civil Rights Activist',desc:'Her refusal to give up her bus seat to a white passenger on 1 December 1955 catalysed the Montgomery Bus Boycott and the American civil rights movement. The bus became a symbol of racial justice. Parks made the bus the stage for one of history\'s most consequential acts of resistance.'}
+  ],
+];
 
 let year=-8000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -6303,9 +6444,58 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+  'Europe':['roman_roads','viking_longship','hanseatic_cog','stagecoach','turnpike_road','bridgewater_canal','canal_lock','steam_locomotive','stockton_darlington','bicycle','london_underground','electric_tram','autobahn','tgv','channel_tunnel','carriage','fluyt'],
+  'East Asia':['grand_canal','chinese_junk','compass_navigation','zheng_he_fleet','shinkansen','china_hsr','maglev','rickshaw'],
+  'South & SE Asia':['outrigger','dhow','elephant_transport','rickshaw','motorcycle'],
+  'Middle East':['wheel','chariot','camel_caravan','persian_royal_road','silk_road','dhow','suez_canal','oil_tanker'],
+  'Africa':['dugout_canoe','reed_boat','nile_barge','camel_caravan','donkey_mule','suez_canal'],
+  'North America':['pony_express','transcontinental_railroad','erie_canal','model_t','interstate_highway','apollo_moon','space_shuttle','spacex','boeing_747','jet_airliner','dc3','jeep','autonomous_vehicle','ride_hailing'],
+  'South America':['inca_road','dugout_canoe','outrigger','panama_canal','cable_car'],
+  'Pacific & Oceania':['outrigger','polynesian_voyaging','kayak'],
+  'Arctic':['dog_sled','kayak','snowshoe_ski'],
+  'Global Maritime':['sailing_vessel','steamship','clipper_ship','container_ship','oil_tanker','liberty_ship','ironclad','nuclear_submarine','ferry'],
+  'Global Aviation':['hot_air_balloon','zeppelin','wright_brothers','dc3','jet_airliner','boeing_747','concorde','helicopter','drone_delivery','parachute'],
+  'Global Digital':['gps','ride_hailing','autonomous_vehicle','electric_car','electric_scooter','drone_delivery','hyperloop'],
+};
 
-const HERITAGE_REASONS={};
+const HERITAGE_REASONS={
+  dugout_canoe:'First watercraft, river transport',
+  reed_boat:'Nile transport, pyramid building',
+  horse_domestication:'Land speed revolution',
+  wheel:'Most consequential transport invention',
+  sailing_vessel:'Wind-powered ocean transport',
+  ox_cart:'Bulk overland freight',
+  chariot:'High-speed warfare',
+  camel_caravan:'Desert trade networks',
+  phoenician_galley:'Mediterranean maritime mastery',
+  persian_royal_road:'First engineered highway',
+  roman_roads:'Greatest ancient road network',
+  silk_road:'First global trade network',
+  grand_canal:'Longest artificial waterway',
+  viking_longship:'North Atlantic exploration',
+  dhow:'Indian Ocean monsoon trade',
+  chinese_junk:'Most advanced medieval vessel',
+  compass_navigation:'Enabled ocean navigation',
+  inca_road:'40,000 km without the wheel',
+  caravel:'Ship that connected continents',
+  steam_locomotive:'The transport revolution',
+  bicycle:'Most energy-efficient vehicle',
+  suez_canal:'Shortcut between worlds',
+  transcontinental_railroad:'Bound a continent',
+  london_underground:'First metro system',
+  automobile:'Personal mobility revolution',
+  model_t:'Car for the masses',
+  wright_brothers:'First powered flight',
+  panama_canal:'Atlantic meets Pacific',
+  shinkansen:'Bullet train revolution',
+  boeing_747:'Democratised flying',
+  container_ship:'Box that changed world trade',
+  gps:'Satellite navigation for all',
+  electric_car:'Decarbonising the automobile',
+  spacex:'Reusable rockets',
+  china_hsr:'World\'s largest HSR network',
+};
 
 let heritageRegion=null;
 
