@@ -543,7 +543,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </head>
 <body>
 
-<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to civilization panel</button>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to language panel</button>
 <header class="hdr" role="banner">
   <div class="hdr-left">
     <span class="logo-t">LINGUA</span>
@@ -556,7 +556,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
   <div class="hdr-right">
     <div class="cnt-disp">
       <span class="cnt-n" id="cnt-n">2</span>
-      civilizations active
+      languages known
     </div>
     <!-- Burger menu -->
     <div class="burger-wrap" id="burger-wrap">
@@ -577,7 +577,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
           <span>◉</span><span>Explore</span>
         </button>
         <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⟳</span><span>Threads</span>
+          <span>⟳</span><span>Linguistic Chains</span>
         </button>
         <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
           <span>⊞</span><span>Compare</span>
@@ -586,7 +586,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
           <span>⟁</span><span>What If</span>
         </button>
         <button class="burger-item burger-mode" id="btn-heritage" onclick="setMode('heritage');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⌂</span><span>Heritage</span>
+          <span>⌂</span><span>Language Families</span>
         </button>
         <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" role="menuitem">
           <span style="font-size:15px">♀</span>
@@ -609,10 +609,10 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </header>
 
 
-<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Concept transmissions">
+<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Linguistic Chains">
   <div class="thread-panel-inner">
     <div class="thread-panel-bar">
-      <span class="thread-panel-title" id="thread-panel-title">Concept Threads</span>
+      <span class="thread-panel-title" id="thread-panel-title">Linguistic Chains</span>
       <div style="display:flex;align-items:center;gap:12px">
         <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">← All Threads</button>
         <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">✕</button>
@@ -628,7 +628,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 <div class="main">
   <div class="map-tl-col">
   <div class="map-c">
-    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with civilization markers" style="cursor:pointer">
+    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with language markers" style="cursor:pointer">
       <defs>
 
         <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
@@ -665,7 +665,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
       <g id="thread-layer"></g>
       <!-- Selected-item label only -->
       <g id="label-layer" pointer-events="none"></g>
-      <!-- Civilization markers -->
+      <!-- Language markers -->
       <g id="mark-layer"></g>
       <!-- Hover tooltip label (sits above markers) -->
       <g id="hover-label-layer" pointer-events="none"></g>
@@ -676,11 +676,11 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
     </div>
   </div>
   <div class="tl-wrap" role="navigation" aria-label="Timeline">
-  <svg id="density-bar" aria-label="Civilization density over time"></svg>
+  <svg id="density-bar" aria-label="Language density over time"></svg>
   <div class="tl-lbls">
-    <span class="tl-lbl">65,000 BCE</span>
+    <span class="tl-lbl">100,000 BCE</span>
+    <span class="tl-lbl">10,000 BCE</span>
     <span class="tl-lbl">3000 BCE</span>
-    <span class="tl-lbl">2000 BCE</span>
     <span class="tl-lbl">1000 BCE</span>
     <span class="tl-lbl">1 CE</span>
     <span class="tl-lbl">1000 CE</span>
@@ -694,7 +694,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </div>
   </div><!-- /map-tl-col -->
 
-  <div class="info-panel" id="info-panel" role="complementary" aria-label="Civilization details">
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Language details">
     <div class="drawer-handle" id="drawer-handle" aria-label="Drag to resize"></div>
     <div id="drawer-top"></div>
     <div id="drawer-content"></div>
@@ -751,7 +751,7 @@ const ERAS=[
   {y:2000,n:'DIGITAL AGE'},
 ];
 
-const CIVS=[
+const ITEMS=[
   {id:'mesopotamia',fp:{mil:8,com:9,art:7,sci:9,reach:6,lon:10},music:{scale:'lydian',root:58,tempo:60,timbre:'pluck',rhythm:[1,0,0,1,0,0,1,0],reverb:.4,artifact:'Bull-headed lyre, Royal Cemetery of Ur (c.2500 BCE); Hurrian Hymn No.6 (c.1400 BCE) — oldest notated melody on record'},lon:44,lat:33,nm:'Mesopotamia',sb:'Tigris-Euphrates Civilizations',x:585,y:192,s:-4000,e:500,
    conns:['egypt','persia','india'],
    overview:'The world\'s first cities rose in the alluvial plains between the Tigris and Euphrates around 4000 BCE — not from genius alone, but from the ecological pressure of irrigating dry land at scale, which demanded record-keeping, law, and bureaucracy. Sumer, Akkad, Babylon, and Assyria succeeded one another as dominant powers over three millennia, each collapse absorbed by the next dynasty\'s rise. This civilisation gave humanity writing, the wheel, the 60-minute hour, the first law code, and the oldest story ever told — Gilgamesh confronting death and finding no answer but the fact of friendship. Its rivers are polluted and its ruins half-buried in sand, but the institutional DNA of every government on Earth descends from the clay tablets of its scribes.',
@@ -5128,7 +5128,7 @@ function toggleLensDD(){
 }
 
 function lensLabel(){
-  if(!lenses.size)return'Civilization Arc';
+  if(!lenses.size)return'Language Arc';
   const names=[...lenses].map(id=>{const L=LENSES.find(l=>l.id===id);return L?L.lbl:'';});
   if(names.length===1)return names[0];
   if(names.length<=3)return names.join(' · ');
@@ -5164,7 +5164,7 @@ function renderLensDD(){
       <div class="lens-row${arcOn?' on':''}" onclick="toggleLens('__arc__')">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Language Arc</span>
       </div>
       <div class="lens-row-sep"></div>
       ${rows}
@@ -5200,15 +5200,15 @@ function toggleLens(id){
       }).join('');
     }
     const col=lenses.size?getLensCol():OVERVIEW_COL;
-    const actIds=new Set(CIVS.filter(x=>active(x)).map(x=>x.id));
+    const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
     const connHTML=c.conns.length?`<div class="conn-hdr" id="conn-hdr">Historical connections</div>`+c.conns.map(cid=>{
-      const o=CIVS.find(x=>x&&x.id===cid);if(!o)return'';
+      const o=ITEMS.find(x=>x&&x.id===cid);if(!o)return'';
       const isA=actIds.has(cid);
       const badge=isA?'ACTIVE':'→ JUMP';
       const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
       return`<button class="conn-item" tabindex="0"
           aria-label="${tip}"
-          onclick="navigateToCiv('${cid}')"
+          onclick="navigateToItem('${cid}')"
           style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
         <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
         <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -5253,19 +5253,19 @@ function civPt(c){
 }
 
 function renderMap(){
-  const ids=new Set(CIVS.filter(c=>active(c)).map(c=>c.id));
+  const ids=new Set(ITEMS.filter(c=>active(c)).map(c=>c.id));
   window.ids_cache=ids;
   const col=lenses.size?getLensCol():OVERVIEW_COL;
 
   const drawn=new Set();
   let cl='';
-  CIVS.forEach(c=>{
+  ITEMS.forEach(c=>{
     if(!ids.has(c.id))return;
     c.conns.forEach(id=>{
       const k=[c.id,id].sort().join('-');
       if(drawn.has(k)||!ids.has(id))return;
       drawn.add(k);
-      const o=CIVS.find(x=>x&&x.id===id);
+      const o=ITEMS.find(x=>x&&x.id===id);
       if(!o)return;
       const [cx,cy]=civPt(c),[ox,oy]=civPt(o);
       const mx=(cx+ox)/2,my=Math.min(cy,oy)-28;
@@ -5276,7 +5276,7 @@ function renderMap(){
 
   // TWO-PASS: rings first (all), then dots on top (all) — prevents hit area overlap
   let rings='', dots='', ll='';
-  const civData=CIVS.map(c=>{
+  const civData=ITEMS.map(c=>{
     const on=ids.has(c.id);
     const isSel=sel&&sel.id===c.id;
     const heritageIds=mode==='heritage'&&heritageRegion?new Set(HERITAGE_REGIONS[heritageRegion]||[]):null;
@@ -5317,7 +5317,7 @@ function renderMap(){
       const pulseMax=Math.max(8, 16/zr);
       dots+=`<g role="button" tabindex="0" data-civ="${c.id}"
           aria-label="${c.nm} — click to explore"
-          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();civClick('${c.id}')}"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();itemClick('${c.id}')}"
           opacity="${op}" pointer-events="none">
           <circle cx="${cx}" cy="${cy}" r="${dotR.toFixed(1)}"
             fill="${mcol}" filter="url(#glow${isSel?'2':''})"
@@ -5338,8 +5338,8 @@ function renderMap(){
   document.getElementById('label-layer').innerHTML=ll;
 }
 
-function navigateToCiv(id){
-  const c=CIVS.find(x=>x&&x.id===id);
+function navigateToItem(id){
+  const c=ITEMS.find(x=>x&&x.id===id);
   if(!c)return;
   if(mode==='whatif'){
     setWhatIf(id);
@@ -5364,9 +5364,9 @@ function navigateToCiv(id){
   document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
 }
 
-function civClick(id){
+function itemClick(id){
   _renderHoverLabel(null);
-  navigateToCiv(id);
+  navigateToItem(id);
 }
 
 
@@ -5396,15 +5396,15 @@ function renderDrawerContent(){
     }).join('');
   }
   const col=lenses.size?getLensCol():OVERVIEW_COL;
-  const actIds=new Set(CIVS.filter(x=>active(x)).map(x=>x.id));
+  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
   const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
-    const o=CIVS.find(x=>x&&x.id===id);if(!o)return'';
+    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
     const isA=actIds.has(id);
     const badge=isA?'ACTIVE':'→ JUMP';
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -5547,15 +5547,15 @@ function renderDrawer(){
   }
 
   const col=lenses.size?getLensCol():OVERVIEW_COL;
-  const actIds=new Set(CIVS.filter(x=>active(x)).map(x=>x.id));
+  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
   const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
-    const o=CIVS.find(x=>x&&x.id===id);if(!o)return'';
+    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
     const isA=actIds.has(id);
     const badge=isA?'ACTIVE':'→ JUMP';
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -5583,7 +5583,7 @@ function setYear(y){
   tlEl.setAttribute('aria-valuetext',fmt(year));
   document.getElementById('era-y').textContent=fmt(year);
   document.getElementById('era-n').textContent=eraName(year);
-  document.getElementById('cnt-n').textContent=CIVS.filter(c=>active(c)).length;
+  document.getElementById('cnt-n').textContent=ITEMS.filter(c=>active(c)).length;
   renderMap();
   if(sel&&!active(sel))closeInfo();
   else renderDrawer();
@@ -5713,14 +5713,14 @@ function renderThreadConceptList(){
     list.style.display='block';
     if(steps){steps.style.display='none';steps.innerHTML='';}
     if(backBtn)backBtn.style.display='none';
-    if(title)title.textContent='Concept Threads';
+    if(title)title.textContent='Linguistic Chains';
     const concepts=getUniqueConcepts();
     list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
       const chain=getChain(c);
       return`<button class="thread-concept-btn" onclick="activateThread('${c.replace(/'/g,"\\'")}')" >
         <span class="thread-concept-name">${c}</span>
         <span class="thread-concept-chain">${chain.map(t=>{
-          const fc=CIVS.find(x=>x&&x.id===t.from),tc=CIVS.find(x=>x&&x.id===t.to);
+          const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
           return(fc?fc.nm:'?')+' → '+(tc?tc.nm:'?');
         }).join('<br>')}</span>
       </button>`;
@@ -5759,7 +5759,7 @@ function renderThreadSteps(concept){
     <div class="thread-chain-line"></div>
   </div>`;
   const items=chain.map(t=>{
-    const fc=CIVS.find(x=>x&&x.id===t.from),tc=CIVS.find(x=>x&&x.id===t.to);
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     return`<div class="thread-step">
       <div class="thread-step-yr">${fmt(t.year)}</div>
       <div class="thread-step-civ">${fc?fc.nm:'?'} → ${tc?tc.nm:'?'}</div>
@@ -5783,7 +5783,7 @@ function renderThreadPaths(concept){
   let out='<defs><marker id="tarrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f0d060" opacity=".9"/></marker></defs>';
   const drawn=[];
   chain.forEach(t=>{
-    const fc=CIVS.find(x=>x&&x.id===t.from),tc=CIVS.find(x=>x&&x.id===t.to);
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
     const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-44;
@@ -5819,7 +5819,7 @@ function renderThreadPaths(concept){
 
 // ── COMPARE MODE ──
 function addToCompare(id){
-  const c=CIVS.find(x=>x&&x.id===id);
+  const c=ITEMS.find(x=>x&&x.id===id);
   if(!c)return;
   if(!sel){sel=c;mode='compare';}
   else{sel2=c;mode='compare';}
@@ -5894,7 +5894,7 @@ function renderLensDDInline(){
       <div class="lens-row${arcOn?' on':''}" onclick="lenses.clear();lensDD=false;if(mode==='compare')renderCompareDrawer();else renderDrawerContent();">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Language Arc</span>
       </div>
       <div class="lens-row-sep"></div>${rows}
       <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done ▴</div>
@@ -5925,8 +5925,8 @@ function decodeState(){
       year=y;
       document.getElementById('tl').value=y;
     }
-    if(params.get('c')){sel=CIVS.find(x=>x&&x.id===params.get('c'))||null;}
-    if(params.get('c2')){sel2=CIVS.find(x=>x&&x.id===params.get('c2'))||null;}
+    if(params.get('c')){sel=ITEMS.find(x=>x&&x.id===params.get('c'))||null;}
+    if(params.get('c2')){sel2=ITEMS.find(x=>x&&x.id===params.get('c2'))||null;}
     if(params.get('l')){params.get('l').split(',').forEach(id=>lenses.add(id));}
     if(params.get('m'))mode=params.get('m');
     if(params.get('t'))activeThread=params.get('t');
@@ -6325,7 +6325,7 @@ function renderEnhancedSpanBar(c){
   const width=Math.min(100-left,(c.e-c.s)/total*100);
 
   // Find up to 4 contemporaries that overlap with this civ's lifespan
-  const overlap=CIVS.filter(x=>x.id!==c.id&&x.s<c.e&&x.e>c.s)
+  const overlap=ITEMS.filter(x=>x.id!==c.id&&x.s<c.e&&x.e>c.s)
     .map(x=>{
       const overlapStart=Math.max(x.s,c.s);
       const overlapEnd=Math.min(x.e,c.e);
@@ -6343,7 +6343,7 @@ function renderEnhancedSpanBar(c){
     const ol=Math.max(xl,left);
     const or_=Math.min(xl+xw,left+width);
     const ow=Math.max(0,or_-ol);
-    return`<div class="contemp-bar-row" onclick="navigateToCiv('${x.id}')" title="Navigate to ${x.nm}">
+    return`<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
       <div class="contemp-bar-nm">${x.nm}</div>
       <div class="contemp-bar-track">
         <div class="contemp-bar-fill" style="left:${(ol-left).toFixed(1)}%;width:${ow.toFixed(1)}%;background:${colors[i]}"></div>
@@ -6380,7 +6380,7 @@ function renderDensityBar(){
   let mx=0;
   for(let i=0;i<steps;i++){
     const yr=MIN+i*stepYr;
-    const n=CIVS.filter(c=>c.s<=yr&&c.e>=yr).length;
+    const n=ITEMS.filter(c=>c.s<=yr&&c.e>=yr).length;
     counts.push(n);
     if(n>mx)mx=n;
   }
@@ -6405,10 +6405,10 @@ function renderDiplomaticLayer(){
   // Add diplomatic lines on top of regular connections when in explore mode
   // and no civ selected (so they're visible on the map)
   if(sel)return; // only show when no civ selected
-  const ids=new Set(CIVS.filter(c=>active(c)).map(c=>c.id));
+  const ids=new Set(ITEMS.filter(c=>active(c)).map(c=>c.id));
   let dl='';
   DIPLOMATIC.forEach(d=>{
-    const fc=CIVS.find(x=>x&&x.id===d.from),tc=CIVS.find(x=>x&&x.id===d.to);
+    const fc=ITEMS.find(x=>x&&x.id===d.from),tc=ITEMS.find(x=>x&&x.id===d.to);
     if(!fc||!tc||!ids.has(d.from)||!ids.has(d.to))return;
     const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-36;
@@ -6428,7 +6428,7 @@ function renderDiplomaticSection(c){
   if(!relevant.length)return'';
   return`<div class="conn-hdr">Diplomatic Record</div>`+
     relevant.map(d=>{
-      const other=CIVS.find(x=>x&&x.id===(d.from===c.id?d.to:d.from));
+      const other=ITEMS.find(x=>x&&x.id===(d.from===c.id?d.to:d.from));
       return`<div style="padding:8px 0;border-bottom:1px solid var(--bdr2)">
         <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
           <span class="diplom-icon"></span>
@@ -6451,7 +6451,7 @@ function renderWhatIfPaths(){
   if(!layer){return;}
   if(!whatifCiv){layer.innerHTML='';return;}
 
-  const c=CIVS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
   if(!c){layer.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -6464,7 +6464,7 @@ function renderWhatIfPaths(){
   // Direct broken paths — animated red dashed lines with stroke-dashoffset animation
   let validDirect=0;
   directOut.forEach((t,i)=>{
-    const tc=CIVS.find(x=>x&&x.id===t.to);
+    const tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!tc)return;
     const [tx,ty]=civPt(tc);
     const mx=(cx+tx)/2, my=Math.min(cy,ty)-40;
@@ -6488,7 +6488,7 @@ function renderWhatIfPaths(){
   // Downstream broken paths — dimmer orange dashes
   const downDelay=(validDirect*0.2+0.4).toFixed(1);
   downstream.forEach((t,j)=>{
-    const fc=CIVS.find(x=>x&&x.id===t.from),tc=CIVS.find(x=>x&&x.id===t.to);
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
     const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-24;
@@ -6503,7 +6503,7 @@ function renderWhatIfPaths(){
   // Set text content separately for label safety
   validDirect=0;
   directOut.forEach((t,i)=>{
-    const tc=CIVS.find(x=>x&&x.id===t.to);
+    const tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!tc)return;
     const lbl=document.getElementById('wi-lbl-'+i);
     if(lbl)lbl.textContent=t.concept;
@@ -6548,7 +6548,7 @@ function renderWhatIfDrawer(){
       {id:'rome',         why:'Latin, Roman law and the institutional Church'},
       {id:'byzantium',    why:'Preserved the Greek texts that triggered the Renaissance'},
     ].map(s=>{
-      const c=CIVS.find(x=>x&&x.id===s.id);
+      const c=ITEMS.find(x=>x&&x.id===s.id);
       if(!c)return'';
       return`<button class="whatif-civ-btn" onclick="setWhatIf('${c.id}')">
         <div style="flex:1">
@@ -6561,7 +6561,7 @@ function renderWhatIfDrawer(){
     return;
   }
 
-  const c=CIVS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
   if(!c){dc.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -6598,7 +6598,7 @@ function renderWhatIfDrawer(){
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:#e8251a;text-transform:uppercase;margin-bottom:8px">Direct transmissions broken</div>
   ${directOut.length
     ? directOut.map(t=>{
-        const tc=CIVS.find(x=>x&&x.id===t.to);
+        const tc=ITEMS.find(x=>x&&x.id===t.to);
         return`<div style="padding:9px 0;border-bottom:1px solid var(--bdr2)">
           <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap">
             <span style="font-family:'Cinzel',serif;font-size:10px;color:#e8251a;text-decoration:line-through;opacity:.8">${t.concept}</span>
@@ -6614,7 +6614,7 @@ function renderWhatIfDrawer(){
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;margin:16px 0 8px">Downstream unravelling</div>
   <div style="font-size:12px;color:var(--txt3);margin-bottom:10px;font-style:italic;line-height:1.6">These transmissions were only possible because of what ${c.nm} first made happen:</div>
   ${downstream.map(t=>{
-    const fc=CIVS.find(x=>x&&x.id===t.from),tc2=CIVS.find(x=>x&&x.id===t.to);
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc2=ITEMS.find(x=>x&&x.id===t.to);
     return`<div style="padding:6px 0;border-bottom:1px solid var(--bdr2);font-size:12px">
       <span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9.5px">${t.concept}</span>
       <span style="color:var(--txt3)"> · ${fc?fc.nm:'?'} → ${tc2?tc2.nm:'?'} · ${fmt(t.year)}</span>
@@ -6732,7 +6732,7 @@ function renderHeritageDrawer(){
   }
 
   const civIds=HERITAGE_REGIONS[heritageRegion];
-  const civs=civIds.map(id=>CIVS.find(c=>c.id===id)).filter(Boolean);
+  const civs=civIds.map(id=>ITEMS.find(c=>c.id===id)).filter(Boolean);
 
   dc.innerHTML=`
   <button onclick="clearHeritage()"
@@ -6743,7 +6743,7 @@ function renderHeritageDrawer(){
   <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);letter-spacing:1px;margin-bottom:4px">${heritageRegion}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing civilizations · shown in blue on the map</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your civilizational ancestry</div>
-  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToCiv('${c.id}')">
+  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToItem('${c.id}')">
     <span class="heritage-civ-nm">${c.nm}</span>
     <span class="heritage-civ-why">${HERITAGE_REASONS[c.id]||''}</span>
   </div>`).join('')}`;
@@ -6849,8 +6849,8 @@ function renderHerstoryDrawer(){
       ];
       const shuffled=[...ALL].sort(()=>Math.random()-.5);
       return shuffled.slice(0,5).map(w=>{
-        const c=CIVS.find(x=>x&&x.id===w.civ);
-        return c?`<button onclick="navigateToCiv('${c.id}')" 
+        const c=ITEMS.find(x=>x&&x.id===w.civ);
+        return c?`<button onclick="navigateToItem('${c.id}')" 
           style="width:100%;background:none;border:1px solid rgba(192,96,160,.25);padding:9px 12px;text-align:left;cursor:pointer;margin-bottom:4px;border-radius:2px;transition:all .15s"
           onmouseover="this.style.background='rgba(192,96,160,.08)'" onmouseout="this.style.background='none'">
           <div style="font-family:'Cinzel',serif;font-size:10px;color:#c060a0;margin-bottom:2px">${w.nm} · ${w.yr<0?Math.abs(w.yr)+' BCE':w.yr+' CE'}</div>
@@ -6901,9 +6901,9 @@ function mapClick(e){
     const isTouch='ontouchstart' in window||navigator.maxTouchPoints>0;
     const zr=1000/_vbW;
     const thresh=(isTouch?55:35)/zr;
-    const activeSet=window.ids_cache||new Set(CIVS.filter(c=>c&&active(c)).map(c=>c.id));
+    const activeSet=window.ids_cache||new Set(ITEMS.filter(c=>c&&active(c)).map(c=>c.id));
     const candidates=[];
-    CIVS.forEach(c=>{
+    ITEMS.forEach(c=>{
       if(!c||!c.id||!activeSet.has(c.id))return;
       const pt=civPt(c);
       if(!pt||!isFinite(pt[0])||!isFinite(pt[1]))return;
@@ -6921,7 +6921,7 @@ function mapClick(e){
     if(isCluster){
       showClusterPicker(candidates.map(x=>x.c),clientX,clientY);
     } else {
-      civClick(nearest.c.id);
+      itemClick(nearest.c.id);
     }
   }catch(err){console.warn('mapClick err:',err);}
 }
@@ -7086,9 +7086,9 @@ function _onMapMouseMove(e){
   const [svgX,svgY]=screenToSVG(e.clientX,e.clientY);
   const zr=1000/_vbW;
   const thresh=28/zr;
-  const activeSet=window.ids_cache||new Set(CIVS.filter(c=>c&&active(c)).map(c=>c.id));
+  const activeSet=window.ids_cache||new Set(ITEMS.filter(c=>c&&active(c)).map(c=>c.id));
   let nearest=null, bestD=thresh;
-  CIVS.forEach(c=>{
+  ITEMS.forEach(c=>{
     if(!c||!activeSet.has(c.id))return;
     if(sel&&sel.id===c.id)return; // skip selected — it already has persistent label
     const pt=civPt(c);
@@ -7179,7 +7179,7 @@ function showClusterPicker(civs, screenX, screenY){
   if(!picker||!list)return;
   picker._openedAt=Date.now();
   list.innerHTML=civs.map(c=>`
-    <div class="cluster-item" onclick="closeClusterPicker();civClick('${c.id}')">
+    <div class="cluster-item" onclick="closeClusterPicker();itemClick('${c.id}')">
       <div class="cluster-item-dot" style="background:${herstory?'#c060a0':'#e8251a'}"></div>
       <div>
         <div class="cluster-item-nm">${c.nm}</div>
