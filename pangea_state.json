@@ -85,7 +85,7 @@
       "section": "III"
     },
     "via": {
-      "phase": "1A",
+      "phase": "DATA",
       "items": 0,
       "target": 100,
       "live": false,
@@ -1237,6 +1237,36 @@
       "atlas": "lingua",
       "phase_done": "GO_LIVE",
       "items": 120
+    },
+    {
+      "atlas": "via",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 1
+    },
+    {
+      "atlas": "via",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 1
+    },
+    {
+      "atlas": "via",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 1
+    },
+    {
+      "atlas": "via",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 1
+    },
+    {
+      "atlas": "via",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
     }
   ]
 }
