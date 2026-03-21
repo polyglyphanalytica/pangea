@@ -4345,7 +4345,7 @@ function renderLensDD(){
   const arcOn=!lenses.size;
   const rows=LENSES.map(l=>{
     const on=lenses.has(l.id);
-    return`<div class="lens-row${on?' on':''}" onclick="toggleLens('${l.id}')">
+    return `<div class="lens-row${on?' on':''}" onclick="toggleLens('${l.id}')">
       <div class="lens-row-chk${on?' on':''}">${on?'✓':''}</div>
       <span class="lens-row-ico">${l.ico}</span>
       <span class="lens-row-lbl">${l.lbl}</span>
@@ -4386,7 +4386,7 @@ function toggleLens(id){
       body=[...lenses].map(lid=>{
         const L=LENSES.find(l=>l.id===lid);
         if(!L)return'';
-        return`<div class="lens-section">
+        return `<div class="lens-section">
           <div class="lens-section-hdr">
             <span class="lens-section-ico">${L.ico}</span>
             <span class="lens-section-lbl">${L.lbl}</span>
@@ -4402,7 +4402,7 @@ function toggleLens(id){
       const isA=actIds.has(cid);
       const badge=isA?'ACTIVE':'→ JUMP';
       const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
-      return`<button class="conn-item" tabindex="0"
+      return `<button class="conn-item" tabindex="0"
           aria-label="${tip}"
           onclick="navigateToItem('${cid}')"
           style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
@@ -4620,7 +4620,7 @@ function renderFingerprint(c){
   const vals=FP_KEYS.map(k=>c.fp[k]||0);
   const dataPts=angles.map((a,i)=>{
     const r=R*(vals[i]/10);
-    return`${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`;
+    return `${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`;
   }).join(' ');
   svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
   const SHORT=['Innovation','Reach','Longevity','Stability','Trade Impact','Institutional'];
@@ -4634,7 +4634,7 @@ function renderFingerprint(c){
     svg+=`<text x="${lx.toFixed(1)}" y="${(ly+dy).toFixed(1)}" text-anchor="${anchor}" class="fp-label">${SHORT[i]}</text>`;
   });
   svg+='</svg>';
-  return`<div class="fp-wrap"><div class="fp-title">Monetary Fingerprint</div>${svg}</div>`;
+  return `<div class="fp-wrap"><div class="fp-title">Monetary Fingerprint</div>${svg}</div>`;
 }
 
 // ══════════════════════════════════════════════════════
@@ -4662,7 +4662,7 @@ function renderEnhancedSpanBar(c){
     const ol=Math.max(xl,left);
     const or_=Math.min(xl+xw,left+width);
     const ow=Math.max(0,or_-ol);
-    return`<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
+    return `<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
       <div class="contemp-bar-nm">${x.nm}</div>
       <div class="contemp-bar-track">
         <div class="contemp-bar-fill" style="left:${(ol-left).toFixed(1)}%;width:${ow.toFixed(1)}%;background:${colors[i]}"></div>
@@ -4707,7 +4707,7 @@ function renderDensityBar(){
   const pts=counts.map((n,i)=>{
     const x=(i/steps)*W;
     const y=18-(n/mx)*14-1;
-    return`${x.toFixed(1)},${y.toFixed(1)}`;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
   });
   const poly=`0,18 ${pts.join(' ')} ${W},18`;
   svg.innerHTML=`<polygon points="${poly}" fill="rgba(232,152,32,.25)" stroke="rgba(232,152,32,.5)" stroke-width=".5"/>
@@ -4730,7 +4730,7 @@ function renderDrawerContent(){
     body=[...lenses].map(id=>{
       const L=LENSES.find(l=>l.id===id);
       if(!L)return'';
-      return`<div class="lens-section">
+      return `<div class="lens-section">
         <div class="lens-section-hdr">
           <span class="lens-section-ico">${L.ico}</span>
           <span class="lens-section-lbl">${L.lbl}</span>
@@ -4747,7 +4747,7 @@ function renderDrawerContent(){
     const isA=actIds.has(id);
     const badge=isA?'ACTIVE':'→ JUMP';
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
-    return`<button class="conn-item" tabindex="0"
+    return `<button class="conn-item" tabindex="0"
         aria-label="${tip}"
         onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
@@ -4948,7 +4948,7 @@ function renderThreadConceptList(){
     const concepts=getUniqueConcepts();
     list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
       const chain=getChain(c);
-      return`<button class="thread-concept-btn" onclick="activateThread('${c.replace(/'/g,"\\'")}')" >
+      return `<button class="thread-concept-btn" onclick="activateThread('${c.replace(/'/g,"\\'")}')" >
         <span class="thread-concept-name">${c}</span>
         <span class="thread-concept-chain">${chain.map(t=>{
           const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
@@ -4990,7 +4990,7 @@ function renderThreadSteps(concept){
   </div>`;
   const items=chain.map(t=>{
     const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
-    return`<div class="thread-step">
+    return `<div class="thread-step">
       <div class="thread-step-yr">${fmt(t.year)}</div>
       <div class="thread-step-civ">${fc?fc.nm:'?'} → ${tc?tc.nm:'?'}</div>
       <div class="thread-step-txt">${t.desc}</div>
@@ -5070,7 +5070,7 @@ function renderWhatIfDrawer(){
     const allAffected=[...new Set([...affected,...downstream])];
     const stepsHtml=allAffected.map(t=>{
       const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
-      return`<div class="whatif-chain lost">✕ ${t.concept}: ${fc?fc.nm:'?'} → ${tc?tc.nm:'?'} (${fmt(t.year)})</div>`;
+      return `<div class="whatif-chain lost">✕ ${t.concept}: ${fc?fc.nm:'?'} → ${tc?tc.nm:'?'} (${fmt(t.year)})</div>`;
     }).join('');
     dc.innerHTML=`<button onclick="clearWhatIf()" style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px">← All systems</button>
     <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:#d4a820;margin-bottom:4px">Without ${c.nm}</div>
@@ -5179,12 +5179,12 @@ function renderHerstoryDrawer(){
     ${Object.keys(WOMEN).slice(0,8).map(id=>{
       const c=ITEMS.find(x=>x&&x.id===id);if(!c)return'';
       const w=WOMEN[id];
-      return\`<button onclick="navigateToItem('${id}')"
+      return `<button onclick="navigateToItem('${id}')"
         style="background:none;border:1px solid rgba(192,96,160,.2);border-radius:3px;padding:8px 10px;cursor:pointer;text-align:left;transition:border-color .15s"
         onmouseover="this.style.borderColor='rgba(192,96,160,.5)'" onmouseout="this.style.borderColor='rgba(192,96,160,.2)'">
         <div style="font-family:'Cinzel',serif;font-size:9.5px;color:#c060a0;margin-bottom:2px">${c.nm}</div>
         <div style="font-size:11px;color:var(--txt3);font-style:italic">${w[0].nm} \u00b7 ${w[0].role}</div>
-      </button>\`;
+      </button>`;
     }).join('')}
     </div>`;
     return;
@@ -5230,7 +5230,7 @@ function renderWomenDrawer(){
     const entries=Object.entries(WOMEN).map(([id,w])=>{
       const c=ITEMS.find(x=>x&&x.id===id);
       if(!c)return'';
-      return`<div class="heritage-civ" onclick="navigateToItem('${id}')">
+      return `<div class="heritage-civ" onclick="navigateToItem('${id}')">
         <span class="heritage-civ-nm">${w.nm} · <span style="font-weight:400">${w.years}</span></span>
         <span class="heritage-civ-why">${c.nm}</span>
       </div>`;
@@ -5281,13 +5281,13 @@ function renderCompareDrawer(){
     return;
   }
   const renderCol=(c,slot)=>{
-    if(!c)return`<div class="compare-col">
+    if(!c)return `<div class="compare-col">
       <div class="compare-prompt" style="height:200px"><div>Click a monetary system on the map to add it here</div></div>
     </div>`;
     const body=lenses.size?[...lenses].map(lid=>{
       const L=LENSES.find(l=>l.id===lid);
       if(!L)return'';
-      return`<div class="lens-section">
+      return `<div class="lens-section">
         <div class="lens-section-hdr">
           <span class="lens-section-ico">${L.ico}</span>
           <span class="lens-section-lbl">${L.lbl}</span>
@@ -5296,7 +5296,7 @@ function renderCompareDrawer(){
       </div>`;
     }).join(''):
     `<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}`;
-    return`<div class="compare-col">
+    return `<div class="compare-col">
       <div class="compare-col-hdr">
         <span>${c.nm}</span>
         <button class="compare-remove" onclick="${slot===1?'sel=null':'sel2=null'};renderCompareDrawer();renderMap()" aria-label="Remove">✕</button>
@@ -5318,13 +5318,13 @@ function renderLensDDInline(){
   const arcOn=!lenses.size;
   const rows=LENSES.map(l=>{
     const on=lenses.has(l.id);
-    return`<div class="lens-row${on?' on':''}" onclick="toggleLens('${l.id}');if(mode==='compare')renderCompareDrawer();">
+    return `<div class="lens-row${on?' on':''}" onclick="toggleLens('${l.id}');if(mode==='compare')renderCompareDrawer();">
       <div class="lens-row-chk${on?' on':''}">${on?'✓':''}</div>
       <span class="lens-row-ico">${l.ico}</span>
       <span class="lens-row-lbl">${l.lbl}</span>
     </div>`;
   }).join('');
-  return`<div class="lens-dd-wrap">
+  return `<div class="lens-dd-wrap">
     <div class="lens-dd-hdr${lensDD?' open':''}" onclick="toggleLensDD()">
       <span class="lens-dd-title">Lens</span>
       <span class="lens-dd-summary">${lensLabel()}</span>

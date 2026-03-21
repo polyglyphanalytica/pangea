@@ -1164,19 +1164,19 @@ const TRANSMISSIONS=[
   {from:'tea_trade',to:'opium_trade',concept:'Trade Imbalance Wars',year:1773,desc:'British demand for Chinese tea created the trade deficit that drove the opium trade — and ultimately the Opium Wars.'},
   {from:'opium_trade',to:'eic_routes',concept:'Trade Imbalance Wars',year:1800,desc:'The East India Company\'s opium-tea triangular trade was history\'s most profitable and destructive commercial system.'},
   {from:'silver_route',to:'manila_galleon',concept:'Global Silver Circuit',year:1565,desc:'Spanish American silver flowed westward across the Pacific via the Manila Galleon to China — completing the first global monetary circuit.'},
-  {from:'manila_galleon',to:'china_sea',concept:'Global Silver Circuit',year:1570,desc:'Manila Galleon silver entered China\\'s monetary system through South China Sea trade networks, sustaining the Ming economy.'},
+  {from:'manila_galleon',to:'china_sea',concept:'Global Silver Circuit',year:1570,desc:'Manila Galleon silver entered China\'s monetary system through South China Sea trade networks, sustaining the Ming economy.'},
   {from:'transcontinental_rail',to:'container_shipping',concept:'Transport Revolutions',year:1956,desc:'Containerization connected rail and sea transport into seamless intermodal networks that the transcontinental railroad had pioneered.'},
   {from:'container_shipping',to:'digital_trade',concept:'Transport Revolutions',year:1991,desc:'Physical container shipping infrastructure enabled the e-commerce revolution by providing the logistics backbone for global delivery.'},
   {from:'digital_trade',to:'ecommerce_logistics',concept:'Transport Revolutions',year:1995,desc:'Digital trade platforms created demand for the e-commerce logistics networks that now deliver billions of packages annually.'},
   {from:'suez_canal',to:'panama_canal',concept:'Canal Engineering',year:1914,desc:'The Panama Canal was directly inspired by the Suez Canal — de Lesseps attempted both, and American engineers completed what French engineers started.'},
   {from:'oil_routes',to:'lng_trade',concept:'Energy Transitions',year:1964,desc:'LNG trade developed as a complement to oil shipping, using similar maritime infrastructure to deliver natural gas to distant markets.'},
   {from:'coal_trade',to:'oil_routes',concept:'Energy Transitions',year:1859,desc:'Petroleum replaced coal as the world\'s dominant energy commodity, redirecting trade routes from coal basins to oil fields.'},
-  {from:'oil_routes',to:'lithium_trade',concept:'Energy Transitions',year:2010,desc:'The energy transition from fossil fuels to batteries is creating new commodity trade routes centered on lithium, replacing oil\\'s dominance.'},
+  {from:'oil_routes',to:'lithium_trade',concept:'Energy Transitions',year:2010,desc:'The energy transition from fossil fuels to batteries is creating new commodity trade routes centered on lithium, replacing oil\'s dominance.'},
   {from:'wool_trade',to:'cotton_route',concept:'Textile Evolution',year:1700,desc:'Cotton displaced wool as the world\'s dominant textile through mechanization — cheaper, lighter, and better suited to industrial production.'},
   {from:'indian_textile',to:'eic_routes',concept:'Colonial Commodity Control',year:1600,desc:'The East India Company initially traded Indian textiles before deliberately destroying the industry to create captive markets for British manufactures.'},
-  {from:'fur_trade',to:'transcontinental_rail',concept:'North American Expansion',year:1869,desc:'The fur trade mapped North America\\'s interior; the transcontinental railroad followed its paths and connected the territories it had opened.'},
+  {from:'fur_trade',to:'transcontinental_rail',concept:'North American Expansion',year:1869,desc:'The fur trade mapped North America\'s interior; the transcontinental railroad followed its paths and connected the territories it had opened.'},
   {from:'cod_trade',to:'whaling_routes',concept:'Ocean Harvesting',year:1600,desc:'Cod fishing trained the sailors and developed the maritime skills that enabled the deep-ocean whaling industry.'},
-  {from:'whaling_routes',to:'oil_routes',concept:'Ocean Harvesting',year:1859,desc:'Petroleum replaced whale oil as the world\\'s primary illuminant and lubricant — one exploitation of nature substituting for another.'},
+  {from:'whaling_routes',to:'oil_routes',concept:'Ocean Harvesting',year:1859,desc:'Petroleum replaced whale oil as the world\'s primary illuminant and lubricant — one exploitation of nature substituting for another.'},
   {from:'rare_earth_trade',to:'semiconductor_trade',concept:'Critical Minerals',year:1980,desc:'Rare earth elements are essential components in the semiconductors that drive the digital economy.'},
   {from:'copper_trade',to:'lithium_trade',concept:'Critical Minerals',year:2010,desc:'The energy transition demands both copper (for wiring) and lithium (for batteries) — creating parallel critical mineral supply chain challenges.'}
 ];
@@ -1807,7 +1807,7 @@ function renderThreadConceptList(){
     const concepts=getUniqueConcepts();
     list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
       const chain=getChain(c);
-      return`<button class="thread-concept-btn" onclick="activateThread('${c.replace(/'/g,"\\'")}')" >
+      return`<button class="thread-concept-btn" onclick="activateThread('${c.replace(/'/g,"\'")}')" >
         <span class="thread-concept-name">${c}</span>
         <span class="thread-concept-chain">${chain.map(t=>{
           const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
