@@ -183,8 +183,21 @@ def validate(atlas, force=False):
     fp_keys = re.findall(r"'([^']+)'", fp_m.group(1)) if fp_m else []
     checks.append(("FP_KEYS defined", len(fp_keys) > 0, f"{len(fp_keys)} keys"))
 
+    # ── FP_KEYS match item fp{} keys ─────────────────────────────────────
+    if fp_keys:
+        fp_key_set = set(fp_keys)
+        item_fp_blocks = re.findall(r"fp:\{([^}]+)\}", items_text)
+        fp_mismatches = 0
+        for fp_block in item_fp_blocks:
+            fp_item_keys = set(re.findall(r"(\w+):", fp_block))
+            if fp_item_keys != fp_key_set:
+                fp_mismatches += 1
+        checks.append(("FP_KEYS match item fp{} keys",
+                       fp_mismatches == 0,
+                       f"{fp_mismatches} items have wrong fp keys" if fp_mismatches else "OK"))
+
     # ══════════════════════════════════════════════════════════════════════════
-    # NEW: Cross-reference validation
+    # Cross-reference validation
     # ══════════════════════════════════════════════════════════════════════════
 
     item_ids = _extract_item_ids(items_text)
@@ -238,9 +251,31 @@ def validate(atlas, force=False):
     checks.append(("Drift 1: hover-label-layer SVG group",
                    'id="hover-label-layer"' in html, ""))
 
+    # ── Drift 2: inactive items fully hidden (opacity 0, not 0.06) ────────
+    # Check for the old 0.06 ghost-dot opacity in the opacity formula
+    has_006_ghost = bool(re.search(r'herstory\s*\?\s*0\.15\s*:\s*0\.06', html))
+    checks.append(("Drift 2: inactive items hidden (no 0.06 ghost dots)",
+                   not has_006_ghost,
+                   "found 0.06 ghost opacity — should be 0" if has_006_ghost else "OK"))
+
+    # ── Drift 3: herstory filter (items without WOMEN fully hidden) ───────
+    # Check that the herstory && !womenCount branch uses 0, not 0.35
+    has_035_herstory = bool(re.search(r'herstory\s*&&\s*!womenCount.*?0\.35', html))
+    checks.append(("Drift 3: herstory filter hides non-WOMEN items (no 0.35)",
+                   not has_035_herstory,
+                   "found 0.35 dimming — should be 0 (filter, not overlay)" if has_035_herstory else "OK"))
+
     # ── Drift 4: Herstory dedicated panel ────────────────────────────────────
     checks.append(("Drift 4: Herstory dedicated panel (hs-panel-hdr)",
                    "hs-panel-hdr" in html, ""))
+
+    # ── About modal matches atlas name ────────────────────────────────────
+    about_label = re.search(r'aria-label="About\s+([^"]+)"', html)
+    if about_label and atlas != "civilitas":
+        about_name = about_label.group(1).lower()
+        checks.append(("about modal matches atlas",
+                       atlas.lower() in about_name or about_name in atlas.lower(),
+                       f"aria-label says '{about_label.group(1)}', atlas is '{atlas}'"))
 
     # ══════════════════════════════════════════════════════════════════════════
     # NEW: Code-level naming leaks (not content — function/variable names)
@@ -265,9 +300,11 @@ def validate(atlas, force=False):
     checks.append(("mark-layer group present", 'id="mark-layer"' in html, ""))
     checks.append(("window._proj assigned", "window._proj=" in html or "window._proj =" in html, ""))
 
-    # ── CDNs ────────────────────────────────────────────────────────────────
+    # ── CDNs (Drift 5) ──────────────────────────────────────────────────────
     checks.append(("D3 from cdn.jsdelivr.net", "cdn.jsdelivr.net" in html and "d3" in html, ""))
     checks.append(("TopoJSON from cdn.jsdelivr.net", "cdn.jsdelivr.net" in html and "topojson" in html, ""))
+    checks.append(("Drift 5: no cdnjs.cloudflare.com",
+                   "cdnjs.cloudflare.com" not in html, ""))
 
     # ── Item coordinates ────────────────────────────────────────────────────
     lat_count = len(re.findall(r"\blat:\s*-?\d", items_text))
@@ -348,6 +385,19 @@ def validate(atlas, force=False):
     checks.append(("all items have conns field",
                    conns_count >= item_count,
                    f"{conns_count}/{item_count}" if conns_count < item_count else "OK"))
+
+    # ── Lens content sentence count (warning, not blocking) ───────────────
+    # CLAUDE.md requires 2-4 sentences per d{} value
+    short_lens_count = 0
+    for d in d_blocks:
+        for val_match in re.finditer(r"\w+:'((?:[^'\\]|\\.)+)'", d):
+            val = val_match.group(1)
+            sentences = len(re.findall(r'[.!?]\s+[A-Z]', val)) + 1
+            if sentences < 2 and len(val) > 10:
+                short_lens_count += 1
+                break  # count per item, not per lens
+    if short_lens_count > 0:
+        warnings.append(f"lens sentence count: {short_lens_count}/{item_count} items have lens entries under 2 sentences")
 
     # ══════════════════════════════════════════════════════════════════════════
     # Print results

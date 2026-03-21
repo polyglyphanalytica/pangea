@@ -12,7 +12,7 @@
       "section": "III",
       "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
       "validated_short": "0e2be19",
-      "validated_at": "2026-03-21T15:51:26.406273Z",
+      "validated_at": "2026-03-21T15:55:09.231081Z",
       "validated_items": 100,
       "validated_lenses": 30
     },
@@ -25,7 +25,7 @@
       "section": "V",
       "validated_sha": "8f176c990fbd22776fbcc85e340f203a46b0be71",
       "validated_short": "8f176c9",
-      "validated_at": "2026-03-21T15:51:26.966340Z",
+      "validated_at": "2026-03-21T15:55:09.851509Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -38,7 +38,7 @@
       "section": "IV",
       "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
       "validated_short": "0e2be19",
-      "validated_at": "2026-03-21T15:51:27.539976Z",
+      "validated_at": "2026-03-21T15:55:10.485358Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -51,7 +51,7 @@
       "section": "VI",
       "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
       "validated_short": "0e2be19",
-      "validated_at": "2026-03-21T15:51:28.226960Z",
+      "validated_at": "2026-03-21T15:55:11.298813Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -64,7 +64,7 @@
       "section": "I",
       "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
       "validated_short": "0e2be19",
-      "validated_at": "2026-03-21T15:51:29.557687Z",
+      "validated_at": "2026-03-21T15:55:12.656919Z",
       "validated_items": 105,
       "validated_lenses": 20
     },
@@ -77,7 +77,7 @@
       "section": "VII",
       "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
       "validated_short": "0e2be19",
-      "validated_at": "2026-03-21T15:51:29.063569Z",
+      "validated_at": "2026-03-21T15:55:12.128692Z",
       "validated_items": 141,
       "validated_lenses": 20
     },
@@ -91,7 +91,7 @@
       "note": "Complete. Needs GO_LIVE only \u2014 homepage card still forthcoming.",
       "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
       "validated_short": "0e2be19",
-      "validated_at": "2026-03-21T15:51:30.026465Z",
+      "validated_at": "2026-03-21T15:55:13.155419Z",
       "validated_items": 112,
       "validated_lenses": 20
     },
@@ -104,7 +104,7 @@
       "section": "IX",
       "validated_sha": "b4d506126d11e9522148bc193ad31008f9c89ffb",
       "validated_short": "b4d5061",
-      "validated_at": "2026-03-21T15:51:31.023385Z",
+      "validated_at": "2026-03-21T15:55:14.248937Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -117,7 +117,7 @@
       "section": "V",
       "validated_sha": "b4d506126d11e9522148bc193ad31008f9c89ffb",
       "validated_short": "b4d5061",
-      "validated_at": "2026-03-21T15:51:31.582926Z",
+      "validated_at": "2026-03-21T15:55:14.834964Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -130,7 +130,7 @@
       "section": "III",
       "validated_sha": "758dd5f44f10e849b088339ee8539be613269702",
       "validated_short": "758dd5f",
-      "validated_at": "2026-03-21T15:51:32.156867Z",
+      "validated_at": "2026-03-21T15:55:15.491244Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -141,9 +141,9 @@
       "live": true,
       "map": "world",
       "section": "VII",
-      "validated_sha": "b4d506126d11e9522148bc193ad31008f9c89ffb",
-      "validated_short": "b4d5061",
-      "validated_at": "2026-03-21T15:51:32.764093Z",
+      "validated_sha": "ce79eab2e2226e3d10e98575bd6e0ecef5917d75",
+      "validated_short": "ce79eab",
+      "validated_at": "2026-03-21T15:55:16.110720Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -635,7 +635,7 @@
       "section": "VII",
       "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
       "validated_short": "0e2be19",
-      "validated_at": "2026-03-21T15:51:30.469415Z",
+      "validated_at": "2026-03-21T15:55:23.555310Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
