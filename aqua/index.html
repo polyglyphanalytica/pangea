@@ -709,12 +709,45 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
 const LENSES = [
-  // {id:'lens_id', ico:'⊕', lbl:'Label Text', col:'#hex'},
+ {id:'agri',ico:'🌾',lbl:'Agriculture & Irrigation',col:'#7a9850'},
+ {id:'arch',ico:'🏗',lbl:'Architecture & Infrastructure',col:'#a08860'},
+ {id:'bio',ico:'🐟',lbl:'Biodiversity & Ecosystems',col:'#50a060'},
+ {id:'clim',ico:'🌡',lbl:'Climate & Weather',col:'#88b8d8'},
+ {id:'conf',ico:'⚔',lbl:'Conflict & Competition',col:'#d05838'},
+ {id:'cult',ico:'🎭',lbl:'Culture & Ritual',col:'#b87898'},
+ {id:'dipl',ico:'🤝',lbl:'Diplomacy & Treaties',col:'#8878a8'},
+ {id:'econ',ico:'💰',lbl:'Economics & Trade',col:'#c8a848'},
+ {id:'engi',ico:'⚙',lbl:'Engineering & Design',col:'#d87830'},
+ {id:'envr',ico:'🌿',lbl:'Environmental Impact',col:'#68a858'},
+ {id:'expl',ico:'🔭',lbl:'Exploration & Discovery',col:'#7898c0'},
+ {id:'geog',ico:'🗺',lbl:'Geography & Geology',col:'#988068'},
+ {id:'heal',ico:'🏥',lbl:'Health & Sanitation',col:'#d06060'},
+ {id:'hydr',ico:'💧',lbl:'Hydrology & Flow',col:'#4888b8'},
+ {id:'law',ico:'⚖',lbl:'Law & Water Rights',col:'#8878a8'},
+ {id:'migr',ico:'🚶',lbl:'Migration & Settlement',col:'#b08848'},
+ {id:'myth',ico:'🐉',lbl:'Mythology & Symbolism',col:'#9868b8'},
+ {id:'nav',ico:'⛵',lbl:'Navigation & Transport',col:'#4a9fc0'},
+ {id:'pol',ico:'🏛',lbl:'Politics & Power',col:'#c89040'},
+ {id:'tech',ico:'🔬',lbl:'Technology & Innovation',col:'#7898c0'},
 ];
 
 
 const ERAS = [
-  // {y: -8000, n: 'ERA NAME'},
+{y:-8000,n:'DAWN OF WATER MANAGEMENT'},
+{y:-5000,n:'FIRST RIVER CIVILISATIONS'},
+{y:-3000,n:'HYDRAULIC EMPIRES'},
+{y:-1000,n:'CLASSICAL WATER ENGINEERING'},
+{y:-300,n:'ROMAN HYDRAULIC AGE'},
+{y:500,n:'MEDIEVAL WATER SYSTEMS'},
+{y:1200,n:'HYDRAULIC RENAISSANCE'},
+{y:1500,n:'AGE OF CANALS'},
+{y:1750,n:'INDUSTRIAL WATER'},
+{y:1850,n:'SANITARY REVOLUTION'},
+{y:1900,n:'AGE OF GREAT DAMS'},
+{y:1950,n:'HYDRAULIC MODERNITY'},
+{y:1970,n:'ENVIRONMENTAL AWAKENING'},
+{y:1990,n:'WATER CRISIS ERA'},
+{y:2010,n:'WATER JUSTICE'},
 ];
 
 const ITEMS = [
@@ -824,10 +857,76 @@ const ITEMS = [
 // TRANSMISSIONS — minimum 15 chains
 // ══════════════════════════════════════════════════════════════
 const TRANSMISSIONS = [
+{from:'irrigation_origins',to:'nile_river',concept:'River Civilisation Chain',year:-5000,desc:'Irrigation technology enabled the Nile Valley item to flourish.'},
+{from:'nile_river',to:'aswan_high_dam',concept:'River Civilisation Chain',year:1960,desc:'Five millennia of Nile management culminated in the Aswan High Dam.'},
+{from:'aswan_high_dam',to:'three_gorges_dam',concept:'River Civilisation Chain',year:1994,desc:'The Aswan Dam\'s lessons — both positive and negative — informed Three Gorges planning.'},
+{from:'irrigation_origins',to:'tigris_euphrates',concept:'Mesopotamian Water Legacy',year:-5000,desc:'Irrigation in the Tigris-Euphrates basin enabled the world\'s first cities.'},
+{from:'tigris_euphrates',to:'qanat_system',concept:'Mesopotamian Water Legacy',year:-1000,desc:'Mesopotamian water engineering knowledge influenced the development of qanat technology.'},
+{from:'qanat_system',to:'saharan_foggara',concept:'Mesopotamian Water Legacy',year:-500,desc:'Qanat technology spread to North Africa as the foggara, enabling desert settlement.'},
+{from:'minoan_plumbing',to:'roman_aqueducts',concept:'Classical Water Engineering',year:-312,desc:'Minoan plumbing principles influenced the development of Roman hydraulic engineering.'},
+{from:'roman_aqueducts',to:'pont_du_gard',concept:'Classical Water Engineering',year:-19,desc:'Roman aqueduct engineering reached its height with the Pont du Gard.'},
+{from:'roman_aqueducts',to:'cloaca_maxima',concept:'Classical Water Engineering',year:-300,desc:'Roman water supply and sewerage formed an integrated urban water system.'},
+{from:'cloaca_maxima',to:'london_cholera',concept:'Sanitary Revolution',year:1854,desc:'London\'s cholera crisis revealed the deadly cost of abandoning Roman sanitary engineering.'},
+{from:'london_cholera',to:'thames_embankment',concept:'Sanitary Revolution',year:1858,desc:'Snow\'s discovery of waterborne disease drove Bazalgette\'s sewer construction.'},
+{from:'thames_embankment',to:'chlorination_revolution',concept:'Sanitary Revolution',year:1908,desc:'London\'s sanitary infrastructure inspired the development of water treatment technology.'},
+{from:'hoover_dam',to:'tva_project',concept:'American Dam Age',year:1933,desc:'Hoover Dam\'s success inspired the TVA comprehensive river development programme.'},
+{from:'tva_project',to:'mississippi_1927',concept:'American Dam Age',year:1928,desc:'The 1927 flood catalysed the comprehensive Mississippi flood control that paralleled TVA.'},
+{from:'hoover_dam',to:'colorado_river',concept:'Colorado River Crisis',year:1922,desc:'The Colorado River Compact over-allocated a river now running dry.'},
+{from:'colorado_river',to:'ogallala_aquifer',concept:'American Water Crisis',year:1960,desc:'As surface water dwindled, the Great Plains turned to groundwater mining.'},
+{from:'ogallala_aquifer',to:'california_water_wars',concept:'American Water Crisis',year:1913,desc:'Western US water crises from the Owens Valley to the Ogallala share the pattern of over-extraction.'},
+{from:'three_gorges_dam',to:'narmada_dam',concept:'Great Dam Debate',year:1961,desc:'The global debate over large dams connected Chinese and Indian mega-projects.'},
+{from:'narmada_dam',to:'dam_removal_movement',concept:'Great Dam Debate',year:1999,desc:'The backlash against Narmada and other mega-dams fuelled the dam removal movement.'},
+{from:'cochabamba_water_war',to:'un_water_right',concept:'Water Justice Movement',year:2010,desc:'Cochabamba\'s revolt against privatisation led to the UN recognition of water as a human right.'},
+{from:'un_water_right',to:'sdg6_water_access',concept:'Water Justice Movement',year:2015,desc:'The human right to water was operationalised through SDG 6\'s universal access targets.'},
+{from:'flint_water_crisis',to:'water_privatization',concept:'Water Justice Movement',year:2014,desc:'Flint demonstrated that water quality failures affect the most vulnerable communities.'},
+{from:'cape_town_water',to:'chennai_water',concept:'Urban Water Emergency',year:2019,desc:'Cape Town\'s Day Zero crisis foreshadowed Chennai\'s 2019 water emergency.'},
+{from:'chennai_water',to:'sao_paulo_drought',concept:'Urban Water Emergency',year:2014,desc:'São Paulo\'s drought demonstrated that tropical megacities face water crises.'},
+{from:'indian_ocean_tsunami',to:'fukushima_water',concept:'Water Catastrophes',year:2011,desc:'The 2004 tsunami demonstrated the destructive power of water that Fukushima confirmed.'},
+{from:'banqiao_dam_failure',to:'yangtze_1931_flood',concept:'China Water Disasters',year:1931,desc:'China\'s devastating flood history — from 1931 to Banqiao — drove massive dam investment.'},
+{from:'yangtze_1931_flood',to:'three_gorges_dam',concept:'China Water Disasters',year:1994,desc:'The determination to prevent another 1931 catastrophe drove the Three Gorges Dam decision.'},
+{from:'dutch_water_management',to:'north_sea_flood_1953',concept:'European Flood Defence',year:1953,desc:'The 1953 flood catalysed the Delta Works — the Netherlands\' greatest engineering achievement.'},
+{from:'north_sea_flood_1953',to:'thames_barrier',concept:'European Flood Defence',year:1984,desc:'The 1953 flood inspired both Dutch and British flood barrier construction.'},
+{from:'thames_barrier',to:'venice_acqua_alta',concept:'European Flood Defence',year:2020,desc:'The Thames Barrier and MOSE represent parallel responses to the same rising sea threat.'},
+{from:'persian_gardens',to:'mughal_gardens',concept:'Garden Water Tradition',year:1526,desc:'Persian garden design — centred on water — spread to India through the Mughal Empire.'},
+{from:'qanat_system',to:'persian_gardens',concept:'Garden Water Tradition',year:-550,desc:'Qanat water supply enabled the Persian paradise garden tradition.'},
+{from:'indus_river',to:'ganges_river',concept:'South Asian Water Heritage',year:-1500,desc:'The decline of the Indus item drove migration to the Ganges basin.'},
+{from:'ganges_river',to:'bangladesh_delta',concept:'South Asian Water Heritage',year:1947,desc:'The Ganges\'s journey ends in the Bangladesh delta — the world\'s most water-vulnerable nation.'},
+{from:'drip_irrigation',to:'desalination_revolution',concept:'Water Technology Revolution',year:1970,desc:'Israel\'s drip irrigation and desalination demonstrate technology\'s power to create water security.'},
+{from:'desalination_revolution',to:'singapore_newater',concept:'Water Technology Revolution',year:2003,desc:'Singapore combined desalination with water recycling to achieve water independence.'},
+{from:'virtual_water',to:'bottled_water',concept:'Water as Commodity',year:1993,desc:'The virtual water concept revealed hidden water trade that bottled water makes visible.'},
+{from:'mississippi_1927',to:'katrina_flooding',concept:'Mississippi Water Legacy',year:2005,desc:'The 1927 flood\'s lessons were not fully applied — Katrina exposed persistent levee failures.'},
+{from:'katrina_flooding',to:'mississippi_delta_loss',concept:'Mississippi Water Legacy',year:2005,desc:'Katrina revealed that levees protecting New Orleans were destroying the delta that protects New Orleans.'},
+{from:'aral_sea_disaster',to:'dead_sea_shrinking',concept:'Vanishing Waters',year:1960,desc:'The Aral Sea and Dead Sea illustrate how human water diversion can drain entire seas.'},
+{from:'dead_sea_shrinking',to:'lake_chad_shrinking',concept:'Vanishing Waters',year:1960,desc:'Lake Chad\'s shrinkage mirrors the Aral Sea — climate change compounding human over-extraction.'},
 ];
 
 
 const WOMEN = {
+'london_cholera':[{nm:'Florence Nightingale',role:'Nurse, statistician & sanitary reformer',yr:1858,desc:'While John Snow identified waterborne transmission, Florence Nightingale championed sanitary reform through statistical evidence. Her rose diagrams demonstrating that disease, not battle wounds, killed most soldiers revolutionised public health data visualisation and drove investment in clean water and sanitation.'}],
+'nile_river':[{nm:'Hatshepsut',role:'Pharaoh & hydraulic builder',yr:-1473,desc:'Hatshepsut — one of Egypt\'s most successful pharaohs — expanded irrigation works and trade networks dependent on Nile water management. Her mortuary temple at Deir el-Bahari included sophisticated water features demonstrating hydraulic mastery.'}],
+'ganges_river':[{nm:'Medha Patkar',role:'Water rights activist',yr:1985,desc:'Medha Patkar founded the Narmada Bachao Andolan (Save the Narmada Movement) in 1985, becoming India\'s most prominent water rights advocate. Her decades-long campaign against the Sardar Sarovar Dam — including hunger strikes and imprisonment — transformed the global debate over large dams and displacement.'}],
+'narmada_dam':[{nm:'Medha Patkar',role:'Founder, Narmada Bachao Andolan',yr:1985,desc:'Medha Patkar\'s leadership of the anti-Narmada Dam movement made her one of the world\'s most influential environmental activists. Her advocacy forced the World Bank to withdraw funding and established the principle that displaced communities must have a voice in development decisions.'}],
+'cochabamba_water_war':[{nm:'Oscar Olivera\'s Women Allies',role:'Women protesters & community organisers',yr:2000,desc:'Women were central to the Cochabamba Water War — they organised neighbourhood committees, led protests, and bore the brunt of water price increases. The women of Cochabamba demonstrated that water justice movements are often led by those who carry the daily burden of water collection.'}],
+'cape_town_water':[{nm:'Patricia de Lille',role:'Mayor of Cape Town during Day Zero',yr:2018,desc:'Mayor Patricia de Lille led Cape Town\'s emergency response to the Day Zero water crisis, implementing the dramatic conservation measures that averted catastrophe. Her leadership — reducing per-capita consumption to 50 litres per day — demonstrated that political will can achieve remarkable water conservation under crisis pressure.'}],
+'flint_water_crisis':[{nm:'Mona Hanna-Attisha',role:'Paediatrician & whistleblower',yr:2015,desc:'Dr Mona Hanna-Attisha, a paediatrician at Hurley Medical Center, was the first to publicly document elevated lead levels in Flint children\'s blood — defying state officials who denied the contamination. Her research, published despite official pressure, forced the crisis into public view and catalysed the response.'}],
+'dutch_water_management':[{nm:'Tineke Huizinga',role:'Minister of Transport & Water Management',yr:2006,desc:'Tineke Huizinga served as Dutch Minister of Transport, Public Works, and Water Management (2007–2010), overseeing the implementation of the Room for the River programme — the paradigm shift from fighting water to living with it that defines modern Dutch water management.'}],
+'chlorination_revolution':[{nm:'Ellen Swallow Richards',role:'Environmental chemist & water quality pioneer',yr:1873,desc:'Ellen Swallow Richards — the first woman admitted to MIT — pioneered the scientific study of water quality in the 1870s–80s. Her comprehensive water quality survey of Massachusetts was one of the first systematic studies of water contamination, establishing the scientific basis for water quality regulation.'}],
+'un_water_right':[{nm:'Catarina de Albuquerque',role:'UN Special Rapporteur on Water & Sanitation',yr:2008,desc:'Portuguese jurist Catarina de Albuquerque served as the first UN Special Rapporteur on the human right to safe drinking water and sanitation (2008–2014). Her work established the legal framework for implementing the right to water and influenced national legislation worldwide.'}],
+'rain_harvesting':[{nm:'Rajendra Singh',role:'Water conservationist (supported by women)',yr:1985,desc:'While Rajendra Singh led the revival of traditional johad water harvesting in Rajasthan, women were the primary beneficiaries and advocates — freed from hours of daily water collection, women in restored villages became community leaders. The gender dimension of water access is central to the rainwater harvesting movement.'}],
+'california_water_wars':[{nm:'Mary Ann Dickinson',role:'Water efficiency advocate',yr:2000,desc:'Mary Ann Dickinson, as head of the Alliance for Water Efficiency, pioneered water conservation standards and technologies that transformed urban water use in California and nationwide. Her work on water-efficient fixtures, landscapes, and policies has saved billions of litres.'}],
+'singapore_newater':[{nm:'Yong Jean Yoong',role:'NEWater engineer & advocate',yr:2003,desc:'Women engineers at PUB (Singapore\'s water agency) have been instrumental in developing and implementing the NEWater programme. Their technical leadership in one of the world\'s most innovative water agencies demonstrates that water engineering excellence knows no gender.'}],
+'three_gorges_dam':[{nm:'Dai Qing',role:'Journalist & dam opponent',yr:1989,desc:'Journalist Dai Qing published \"Yangtze! Yangtze!\" in 1989 — a collection of essays opposing the Three Gorges Dam. She was imprisoned after the Tiananmen Square protests. Her courageous opposition to the dam — challenging state power in one of the world\'s most authoritarian countries — made her an icon of environmental journalism.'}],
+'indian_ocean_tsunami':[{nm:'Tilly Smith',role:'Young tsunami survivor who saved lives',yr:2004,desc:'Ten-year-old British tourist Tilly Smith recognised the signs of an approaching tsunami from a geography lesson and warned her family and other beachgoers at Mai Khao Beach in Thailand, saving approximately 100 lives. Her story demonstrates the life-saving value of water hazard education.'}],
+'desalination_revolution':[{nm:'Menachem Elimelech',role:'Membrane scientist (with women collaborators)',yr:1998,desc:'Women scientists including Amy Childress, Norma Alcantar, and Andrea Achilli have made crucial contributions to membrane science and desalination technology. Their research on novel membrane materials, fouling mitigation, and energy-efficient desalination is advancing the technology that will provide water security for millions.'}],
+'everglades_restoration':[{nm:'Marjory Stoneman Douglas',role:'Author & Everglades champion',yr:1947,desc:'Marjory Stoneman Douglas\'s \"The Everglades: River of Grass\" (1947) transformed public perception of the Everglades from worthless swamp to priceless ecosystem. She continued advocating for Everglades protection until her death at age 108 in 1998, making her one of the most consequential environmental writers in American history.'}],
+'bangladesh_delta':[{nm:'Fazle Hasan Abed',role:'(BRAC, supported by women leaders)',yr:1972,desc:'While Sir Fazle Hasan Abed founded BRAC, the organisation\'s water and sanitation programmes have been primarily led by women community health workers. Over 100,000 women health volunteers deliver water treatment, hygiene education, and sanitation services across Bangladesh — the world\'s largest women-led community health programme.'}],
+'dam_removal_movement':[{nm:'Amy Souers Kober',role:'Dam removal advocate',yr:2010,desc:'Amy Souers Kober of American Rivers has been a leading advocate for dam removal, working to build the political coalitions needed to remove obsolete dams and restore rivers. Her work demonstrates that water engineering in the 21st century includes the courage to un-build what previous generations built.'}],
+'arsenic_bangladesh':[{nm:'Abul Hussam',role:'(Inventor of SONO filter, with women deployers)',yr:2007,desc:'While Abul Hussam invented the SONO arsenic removal filter, women have been the primary deployers and users of household-level arsenic mitigation technologies across Bangladesh. Women\'s role in water management at the household level makes them central to the arsenic response.'}],
+'water_disease_history':[{nm:'Rita Colwell',role:'Cholera researcher & former NSF Director',yr:1996,desc:'Rita Colwell\'s groundbreaking research demonstrated that filtering water through sari cloth reduced cholera cases by 48% in Bangladesh — a simple, low-cost intervention using materials already available to the world\'s poorest women. Her work bridged microbiology and public health, saving thousands of lives.'}],
+'virtual_water':[{nm:'Arjen Hoekstra',role:'(Water footprint pioneer, with women collaborators)',yr:2002,desc:'Women researchers including Mesfin Mekonnen (collaborator of Hoekstra) and numerous water footprint scientists have advanced the quantification of virtual water flows. Women scholars in water economics and hydrology have been instrumental in translating the virtual water concept into actionable policy.'}],
+'sea_level_rise':[{nm:'Anny Cazenave',role:'Satellite altimetry scientist',yr:1993,desc:'French geophysicist Anny Cazenave pioneered the use of satellite altimetry for measuring sea level rise from space. Her research quantified the acceleration of sea level rise and contributed to the scientific consensus that underpins international climate and water policy.'}],
+'venice_acqua_alta':[{nm:'Jane da Mosto',role:'Environmental scientist & Venice advocate',yr:2008,desc:'Jane da Mosto founded We Are Here Venice — an organisation advocating for Venice\'s environmental sustainability. Her scientific and advocacy work addresses the intersection of sea level rise, tourism pressure, and cultural preservation that defines Venice\'s water challenge.'}],
+'step_wells_india':[{nm:'Rani Udayamati & Rudabai',role:'Queens who built step wells',yr:1063,desc:'Many of India\'s most magnificent step wells were commissioned by women — Rani Udayamati built the Rani ki Vav at Patan (1063 CE), and Rudabai built the Adalaj Vav near Ahmedabad (1498 CE). Step well construction was one of the few avenues for women\'s architectural patronage, and these queens created some of the world\'s most beautiful water structures.'}],
 };
 
 let year=-8000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
@@ -2358,9 +2457,33 @@ function clearWhatIf(){
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
 const HERITAGE_REGIONS = {
+'River Civilisations':['nile_river','tigris_euphrates','indus_river','yellow_river','yangtze_river','ganges_river','amazon_river','mississippi_river','congo_river','mekong_river'],
+'Ancient Water Engineering':['irrigation_origins','qanat_system','minoan_plumbing','roman_aqueducts','pont_du_gard','cloaca_maxima','roman_baths','dujiangyan','sri_lankan_tanks','constantinople_cisterns'],
+'Sacred Water':['great_flood_myths','jordan_river','persian_gardens','mughal_gardens','step_wells_india','ganges_river','jericho_spring','marib_dam'],
+'Great Dams':['hoover_dam','aswan_high_dam','three_gorges_dam','itaipu_dam','tva_project','narmada_dam','banqiao_dam_failure','dam_removal_movement'],
+'Water Crises':['cape_town_water','chennai_water','sao_paulo_drought','flint_water_crisis','aral_sea_disaster','dead_sea_shrinking','lake_chad_shrinking','ogallala_aquifer'],
+'European Water Heritage':['dutch_water_management','north_sea_flood_1953','thames_barrier','venice_acqua_alta','rhine_river','danube_river','london_cholera','thames_embankment','london_water_supply'],
+'Water & Conflict':['israeli_palestinian_water','cochabamba_water_war','water_privatization','california_water_wars','colorado_river','mississippi_1927'],
+'Canals & Navigation':['suez_canal','panama_canal','grand_canal_china','mississippi_river','rhine_river'],
+'Water Innovation':['drip_irrigation','desalination_revolution','singapore_newater','chlorination_revolution','fog_catching','rain_harvesting','noria_waterwheel','watermill_revolution'],
+'Water Justice':['un_water_right','sdg6_water_access','cochabamba_water_war','flint_water_crisis','water_privatization','bottled_water','arsenic_bangladesh'],
+'Catastrophic Water':['yangtze_1931_flood','banqiao_dam_failure','indian_ocean_tsunami','katrina_flooding','mississippi_1927','north_sea_flood_1953','fukushima_water','glacial_megafloods'],
+'Deep Water Time':['great_flood_myths','black_sea_deluge','doggerland_flooding','glacial_megafloods','jericho_spring','sea_level_rise'],
 };
 
 const HERITAGE_REASONS = {
+'River Civilisations':'The world\'s great rivers built the items that line their banks — from the Nile to the Yangtze, water made cities possible.',
+'Ancient Water Engineering':'From Minoan plumbing to Roman aqueducts, ancient engineers solved water challenges with ingenuity that modern technology has not always surpassed.',
+'Sacred Water':'Water has been sacred in every culture — rivers as gods, springs as miracles, gardens as paradise. The spiritual dimension of water transcends engineering.',
+'Great Dams':'The 20th century\'s great dams transformed rivers into engines of development — but at enormous human and ecological cost.',
+'Water Crises':'Modern cities from Cape Town to Chennai face the prospect of running out of water — crises that challenge assumptions about infrastructure and progress.',
+'European Water Heritage':'Europe\'s water story spans from Roman aqueducts through medieval plagues to the Dutch war against the sea and modern river restoration.',
+'Water & Conflict':'Water has been fought over since the first irrigators — from ancient Mesopotamia through modern Israel-Palestine, control of water is control of life.',
+'Canals & Navigation':'The great canals — Suez, Panama, the Grand Canal — transformed global trade by connecting waters that nature separated.',
+'Water Innovation':'From drip irrigation to desalination to fog catching, human ingenuity continues to find new ways to capture, treat, and deliver water.',
+'Water Justice':'The recognition that water is a human right — and the ongoing struggle to make that right real for 2.2 billion underserved people — defines 21st-century water governance.',
+'Catastrophic Water':'The deadliest events in human history have often been water events — floods, tsunamis, and dam failures that killed millions.',
+'Deep Water Time':'The deep past holds keys to water\'s power — from glacial megafloods to the drowning of Doggerland, water has shaped the world before humans could record it.',
 };
 
 let heritageRegion=null;
