@@ -17,7 +17,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "V"
+      "section": "V",
+      "validated_sha": "8f176c990fbd22776fbcc85e340f203a46b0be71",
+      "validated_short": "8f176c9",
+      "validated_at": "2026-03-21T08:17:00.212616Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "numen": {
       "phase": "DONE",
@@ -25,7 +30,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "IV"
+      "section": "IV",
+      "validated_sha": "f8c000f5a8f82e24bd08bf6faeddf26fd3f8b8c3",
+      "validated_short": "f8c000f",
+      "validated_at": "2026-03-21T08:17:00.506664Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "lex": {
       "phase": "DONE",
@@ -33,7 +43,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "VI"
+      "section": "VI",
+      "validated_sha": "38ebe264c2602b50e439b36c71c9226531012db7",
+      "validated_short": "38ebe26",
+      "validated_at": "2026-03-21T08:17:00.834324Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "flora": {
       "phase": "DONE",
@@ -41,7 +56,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "I"
+      "section": "I",
+      "validated_sha": "f8c000f5a8f82e24bd08bf6faeddf26fd3f8b8c3",
+      "validated_short": "f8c000f",
+      "validated_at": "2026-03-21T08:17:01.083744Z",
+      "validated_items": 105,
+      "validated_lenses": 20
     },
     "pecunia": {
       "phase": "DONE",
@@ -49,7 +69,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "VII"
+      "section": "VII",
+      "validated_sha": "2b0fe4b232f54010b8f89f6e7e69bc90b1a3ef3b",
+      "validated_short": "2b0fe4b",
+      "validated_at": "2026-03-21T08:17:01.539787Z",
+      "validated_items": 141,
+      "validated_lenses": 20
     },
     "cosmos": {
       "phase": "DONE",
@@ -58,7 +83,12 @@
       "live": true,
       "map": "sky",
       "section": "I",
-      "note": "Complete. Needs GO_LIVE only \u2014 homepage card still forthcoming."
+      "note": "Complete. Needs GO_LIVE only \u2014 homepage card still forthcoming.",
+      "validated_sha": "bb4f0190ee7dc4aeb32bcc2718db29701172f0dd",
+      "validated_short": "bb4f019",
+      "validated_at": "2026-03-21T08:17:01.786054Z",
+      "validated_items": 112,
+      "validated_lenses": 20
     },
     "anthrophone": {
       "phase": "DONE",
@@ -66,7 +96,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "IX"
+      "section": "IX",
+      "validated_sha": "433c49cb84dd7edb420681cf53e1c75afb79c4ae",
+      "validated_short": "433c49c",
+      "validated_at": "2026-03-21T08:17:02.058603Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "dynastia": {
       "phase": "DONE",
@@ -74,7 +109,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "V"
+      "section": "V",
+      "validated_sha": "8f176c990fbd22776fbcc85e340f203a46b0be71",
+      "validated_short": "8f176c9",
+      "validated_at": "2026-03-21T08:17:02.332378Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "lingua": {
       "phase": "DONE",
@@ -82,7 +122,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "III"
+      "section": "III",
+      "validated_sha": "758dd5f44f10e849b088339ee8539be613269702",
+      "validated_short": "758dd5f",
+      "validated_at": "2026-03-21T08:17:02.623818Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "via": {
       "phase": "DATA",

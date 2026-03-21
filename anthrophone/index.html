@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/anthrophone/">
 <meta property="og:title" content="Anthrophone — Atlas of Musical Instruments">
-<meta property="og:description" content="100 instruments. 40,000 years. Every string, wind, percussion, and electronic instrument that gave humanity its voice — mapped, connected, and explorable.">
+<meta property="og:description" content="120 instruments. 40,000 years. Every string, wind, percussion, and electronic instrument that gave humanity its voice — mapped, connected, and explorable.">
 <meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/anthrophone/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@polyglyphanalytica">
 <meta name="twitter:title" content="Anthrophone — Atlas of Musical Instruments">
-<meta name="twitter:description" content="100 instruments. 40,000 years. Every string, wind, percussion, and electronic instrument that gave humanity its voice — mapped, connected, and explorable.">
+<meta name="twitter:description" content="120 instruments. 40,000 years. Every string, wind, percussion, and electronic instrument that gave humanity its voice — mapped, connected, and explorable.">
 <meta name="twitter:image" content="https://polyglyphanalytica.github.io/pangea/anthrophone/og-image.png">
 
 <!-- Structured Data -->
@@ -36,7 +36,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Anthrophone — Atlas of Musical Instruments",
-  "description": "An interactive organology atlas exploring 100 musical instruments across 40,000 years. Features a real geographic map, continuous timeline, 20 interpretive lenses including Acoustics, Construction, Repertoire, Social Role, and Ritual. Includes a Herstory mode tracing women across all musical traditions.",
+  "description": "An interactive organology atlas exploring 120 musical instruments across 40,000 years. Features a real geographic map, continuous timeline, 20 interpretive lenses including Acoustics, Construction, Repertoire, Social Role, and Ritual. Includes a Herstory mode tracing women across all musical traditions.",
   "url": "https://polyglyphanalytica.github.io/pangea/anthrophone/",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Web Browser",
@@ -50,7 +50,7 @@
     "name": "Polyglyph Analytica"
   },
   "featureList": [
-    "100 musical instruments from bone flutes to synthesisers",
+    "120 musical instruments from bone flutes to synthesisers",
     "40,000-year interactive timeline",
     "20 interpretive lenses including Acoustics, Construction, Repertoire, Social Role",
     "Instrument lineage tracking across cultures",
@@ -708,26 +708,26 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
 const LENSES=[
-{id:'acoustics',ico:'\u2299',lbl:'Acoustics',col:'#e89820'},
-{id:'construction',ico:'\u2692',lbl:'Construction',col:'#d4782a'},
-{id:'cultural_exchange',ico:'\u2740',lbl:'Cultural Exchange',col:'#7a9848'},
-{id:'ensembles',ico:'\u2637',lbl:'Ensembles',col:'#6a88b8'},
-{id:'evolution',ico:'\u21BB',lbl:'Evolution',col:'#b87830'},
-{id:'gender',ico:'\u26A4',lbl:'Gender & Access',col:'#c060a0'},
-{id:'innovation',ico:'\u2606',lbl:'Innovation',col:'#d4a840'},
-{id:'makers',ico:'\u270B',lbl:'Makers & Builders',col:'#8a7040'},
-{id:'materials',ico:'\u25A8',lbl:'Materials',col:'#a08850'},
-{id:'notation',ico:'\u266B',lbl:'Notation',col:'#9078a8'},
-{id:'oral_tradition',ico:'\u2767',lbl:'Oral Tradition',col:'#b89060'},
-{id:'pedagogy',ico:'\u270D',lbl:'Pedagogy',col:'#7890a0'},
-{id:'performance',ico:'\u2605',lbl:'Performance',col:'#c89030'},
-{id:'recording',ico:'\u25C9',lbl:'Recording',col:'#607890'},
-{id:'repertoire',ico:'\u2669',lbl:'Repertoire',col:'#a87838'},
-{id:'revival',ico:'\u2740',lbl:'Revival',col:'#6a9850'},
-{id:'ritual',ico:'\u2721',lbl:'Ritual & Ceremony',col:'#a07048'},
-{id:'social_role',ico:'\u2302',lbl:'Social Role',col:'#8888a0'},
-{id:'symbolism',ico:'\u2318',lbl:'Symbolism',col:'#9868a0'},
-{id:'trade',ico:'\u2696',lbl:'Trade & Commerce',col:'#c0a040'}
+  {id:'acoustics',ico:'\u2299',lbl:'Acoustics',col:'#e89820'},
+  {id:'construction',ico:'\u2692',lbl:'Construction',col:'#d4782a'},
+  {id:'cultural_exchange',ico:'\u2740',lbl:'Cultural Exchange',col:'#7a9848'},
+  {id:'ensembles',ico:'\u2637',lbl:'Ensembles',col:'#6a88b8'},
+  {id:'evolution',ico:'\u21BB',lbl:'Evolution',col:'#b87830'},
+  {id:'gender',ico:'\u26A4',lbl:'Gender & Access',col:'#c060a0'},
+  {id:'innovation',ico:'\u2606',lbl:'Innovation',col:'#d4a840'},
+  {id:'makers',ico:'\u270B',lbl:'Makers & Builders',col:'#8a7040'},
+  {id:'materials',ico:'\u25A8',lbl:'Materials',col:'#a08850'},
+  {id:'notation',ico:'\u266B',lbl:'Notation',col:'#9078a8'},
+  {id:'oral_tradition',ico:'\u2767',lbl:'Oral Tradition',col:'#b89060'},
+  {id:'pedagogy',ico:'\u270D',lbl:'Pedagogy',col:'#7890a0'},
+  {id:'performance',ico:'\u2605',lbl:'Performance',col:'#c89030'},
+  {id:'recording',ico:'\u25C9',lbl:'Recording',col:'#607890'},
+  {id:'repertoire',ico:'\u2669',lbl:'Repertoire',col:'#a87838'},
+  {id:'revival',ico:'\u2740',lbl:'Revival',col:'#6a9850'},
+  {id:'ritual',ico:'\u2721',lbl:'Ritual & Ceremony',col:'#a07048'},
+  {id:'social_role',ico:'\u2302',lbl:'Social Role',col:'#8888a0'},
+  {id:'symbolism',ico:'\u2318',lbl:'Symbolism',col:'#9868a0'},
+  {id:'trade',ico:'\u2696',lbl:'Trade & Commerce',col:'#c0a040'}
 ];
 
 const ERAS=[
@@ -4526,7 +4526,7 @@ document.addEventListener('keydown',function(e){
 // Update herstory badge in burger menu when toggled
 const _origToggleHerstory=typeof toggleHerstory==='function'?toggleHerstory:null;
 
-window.addEventListener('load',init);
+document.addEventListener('DOMContentLoaded',init);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeClusterPicker();});
 
 // ── THEME ──
@@ -4547,10 +4547,12 @@ function toggleTheme(){
   // Prefer pangea-theme (project-wide), fall back to civ-theme (legacy), then system
   const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('civ-theme');
   if(saved){applyTheme(saved);}
-  else{
-    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
-    document.documentElement.dataset.theme=sys;
-    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
+  else if(window.matchMedia('(prefers-color-scheme:light)').matches){
+    document.documentElement.dataset.theme='light';
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent='◐';
+  }else{
+    document.documentElement.dataset.theme='dark';
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent='◑';
   }
 })();
 
