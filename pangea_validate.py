@@ -110,8 +110,18 @@ def validate(atlas, force=False):
     checks = []
     warnings = []  # non-blocking issues
 
-    # ── Item count ──────────────────────────────────────────────────────────
-    item_count = len(re.findall(r"^\{id:'", html, re.MULTILINE))
+    # ── Item count (inside ITEMS block only) ────────────────────────────────
+    # Find the region between 'const ITEMS=[' and 'const TRANSMISSIONS'
+    # (or next const declaration) to avoid matching LENSES entries
+    items_start_m = re.search(r'const ITEMS\s*=\s*\[', html)
+    items_end_m = re.search(r'const TRANSMISSIONS\s*=', html)
+    if items_start_m and items_end_m:
+        items_region = html[items_start_m.end():items_end_m.start()]
+    elif items_start_m:
+        items_region = html[items_start_m.end():]
+    else:
+        items_region = ""
+    item_count = len(re.findall(r"^\{id:'", items_region, re.MULTILINE))
     checks.append(("item_count >= 100", item_count >= 100, f"found {item_count}"))
 
     # ── Meta description count ──────────────────────────────────────────────
@@ -134,8 +144,14 @@ def validate(atlas, force=False):
                    is_sorted, "OK" if is_sorted else f"unsorted: {lens_labels[:4]}"))
 
     # ── Item d{} keys match lens IDs ────────────────────────────────────────
-    items_block = re.search(r'const ITEMS\s*=\s*\[[\s\S]*?\];', html)
-    items_text = items_block.group(0) if items_block else ""
+    # Find the first ]; that appears after all items have been seen
+    items_text = items_region
+    for m in re.finditer(r'^\];', items_region, re.MULTILINE):
+        candidate = items_region[:m.start()]
+        count = len(re.findall(r"^\{id:'", candidate, re.MULTILINE))
+        if count >= item_count:
+            items_text = candidate
+            break
     d_blocks = re.findall(r'd:\{([^}]+)\}', items_text)
     lens_id_set = set(lens_ids)
     orphan_keys = set()
