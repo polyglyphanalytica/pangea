@@ -26,6 +26,16 @@ If you find yourself writing item 3 before item 2 is committed, stop immediately
 4. python3 pangea_orchestrator.py status
 5. python3 pangea_orchestrator.py → execute immediately.
 
+## MERGE CONFLICT PREVENTION
+
+Before every `git commit`, run:
+```bash
+python3 pangea_orchestrator.py sync
+```
+This pulls the latest remote changes and rebases your local work on top.
+It also auto-resolves conflicts on `pangea_state.json` using smart JSON merge.
+Skipping this step risks merge conflicts when multiple sessions push concurrently.
+
 ---
 
 ## THE LOOP
@@ -41,12 +51,17 @@ Never pause. Never wait for confirmation.
 ```bash
 cp civilitas/index.html ATLAS/index.html
 ```
-Verify it opens. Commit: "ATLAS: Phase 1A — copy from civilitas"
+Verify it opens.
+```bash
+python3 pangea_orchestrator.py sync
+git add ATLAS/ && git commit -m "ATLAS: Phase 1A — copy from civilitas"
+```
 `python3 pangea_orchestrator.py advance ATLAS 1A`
 
 ### Phases 1B / 1C / 1D
 Adapt metadata, logo, domain language per CLAUDE.md Section 2.
-No colour changes. No Herstory changes. Commit after each. Advance after each.
+No colour changes. No Herstory changes.
+Sync (`python3 pangea_orchestrator.py sync`), then commit after each. Advance after each.
 
 ### Phase 1E (sky atlas only)
 Replace only renderWorldMap() and itemPt(). Commit. Advance.
@@ -173,7 +188,11 @@ The orchestrator output will look like:
    ```
    Must be exactly item_number. If not — fix before continuing.
 
-4. Commit: "ATLAS: item N/100 — Item Name"
+4. Sync and commit:
+   ```bash
+   python3 pangea_orchestrator.py sync
+   git add ATLAS/ && git commit -m "ATLAS: item N/100 — Item Name"
+   ```
 
 5. Update state:
    ```bash

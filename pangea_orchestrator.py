@@ -10,15 +10,216 @@ Usage:
   python3 pangea_orchestrator.py golive ATLAS        — mark atlas live
   python3 pangea_orchestrator.py status              — human-readable progress report
   python3 pangea_orchestrator.py verify              — check state file integrity
+  python3 pangea_orchestrator.py sync                — pull & rebase before committing (prevents merge conflicts)
 """
 
 import json
 import os
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 STATE_FILE = Path("pangea_state.json")
+
+
+# ── Merge-conflict prevention ────────────────────────────────────────────────
+
+def _run_git(*args, **kwargs):
+    """Run a git command and return the CompletedProcess."""
+    return subprocess.run(["git"] + list(args), capture_output=True, text=True, **kwargs)
+
+
+def _merge_state_json(ours_path):
+    """Smart-merge pangea_state.json after a rebase/merge conflict.
+
+    Strategy: load both versions, merge atlases (union of keys, prefer the
+    version with more progress), merge queue (union preserving order), merge
+    completed (union), merge session_log (concatenate and deduplicate).
+    Returns True if resolved, False if unresolvable.
+    """
+    try:
+        # Get the two conflicting versions
+        ours_result = _run_git("show", ":2:pangea_state.json")   # ours
+        theirs_result = _run_git("show", ":3:pangea_state.json") # theirs
+        if ours_result.returncode != 0 or theirs_result.returncode != 0:
+            return False
+        ours = json.loads(ours_result.stdout)
+        theirs = json.loads(theirs_result.stdout)
+    except (json.JSONDecodeError, KeyError):
+        return False
+
+    merged = dict(ours)
+
+    # Merge atlases: union of keys; for shared keys, pick the one further along
+    phase_rank = {p: i for i, p in enumerate(PHASES_ORDERED)}
+    their_atlases = theirs.get("atlases", {})
+    our_atlases = merged.get("atlases", {})
+    for key, their_info in their_atlases.items():
+        if key not in our_atlases:
+            our_atlases[key] = their_info
+        else:
+            our_info = our_atlases[key]
+            our_phase = phase_rank.get(our_info.get("phase", "1A"), 0)
+            their_phase = phase_rank.get(their_info.get("phase", "1A"), 0)
+            # Pick whichever is further along (higher phase or more items)
+            if their_phase > our_phase or (
+                their_phase == our_phase
+                and their_info.get("items", 0) > our_info.get("items", 0)
+            ):
+                our_atlases[key] = their_info
+            # If theirs is live and ours isn't, take theirs
+            if their_info.get("live") and not our_info.get("live"):
+                our_atlases[key] = their_info
+    merged["atlases"] = our_atlases
+
+    # Merge queue: union preserving order (ours first, then any new from theirs)
+    our_queue = merged.get("queue", [])
+    their_queue = theirs.get("queue", [])
+    seen = set(our_queue)
+    for item in their_queue:
+        if item not in seen:
+            our_queue.append(item)
+            seen.add(item)
+    # Remove anything that's now live or completed from the queue
+    completed_set = set(merged.get("completed", []))
+    for key, info in our_atlases.items():
+        if info.get("live"):
+            completed_set.add(key)
+    our_queue = [q for q in our_queue if q not in completed_set]
+    merged["queue"] = our_queue
+
+    # Merge completed: union
+    our_completed = set(merged.get("completed", []))
+    their_completed = set(theirs.get("completed", []))
+    merged["completed"] = list(our_completed | their_completed)
+
+    # Merge session_log: concatenate, deduplicate by content
+    our_log = merged.get("session_log", [])
+    their_log = theirs.get("session_log", [])
+    seen_entries = {json.dumps(e, sort_keys=True) for e in our_log}
+    for entry in their_log:
+        key = json.dumps(entry, sort_keys=True)
+        if key not in seen_entries:
+            our_log.append(entry)
+            seen_entries.add(key)
+    merged["session_log"] = our_log
+
+    # Write merged result
+    Path(ours_path).write_text(json.dumps(merged, indent=2))
+    _run_git("add", ours_path)
+    return True
+
+
+def pull_and_rebase():
+    """Pull latest changes from origin, rebasing local commits on top.
+
+    Handles conflicts on pangea_state.json with smart JSON merge.
+    Returns True if sync succeeded, False if manual intervention needed.
+    """
+    # Detect current branch
+    branch_result = _run_git("rev-parse", "--abbrev-ref", "HEAD")
+    if branch_result.returncode != 0:
+        return True  # not in a git repo or detached HEAD — skip
+    branch = branch_result.stdout.strip()
+
+    # Fetch with retry
+    for attempt in range(4):
+        fetch = _run_git("fetch", "origin", branch)
+        if fetch.returncode == 0:
+            break
+        wait = 2 ** (attempt + 1)
+        print(f"  fetch failed (attempt {attempt+1}/4), retrying in {wait}s...")
+        time.sleep(wait)
+    else:
+        print("WARNING: Could not fetch from origin — committing locally only.")
+        return True
+
+    # Check if there are upstream changes to incorporate
+    diff_check = _run_git("rev-list", "--count", f"HEAD..origin/{branch}")
+    if diff_check.returncode != 0 or diff_check.stdout.strip() == "0":
+        return True  # nothing to rebase onto
+
+    # Stash any unstaged changes so rebase doesn't fail on dirty tree
+    _run_git("stash", "--include-untracked", "-m", "orchestrator-auto-stash")
+    stashed = True
+
+    # Attempt rebase
+    rebase = _run_git("rebase", f"origin/{branch}")
+    if rebase.returncode != 0:
+        # Check if the conflict is only on pangea_state.json
+        status = _run_git("diff", "--name-only", "--diff-filter=U")
+        conflicted = [f.strip() for f in status.stdout.strip().split("\n") if f.strip()]
+
+        resolvable = True
+        for f in conflicted:
+            if f == "pangea_state.json":
+                if not _merge_state_json(f):
+                    resolvable = False
+                    break
+            else:
+                resolvable = False
+                break
+
+        if resolvable and conflicted:
+            cont = _run_git("rebase", "--continue")
+            if cont.returncode != 0:
+                # Try with a no-edit env to skip editor
+                env = os.environ.copy()
+                env["GIT_EDITOR"] = "true"
+                subprocess.run(
+                    ["git", "rebase", "--continue"],
+                    capture_output=True, text=True, env=env
+                )
+        elif not resolvable:
+            _run_git("rebase", "--abort")
+            print("WARNING: Rebase conflict could not be auto-resolved. Committing without rebase.")
+
+    # Restore stash
+    if stashed:
+        _run_git("stash", "pop")
+
+    return True
+
+
+def safe_git_commit(files, message):
+    """Stage files, sync with remote, then commit. Returns True on success.
+
+    This is the single commit entry-point for the orchestrator.  It:
+      1. Stages the given files
+      2. Pulls & rebases to avoid merge conflicts
+      3. Re-stages files (in case rebase changed them)
+      4. Commits
+    """
+    # Stage
+    for f in files:
+        _run_git("add", f)
+
+    # Sync with remote before committing
+    pull_and_rebase()
+
+    # Re-stage in case rebase changed working tree
+    for f in files:
+        if Path(f).exists():
+            _run_git("add", f)
+
+    # Commit
+    result = _run_git("commit", "-m", message)
+    if result.returncode != 0:
+        # Might be "nothing to commit" after rebase incorporated our changes
+        if "nothing to commit" in result.stdout or "nothing to commit" in result.stderr:
+            print("  (changes already incorporated by rebase — no new commit needed)")
+            return True
+        print(f"WARNING: git commit failed: {result.stderr.strip()}")
+        return False
+    return True
+
+
+def cmd_sync():
+    """Pull latest changes and rebase local work on top. Called by agents
+    before they make their own commits to avoid merge conflicts."""
+    pull_and_rebase()
+    print("Sync complete.")
 
 # Phases in order — DATA is a single phase covering all item writing
 PHASES_ORDERED = [
@@ -267,8 +468,9 @@ def get_next_action(state):
             f"1. Append {batch_size} item to the ITEMS array in {atlas}/index.html\n"
             f"   (or in {atlas}/data.js if using the build system)\n"
             f"2. grep -c '^{{id:\'' {atlas}/index.html  →  must equal {batch_end}\n"
-            f"3. git add {atlas}/ && git commit -m '{atlas}: item {batch_start}/{target}'\n"
-            f"4. python3 pangea_orchestrator.py batch_done {atlas}"
+            f"3. python3 pangea_orchestrator.py sync\n"
+            f"4. git add {atlas}/ && git commit -m '{atlas}: item {batch_start}/{target}'\n"
+            f"5. python3 pangea_orchestrator.py batch_done {atlas}"
         )
         return None
 
@@ -375,6 +577,7 @@ def cmd_batch_done(atlas):
         print(
             f"batch_recorded {real_count}/{target}. {remaining} remaining.\n"
             f"WRITE NEXT ITEM: item {batch_start}/{target}.\n"
+            f"Sync:   python3 pangea_orchestrator.py sync\n"
             f"Commit: git add {atlas}/ && git commit -m '{atlas}: item {batch_start}/{target}'\n"
             f"Then run: python3 pangea_orchestrator.py batch_done {atlas}"
         )
@@ -421,7 +624,7 @@ def cmd_golive(atlas):
         html, index_updated = update_index_card_to_live(html, atlas, display_name)
         if index_updated:
             # Also add to JSON-LD hasPart if not already there
-            hasPart_entry = f'{{"@type":"Dataset","name":"{display_name}","url":"https://polyglyphanalytica.github.io/pangea/{atlas}/"}}' 
+            hasPart_entry = f'{{"@type":"Dataset","name":"{display_name}","url":"https://polyglyphanalytica.github.io/pangea/{atlas}/"}}'
             if hasPart_entry not in html and '"hasPart"' in html:
                 html = html.replace(
                     '"hasPart":[',
@@ -429,10 +632,10 @@ def cmd_golive(atlas):
                     1
                 )
             index_path.write_text(html, encoding="utf-8")
-            subprocess.run(["git", "add", "index.html"], capture_output=True)
-        subprocess.run(["git", "add", f"{atlas}/index.html"], capture_output=True)
-        subprocess.run(["git", "commit", "-m", f"{atlas}: go-live — homepage activated"],
-                       capture_output=True)
+        commit_files = [f"{atlas}/index.html", "pangea_state.json"]
+        if index_updated:
+            commit_files.append("index.html")
+        safe_git_commit(commit_files, f"{atlas}: go-live — homepage activated")
 
     print(json.dumps({"status": "live", "atlas": atlas, "items": info["items"],
                       "homepage_updated": index_updated}))
@@ -613,10 +816,10 @@ def cmd_new_atlas(key, name, section, icon, tagline, tags_str):
         html = index_path.read_text(encoding="utf-8")
         html = insert_card_into_section(html, section, card)
         index_path.write_text(html, encoding="utf-8")
-        subprocess.run(["git", "add", "index.html", "pangea_state.json"], capture_output=True)
-        r = subprocess.run(["git", "commit", "-m", f"feat: new atlas card — {name}"],
-                           capture_output=True, text=True)
-        committed = r.returncode == 0
+        committed = safe_git_commit(
+            ["index.html", "pangea_state.json"],
+            f"feat: new atlas card — {name}"
+        )
 
     print(f"Registered: {name} ({key}) | section {section}")
     print(f"Homepage card inserted into section {section}: {committed}")
@@ -638,6 +841,8 @@ if __name__ == "__main__":
         cmd_batch_done(sys.argv[2])
     elif sys.argv[1] == "golive" and len(sys.argv) == 3:
         cmd_golive(sys.argv[2])
+    elif sys.argv[1] == "sync":
+        cmd_sync()
     elif sys.argv[1] == "status":
         cmd_status()
     elif sys.argv[1] == "verify":
