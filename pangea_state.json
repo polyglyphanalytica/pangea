@@ -76,7 +76,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "IX"
+      "section": "IX",
+      "validated_sha": "de7380d276279292c30ff6560e6954abf035c0cc",
+      "validated_short": "de7380d",
+      "validated_at": "2026-03-21T08:11:25.037591Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "dynastia": {
       "phase": "DONE",
