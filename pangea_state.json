@@ -78,7 +78,12 @@
       "live": true,
       "map": "sky",
       "section": "I",
-      "note": "Complete. Needs GO_LIVE only \u2014 homepage card still forthcoming."
+      "note": "Complete. Needs GO_LIVE only \u2014 homepage card still forthcoming.",
+      "validated_sha": "946ab5f5a43de181306cf5a62a0714b2b85cc981",
+      "validated_short": "946ab5f",
+      "validated_at": "2026-03-21T08:13:35.079189Z",
+      "validated_items": 112,
+      "validated_lenses": 20
     },
     "anthrophone": {
       "phase": "DONE",
