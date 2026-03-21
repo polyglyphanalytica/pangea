@@ -30,7 +30,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "IV"
+      "section": "IV",
+      "validated_sha": "592df5861c7fac0afde752105ff5c40c261d4f68",
+      "validated_short": "592df58",
+      "validated_at": "2026-03-21T08:11:37.751959Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "lex": {
       "phase": "DONE",
@@ -51,7 +56,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "I"
+      "section": "I",
+      "validated_sha": "2840468d11896a690c097cdddff324178e5bc45b",
+      "validated_short": "2840468",
+      "validated_at": "2026-03-21T08:11:37.182864Z",
+      "validated_items": 105,
+      "validated_lenses": 20
     },
     "pecunia": {
       "phase": "DONE",
