@@ -334,6 +334,7 @@ def generate_new_atlas(state):
     # Each tuple: (key, display_name, section, icon, tagline, tags)
     # Rules: global scope, 5 000+ year span, clear Herstory angle, Latin key.
     IDEA_POOL = [
+        # ── Batch 1: Original pool ──────────────────────────────────────────
         ("colonia",    "Colonia",    "V",    "🏴",  "Every empire planted a flag — every colony pulled it down.",            "Colonialism,Empire,Resistance"),
         ("orbis",      "Orbis",      "IX",   "🌍",  "The story of maps, borders, and who drew them.",                        "Geography,Cartography,Borders"),
         ("nexus",      "Nexus",      "IX",   "🔗",  "Networks that connected civilisations before the internet.",            "Networks,Communication,Trade"),
@@ -364,28 +365,83 @@ def generate_new_atlas(state):
         ("censor",     "Censor",     "VI",   "✂️",  "What was silenced tells us as much as what was spoken.",               "Censorship,Suppression,Freedom"),
         ("elementum",  "Elementum",  "II",   "⚗️",  "From four elements to 118 — chemistry remade the world.",             "Chemistry,Elements,Alchemy"),
         ("bibliotheca","Bibliotheca","IV",   "📚",  "Every burned library was a civilisation's memory erased.",             "Libraries,Books,Knowledge"),
+        # ── Batch 2: Extended pool ──────────────────────────────────────────
+        ("veneficium", "Veneficium", "IV",   "🧪",  "Poison, pharmacy, and the thin line between cure and kill.",           "Poison,Medicine,Alchemy"),
+        ("ludus",      "Ludus",      "IX",   "🎲",  "Games, sport, and spectacle — how humanity learned to compete.",       "Games,Sport,Competition"),
+        ("vestis",     "Vestis",     "VIII", "👘",  "Clothing told the world who you were before you spoke.",               "Clothing,Fashion,Identity"),
+        ("fames",      "Fames",      "I",    "🍞",  "Every famine reshaped the politics of the full.",                      "Famine,Food,Scarcity"),
+        ("pestis",     "Pestis",     "X",    "🦠",  "Plagues killed more than wars — and changed more than revolutions.",   "Plague,Disease,Pandemic"),
+        ("specula",    "Specula",    "III",  "🔭",  "Observation towers, lighthouses, and the architecture of watching.",   "Observation,Surveillance,Towers"),
+        ("silva",      "Silva",      "I",    "🌲",  "Forests fed, sheltered, and terrified every civilisation.",             "Forests,Timber,Ecology"),
+        ("vinum",      "Vinum",      "VII",  "🍷",  "Wine, beer, and spirits — fermentation shaped trade and ritual.",      "Alcohol,Brewing,Trade"),
+        ("clavus",     "Clavus",     "VIII", "🔑",  "Locks, keys, and the invention of private property.",                  "Security,Property,Trust"),
+        ("theatrum",   "Theatrum",   "IX",   "🎭",  "The stage held a mirror to every society that built one.",             "Theatre,Performance,Drama"),
+        ("moneta",     "Moneta",     "VII",  "🪙",  "Coins carried power further than any army.",                           "Coins,Currency,Minting"),
+        ("desertum",   "Desertum",   "I",    "🏜️",  "Deserts were never empty — they were full of adaptation.",             "Deserts,Arid,Survival"),
+        ("servitus",   "Servitus",   "VI",   "⛓️",  "Slavery built empires — abolition rebuilt the world.",                 "Slavery,Abolition,Labour"),
+        ("census",     "Census",     "III",  "📋",  "Counting people was the first act of governance.",                     "Census,Population,Data"),
+        ("ars_bellica","Ars Bellica","V",    "🏰",  "Fortifications, sieges, and the architecture of survival.",            "Fortifications,Sieges,Defence"),
+        ("dolium",     "Dolium",     "VIII", "🏺",  "Pottery, ceramics, and the containers that carried civilisation.",     "Pottery,Ceramics,Storage"),
+        ("sal",        "Sal",        "VII",  "🧂",  "Salt preserved food, funded empires, and started wars.",               "Salt,Preservation,Trade"),
+        ("ignis",      "Ignis",      "II",   "🔥",  "Fire was humanity's first technology — and its most dangerous.",       "Fire,Energy,Industry"),
+        ("calendarium","Calendarium","III",  "📅",  "Calendars decided when to plant, pray, and fight.",                    "Calendars,Time,Astronomy"),
+        ("mythologia", "Mythologia", "IV",   "🐉",  "Myths explained the world before science tried.",                     "Mythology,Legend,Folklore"),
+        ("metallum",   "Metallum",   "II",   "⚙️",  "Bronze, iron, steel — each metal age remade the balance of power.",   "Metals,Smelting,Industry"),
+        ("taberna",    "Taberna",     "VII",  "🏪",  "Markets, bazaars, and shops — where strangers became neighbours.",     "Markets,Commerce,Exchange"),
+        ("musica",     "Musica",     "IX",   "🎵",  "Every culture sang before it wrote.",                                  "Music,Song,Instruments"),
+        ("portus",     "Portus",     "VIII", "⚓",  "Ports were the mouths through which civilisations spoke to each other.","Ports,Harbours,Trade"),
+        ("mons",       "Mons",       "I",    "🏔️",  "Mountains divided peoples and sheltered the defiant.",                 "Mountains,Terrain,Isolation"),
+        ("papyrus",    "Papyrus",    "III",  "📜",  "Writing surfaces — from clay to cloud — shaped what survived.",        "Writing,Paper,Records"),
+        ("pirata",     "Pirata",     "V",    "🏴‍☠️",  "Pirates policed the margins of every maritime empire.",                "Piracy,Smuggling,Maritime"),
+        ("lingua",     "Lingua",     "IV",   "🗣️",  "Languages carried worldviews — when they died, worlds ended.",        "Language,Linguistics,Translation"),
+        ("fossilia",   "Fossilia",   "II",   "🦴",  "Fossils rewrote the story humanity told about itself.",                "Fossils,Palaeontology,Evolution"),
+        ("color",      "Color",      "IX",   "🎨",  "Pigments, dyes, and colours — the chemistry of beauty.",               "Colour,Dyes,Pigments"),
     ]
 
     # Filter out any ideas whose key already exists
     available = [idea for idea in IDEA_POOL if idea[0] not in existing]
 
     if not available:
-        # Pool exhausted — synthesise from a counter
-        counter = len(existing)
-        key = f"atlas_{counter}"
-        while key in existing:
-            counter += 1
+        # Pool exhausted — synthesise with meaningful names from a secondary list
+        OVERFLOW_THEMES = [
+            ("labyrinthus", "Labyrinthus", "🌀", "Mazes, puzzles, and the architecture of confusion.", "Mazes,Puzzles,Architecture"),
+            ("umbra",       "Umbra",       "🌑", "Shadows, eclipses, and the science of darkness.",    "Shadows,Eclipses,Optics"),
+            ("harena",      "Harena",      "🏟️", "Arenas, amphitheatres, and spectacles of power.",   "Arenas,Gladiators,Spectacle"),
+            ("horologium",  "Horologium",  "⏳", "Clocks, sundials, and humanity's obsession with time.", "Clocks,Time,Horology"),
+            ("spectrum",    "Spectrum",    "🌈", "Light, optics, and the science of seeing.",          "Light,Optics,Colour"),
+            ("apotheca",    "Apotheca",    "💊", "Pharmacies, apothecaries, and the business of healing.", "Pharmacy,Remedies,Healing"),
+            ("coemeterium", "Coemeterium", "⚰️", "Burial, mourning, and the architecture of death.",  "Death,Burial,Mourning"),
+            ("nummus",      "Nummus",      "💰", "Debt, credit, and the invisible architecture of obligation.", "Debt,Credit,Obligation"),
+            ("machina",     "Machina",     "🔧", "Machines, automation, and the labour they displaced.", "Machines,Automation,Labour"),
+            ("turris",      "Turris",      "🗼", "Towers — from Babel to broadcast — reaching upward.", "Towers,Height,Ambition"),
+        ]
+        for okey, oname, oicon, otagline, otags in OVERFLOW_THEMES:
+            if okey not in existing:
+                # Pick section with fewest atlases
+                section_counts = {}
+                for info in state["atlases"].values():
+                    s = info.get("section", "I")
+                    section_counts[s] = section_counts.get(s, 0) + 1
+                all_sections = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"]
+                section = min(all_sections, key=lambda s: section_counts.get(s, 0))
+                chosen = (okey, oname, section, oicon, otagline, otags)
+                break
+        else:
+            # Even overflow exhausted — synthesise from counter
+            counter = len(existing)
             key = f"atlas_{counter}"
-        # Pick a section with the fewest atlases
-        section_counts = {}
-        for info in state["atlases"].values():
-            s = info.get("section", "I")
-            section_counts[s] = section_counts.get(s, 0) + 1
-        all_sections = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"]
-        section = min(all_sections, key=lambda s: section_counts.get(s, 0))
-        chosen = (key, key.replace("_", " ").title(), section, "🗺️",
-                  "Another chapter in humanity's unfinished story.",
-                  "History,Culture,Civilization")
+            while key in existing:
+                counter += 1
+                key = f"atlas_{counter}"
+            section_counts = {}
+            for info in state["atlases"].values():
+                s = info.get("section", "I")
+                section_counts[s] = section_counts.get(s, 0) + 1
+            all_sections = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"]
+            section = min(all_sections, key=lambda s: section_counts.get(s, 0))
+            chosen = (key, key.replace("_", " ").title(), section, "🗺️",
+                      "Another chapter in humanity's unfinished story.",
+                      "History,Culture,Civilization")
     else:
         # Pick the first available (deterministic order, not random)
         chosen = available[0]
@@ -425,14 +481,10 @@ def get_next_action(state):
         phase = "DATA"
 
     if phase == "DONE" and not info.get("live"):
-        return {
-            "action": "GO_LIVE",
-            "atlas": atlas,
-            "items": count_items(atlas),
-            "target": info.get("target", 100),
-            "section": info.get("section", "?"),
-            "homepage_name": info.get("homepage_name", atlas.capitalize())
-        }
+        # Auto-golive: validate, flip card, commit, and chain to next atlas
+        print(f"{atlas} is DONE but not live — auto-triggering go-live...")
+        cmd_golive(atlas)  # chains into self_invoke() → next atlas
+        return None  # unreachable — cmd_golive calls self_invoke()
 
     # Sync item count
     real_count = count_items(atlas)
@@ -503,7 +555,7 @@ def cmd_advance(atlas, completed_phase):
     real_count = count_items(atlas)
     info["items"] = real_count
 
-    # Phase 5 complete → automatically run validation before advancing to 6
+    # Phase 5 complete → run validation, then auto-golive and chain to next atlas
     if completed_phase == "5":
         print(f"Phase 5 complete. Running validation automatically...")
         passed = run_validation(atlas)
@@ -512,15 +564,15 @@ def cmd_advance(atlas, completed_phase):
             print(f"VALIDATION FAILED. Fix all FAIL items in {atlas}/index.html.")
             print(f"Then re-run: python3 pangea_orchestrator.py advance {atlas} 5")
             sys.exit(1)
-        # Validation passed — skip phase 6 since we just validated, go straight to DONE
+        # Validation passed — go live immediately, no manual GO_LIVE step
         info["phase"] = "DONE"
         state["atlases"][atlas] = info
         state.setdefault("session_log", []).append({
-            "atlas": atlas, "phase_done": "5+6", "phase_next": "DONE", "items": real_count
+            "atlas": atlas, "phase_done": "5+6", "phase_next": "GO_LIVE", "items": real_count
         })
         save_state(state)
-        print(f"Validation passed. {atlas} advancing to DONE → GO_LIVE next.")
-        self_invoke()
+        print(f"Validation passed. Auto-triggering go-live for {atlas}...")
+        cmd_golive(atlas)  # chains into self_invoke() → next atlas
         return
 
     info["phase"] = next_phase(completed_phase, info.get("map", "world"))

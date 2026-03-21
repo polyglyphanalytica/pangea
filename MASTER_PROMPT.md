@@ -114,13 +114,8 @@ Verify all 5 modes work.
 Commit: "ATLAS: Phase 5 — all modes verified"
 `python3 pangea_orchestrator.py advance ATLAS 5`
 
-### Phase 6
-```bash
-python3 pangea_validate.py ATLAS
-```
-Exit 0 → commit "ATLAS: Phase 6 — validation passed", advance, proceed to GO_LIVE.
-Exit 1 → fix every FAIL, re-run, do not advance until clean.
-`python3 pangea_orchestrator.py advance ATLAS 6`
+This automatically runs validation, flips the homepage card to live, commits, and
+chains to the next atlas. No manual GO_LIVE step needed.
 
 ---
 
@@ -203,28 +198,19 @@ The orchestrator output will look like:
 
 ---
 
-## GO_LIVE
+## GO_LIVE (automatic)
 
-1. `python3 pangea_validate.py ATLAS` — must exit 0.
-2. In index.html update the card:
-   - class="card card--forthcoming" → class="card card--live"
-   - Remove <span class="coming-soon">Coming Soon</span>
-   - Add <span class="status status--live">Live</span> as first child
-   - Wrap content in <a href="ATLAS/index.html">...</a>
-3. Add to JSON-LD hasPart: {"@type":"Dataset","name":"NAME","url":"https://polyglyphanalytica.github.io/pangea/ATLAS/"}
-4. Verify: grep -c "card--live" index.html → increased by 1.
-5. Commit: "ATLAS: go-live — homepage activated"
-6. `python3 pangea_orchestrator.py golive ATLAS`
-7. Call `python3 pangea_orchestrator.py` → begin next atlas.
+Go-live is handled automatically by the orchestrator after Phase 5 validation passes.
+The orchestrator validates, flips the homepage card, updates JSON-LD, commits, and
+chains to the next atlas — all without manual intervention.
 
----
+If you need to manually trigger go-live (e.g. after a fix):
+`python3 pangea_orchestrator.py golive ATLAS`
 
-## CLEANUP
-`python3 pangea_orchestrator.py golive ATLAS` → continue.
+## QUEUE EMPTY (automatic)
 
-## ALL_DONE (queue empty)
-The orchestrator automatically calls the Claude API to generate a new atlas idea,
-adds it to pangea_state.json and index.html, commits, and continues building.
+When the queue runs out, the orchestrator auto-generates a new atlas from its idea
+pool (60+ topics), registers it, inserts a homepage card, commits, and begins building.
 The pipeline never stops unless manually interrupted or a real failure occurs.
 
 ---
