@@ -338,6 +338,17 @@ def validate(atlas, force=False):
                        fp_mismatches == 0,
                        f"{fp_mismatches} items have wrong fp keys" if fp_mismatches else "OK"))
 
+    # ── Fingerprint SHORT labels match FP_LABELS ──────────────────────────
+    fp_labels_m = re.search(r"const FP_LABELS\s*=\s*\[([^\]]+)\]", html)
+    fp_labels = re.findall(r"'([^']+)'", fp_labels_m.group(1)) if fp_labels_m else []
+    short_m = re.search(r"const SHORT\s*=\s*\[([^\]]+)\]", html)
+    short_labels = re.findall(r"'([^']+)'", short_m.group(1)) if short_m else []
+    if fp_labels and short_labels:
+        fp_short_match = short_labels == fp_labels
+        checks.append(("fingerprint SHORT labels match FP_LABELS",
+                       fp_short_match,
+                       f"SHORT={short_labels} vs FP_LABELS={fp_labels}" if not fp_short_match else "OK"))
+
     # ══════════════════════════════════════════════════════════════════════════
     # Cross-reference validation
     # ══════════════════════════════════════════════════════════════════════════
@@ -480,6 +491,11 @@ def validate(atlas, force=False):
         share_title = re.search(r"shareTitle\s*=\s*'([^']+)'", html)
         if share_title and "Civilitas" in share_title.group(1):
             code_leaks.append("Civilitas in shareTitle")
+
+        if re.search(r'\bwhatifCiv\b', html):
+            code_leaks.append("whatifCiv")
+        if re.search(r'\bcivPt\b', html):
+            code_leaks.append("civPt")
 
         checks.append(("no civilitas code leaks",
                        len(code_leaks) == 0,
