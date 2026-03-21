@@ -33,7 +33,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "VI"
+      "section": "VI",
+      "validated_sha": "b13483afa2af1d80e4d5ae28355954de38f73030",
+      "validated_short": "b13483a",
+      "validated_at": "2026-03-21T07:46:24.759399Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "flora": {
       "phase": "DONE",

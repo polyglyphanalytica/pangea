@@ -391,7 +391,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
         </button>
         <div class="burger-divider"></div>
         <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" role="menuitem">
-          <span>&#9792;</span>
+          <span style="font-size:15px">♀</span>
           <span>Herstory</span>
           <span class="badge" id="herstory-badge"></span>
         </button>
@@ -4513,7 +4513,7 @@ function renderHerstoryDrawer(){
   if(dt)dt.innerHTML='';
   if(!sel){
     dc.innerHTML=`
-    <div class="hs-panel-hdr">&#9792; Herstory</div>
+    <div class="hs-panel-hdr">♀ Herstory</div>
     <div class="hs-panel-sub">
       A parallel dimension of Lex — tracing 4,000 years of law through the women who wrote it, interpreted it, defied it, and demanded it change. From Enheduanna's legal hymns to Ruth Bader Ginsburg's dissents, the record of women in law is incomplete because the record was kept by men. That absence is itself the argument.
     </div>
@@ -4735,7 +4735,7 @@ function toggleTheme(){
   else d.dataset.theme=window.matchMedia('(prefers-color-scheme:dark)').matches?'light':'dark';
   try{localStorage.setItem('lex-theme',d.dataset.theme);}catch(e){}
 }
-(function(){try{const t=localStorage.getItem('lex-theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+(function(){try{const t=localStorage.getItem('lex-theme');if(t)document.documentElement.dataset.theme=t;else document.documentElement.dataset.theme='dark';}catch(e){document.documentElement.dataset.theme='dark';}})();
 
 // ══════════════════════════════════════════════════════
 // ABOUT MODAL
