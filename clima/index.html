@@ -890,9 +890,6 @@ function sliderToYear(v){
 function yearToSlider(yr){
   yr=parseInt(yr);
   return Math.round(((yr-(-8000))/(2024-(-8000)))*1000);
-} else {
-    return Math.round(80+920*((yr-(-4000))/(2024-(-4000))));
-  }
 }
 
 function civPt(c){
