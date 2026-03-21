@@ -210,16 +210,16 @@ def get_next_action(state):
                 "map": info.get("map", "world")
             }
         batch_start = real_count + 1
-        batch_end = min(real_count + 10, target)
+        batch_end = min(real_count + 1, target)
         batch_size = batch_end - real_count
         # Print imperative directly so agent has no decision gap
         print(
             f"WRITE_BATCH {batch_start}-{batch_end}/{target} for {atlas}. "
-            f"Write {batch_size} items.\n"
-            f"1. Append {batch_size} items to the ITEMS array in {atlas}/index.html\n"
+            f"Write {batch_size} item.\n"
+            f"1. Append {batch_size} item to the ITEMS array in {atlas}/index.html\n"
             f"   (or in {atlas}/data.js if using the build system)\n"
             f"2. grep -c '^{{id:\'' {atlas}/index.html  →  must equal {batch_end}\n"
-            f"3. git add {atlas}/ && git commit -m '{atlas}: items {batch_start}-{batch_end}/{target}'\n"
+            f"3. git add {atlas}/ && git commit -m '{atlas}: item {batch_start}/{target}'\n"
             f"4. python3 pangea_orchestrator.py batch_done {atlas}"
         )
         return None
@@ -302,8 +302,8 @@ def cmd_batch_done(atlas):
         print(f"ERROR: No new items detected. Count is still {real_count}.")
         print(f"Write items to {atlas}/index.html (or data.js), then call batch_done again.")
         sys.exit(1)
-    if added > 25:
-        print(f"WARNING: {added} items added (max batch is 10). Accepted, but prefer ≤10.")
+    if added > 5:
+        print(f"WARNING: {added} items added (max batch is 1). Accepted, but prefer 1 at a time.")
 
     info["items"] = real_count
     remaining = target - real_count
@@ -322,12 +322,12 @@ def cmd_batch_done(atlas):
         self_invoke()
     else:
         batch_start = real_count + 1
-        batch_end = min(real_count + 10, target)
+        batch_end = min(real_count + 1, target)
         batch_size = batch_end - real_count
         print(
             f"batch_recorded {real_count}/{target}. {remaining} remaining.\n"
-            f"WRITE NEXT BATCH: items {batch_start}-{batch_end} ({batch_size} items).\n"
-            f"Commit: git add {atlas}/ && git commit -m '{atlas}: items {batch_start}-{batch_end}/{target}'\n"
+            f"WRITE NEXT ITEM: item {batch_start}/{target}.\n"
+            f"Commit: git add {atlas}/ && git commit -m '{atlas}: item {batch_start}/{target}'\n"
             f"Then run: python3 pangea_orchestrator.py batch_done {atlas}"
         )
 
