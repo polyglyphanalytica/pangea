@@ -148,7 +148,7 @@
       "validated_lenses": 20
     },
     "clima": {
-      "phase": "3",
+      "phase": "DONE",
       "items": 100,
       "target": 100,
       "live": false,
@@ -1861,6 +1861,18 @@
     {
       "atlas": "clima",
       "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "clima",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 100
+    },
+    {
+      "atlas": "clima",
+      "phase_done": "5+6",
+      "phase_next": "DONE",
       "items": 100
     }
   ]
