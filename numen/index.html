@@ -498,6 +498,9 @@ button:focus-visible{outline:2px solid var(--amber-b);outline-offset:2px}
   animation:ptr-spin .7s linear infinite;
 }
 @keyframes ptr-spin{to{transform:rotate(360deg)}}
+.hs-panel-hdr{font-family:'Cinzel Decorative',serif;font-size:13px;color:#c060a0;margin-bottom:6px;letter-spacing:1px}
+.hs-panel-sub{font-size:15px;color:var(--txt3);margin-bottom:16px;font-style:italic;line-height:1.9}
+.hs-woman-nm{font-family:'Cinzel',serif;font-size:14px;color:#c060a0;letter-spacing:.5px;margin-bottom:2px}
 </style>
 </head>
 <body>
@@ -4040,6 +4043,7 @@ function renderDrawerContent(){
 function renderDrawer(){
   if(mode==='compare'){renderCompareDrawer();return;}
   if(mode==='heritage'){renderHeritageDrawer();return;}
+  if(herstory){renderHerstoryDrawer();return;}
   const dc=document.getElementById('drawer-content');
   if(!sel){
     document.getElementById('drawer-top').innerHTML='';
@@ -5140,6 +5144,60 @@ function updateTlFill(pct){
 }
 
 document.addEventListener('DOMContentLoaded',init);
+function renderHerstoryDrawer(){
+  const dc=document.getElementById('drawer-content');
+  const dt=document.getElementById('drawer-top');
+  if(dt)dt.innerHTML='';
+  if(!dc)return;
+  if(!sel){
+    dc.innerHTML=`
+    <div class="hs-panel-hdr">\u2640 Herstory</div>
+    <div class="hs-panel-sub">
+      Tracing the women who shaped every entry in this atlas. Their contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
+    </div>
+    <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
+      Tap any item on the map to discover the women who shaped it.
+    </div>
+    <div style="display:grid;gap:6px;">
+    ${Object.keys(WOMEN).slice(0,8).map(id=>{
+      const c=ITEMS.find(x=>x&&x.id===id);if(!c)return'';
+      const w=WOMEN[id];
+      return\`<button onclick="navigateToItem('${id}')"
+        style="background:none;border:1px solid rgba(192,96,160,.2);border-radius:3px;padding:8px 10px;cursor:pointer;text-align:left;transition:border-color .15s"
+        onmouseover="this.style.borderColor='rgba(192,96,160,.5)'" onmouseout="this.style.borderColor='rgba(192,96,160,.2)'">
+        <div style="font-family:'Cinzel',serif;font-size:9.5px;color:#c060a0;margin-bottom:2px">${c.nm}</div>
+        <div style="font-size:11px;color:var(--txt3);font-style:italic">${w[0].nm} \u00b7 ${w[0].role}</div>
+      </button>\`;
+    }).join('')}
+    </div>`;
+    return;
+  }
+  const women=WOMEN[sel.id];
+  if(!women||!women.length){
+    dc.innerHTML=`
+    <div class="hs-panel-hdr">\u2640 Herstory</div>
+    <div style="font-size:13px;line-height:1.8;color:var(--txt3);font-style:italic;padding:12px 0">
+      No Herstory entries documented for ${sel.nm}. Tap another item on the map.
+    </div>`;
+    return;
+  }
+  const civHdr=`
+  <div style="margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(192,96,160,.25)">
+    <div class="hs-panel-hdr">\u2640 Herstory \u00b7 ${sel.nm}</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3)">${fmt(sel.s)} \u2013 ${fmt(sel.e)} \u00b7 ${sel.sb}</div>
+  </div>`;
+  const womenHTML=women.map(w=>`
+  <div style="margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid rgba(192,96,160,.15)">
+    <div class="hs-woman-nm">${w.nm}</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--txt3);margin-bottom:6px">${w.role}${w.yr?` \u00b7 ${fmt(w.yr)}`:''}
+    </div>
+    <div style="font-size:13px;line-height:1.78;color:var(--txt2)">${w.desc}</div>
+  </div>`).join('');
+  dc.innerHTML=civHdr+womenHTML;
+  const panel=document.getElementById('info-panel');
+  if(panel)setTimeout(()=>panel.scrollTop=0,0);
+}
+
 function toggleHerstory(){
   const body=document.body;
   const on=body.classList.toggle('herstory');

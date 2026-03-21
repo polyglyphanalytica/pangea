@@ -334,6 +334,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
         <g id="conn-layer"></g>
         <g id="thread-layer"></g>
         <g id="label-layer" pointer-events="none"></g>
+        <g id="hover-label-layer" pointer-events="none"></g>
         <g id="mark-layer"></g>
       </svg>
       <div class="hint" id="map-hint">
@@ -929,7 +930,7 @@ life:'No conditions for life as we know it exist in Uranus\'s atmosphere or inte
 
 {id:'neptune_planet',nm:'Neptune',sb:'Ice Giant \u00b7 Eighth Planet',s:1846,e:2024,lon:225,lat:-5,
 fp:{mass:5,size:5,lum:2,complex:5,reach:4,age:7},
-conns:['uranus_planet','pluto','triton','kuiper_belt'],
+conns:['uranus_planet','pluto','kuiper_belt'],
 overview:'Neptune is the eighth and outermost planet — the last of the four giants and the most distant large body in the solar system. Discovered in 1846 through mathematical prediction rather than observation, it was the first planet found by calculation: deviations in Uranus\'s orbit betrayed an unknown mass pulling at it from beyond. Neptune is the most dynamically active ice giant, with the fastest winds in the solar system and a large captured moon, Triton, orbiting in the wrong direction.',
 d:{
 scale:'Neptune is slightly smaller than Uranus at 49,528 km diameter but significantly more massive — 17.1 Earth masses versus Uranus\'s 14.5. Its higher density reflects a different interior composition. Its volume holds about 58 Earths.',
@@ -981,7 +982,7 @@ life:'The conditions on Pluto — extreme cold, negligible energy input, no liqu
 
 {id:'asteroid_belt',nm:'Asteroid Belt',sb:'Protoplanetary Remnant \u00b7 Inner Solar System',s:-3000,e:2024,lon:205,lat:2,
 fp:{mass:2,size:2,lum:1,complex:3,reach:5,age:9},
-conns:['mars_planet','jupiter_planet','ceres','vesta'],
+conns:['mars_planet','jupiter_planet','ceres'],
 overview:'The asteroid belt is a torus-shaped region between Mars and Jupiter containing millions of rocky and metallic bodies — the remnant material of the inner solar system that Jupiter\'s gravity prevented from coalescing into a planet. Contrary to science fiction, the belt is mostly empty space; its total mass is less than 4% of the Moon. Yet it is a critical reservoir of primordial material, a record of the solar system\'s violent early history, and a potential future source of resources.',
 d:{
 scale:'The asteroid belt extends from about 2.2 to 3.2 AU from the Sun — a band roughly 140 million km wide. Its total mass is estimated at about 2.39 ×10²¹ kg, roughly 4% of the Moon. Ceres, the largest body, contains about a third of the belt\'s total mass. Despite millions of objects, the average distance between asteroids is about 1 million km.',
@@ -1033,7 +1034,7 @@ life:'The extreme cold and isolation of the Kuiper Belt make it inhospitable to 
 
 {id:'oort_cloud',nm:'Oort Cloud',sb:'Spherical Comet Reservoir \u00b7 Outermost Solar System',s:1950,e:2024,lon:50,lat:40,
 fp:{mass:2,size:4,lum:1,complex:2,reach:6,age:9},
-conns:['kuiper_belt','halley_comet','long_period_comets'],
+conns:['kuiper_belt','halley_comet'],
 overview:'The Oort Cloud is a vast spherical shell of icy bodies surrounding the solar system at distances from roughly 2,000 to 100,000 AU — reaching nearly halfway to the nearest star. It has never been directly observed; its existence is inferred from the orbits of long-period comets, which arrive from all directions and must originate in a spherical reservoir. Proposed by Jan Oort in 1950, it is thought to contain trillions of icy bodies — the repository of comets ejected outward during the solar system\'s early chaotic period.',
 d:{
 scale:'The Oort Cloud extends from roughly 2,000 AU to 100,000 AU from the Sun — the full sphere spanning 9.3 trillion kilometres at its outer edge. Its inner region (the Hills Cloud, 2,000-20,000 AU) is disk-shaped; the outer Oort Cloud (20,000-100,000 AU) is roughly spherical. Its estimated total mass is 1 to 5 Earth masses, distributed across trillions of objects.',
@@ -1494,7 +1495,7 @@ unlocked:'Andromeda proved the universe is inconceivably vast \u2014 full of isl
 
 {id:'dark_matter',nm:'Dark Matter',sb:'Invisible Mass \u00b7 27% of the Universe',s:1933,e:2024,lon:600,lat:0,
 fp:{mass:9,size:9,lum:1,complex:8,reach:10,age:10},
-conns:['milky_way','andromeda','coma_cluster'],
+conns:['milky_way','andromeda'],
 overview:'Dark matter is a hypothetical form of matter that emits no light, absorbs no light, and interacts only through gravity \u2014 yet constitutes roughly 27% of the total mass-energy of the universe. Its existence is inferred from the rotation of galaxies (which spin too fast for visible matter to hold them together), gravitational lensing, the large-scale structure of the universe, and the cosmic microwave background. First proposed by Fritz Zwicky in 1933 and definitively evidenced by Vera Rubin\'s galaxy rotation curves in the 1970s, dark matter remains one of the deepest unsolved problems in physics.',
 d:{
 composition:'The composition of dark matter is unknown. Leading candidates include WIMPs (weakly interacting massive particles), axions, sterile neutrinos, and primordial black holes. Dark matter does not interact electromagnetically \u2014 it cannot emit, absorb, or reflect light. It interacts only through gravity (and possibly the weak nuclear force). It forms spherical halos around galaxies rather than the flat disc of visible matter.',
@@ -2452,7 +2453,7 @@ unlocked:'Charon established that binary minor planets exist and are not exotic 
 
 {id:'ceres',nm:'Ceres',sb:'Largest Asteroid \u00b7 Inner Solar System Dwarf Planet',s:1801,e:2024,lon:205,lat:10,
 fp:{mass:1,size:1,lum:1,complex:4,reach:4,age:9},
-conns:['asteroid_belt','vesta'],
+conns:['asteroid_belt'],
 overview:'Ceres is the largest object in the asteroid belt and the only dwarf planet in the inner solar system \u2014 a world 945 km across containing about one-third of the entire asteroid belt\'s mass. Discovered by Giuseppe Piazzi on 1 January 1801, it was initially classified as a planet for 50 years before being demoted. The Dawn spacecraft, which orbited Ceres from 2015 to 2018, revealed a geologically active world with bright salt deposits in impact craters, a cryovolcanic dome (Ahuna Mons), and subsurface brines \u2014 making Ceres an unexpected ocean world candidate.',
 d:{
 composition:'Ceres is differentiated: a rocky core, a water ice mantle (up to 30% of total mass), and a dusty outer crust. Bright spots (faculae) in Occator Crater are salt deposits from briny water welling up from subsurface reservoirs. Ahuna Mons is a 4-km-tall cryovolcanic dome. Spectral data indicate hydrated minerals, clays, and carbonates \u2014 suggesting a water-rich history.',
@@ -2820,7 +2821,7 @@ unlocked:'R136a1 extended the empirical stellar mass function above the theoreti
 
 {id:'cosmic_distance_ladder',nm:'Cosmic Distance Ladder',sb:'How We Measure the Universe',s:1784,e:2024,lon:210,lat:5,
 fp:{mass:1,size:10,lum:1,complex:8,reach:10,age:5},
-conns:['hubble_constant','cepheid_stars','andromeda','milky_way'],
+conns:['hubble_constant','andromeda','milky_way'],
 overview:'The cosmic distance ladder is the sequence of overlapping methods used to measure distances across the universe — from radar ranging of solar system objects to parallax of nearby stars, Cepheid variable distances to nearby galaxies, and Type Ia supernovae to cosmological distances. Each "rung" of the ladder is calibrated by the rung below, allowing distances to propagate from the solar system to billions of light-years. The precision of the ladder determines the precision of the Hubble constant and the age of the universe. Its calibration is central to the Hubble Tension, with JWST providing new independent checks of Cepheid distances.',
 d:{
 composition:'The distance ladder has multiple rungs: (1) Radar ranging (solar system, 1 AU–40 AU); (2) Trigonometric parallax (up to ~3,000 light-years with Gaia); (3) Spectroscopic parallax (up to ~100,000 light-years); (4) Cepheid variable period-luminosity relation (up to ~100 million light-years); (5) Type Ia supernova standard candles (up to ~10 billion light-years); (6) Baryon acoustic oscillations (entire observable universe); (7) CMB angular diameter distance (13.8 billion light-years).',
@@ -2980,7 +2981,7 @@ unlocked:'GRBs confirmed that neutron star mergers produce gamma-ray bursts, gra
 
 {id:'solar_wind',nm:'Solar Wind',sb:'Stream of Charged Particles from the Sun',s:1958,e:2024,lon:180,lat:0,
 fp:{mass:2,size:5,lum:3,complex:6,reach:6,age:1},
-conns:['sun','earth_magnetosphere','aurora_borealis','voyager_1'],
+conns:['sun','earth_magnetosphere','voyager_1'],
 overview:'The solar wind is a continuous stream of charged particles — primarily protons and electrons — flowing outward from the Sun\'s corona at speeds of 300–800 km/s, permeating the entire solar system and shaping it into the "heliosphere." Predicted by Eugene Parker in 1958 (initially rejected by referees), confirmed by Soviet Luna 1 spacecraft in 1959, it shapes planetary magnetospheres, erodes atmospheres, causes aurorae, and defines the outer boundary of the Sun\'s influence — the heliopause crossed by Voyager 1. The Parker Solar Probe (2018\u2013) is now flying through the outer corona, providing the first in-situ measurements of the solar wind source region.',
 d:{
 composition:'The solar wind is ~95% protons, ~4% alpha particles (helium nuclei), ~1% heavier ions, and electrons. It flows at 300–500 km/s (slow wind) or 600–800 km/s (fast wind). Temperature: electron temperature ~100,000 K, proton temperature ~10,000 K at Earth. Number density at Earth: ~5 protons/cm³. The heliospheric current sheet separates opposite magnetic polarity sectors of the solar wind.',
@@ -3006,7 +3007,7 @@ unlocked:'The solar wind established that the Sun actively sculpts its environme
 
 {id:'earth_magnetosphere',nm:'Earth\u2019s Magnetosphere',sb:'Magnetic Shield of Life \u00b7 Aurora Generator',s:1958,e:2024,lon:0,lat:0,
 fp:{mass:2,size:4,lum:1,complex:7,reach:5,age:4},
-conns:['solar_wind','sun','moon','aurora_borealis'],
+conns:['solar_wind','sun','moon'],
 overview:'Earth\'s magnetosphere is the region of space dominated by our planet\'s magnetic field — a vast asymmetric bubble extending ~60,000 km toward the Sun and ~1 million km away from it, shaped by the continuous pressure of the solar wind. Generated by the geodynamo — convective currents of liquid iron in Earth\'s outer core — it deflects the solar wind and protects the atmosphere from erosion, making complex life on Earth\'s surface possible. The polar auroras are the most visible manifestation of the interaction between solar wind particles and the magnetosphere.',
 d:{
 composition:'The magnetosphere consists of the magnetopause (boundary with solar wind, ~10 Earth radii sunward), the Van Allen radiation belts (inner belt: protons at 1–2 Earth radii; outer belt: electrons at 4–6 Earth radii), the magnetotail (extending millions of km downwind), and the plasmasphere (inner region of cold dense plasma). Charged particles trapped in the radiation belts execute complex helical motions along field lines.',
@@ -3296,7 +3297,7 @@ life:'The measurement of Earth\'s scale eventually contributed to determining th
 
 {id:'precession_discovery',nm:'Precession of the Equinoxes',sb:'Hipparchus · 127 BCE',s:-127,e:2024,lon:350,lat:12,
 fp:{mass:1,size:1,lum:1,complex:6,reach:8,age:7},
-conns:['polaris','spica','babylonian_astronomy','greek_heliocentric'],
+conns:['polaris','spica','greek_heliocentric'],
 overview:'Hipparchus of Nicaea discovered the precession of the equinoxes around 127 BCE by comparing his measured position of the star Spica with records made by Timocharis 150 years earlier, and with Babylonian eclipse records several centuries older still. He found that the vernal equinox had shifted roughly 2° westward along the ecliptic — an angular motion he correctly attributed to a slow wobble of Earth\'s rotational axis. The precession cycle of approximately 26,000 years was identified, a result not improved upon until Islamic astronomers in the 9th century CE.',
 d:{
 scale:'The precession rate Hipparchus derived (at least 1° per century, more likely ~1.38°/century) is close to the modern value of 1.396°/century, implying a cycle of 25,772 years. This is one of the most accurate ancient astronomical measurements — derived from comparing observations separated by 150 to 300 years.',
@@ -3348,7 +3349,7 @@ life:'Aryabhata calculated that the Earth is a sphere rotating in space, explain
 
 {id:'islamic_astronomy',nm:'Islamic Golden Age Astronomy',sb:'Al-Battani · Al-Sufi · 820–1050 CE',s:820,e:2024,lon:40,lat:20,
 fp:{mass:1,size:1,lum:1,complex:8,reach:9,age:6},
-conns:['aryabhata_astronomy','babylonian_astronomy','precession_discovery','stellar_populations'],
+conns:['aryabhata_astronomy','precession_discovery','stellar_populations'],
 overview:'Between approximately 820 and 1050 CE, Islamic astronomers — working at the House of Wisdom in Baghdad and at royal observatories from Córdoba to Samarkand — made the most significant advances in positional astronomy since Hipparchus. Al-Battani corrected Ptolemy\'s solar theory and determined the precession rate to unprecedented accuracy. Abd al-Rahman al-Sufi\'s Book of Fixed Stars (964 CE) measured the magnitudes and positions of every star in Ptolemy\'s catalogue and added stars invisible from the Mediterranean. Al-Biruni measured the Earth\'s radius from a single hilltop observation. This tradition preserved, corrected, and extended Greek astronomy and transmitted it, along with Indian mathematics, to the European Renaissance.',
 d:{
 scale:'Al-Battani\'s solar observations refined the length of the tropical year to 365 days 5 hours 46 minutes 24 seconds (modern: 365d 5h 48m 45s — error of 2 minutes 21 seconds). Al-Sufi\'s star catalogue measured stellar magnitudes to half-magnitude precision across 1,025 stars. Al-Biruni measured Earth\'s radius from the height of a mountain and a measured dip of the horizon — deriving a value of 6,339.6 km (modern equatorial value: 6,378 km).',
@@ -3465,7 +3466,6 @@ const DISCOVERY_CHAINS=[
    desc:'From Henrietta Leavitt\'s Cepheid yardstick to Andrea Ghez\'s Nobel-winning black hole orbit \u2014 the indispensable contributions of women astronomers to our understanding of the cosmos.'}
 ];
 const TRANSMISSIONS=[
-  {from:'babylonian_astronomy',to:'greek_heliocentric',concept:'Ancient Foundations',year:-500,desc:'Babylonian arithmetic astronomy and star catalogues provided the observational base that Greek astronomers transformed into geometric models.'},
   {from:'greek_heliocentric',to:'earth_circumference',concept:'Ancient Foundations',year:-240,desc:'Aristarchus\'s heliocentric reasoning inspired Eratosthenes to treat Earth as a measurable sphere, yielding the first accurate circumference.'},
   {from:'earth_circumference',to:'precession_discovery',concept:'Ancient Foundations',year:-130,desc:'Eratosthenes\'s geodetic methods enabled Hipparchus to compare star positions across decades, revealing the slow precession of the equinoxes.'},
   {from:'sun',to:'stellar_populations',concept:'Stellar Classification',year:1925,desc:'Cecilia Payne-Gaposchkin\'s analysis of solar and stellar spectra proved stars are mostly hydrogen and helium, founding stellar composition science.'},

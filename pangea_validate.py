@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Pangea Atlas Validator
-======================
+Pangea Atlas Validator v2
+=========================
 Runs the full CLAUDE.md Section 18 checklist against an atlas file.
 Exits 0 if ELIGIBLE FOR GO-LIVE, exits 1 if NOT ELIGIBLE.
 
 Usage:
   python3 pangea_validate.py ATLAS_NAME
+  python3 pangea_validate.py ATLAS_NAME --force   (skip cached result)
 """
 
 import datetime
@@ -23,13 +24,11 @@ def _record_validation(atlas, item_count, lens_count):
     if not state_path.exists():
         return
 
-    # Get current commit SHA for this atlas file
     result = subprocess.run(
         ["git", "log", "-1", "--format=%H", f"{atlas}/index.html"],
         capture_output=True, text=True
     )
     sha = result.stdout.strip() or "unknown"
-
     short = subprocess.run(
         ["git", "log", "-1", "--format=%h", f"{atlas}/index.html"],
         capture_output=True, text=True
@@ -47,7 +46,41 @@ def _record_validation(atlas, item_count, lens_count):
     print(f"Validation recorded: {atlas} @ {short} ({datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M')} UTC)")
 
 
-def validate(atlas):
+def _extract_item_ids(items_text):
+    """Extract all item IDs from the ITEMS block."""
+    return set(re.findall(r"^\{id:'([^']+)'", items_text, re.MULTILINE))
+
+
+def _extract_women_keys(html):
+    """Extract item-ID keys from the WOMEN object (both 'key':[ and key:[ formats)."""
+    women_block = re.search(r'const WOMEN\s*=\s*\{([\s\S]*?)\};', html)
+    if not women_block:
+        return []
+    text = women_block.group(1)
+    return re.findall(r"['\"]?(\w+)['\"]?\s*:\s*\[", text)
+
+
+def _count_women_persons(html):
+    """Count person entries inside the WOMEN object only (not the whole file)."""
+    women_block = re.search(r'const WOMEN\s*=\s*\{([\s\S]*?)\};', html)
+    if not women_block:
+        return 0
+    return len(re.findall(r"\{nm:", women_block.group(1)))
+
+
+def _extract_heritage_item_refs(html):
+    """Extract item-ID references from HERITAGE_REGIONS values."""
+    hr_block = re.search(r'const HERITAGE_REGIONS\s*=\s*\{([\s\S]*?)\};', html)
+    if not hr_block:
+        return set()
+    refs = set()
+    # Find all array values: ['id1','id2',...]
+    for arr_match in re.finditer(r":\s*\[([^\]]+)\]", hr_block.group(1)):
+        refs.update(re.findall(r"'([^']+)'", arr_match.group(1)))
+    return refs
+
+
+def validate(atlas, force=False):
     p = Path(f"{atlas}/index.html")
     if not p.exists():
         print(f"FAIL   file not found: {atlas}/index.html")
@@ -55,25 +88,27 @@ def validate(atlas):
         sys.exit(1)
 
     # ── Skip if already validated at current commit ────────────────────────
-    state_path = Path("pangea_state.json")
-    if state_path.exists():
-        state = json.loads(state_path.read_text())
-        info = state.get("atlases", {}).get(atlas, {})
-        stored_sha = info.get("validated_sha")
-        if stored_sha:
-            current_sha = subprocess.run(
-                ["git", "log", "-1", "--format=%H", f"{atlas}/index.html"],
-                capture_output=True, text=True
-            ).stdout.strip()
-            if current_sha and current_sha == stored_sha:
-                short = info.get("validated_short", current_sha[:7])
-                at = info.get("validated_at", "")[:10]
-                print(f"SKIP  Already validated at {short} ({at}) — no changes since.")
-                print("VERDICT: ELIGIBLE FOR GO-LIVE")
-                sys.exit(0)
+    if not force:
+        state_path = Path("pangea_state.json")
+        if state_path.exists():
+            state = json.loads(state_path.read_text())
+            info = state.get("atlases", {}).get(atlas, {})
+            stored_sha = info.get("validated_sha")
+            if stored_sha:
+                current_sha = subprocess.run(
+                    ["git", "log", "-1", "--format=%H", f"{atlas}/index.html"],
+                    capture_output=True, text=True
+                ).stdout.strip()
+                if current_sha and current_sha == stored_sha:
+                    short = info.get("validated_short", current_sha[:7])
+                    at = info.get("validated_at", "")[:10]
+                    print(f"SKIP  Already validated at {short} ({at}) — no changes since.")
+                    print("VERDICT: ELIGIBLE FOR GO-LIVE")
+                    sys.exit(0)
 
     html = p.read_text(encoding="utf-8", errors="replace")
     checks = []
+    warnings = []  # non-blocking issues
 
     # ── Item count ──────────────────────────────────────────────────────────
     item_count = len(re.findall(r"^\{id:'", html, re.MULTILINE))
@@ -98,7 +133,7 @@ def validate(atlas):
     checks.append(("lenses sorted alphabetically",
                    is_sorted, "OK" if is_sorted else f"unsorted: {lens_labels[:4]}"))
 
-    # ── Item d{} keys match lens IDs ───────────────────────────────────────
+    # ── Item d{} keys match lens IDs ────────────────────────────────────────
     items_block = re.search(r'const ITEMS\s*=\s*\[[\s\S]*?\];', html)
     items_text = items_block.group(0) if items_block else ""
     d_blocks = re.findall(r'd:\{([^}]+)\}', items_text)
@@ -132,8 +167,70 @@ def validate(atlas):
     fp_keys = re.findall(r"'([^']+)'", fp_m.group(1)) if fp_m else []
     checks.append(("FP_KEYS defined", len(fp_keys) > 0, f"{len(fp_keys)} keys"))
 
+    # ══════════════════════════════════════════════════════════════════════════
+    # NEW: Cross-reference validation
+    # ══════════════════════════════════════════════════════════════════════════
+
+    item_ids = _extract_item_ids(items_text)
+
+    # ── conns[] resolve to real item IDs ─────────────────────────────────────
+    all_conn_ids = set()
+    for c_match in re.finditer(r"conns:\s*\[([^\]]*)\]", items_text):
+        all_conn_ids.update(re.findall(r"'([^']+)'", c_match.group(1)))
+    broken_conns = all_conn_ids - item_ids
+    checks.append(("all conns[] reference real item IDs",
+                   len(broken_conns) == 0,
+                   f"{len(broken_conns)} broken: {sorted(broken_conns)[:5]}" if broken_conns else "OK"))
+
+    # ── TRANSMISSIONS from/to resolve to real item IDs ───────────────────────
+    tx_block = re.search(r'const TRANSMISSIONS\s*=\s*\[[\s\S]*?\];', html)
+    tx_text = tx_block.group(0) if tx_block else ""
+    tx_froms = set(re.findall(r"from:\s*'([^']+)'", tx_text))
+    tx_tos = set(re.findall(r"to:\s*'([^']+)'", tx_text))
+    broken_tx = (tx_froms | tx_tos) - item_ids
+    checks.append(("all TRANSMISSIONS from/to reference real items",
+                   len(broken_tx) == 0,
+                   f"{len(broken_tx)} broken: {sorted(broken_tx)[:5]}" if broken_tx else "OK"))
+
+    # ── WOMEN keys resolve to real item IDs ──────────────────────────────────
+    women_keys = _extract_women_keys(html)
+    broken_women = set(women_keys) - item_ids
+    checks.append(("all WOMEN keys reference real item IDs",
+                   len(broken_women) == 0,
+                   f"{len(broken_women)} broken: {sorted(broken_women)[:5]}" if broken_women else "OK"))
+
+    # ── HERITAGE_REGIONS values resolve to real item IDs ─────────────────────
+    hr_refs = _extract_heritage_item_refs(html)
+    broken_hr = hr_refs - item_ids
+    checks.append(("all HERITAGE_REGIONS values reference real items",
+                   len(broken_hr) == 0,
+                   f"{len(broken_hr)} broken: {sorted(broken_hr)[:5]}" if broken_hr else "OK"))
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # NEW: WOMEN data quality (count within WOMEN object, not whole file)
+    # ══════════════════════════════════════════════════════════════════════════
+    women_person_count = _count_women_persons(html)
+    checks.append(("WOMEN has person entries (inside WOMEN object)",
+                   women_person_count >= 5,
+                   f"found {women_person_count}"))
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # NEW: Drift spec compliance
+    # ══════════════════════════════════════════════════════════════════════════
+
+    # ── Drift 1: hover-label-layer SVG group ─────────────────────────────────
+    checks.append(("Drift 1: hover-label-layer SVG group",
+                   'id="hover-label-layer"' in html, ""))
+
+    # ── Drift 4: Herstory dedicated panel ────────────────────────────────────
+    checks.append(("Drift 4: Herstory dedicated panel (hs-panel-hdr)",
+                   "hs-panel-hdr" in html, ""))
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # NEW: Code-level naming leaks (not content — function/variable names)
+    # ══════════════════════════════════════════════════════════════════════════
+
     # ── DARK THEME FORCED ON LOAD ───────────────────────────────────────────
-    # Critical: if OS is light mode and dark theme isn't forced, map shows blank
     forces_dark = any([
         "document.documentElement.dataset.theme='dark'" in html,
         'document.documentElement.dataset.theme = "dark"' in html,
@@ -168,12 +265,30 @@ def validate(atlas):
     checks.append(("herstory #c060a0 colour", "#c060a0" in html, ""))
     checks.append(("herstory ♀ Herstory label", "♀ Herstory" in html, ""))
     checks.append(("WOMEN object exists", "const WOMEN" in html, ""))
-    women_entries = len(re.findall(r"nm:\s*'", html))
-    checks.append(("WOMEN >= 5 entries", women_entries >= 5, f"found {women_entries}"))
 
     # ── No civilitas leak ───────────────────────────────────────────────────
-    civ = len(re.findall(r'\bcivilizat', html, re.IGNORECASE))
-    checks.append(("no civilitas text leaked", civ == 0, f"{civ} hits" if civ else ""))
+    # Skip for civilitas itself (it's the reference atlas)
+    if atlas != "civilitas":
+        # Code-level leaks: function/variable names that should have been renamed
+        code_leaks = []
+        if re.search(r'\bnavigateToCiv\b', html):
+            code_leaks.append("navigateToCiv")
+        if re.search(r'\bcivClick\b', html):
+            code_leaks.append("civClick")
+        if re.search(r'\bCIVS\b', html):
+            code_leaks.append("CIVS")
+        # Check for "Civilitas" as proper noun in UI strings (not in content data)
+        # Look in header, modal, share title — not inside item data strings
+        logo_text = re.search(r'class="logo-t">([^<]+)<', html)
+        if logo_text and "CIVILITAS" in logo_text.group(1):
+            code_leaks.append("CIVILITAS in logo")
+        share_title = re.search(r"shareTitle\s*=\s*'([^']+)'", html)
+        if share_title and "Civilitas" in share_title.group(1):
+            code_leaks.append("Civilitas in shareTitle")
+
+        checks.append(("no civilitas code leaks",
+                       len(code_leaks) == 0,
+                       f"found: {code_leaks}" if code_leaks else "OK"))
 
     # ── Colour values ───────────────────────────────────────────────────────
     checks.append(("dark bg #02040a present", "#02040a" in html, ""))
@@ -205,7 +320,22 @@ def validate(atlas):
     checks.append(("HERITAGE_REGIONS defined",
                    "HERITAGE_REGIONS" in html or "COSMIC_ADDRESS" in html, ""))
 
-    # ── Print ────────────────────────────────────────────────────────────────
+    # ══════════════════════════════════════════════════════════════════════════
+    # NEW: Overview and conns fields exist on items
+    # ══════════════════════════════════════════════════════════════════════════
+    overview_count = len(re.findall(r"\boverview:\s*'", items_text))
+    checks.append(("all items have overview field",
+                   overview_count >= item_count,
+                   f"{overview_count}/{item_count}" if overview_count < item_count else "OK"))
+
+    conns_count = len(re.findall(r"\bconns:\s*\[", items_text))
+    checks.append(("all items have conns field",
+                   conns_count >= item_count,
+                   f"{conns_count}/{item_count}" if conns_count < item_count else "OK"))
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # Print results
+    # ══════════════════════════════════════════════════════════════════════════
     fails = []
     for name, passed, detail in checks:
         status = "PASS" if passed else "FAIL"
@@ -214,9 +344,14 @@ def validate(atlas):
         suffix = f"  [{detail}]" if detail else ""
         print(f"{status:<4}  {name}{suffix}")
 
+    # Print warnings (non-blocking)
+    for w in warnings:
+        print(f"WARN  {w}")
+
     print()
-    print(f"Items:{item_count}  Lenses:{lens_count}  WOMEN:{women_entries}  "
-          f"TX:{tx_count}  OrphanKeys:{len(orphan_keys)}")
+    print(f"Items:{item_count}  Lenses:{lens_count}  WOMEN:{women_person_count}  "
+          f"TX:{tx_count}  OrphanKeys:{len(orphan_keys)}  "
+          f"BrokenConns:{len(broken_conns)}  BrokenTX:{len(broken_tx)}")
     print()
 
     if not fails:
@@ -231,7 +366,9 @@ def validate(atlas):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    force = "--force" in sys.argv
+    args = [a for a in sys.argv[1:] if a != "--force"]
+    if len(args) != 1:
         print(__doc__)
         sys.exit(1)
-    validate(sys.argv[1])
+    validate(args[0], force=force)
