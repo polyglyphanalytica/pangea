@@ -622,12 +622,17 @@
       "section": "VII"
     },
     "cursus": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "VII"
+      "section": "VII",
+      "validated_sha": "eb4f135e103b2fac0df2c87d755d4ee3c0e930cd",
+      "validated_short": "eb4f135",
+      "validated_at": "2026-03-21T15:19:18.365228Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "classis": {
       "phase": "1A",
@@ -1019,7 +1024,6 @@
     }
   },
   "queue": [
-    "cursus",
     "clima",
     "aqua",
     "solum",
@@ -1138,7 +1142,8 @@
     "anthrophone",
     "dynastia",
     "lingua",
-    "via"
+    "via",
+    "cursus"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -1339,6 +1344,53 @@
       "atlas": "via",
       "phase_done": "GO_LIVE",
       "items": 116
+    },
+    {
+      "atlas": "cursus",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "cursus",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "cursus",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "cursus",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "cursus",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "cursus",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 100
+    },
+    {
+      "atlas": "cursus",
+      "phase_done": "5+6",
+      "phase_next": "DONE",
+      "items": 100
+    },
+    {
+      "atlas": "cursus",
+      "phase_done": "GO_LIVE",
+      "items": 100
     }
   ]
 }
