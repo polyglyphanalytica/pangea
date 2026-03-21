@@ -148,8 +148,8 @@
       "validated_lenses": 20
     },
     "clima": {
-      "phase": "DATA",
-      "items": 0,
+      "phase": "3",
+      "items": 100,
       "target": 100,
       "live": false,
       "map": "world",
@@ -1401,6 +1401,466 @@
       "atlas": "clima",
       "phase_done": "1A",
       "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "clima",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "clima",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "clima",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "clima",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "clima",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "clima",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "clima",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "clima",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "clima",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "clima",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "clima",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "clima",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "clima",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "clima",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "clima",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "clima",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "clima",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "clima",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "clima",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "clima",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "clima",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "clima",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "clima",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "clima",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "clima",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "clima",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "clima",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "clima",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "clima",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "clima",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "clima",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "clima",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "clima",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "clima",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "clima",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "clima",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "clima",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "clima",
+      "batch": "38-38",
+      "items": 38
+    },
+    {
+      "atlas": "clima",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "clima",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "clima",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "clima",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "clima",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "clima",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "clima",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "clima",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "clima",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "clima",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "clima",
+      "batch": "49-50",
+      "items": 50
+    },
+    {
+      "atlas": "clima",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "clima",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "clima",
+      "batch": "53-54",
+      "items": 54
+    },
+    {
+      "atlas": "clima",
+      "batch": "55-56",
+      "items": 56
+    },
+    {
+      "atlas": "clima",
+      "batch": "57-58",
+      "items": 58
+    },
+    {
+      "atlas": "clima",
+      "batch": "59-60",
+      "items": 60
+    },
+    {
+      "atlas": "clima",
+      "batch": "61-62",
+      "items": 62
+    },
+    {
+      "atlas": "clima",
+      "batch": "63-64",
+      "items": 64
+    },
+    {
+      "atlas": "clima",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "clima",
+      "batch": "66-67",
+      "items": 67
+    },
+    {
+      "atlas": "clima",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "clima",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "clima",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "clima",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "clima",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "clima",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "clima",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "clima",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "clima",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "clima",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "clima",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "clima",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "clima",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "clima",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "clima",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "clima",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "clima",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "clima",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "clima",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "clima",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "clima",
+      "batch": "88-88",
+      "items": 88
+    },
+    {
+      "atlas": "clima",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "clima",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "clima",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "clima",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "clima",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "clima",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "clima",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "clima",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "clima",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "clima",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "clima",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "clima",
+      "batch": "100-100",
       "items": 100
     }
   ]
