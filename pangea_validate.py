@@ -172,11 +172,8 @@ def validate(atlas):
     checks.append(("WOMEN >= 5 entries", women_entries >= 5, f"found {women_entries}"))
 
     # ── No civilitas leak ───────────────────────────────────────────────────
-    if atlas == "civilitas":
-        checks.append(("no civilitas text leaked", True, "skipped for civilitas itself"))
-    else:
-        civ = len(re.findall(r'\bcivilizat', html, re.IGNORECASE))
-        checks.append(("no civilitas text leaked", civ == 0, f"{civ} hits" if civ else ""))
+    civ = len(re.findall(r'\bcivilizat', html, re.IGNORECASE))
+    checks.append(("no civilitas text leaked", civ == 0, f"{civ} hits" if civ else ""))
 
     # ── Colour values ───────────────────────────────────────────────────────
     checks.append(("dark bg #02040a present", "#02040a" in html, ""))
@@ -194,7 +191,13 @@ def validate(atlas):
     checks.append(("back link ../index.html", "../index.html" in html, ""))
     checks.append(("skip link", "skip-link" in html, ""))
     checks.append(("JSON-LD", "application/ld+json" in html, ""))
-    checks.append(("init() on DOMContentLoaded", "DOMContentLoaded" in html and "init()" in html, ""))
+    init_booted = (
+        ("DOMContentLoaded" in html and "init()" in html) or
+        ("addEventListener('load',init)" in html) or
+        ('addEventListener("load",init)' in html) or
+        ("addEventListener('load', init)" in html)
+    )
+    checks.append(("init() called on page load", init_booted, ""))
 
     # ── Transmissions and Heritage ──────────────────────────────────────────
     tx_count = len(re.findall(r"\{from:", html))
