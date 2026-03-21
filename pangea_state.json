@@ -156,10 +156,10 @@
       "section": "I"
     },
     "aqua": {
-      "phase": "DATA",
-      "items": 75,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "I"
     },
@@ -1029,7 +1029,6 @@
     }
   },
   "queue": [
-    "aqua",
     "solum",
     "sylva",
     "ignis",
@@ -1148,7 +1147,8 @@
     "lingua",
     "via",
     "cursus",
-    "clima"
+    "clima",
+    "aqua"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -2260,6 +2260,148 @@
       "atlas": "aqua",
       "batch": "75-75",
       "items": 75
+    },
+    {
+      "atlas": "aqua",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "aqua",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "aqua",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "aqua",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "aqua",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "aqua",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "aqua",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "aqua",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "aqua",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "aqua",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "aqua",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "aqua",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "aqua",
+      "batch": "88-88",
+      "items": 88
+    },
+    {
+      "atlas": "aqua",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "aqua",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "aqua",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "aqua",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "aqua",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "aqua",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "aqua",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "aqua",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "aqua",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "aqua",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "aqua",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "aqua",
+      "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "aqua",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 100
+    },
+    {
+      "atlas": "aqua",
+      "phase_done": "5+6",
+      "phase_next": "DONE",
+      "items": 100
+    },
+    {
+      "atlas": "aqua",
+      "phase_done": "GO_LIVE",
+      "items": 100
     }
   ]
 }
