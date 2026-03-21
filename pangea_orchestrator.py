@@ -121,39 +121,87 @@ def next_phase(current, map_type="world"):
 
 
 def generate_new_atlas(state):
-    existing = sorted(state["atlases"].keys())
-    print("=" * 60)
-    print("QUEUE EMPTY - GENERATE A NEW ATLAS NOW")
-    print("=" * 60)
-    print(f"All {len(existing)} atlases are built or queued.")
-    print()
-    print("You are Claude. Use your knowledge to invent ONE new atlas.")
-    print("It must not overlap any existing atlas.")
-    print("It must be global, span 5000+ years, have a Herstory angle.")
-    print()
-    print("Existing keys:", ", ".join(existing[:15]), "... (and more)")
-    print()
-    print("When you have an idea, register it with:")
-    cmd = "python3 pangea_orchestrator.py new_atlas KEY NAME SECTION ICON TAGLINE TAGS"
-    print(" ", cmd)
-    print()
-    print("Where:")
-    print("  KEY     = lowercase latin word, no spaces")
-    print("  NAME    = display name")
-    print("  SECTION = roman numeral I through XII")
-    print("  ICON    = single emoji")
-    print("  TAGLINE = quoted sentence max 12 words")
-    print("  TAGS    = quoted comma-separated list e.g. 'Tag1,Tag2,Tag3'")
-    print()
-    print("Run that command now. The loop will continue automatically.")
+    """Auto-generate and register a new atlas when the queue is empty.
+
+    Draws from a large pool of pre-defined atlas ideas, skipping any whose key
+    already exists in state.  If the pool is exhausted, synthesises a key from
+    a rotating pattern so the pipeline never stops.
+    """
+    existing = set(state["atlases"].keys())
+
+    # ── Atlas idea pool ─────────────────────────────────────────────────
+    # Each tuple: (key, display_name, section, icon, tagline, tags)
+    # Rules: global scope, 5 000+ year span, clear Herstory angle, Latin key.
+    IDEA_POOL = [
+        ("colonia",    "Colonia",    "V",    "🏴",  "Every empire planted a flag — every colony pulled it down.",            "Colonialism,Empire,Resistance"),
+        ("orbis",      "Orbis",      "IX",   "🌍",  "The story of maps, borders, and who drew them.",                        "Geography,Cartography,Borders"),
+        ("nexus",      "Nexus",      "IX",   "🔗",  "Networks that connected civilisations before the internet.",            "Networks,Communication,Trade"),
+        ("ferrum",     "Ferrum",     "II",   "⛏️",  "Every metal humanity pulled from the earth changed history.",           "Metallurgy,Mining,Industry"),
+        ("navigium",   "Navigium",   "VIII", "⛵",  "From reed boats to aircraft carriers — the sea changed everything.",   "Ships,Navigation,Maritime"),
+        ("scholae",    "Scholae",    "IV",   "🏫",  "How humanity learned to teach itself.",                                "Education,Schools,Literacy"),
+        ("caelum",     "Caelum",     "II",   "☁️",  "The atmosphere is the thinnest page in Earth's biography.",             "Weather,Climate,Atmosphere"),
+        ("hospitium",  "Hospitium",  "X",    "🏥",  "Every hospital, healer, and plague that reshaped medicine.",            "Medicine,Healing,Epidemics"),
+        ("pratum",     "Pratum",     "I",    "🌾",  "Agriculture invented civilisation — then civilisation forgot.",         "Farming,Land,Food"),
+        ("textilis",   "Textilis",   "VIII", "🧵",  "Thread, loom, and needle wove the fabric of every society.",            "Textiles,Fashion,Industry"),
+        ("numerus",    "Numerus",    "III",  "🔢",  "From tally sticks to quantum computers — the number shaped the world.","Numbers,Counting,Data"),
+        ("asylum",     "Asylum",     "VI",   "🕊️",  "Every refugee carried a civilisation in their memory.",                "Refugees,Migration,Sanctuary"),
+        ("carcere",    "Carcere",    "VI",   "🔒",  "Walls built to confine changed the societies that built them.",        "Prisons,Punishment,Justice"),
+        ("aeris",      "Aeris",      "II",   "✈️",  "From Icarus to orbit — the conquest of the sky.",                      "Aviation,Flight,Aerospace"),
+        ("aquaeductus","Aquaeductus","VIII", "🚰",  "Every civilisation rose on water engineering and fell without it.",     "Water,Infrastructure,Sanitation"),
+        ("sapientia",  "Sapientia",  "IV",   "🦉",  "The libraries, universities, and thinkers who kept knowledge alive.",  "Wisdom,Philosophy,Scholarship"),
+        ("tyrannis",   "Tyrannis",   "V",    "👑",  "Every tyrant thought the throne was permanent.",                       "Tyranny,Autocracy,Revolution"),
+        ("aether",     "Aether",     "II",   "📡",  "Invisible waves that rewrote how humanity communicates.",              "Radio,Signals,Telecom"),
+        ("ruina",      "Ruina",      "III",  "🏚️",  "The archaeology of collapse — what survived and what didn't.",         "Ruins,Archaeology,Collapse"),
+        ("hereditas",  "Hereditas",  "X",    "🧬",  "Blood, lineage, and inheritance shaped every throne and farm.",        "Genetics,Inheritance,Lineage"),
+        ("patronus",   "Patronus",   "VIII", "🎭",  "Patrons made art possible — and controlled what it said.",             "Patronage,Arts,Power"),
+        ("exsilium",   "Exsilium",   "VI",   "🚪",  "Banishment created new worlds wherever the exiled landed.",            "Exile,Diaspora,Identity"),
+        ("oraculum",   "Oraculum",   "IV",   "🔮",  "Prophecy, divination, and the futures humanity tried to read.",        "Prophecy,Divination,Fate"),
+        ("foedus",     "Foedus",     "V",    "🤝",  "Every treaty was a bet that peace could be written down.",             "Treaties,Diplomacy,Alliances"),
+        ("pons",       "Pons",       "VIII", "🌉",  "Bridges connected what geography kept apart.",                         "Bridges,Engineering,Connection"),
+        ("glacies",    "Glacies",    "II",   "🧊",  "Ice ages and frozen frontiers that shaped human migration.",           "Ice,Glaciers,Climate"),
+        ("nummularius","Nummularius","VII",  "🏦",  "Banking invented modern power — and modern crisis.",                   "Banking,Finance,Credit"),
+        ("censor",     "Censor",     "VI",   "✂️",  "What was silenced tells us as much as what was spoken.",               "Censorship,Suppression,Freedom"),
+        ("elementum",  "Elementum",  "II",   "⚗️",  "From four elements to 118 — chemistry remade the world.",             "Chemistry,Elements,Alchemy"),
+        ("bibliotheca","Bibliotheca","IV",   "📚",  "Every burned library was a civilisation's memory erased.",             "Libraries,Books,Knowledge"),
+    ]
+
+    # Filter out any ideas whose key already exists
+    available = [idea for idea in IDEA_POOL if idea[0] not in existing]
+
+    if not available:
+        # Pool exhausted — synthesise from a counter
+        counter = len(existing)
+        key = f"atlas_{counter}"
+        while key in existing:
+            counter += 1
+            key = f"atlas_{counter}"
+        # Pick a section with the fewest atlases
+        section_counts = {}
+        for info in state["atlases"].values():
+            s = info.get("section", "I")
+            section_counts[s] = section_counts.get(s, 0) + 1
+        all_sections = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"]
+        section = min(all_sections, key=lambda s: section_counts.get(s, 0))
+        chosen = (key, key.replace("_", " ").title(), section, "🗺️",
+                  "Another chapter in humanity's unfinished story.",
+                  "History,Culture,Civilization")
+    else:
+        # Pick the first available (deterministic order, not random)
+        chosen = available[0]
+
+    key, name, section, icon, tagline, tags = chosen
+    print(f"Queue empty — auto-generating new atlas: {name} ({key})")
+    cmd_new_atlas(key, name, section, icon, tagline, tags)
 
 
 def get_next_action(state):
     queue = state.get("queue", [])
     if not queue:
-        print("Queue empty — generating new atlas idea via Claude API...")
+        # Auto-generate a new atlas and continue the loop.
+        # generate_new_atlas() calls cmd_new_atlas() which calls self_invoke(),
+        # so this branch never returns — the process re-execs with the new queue.
         generate_new_atlas(state)
-        return None
+        return None  # unreachable, but keeps the type signature consistent
 
     atlas = queue[0]
     info = state["atlases"].get(atlas)
