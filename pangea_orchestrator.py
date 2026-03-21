@@ -221,6 +221,15 @@ def get_next_action(state):
     }
 
 
+def run_validation(atlas):
+    """Run pangea_validate.py for atlas. Returns True if passed, False if failed."""
+    result = subprocess.run(
+        [sys.executable, "pangea_validate.py", atlas],
+        capture_output=False  # let output stream to terminal
+    )
+    return result.returncode == 0
+
+
 def cmd_advance(atlas, completed_phase):
     state = load_state()
     info = state["atlases"].get(atlas)
@@ -229,6 +238,27 @@ def cmd_advance(atlas, completed_phase):
         sys.exit(1)
     real_count = count_items(atlas)
     info["items"] = real_count
+
+    # Phase 5 complete → automatically run validation before advancing to 6
+    if completed_phase == "5":
+        print(f"Phase 5 complete. Running validation automatically...")
+        passed = run_validation(atlas)
+        if not passed:
+            print()
+            print(f"VALIDATION FAILED. Fix all FAIL items in {atlas}/index.html.")
+            print(f"Then re-run: python3 pangea_orchestrator.py advance {atlas} 5")
+            sys.exit(1)
+        # Validation passed — skip phase 6 since we just validated, go straight to DONE
+        info["phase"] = "DONE"
+        state["atlases"][atlas] = info
+        state.setdefault("session_log", []).append({
+            "atlas": atlas, "phase_done": "5+6", "phase_next": "DONE", "items": real_count
+        })
+        save_state(state)
+        print(f"Validation passed. {atlas} advancing to DONE → GO_LIVE next.")
+        self_invoke()
+        return
+
     info["phase"] = next_phase(completed_phase, info.get("map", "world"))
     state["atlases"][atlas] = info
     state.setdefault("session_log", []).append({
@@ -295,6 +325,14 @@ def cmd_golive(atlas):
     if info is None:
         print(f"ERROR: '{atlas}' not found.", file=sys.stderr)
         sys.exit(1)
+
+    # Safety gate: validate before going live (skips instantly if already validated at current SHA)
+    print(f"Running validation gate before go-live...")
+    passed = run_validation(atlas)
+    if not passed:
+        print(f"BLOCKED: {atlas} failed validation. Fix issues before going live.")
+        sys.exit(1)
+
     info["live"] = True
     info["phase"] = "DONE"
     info["items"] = count_items(atlas)
@@ -360,6 +398,22 @@ def cmd_status():
         info = state["atlases"].get(a, {})
         n = count_items(a)
         print(f"    {a:<20} phase={info.get('phase','?'):<6} {n}/{info.get('target',100)}")
+    print()
+
+
+def cmd_validation_status():
+    """Show validation state for all atlases."""
+    state = load_state()
+    print(f"\n{'ATLAS':<22} {'PHASE':<8} {'ITEMS':<8} {'VALIDATED':<12} {'SHA':<10} {'AT'}")
+    print("-" * 80)
+    for key in sorted(state["atlases"]):
+        info = state["atlases"][key]
+        phase = info.get("phase", "?")
+        items = info.get("items", 0)
+        sha = info.get("validated_short", "-")
+        at = info.get("validated_at", "-")[:10] if info.get("validated_at") else "-"
+        validated = "YES" if info.get("validated_sha") else "no"
+        print(f"  {key:<20} {phase:<8} {items:<8} {validated:<12} {sha:<10} {at}")
     print()
 
 
@@ -520,6 +574,8 @@ if __name__ == "__main__":
         cmd_status()
     elif sys.argv[1] == "verify":
         cmd_verify()
+    elif sys.argv[1] == "validation_status":
+        cmd_validation_status()
     elif sys.argv[1] == "new_atlas" and len(sys.argv) >= 7:
         cmd_new_atlas(sys.argv[2], sys.argv[3], sys.argv[4],
                       sys.argv[5], sys.argv[6],

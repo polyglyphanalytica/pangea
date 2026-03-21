@@ -9,9 +9,42 @@ Usage:
   python3 pangea_validate.py ATLAS_NAME
 """
 
+import datetime
+import json
 import re
+import subprocess
 import sys
 from pathlib import Path
+
+
+def _record_validation(atlas, item_count, lens_count):
+    """Record passing validation commit SHA into pangea_state.json."""
+    state_path = Path("pangea_state.json")
+    if not state_path.exists():
+        return
+
+    # Get current commit SHA for this atlas file
+    result = subprocess.run(
+        ["git", "log", "-1", "--format=%H", f"{atlas}/index.html"],
+        capture_output=True, text=True
+    )
+    sha = result.stdout.strip() or "unknown"
+
+    short = subprocess.run(
+        ["git", "log", "-1", "--format=%h", f"{atlas}/index.html"],
+        capture_output=True, text=True
+    ).stdout.strip() or sha[:7]
+
+    state = json.loads(state_path.read_text())
+    info = state.get("atlases", {}).get(atlas, {})
+    info["validated_sha"] = sha
+    info["validated_short"] = short
+    info["validated_at"] = datetime.datetime.utcnow().isoformat() + "Z"
+    info["validated_items"] = item_count
+    info["validated_lenses"] = lens_count
+    state["atlases"][atlas] = info
+    state_path.write_text(json.dumps(state, indent=2))
+    print(f"Validation recorded: {atlas} @ {short} ({datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M')} UTC)")
 
 
 def validate(atlas):
@@ -20,6 +53,24 @@ def validate(atlas):
         print(f"FAIL   file not found: {atlas}/index.html")
         print("\nVERDICT: NOT ELIGIBLE")
         sys.exit(1)
+
+    # ── Skip if already validated at current commit ────────────────────────
+    state_path = Path("pangea_state.json")
+    if state_path.exists():
+        state = json.loads(state_path.read_text())
+        info = state.get("atlases", {}).get(atlas, {})
+        stored_sha = info.get("validated_sha")
+        if stored_sha:
+            current_sha = subprocess.run(
+                ["git", "log", "-1", "--format=%H", f"{atlas}/index.html"],
+                capture_output=True, text=True
+            ).stdout.strip()
+            if current_sha and current_sha == stored_sha:
+                short = info.get("validated_short", current_sha[:7])
+                at = info.get("validated_at", "")[:10]
+                print(f"SKIP  Already validated at {short} ({at}) — no changes since.")
+                print("VERDICT: ELIGIBLE FOR GO-LIVE")
+                sys.exit(0)
 
     html = p.read_text(encoding="utf-8", errors="replace")
     checks = []
@@ -164,6 +215,7 @@ def validate(atlas):
 
     if not fails:
         print("VERDICT: ELIGIBLE FOR GO-LIVE")
+        _record_validation(atlas, item_count, lens_count)
         sys.exit(0)
     else:
         print(f"VERDICT: NOT ELIGIBLE — {len(fails)} failures:")
