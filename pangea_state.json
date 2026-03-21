@@ -151,7 +151,7 @@
       "phase": "DONE",
       "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "I"
     },
@@ -1029,7 +1029,6 @@
     }
   },
   "queue": [
-    "clima",
     "aqua",
     "solum",
     "sylva",
@@ -1148,7 +1147,8 @@
     "dynastia",
     "lingua",
     "via",
-    "cursus"
+    "cursus",
+    "clima"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -1873,6 +1873,11 @@
       "atlas": "clima",
       "phase_done": "5+6",
       "phase_next": "DONE",
+      "items": 100
+    },
+    {
+      "atlas": "clima",
+      "phase_done": "GO_LIVE",
       "items": 100
     }
   ]
