@@ -819,14 +819,9 @@ const WOMEN={};
 Open the file. Verify it loads, shows the welcome state in the drawer, and has no console errors. Commit.
 After Phase 1F: the shell is complete. The file is pixel-identical to civilitas in colour, layout, and behaviour. Only text and domain language differ. This is the mandatory starting point for all data phases.
 ---
-Phase 2A — Data Batch 1 (items 1–25)
-Write 25 fully populated items. Every item must have every lens field written — no stubs, no placeholders. Commit.
-Phase 2B — Data Batch 2 (items 26–50)
-25 more fully populated items. Commit.
-Phase 2C — Data Batch 3 (items 51–75)
-25 more fully populated items. Commit.
-Phase 2D — Data Batch 4 (items 76–100+)
-Remaining items to reach the 100+ minimum. Commit.
+Phase 2 — Data (items 1–100+)
+Write 1 item at a time. Each item must be fully populated — every lens field written, no stubs, no placeholders. Commit after every single item. Do not batch multiple items into one commit. The orchestrator will track progress and auto-advance to Phase 3 when the target count is reached.
+Why 1 at a time: Writing more than 1 item per pass causes the agent to stall. This is a hard constraint — do not attempt to write 2, 5, 10, or 25 items in a single pass regardless of what seems efficient.
 ---
 Phase 3 — Constants & Chain Data
 Write `LENSES` (sorted alphabetically by `lbl`), `ERAS`, `FP_LABELS`, `FP_KEYS`, `TRANSMISSIONS` (~15–25 chains), `HERITAGE_REGIONS` (or domain equivalent), `WOMEN` (Herstory data — mandatory). Commit.
