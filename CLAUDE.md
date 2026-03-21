@@ -639,8 +639,8 @@ Shows each WOMEN entry as a named card: name, role, year, and biographical descr
 Does not show the lens row, fingerprint chart, or other standard drawer content
 Has its own heading and visual treatment distinct from the lens grid
 The drawer in Herstory mode shows the woman's name in `#c060a0`, role in `--txt3`, year in `--amber-b`, and description in `--txt2`.
-The domain's Women & Gender lens (e.g. `id: 'women'`) continues to exist in the LENSES array and is selectable outside of Herstory mode. It covers the domain's structural and social gender history. It is not the same content as the WOMEN biographical entries and must not be treated as such.
-Rationale: Folding named biographical entries into a lens row treats individual women as just another interpretive angle, equivalent to architecture or music. A dedicated panel gives their contributions distinct visual weight. The Women & Gender lens covers the structural and doctrinal dimension; the Herstory panel covers the biographical and individual dimension. They are complementary, not duplicative.
+There is no separate Women & Gender lens in the LENSES array. Herstory is the sole mechanism for surfacing women's contributions. Do not create a `women` or `women_gender` lens — it would be redundant with the Herstory feature and waste one of the 20 lens slots.
+Rationale: Folding named biographical entries into a lens row treats individual women as just another interpretive angle, equivalent to architecture or music. The dedicated Herstory panel gives their contributions distinct visual weight. A separate Women & Gender lens would duplicate this coverage and dilute the purpose of both features.
 Every atlas must have a populated `WOMEN` object. No atlas ships with an empty Herstory. Research the women. Every field has them — astronomy, law, economics, botany, military history, religion, linguistics. Finding them and giving them their place in the atlas is part of the work.
 Do not rename it "Discoverers", "Pioneers", "Women in Science", or anything else. The name is Herstory.
 Mode State Management
@@ -1007,7 +1007,7 @@ Drift 4 — Herstory Drawer — Dedicated Women Panel
 Scope: All atlases.
 Default: WOMEN entries render as part of the standard lens row layout.
 Revised: When Herstory is active and an item is selected, the drawer shows a standalone biographical panel — each WOMEN entry as a named card (name in `#c060a0`, role in `--txt3`, year in `--amber-b`, desc in `--txt2`). Lens rows, fingerprint chart, and span bar are suppressed for the duration of the Herstory session.
-The Women & Gender lens (`id: 'women'`) remains in LENSES and covers structural/social gender history. It is separate from the Herstory biographical panel and must not be collapsed into it.
+There is no separate Women & Gender lens. Herstory is the sole mechanism for women's contributions — do not create a `women` lens in the LENSES array.
 ---
 Drift 5 — CDN Source — jsdelivr Only
 Scope: All atlases.
