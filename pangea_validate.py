@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pangea Atlas Validator v2
+Pangea Atlas Validator v3
 =========================
 Runs the full CLAUDE.md Section 18 checklist against an atlas file.
 Exits 0 if ELIGIBLE FOR GO-LIVE, exits 1 if NOT ELIGIBLE.
@@ -80,6 +80,95 @@ def _extract_heritage_item_refs(html):
     return refs
 
 
+def _count_unescaped_apostrophes(items_text):
+    """Count unescaped apostrophes inside single-quoted data strings.
+
+    Walks through lines that look like data (contain key:'value' patterns)
+    and tracks string state to find apostrophes that prematurely close strings.
+    Returns the count of likely-broken apostrophes.
+    """
+    count = 0
+    for line in items_text.split('\n'):
+        # Only check lines that contain data values (key:'...')
+        if ":'" not in line:
+            continue
+        in_string = False
+        i = 0
+        while i < len(line):
+            c = line[i]
+            if c == '\\' and in_string and i + 1 < len(line):
+                i += 2  # skip escaped character
+                continue
+            if c == "'":
+                if not in_string:
+                    in_string = True
+                else:
+                    # Check if this looks like a premature string close
+                    # (followed by a lowercase letter = likely contraction/possessive)
+                    rest = line[i + 1:i + 3]
+                    if rest and rest[0].isalpha() and rest[0].islower():
+                        count += 1
+                        # Stay in string mode (the real close is later)
+                    elif rest and rest[0] == ' ' and len(rest) > 1 and rest[1].islower():
+                        count += 1
+                    else:
+                        in_string = False
+            i += 1
+    return count
+
+
+def _check_js_parse(html, atlas):
+    """Run the inline <script> block through Node.js vm.Script to catch syntax errors."""
+    # Extract the main inline script block (skip JSON-LD)
+    lines = html.split('\n')
+    start = -1
+    end = -1
+    for i, line in enumerate(lines):
+        if line.strip() == '<script>' and start == -1 and i > 100:
+            start = i
+        if start > 0 and line.strip() == '</script>' and i > start + 100:
+            end = i
+            break
+
+    if start == -1 or end == -1:
+        return False, "could not find inline <script> block"
+
+    script = '\n'.join(lines[start + 1:end])
+
+    # Write to temp file and parse with Node.js
+    tmp_path = Path(f"/tmp/_pangea_validate_{atlas}.js")
+    tmp_path.write_text(script, encoding='utf-8')
+
+    result = subprocess.run(
+        ["node", "-e", f"""
+const vm = require('vm');
+const fs = require('fs');
+const script = fs.readFileSync('{tmp_path}', 'utf8');
+try {{
+    new vm.Script(script, {{filename: '{atlas}.js'}});
+    process.exit(0);
+}} catch(e) {{
+    const lineNum = e.stack?.match(/:(\d+)/)?.[1];
+    const fileLine = lineNum ? parseInt(lineNum) + {start + 1} : -1;
+    console.error('line ' + fileLine + ': ' + e.message);
+    process.exit(1);
+}}
+"""],
+        capture_output=True, text=True, timeout=15
+    )
+
+    try:
+        tmp_path.unlink()
+    except OSError:
+        pass
+
+    if result.returncode == 0:
+        return True, "OK"
+    else:
+        detail = result.stderr.strip() or result.stdout.strip() or "parse failed"
+        return False, detail
+
+
 def validate(atlas, force=False):
     p = Path(f"{atlas}/index.html")
     if not p.exists():
@@ -109,6 +198,38 @@ def validate(atlas, force=False):
     html = p.read_text(encoding="utf-8", errors="replace")
     checks = []
     warnings = []  # non-blocking issues
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # CRITICAL: JavaScript parse check (catches ALL syntax errors at once)
+    # ══════════════════════════════════════════════════════════════════════════
+    js_parse_ok, js_parse_detail = _check_js_parse(html, atlas)
+    checks.append(("JavaScript parses without errors", js_parse_ok, js_parse_detail))
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # Structural integrity checks — full-file scans (no data region needed)
+    # ══════════════════════════════════════════════════════════════════════════
+
+    # ── Escaped backticks in template literals ─────────────────────────────
+    escaped_bt = re.findall(r'return\\`', html)
+    checks.append(("no escaped backticks in template literals",
+                   len(escaped_bt) == 0,
+                   f"{len(escaped_bt)} found (return\\` should be return `)" if escaped_bt else "OK"))
+
+    # ── Missing commas between ITEMS array elements ────────────────────────
+    missing_comma = re.findall(r"\}\}\n\{id:", html)
+    checks.append(("no missing commas between ITEMS",
+                   len(missing_comma) == 0,
+                   f"{len(missing_comma)} found (}} not followed by comma before next item)" if missing_comma else "OK"))
+
+    # ── WOMEN object closed correctly ──────────────────────────────────────
+    women_close = re.search(r'const WOMEN\s*=\s*\{', html)
+    if women_close:
+        # Find the matching close — should be }; not ];
+        women_text = html[women_close.start():]
+        bad_women_close = bool(re.search(r'\]\s*;\s*\n\s*let\s+year\b', women_text))
+        checks.append(("WOMEN object closed with }; not ];",
+                       not bad_women_close,
+                       "found ]; closing WOMEN — should be };" if bad_women_close else "OK"))
 
     # ── Item count (inside ITEMS block only) ────────────────────────────────
     # Find the region between 'const ITEMS=[' and 'const TRANSMISSIONS'
@@ -172,11 +293,29 @@ def validate(atlas, force=False):
     empty = len(re.findall(r"(\w+):\s*''", items_text))
     checks.append(("no empty lens strings", empty == 0, f"{empty} found"))
 
-    # ── Unescaped apostrophes ───────────────────────────────────────────────
-    bad_apos = re.findall(r":\s*'[^'\\]*[a-zA-Z]['][a-zA-Z][^']*'", items_text)
+    # ── Double-escaped apostrophes in data strings ────────────────────────
+    # Only scan data regions (ITEMS + TRANSMISSIONS + WOMEN) to avoid
+    # false positives from legitimate JS like replace(/'/g,"\\'")
+    data_regions = items_text
+    tx_block_m = re.search(r'const TRANSMISSIONS\s*=\s*\[[\s\S]*?\];', html)
+    if tx_block_m:
+        data_regions += tx_block_m.group(0)
+    women_block_m = re.search(r'const WOMEN\s*=\s*\{[\s\S]*?\};', html)
+    if women_block_m:
+        data_regions += women_block_m.group(0)
+    double_esc = re.findall(r"\\\\'", data_regions)
+    checks.append(("no double-escaped apostrophes in data",
+                   len(double_esc) == 0,
+                   f"{len(double_esc)} found (\\\\' should be \\')" if double_esc else "OK"))
+
+    # ── Unescaped apostrophes in data strings ───────────────────────────────
+    # The JS parse check above catches these too, but this gives a specific
+    # count and helps agents fix them. Scans all single-quoted data values
+    # in the ITEMS region for apostrophes that would prematurely close the string.
+    bad_apos_count = _count_unescaped_apostrophes(items_text)
     checks.append(("no unescaped apostrophes in data",
-                   len(bad_apos) == 0,
-                   f"{len(bad_apos)} found" if bad_apos else "OK"))
+                   bad_apos_count == 0,
+                   f"{bad_apos_count} found" if bad_apos_count else "OK"))
 
     # ── FP_KEYS ─────────────────────────────────────────────────────────────
     fp_m = re.search(r"const FP_KEYS\s*=\s*\[([^\]]+)\]", html)
