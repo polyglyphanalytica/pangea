@@ -465,6 +465,9 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
   animation:ptr-spin .7s linear infinite;
 }
 @keyframes ptr-spin{to{transform:rotate(360deg)}}
+.hs-panel-hdr{font-family:'Cinzel Decorative',serif;font-size:13px;color:#c060a0;margin-bottom:6px;letter-spacing:1px}
+.hs-panel-sub{font-size:15px;color:var(--txt3);margin-bottom:16px;font-style:italic;line-height:1.9}
+.hs-woman-nm{font-family:'Cinzel',serif;font-size:14px;color:#c060a0;letter-spacing:.5px;margin-bottom:2px}
 </style>
 </head>
 <body>
@@ -1799,7 +1802,7 @@ const ITEMS=[
     globalisation:'The Templar network connected Western Europe, the Byzantine Empire, the Crusader states, and the edges of the Islamic world in a single financial system. Their preceptories from Portugal to Cyprus created the first genuinely international banking network — 150 years before the Medici extended Italian banking across Europe.',
    }},
 {id:'bolsa',fp:{innov:10,reach:8,lon:4,stab:7,trade:9,inst:9},lon:4.9,lat:52.4,nm:'Amsterdam Stock Exchange',sb:'Amsterdam · Birth of Equity Markets',s:1602,e:2024,
-   conns:['guilder','wisselbank','bank_of_england','voc'],
+   conns:['guilder','wisselbank','bank_of_england'],
    overview:'When the Dutch East India Company (VOC) was formed in 1602, its founders faced a simple problem: the capital required to outfit an East Indies fleet was far more than any individual merchant could provide. Their solution — issuing tradeable shares to the public — created the world\'s first stock exchange. The Amsterdam Beurs became the marketplace where VOC shares, government bonds, and commodity futures were bought and sold, inventing the mechanics of equity markets that persist today. Within decades Amsterdam traders had invented options, futures, short selling, margin lending, and even a primitive index — the full toolkit of modern finance, assembled in one building.',
    d:{
     overview:'The Amsterdam Stock Exchange (1602) was the world\'s first equity market and the birthplace of modern financial capitalism. Created to trade VOC shares, it rapidly developed the full toolkit of modern finance: options, futures, short selling, margin lending, and price indices. Its innovations, described by Joseph de la Vega in 1688, read as a recognisably modern account of speculative trading three centuries later.',
@@ -2503,7 +2506,7 @@ const ITEMS=[
     globalisation:'Keynesian economics reshaped global economic governance through the Bretton Woods institutions Keynes helped design. His framework of managed capitalism, counter-cyclical fiscal policy, and international monetary cooperation defined the post-war global economic order and continues to influence responses to international financial crises.',}},
 
 {id:'monetarism',fp:{innov:8,reach:8,lon:5,stab:6,trade:6,inst:8},lon:-87.6,lat:41.9,nm:'Monetarism',sb:'Chicago · Money Supply Rules',s:1956,e:2024,
-   conns:['federal_reserve','depression','keynes','inflation','austrian'],
+   conns:['federal_reserve','depression','keynes','austrian'],
    overview:'Monetarism — the economic doctrine associated primarily with Milton Friedman and the Chicago School, holding that changes in the money supply are the primary determinant of nominal economic activity and that central banks should follow rules rather than exercise discretion — was the intellectual framework that displaced Keynesian economics in the 1970s and shaped the global monetary policy revolution of the 1980s. Friedman’s A Monetary History of the United States (1963, with Anna Schwartz) demonstrated that the Federal Reserve’s failure to maintain the money supply during the 1929–1933 banking crisis had caused the Great Depression — reinterpreting the 20th century’s defining economic catastrophe as a government failure rather than a market failure. His natural rate of unemployment hypothesis demolished the Keynesian Phillips curve. His advocacy for inflation targeting and monetary rules over discretion shaped every major central bank’s operating framework by the 1990s. Monetarism as a specific policy doctrine has been largely abandoned (the money supply proved too difficult to control precisely), but its influence on central bank independence, inflation targeting, and the rules vs. discretion debate is permanent.',
    d:{
     overview:'Monetarism, associated primarily with Milton Friedman and the University of Chicago, argued that changes in the money supply are the primary driver of nominal economic activity and that central banks should follow rules rather than exercise discretion. Its two central empirical claims — that the Fed caused the Great Depression by contracting the money supply, and that inflation is always and everywhere a monetary phenomenon — reshaped macroeconomic thinking and central bank practice globally.',
@@ -3031,7 +3034,7 @@ const ITEMS=[
     globalisation:'Global remittances represent one of the most significant financial flows in the world economy — over $700 billion annually, exceeding foreign direct investment to many developing countries. This worker-driven globalisation, powered by migration and family obligation, redistributes wealth from rich to poor countries through millions of individual transactions.',}},
 
 {id:'zimbabwe',fp:{innov:2,reach:4,lon:1,stab:1,trade:2,inst:2},lon:31.0,lat:-17.8,nm:'Zimbabwe Hyperinflation',sb:'Harare · Money Becomes Worthless',s:2007,e:2009,
-   conns:['hyperinflation','debasement','weimar','federal_reserve','neoliberalism'],
+   conns:['hyperinflation','debasement','federal_reserve','neoliberalism'],
    overview:'Zimbabwe’s hyperinflation of 2007–2009 — in which annual inflation reached 89.7 sextillion percent by November 2008, the second highest ever recorded — destroyed the Zimbabwean dollar, wiped out life savings, rendered the formal economy non-functional, and forced the abandonment of the national currency entirely. The Mugabe government’s land reform programme (2000) had destroyed agricultural productivity and government revenues simultaneously; unable to finance its deficit through taxation or borrowing, the Reserve Bank printed money in accelerating quantities until notes became worthless faster than they were printed. Zimbabwe printed 100 trillion dollar notes. School fees were paid in wheelbarrows of cash. Prices doubled every 24 hours at peak. The episode is the paradigm case of 21st-century hyperinflation and the clearest demonstration that monetary stability requires institutional independence from political pressure.',
    d:{
     overview:'Zimbabwe’s hyperinflation (2007–2009) — annual inflation reaching 89.7 sextillion percent — is the 21st century’s most severe monetary collapse. Its causes (land reform destroying fiscal revenues, political instruction to print money) and consequences (currency abandonment, dollarisation, economic collapse, mass emigration) illustrate the political economy of hyperinflation with painful precision. Zimbabwe printed 100 trillion dollar notes. The episode is the definitive modern case study in monetary institutional failure.',
@@ -3282,7 +3285,7 @@ const ITEMS=[
   globalisation:'The Inca Empire was deliberately not embedded in global trade networks, which was both resilience and vulnerability. Its isolation from Eurasian disease exposure made it catastrophically vulnerable to Spanish-introduced epidemics. The conquest was a total systemic rupture rather than a gradual incorporation precisely because the Inca economy had no prior entanglement with global circuits.'}},
 
 {id:'mongol',fp:{innov:7,reach:9,lon:2,stab:4,trade:10,inst:6},lon:106.9,lat:47.9,nm:'Mongol Trade Network',sb:'Central Asia · The world empire\'s commercial peace',s:1206,e:1368,
- conns:['silk_road','yuan','persian','byzantine','hawala'],
+ conns:['yuan','persian','byzantine','hawala'],
  overview:'The Mongol Empire at its height connected China to Europe in a single political space for the first time in history. The Pax Mongolica — roughly 1250–1350 — made the Silk Road safer than it had ever been, enabling Marco Polo\'s journeys and the first direct European knowledge of Chinese commerce. Mongol rulers actively promoted long-distance trade through paper money, postal relay systems, and merchant partnerships (ortoq). The Black Death, which ended the Pax Mongolica, travelled the same trade routes that the Mongols had made safe.',
  d:{
   overview:'The Mongol Empire was, among other things, a trade empire. Chinggis Khan\'s successors aggressively promoted commerce — reducing tariffs, protecting merchants, establishing relay postal stations, and issuing paper currency. The ortoq system of merchant partnerships between Mongol nobles and Muslim trading families created a commercial network spanning Eurasia. At its peak, a merchant could travel from Korea to Poland under Mongol protection.',
@@ -3382,7 +3385,7 @@ const ITEMS=[
   globalisation:'The wergeld principle appears across multiple unconnected legal systems — Germanic, Arab (diya), and early Chinese law all contain elements of fixed monetary compensation for injury or death. This convergence suggests that the monetisation of violence is a recurring institutional solution to the problem of conflict resolution in societies where state enforcement capacity is limited.'}},
 
 {id:'salt_tax',fp:{innov:6,reach:8,lon:4,stab:5,trade:7,inst:8},lon:102.7,lat:25.0,nm:'Salt Tax',sb:'China & France · The tax that triggered revolutions',s:-300,e:1947,
- conns:['yuan','franc','gabelle','renminbi','assignat'],
+ conns:['yuan','franc','renminbi','assignat'],
  overview:'Salt taxes — levied on the universal necessity of salt — were among the most productive and most hated fiscal instruments in history. China\'s salt gabelle, administered continuously from the Han dynasty to 1947, generated up to 50% of imperial revenue in some periods. France\'s gabelle was the most despised tax of the Ancien Régime, contributing directly to the 1789 Revolution. India\'s salt tax under British rule was the target of Gandhi\'s 1930 Salt March. In each case, the taxation of a physiological necessity concentrated the fiscal burden on the poorest households and politicised the most mundane of commodities.',
  d:{
   overview:'Salt was the perfect tax base: everyone needed it, it was easily identified, and its production could be concentrated at a few sites. State salt monopolies took two forms — monopoly production (the state sold salt directly) or monopoly taxation (private producers paid a license and tax). Both transferred the fiscal burden heavily onto poor consumers for whom salt was a major household expense.',
@@ -3432,7 +3435,7 @@ const ITEMS=[
   globalisation:'The globalisation of monetary standards from the 19th century onward — gold standard adoption, Bretton Woods, post-Bretton Woods dollar standard — was achieved through multilateral coinage-equivalent agreements rather than single sovereign acts. The coordination problem that coinage acts solved domestically required international negotiation globally.'}},
 
 {id:'kula_ring',fp:{innov:7,reach:3,lon:4,stab:9,trade:5,inst:6},lon:150.8,lat:-9.4,nm:'Kula Ring',sb:'Melanesia · Gifts that bind the world together',s:-1000,e:2024,
- conns:['wampum','cacao','barter','gift_economy','cowrie'],
+ conns:['wampum','cacao','barter','cowrie'],
  overview:'The Kula Ring is a ceremonial exchange system practiced across 18 islands in the Milne Bay region of Papua New Guinea, in which participants circulate two types of valuables — soulava (shell necklaces, moving clockwise) and mwali (armbands, moving counter-clockwise) — in an endless circuit. No item is permanently owned; each is held temporarily, enhances the holder\'s prestige, and must be given away to a trading partner. Bronisław Malinowski\'s 1922 study "Argonauts of the Western Pacific" made the Kula Ring the founding case study of economic anthropology and the central challenge to the assumption that exchange is primarily about material advantage.',
  d:{
   overview:'The Kula exchange is not barter and not gift-giving in the Western sense. The valuables — spondylus shell necklaces and armshell bracelets — have no use value and cannot be consumed or converted to other purposes. They circulate perpetually, creating and maintaining social relationships between exchange partners across vast ocean distances. The Kula is a machine for generating social bonds using objects that derive their value from the relationships they encode.',
@@ -3482,7 +3485,7 @@ const ITEMS=[
   globalisation:'Cloth money connected three continents in the 18th century. Indian cotton was woven, sold to European merchants, shipped to West Africa as monetary currency, used to purchase enslaved Africans, who were transported to the Americas to produce sugar and cotton consumed in Europe. This triangular trade had cloth at its monetary centre — a globalisation of money that preceded and enabled globalisation of production.'}},
 
 {id:'rice_money',fp:{innov:5,reach:6,lon:3,stab:5,trade:6,inst:6},lon:130.8,lat:31.6,nm:'Rice Money',sb:'Japan & Southeast Asia · The grain that governed empires',s:700,e:1870,
- conns:['yuan','cashcoins','songmoney','silk_road','yen'],
+ conns:['yuan','cashcoins','songmoney','yen'],
  overview:'Rice served as the primary monetary and fiscal unit in Japan from the Nara period through the Edo period — a span of over 1,000 years — and performed similar functions across much of Southeast Asia. The koku (approximately 180 litres, the rice consumption of one adult for one year) was the unit in which samurai stipends, fiefdom values, and tax obligations were denominated in Tokugawa Japan. A daimyo described as having "one million koku" was not just a wealthy landowner but the holder of a fiscal unit equivalent to one million persons\' annual rice consumption. Rice-based fiscal systems shaped state formation, social structure, and commercial development across maritime Asia.',
  d:{
   overview:'Rice money was not the only currency in rice-based economies — Japan had copper cash, China had silver — but rice was the primary fiscal denomination and in many contexts the primary store of value. Its advantages were its universality (everyone needed it), its measurability (koku were standardised), and its direct relationship to productive capacity. Its disadvantages were perishability, bulk, and the inflation risk of good harvests.',
@@ -3782,7 +3785,7 @@ const ITEMS=[
   globalisation:'The Crusades were a globalising force, integrating European, Byzantine, Islamic, and Central Asian economies into denser exchange networks. The demand for eastern goods stimulated Silk Road commerce and Indian Ocean trade. Crusade finance internationalised Italian banking, creating the first genuinely European-scale credit markets. The economic connections forged in holy war outlasted the wars themselves.'}},
 
 {id:'manorial_economy',fp:{innov:3,reach:6,lon:7,stab:6,trade:4,inst:7},lon:2.3,lat:48.9,nm:'Manorial Economy',sb:'Medieval Europe · Land as capital',s:800,e:1500,
- conns:['wergeld','feudal','continental','grain_bank'],
+ conns:['wergeld','continental','grain_bank'],
  overview:'The manorial economy was the dominant economic system of medieval Western Europe, organising agricultural production around the self-sufficient estate of a lord. Serfs and villeins owed labour services and rent in kind, tying people to land in a system that minimised cash transactions. Lords extracted surplus through direct cultivation of demesne lands, and the manor functioned as both economic unit and local government. The slow monetisation of manorial obligations from the twelfth century onwards was a key driver of Europe\'s commercial revolution.',
  d:{
   overview:'The manorial economy was the dominant economic system of medieval Western Europe, organising agricultural production around the self-sufficient estate of a lord. Serfs and villeins owed labour services and rent in kind, tying people to land in a system that minimised cash transactions. Lords extracted surplus through direct cultivation of demesne lands, and the manor functioned as both economic unit and local government. The slow monetisation of manorial obligations from the twelfth century onwards was a key driver of Europe\'s commercial revolution.',
@@ -3857,7 +3860,7 @@ const ITEMS=[
   globalisation:'The papacy was the first genuinely global fiscal institution, eventually extending its revenue networks to the Americas, Africa, and Asia through missionary orders and colonial churches. Jesuit missions in Japan, China, and the Americas generated revenue while pursuing conversion. The patronato system made Iberian colonial churches effective branches of papal financial administration. The papacy\'s global network was the template — consciously or not — for later multinational fiscal and corporate structures.'}},
 
 {id:'amsterdam_bourse',fp:{innov:9,reach:8,lon:5,stab:5,trade:9,inst:8},lon:4.9,lat:52.4,nm:'Amsterdam Bourse',sb:'Netherlands · The first stock exchange',s:1602,e:1795,
- conns:['wisselbank','guilder','voc','bolsa','venetian'],
+ conns:['wisselbank','guilder','bolsa','venetian'],
  overview:'The Amsterdam Bourse, founded in 1602 alongside the Dutch East India Company (VOC), was the world\'s first modern stock exchange — a permanent venue for continuous trading in company shares, government bonds, and commodity futures. The VOC\'s novel joint-stock structure, which distributed shares to the public and limited liability to investment, required a secondary market where shareholders could exit without dissolving the company. Amsterdam\'s exchange thus invented the secondary securities market, the short sale, the futures contract, and speculative financial culture simultaneously. Its innovations became the template for every subsequent stock exchange.',
  d:{
   overview:'The Amsterdam Bourse, founded in 1602 alongside the Dutch East India Company (VOC), was the world\'s first modern stock exchange — a permanent venue for continuous trading in company shares, government bonds, and commodity futures. The VOC\'s novel joint-stock structure, which distributed shares to the public and limited liability to investment, required a secondary market where shareholders could exit without dissolving the company. Amsterdam\'s exchange thus invented the secondary securities market, the short sale, the futures contract, and speculative financial culture simultaneously. Its innovations became the template for every subsequent stock exchange.',
@@ -4057,7 +4060,7 @@ const ITEMS=[
   globalisation:'The post-Bretton Woods dollar standard was the monetary foundation of the globalisation era (1980–2020). Falling trade barriers, capital account liberalisation, and dollar-denominated finance integrated the world economy to unprecedented depth. The dollar system enabled China\'s export-led growth by absorbing Chinese surpluses as Treasury reserves. Globalisation\'s partial reversal after 2016 — trade barriers, sanctions, supply chain reshoring — is simultaneously a challenge to the dollar system that helped create it.'}},
 
 {id:'microfinance_global',fp:{innov:8,reach:7,lon:5,stab:5,trade:5,inst:7},lon:90.4,lat:23.8,nm:'Microfinance Revolution',sb:'Bangladesh · Credit for the poorest',s:1976,e:2024,
- conns:['microfinance','mpesa','grameen','hawala'],
+ conns:['microfinance','mpesa','hawala'],
  overview:'The microfinance revolution — pioneered by Muhammad Yunus and the Grameen Bank in Bangladesh from 1976 — challenged the foundational assumption that the poor were not creditworthy and would waste small loans. Grameen\'s group-lending model, which substituted social collateral (peer pressure and solidarity) for physical collateral, achieved repayment rates above 95% while lending to women in some of the world\'s poorest communities. Microfinance spread globally to reach over 200 million borrowers, but faced criticism from the 2000s onward for high interest rates, debt traps, and the limits of credit as an anti-poverty tool.',
  d:{
   overview:'The microfinance revolution — pioneered by Muhammad Yunus and the Grameen Bank in Bangladesh from 1976 — challenged the foundational assumption that the poor were not creditworthy and would waste small loans. Grameen\'s group-lending model, which substituted social collateral (peer pressure and solidarity) for physical collateral, achieved repayment rates above 95% while lending to women in some of the world\'s poorest communities. Microfinance spread globally to reach over 200 million borrowers, but faced criticism from the 2000s onward for high interest rates, debt traps, and the limits of credit as an anti-poverty tool.',
@@ -4107,7 +4110,7 @@ const ITEMS=[
   globalisation:'Currency wars are simultaneously a product of and a threat to globalisation. Trade integration creates incentives for competitive devaluation; financial integration makes currency attacks easier to launch. The interwar currency wars contributed to the collapse of globalisation in the 1930s. Whether the post-2008 latent currency war degrades the 1990s–2000s globalisation framework — as trade conflict, capital controls, and dedollarisation rhetoric suggest — is the defining question of contemporary international monetary relations.'}},
 
 {id:'development_finance',fp:{innov:7,reach:8,lon:5,stab:5,trade:7,inst:8},lon:-77.0,lat:38.9,nm:'Development Finance',sb:'Washington · The price of growth',s:1944,e:2024,
- conns:['imf','brettonwoods','microfinance_global','colonial_taxation','marshall_plan'],
+ conns:['imf','brettonwoods','microfinance_global','colonial_taxation'],
  overview:'Development finance — the mobilisation of capital for economic growth in low-income countries — became a major global institutional enterprise after 1944, shaped by the World Bank, regional development banks, bilateral aid, and private investment. Its intellectual history has swung between infrastructure-centred big-push theories, market liberalisation doctrine (the Washington Consensus), and contemporary concerns with climate, institutions, and human capital. Development finance\'s record is contested: Asia\'s transformative growth has been largely self-financed; Africa\'s external-finance-dependent development has been slower and more debt-laden. China\'s Belt and Road Initiative has reshaped the sector from the 2010s.',
  d:{
   overview:'Development finance — the mobilisation of capital for economic growth in low-income countries — became a major global institutional enterprise after 1944, shaped by the World Bank, regional development banks, bilateral aid, and private investment. Its intellectual history has swung between infrastructure-centred big-push theories, market liberalisation doctrine (the Washington Consensus), and contemporary concerns with climate, institutions, and human capital. Development finance\'s record is contested: Asia\'s transformative growth has been largely self-financed; Africa\'s external-finance-dependent development has been slower and more debt-laden. China\'s Belt and Road Initiative has reshaped the sector from the 2010s.',
@@ -4226,13 +4229,12 @@ const TRANSMISSIONS=[
   {from:'mpesa',to:'dollar',concept:'Mobile Money',year:2007,desc:'Kenya\'s M-Pesa mobile payment system, launched in 2007, demonstrated that developing economies could leapfrog traditional banking infrastructure, inspiring fintech revolutions worldwide.'},
   {from:'sterling',to:'dollar',concept:'Reserve Currency',year:1944,desc:'Britain\'s pound sterling had served as the world\'s dominant reserve currency for two centuries before the Bretton Woods agreement of 1944 formally transferred that role to the US dollar.'},
   {from:'silver',to:'lydian',concept:'Commodity Standard',year:-640,desc:'Mesopotamian weighed-silver commerce provided the conceptual foundation for Lydian coinage — the insight that a metal of known purity could serve as guaranteed value shaped every monetary system that followed.'},
-  {from:'grain',to:'silver',concept:'Temple Banking',year:-2500,desc:'Mesopotamian temple grain storage — the world\'s first banking system — evolved from physical grain deposits to silver-denominated accounts, creating the accounting infrastructure that all subsequent banking inherited.'},
   {from:'mpesa',to:'rupee',concept:'Microfinance',year:1976,desc:'Muhammad Yunus\'s Grameen Bank model transformed microlending into a global movement, influencing rural credit systems across South Asia and Africa and merging with mobile money platforms in the 2010s.'},
   {from:'hyperinflation',to:'deutschmark',concept:'Hyperinflation Recovery',year:1923,desc:'Germany\'s catastrophic Weimar hyperinflation, which destroyed the Reichsmark, led directly to the Rentenmark stabilisation and ultimately informed the design of the post-war Deutschmark\'s strict monetary discipline.'},
   {from:'denarius',to:'byzantine',concept:'Debasement',year:301,desc:'The Roman denarius\'s debasement from 90% to under 5% silver helped destroy the western Roman economy, directly motivating the Byzantine solidus\'s deliberate design as an inviolable gold standard for nearly a millennium.'},
   {from:'bitcoin',to:'cbdc',concept:'Digital Ledger',year:2014,desc:'Bitcoin\'s blockchain distributed ledger concept was studied by central banks worldwide, with China, the EU, and the US launching central bank digital currency projects directly inspired by cryptocurrency architecture.'},
   {from:'sterling',to:'rupee',concept:'Colonial Finance',year:1858,desc:'The British East India Company\'s conquest of India imposed sterling-denominated taxation, trade deficits, and debt obligations on the subcontinent, establishing the rupee as a subordinate currency within the British imperial monetary system.'},
-  {from:'spanish',to:'dollar',concept:'Trade Currency Adoption',year:1785,desc:'The Spanish piece of eight was so dominant in American colonial commerce that the new US dollar was explicitly pegged to it in the 1792 Coinage Act — the word "dollar" and the "$" symbol both derive from the Spanish real.'},
+  {from:'spanish',to:'dollar',concept:'Trade Currency Adoption',year:1785,desc:'The Spanish piece of eight was so dominant in American colonial commerce that the new US dollar was explicitly pegged to it in the 1792 Coinage Act — the word "dollar" and the "$" symbol both derive from the Spanish real.'}
 ];
 
 let year=-6000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
@@ -4243,18 +4245,18 @@ let whatifItem=null,heritageRegion=null,herstory=false;
 // HERITAGE REGIONS
 // ══════════════════════════════════════════════════════
 const HERITAGE_REGIONS={
-  'Mesopotamia & Persia':['silver','lydian','dinar','silkroad','persian','grain','templars'],
+  'Mesopotamia & Persia':['silver','lydian','dinar','silkroad','persian','templars'],
   'East Asia':['cashcoins','songmoney','yuan','yen','renminbi','mongol'],
   'South & Southeast Asia':['rupee','dinar','silkroad','mughal','hawala','mpesa'],
   'Mediterranean & Rome':['athenian','denarius','byzantine','salt','venetian','medici'],
   'Western Europe':['florin','guilder','sterling','franc','thaler','tally','wisselbank','southsea','bank_of_england'],
-  'The Americas':['dollar','continental','peso','azteccacao','wampum','slavetrade'],
-  'Sub-Saharan Africa':['cowrie','cfa','rand','naira','manilla','mpesa','slavetrade'],
+  'The Americas':['dollar','continental','wampum','slavetrade'],
+  'Sub-Saharan Africa':['cowrie','cfa','rand','manilla','mpesa','slavetrade'],
   'East Africa & Arabia':['dinar','cowrie','hawala','rupee','mpesa'],
   'China & East Asia':['cashcoins','songmoney','yuan','renminbi','silkroad','cacao'],
   'Central Asia':['silkroad','dinar','mongol','silver','persian'],
-  'Scandinavia':['viking','tally','sterling','hanseatic'],
-  'Russia & Eurasia':['rouble','soviet','silkroad','mongol','viking'],
+  'Scandinavia':['tally','sterling','hanseatic'],
+  'Russia & Eurasia':['rouble','silkroad','mongol'],
 };
 
 const HERITAGE_REASONS={
@@ -4775,6 +4777,7 @@ function renderDrawer(){
   if(mode==='compare'){renderCompareDrawer();return;}
   if(mode==='whatif'){renderWhatIfDrawer();return;}
   if(mode==='heritage'){renderHeritageDrawer();return;}
+  if(herstory){renderHerstoryDrawer();return;}
   if(herstory&&sel){renderWomenDrawer();return;}
   const dc=document.getElementById('drawer-content');
   if(!sel){
@@ -5158,6 +5161,60 @@ function _syncHerstoryBadge(){
   const badge=document.getElementById('herstory-badge');
   if(badge)badge.textContent=herstory?'ON':'';
 }
+function renderHerstoryDrawer(){
+  const dc=document.getElementById('drawer-content');
+  const dt=document.getElementById('drawer-top');
+  if(dt)dt.innerHTML='';
+  if(!dc)return;
+  if(!sel){
+    dc.innerHTML=`
+    <div class="hs-panel-hdr">\u2640 Herstory</div>
+    <div class="hs-panel-sub">
+      Tracing the women who shaped every entry in this atlas. Their contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
+    </div>
+    <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
+      Tap any item on the map to discover the women who shaped it.
+    </div>
+    <div style="display:grid;gap:6px;">
+    ${Object.keys(WOMEN).slice(0,8).map(id=>{
+      const c=ITEMS.find(x=>x&&x.id===id);if(!c)return'';
+      const w=WOMEN[id];
+      return\`<button onclick="navigateToItem('${id}')"
+        style="background:none;border:1px solid rgba(192,96,160,.2);border-radius:3px;padding:8px 10px;cursor:pointer;text-align:left;transition:border-color .15s"
+        onmouseover="this.style.borderColor='rgba(192,96,160,.5)'" onmouseout="this.style.borderColor='rgba(192,96,160,.2)'">
+        <div style="font-family:'Cinzel',serif;font-size:9.5px;color:#c060a0;margin-bottom:2px">${c.nm}</div>
+        <div style="font-size:11px;color:var(--txt3);font-style:italic">${w[0].nm} \u00b7 ${w[0].role}</div>
+      </button>\`;
+    }).join('')}
+    </div>`;
+    return;
+  }
+  const women=WOMEN[sel.id];
+  if(!women||!women.length){
+    dc.innerHTML=`
+    <div class="hs-panel-hdr">\u2640 Herstory</div>
+    <div style="font-size:13px;line-height:1.8;color:var(--txt3);font-style:italic;padding:12px 0">
+      No Herstory entries documented for ${sel.nm}. Tap another item on the map.
+    </div>`;
+    return;
+  }
+  const civHdr=`
+  <div style="margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(192,96,160,.25)">
+    <div class="hs-panel-hdr">\u2640 Herstory \u00b7 ${sel.nm}</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3)">${fmt(sel.s)} \u2013 ${fmt(sel.e)} \u00b7 ${sel.sb}</div>
+  </div>`;
+  const womenHTML=women.map(w=>`
+  <div style="margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid rgba(192,96,160,.15)">
+    <div class="hs-woman-nm">${w.nm}</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--txt3);margin-bottom:6px">${w.role}${w.yr?` \u00b7 ${fmt(w.yr)}`:''}
+    </div>
+    <div style="font-size:13px;line-height:1.78;color:var(--txt2)">${w.desc}</div>
+  </div>`).join('');
+  dc.innerHTML=civHdr+womenHTML;
+  const panel=document.getElementById('info-panel');
+  if(panel)setTimeout(()=>panel.scrollTop=0,0);
+}
+
 function toggleHerstory(){
   herstory=!herstory;
   document.body.classList.toggle('herstory',herstory);

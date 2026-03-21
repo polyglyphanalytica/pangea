@@ -10,9 +10,9 @@
       "live": false,
       "map": "world",
       "section": "III",
-      "validated_sha": "fba452a1b9aeb61343bd221dc68546df27778b4a",
-      "validated_short": "fba452a",
-      "validated_at": "2026-03-21T11:21:04.133029Z",
+      "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
+      "validated_short": "0e2be19",
+      "validated_at": "2026-03-21T15:55:09.231081Z",
       "validated_items": 100,
       "validated_lenses": 30
     },
@@ -25,7 +25,7 @@
       "section": "V",
       "validated_sha": "8f176c990fbd22776fbcc85e340f203a46b0be71",
       "validated_short": "8f176c9",
-      "validated_at": "2026-03-21T08:17:00.212616Z",
+      "validated_at": "2026-03-21T15:55:09.851509Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -36,9 +36,9 @@
       "live": true,
       "map": "world",
       "section": "IV",
-      "validated_sha": "f8c000f5a8f82e24bd08bf6faeddf26fd3f8b8c3",
-      "validated_short": "f8c000f",
-      "validated_at": "2026-03-21T08:17:00.506664Z",
+      "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
+      "validated_short": "0e2be19",
+      "validated_at": "2026-03-21T15:55:10.485358Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -49,9 +49,9 @@
       "live": true,
       "map": "world",
       "section": "VI",
-      "validated_sha": "38ebe264c2602b50e439b36c71c9226531012db7",
-      "validated_short": "38ebe26",
-      "validated_at": "2026-03-21T08:17:00.834324Z",
+      "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
+      "validated_short": "0e2be19",
+      "validated_at": "2026-03-21T15:55:11.298813Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -62,9 +62,9 @@
       "live": true,
       "map": "world",
       "section": "I",
-      "validated_sha": "f8c000f5a8f82e24bd08bf6faeddf26fd3f8b8c3",
-      "validated_short": "f8c000f",
-      "validated_at": "2026-03-21T08:17:01.083744Z",
+      "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
+      "validated_short": "0e2be19",
+      "validated_at": "2026-03-21T15:55:12.656919Z",
       "validated_items": 105,
       "validated_lenses": 20
     },
@@ -75,9 +75,9 @@
       "live": true,
       "map": "world",
       "section": "VII",
-      "validated_sha": "2b0fe4b232f54010b8f89f6e7e69bc90b1a3ef3b",
-      "validated_short": "2b0fe4b",
-      "validated_at": "2026-03-21T08:17:01.539787Z",
+      "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
+      "validated_short": "0e2be19",
+      "validated_at": "2026-03-21T15:55:12.128692Z",
       "validated_items": 141,
       "validated_lenses": 20
     },
@@ -89,9 +89,9 @@
       "map": "sky",
       "section": "I",
       "note": "Complete. Needs GO_LIVE only \u2014 homepage card still forthcoming.",
-      "validated_sha": "bb4f0190ee7dc4aeb32bcc2718db29701172f0dd",
-      "validated_short": "bb4f019",
-      "validated_at": "2026-03-21T08:17:01.786054Z",
+      "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
+      "validated_short": "0e2be19",
+      "validated_at": "2026-03-21T15:55:13.155419Z",
       "validated_items": 112,
       "validated_lenses": 20
     },
@@ -102,9 +102,9 @@
       "live": true,
       "map": "world",
       "section": "IX",
-      "validated_sha": "433c49cb84dd7edb420681cf53e1c75afb79c4ae",
-      "validated_short": "433c49c",
-      "validated_at": "2026-03-21T08:17:02.058603Z",
+      "validated_sha": "b4d506126d11e9522148bc193ad31008f9c89ffb",
+      "validated_short": "b4d5061",
+      "validated_at": "2026-03-21T15:55:14.248937Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -115,9 +115,9 @@
       "live": true,
       "map": "world",
       "section": "V",
-      "validated_sha": "8f176c990fbd22776fbcc85e340f203a46b0be71",
-      "validated_short": "8f176c9",
-      "validated_at": "2026-03-21T08:17:02.332378Z",
+      "validated_sha": "b4d506126d11e9522148bc193ad31008f9c89ffb",
+      "validated_short": "b4d5061",
+      "validated_at": "2026-03-21T15:55:14.834964Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -130,7 +130,7 @@
       "section": "III",
       "validated_sha": "758dd5f44f10e849b088339ee8539be613269702",
       "validated_short": "758dd5f",
-      "validated_at": "2026-03-21T08:17:02.623818Z",
+      "validated_at": "2026-03-21T15:55:15.491244Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -140,11 +140,16 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "VII"
+      "section": "VII",
+      "validated_sha": "ce79eab2e2226e3d10e98575bd6e0ecef5917d75",
+      "validated_short": "ce79eab",
+      "validated_at": "2026-03-21T15:55:16.110720Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "clima": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "1B",
+      "items": 100,
       "target": 100,
       "live": false,
       "map": "world",
@@ -628,9 +633,9 @@
       "live": true,
       "map": "world",
       "section": "VII",
-      "validated_sha": "eb4f135e103b2fac0df2c87d755d4ee3c0e930cd",
-      "validated_short": "eb4f135",
-      "validated_at": "2026-03-21T15:19:18.365228Z",
+      "validated_sha": "0e2be19650064292fc2f81970dd85667baaa8d71",
+      "validated_short": "0e2be19",
+      "validated_at": "2026-03-21T15:55:23.555310Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -1390,6 +1395,12 @@
     {
       "atlas": "cursus",
       "phase_done": "GO_LIVE",
+      "items": 100
+    },
+    {
+      "atlas": "clima",
+      "phase_done": "1A",
+      "phase_next": "1B",
       "items": 100
     }
   ]
