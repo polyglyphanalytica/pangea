@@ -543,7 +543,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </head>
 <body>
 
-<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to civilization panel</button>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to trade route panel</button>
 <header class="hdr" role="banner">
   <div class="hdr-left">
     <span class="logo-t">VIA</span>
@@ -556,7 +556,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
   <div class="hdr-right">
     <div class="cnt-disp">
       <span class="cnt-n" id="cnt-n">2</span>
-      civilizations active
+      routes known
     </div>
     <!-- Burger menu -->
     <div class="burger-wrap" id="burger-wrap">
@@ -586,7 +586,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
           <span>⟁</span><span>What If</span>
         </button>
         <button class="burger-item burger-mode" id="btn-heritage" onclick="setMode('heritage');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⌂</span><span>Heritage</span>
+          <span>⌂</span><span>Trade Regions</span>
         </button>
         <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" role="menuitem">
           <span style="font-size:15px">♀</span>
@@ -612,7 +612,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 <div class="thread-panel" id="thread-panel" role="complementary" aria-label="Concept transmissions">
   <div class="thread-panel-inner">
     <div class="thread-panel-bar">
-      <span class="thread-panel-title" id="thread-panel-title">Concept Threads</span>
+      <span class="thread-panel-title" id="thread-panel-title">Commodity Chains</span>
       <div style="display:flex;align-items:center;gap:12px">
         <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">← All Threads</button>
         <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">✕</button>
@@ -628,7 +628,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 <div class="main">
   <div class="map-tl-col">
   <div class="map-c">
-    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with civilization markers" style="cursor:pointer">
+    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with trade route markers" style="cursor:pointer">
       <defs>
 
         <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
@@ -665,20 +665,20 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
       <g id="thread-layer"></g>
       <!-- Selected-item label only -->
       <g id="label-layer" pointer-events="none"></g>
-      <!-- Civilization markers -->
+      <!-- Trade route markers -->
       <g id="mark-layer"></g>
       <!-- Hover tooltip label (sits above markers) -->
       <g id="hover-label-layer" pointer-events="none"></g>
     </svg>
     <div class="hint" id="map-hint">
-      <span id="map-hint-text">TAP A CIVILIZATION  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
+      <span id="map-hint-text">TAP A ROUTE  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
       <button id="map-reset-btn" onclick="resetMapZoom()" style="display:none;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--amber-b);background:none;border:1px solid var(--bdr);padding:2px 8px;border-radius:10px;cursor:pointer;margin-left:10px;white-space:nowrap">⊙ RESET ZOOM</button>
     </div>
   </div>
   <div class="tl-wrap" role="navigation" aria-label="Timeline">
-  <svg id="density-bar" aria-label="Civilization density over time"></svg>
+  <svg id="density-bar" aria-label="Trade route density over time"></svg>
   <div class="tl-lbls">
-    <span class="tl-lbl">65,000 BCE</span>
+    <span class="tl-lbl">3000 BCE</span>
     <span class="tl-lbl">3000 BCE</span>
     <span class="tl-lbl">2000 BCE</span>
     <span class="tl-lbl">1000 BCE</span>
@@ -694,7 +694,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </div>
   </div><!-- /map-tl-col -->
 
-  <div class="info-panel" id="info-panel" role="complementary" aria-label="Civilization details">
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Trade route details">
     <div class="drawer-handle" id="drawer-handle" aria-label="Drag to resize"></div>
     <div id="drawer-top"></div>
     <div id="drawer-content"></div>
@@ -751,7 +751,7 @@ const ERAS=[
   {y:2000,n:'DIGITAL AGE'},
 ];
 
-const CIVS=[
+const ITEMS=[
   {id:'mesopotamia',fp:{mil:8,com:9,art:7,sci:9,reach:6,lon:10},music:{scale:'lydian',root:58,tempo:60,timbre:'pluck',rhythm:[1,0,0,1,0,0,1,0],reverb:.4,artifact:'Bull-headed lyre, Royal Cemetery of Ur (c.2500 BCE); Hurrian Hymn No.6 (c.1400 BCE) — oldest notated melody on record'},lon:44,lat:33,nm:'Mesopotamia',sb:'Tigris-Euphrates Civilizations',x:585,y:192,s:-4000,e:500,
    conns:['egypt','persia','india'],
    overview:'The world\'s first cities rose in the alluvial plains between the Tigris and Euphrates around 4000 BCE — not from genius alone, but from the ecological pressure of irrigating dry land at scale, which demanded record-keeping, law, and bureaucracy. Sumer, Akkad, Babylon, and Assyria succeeded one another as dominant powers over three millennia, each collapse absorbed by the next dynasty\'s rise. This civilisation gave humanity writing, the wheel, the 60-minute hour, the first law code, and the oldest story ever told — Gilgamesh confronting death and finding no answer but the fact of friendship. Its rivers are polluted and its ruins half-buried in sand, but the institutional DNA of every government on Earth descends from the clay tablets of its scribes.',
@@ -5128,7 +5128,7 @@ function toggleLensDD(){
 }
 
 function lensLabel(){
-  if(!lenses.size)return'Civilization Arc';
+  if(!lenses.size)return'Trade Route Arc';
   const names=[...lenses].map(id=>{const L=LENSES.find(l=>l.id===id);return L?L.lbl:'';});
   if(names.length===1)return names[0];
   if(names.length<=3)return names.join(' · ');
@@ -5164,7 +5164,7 @@ function renderLensDD(){
       <div class="lens-row${arcOn?' on':''}" onclick="toggleLens('__arc__')">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Trade Route Arc</span>
       </div>
       <div class="lens-row-sep"></div>
       ${rows}
@@ -5200,15 +5200,15 @@ function toggleLens(id){
       }).join('');
     }
     const col=lenses.size?getLensCol():OVERVIEW_COL;
-    const actIds=new Set(CIVS.filter(x=>active(x)).map(x=>x.id));
+    const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
     const connHTML=c.conns.length?`<div class="conn-hdr" id="conn-hdr">Historical connections</div>`+c.conns.map(cid=>{
-      const o=CIVS.find(x=>x&&x.id===cid);if(!o)return'';
+      const o=ITEMS.find(x=>x&&x.id===cid);if(!o)return'';
       const isA=actIds.has(cid);
       const badge=isA?'ACTIVE':'→ JUMP';
       const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
       return`<button class="conn-item" tabindex="0"
           aria-label="${tip}"
-          onclick="navigateToCiv('${cid}')"
+          onclick="navigateToItem('${cid}')"
           style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
         <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
         <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -5253,19 +5253,19 @@ function civPt(c){
 }
 
 function renderMap(){
-  const ids=new Set(CIVS.filter(c=>active(c)).map(c=>c.id));
+  const ids=new Set(ITEMS.filter(c=>active(c)).map(c=>c.id));
   window.ids_cache=ids;
   const col=lenses.size?getLensCol():OVERVIEW_COL;
 
   const drawn=new Set();
   let cl='';
-  CIVS.forEach(c=>{
+  ITEMS.forEach(c=>{
     if(!ids.has(c.id))return;
     c.conns.forEach(id=>{
       const k=[c.id,id].sort().join('-');
       if(drawn.has(k)||!ids.has(id))return;
       drawn.add(k);
-      const o=CIVS.find(x=>x&&x.id===id);
+      const o=ITEMS.find(x=>x&&x.id===id);
       if(!o)return;
       const [cx,cy]=civPt(c),[ox,oy]=civPt(o);
       const mx=(cx+ox)/2,my=Math.min(cy,oy)-28;
@@ -5276,7 +5276,7 @@ function renderMap(){
 
   // TWO-PASS: rings first (all), then dots on top (all) — prevents hit area overlap
   let rings='', dots='', ll='';
-  const civData=CIVS.map(c=>{
+  const civData=ITEMS.map(c=>{
     const on=ids.has(c.id);
     const isSel=sel&&sel.id===c.id;
     const heritageIds=mode==='heritage'&&heritageRegion?new Set(HERITAGE_REGIONS[heritageRegion]||[]):null;
@@ -5317,7 +5317,7 @@ function renderMap(){
       const pulseMax=Math.max(8, 16/zr);
       dots+=`<g role="button" tabindex="0" data-civ="${c.id}"
           aria-label="${c.nm} — click to explore"
-          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();civClick('${c.id}')}"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();itemClick('${c.id}')}"
           opacity="${op}" pointer-events="none">
           <circle cx="${cx}" cy="${cy}" r="${dotR.toFixed(1)}"
             fill="${mcol}" filter="url(#glow${isSel?'2':''})"
@@ -5338,8 +5338,8 @@ function renderMap(){
   document.getElementById('label-layer').innerHTML=ll;
 }
 
-function navigateToCiv(id){
-  const c=CIVS.find(x=>x&&x.id===id);
+function navigateToItem(id){
+  const c=ITEMS.find(x=>x&&x.id===id);
   if(!c)return;
   if(mode==='whatif'){
     setWhatIf(id);
@@ -5364,9 +5364,9 @@ function navigateToCiv(id){
   document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
 }
 
-function civClick(id){
+function itemClick(id){
   _renderHoverLabel(null);
-  navigateToCiv(id);
+  navigateToItem(id);
 }
 
 
@@ -5396,15 +5396,15 @@ function renderDrawerContent(){
     }).join('');
   }
   const col=lenses.size?getLensCol():OVERVIEW_COL;
-  const actIds=new Set(CIVS.filter(x=>active(x)).map(x=>x.id));
+  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
   const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
-    const o=CIVS.find(x=>x&&x.id===id);if(!o)return'';
+    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
     const isA=actIds.has(id);
     const badge=isA?'ACTIVE':'→ JUMP';
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -5429,72 +5429,51 @@ function renderDrawer(){
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Trade Route Atlas</div>
 
       <div style="font-size:13.5px;line-height:1.85;color:var(--txt2);margin-bottom:18px">
-        100 civilizations. 65,000 years. Every idea, technology, religion, and political system that made the modern world — mapped, connected, and explorable. From Aboriginal Australia's 65,000-year culture to the present day, rendered on a real geographic projection and navigable across a continuous timeline.
+        100 trade routes. 5,000 years. Every path that carried goods, ideas, and people across the world — mapped, connected, and explorable. From the earliest Mesopotamian trade networks to modern container shipping, rendered on a real geographic projection and navigable across a continuous timeline.
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">The Map</div>
       <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-        Drag the <span style="color:var(--amber-b)">timeline</span> at the bottom across 65,000 years — civilizations emerge and collapse in real time. <span style="color:#e8251a">Red markers</span> show active civilizations. Tap any to open its full profile, play its musical signature, and explore its connections.
+        Drag the <span style="color:var(--amber-b)">timeline</span> at the bottom across 5,000 years — trade routes emerge and fade in real time. Gold markers show active routes. Tap any to open its full profile and explore its connections.
       </div>
 
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">21 Lenses</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">20 Lenses</div>
       <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-        Apply a <span style="color:var(--amber-b)">lens</span> to read all of history through a single idea — Economy, Military, Gender, Slavery, Collapse, Trade Routes, Philosophy, Science, and 13 more. Compare any two civilizations side by side under the same lens.
+        Apply a <span style="color:var(--amber-b)">lens</span> to read all of trade history through a single dimension — Commodities, Infrastructure, Maritime Technology, Geopolitics, Finance, and 15 more. Compare any two trade routes side by side under the same lens.
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">5 Modes</div>
       <div style="font-size:12.5px;line-height:1.8;color:var(--txt2);margin-bottom:18px">
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟳ THREADS</span> — Watch ideas travel across civilizations. Animated gold arrows trace the path of Zero, Gunpowder, Buddhism, Coffee, and 16 more concepts across centuries.</div>
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⊞ COMPARE</span> — Tap two civilizations to read them side by side under any lens.</div>
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟁ WHAT IF</span> — Remove a civilization from history. Red arrows on the map show every transmission that would have been lost.</div>
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⌂ HERITAGE</span> — Select your regional background to see your civilizational ancestry highlighted on the map in blue.</div>
-        <div><span style="color:#c060a0;font-family:'Cinzel',serif;font-size:9px">♀ HERSTORY</span> — A mirror dimension tracing the same 65,000 years through the women who shaped every civilisation — rulers, philosophers, warriors, and knowledge-keepers whose contributions history forgot.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟳ COMMODITY CHAINS</span> — Watch goods travel across trade routes. Animated gold arrows trace the path of silk, spice, gold, and 16 more commodities across centuries.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⊞ COMPARE</span> — Tap two trade routes to read them side by side under any lens.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟁ WHAT IF</span> — Remove a trade route from history. Red arrows on the map show every commodity transmission that would have been lost.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⌂ TRADE REGIONS</span> — Select a trade region to see every route in that network highlighted on the map in blue.</div>
+        <div><span style="color:#c060a0;font-family:'Cinzel',serif;font-size:9px">♀ HERSTORY</span> — Tracing the women who shaped every trade route — merchants, financiers, textile producers, and entrepreneurs whose contributions were minimised or forgotten.</div>
       </div>
 
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Each civilization profile includes</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Each trade route profile includes</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:18px;font-size:11.5px">
-        ${[['◈','30 interpretive lenses'],['⟳','Concept transmission chains'],['♪','Synthesized musical theme'],['◎','Civilizational fingerprint chart'],['⊞','Side-by-side comparison'],['⬡','Diplomatic archive'],['↗','Contemporary civilizations'],['⌂','Heritage ancestry'],['♀','Women in Herstory mode'],['◉','What-If impact analysis']].map(([ico,lbl])=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--bdr2);border-radius:2px;color:var(--txt2)"><span style="color:var(--amber-b);font-size:13px">${ico}</span>${lbl}</div>`).join('')}
+        ${[['◈','20 interpretive lenses'],['⟳','Commodity transmission chains'],['◎','Trade route fingerprint chart'],['⊞','Side-by-side comparison'],['↗','Connected routes'],['⌂','Trade region heritage'],['♀','Women in Herstory mode'],['◉','What-If impact analysis'],['⬡','Infrastructure overview'],['🚢','Maritime & overland routes']].map(([ico,lbl])=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--bdr2);border-radius:2px;color:var(--txt2)"><span style="color:var(--amber-b);font-size:13px">${ico}</span>${lbl}</div>`).join('')}
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Pivotal moments to try</div>
       ${(()=>{
         const ALL=[
-          [-65000,'Aboriginal Australia begins','The oldest continuous culture on earth — 65,000 unbroken years'],
-          [-10000,'The Agricultural Revolution','Humans stop following herds and start growing food — nothing is the same again'],
-          [-3500,'Writing is invented','The Sumerians of Mesopotamia begin storing memory outside the human mind'],
-          [-3100,'Egypt unified under one pharaoh','Upper and Lower Egypt merge — one of the longest-lasting states in history begins'],
-          [-2600,'Indus Valley at its peak','Mohenjo-daro and Harappa are among the world\'s largest cities, with running water'],
-          [-2560,'The Great Pyramid completed','The only surviving Ancient Wonder — built with a precision that still puzzles engineers'],
-          [-1800,'The Code of Hammurabi','The most complete ancient law code — 282 laws carved in stone for all to read'],
-          [-1350,'Akhenaten\'s monotheism','Egypt\'s pharaoh erases all gods but one — the world\'s first state monotheism, then erased itself'],
-          [-1200,'Bronze Age Collapse','Five great civilizations fail within decades of each other — the ancient world\'s extinction event'],
-          [-800,'Homer composes the Iliad','The oral tradition crystallises into the text that will define Western storytelling for 3,000 years'],
-          [-776,'The first Olympic Games','Greeks pause their wars every four years to compete — sport as diplomacy'],
-          [-604,'Laozi writes the Tao Te Ching','Eighty-one short verses that become the foundation of Taoism and influence billions'],
-          [-563,'The Buddha is born','Siddhartha Gautama\'s life and teachings will reshape Asia and eventually the world'],
-          [-551,'Confucius is born','His ideas on duty, family, and governance will shape Chinese civilization for 2,500 years'],
-          [-500,'The Axial Age','Confucius, Buddha, Socrates, and Isaiah are alive simultaneously — humanity\'s great leap'],
-          [-490,'Battle of Marathon','A smaller Athenian force defeats the Persian invasion — democracy survives its first test'],
-          [-334,'Alexander begins his conquest','A 22-year-old Macedonian sets out to conquer the known world — and nearly does'],
-          [-221,'China unified under Qin','The Warring States end; the Great Wall begins; the template for Chinese empire is set'],
-          [-44,'Julius Caesar assassinated','The Roman Republic dies with him — the age of emperors begins'],
-          [33,'Crucifixion of Jesus','A wandering teacher\'s execution becomes the founding moment of Western civilization'],
-          [105,'Paper invented in China','Cai Lun\'s invention will eventually carry every idea in the world'],
-          [306,'Constantine converts to Christianity','The Roman Emperor\'s conversion turns a persecuted sect into the world\'s dominant religion'],
-          [476,'Fall of Western Rome','The empire that defined Europe for 500 years collapses — the medieval world begins'],
-          [610,'Muhammad receives first revelation','In a cave near Mecca, a religion begins that will reshape a third of the world'],
-          [800,'Charlemagne crowned emperor','The Frankish king unites Western Europe — the idea of Europe as a political entity is born'],
-          [1000,'Peak civilizational diversity','More simultaneous civilizations than any other moment in history'],
-          [1066,'Battle of Hastings','The Norman conquest reshapes England — and through it, the English language and common law'],
-          [1206,'Mongol Empire begins','Genghis Khan unites the steppe — within 70 years his descendants will rule from Korea to Poland'],
-          [1347,'Black Death arrives in Europe','The Mongol trade network carries plague from Central Asia — one third of Europe will die'],
-          [1440,'Gutenberg\'s printing press','The first mass-produced book — the information revolution that makes the Reformation possible'],
-          [1492,'Columbus reaches the Americas','Two worlds collide — the beginning of global trade, colonialism, and the modern world'],
-          [1543,'Copernicus publishes','The Earth is not the centre of the universe — science begins its long war with authority'],
-          [1648,'Peace of Westphalia','The Thirty Years\' War ends — the modern system of sovereign nation-states is born'],
-          [1789,'The French Revolution begins','Liberty, Equality, Fraternity — the ideas that will topple monarchies across two centuries'],
-          [1848,'Year of Revolutions','Nineteen countries convulse simultaneously — the modern left-right political divide crystallises'],
-          [1905,'Einstein\'s annus mirabilis','Special relativity, the photoelectric effect, Brownian motion — physics transformed in one year'],
+          [-3000,'Mesopotamian trade networks emerge','The first long-distance trade connecting the Tigris-Euphrates with the Indus Valley'],
+          [-2500,'Egyptian Red Sea trade begins','Pharaonic expeditions to Punt for incense, gold, and exotic goods'],
+          [-1500,'Bronze Age maritime trade peaks','Uluburun ship carries copper, tin, glass, and luxury goods across the Mediterranean'],
+          [-500,'Persian Royal Road opens','2,700 km from Susa to Sardis — a relay system carrying messages in nine days'],
+          [-200,'Silk Road trade begins','Chinese silk reaches Rome through a chain of Central Asian middlemen'],
+          [100,'Indian Ocean monsoon trade flourishes','Seasonal winds carry Roman gold to India and Indian spices to Alexandria'],
+          [700,'Trans-Saharan gold trade peaks','Camel caravans carry salt south and gold north — making West African empires rich'],
+          [1000,'Song Dynasty maritime revolution','Chinese junks dominate Asian trade with the compass, stern rudder, and watertight compartments'],
+          [1405,'Zheng He\'s treasure fleets sail','The largest wooden ships ever built carry Chinese diplomacy across the Indian Ocean'],
+          [1492,'Columbus crosses the Atlantic','The Columbian Exchange begins — the most consequential trade connection in history'],
+          [1600,'VOC founded','The Dutch East India Company becomes the world\'s first multinational corporation'],
+          [1869,'Suez Canal opens','The shortcut between Europe and Asia reshapes global shipping forever'],
+          [1956,'First container ship sails','The Ideal X transforms global trade — containerization cuts shipping costs by 95%'],
+          [1994,'NAFTA takes effect','Free trade reshapes North American economies and global supply chains'],
+          [2013,'Belt and Road Initiative announced','China\'s modern Silk Road project reshapes Eurasian trade infrastructure'],
         ];
         const shuffled=[...ALL].sort(()=>Math.random()-.5);
         return shuffled.slice(0,5).map(([yr,title,desc])=>`
@@ -5547,15 +5526,15 @@ function renderDrawer(){
   }
 
   const col=lenses.size?getLensCol():OVERVIEW_COL;
-  const actIds=new Set(CIVS.filter(x=>active(x)).map(x=>x.id));
+  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
   const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
-    const o=CIVS.find(x=>x&&x.id===id);if(!o)return'';
+    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
     const isA=actIds.has(id);
     const badge=isA?'ACTIVE':'→ JUMP';
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -5583,7 +5562,7 @@ function setYear(y){
   tlEl.setAttribute('aria-valuetext',fmt(year));
   document.getElementById('era-y').textContent=fmt(year);
   document.getElementById('era-n').textContent=eraName(year);
-  document.getElementById('cnt-n').textContent=CIVS.filter(c=>active(c)).length;
+  document.getElementById('cnt-n').textContent=ITEMS.filter(c=>active(c)).length;
   renderMap();
   if(sel&&!active(sel))closeInfo();
   else renderDrawer();
@@ -5713,14 +5692,14 @@ function renderThreadConceptList(){
     list.style.display='block';
     if(steps){steps.style.display='none';steps.innerHTML='';}
     if(backBtn)backBtn.style.display='none';
-    if(title)title.textContent='Concept Threads';
+    if(title)title.textContent='Commodity Chains';
     const concepts=getUniqueConcepts();
     list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
       const chain=getChain(c);
       return`<button class="thread-concept-btn" onclick="activateThread('${c.replace(/'/g,"\\'")}')" >
         <span class="thread-concept-name">${c}</span>
         <span class="thread-concept-chain">${chain.map(t=>{
-          const fc=CIVS.find(x=>x&&x.id===t.from),tc=CIVS.find(x=>x&&x.id===t.to);
+          const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
           return(fc?fc.nm:'?')+' → '+(tc?tc.nm:'?');
         }).join('<br>')}</span>
       </button>`;
@@ -5759,7 +5738,7 @@ function renderThreadSteps(concept){
     <div class="thread-chain-line"></div>
   </div>`;
   const items=chain.map(t=>{
-    const fc=CIVS.find(x=>x&&x.id===t.from),tc=CIVS.find(x=>x&&x.id===t.to);
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     return`<div class="thread-step">
       <div class="thread-step-yr">${fmt(t.year)}</div>
       <div class="thread-step-civ">${fc?fc.nm:'?'} → ${tc?tc.nm:'?'}</div>
@@ -5783,7 +5762,7 @@ function renderThreadPaths(concept){
   let out='<defs><marker id="tarrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f0d060" opacity=".9"/></marker></defs>';
   const drawn=[];
   chain.forEach(t=>{
-    const fc=CIVS.find(x=>x&&x.id===t.from),tc=CIVS.find(x=>x&&x.id===t.to);
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
     const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-44;
@@ -5819,7 +5798,7 @@ function renderThreadPaths(concept){
 
 // ── COMPARE MODE ──
 function addToCompare(id){
-  const c=CIVS.find(x=>x&&x.id===id);
+  const c=ITEMS.find(x=>x&&x.id===id);
   if(!c)return;
   if(!sel){sel=c;mode='compare';}
   else{sel2=c;mode='compare';}
@@ -5835,13 +5814,13 @@ function renderCompareDrawer(){
   if(!sel&&!sel2){
     dc.innerHTML=`<div class="compare-prompt">
       <div>⊞</div>
-      <div>Select two civilizations on the map to compare them side by side</div>
+      <div>Select two trade routes on the map to compare them side by side</div>
     </div>`;
     return;
   }
   const renderCol=(c,slot)=>{
     if(!c)return`<div class="compare-col">
-      <div class="compare-prompt" style="height:200px"><div>Click a civilization on the map to add it here</div></div>
+      <div class="compare-prompt" style="height:200px"><div>Click a trade route on the map to add it here</div></div>
     </div>`;
     const body=lenses.size?[...lenses].map(lid=>{
       const L=LENSES.find(l=>l.id===lid);
@@ -5894,7 +5873,7 @@ function renderLensDDInline(){
       <div class="lens-row${arcOn?' on':''}" onclick="lenses.clear();lensDD=false;if(mode==='compare')renderCompareDrawer();else renderDrawerContent();">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Trade Route Arc</span>
       </div>
       <div class="lens-row-sep"></div>${rows}
       <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done ▴</div>
@@ -5925,8 +5904,8 @@ function decodeState(){
       year=y;
       document.getElementById('tl').value=y;
     }
-    if(params.get('c')){sel=CIVS.find(x=>x&&x.id===params.get('c'))||null;}
-    if(params.get('c2')){sel2=CIVS.find(x=>x&&x.id===params.get('c2'))||null;}
+    if(params.get('c')){sel=ITEMS.find(x=>x&&x.id===params.get('c'))||null;}
+    if(params.get('c2')){sel2=ITEMS.find(x=>x&&x.id===params.get('c2'))||null;}
     if(params.get('l')){params.get('l').split(',').forEach(id=>lenses.add(id));}
     if(params.get('m'))mode=params.get('m');
     if(params.get('t'))activeThread=params.get('t');
@@ -5950,8 +5929,8 @@ function shareState(){
   const civName=sel?sel.nm:null;
   const shareTitle='Via — The Trade Route Atlas';
   const shareText=civName
-    ? `Explore ${civName} on Civilitas — 85 civilizations, 65,000 years of human history`
-    : 'Civilitas — 85 civilizations, 65,000 years of human history, all in one map';
+    ? `Explore ${civName} on Via — 100 trade routes, 5,000 years of global commerce`
+    : 'Via — 100 trade routes, 5,000 years of global commerce, all in one map';
 
   // Use native share sheet on devices that support it (iOS, Android, modern desktop)
   if(navigator.share){
@@ -6313,7 +6292,7 @@ function renderFingerprint(c){
     svg+=`<text x="${lx.toFixed(1)}" y="${(ly+dy).toFixed(1)}" text-anchor="${anchor}" class="fp-label">${SHORT[i]}</text>`;
   });
   svg+='</svg>';
-  return`<div class="fp-wrap"><div class="fp-title">Civilizational Fingerprint</div>${svg}</div>`;
+  return`<div class="fp-wrap"><div class="fp-title">Trade Route Fingerprint</div>${svg}</div>`;
 }
 
 // ══════════════════════════════════════════════════════
@@ -6325,7 +6304,7 @@ function renderEnhancedSpanBar(c){
   const width=Math.min(100-left,(c.e-c.s)/total*100);
 
   // Find up to 4 contemporaries that overlap with this civ's lifespan
-  const overlap=CIVS.filter(x=>x.id!==c.id&&x.s<c.e&&x.e>c.s)
+  const overlap=ITEMS.filter(x=>x.id!==c.id&&x.s<c.e&&x.e>c.s)
     .map(x=>{
       const overlapStart=Math.max(x.s,c.s);
       const overlapEnd=Math.min(x.e,c.e);
@@ -6343,7 +6322,7 @@ function renderEnhancedSpanBar(c){
     const ol=Math.max(xl,left);
     const or_=Math.min(xl+xw,left+width);
     const ow=Math.max(0,or_-ol);
-    return`<div class="contemp-bar-row" onclick="navigateToCiv('${x.id}')" title="Navigate to ${x.nm}">
+    return`<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
       <div class="contemp-bar-nm">${x.nm}</div>
       <div class="contemp-bar-track">
         <div class="contemp-bar-fill" style="left:${(ol-left).toFixed(1)}%;width:${ow.toFixed(1)}%;background:${colors[i]}"></div>
@@ -6380,7 +6359,7 @@ function renderDensityBar(){
   let mx=0;
   for(let i=0;i<steps;i++){
     const yr=MIN+i*stepYr;
-    const n=CIVS.filter(c=>c.s<=yr&&c.e>=yr).length;
+    const n=ITEMS.filter(c=>c.s<=yr&&c.e>=yr).length;
     counts.push(n);
     if(n>mx)mx=n;
   }
@@ -6405,10 +6384,10 @@ function renderDiplomaticLayer(){
   // Add diplomatic lines on top of regular connections when in explore mode
   // and no civ selected (so they're visible on the map)
   if(sel)return; // only show when no civ selected
-  const ids=new Set(CIVS.filter(c=>active(c)).map(c=>c.id));
+  const ids=new Set(ITEMS.filter(c=>active(c)).map(c=>c.id));
   let dl='';
   DIPLOMATIC.forEach(d=>{
-    const fc=CIVS.find(x=>x&&x.id===d.from),tc=CIVS.find(x=>x&&x.id===d.to);
+    const fc=ITEMS.find(x=>x&&x.id===d.from),tc=ITEMS.find(x=>x&&x.id===d.to);
     if(!fc||!tc||!ids.has(d.from)||!ids.has(d.to))return;
     const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-36;
@@ -6428,7 +6407,7 @@ function renderDiplomaticSection(c){
   if(!relevant.length)return'';
   return`<div class="conn-hdr">Diplomatic Record</div>`+
     relevant.map(d=>{
-      const other=CIVS.find(x=>x&&x.id===(d.from===c.id?d.to:d.from));
+      const other=ITEMS.find(x=>x&&x.id===(d.from===c.id?d.to:d.from));
       return`<div style="padding:8px 0;border-bottom:1px solid var(--bdr2)">
         <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
           <span class="diplom-icon"></span>
@@ -6451,7 +6430,7 @@ function renderWhatIfPaths(){
   if(!layer){return;}
   if(!whatifCiv){layer.innerHTML='';return;}
 
-  const c=CIVS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
   if(!c){layer.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -6464,7 +6443,7 @@ function renderWhatIfPaths(){
   // Direct broken paths — animated red dashed lines with stroke-dashoffset animation
   let validDirect=0;
   directOut.forEach((t,i)=>{
-    const tc=CIVS.find(x=>x&&x.id===t.to);
+    const tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!tc)return;
     const [tx,ty]=civPt(tc);
     const mx=(cx+tx)/2, my=Math.min(cy,ty)-40;
@@ -6488,7 +6467,7 @@ function renderWhatIfPaths(){
   // Downstream broken paths — dimmer orange dashes
   const downDelay=(validDirect*0.2+0.4).toFixed(1);
   downstream.forEach((t,j)=>{
-    const fc=CIVS.find(x=>x&&x.id===t.from),tc=CIVS.find(x=>x&&x.id===t.to);
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
     const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-24;
@@ -6503,7 +6482,7 @@ function renderWhatIfPaths(){
   // Set text content separately for label safety
   validDirect=0;
   directOut.forEach((t,i)=>{
-    const tc=CIVS.find(x=>x&&x.id===t.to);
+    const tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!tc)return;
     const lbl=document.getElementById('wi-lbl-'+i);
     if(lbl)lbl.textContent=t.concept;
@@ -6535,7 +6514,7 @@ function renderWhatIfDrawer(){
     dc.innerHTML=`
     <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">What If?</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Remove a civilization from history. Red lines animate on the map as the transmission chain breaks. See below for every idea and technology the world would lose.
+      Remove a trade route from history. Red lines animate on the map as the commodity chain breaks. See below for every connection and commerce the world would lose.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Tap a marker on the map — or try one of these</div>
     ${[
@@ -6548,7 +6527,7 @@ function renderWhatIfDrawer(){
       {id:'rome',         why:'Latin, Roman law and the institutional Church'},
       {id:'byzantium',    why:'Preserved the Greek texts that triggered the Renaissance'},
     ].map(s=>{
-      const c=CIVS.find(x=>x&&x.id===s.id);
+      const c=ITEMS.find(x=>x&&x.id===s.id);
       if(!c)return'';
       return`<button class="whatif-civ-btn" onclick="setWhatIf('${c.id}')">
         <div style="flex:1">
@@ -6561,7 +6540,7 @@ function renderWhatIfDrawer(){
     return;
   }
 
-  const c=CIVS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
   if(!c){dc.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -6598,7 +6577,7 @@ function renderWhatIfDrawer(){
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:#e8251a;text-transform:uppercase;margin-bottom:8px">Direct transmissions broken</div>
   ${directOut.length
     ? directOut.map(t=>{
-        const tc=CIVS.find(x=>x&&x.id===t.to);
+        const tc=ITEMS.find(x=>x&&x.id===t.to);
         return`<div style="padding:9px 0;border-bottom:1px solid var(--bdr2)">
           <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap">
             <span style="font-family:'Cinzel',serif;font-size:10px;color:#e8251a;text-decoration:line-through;opacity:.8">${t.concept}</span>
@@ -6607,14 +6586,14 @@ function renderWhatIfDrawer(){
           <div style="font-size:12.5px;line-height:1.65;color:var(--txt2)">${t.desc}</div>
         </div>`;
       }).join('')
-    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this civilization in the current dataset.</div>`
+    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this trade route in the current dataset.</div>`
   }
 
   ${downstream.length?`
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;margin:16px 0 8px">Downstream unravelling</div>
   <div style="font-size:12px;color:var(--txt3);margin-bottom:10px;font-style:italic;line-height:1.6">These transmissions were only possible because of what ${c.nm} first made happen:</div>
   ${downstream.map(t=>{
-    const fc=CIVS.find(x=>x&&x.id===t.from),tc2=CIVS.find(x=>x&&x.id===t.to);
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc2=ITEMS.find(x=>x&&x.id===t.to);
     return`<div style="padding:6px 0;border-bottom:1px solid var(--bdr2);font-size:12px">
       <span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9.5px">${t.concept}</span>
       <span style="color:var(--txt3)"> · ${fc?fc.nm:'?'} → ${tc2?tc2.nm:'?'} · ${fmt(t.year)}</span>
@@ -6722,7 +6701,7 @@ function renderHeritageDrawer(){
       `<button class="heritage-btn" onclick="setHeritage('${r}')">${r}</button>`
     ).join('');
     dc.innerHTML=`
-    <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">Heritage</div>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">Trade Regions</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
       Select your regional background to see every civilization that shaped your cultural DNA — linguistically, religiously, scientifically, and genetically. Blue markers on the map show your ancestral civilizations.
     </div>
@@ -6732,7 +6711,7 @@ function renderHeritageDrawer(){
   }
 
   const civIds=HERITAGE_REGIONS[heritageRegion];
-  const civs=civIds.map(id=>CIVS.find(c=>c.id===id)).filter(Boolean);
+  const civs=civIds.map(id=>ITEMS.find(c=>c.id===id)).filter(Boolean);
 
   dc.innerHTML=`
   <button onclick="clearHeritage()"
@@ -6741,9 +6720,9 @@ function renderHeritageDrawer(){
     ← All regions
   </button>
   <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);letter-spacing:1px;margin-bottom:4px">${heritageRegion}</div>
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing civilizations · shown in blue on the map</div>
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your civilizational ancestry</div>
-  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToCiv('${c.id}')">
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing routes · shown in blue on the map</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Routes in this region</div>
+  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToItem('${c.id}')">
     <span class="heritage-civ-nm">${c.nm}</span>
     <span class="heritage-civ-why">${HERITAGE_REASONS[c.id]||''}</span>
   </div>`).join('')}`;
@@ -6808,10 +6787,10 @@ function renderHerstoryDrawer(){
     dc.innerHTML=`
     <div class="hs-panel-hdr">♀ Herstory</div>
     <div class="hs-panel-sub">
-      A mirror to VIA — tracing 65,000 years of human history through the women who shaped it. Rulers, philosophers, warriors, artists, and mothers whose contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
+      A mirror to VIA — tracing the history of global trade through the women who shaped it. Merchants, financiers, navigators, textile producers, and entrepreneurs whose contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
     </div>
     <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Tap any civilization on the map to discover the women who shaped it — queens who governed, scholars who wrote, warriors who fought, and spiritual leaders who held communities together.
+      Tap any trade route on the map to discover the women who shaped it — merchants, financiers, navigators, and entrepreneurs whose contributions were minimised or forgotten.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:12px">Women who changed everything</div>
     ${(()=>{
@@ -6849,8 +6828,8 @@ function renderHerstoryDrawer(){
       ];
       const shuffled=[...ALL].sort(()=>Math.random()-.5);
       return shuffled.slice(0,5).map(w=>{
-        const c=CIVS.find(x=>x&&x.id===w.civ);
-        return c?`<button onclick="navigateToCiv('${c.id}')" 
+        const c=ITEMS.find(x=>x&&x.id===w.civ);
+        return c?`<button onclick="navigateToItem('${c.id}')" 
           style="width:100%;background:none;border:1px solid rgba(192,96,160,.25);padding:9px 12px;text-align:left;cursor:pointer;margin-bottom:4px;border-radius:2px;transition:all .15s"
           onmouseover="this.style.background='rgba(192,96,160,.08)'" onmouseout="this.style.background='none'">
           <div style="font-family:'Cinzel',serif;font-size:10px;color:#c060a0;margin-bottom:2px">${w.nm} · ${w.yr<0?Math.abs(w.yr)+' BCE':w.yr+' CE'}</div>
@@ -6868,7 +6847,7 @@ function renderHerstoryDrawer(){
   <button onclick="closeInfo()"
     style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px;transition:opacity .15s"
     onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-    ← All civilizations
+    ← All trade routes
   </button>
   <div class="hs-panel-hdr">${c.nm}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:14px">${c.sb}</div>
@@ -6881,7 +6860,7 @@ function renderHerstoryDrawer(){
         </div>
         <div class="hs-woman-desc">${w.desc}</div>
       </div>`).join('')
-    : `<div class="hs-no-data">The historical record for women in ${c.nm} is sparse — not because women were absent, but because those who recorded history did not record them. Their presence was the water the civilisation swam in.</div>`
+    : `<div class="hs-no-data">The historical record for women in ${c.nm} is sparse — not because women were absent, but because those who recorded history did not record them. Their presence was the water the trade route swam in.</div>`
   }`;
 
   const panel=document.getElementById('info-panel');
@@ -6901,9 +6880,9 @@ function mapClick(e){
     const isTouch='ontouchstart' in window||navigator.maxTouchPoints>0;
     const zr=1000/_vbW;
     const thresh=(isTouch?55:35)/zr;
-    const activeSet=window.ids_cache||new Set(CIVS.filter(c=>c&&active(c)).map(c=>c.id));
+    const activeSet=window.ids_cache||new Set(ITEMS.filter(c=>c&&active(c)).map(c=>c.id));
     const candidates=[];
-    CIVS.forEach(c=>{
+    ITEMS.forEach(c=>{
       if(!c||!c.id||!activeSet.has(c.id))return;
       const pt=civPt(c);
       if(!pt||!isFinite(pt[0])||!isFinite(pt[1]))return;
@@ -6921,7 +6900,7 @@ function mapClick(e){
     if(isCluster){
       showClusterPicker(candidates.map(x=>x.c),clientX,clientY);
     } else {
-      civClick(nearest.c.id);
+      itemClick(nearest.c.id);
     }
   }catch(err){console.warn('mapClick err:',err);}
 }
@@ -7086,9 +7065,9 @@ function _onMapMouseMove(e){
   const [svgX,svgY]=screenToSVG(e.clientX,e.clientY);
   const zr=1000/_vbW;
   const thresh=28/zr;
-  const activeSet=window.ids_cache||new Set(CIVS.filter(c=>c&&active(c)).map(c=>c.id));
+  const activeSet=window.ids_cache||new Set(ITEMS.filter(c=>c&&active(c)).map(c=>c.id));
   let nearest=null, bestD=thresh;
-  CIVS.forEach(c=>{
+  ITEMS.forEach(c=>{
     if(!c||!activeSet.has(c.id))return;
     if(sel&&sel.id===c.id)return; // skip selected — it already has persistent label
     const pt=civPt(c);
@@ -7179,7 +7158,7 @@ function showClusterPicker(civs, screenX, screenY){
   if(!picker||!list)return;
   picker._openedAt=Date.now();
   list.innerHTML=civs.map(c=>`
-    <div class="cluster-item" onclick="closeClusterPicker();civClick('${c.id}')">
+    <div class="cluster-item" onclick="closeClusterPicker();itemClick('${c.id}')">
       <div class="cluster-item-dot" style="background:${herstory?'#c060a0':'#e8251a'}"></div>
       <div>
         <div class="cluster-item-nm">${c.nm}</div>
@@ -7377,9 +7356,9 @@ function updateTlFill(pct){
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 
   <!-- Cluster picker popup -->
-  <div id="cluster-picker" role="dialog" aria-label="Select civilization">
+  <div id="cluster-picker" role="dialog" aria-label="Select trade route">
     <div id="cluster-picker-hdr">
-      <span>Select civilization</span>
+      <span>Select trade route</span>
       <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">✕</button>
     </div>
     <div id="cluster-list"></div>
