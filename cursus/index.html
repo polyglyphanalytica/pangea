@@ -543,7 +543,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </head>
 <body>
 
-<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to civilization panel</button>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to transport panel</button>
 <header class="hdr" role="banner">
   <div class="hdr-left">
     <span class="logo-t">CURSUS</span>
@@ -556,7 +556,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
   <div class="hdr-right">
     <div class="cnt-disp">
       <span class="cnt-n" id="cnt-n">2</span>
-      civilizations active
+      systems active
     </div>
     <!-- Burger menu -->
     <div class="burger-wrap" id="burger-wrap">
@@ -577,7 +577,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
           <span>◉</span><span>Explore</span>
         </button>
         <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⟳</span><span>Threads</span>
+          <span>⟳</span><span>Infrastructure Chains</span>
         </button>
         <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
           <span>⊞</span><span>Compare</span>
@@ -586,7 +586,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
           <span>⟁</span><span>What If</span>
         </button>
         <button class="burger-item burger-mode" id="btn-heritage" onclick="setMode('heritage');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⌂</span><span>Heritage</span>
+          <span>⌂</span><span>Transit Heritage</span>
         </button>
         <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" role="menuitem">
           <span style="font-size:15px">♀</span>
@@ -609,10 +609,10 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </header>
 
 
-<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Concept transmissions">
+<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Infrastructure Chains">
   <div class="thread-panel-inner">
     <div class="thread-panel-bar">
-      <span class="thread-panel-title" id="thread-panel-title">Concept Threads</span>
+      <span class="thread-panel-title" id="thread-panel-title">Infrastructure Chains</span>
       <div style="display:flex;align-items:center;gap:12px">
         <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">← All Threads</button>
         <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">✕</button>
@@ -628,7 +628,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 <div class="main">
   <div class="map-tl-col">
   <div class="map-c">
-    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with civilization markers" style="cursor:pointer">
+    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with transport system markers" style="cursor:pointer">
       <defs>
 
         <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
@@ -665,22 +665,22 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
       <g id="thread-layer"></g>
       <!-- Selected-item label only -->
       <g id="label-layer" pointer-events="none"></g>
-      <!-- Civilization markers -->
+      <!-- Transport markers -->
       <g id="mark-layer"></g>
       <!-- Hover tooltip label (sits above markers) -->
       <g id="hover-label-layer" pointer-events="none"></g>
     </svg>
     <div class="hint" id="map-hint">
-      <span id="map-hint-text">TAP A CIVILIZATION  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
+      <span id="map-hint-text">TAP A SYSTEM  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
       <button id="map-reset-btn" onclick="resetMapZoom()" style="display:none;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--amber-b);background:none;border:1px solid var(--bdr);padding:2px 8px;border-radius:10px;cursor:pointer;margin-left:10px;white-space:nowrap">⊙ RESET ZOOM</button>
     </div>
   </div>
   <div class="tl-wrap" role="navigation" aria-label="Timeline">
-  <svg id="density-bar" aria-label="Civilization density over time"></svg>
+  <svg id="density-bar" aria-label="Transport system density over time"></svg>
   <div class="tl-lbls">
-    <span class="tl-lbl">65,000 BCE</span>
+    <span class="tl-lbl">8000 BCE</span>
+    <span class="tl-lbl">5000 BCE</span>
     <span class="tl-lbl">3000 BCE</span>
-    <span class="tl-lbl">2000 BCE</span>
     <span class="tl-lbl">1000 BCE</span>
     <span class="tl-lbl">1 CE</span>
     <span class="tl-lbl">1000 CE</span>
@@ -694,7 +694,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </div>
   </div><!-- /map-tl-col -->
 
-  <div class="info-panel" id="info-panel" role="complementary" aria-label="Civilization details">
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Transport system details">
     <div class="drawer-handle" id="drawer-handle" aria-label="Drag to resize"></div>
     <div id="drawer-top"></div>
     <div id="drawer-content"></div>
@@ -6606,7 +6606,7 @@ nabataean:[
   ],
 };
 
-let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
+let year=-8000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
 const OVERVIEW_COL='#c8881c';
 
@@ -6627,7 +6627,7 @@ function toggleLensDD(){
 }
 
 function lensLabel(){
-  if(!lenses.size)return'Civilization Arc';
+  if(!lenses.size)return'Transport Arc';
   const names=[...lenses].map(id=>{const L=LENSES.find(l=>l.id===id);return L?L.lbl:'';});
   if(names.length===1)return names[0];
   if(names.length<=3)return names.join(' · ');
@@ -6663,7 +6663,7 @@ function renderLensDD(){
       <div class="lens-row${arcOn?' on':''}" onclick="toggleLens('__arc__')">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Transport Arc</span>
       </div>
       <div class="lens-row-sep"></div>
       ${rows}
@@ -6707,7 +6707,7 @@ function toggleLens(id){
       const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
       return`<button class="conn-item" tabindex="0"
           aria-label="${tip}"
-          onclick="navigateToCiv('${cid}')"
+          onclick="navigateToItem('${cid}')"
           style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
         <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
         <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -6724,23 +6724,14 @@ function toggleLens(id){
 
 // ── NON-LINEAR TIMELINE ──
 // Slider 0-1000 maps to year via two segments:
-// 0-80   → -65000 to -4000 (deep prehistory, 8% of slider)
-// 80-1000 → -4000 to 2024  (recorded history, 92% of slider)
+// Linear mapping: 0-1000 → -8000 to 2024
 function sliderToYear(v){
   v=parseInt(v);
-  if(v<=80){
-    return Math.round(-65000+((-4000-(-65000))*(v/80)));
-  } else {
-    return Math.round(-4000+((2024-(-4000))*((v-80)/920)));
-  }
+  return Math.round(-8000+(v/1000)*(2024-(-8000)));
 }
 function yearToSlider(yr){
   yr=parseInt(yr);
-  if(yr<=-4000){
-    return Math.round(80*((yr-(-65000))/(-4000-(-65000))));
-  } else {
-    return Math.round(80+920*((yr-(-4000))/(2024-(-4000))));
-  }
+  return Math.round(((yr-(-8000))/(2024-(-8000)))*1000);
 }
 
 function civPt(c){
@@ -6816,7 +6807,7 @@ function renderMap(){
       const pulseMax=Math.max(8, 16/zr);
       dots+=`<g role="button" tabindex="0" data-civ="${c.id}"
           aria-label="${c.nm} — click to explore"
-          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();civClick('${c.id}')}"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();itemClick('${c.id}')}"
           opacity="${op}" pointer-events="none">
           <circle cx="${cx}" cy="${cy}" r="${dotR.toFixed(1)}"
             fill="${mcol}" filter="url(#glow${isSel?'2':''})"
@@ -6837,7 +6828,7 @@ function renderMap(){
   document.getElementById('label-layer').innerHTML=ll;
 }
 
-function navigateToCiv(id){
+function navigateToItem(id){
   const c=ITEMS.find(x=>x&&x.id===id);
   if(!c)return;
   if(mode==='whatif'){
@@ -6863,9 +6854,9 @@ function navigateToCiv(id){
   document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
 }
 
-function civClick(id){
+function itemClick(id){
   _renderHoverLabel(null);
-  navigateToCiv(id);
+  navigateToItem(id);
 }
 
 
@@ -6903,7 +6894,7 @@ function renderDrawerContent(){
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -7042,7 +7033,7 @@ function renderDrawer(){
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -7200,7 +7191,7 @@ function renderThreadConceptList(){
     list.style.display='block';
     if(steps){steps.style.display='none';steps.innerHTML='';}
     if(backBtn)backBtn.style.display='none';
-    if(title)title.textContent='Concept Threads';
+    if(title)title.textContent='Infrastructure Chains';
     const concepts=getUniqueConcepts();
     list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
       const chain=getChain(c);
@@ -7381,7 +7372,7 @@ function renderLensDDInline(){
       <div class="lens-row${arcOn?' on':''}" onclick="lenses.clear();lensDD=false;if(mode==='compare')renderCompareDrawer();else renderDrawerContent();">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Transport Arc</span>
       </div>
       <div class="lens-row-sep"></div>${rows}
       <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done ▴</div>
@@ -7830,7 +7821,7 @@ function renderEnhancedSpanBar(c){
     const ol=Math.max(xl,left);
     const or_=Math.min(xl+xw,left+width);
     const ow=Math.max(0,or_-ol);
-    return`<div class="contemp-bar-row" onclick="navigateToCiv('${x.id}')" title="Navigate to ${x.nm}">
+    return`<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
       <div class="contemp-bar-nm">${x.nm}</div>
       <div class="contemp-bar-track">
         <div class="contemp-bar-fill" style="left:${(ol-left).toFixed(1)}%;width:${ow.toFixed(1)}%;background:${colors[i]}"></div>
@@ -8209,9 +8200,9 @@ function renderHeritageDrawer(){
       `<button class="heritage-btn" onclick="setHeritage('${r}')">${r}</button>`
     ).join('');
     dc.innerHTML=`
-    <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">Heritage</div>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">Transit Heritage</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Select your regional background to see every civilization that shaped your cultural DNA — linguistically, religiously, scientifically, and genetically. Blue markers on the map show your ancestral civilizations.
+      Select your region to see the transport revolutions that shaped how your part of the world moves — by road, rail, water, and air. Blue markers on the map show your regional transport systems.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Choose your region</div>
     <div class="heritage-grid">${regionBtns}</div>`;
@@ -8230,7 +8221,7 @@ function renderHeritageDrawer(){
   <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);letter-spacing:1px;margin-bottom:4px">${heritageRegion}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing civilizations · shown in blue on the map</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your civilizational ancestry</div>
-  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToCiv('${c.id}')">
+  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToItem('${c.id}')">
     <span class="heritage-civ-nm">${c.nm}</span>
     <span class="heritage-civ-why">${HERITAGE_REASONS[c.id]||''}</span>
   </div>`).join('')}`;
@@ -8388,7 +8379,7 @@ function mapClick(e){
     if(isCluster){
       showClusterPicker(candidates.map(x=>x.c),clientX,clientY);
     } else {
-      civClick(nearest.c.id);
+      itemClick(nearest.c.id);
     }
   }catch(err){console.warn('mapClick err:',err);}
 }
@@ -8646,7 +8637,7 @@ function showClusterPicker(civs, screenX, screenY){
   if(!picker||!list)return;
   picker._openedAt=Date.now();
   list.innerHTML=civs.map(c=>`
-    <div class="cluster-item" onclick="closeClusterPicker();civClick('${c.id}')">
+    <div class="cluster-item" onclick="closeClusterPicker();itemClick('${c.id}')">
       <div class="cluster-item-dot" style="background:${herstory?'#c060a0':'#e8251a'}"></div>
       <div>
         <div class="cluster-item-nm">${c.nm}</div>
@@ -8843,9 +8834,9 @@ function updateTlFill(pct){
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 
   <!-- Cluster picker popup -->
-  <div id="cluster-picker" role="dialog" aria-label="Select civilization">
+  <div id="cluster-picker" role="dialog" aria-label="Select transport system">
     <div id="cluster-picker-hdr">
-      <span>Select civilization</span>
+      <span>Select transport system</span>
       <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">✕</button>
     </div>
     <div id="cluster-list"></div>
