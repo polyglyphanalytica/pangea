@@ -5,9 +5,12 @@ Pangea Atlas Validator v3
 Runs the full CLAUDE.md Section 18 checklist against an atlas file.
 Exits 0 if ELIGIBLE FOR GO-LIVE, exits 1 if NOT ELIGIBLE.
 
+Also validates the Pangea homepage (index.html) when --homepage is used.
+
 Usage:
   python3 pangea_validate.py ATLAS_NAME
   python3 pangea_validate.py ATLAS_NAME --force   (skip cached result)
+  python3 pangea_validate.py --homepage            (validate homepage only)
 """
 
 import datetime
@@ -570,10 +573,163 @@ def validate(atlas, force=False):
         sys.exit(1)
 
 
-if __name__ == "__main__":
-    force = "--force" in sys.argv
-    args = [a for a in sys.argv[1:] if a != "--force"]
-    if len(args) != 1:
-        print(__doc__)
+def validate_homepage():
+    """Validate the Pangea homepage (index.html) for structural integrity.
+
+    Checks for issues that break the card grid layout:
+    - Unclosed <a> tags (cause cards to nest inside each other)
+    - Mismatched <a> open/close counts
+    - Card links pointing to wrong atlas directories
+    - Cards with status--live but no <a> link
+    - Cards with <a> links but no </a> close
+    - Stray </a> tags inside forthcoming cards (no matching open)
+    - All live atlas directories actually exist
+    """
+    p = Path("index.html")
+    if not p.exists():
+        print("FAIL   index.html not found")
         sys.exit(1)
-    validate(args[0], force=force)
+
+    html = p.read_text(encoding="utf-8", errors="replace")
+    lines = html.split('\n')
+    checks = []
+
+    # ── Basic HTML structure ───────────────────────────────────────────────
+    a_opens = re.findall(r'<a\s+href="([^"]*)"', html)
+    a_closes = html.count('</a>')
+    checks.append(("all <a> tags closed",
+                   len(a_opens) == a_closes,
+                   f"{len(a_opens)} opens vs {a_closes} closes" if len(a_opens) != a_closes else "OK"))
+
+    # ── Per-card validation ────────────────────────────────────────────────
+    # Extract cards by tracking div nesting depth from each card-open tag
+    unclosed_links = []
+    stray_closes = []
+    wrong_hrefs = []
+    live_no_link = []
+
+    card_starts = list(re.finditer(
+        r'<div class="card card--(live|forthcoming)">', html
+    ))
+
+    for cs in card_starts:
+        card_type = cs.group(1)
+        start = cs.start()
+        card_line = html[:start].count('\n') + 1
+
+        # Walk forward counting div opens/closes to find the matching </div>
+        pos = cs.end()
+        depth = 1
+        while pos < len(html) and depth > 0:
+            next_open = html.find('<div', pos)
+            next_close = html.find('</div>', pos)
+            if next_close == -1:
+                break
+            if next_open != -1 and next_open < next_close:
+                depth += 1
+                pos = next_open + 4
+            else:
+                depth -= 1
+                if depth == 0:
+                    pos = next_close + 6
+                    break
+                pos = next_close + 6
+
+        card_html = html[cs.end():pos]
+
+        # Extract card name
+        name_m = re.search(r'<div class="card-name">([^<]+)</div>', card_html)
+        card_name = name_m.group(1) if name_m else f"unknown@line{card_line}"
+
+        link_opens = re.findall(r'<a\s+href="([^"]*)"', card_html)
+        link_closes = card_html.count('</a>')
+
+        if link_opens and len(link_opens) > link_closes:
+            unclosed_links.append(f"{card_name} (line ~{card_line})")
+
+        if not link_opens and link_closes > 0:
+            stray_closes.append(f"{card_name} (line ~{card_line})")
+
+        # Check live cards have a link
+        if card_type == 'live' and not link_opens:
+            live_no_link.append(f"{card_name} (line ~{card_line})")
+
+        # Check link hrefs point to existing directories
+        for href in link_opens:
+            if href.startswith('#') or href.startswith('http'):
+                continue
+            expected_dir = href.split('/')[0] if '/' in href else ''
+            if expected_dir:
+                target = Path(expected_dir)
+                if not target.exists():
+                    wrong_hrefs.append(f"{card_name} → {href} (dir missing)")
+
+    checks.append(("no unclosed <a> inside cards",
+                   len(unclosed_links) == 0,
+                   f"unclosed: {unclosed_links}" if unclosed_links else "OK"))
+
+    checks.append(("no stray </a> inside cards",
+                   len(stray_closes) == 0,
+                   f"stray: {stray_closes}" if stray_closes else "OK"))
+
+    checks.append(("all card hrefs point to existing dirs",
+                   len(wrong_hrefs) == 0,
+                   f"broken: {wrong_hrefs}" if wrong_hrefs else "OK"))
+
+    if live_no_link:
+        checks.append(("all live cards have links",
+                       False, f"missing: {live_no_link}"))
+
+    # ── Live atlas directories have index.html ─────────────────────────────
+    live_links = []
+    for m in re.finditer(
+        r'<div class="card card--live">[\s\S]*?<a href="([^"]+)"', html
+    ):
+        live_links.append(m.group(1))
+
+    missing_files = []
+    for href in live_links:
+        if not Path(href).exists():
+            missing_files.append(href)
+
+    checks.append(("all live atlas links resolve to files",
+                   len(missing_files) == 0,
+                   f"missing: {missing_files}" if missing_files else "OK"))
+
+    # ── Card grid div nesting ──────────────────────────────────────────────
+    # Quick check: count card-grid opens/closes
+    grid_opens = html.count('class="card-grid"')
+    grid_div_closes = 0
+    # Each card-grid should be properly closed
+    checks.append(("card-grid sections present", grid_opens > 0, f"found {grid_opens}"))
+
+    # ── Print results ──────────────────────────────────────────────────────
+    fails = []
+    for name, passed, detail in checks:
+        status = "PASS" if passed else "FAIL"
+        if not passed:
+            fails.append(name)
+        suffix = f"  [{detail}]" if detail else ""
+        print(f"{status:<4}  {name}{suffix}")
+
+    print()
+    if not fails:
+        print("HOMEPAGE: OK")
+        sys.exit(0)
+    else:
+        print(f"HOMEPAGE: {len(fails)} failures:")
+        for f in fails:
+            print(f"  ✗ {f}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    if "--homepage" in sys.argv:
+        validate_homepage()
+    else:
+        force = "--force" in sys.argv
+        args = [a for a in sys.argv[1:] if a != "--force"]
+        if len(args) != 1:
+            print(__doc__)
+            sys.exit(1)
+        validate(args[0], force=force)
