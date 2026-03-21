@@ -172,8 +172,11 @@ def validate(atlas):
     checks.append(("WOMEN >= 5 entries", women_entries >= 5, f"found {women_entries}"))
 
     # ── No civilitas leak ───────────────────────────────────────────────────
-    civ = len(re.findall(r'\bcivilizat', html, re.IGNORECASE))
-    checks.append(("no civilitas text leaked", civ == 0, f"{civ} hits" if civ else ""))
+    if atlas == "civilitas":
+        checks.append(("no civilitas text leaked", True, "skipped for civilitas itself"))
+    else:
+        civ = len(re.findall(r'\bcivilizat', html, re.IGNORECASE))
+        checks.append(("no civilitas text leaked", civ == 0, f"{civ} hits" if civ else ""))
 
     # ── Colour values ───────────────────────────────────────────────────────
     checks.append(("dark bg #02040a present", "#02040a" in html, ""))
