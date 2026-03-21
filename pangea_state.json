@@ -4,12 +4,17 @@
   "active_atlas": null,
   "atlases": {
     "civilitas": {
-      "phase": "DONE",
+      "phase": "3",
       "items": 100,
       "target": 100,
-      "live": true,
+      "live": false,
       "map": "world",
-      "section": "III"
+      "section": "III",
+      "validated_sha": "fba452a1b9aeb61343bd221dc68546df27778b4a",
+      "validated_short": "fba452a",
+      "validated_at": "2026-03-21T11:21:04.133029Z",
+      "validated_items": 100,
+      "validated_lenses": 30
     },
     "bellum": {
       "phase": "DONE",
@@ -1014,6 +1019,7 @@
     }
   },
   "queue": [
+    "civilitas",
     "via",
     "cursus",
     "clima",
@@ -1125,7 +1131,6 @@
     "diluvium"
   ],
   "completed": [
-    "civilitas",
     "bellum",
     "numen",
     "lex",
