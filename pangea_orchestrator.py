@@ -5,7 +5,7 @@ Pangea Project Orchestrator v3
 Usage:
   python3 pangea_orchestrator.py                     — print next action as JSON
   python3 pangea_orchestrator.py advance ATLAS PHASE — mark shell/constants/modes phase done
-  python3 pangea_orchestrator.py batch_done ATLAS    — record a batch of items written (up to 25)
+  python3 pangea_orchestrator.py batch_done ATLAS    — record a batch of items written (up to 10)
   python3 pangea_orchestrator.py item_done ATLAS     — legacy alias for batch_done
   python3 pangea_orchestrator.py golive ATLAS        — mark atlas live
   python3 pangea_orchestrator.py status              — human-readable progress report
@@ -210,7 +210,7 @@ def get_next_action(state):
                 "map": info.get("map", "world")
             }
         batch_start = real_count + 1
-        batch_end = min(real_count + 25, target)
+        batch_end = min(real_count + 10, target)
         batch_size = batch_end - real_count
         # Print imperative directly so agent has no decision gap
         print(
@@ -303,7 +303,7 @@ def cmd_batch_done(atlas):
         print(f"Write items to {atlas}/index.html (or data.js), then call batch_done again.")
         sys.exit(1)
     if added > 25:
-        print(f"WARNING: {added} items added (max batch is 25). Accepted, but prefer ≤25.")
+        print(f"WARNING: {added} items added (max batch is 10). Accepted, but prefer ≤10.")
 
     info["items"] = real_count
     remaining = target - real_count
@@ -322,7 +322,7 @@ def cmd_batch_done(atlas):
         self_invoke()
     else:
         batch_start = real_count + 1
-        batch_end = min(real_count + 25, target)
+        batch_end = min(real_count + 10, target)
         batch_size = batch_end - real_count
         print(
             f"batch_recorded {real_count}/{target}. {remaining} remaining.\n"
