@@ -69,7 +69,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "VII"
+      "section": "VII",
+      "validated_sha": "300c4e0f4a16fc35140ec66d2922d06ba907f1ab",
+      "validated_short": "300c4e0",
+      "validated_at": "2026-03-21T08:16:24.750368Z",
+      "validated_items": 141,
+      "validated_lenses": 20
     },
     "cosmos": {
       "phase": "DONE",
