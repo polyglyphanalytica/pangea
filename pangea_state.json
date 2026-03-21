@@ -17,7 +17,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "V"
+      "section": "V",
+      "validated_sha": "7d3273aeee4efe578e94a884599258b3bd24c7d2",
+      "validated_short": "7d3273a",
+      "validated_at": "2026-03-21T08:09:16.471006Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "numen": {
       "phase": "DONE",
@@ -79,7 +84,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "V"
+      "section": "V",
+      "validated_sha": "9ac09ee3e6ecb4ccbcc6c2a3ef23edcffd9f4c9c",
+      "validated_short": "9ac09ee",
+      "validated_at": "2026-03-21T08:09:15.904824Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "lingua": {
       "phase": "DONE",
