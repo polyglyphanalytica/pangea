@@ -708,9 +708,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'agriculture',ico:'🌾',lbl:'Agriculture & Food',col:'#6a994e'},
+{id:'architecture',ico:'🏛',lbl:'Architecture & Shelter',col:'#a68a64'},
+{id:'casualties',ico:'⚰',lbl:'Casualties & Mortality',col:'#c44536'},
+{id:'climate_science',ico:'🌡',lbl:'Climate Science',col:'#4ecdc4'},
+{id:'cultural_impact',ico:'🎭',lbl:'Cultural Impact',col:'#e76f51'},
+{id:'economic_impact',ico:'💰',lbl:'Economic Impact',col:'#e9c46a'},
+{id:'engineering',ico:'⚙',lbl:'Engineering & Infrastructure',col:'#8d99ae'},
+{id:'exploration',ico:'🔭',lbl:'Exploration & Discovery',col:'#457b9d'},
+{id:'folklore',ico:'📖',lbl:'Folklore & Oral Tradition',col:'#d4a373'},
+{id:'geography',ico:'🗺',lbl:'Geography & Terrain',col:'#588157'},
+{id:'legislation',ico:'⚖',lbl:'Legislation & Governance',col:'#6c757d'},
+{id:'military',ico:'⚔',lbl:'Military & Conflict',col:'#9b2226'},
+{id:'migration',ico:'🚶',lbl:'Migration & Displacement',col:'#bc6c25'},
+{id:'mythology',ico:'🐉',lbl:'Mythology & Cosmology',col:'#7b2cbf'},
+{id:'navigation',ico:'🧭',lbl:'Navigation & Transport',col:'#219ebc'},
+{id:'prediction',ico:'📡',lbl:'Prediction & Forecasting',col:'#3a86ff'},
+{id:'public_health',ico:'🏥',lbl:'Public Health',col:'#e63946'},
+{id:'ritual',ico:'🕯',lbl:'Ritual & Ceremony',col:'#c77dff'},
+{id:'science',ico:'🔬',lbl:'Science & Mechanisms',col:'#48cae4'},
+{id:'trade',ico:'⚓',lbl:'Trade & Commerce',col:'#dda15e'}
+];
 
-const ERAS=[];
+const ERAS=[
+{y:-8000,n:'EARLY HOLOCENE'},
+{y:-5000,n:'ANCIENT CIVILISATIONS'},
+{y:-3000,n:'BRONZE AGE'},
+{y:-1200,n:'IRON AGE'},
+{y:-500,n:'CLASSICAL ANTIQUITY'},
+{y:200,n:'LATE ANTIQUITY'},
+{y:500,n:'EARLY MEDIEVAL'},
+{y:900,n:'HIGH MEDIEVAL'},
+{y:1300,n:'LATE MEDIEVAL'},
+{y:1500,n:'AGE OF EXPLORATION'},
+{y:1700,n:'AGE OF ENLIGHTENMENT'},
+{y:1800,n:'INDUSTRIAL AGE'},
+{y:1900,n:'MODERN ERA'},
+{y:1945,n:'ATOMIC AGE'},
+{y:1970,n:'ENVIRONMENTAL AWAKENING'},
+{y:2000,n:'CLIMATE CRISIS'}
+];
 
 const ITEMS=[
 {id:'indian_monsoon',nm:'Indian Summer Monsoon',sb:'South Asia · 8000 BCE – present',s:-8000,e:2024,
