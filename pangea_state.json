@@ -284,7 +284,7 @@
       "homepage_name": "D\u014dnum"
     },
     "petra": {
-      "phase": "1A",
+      "phase": "1C",
       "items": 0,
       "target": 100,
       "live": false,
@@ -959,7 +959,7 @@
     },
     "ignis": {
       "phase": "DONE",
-      "items": 90,
+      "items": 100,
       "target": 100,
       "live": true,
       "map": "world",
