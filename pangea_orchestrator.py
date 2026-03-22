@@ -3,7 +3,10 @@
 Pangea Project Orchestrator v3
 ================================
 Usage:
-  python3 pangea_orchestrator.py                     — print next action as JSON
+  python3 pangea_orchestrator.py                     — print next action as JSON (first unlocked atlas)
+  python3 pangea_orchestrator.py --agent AGENT_ID    — print next action for this agent (claims an atlas)
+  python3 pangea_orchestrator.py claim AGENT_ID      — claim the next free atlas for this agent
+  python3 pangea_orchestrator.py release AGENT_ID    — release this agent's atlas lock
   python3 pangea_orchestrator.py advance ATLAS PHASE — mark shell/constants/modes phase done
   python3 pangea_orchestrator.py batch_done ATLAS    — record a batch of items written (up to 10)
   python3 pangea_orchestrator.py item_done ATLAS     — legacy alias for batch_done
@@ -11,6 +14,11 @@ Usage:
   python3 pangea_orchestrator.py status              — human-readable progress report
   python3 pangea_orchestrator.py verify              — check state file integrity
   python3 pangea_orchestrator.py sync                — pull & rebase before committing (prevents merge conflicts)
+
+Agent Queue:
+  Multiple agents can work in parallel without conflicts. Each agent claims an
+  atlas via --agent or claim. The orchestrator ensures no two agents work on the
+  same atlas. Locks auto-expire after 2 hours of inactivity.
 """
 
 import json
@@ -221,6 +229,72 @@ def cmd_sync():
     pull_and_rebase()
     print("Sync complete.")
 
+
+def cmd_claim(agent_id):
+    """Claim the next free atlas for this agent. Prints JSON with the assignment."""
+    state = load_state()
+    # If already assigned to a non-expired, queued atlas, return it
+    assigned = _agent_atlas(state, agent_id)
+    queue = state.get("queue", [])
+    if assigned and assigned in queue:
+        _refresh_lock(state, agent_id)
+        save_state(state)
+        info = state["atlases"].get(assigned, {})
+        print(json.dumps({
+            "status": "already_assigned",
+            "agent": agent_id,
+            "atlas": assigned,
+            "phase": info.get("phase", "?"),
+            "items": info.get("items", 0),
+            "target": info.get("target", 100)
+        }))
+        return
+
+    # Find next unlocked atlas
+    locked = _locked_atlases(state)
+    atlas = None
+    for candidate in queue:
+        if candidate not in locked:
+            atlas = candidate
+            break
+
+    if atlas is None:
+        if not queue:
+            generate_new_atlas(state)
+            return  # unreachable — generate_new_atlas calls self_invoke
+        print(json.dumps({
+            "status": "all_locked",
+            "agent": agent_id,
+            "message": "All queued atlases are locked by other agents. Wait or add more atlases.",
+            "locked_count": len(locked),
+            "queue_size": len(queue)
+        }))
+        return
+
+    _assign_agent(state, agent_id, atlas)
+    save_state(state)
+    info = state["atlases"].get(atlas, {})
+    print(json.dumps({
+        "status": "claimed",
+        "agent": agent_id,
+        "atlas": atlas,
+        "phase": info.get("phase", "?"),
+        "items": info.get("items", 0),
+        "target": info.get("target", 100)
+    }))
+
+
+def cmd_release(agent_id):
+    """Release this agent's atlas lock."""
+    state = load_state()
+    released = _release_agent(state, agent_id)
+    save_state(state)
+    if released:
+        print(json.dumps({"status": "released", "agent": agent_id, "atlas": released}))
+    else:
+        print(json.dumps({"status": "not_assigned", "agent": agent_id}))
+
+
 # Phases in order — DATA is a single phase covering all item writing
 PHASES_ORDERED = [
     "1A", "1B", "1C", "1D", "1E", "1F",
@@ -233,6 +307,87 @@ PHASES_ORDERED = [
 ]
 
 SKIP_IF_WORLD_MAP = {"1E", "4A", "4B", "4C"}
+
+# Agent lock expiry: 2 hours (seconds). Stale locks are ignored.
+LOCK_EXPIRY_SECS = 2 * 60 * 60
+
+
+# ── Agent assignment helpers ─────────────────────────────────────────────────
+
+def _now_iso():
+    """Current UTC time as ISO string."""
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _lock_age_secs(claimed_at):
+    """Seconds since a lock was claimed. Returns inf if unparseable."""
+    from datetime import datetime, timezone
+    try:
+        dt = datetime.fromisoformat(claimed_at)
+        return (datetime.now(timezone.utc) - dt).total_seconds()
+    except (ValueError, TypeError):
+        return float("inf")
+
+
+def _get_assignments(state):
+    """Return the assignments dict, initialising if absent."""
+    if "assignments" not in state:
+        state["assignments"] = {}
+    return state["assignments"]
+
+
+def _locked_atlases(state):
+    """Return set of atlas keys that are currently locked by any agent."""
+    assignments = _get_assignments(state)
+    locked = set()
+    for agent_id, info in list(assignments.items()):
+        age = _lock_age_secs(info.get("claimed_at", ""))
+        if age < LOCK_EXPIRY_SECS:
+            locked.add(info["atlas"])
+        else:
+            # Expired lock — clean it up
+            del assignments[agent_id]
+    return locked
+
+
+def _agent_atlas(state, agent_id):
+    """Return the atlas key this agent is assigned to, or None if unassigned/expired."""
+    assignments = _get_assignments(state)
+    info = assignments.get(agent_id)
+    if info is None:
+        return None
+    age = _lock_age_secs(info.get("claimed_at", ""))
+    if age >= LOCK_EXPIRY_SECS:
+        del assignments[agent_id]
+        return None
+    return info["atlas"]
+
+
+def _assign_agent(state, agent_id, atlas_key):
+    """Assign an agent to an atlas. Overwrites any prior assignment for this agent."""
+    assignments = _get_assignments(state)
+    # Release any previous assignment
+    if agent_id in assignments:
+        del assignments[agent_id]
+    assignments[agent_id] = {
+        "atlas": atlas_key,
+        "claimed_at": _now_iso()
+    }
+
+
+def _release_agent(state, agent_id):
+    """Release an agent's atlas lock. Returns the atlas key or None."""
+    assignments = _get_assignments(state)
+    info = assignments.pop(agent_id, None)
+    return info["atlas"] if info else None
+
+
+def _refresh_lock(state, agent_id):
+    """Bump the claimed_at timestamp to keep the lock alive."""
+    assignments = _get_assignments(state)
+    if agent_id in assignments:
+        assignments[agent_id]["claimed_at"] = _now_iso()
 
 
 def load_state():
@@ -451,7 +606,7 @@ def generate_new_atlas(state):
     cmd_new_atlas(key, name, section, icon, tagline, tags)
 
 
-def get_next_action(state):
+def get_next_action(state, agent_id=None):
     queue = state.get("queue", [])
     if not queue:
         # Auto-generate a new atlas and continue the loop.
@@ -460,7 +615,37 @@ def get_next_action(state):
         generate_new_atlas(state)
         return None  # unreachable, but keeps the type signature consistent
 
-    atlas = queue[0]
+    # ── Agent-aware atlas selection ──────────────────────────────────────
+    if agent_id:
+        # Check if this agent already has an assignment
+        assigned = _agent_atlas(state, agent_id)
+        if assigned and assigned in [a for a in queue]:
+            atlas = assigned
+            _refresh_lock(state, agent_id)
+            save_state(state)
+        else:
+            # Find the next unlocked atlas in the queue
+            locked = _locked_atlases(state)
+            atlas = None
+            for candidate in queue:
+                if candidate not in locked:
+                    atlas = candidate
+                    break
+            if atlas is None:
+                return {"action": "WAIT", "message": "All queued atlases are locked by other agents.",
+                        "locked_count": len(locked), "queue_size": len(queue)}
+            _assign_agent(state, agent_id, atlas)
+            save_state(state)
+            print(f"Agent '{agent_id}' assigned to atlas '{atlas}'")
+    else:
+        # Legacy mode (no agent_id): pick first unlocked atlas, or first if none locked
+        locked = _locked_atlases(state)
+        atlas = queue[0]
+        for candidate in queue:
+            if candidate not in locked:
+                atlas = candidate
+                break
+
     info = state["atlases"].get(atlas)
 
     if info is None:
@@ -662,6 +847,13 @@ def cmd_golive(atlas):
         state["queue"].remove(atlas)
     if atlas not in state.get("completed", []):
         state.setdefault("completed", []).append(atlas)
+
+    # Release any agent that was working on this atlas
+    assignments = _get_assignments(state)
+    for agent_id in list(assignments.keys()):
+        if assignments[agent_id].get("atlas") == atlas:
+            del assignments[agent_id]
+            print(f"Released agent '{agent_id}' (atlas '{atlas}' is now live)")
     state.setdefault("session_log", []).append(
         {"atlas": atlas, "phase_done": "GO_LIVE", "items": info["items"]}
     )
@@ -718,19 +910,44 @@ def cmd_status():
     print(f"  Live:      {len(completed)}")
     print(f"  Remaining: {len(queue)}")
     print(f"  Progress:  {len(completed)}/{total} ({100*len(completed)//total}%)")
+
+    # Show active agent assignments
+    assignments = _get_assignments(state)
+    locked = _locked_atlases(state)  # also cleans expired locks
+    active_agents = {aid: info for aid, info in assignments.items()
+                     if info["atlas"] in locked}
+    if active_agents:
+        print(f"\n  Active agents: {len(active_agents)}")
+        for aid, info in active_agents.items():
+            age_mins = int(_lock_age_secs(info.get("claimed_at", "")) / 60)
+            atlas_info = state["atlases"].get(info["atlas"], {})
+            print(f"    {aid:<24} → {info['atlas']:<16} phase={atlas_info.get('phase','?'):<6} ({age_mins}m ago)")
+    else:
+        print(f"\n  Active agents: 0")
+
     if queue:
-        a = queue[0]
-        info = state["atlases"].get(a, {})
-        n = count_items(a)
-        t = info.get("target", 100)
-        print(f"\n  Next: {a}  phase={info.get('phase','?')}  items={n}/{t}")
-        bar = int(30 * n / t) if t else 0
-        print(f"  [{'█'*bar}{'░'*(30-bar)}] {n}/{t}")
+        # Show next unassigned atlas
+        next_free = None
+        for a in queue:
+            if a not in locked:
+                next_free = a
+                break
+        if next_free:
+            info = state["atlases"].get(next_free, {})
+            n = count_items(next_free)
+            t = info.get("target", 100)
+            print(f"\n  Next free: {next_free}  phase={info.get('phase','?')}  items={n}/{t}")
+            bar = int(30 * n / t) if t else 0
+            print(f"  [{'█'*bar}{'░'*(30-bar)}] {n}/{t}")
+        elif locked:
+            print(f"\n  All {len(queue)} queued atlases are locked by agents.")
+
     print(f"\n  Queue preview:")
     for a in queue[:10]:
         info = state["atlases"].get(a, {})
         n = count_items(a)
-        print(f"    {a:<20} phase={info.get('phase','?'):<6} {n}/{info.get('target',100)}")
+        lock_marker = " 🔒" if a in locked else ""
+        print(f"    {a:<20} phase={info.get('phase','?'):<6} {n}/{info.get('target',100)}{lock_marker}")
     print()
 
 
@@ -764,8 +981,18 @@ def cmd_verify():
     for a in state.get("completed", []):
         if a not in state["atlases"]:
             errors.append(f"In completed but missing from atlases: {a}")
+    # Verify agent assignments point to valid atlases
+    assignments = _get_assignments(state)
+    for agent_id, info in assignments.items():
+        atlas = info.get("atlas")
+        if atlas and atlas not in state["atlases"]:
+            errors.append(f"Agent '{agent_id}' assigned to unknown atlas: {atlas}")
+        if atlas and atlas not in queue:
+            errors.append(f"Agent '{agent_id}' assigned to atlas '{atlas}' not in queue")
+    locked = _locked_atlases(state)
     print(f"Atlases: {len(state['atlases'])}  Queue: {len(set(queue))}  "
           f"Completed: {len(state.get('completed',[]))}  "
+          f"Locked: {len(locked)}  "
           f"Total: {len(set(queue)) + len(state.get('completed',[]))}")
     if errors:
         print(f"\nERRORS:")
@@ -914,6 +1141,16 @@ if __name__ == "__main__":
         result = get_next_action(load_state())
         if result is not None:
             print(json.dumps(result, indent=2))
+    elif sys.argv[1] == "--agent" and len(sys.argv) == 3:
+        # Agent-aware next action: claims an atlas for this agent
+        agent_id = sys.argv[2]
+        result = get_next_action(load_state(), agent_id=agent_id)
+        if result is not None:
+            print(json.dumps(result, indent=2))
+    elif sys.argv[1] == "claim" and len(sys.argv) == 3:
+        cmd_claim(sys.argv[2])
+    elif sys.argv[1] == "release" and len(sys.argv) == 3:
+        cmd_release(sys.argv[2])
     elif sys.argv[1] == "advance" and len(sys.argv) == 4:
         cmd_advance(sys.argv[2], sys.argv[3])
     elif sys.argv[1] == "item_done" and len(sys.argv) == 3:
