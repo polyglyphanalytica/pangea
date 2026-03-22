@@ -169,12 +169,17 @@
       "section": "I"
     },
     "debitum": {
-      "phase": "3",
-      "items": 100,
+      "phase": "5",
+      "items": 134,
       "target": 100,
       "live": false,
       "map": "world",
-      "section": "VII"
+      "section": "VII",
+      "validated_sha": "00be8e07e0dac33dd54da8b126358a75d09752f7",
+      "validated_short": "00be8e0",
+      "validated_at": "2026-03-22T22:13:02.539858Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "sophia": {
       "phase": "1A",
@@ -4710,6 +4715,12 @@
       "atlas": "debitum",
       "batch": "100-100",
       "items": 100
+    },
+    {
+      "atlas": "debitum",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 134
     }
   ],
   "assignments": {}
