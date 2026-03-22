@@ -708,10 +708,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'casualties',ico:'☠',lbl:'Casualties & Human Toll',col:'#e85050'},
+{id:'causes',ico:'⚡',lbl:'Causes & Origins',col:'#e8a020'},
+{id:'combustion_science',ico:'🔬',lbl:'Combustion Science',col:'#50b0e8'},
+{id:'cultural_impact',ico:'🎭',lbl:'Cultural Impact',col:'#c878e0'},
+{id:'ecological_impact',ico:'🌿',lbl:'Ecological Impact',col:'#50c070'},
+{id:'economic_impact',ico:'💰',lbl:'Economic Impact',col:'#e8c830'},
+{id:'energy',ico:'⚛',lbl:'Energy',col:'#e87830'},
+{id:'extinction_events',ico:'💀',lbl:'Extinction Events',col:'#a04040'},
+{id:'firefighting',ico:'🚒',lbl:'Firefighting & Response',col:'#d04020'},
+{id:'fuel_sources',ico:'⛽',lbl:'Fuel Sources',col:'#b08030'},
+{id:'industrial_fire',ico:'🏭',lbl:'Industrial Fire',col:'#808080'},
+{id:'legal_response',ico:'⚖',lbl:'Legal Response',col:'#6080c0'},
+{id:'military_fire',ico:'⚔',lbl:'Military Fire',col:'#708050'},
+{id:'mythology',ico:'🐉',lbl:'Mythology & Symbolism',col:'#d0a050'},
+{id:'nuclear_fire',ico:'☢',lbl:'Nuclear Fire',col:'#40c0a0'},
+{id:'prevention',ico:'🛡',lbl:'Prevention',col:'#4090e0'},
+{id:'reconstruction',ico:'🏗',lbl:'Reconstruction',col:'#60a080'},
+{id:'spread_pattern',ico:'🌊',lbl:'Spread Pattern',col:'#e06040'},
+{id:'technology',ico:'⚙',lbl:'Technology',col:'#9080c0'},
+{id:'urban_fire',ico:'🏙',lbl:'Urban Fire',col:'#c0a060'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-4600000000,n:'STELLAR FIRE'},
+{y:-790000,n:'FIRST CONTROLLED FIRE'},
+{y:-400000,n:'FIRE-HARDENED TOOLS'},
+{y:-65000,n:'FIRE MANAGEMENT ERA'},
+{y:-20000,n:'PYROTECHNOLOGY DAWN'},
+{y:-3500,n:'KILN & SMELTING AGE'},
+{y:-1200,n:'IRON AGE FIRE'},
+{y:-500,n:'CLASSICAL FIRE'},
+{y:500,n:'MEDIEVAL FIRE'},
+{y:1200,n:'GUNPOWDER AGE'},
+{y:1666,n:'GREAT FIRES ERA'},
+{y:1760,n:'INDUSTRIAL FIRE'},
+{y:1856,n:'STEEL & STEAM AGE'},
+{y:1942,n:'ATOMIC FIRE'},
+{y:1970,n:'ENVIRONMENTAL FIRE'},
+{y:2000,n:'CLIMATE FIRE ERA'}
+];
 
 const ITEMS=[
 {id:'controlled_fire',nm:'First Controlled Fire',sb:'Gesher Benot Ya\'aqov, Israel · 790,000 BCE',s:-790000,e:-400000,lon:35.6,lat:33,fp:{destr:1,scale:1,dur:10,tech:10,human:1,legacy:10},conns:['cooking_fire','fire_hardened_tools','campfire_social'],overview:'The earliest convincing evidence of controlled fire use comes from Gesher Benot Ya\'aqov in Israel, where clusters of burned flint and wood dating to 790,000 years ago suggest Homo erectus deliberately maintained hearths. This was not fire-making but fire-keeping — capturing natural fire from lightning strikes or volcanic activity and sustaining it. The ability to control fire is arguably the most consequential technology in human history, enabling cooking, warmth, protection from predators, and the social gathering that shaped human cognition.',d:{
@@ -4420,10 +4458,67 @@ conomy:'Subsistence agriculture (sweet potato, taro, sugarcane) and fishing; the
       migration:'The Polynesian settlement of Rapa Nui around 900 CE represents the eastern limit of Polynesian expansion — 2,000 kilometres beyond any previous Polynesian settlement.'}},
 ];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'controlled_fire',to:'cooking_fire',concept:'Mastery of Fire',year:-500000,desc:'Controlled fire enabled the systematic cooking of food, transforming human nutrition and cognition.'},
+{from:'cooking_fire',to:'fire_hardened_tools',concept:'Mastery of Fire',year:-400000,desc:'Fire-keeping communities discovered that charring wood in fire hardened it for use as tools and weapons.'},
+{from:'fire_hardened_tools',to:'pottery_kilns',concept:'Mastery of Fire',year:-20000,desc:'The skill of applying fire to transform wood evolved into applying fire to transform clay into pottery.'},
+{from:'pottery_kilns',to:'copper_smelting',concept:'Pyrotechnology Chain',year:-5000,desc:'High-temperature pottery kilns achieved temperatures sufficient to smelt copper ore into metal.'},
+{from:'copper_smelting',to:'iron_smelting',concept:'Pyrotechnology Chain',year:-1200,desc:'Metalworkers pushed kiln temperatures higher, eventually achieving the 1250°C needed to smelt iron from ore.'},
+{from:'iron_smelting',to:'steelmaking',concept:'Pyrotechnology Chain',year:1856,desc:'The Bessemer process transformed iron smelting into mass steel production through controlled oxidation.'},
+{from:'charcoal',to:'coke_fuel',concept:'Fuel Evolution',year:1709,desc:'Abraham Darby replaced charcoal with coke in iron smelting, breaking the dependence on forest fuel.'},
+{from:'coke_fuel',to:'steam_power',concept:'Fuel Evolution',year:1712,desc:'Coal-derived coke powered the mines that produced the coal that fired the steam engines.'},
+{from:'steam_power',to:'industrial_revolution',concept:'Fuel Evolution',year:1760,desc:'Steam engines powered the factories that defined the Industrial Revolution.'},
+{from:'industrial_revolution',to:'fossil_fuel_economy',concept:'Fuel Evolution',year:1850,desc:'The industrial system expanded from coal to oil and gas, creating the global fossil fuel economy.'},
+{from:'fossil_fuel_economy',to:'climate_fire',concept:'Fuel Evolution',year:2000,desc:'Fossil fuel combustion warmed the climate, creating conditions for unprecedented megafires.'},
+{from:'gunpowder',to:'military_incendiaries',concept:'Weapons of Fire',year:1200,desc:'Chinese gunpowder weapons spread westward, initiating the development of incendiary warfare.'},
+{from:'military_incendiaries',to:'napalm',concept:'Weapons of Fire',year:1942,desc:'Harvard chemists developed napalm — gelled petroleum — as the ultimate incendiary weapon.'},
+{from:'napalm',to:'hiroshima',concept:'Weapons of Fire',year:1945,desc:'The firebombing campaigns led directly to the decision to use nuclear weapons against Japan.'},
+{from:'hiroshima',to:'nuclear_power',concept:'Atoms for Peace',year:1942,desc:'The Manhattan Project\'s nuclear fission technology was repurposed for civilian electricity generation.'},
+{from:'nuclear_power',to:'chernobyl',concept:'Atoms for Peace',year:1986,desc:'The Chernobyl disaster revealed the catastrophic potential of nuclear fire when safety systems fail.'},
+{from:'chernobyl',to:'fukushima',concept:'Atoms for Peace',year:2011,desc:'Fukushima reproved that nuclear safety must account for natural disasters beyond design basis.'},
+{from:'greek_fire',to:'napalm',concept:'Inextinguishable Fire',year:1942,desc:'Napalm achieved what Greek fire\'s inventors sought: an incendiary that water cannot extinguish.'},
+{from:'great_fire_london',to:'fire_safety_codes',concept:'Codes from Catastrophe',year:1667,desc:'London\'s Great Fire drove the first comprehensive urban building codes.'},
+{from:'triangle_fire',to:'fire_safety_codes',concept:'Codes from Catastrophe',year:1911,desc:'The Triangle Shirtwaist fire drove workplace safety and exit requirements.'},
+{from:'cocoanut_grove',to:'fire_safety_codes',concept:'Codes from Catastrophe',year:1942,desc:'The Cocoanut Grove fire mandated sprinklers and panic hardware in nightclubs.'},
+{from:'oil_lamp',to:'candle',concept:'Light from Fire',year:-3000,desc:'Solid-fuel candles offered portability advantages over liquid-fuel oil lamps.'},
+{from:'candle',to:'the_match',concept:'Light from Fire',year:1826,desc:'The friction match made fire instant and portable, enabling candle and lamp use anywhere.'},
+{from:'the_match',to:'electrification',concept:'Light from Fire',year:1879,desc:'Electric lighting replaced match-lit candles and lamps, ending millennia of fire-based illumination.'},
+{from:'campfire_social',to:'cremation',concept:'Sacred Fire',year:-40000,desc:'The social campfire\'s sacred associations extended to the ritual use of fire for the dead.'},
+{from:'zoroastrian_fire',to:'vedic_fire',concept:'Sacred Fire',year:-1500,desc:'Indo-Iranian fire worship traditions branched into Zoroastrian and Vedic fire rituals.'},
+{from:'vedic_fire',to:'cremation',concept:'Sacred Fire',year:-1500,desc:'Vedic fire theology made cremation the central funerary rite of Hindu civilisation.'},
+{from:'california_wildfires',to:'climate_fire',concept:'Climate Fire Spiral',year:2017,desc:'California\'s unprecedented fire seasons demonstrated the link between warming and megafire.'},
+{from:'black_summer',to:'canadian_wildfires_2023',concept:'Climate Fire Spiral',year:2023,desc:'Australia\'s Black Summer and Canada\'s 2023 fires showed climate fire as a global phenomenon.'},
+{from:'davy_lamp',to:'fire_safety_codes',concept:'Safety Innovation',year:1815,desc:'The Davy lamp established the principle that fire hazards can be engineered away through science.'},
+{from:'fire_safety_codes',to:'kings_cross_fire',concept:'Safety Innovation',year:1987,desc:'King\'s Cross revealed that even established safety regimes can miss critical fire behaviours.'},
+{from:'rocket_propulsion',to:'the_sun',concept:'Fire Beyond Earth',year:1969,desc:'Rocket propulsion — pillar of fire — carried humans to see the Sun\'s fire from the Moon.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'controlled_fire':[{nm:'Unknown Fire-Keepers',role:'First fire tenders',yr:-790000,desc:'Archaeological evidence suggests that fire-keeping — the continuous maintenance of hearth fires — was likely performed by women in early hominin groups, as it required sustained attention compatible with childcare and food preparation. The role of women as fire-keepers may have been the first gendered division of labour in human history.'}],
+'cooking_fire':[{nm:'Unknown Cooks',role:'First fire-cooks',yr:-500000,desc:'The transformation of raw food into cooked food through fire was almost certainly developed by women, who in virtually all documented hunter-gatherer societies are the primary food processors. Richard Wrangham\'s cooking hypothesis identifies this female innovation as the catalyst for the cognitive revolution that produced Homo sapiens.'}],
+'great_fire_london':[{nm:'Elizabeth Pepys',role:'Evacuee and diarist\'s wife',yr:1666,desc:'Elizabeth Pepys, wife of Samuel Pepys, helped bury their valuables (including Parmesan cheese and wine) in the garden to protect them from the fire, organised the household\'s evacuation, and supported her husband through the crisis. Her role, though recorded only through Samuel\'s diary, represents the experience of thousands of London women who managed households during the catastrophe.'}],
+'triangle_fire':[{nm:'Rose Schneiderman',role:'Labour organiser',yr:1911,desc:'Rose Schneiderman, a Romanian-born Jewish immigrant and labour organiser, gave one of the most powerful speeches in American labour history at the memorial meeting for the 146 Triangle victims: "I would be a traitor to these poor burned bodies if I came here to talk good fellowship." Her speech galvanised the labour movement and drove workplace safety reform.'},{nm:'Frances Perkins',role:'Witness and future Secretary of Labor',yr:1911,desc:'Frances Perkins witnessed the Triangle fire from the street — watching workers jump to their deaths — and it transformed her life. She became the first woman in a US Cabinet position as Franklin Roosevelt\'s Secretary of Labor (1933–1945) and championed the New Deal\'s worker safety provisions, directly inspired by the Triangle dead.'}],
+'davy_lamp':[{nm:'Jane Marcet',role:'Science communicator',yr:1805,desc:'Jane Marcet\'s Conversations on Chemistry (1805) was one of the most influential popular science books of the 19th century, making Humphry Davy\'s combustion research — including the principles behind the safety lamp — accessible to a wide audience. Michael Faraday credited Marcet\'s book with inspiring his scientific career. Her work bridging fire science and public understanding was foundational.'}],
+'nuclear_power':[{nm:'Lise Meitner',role:'Nuclear physicist',yr:1938,desc:'Lise Meitner co-discovered nuclear fission with Otto Hahn in 1938 — the discovery that made nuclear power (and nuclear weapons) possible. She was the first to correctly interpret the experimental results as the splitting of the uranium nucleus, calculating the enormous energy release using Einstein\'s E=mc². She was denied the Nobel Prize that Hahn received alone — one of the most egregious omissions in Nobel history.'},{nm:'Chien-Shiung Wu',role:'Experimental physicist',yr:1957,desc:'Chien-Shiung Wu\'s experimental proof of parity violation (1957) overturned a fundamental assumption of physics. Her work on nuclear reactor chain reactions during the Manhattan Project was critical to understanding the fire of nuclear fission. Known as the "First Lady of Physics," she was denied the Nobel Prize for work that earned her male collaborators the award.'}],
+'chernobyl':[{nm:'Lyudmilla Ignatenko',role:'Wife of firefighter Vasily Ignatenko',yr:1986,desc:'Lyudmilla Ignatenko, whose husband Vasily was one of the first firefighters to respond to the Chernobyl explosion, stayed by his side as he died of acute radiation syndrome over 14 days — her story, told in Svetlana Alexievich\'s Voices from Chernobyl, is one of the most devastating testimonies of nuclear fire\'s human cost. She was pregnant; the radiation she absorbed contributed to the death of her newborn daughter.'}],
+'california_wildfires':[{nm:'Crystal Kolden',role:'Fire scientist',yr:2017,desc:'Crystal Kolden, a pyrogeographer at the University of California, Merced, has been one of the leading researchers on the relationship between climate change and wildfire in the American West. Her work on fire weather, prescribed burning, and WUI risk has shaped scientific understanding of why California burns and what can be done to reduce fire risk.'}],
+'climate_fire':[{nm:'Christine Eriksen',role:'Fire geographer',yr:2014,desc:'Christine Eriksen\'s research on gender, disaster, and bushfire in Australia has revealed that women experience wildfire differently from men — in evacuation decision-making, post-fire recovery, and vulnerability. Her work has transformed emergency management to account for gendered fire impacts, improving outcomes for women in fire-affected communities.'}],
+'steelmaking':[{nm:'Mary Walton',role:'Industrial pollution innovator',yr:1881,desc:'Mary Walton invented a system to reduce pollution from industrial chimneys — including steel mill smokestacks — patenting her air pollution abatement device in 1879. She also invented a noise-reduction system for elevated railways. Her work on industrial fire pollution predated government regulation by decades and addressed the environmental consequences of steelmaking that male industrialists ignored.'}],
+'coal_mining':[{nm:'Ann Clough',role:'Pit-brow woman',yr:1842,desc:'Ann Clough and thousands of "pit-brow women" — women who worked at the surface of coal mines sorting, screening, and loading coal — were central to the coal industry throughout the 19th century. The Mines Act of 1842 banned women from working underground but the pit-brow women continued surface work. Their labour sustained the fuel supply that powered the Industrial Revolution.'},{nm:'Mary Harris "Mother" Jones',role:'Labour organiser',yr:1900,desc:'Mother Jones was the most famous labour organiser in American mining history, leading strikes, marches, and campaigns for coal miners\' rights from the 1890s through the 1920s. Her phrase "Pray for the dead and fight like hell for the living" became the motto of the labour movement. She organised miners\' wives and families alongside the miners themselves.'}],
+'fossil_fuel_economy':[{nm:'Eunice Newton Foote',role:'Climate scientist',yr:1856,desc:'Eunice Newton Foote demonstrated in 1856 — three years before John Tyndall\'s more famous experiments — that carbon dioxide absorbs heat and that increasing CO2 would warm the atmosphere. Her paper was presented at the AAAS by a male colleague because women were not permitted to present. Foote identified the fundamental mechanism by which fossil fuel combustion drives climate change, 170 years before the crisis she predicted.'}],
+'fire_safety_codes':[{nm:'Sara Wermiel',role:'Fire engineering historian',yr:1998,desc:'Sara Wermiel\'s research on the history of fireproof building construction in America — published as The Fireproof Building (2000) — is the definitive account of how fire codes evolved from catastrophe. Her work connects every building code to the specific fire that inspired it, demonstrating that fire safety regulation is written in the blood of victims.'}],
+'the_match':[{nm:'Match Girls of Bryant and May',role:'Labour strikers',yr:1888,desc:'The 1,400 women and girls of the Bryant and May match factory in London went on strike in July 1888 to protest wages of 4 shillings per week, "phossy jaw" from white phosphorus exposure, and punitive fines. The Match Girls\' Strike — organised by Annie Besant — was one of the first successful strikes by unskilled workers in Britain and helped spark the New Unionist movement that transformed British labour relations.'}],
+'cocoanut_grove':[{nm:'Dr. Francis Daniels Moore\'s nursing staff',role:'Burn care pioneers',yr:1942,desc:'The nursing staff at Massachusetts General Hospital — overwhelmingly women — provided the critical care for Cocoanut Grove burn survivors that led to breakthroughs in fluid replacement therapy. Head nurse Anne Hargreaves organised the triage and treatment of hundreds of burn patients in conditions of extreme crisis, developing protocols that saved lives and advanced burn medicine.'}],
+'campfire_social':[{nm:'Polly Wiessner',role:'Anthropologist',yr:2014,desc:'Polly Wiessner\'s groundbreaking 2014 study of Ju/\'hoansi Bushmen demonstrated that 81% of nighttime fireside conversation was storytelling — compared to only 6% during the day. Her research provided the first empirical evidence that the campfire created human narrative culture. Wiessner\'s work connects the social campfire to the origins of language, imagination, and cultural transmission.'}],
+'hiroshima':[{nm:'Sadako Sasaki',role:'Hibakusha (bomb survivor)',yr:1955,desc:'Sadako Sasaki was two years old when the Hiroshima bomb detonated 1.7 km from her home. She developed leukaemia at age 11 and, following a Japanese legend, began folding paper cranes — believing that folding 1,000 would grant her wish to live. She died in 1955, and her story inspired the Children\'s Peace Monument in Hiroshima. Sadako became the global symbol of nuclear fire\'s innocent victims.'}],
+'library_alexandria':[{nm:'Hypatia of Alexandria',role:'Mathematician and philosopher',yr:415,desc:'Hypatia of Alexandria — the last great scholar of the Alexandrian intellectual tradition — was a mathematician, astronomer, and Neoplatonist philosopher who led the Platonic school of Alexandria. She was murdered by a Christian mob in 415 CE. While she lived centuries after the library\'s main destructions, she embodied the intellectual tradition that the library had created and that fire and violence ultimately ended.'}],
+'permian_extinction':[{nm:'Jennifer Clack',role:'Palaeontologist',yr:2002,desc:'Jennifer Clack\'s research on Devonian and Carboniferous tetrapods transformed understanding of the evolution of terrestrial vertebrates — the animals that would eventually survive (or perish in) the Permian extinction. Her discovery of Acanthostega demonstrated that the colonisation of land — which created the terrestrial fuel loads that enable fire — was more complex than previously understood.'}],
+'wildfire_ecology':[{nm:'Cristina Santín',role:'Fire ecologist',yr:2016,desc:'Cristina Santín, a Spanish fire ecologist at Swansea University, has pioneered research on the effects of wildfire on soil carbon and ecosystem recovery. Her work demonstrates that fire severity — not just fire frequency — determines whether burned landscapes recover or transition to new ecological states. Santín\'s research is reshaping prescribed burning practices to prioritise soil health.'}],
+'kremation':[{nm:'Jessica Mitford',role:'Funeral industry reformer',yr:1963,desc:'Jessica Mitford\'s The American Way of Death (1963) exposed the exploitative practices of the American funeral industry and advocated for cremation as a dignified, affordable alternative to the commercial funeral. Her work drove the growth of the cremation movement in the US, from 4% in 1963 to over 60% today — transforming Americans\' relationship with fire and death.'}],
+'napalm':[{nm:'Phan Thi Kim Phúc',role:'Napalm survivor and peace activist',yr:1972,desc:'Phan Thi Kim Phúc — the "girl in the picture" — was nine years old when a South Vietnamese aircraft dropped napalm on her village of Trảng Bàng on 8 June 1972. Nick Ut\'s Pulitzer Prize-winning photograph of her running naked, her clothes burned away by napalm, became the most influential anti-war image in history. She survived, endured 17 surgeries, and became a UNESCO Goodwill Ambassador and peace activist.'}],
+'grenfell_tower':[{nm:'Natasha Elcock',role:'Survivor and justice campaigner',yr:2017,desc:'Natasha Elcock, a Grenfell Tower resident who escaped the fire with her family from the 11th floor, became chair of Grenfell United — the survivors\' campaign group that fought for justice, accountability, and systemic change in the aftermath of the fire. Her leadership ensured that the victims\' voices were heard in the public inquiry and the national debate about building safety and social housing.'}]
+};
 
 let year=-400000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -5943,7 +6038,21 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Primordial Fire':['the_sun','permian_extinction','ring_of_fire','controlled_fire','cooking_fire','fire_making','campfire_social','fire_hardened_tools'],
+'Mediterranean Fire':['great_fire_rome','vesuvius','library_alexandria','lighthouse','great_fire_smyrna','olympic_flame','prometheus_myth'],
+'Asian Fire':['pottery_kilns','gunpowder','fireworks','great_fire_meireki','zoroastrian_fire','vedic_fire','cremation'],
+'Industrial Fire':['steam_power','industrial_revolution','coal_mining','steelmaking','coke_fuel','electrification','internal_combustion','fossil_fuel_economy'],
+'Urban Conflagrations':['great_fire_london','chicago_fire','san_francisco_fire','great_boston_fire','burning_baghdad','burning_washington','notre_dame_fire'],
+'Nuclear & Atomic Fire':['hiroshima','nuclear_power','chernobyl','fukushima','three_mile_island','windscale_fire'],
+'Military & Weapons Fire':['greek_fire','napalm','military_incendiaries','gunpowder','dresden_firebombing','tokyo_firebombing','london_blitz'],
+'Industrial Disasters':['triangle_fire','texas_city_disaster','bhopal','piper_alpha','deepwater_horizon','beirut_explosion','grenfell_tower'],
+'Theatre & Nightclub Fires':['iroquois_theatre','cocoanut_grove','station_nightclub','kings_cross_fire'],
+'Climate & Wildfire':['climate_fire','california_wildfires','black_summer','siberian_fires','amazon_fires_2019','canadian_wildfires_2023','lahaina_fire','portugal_fires_2017','indonesian_peat_fires','yellowstone_1988'],
+'Fire Technology':['charcoal','the_match','candle','oil_lamp','the_torch','davy_lamp','glassmaking','brickmaking','distillation','fire_safety_codes'],
+'Ecological Fire':['wildfire_ecology','aboriginal_fire','slash_burn_agriculture','campfire_social','spontaneous_combustion'],
+'Sacred & Symbolic Fire':['zoroastrian_fire','vedic_fire','cremation','olympic_flame','eternal_flame','prometheus_myth']
+};
 
 const HERITAGE_REASONS={
   celts:'Celtic language, law & festival tradition',
