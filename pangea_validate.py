@@ -712,6 +712,29 @@ def validate_homepage():
                    len(missing_files) == 0,
                    f"missing: {missing_files}" if missing_files else "OK"))
 
+    # ── Live atlases in state must have card--live on homepage ─────────────
+    state_path = Path("pangea_state.json")
+    if state_path.exists():
+        state = json.loads(state_path.read_text())
+        wrong_status = []
+        for atlas_key, info in state.get("atlases", {}).items():
+            if not info.get("live"):
+                continue
+            display_name = info.get("homepage_name", atlas_key.capitalize())
+            has_live = bool(re.search(
+                rf'card--live.*?{re.escape(display_name)}', html, re.DOTALL
+            ))
+            if not has_live:
+                has_other = "building" if re.search(
+                    rf'card--building.*?{re.escape(display_name)}', html, re.DOTALL
+                ) else "forthcoming" if re.search(
+                    rf'card--forthcoming.*?{re.escape(display_name)}', html, re.DOTALL
+                ) else "missing"
+                wrong_status.append(f"{atlas_key} ({has_other})")
+        checks.append(("all live atlases have card--live on homepage",
+                       len(wrong_status) == 0,
+                       f"wrong: {wrong_status}" if wrong_status else "OK"))
+
     # ── Card grid div nesting ──────────────────────────────────────────────
     # Quick check: count card-grid opens/closes
     grid_opens = html.count('class="card-grid"')

@@ -4444,8 +4444,12 @@ function toggleTheme() {
 (function(){try{
   const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('flora-theme');
   if(saved){applyTheme(saved);}
-  else{document.documentElement.dataset.theme='dark';const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent='◑';}
-}catch(e){document.documentElement.dataset.theme='dark';const _tb3=document.getElementById('theme-btn');if(_tb3)_tb3.textContent='◑';}})();
+  else{
+    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+    document.documentElement.dataset.theme=sys;
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
+  }
+}catch(e){}})();
 
 // ── BURGER ──
 function toggleBurger() {

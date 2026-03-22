@@ -6,7 +6,7 @@
 <title>Via — The Trade Route Atlas | 100 Routes, 5,000 Years of Global Commerce</title>
 
 <!-- Primary SEO -->
-<meta name="description" content="Explore 100 trade routes across 5,000 years of global commerce on an interactive world map. Navigate a continuous timeline from the earliest Mesopotamian trade networks to modern container shipping, with 20 interpretive lenses, commodity transmission chains, What-If scenarios, and a Herstory mode tracing women who shaped every trade route.">
+<meta name="description" content="Explore 120 trade routes across 5,000 years of global commerce on an interactive world map. Navigate a continuous timeline from the earliest Mesopotamian trade networks to modern container shipping, with 20 interpretive lenses, commodity transmission chains, What-If scenarios, and a Herstory mode tracing women who shaped every trade route.">
 <meta name="keywords" content="trade routes map, interactive history, silk road, spice trade, maritime trade, commerce history, global trade, economic history, trade networks, commodities">
 <meta name="author" content="Polyglyph Analytica">
 <meta name="robots" content="index, follow">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/via/">
 <meta property="og:title" content="Via — The Trade Route Atlas">
-<meta property="og:description" content="100 trade routes. 5,000 years. Every route from sail to container — mapped, connected, and explorable.">
+<meta property="og:description" content="120 trade routes. 5,000 years. Every route from sail to container — mapped, connected, and explorable.">
 <meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/via/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@polyglyphanalytica">
 <meta name="twitter:title" content="Via — The Trade Route Atlas">
-<meta name="twitter:description" content="100 trade routes. 5,000 years. Every route from sail to container — mapped, connected, and explorable.">
+<meta name="twitter:description" content="120 trade routes. 5,000 years. Every route from sail to container — mapped, connected, and explorable.">
 <meta name="twitter:image" content="https://polyglyphanalytica.github.io/pangea/via/og-image.png">
 
 <!-- Structured Data -->
@@ -50,7 +50,7 @@
     "name": "Polyglyph Analytica"
   },
   "featureList": [
-    "100 trade routes from ancient Mesopotamia to modern container shipping",
+    "120 trade routes from ancient Mesopotamia to modern container shipping",
     "5,000-year interactive timeline",
     "20 interpretive lenses including Commodities, Infrastructure, Maritime, Geopolitics",
     "Commodity transmission chains across trade networks",
@@ -1539,7 +1539,7 @@ function renderDrawer(){
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Trade Route Atlas</div>
 
       <div style="font-size:13.5px;line-height:1.85;color:var(--txt2);margin-bottom:18px">
-        100 trade routes. 5,000 years. Every path that carried goods, ideas, and people across the world — mapped, connected, and explorable. From the earliest Mesopotamian trade networks to modern container shipping, rendered on a real geographic projection and navigable across a continuous timeline.
+        120 trade routes. 5,000 years. Every path that carried goods, ideas, and people across the world — mapped, connected, and explorable. From the earliest Mesopotamian trade networks to modern container shipping, rendered on a real geographic projection and navigable across a continuous timeline.
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">The Map</div>
@@ -2040,8 +2040,8 @@ function shareState(){
   const civName=sel?sel.nm:null;
   const shareTitle='Via — The Trade Route Atlas';
   const shareText=civName
-    ? `Explore ${civName} on Via — 100 trade routes, 5,000 years of global commerce`
-    : 'Via — 100 trade routes, 5,000 years of global commerce, all in one map';
+    ? `Explore ${civName} on Via — 120 trade routes, 5,000 years of global commerce`
+    : 'Via — 120 trade routes, 5,000 years of global commerce, all in one map';
 
   // Use native share sheet on devices that support it (iOS, Android, modern desktop)
   if(navigator.share){
@@ -3379,7 +3379,7 @@ function toggleTheme(){
   applyTheme(cur==='dark'?'light':'dark');
 }
 
-(function(){
+(function(){try{
   // Prefer pangea-theme (project-wide), fall back to civ-theme (legacy), then system
   const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('civ-theme');
   if(saved){applyTheme(saved);}
@@ -3388,7 +3388,7 @@ function toggleTheme(){
     document.documentElement.dataset.theme=sys;
     const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
   }
-})();
+}catch(e){}})();
 
 // ── MOBILE DRAWER ──
 const isMobile=()=>window.innerWidth<=768 && window.matchMedia('(orientation:portrait)').matches;
