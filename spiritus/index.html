@@ -3353,7 +3353,101 @@ science:'The 1999–2001 Iranian drought resulted from persistent below-average 
 trade:'The drought devastated Iran\'s agricultural export sector. Pistachio exports — normally worth $1.5 billion annually — declined sharply. Saffron production from Khorasan was affected. The carpet industry — dependent on wool from livestock that perished in the drought — suffered supply disruptions. Iran was forced to import wheat at significant cost. The trade impact demonstrated that Iran\'s non-oil economy was vulnerable to atmospheric disruption despite the country\'s petrochemical wealth.'}},
 ];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+// Chain 1: Birth of Weather Forecasting
+{from:'beaufort_scale',to:'weather_telegraph',concept:'Birth of Weather Forecasting',year:1854,desc:'Beaufort\'s standardised wind scale enabled the telegraph-era weather networks to transmit comparable observations.'},
+{from:'weather_telegraph',to:'numerical_weather',concept:'Birth of Weather Forecasting',year:1922,desc:'Telegraph weather networks provided the data that Richardson envisioned computing into forecasts.'},
+{from:'numerical_weather',to:'weather_satellites',concept:'Birth of Weather Forecasting',year:1960,desc:'Numerical models needed global data that only satellites could provide.'},
+{from:'weather_satellites',to:'doppler_radar',concept:'Birth of Weather Forecasting',year:1971,desc:'Satellite-identified storm systems were then examined in detail by Doppler radar.'},
+// Chain 2: Volcanic Climate Chain
+{from:'toba',to:'thera_eruption',concept:'Volcanic Climate Chain',year:-1600,desc:'The Thera eruption reprised Toba\'s pattern of volcanic cooling disrupting civilisations.'},
+{from:'thera_eruption',to:'volcanic_536',concept:'Volcanic Climate Chain',year:536,desc:'The 536 CE volcanic fog created the worst short-term cooling since Thera.'},
+{from:'volcanic_536',to:'laki_eruption',concept:'Volcanic Climate Chain',year:1783,desc:'Laki\'s haze famine replicated the 536 pattern of volcanic aerosols causing crop failure.'},
+{from:'laki_eruption',to:'tambora_1815',concept:'Volcanic Climate Chain',year:1815,desc:'Tambora produced the most severe volcanic climate disruption since Laki.'},
+{from:'tambora_1815',to:'krakatoa',concept:'Volcanic Climate Chain',year:1883,desc:'Krakatoa\'s global cooling followed Tambora\'s precedent and was better documented.'},
+{from:'krakatoa',to:'pinatubo',concept:'Volcanic Climate Chain',year:1991,desc:'Pinatubo was the first eruption whose cooling effect was predicted using models calibrated against Krakatoa data.'},
+// Chain 3: Hurricane Science
+{from:'great_hurricane_1780',to:'galveston_1900',concept:'Hurricane Science',year:1900,desc:'Galveston\'s disaster forced the US to confront the hurricane forecasting failure that 1780 had first exposed.'},
+{from:'galveston_1900',to:'hurricane_belt',concept:'Hurricane Science',year:1935,desc:'The Atlantic hurricane season became formally tracked after Galveston demonstrated the need.'},
+{from:'hurricane_belt',to:'weather_satellites',concept:'Hurricane Science',year:1961,desc:'Satellites revealed the full scale of Atlantic hurricanes for the first time.'},
+{from:'weather_satellites',to:'katrina',concept:'Hurricane Science',year:2005,desc:'Katrina was well-tracked by satellites but exposed failures in communicating risk.'},
+// Chain 4: Clean Air Movement
+{from:'donora_fog',to:'great_smog',concept:'Clean Air Movement',year:1952,desc:'London\'s Great Smog replicated Donora\'s lethal inversion on a far larger scale.'},
+{from:'great_smog',to:'acid_rain',concept:'Clean Air Movement',year:1960,desc:'The tall stacks built to prevent smog dispersed SO₂ over hundreds of kilometres, creating acid rain.'},
+{from:'acid_rain',to:'ozone_hole',concept:'Clean Air Movement',year:1985,desc:'The acid rain regulatory framework provided a model for the Montreal Protocol on ozone.'},
+{from:'ozone_hole',to:'climate_change',concept:'Clean Air Movement',year:1988,desc:'The ozone success proved that atmospheric science could drive global policy — setting the template for climate negotiations.'},
+// Chain 5: Ice Age Science
+{from:'younger_dryas',to:'little_ice_age',concept:'Ice Age Science',year:1300,desc:'The Little Ice Age echoed the Younger Dryas pattern of abrupt cooling disrupting civilisations.'},
+{from:'little_ice_age',to:'maunder_minimum',concept:'Ice Age Science',year:1645,desc:'The Maunder Minimum\'s sunspot absence coincided with the coldest phase of the Little Ice Age.'},
+{from:'maunder_minimum',to:'ice_core_science',concept:'Ice Age Science',year:1966,desc:'Ice cores revealed the deep history of climate variability that the Maunder Minimum had hinted at.'},
+{from:'ice_core_science',to:'keeling_curve',concept:'Ice Age Science',year:1958,desc:'Ice cores placed Keeling\'s CO₂ measurements in a 800,000-year context.'},
+// Chain 6: Monsoon Understanding
+{from:'indian_monsoon',to:'east_asian_monsoon',concept:'Monsoon Understanding',year:-3000,desc:'Trade and migration connected the two great monsoon systems of Asia.'},
+{from:'east_asian_monsoon',to:'west_african_monsoon',concept:'Monsoon Understanding',year:1686,desc:'Halley\'s global wind chart connected Asian and African monsoon circulations.'},
+{from:'west_african_monsoon',to:'tropical_easterly_jet',concept:'Monsoon Understanding',year:1958,desc:'Koteswaram\'s discovery of the TEJ unified Asian and African monsoon dynamics.'},
+{from:'tropical_easterly_jet',to:'hadley_cell',concept:'Monsoon Understanding',year:1960,desc:'The TEJ was recognised as part of the Hadley Cell\'s seasonal modulation.'},
+// Chain 7: Tornado Warning Chain
+{from:'tri_state_tornado',to:'tornado_alley',concept:'Tornado Warning Chain',year:1925,desc:'The Tri-State Tornado\'s devastation proved that Tornado Alley needed a warning system.'},
+{from:'tornado_alley',to:'super_outbreak_1974',concept:'Tornado Warning Chain',year:1974,desc:'The Super Outbreak exposed the inadequacy of the existing warning system.'},
+{from:'super_outbreak_1974',to:'doppler_radar',concept:'Tornado Warning Chain',year:1988,desc:'The NEXRAD Doppler radar network was deployed to prevent another 1974.'},
+{from:'doppler_radar',to:'daulatpur_tornado',concept:'Tornado Warning Chain',year:1989,desc:'Daulatpur\'s catastrophe showed that US tornado science had no parallel in the developing world.'},
+// Chain 8: Ocean-Atmosphere Coupling
+{from:'gulf_stream',to:'north_atlantic_oscillation',concept:'Ocean-Atmosphere Coupling',year:1770,desc:'Franklin\'s Gulf Stream mapping began to reveal ocean-atmosphere connections.'},
+{from:'north_atlantic_oscillation',to:'enso',concept:'Ocean-Atmosphere Coupling',year:1924,desc:'Walker\'s discovery of the Southern Oscillation connected Pacific and Atlantic ocean-atmosphere patterns.'},
+{from:'enso',to:'indian_ocean_dipole',concept:'Ocean-Atmosphere Coupling',year:1999,desc:'The Indian Ocean Dipole was identified as a third major ocean-atmosphere coupling.'},
+// Chain 9: Dust and Drought
+{from:'saharan_pluvial',to:'bronze_age_drought',concept:'Dust and Drought',year:-2200,desc:'The end of the Saharan wet period foreshadowed the 4.2 ka drought that collapsed Bronze Age empires.'},
+{from:'bronze_age_drought',to:'drought_sahel',concept:'Dust and Drought',year:1968,desc:'The Sahel drought replicated the Bronze Age pattern of aridification devastating civilisations.'},
+{from:'drought_sahel',to:'millennium_drought',concept:'Dust and Drought',year:1997,desc:'Australia\'s drought extended the global pattern of Hadley Cell expansion driving aridification.'},
+{from:'millennium_drought',to:'iran_drought',concept:'Dust and Drought',year:1999,desc:'Iran\'s drought paralleled Australia\'s as another manifestation of subtropical drying.'},
+// Chain 10: Wind Power Chain
+{from:'trade_winds',to:'roaring_forties',concept:'Wind Power Chain',year:1500,desc:'Mastery of trade winds led sailors to discover and exploit the Roaring Forties.'},
+{from:'roaring_forties',to:'cape_horn_storms',concept:'Wind Power Chain',year:1616,desc:'Rounding Cape Horn tested the limits of wind-powered navigation.'},
+{from:'cape_horn_storms',to:'wind_power',concept:'Wind Power Chain',year:1887,desc:'Understanding of persistent wind patterns led to systematic wind energy capture.'},
+// Chain 11: Climate Crisis Awareness
+{from:'keeling_curve',to:'climate_change',concept:'Climate Crisis Awareness',year:1988,desc:'Keeling\'s CO₂ data provided the empirical foundation for climate change science.'},
+{from:'climate_change',to:'arctic_amplification',concept:'Climate Crisis Awareness',year:2000,desc:'Arctic amplification emerged as the most visible consequence of warming.'},
+{from:'arctic_amplification',to:'sea_level_rise',concept:'Climate Crisis Awareness',year:2006,desc:'Arctic ice loss accelerated sea level rise projections.'},
+{from:'sea_level_rise',to:'greenland_ice',concept:'Climate Crisis Awareness',year:2012,desc:'Greenland ice sheet mass loss became the primary driver of sea level acceleration.'},
+// Chain 12: Aviation Weather
+{from:'galunggung',to:'eyjafjallajokull',concept:'Aviation Weather',year:2010,desc:'Eyjafjallajökull tested the volcanic ash warning system that Galunggung created.'},
+{from:'eyjafjallajokull',to:'weather_satellites',concept:'Aviation Weather',year:2010,desc:'Satellite ash tracking proved essential during the Eyjafjallajökull crisis.'},
+// Chain 13: Cyclone Preparedness
+{from:'bhola_cyclone',to:'bengal_cyclones',concept:'Cyclone Preparedness',year:1970,desc:'Bhola\'s 500,000 deaths catalysed the Bangladesh cyclone warning and shelter programme.'},
+{from:'bengal_cyclones',to:'nargis',concept:'Cyclone Preparedness',year:2008,desc:'Nargis proved that cyclone preparedness lessons had not reached Myanmar.'},
+{from:'nargis',to:'haiyan',concept:'Cyclone Preparedness',year:2013,desc:'Haiyan\'s devastation showed that even warned communities could not withstand the strongest storms.'},
+// Chain 14: Atmospheric River Science
+{from:'atmospheric_river',to:'california_fires',concept:'Fire-Flood Cycle',year:2018,desc:'Atmospheric rivers cause deadly debris flows on fire-scarred landscapes.'},
+{from:'california_fires',to:'black_summer',concept:'Fire-Flood Cycle',year:2019,desc:'Australia\'s Black Summer paralleled California\'s fire-drought-flood cycle.'},
+// Chain 15: Named Wind Systems
+{from:'mistral',to:'bora',concept:'Named Wind Systems',year:100,desc:'Roman documentation of Mediterranean winds connected the Mistral and Bora.'},
+{from:'bora',to:'sirocco',concept:'Named Wind Systems',year:200,desc:'The Sirocco completed the Mediterranean wind rose alongside the Bora and Mistral.'},
+{from:'sirocco',to:'harmattan',concept:'Named Wind Systems',year:800,desc:'Arab geographers connected the Saharan Harmattan to Mediterranean wind systems.'},
+{from:'harmattan',to:'shamal',concept:'Named Wind Systems',year:900,desc:'Islamic scholars documented the Shamal alongside the Harmattan as dry, dust-laden winds.'},
+{from:'shamal',to:'santa_ana',concept:'Named Wind Systems',year:1880,desc:'Spanish settlers named the Santa Ana winds, extending the tradition of named winds to the New World.'},
+// Chain 16: Polar Science
+{from:'katabatic_winds',to:'antarctic_circumpolar',concept:'Polar Science',year:1911,desc:'Antarctic exploration revealed katabatic winds and circumpolar current as linked systems.'},
+{from:'antarctic_circumpolar',to:'polar_vortex',concept:'Polar Science',year:1952,desc:'Upper-atmosphere exploration connected polar surface winds to the stratospheric vortex.'},
+{from:'polar_vortex',to:'arctic_amplification',concept:'Polar Science',year:2010,desc:'Polar vortex disruptions were linked to Arctic amplification from ice loss.'},
+// Chain 17: Flood Engineering
+{from:'nile_floods',to:'north_sea_flood',concept:'Flood Engineering',year:1953,desc:'The North Sea Flood drove the same defensive engineering that the Nile had inspired for millennia.'},
+{from:'north_sea_flood',to:'pakistan_floods_2022',concept:'Flood Engineering',year:2022,desc:'Pakistan\'s floods showed that flood engineering designed for historical norms was overwhelmed by climate-amplified rainfall.'},
+// Chain 18: Weather and War
+{from:'kamikaze_typhoons',to:'armada_storms',concept:'Weather and War',year:1588,desc:'The Armada storms echoed the Kamikaze typhoons\' pattern of weather deciding military outcomes.'},
+{from:'armada_storms',to:'mongol_winter',concept:'Weather and War',year:1812,desc:'Napoleon\'s Russian retreat replicated the Armada pattern of weather destroying armies.'},
+{from:'mongol_winter',to:'dday_weather',concept:'Weather and War',year:1944,desc:'D-Day\'s weather decision showed that modern warfare could exploit atmospheric knowledge.'},
+{from:'dday_weather',to:'siberian_anticyclone',concept:'Weather and War',year:1945,desc:'The Siberian High remained a strategic factor throughout the Cold War.'},
+// Chain 19: Urban Atmosphere
+{from:'urban_heat_island',to:'great_smog',concept:'Urban Atmosphere',year:1952,desc:'London\'s urban heat island intensified the inversion that trapped the Great Smog.'},
+{from:'great_smog',to:'donora_fog',concept:'Urban Atmosphere',year:1948,desc:'Donora had demonstrated the lethal potential four years before London confirmed it.'},
+{from:'donora_fog',to:'heatwave_2003',concept:'Urban Atmosphere',year:2003,desc:'Europe\'s heatwave killed most severely in cities where urban heat amplified atmospheric extremes.'},
+{from:'heatwave_2003',to:'heat_dome_2021',concept:'Urban Atmosphere',year:2021,desc:'The Pacific Northwest heat dome exceeded all historical urban heat records.'},
+// Chain 20: Global Circulation
+{from:'hadley_cell',to:'trade_winds',concept:'Global Circulation',year:1735,desc:'Hadley explained the trade winds as the surface return flow of his theoretical cell.'},
+{from:'trade_winds',to:'westerlies',concept:'Global Circulation',year:1856,desc:'Ferrel completed the three-cell model connecting trades, westerlies, and polar easterlies.'},
+{from:'westerlies',to:'jet_stream',concept:'Global Circulation',year:1939,desc:'The jet stream was discovered as the upper-level expression of the Ferrel-Hadley boundary.'},
+{from:'jet_stream',to:'chinook_foehn',concept:'Global Circulation',year:1950,desc:'Föhn and Chinook winds were understood as local expressions of jet stream dynamics.'}
+];
 
 const WOMEN={};
 
