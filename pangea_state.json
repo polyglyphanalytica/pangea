@@ -964,8 +964,8 @@
       "section": "I"
     },
     "solum": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DATA",
+      "items": 88,
       "target": 100,
       "live": false,
       "map": "world",
@@ -2402,6 +2402,476 @@
       "atlas": "aqua",
       "phase_done": "GO_LIVE",
       "items": 100
+    },
+    {
+      "atlas": "solum",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "solum",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "solum",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "solum",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "solum",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "solum",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "solum",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "solum",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "solum",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "solum",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "solum",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "solum",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "solum",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "solum",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "solum",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "solum",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "solum",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "solum",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "solum",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "solum",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "solum",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "solum",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "solum",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "solum",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "solum",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "solum",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "solum",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "solum",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "solum",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "solum",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "solum",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "solum",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "solum",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "solum",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "solum",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "solum",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "solum",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "solum",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "solum",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "solum",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "solum",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "solum",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "solum",
+      "batch": "38-38",
+      "items": 38
+    },
+    {
+      "atlas": "solum",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "solum",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "solum",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "solum",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "solum",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "solum",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "solum",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "solum",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "solum",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "solum",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "solum",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "solum",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "solum",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "solum",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "solum",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "solum",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "solum",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "solum",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "solum",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "solum",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "solum",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "solum",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "solum",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "solum",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "solum",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "solum",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "solum",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "solum",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "solum",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "solum",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "solum",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "solum",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "solum",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "solum",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "solum",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "solum",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "solum",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "solum",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "solum",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "solum",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "solum",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "solum",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "solum",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "solum",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "solum",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "solum",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "solum",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "solum",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "solum",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "solum",
+      "batch": "88-88",
+      "items": 88
     }
   ]
 }
