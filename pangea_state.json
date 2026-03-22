@@ -958,8 +958,8 @@
       "validated_lenses": 20
     },
     "ignis": {
-      "phase": "DONE",
-      "items": 90,
+      "phase": "3",
+      "items": 100,
       "target": 100,
       "live": true,
       "map": "world",
@@ -4010,6 +4010,56 @@
       "atlas": "spiritus",
       "batch": "50-50",
       "items": 50
+    },
+    {
+      "atlas": "ignis",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "ignis",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "ignis",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "ignis",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "ignis",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "ignis",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "ignis",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "ignis",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "ignis",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "ignis",
+      "batch": "100-100",
+      "items": 100
     }
   ],
   "assignments": {}
