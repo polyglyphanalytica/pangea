@@ -684,6 +684,18 @@ def cmd_golive(atlas):
                     1
                 )
             index_path.write_text(html, encoding="utf-8")
+
+            # Validate homepage after update — catch broken HTML before committing
+            print("Validating homepage after go-live update...")
+            hp_result = subprocess.run(
+                [sys.executable, "pangea_validate.py", "--homepage"],
+                capture_output=True, text=True
+            )
+            if hp_result.returncode != 0:
+                print("WARNING: Homepage validation failed after go-live update!")
+                print(hp_result.stdout)
+                print("The homepage HTML may be broken — review index.html manually.")
+
         commit_files = [f"{atlas}/index.html", "pangea_state.json"]
         if index_updated:
             commit_files.append("index.html")
@@ -797,36 +809,53 @@ def update_index_card_to_live(html, atlas, display_name):
     Returns updated html."""
     import re
 
-    # Find the card block by atlas display name
-    # Pattern: card--forthcoming ... card-name">NAME< ... </div>\n      </div>
-    pattern = (
-        r'(<div class="card card--forthcoming">)'
-        r'((?:(?!</div>\n    </div>).)*?)'
-        r'(<div class="card-name">' + re.escape(display_name) + r'</div>)'
-        r'((?:(?!</div>\n    </div>).)*?)'
-        r'(<span class="coming-soon">Coming Soon</span>\n      </div>)'
-    )
-    m = re.search(pattern, html, re.DOTALL)
-    if not m:
+    # Find the complete card block containing this atlas name.
+    # Each card is:  <div class="card card--forthcoming">...card-name">NAME</div>...<span class="coming-soon">Coming Soon</span>\n      </div>
+    # We search for the card-name line first, then find the enclosing card div.
+    name_pattern = r'<div class="card-name">' + re.escape(display_name) + r'</div>'
+    name_match = re.search(name_pattern, html)
+    if not name_match:
         return html, False
 
-    original_block = m.group(0)
+    # Walk backwards from the name to find the card--forthcoming opener
+    search_start = max(0, name_match.start() - 500)
+    prefix = html[search_start:name_match.start()]
+    opener_pos = prefix.rfind('<div class="card card--forthcoming">')
+    if opener_pos == -1:
+        return html, False
+    card_start = search_start + opener_pos
 
-    # Build the live card — extract inner content between forthcoming opener and coming-soon span
-    inner_start = m.start(2)
-    inner_end = m.end(4)
-    inner = html[m.start(2):m.end(4)]
+    # Walk forwards from the name to find the closing </div> of the card
+    # The card ends with "Coming Soon</span>\n      </div>" or similar
+    search_end = min(len(html), name_match.end() + 500)
+    suffix = html[name_match.end():search_end]
+    # Find the coming-soon span and the closing </div> after it
+    cs_match = re.search(r'<span class="coming-soon">Coming Soon</span>\s*</div>', suffix)
+    if not cs_match:
+        # Fallback: just find the next </div> pair
+        cs_match = re.search(r'</div>\s*</div>', suffix)
+        if not cs_match:
+            return html, False
+    card_end = name_match.end() + cs_match.end()
+
+    old_block = html[card_start:card_end]
+
+    # Extract the inner content: icon, name, tagline, tags
+    inner = old_block
+    inner = re.sub(r'<div class="card card--forthcoming">\s*', '', inner)
+    inner = re.sub(r'<span class="coming-soon">Coming Soon</span>\s*</div>\s*$', '', inner)
+    inner = inner.strip()
 
     live_card = (
-        f'''<div class="card card--live">\n'''
-        f'''        <span class="status status--live">Live</span>\n'''
-        f'''        <a href="{atlas}/index.html">'''
-        + inner.strip("\n") +
-        f'''\n        </a>\n'''
-        f'''      </div>'''
+        f'<div class="card card--live">\n'
+        f'        <span class="status status--live">Live</span>\n'
+        f'        <a href="{atlas}/index.html" style="text-decoration:none;color:inherit">\n'
+        f'        {inner}\n'
+        f'        </a>\n'
+        f'      </div>'
     )
 
-    html = html[:m.start()] + live_card + html[m.end():]
+    html = html[:card_start] + live_card + html[card_end:]
     return html, True
 
 
