@@ -720,8 +720,8 @@ const LENSES=[
 {id:'folklore',ico:'📖',lbl:'Folklore & Oral Tradition',col:'#d4a373'},
 {id:'geography',ico:'🗺',lbl:'Geography & Terrain',col:'#588157'},
 {id:'legislation',ico:'⚖',lbl:'Legislation & Governance',col:'#6c757d'},
-{id:'military',ico:'⚔',lbl:'Military & Conflict',col:'#9b2226'},
 {id:'migration',ico:'🚶',lbl:'Migration & Displacement',col:'#bc6c25'},
+{id:'military',ico:'⚔',lbl:'Military & Conflict',col:'#9b2226'},
 {id:'mythology',ico:'🐉',lbl:'Mythology & Cosmology',col:'#7b2cbf'},
 {id:'navigation',ico:'🧭',lbl:'Navigation & Transport',col:'#219ebc'},
 {id:'prediction',ico:'📡',lbl:'Prediction & Forecasting',col:'#3a86ff'},
@@ -962,7 +962,7 @@ trade:'Saharan dust affects trade routes ancient and modern. Ancient caravans ti
 {id:'westerlies',nm:'Mid-Latitude Westerlies',sb:'Global · 4000 BCE – present',s:-4000,e:2024,
 lon:-30,lat:48,
 fp:{intensity:7,scale:10,duration:10,freq:10,human:9,legacy:9},
-conns:['trade_winds','jet_stream','roaring_forties','north_atlantic_storm'],
+conns:['trade_winds','jet_stream','roaring_forties','north_atlantic_oscillation'],
 overview:'The mid-latitude westerlies are the dominant wind pattern between 30° and 60° latitude in both hemispheres, blowing from west to east with embedded cyclones and anticyclones. They carry weather systems across Europe, North America, and the Southern Ocean, drive the world\'s most important sailing routes, and deliver the rainfall that sustains temperate agriculture. Western civilisation literally grew downwind.',
 d:{
 agriculture:'The westerlies deliver the reliable rainfall that makes temperate agriculture possible. Western Europe\'s green landscape — in contrast to the arid latitudes of North Africa at the same distance from the equator — exists because the westerlies bring Atlantic moisture inland. The breadbaskets of France, Germany, the American Midwest, and New Zealand all depend on westerly-delivered precipitation.',
@@ -1118,7 +1118,7 @@ trade:'The failed Mongol invasions paradoxically increased Japanese maritime tra
 {id:'armada_storms',nm:'Spanish Armada Storms',sb:'North Atlantic · 1588 CE',s:1588,e:1588,
 lon:-10,lat:55,
 fp:{intensity:9,scale:6,duration:3,freq:2,human:8,legacy:10},
-conns:['westerlies','north_atlantic_storm','gulf_stream','little_ice_age'],
+conns:['westerlies','north_atlantic_oscillation','gulf_stream','little_ice_age'],
 overview:'In August 1588, a series of Atlantic storms scattered and destroyed the Spanish Armada as it attempted to flee northward around Scotland and Ireland after its defeat in the English Channel. Of the 130 ships that sailed from Spain, only 67 returned. The storms killed more Spanish sailors than English guns — an estimated 15,000 men died, most from shipwreck on the Irish and Scottish coasts. England struck a victory medal reading "God blew, and they were scattered."',
 d:{
 agriculture:'The Armada campaign strained Spanish agricultural resources. Provisioning 130 ships with food for 30,000 men required vast grain requisitions from Castilian farms. The destruction of the fleet meant the loss of this investment. The subsequent decades saw Spain\'s agricultural base weakened by continuous military expenditure, contributing to the long-term decline of Iberian farming.',
@@ -1196,7 +1196,7 @@ trade:'The global famine caused by Tambora\'s cooling disrupted trade across eve
 {id:'dust_bowl',nm:'The Dust Bowl',sb:'Great Plains, USA · 1930–1940',s:1930,e:1940,
 lon:-100,lat:37,
 fp:{intensity:9,scale:7,duration:8,freq:8,human:10,legacy:10},
-conns:['saharan_dust','enso','great_plains_tornado','drought_sahel'],
+conns:['saharan_dust','enso','tornado_alley','drought_sahel'],
 overview:'The Dust Bowl was the worst man-made environmental disaster in North American history — a decade of catastrophic wind erosion that stripped the topsoil from 100 million acres of Great Plains farmland, created continent-spanning dust storms, displaced 2.5 million Americans, and fundamentally changed the relationship between government, agriculture, and the atmosphere in the United States.',
 d:{
 agriculture:'The Dust Bowl was caused by the destruction of native grassland. Millions of acres of drought-resistant prairie were ploughed under during the 1920s wheat boom. When drought struck in 1930, there were no roots to hold the soil. Wind did the rest — stripping the topsoil that had accumulated over millennia, exposing hardpan that would not support crops for decades.',
@@ -1274,7 +1274,7 @@ trade:'The cyclone destroyed the jute and rice exports that were East Pakistan\'
 {id:'galveston_1900',nm:'Galveston Hurricane',sb:'Texas, USA · 1900',s:1900,e:1900,
 lon:-94.8,lat:29.3,
 fp:{intensity:10,scale:6,duration:2,freq:3,human:10,legacy:10},
-conns:['hurricane_belt','katrina','trade_winds','north_atlantic_storm'],
+conns:['hurricane_belt','katrina','trade_winds','north_atlantic_oscillation'],
 overview:'The Galveston Hurricane of 8 September 1900 remains the deadliest natural disaster in United States history. The storm struck the barrier island city with winds exceeding 230 km/h and a 4.6-metre storm surge that submerged the entire island, killing between 6,000 and 12,000 people. The disaster destroyed Galveston\'s position as Texas\'s leading city, transferred commercial supremacy to Houston, and transformed American meteorology and coastal engineering.',
 d:{
 agriculture:'The hurricane devastated agricultural land along the Texas coast. Cotton crops were destroyed across multiple counties. Livestock losses were severe — carcasses littered the mainland for weeks after the storm. The saltwater intrusion from the surge contaminated farmland, reducing crop yields for years. Galveston\'s role as a cotton export port was permanently diminished.',
@@ -1378,7 +1378,7 @@ trade:'Climate change is reshaping global trade. Carbon border adjustment mechan
 {id:'north_sea_flood',nm:'North Sea Flood of 1953',sb:'Netherlands / UK · 1953',s:1953,e:1953,
 lon:3.5,lat:52,
 fp:{intensity:10,scale:6,duration:2,freq:2,human:9,legacy:10},
-conns:['westerlies','north_atlantic_storm','sea_level_rise','thames_barrier'],
+conns:['westerlies','north_atlantic_oscillation','sea_level_rise','north_sea_flood'],
 overview:'On the night of 31 January 1953, a powerful North Sea storm surge overwhelmed coastal defences across the Netherlands, Belgium, and eastern England, killing 2,551 people (1,836 in the Netherlands, 307 in England, 28 in Belgium). The disaster triggered the Netherlands\' Delta Works — the world\'s most ambitious flood defence system — and led to the construction of the Thames Barrier. It remains the defining storm surge event in European history.',
 d:{
 agriculture:'The 1953 flood inundated 200,000 hectares of Dutch farmland with saltwater, rendering it uncultivable for years. Livestock losses were immense — over 30,000 cattle and 20,000 pigs drowned. The saltwater contamination of agricultural soil persisted for a decade in some areas. British farms in Essex, Suffolk, and Norfolk were similarly devastated.',
@@ -1404,7 +1404,7 @@ trade:'The 1953 flood disrupted North Sea commerce for weeks. Port facilities in
 {id:'gulf_stream',nm:'The Gulf Stream & AMOC',sb:'Atlantic Ocean · 3000 BCE – present',s:-3000,e:2024,
 lon:-75,lat:35,
 fp:{intensity:7,scale:10,duration:10,freq:10,human:9,legacy:10},
-conns:['trade_winds','westerlies','north_atlantic_storm','climate_change'],
+conns:['trade_winds','westerlies','north_atlantic_oscillation','climate_change'],
 overview:'The Gulf Stream is the warm ocean current that carries tropical heat from the Gulf of Mexico northeastward across the Atlantic, keeping Western Europe 5–10°C warmer than equivalent latitudes in Canada. It is part of the Atlantic Meridional Overturning Circulation (AMOC) — a global conveyor belt of ocean heat transport. Climate models suggest the AMOC is weakening, potentially threatening Europe\'s mild climate within decades.',
 d:{
 agriculture:'The Gulf Stream gives Western Europe an agricultural climate far milder than its latitude warrants. London (51°N) grows palm trees; Labrador (51°N) is subarctic tundra. Irish dairy farming, Scottish whisky barley, and Bordeaux viticulture all depend on Gulf Stream warmth. An AMOC shutdown could shift European agriculture southward by 500–1,000 km, devastating northern farming.',
@@ -1560,7 +1560,7 @@ trade:'Typhoons disrupt Pacific trade flows worth billions of dollars annually. 
 {id:'tornado_alley',nm:'Tornado Alley',sb:'Central United States · 1800 – present',s:1800,e:2024,
 lon:-97,lat:35,
 fp:{intensity:10,scale:4,duration:1,freq:9,human:8,legacy:8},
-conns:['jet_stream','gulf_stream','dust_bowl','great_plains_tornado'],
+conns:['jet_stream','gulf_stream','dust_bowl','tornado_alley'],
 overview:'The central United States experiences more tornadoes than anywhere else on Earth — approximately 1,200 per year, including the most violent on the planet. This "Tornado Alley" exists because of a unique atmospheric collision: warm, moist air from the Gulf of Mexico meets cold, dry air from Canada and hot, dry air from the desert Southwest, all amplified by the jet stream and unobstructed by any mountain barrier. The result is the world\'s most prolific tornado factory.',
 d:{
 agriculture:'Tornadoes devastate Great Plains agriculture annually. Crops are flattened across swaths hundreds of metres wide and kilometres long. Livestock are killed. Farm equipment is destroyed. However, the same atmospheric instability that produces tornadoes also generates the thunderstorms that deliver critical spring and summer rainfall to the American breadbasket. The threat is inseparable from the productivity.',
@@ -1794,7 +1794,7 @@ trade:'Acid rain created trade tensions between emitting and receiving nations. 
 {id:'weather_telegraph',nm:'The Weather Telegraph',sb:'Europe / USA · 1840–1870',s:1840,e:1870,
 lon:-1.3,lat:48.8,
 fp:{intensity:3,scale:7,duration:5,freq:10,human:9,legacy:10},
-conns:['great_smog','beaufort_scale','galveston_1900','north_atlantic_storm'],
+conns:['great_smog','beaufort_scale','galveston_1900','north_atlantic_oscillation'],
 overview:'The invention of the electric telegraph in the 1840s made weather forecasting possible for the first time in human history. For the first time, a storm could be reported before it arrived — weather information could travel faster than the weather itself. The telegraph enabled the creation of national weather services, the first synoptic weather maps, and the first public storm warnings. It was the single most transformative technology in the history of atmospheric science.',
 d:{
 agriculture:'The weather telegraph gave farmers advance warning of frost, storms, and rainfall for the first time. Agricultural weather forecasts — transmitted by telegraph and posted at train stations — became available in the 1870s. The ability to anticipate weather conditions allowed farmers to time planting, harvesting, and livestock management with unprecedented precision, reducing crop losses.',
@@ -2106,7 +2106,7 @@ trade:'Krakatoa disrupted the Sunda Strait — one of the world\'s most importan
 {id:'dday_weather',nm:'D-Day Weather Decision',sb:'English Channel · June 1944',s:1944,e:1944,
 lon:-1,lat:49.3,
 fp:{intensity:5,scale:5,duration:1,freq:1,human:10,legacy:10},
-conns:['westerlies','north_atlantic_storm','north_atlantic_oscillation','weather_telegraph'],
+conns:['westerlies','north_atlantic_oscillation','north_atlantic_oscillation','weather_telegraph'],
 overview:'The most consequential weather forecast in history was made by Group Captain James Stagg on the evening of 4 June 1944. With 156,000 troops loaded on ships, Stagg identified a brief window of acceptable weather between two Atlantic storm systems and advised General Eisenhower to launch the D-Day invasion on 6 June. The German meteorologists, using different methods, predicted continued storms and stood down their defences. The weather gap lasted 36 hours — just enough. The forecast that won the war was accurate; the one that lost it was wrong.',
 d:{
 agriculture:'The D-Day weather decision had no direct agricultural impact, but the war it helped end had enormous agricultural consequences. The liberation of France restored European food production capacity. The Marshall Plan (1948) rebuilt European agriculture. The atmospheric forecast that enabled D-Day ultimately contributed to the recovery of a continent\'s food supply.',
@@ -2418,7 +2418,7 @@ trade:'The Younger Dryas predates trade in the conventional sense, but the mater
 {id:'sandy',nm:'Hurricane Sandy',sb:'US East Coast · 2012',s:2012,e:2012,
 lon:-74,lat:39.5,
 fp:{intensity:8,scale:8,duration:4,freq:2,human:9,legacy:10},
-conns:['hurricane_belt','jet_stream','climate_change','north_atlantic_storm'],
+conns:['hurricane_belt','jet_stream','climate_change','north_atlantic_oscillation'],
 overview:'Hurricane Sandy struck the densely populated US Northeast on 29 October 2012, merging with a mid-latitude weather system to become the largest Atlantic hurricane on record — 1,800 km in diameter. The storm surge inundated Lower Manhattan, flooded the New York City subway system, destroyed thousands of homes along the New Jersey shore, and killed 233 people across eight countries. Sandy caused $70 billion in damage and permanently changed how America\'s largest city thinks about atmospheric vulnerability.',
 d:{
 agriculture:'Sandy\'s impact on agriculture was localised but significant. Coastal farms in New Jersey and Long Island were inundated with saltwater, rendering soil uncultivable for seasons. Greenhouse and nursery operations were destroyed. The Hunterdon County agricultural community in New Jersey lost infrastructure worth millions. Sandy demonstrated the vulnerability of peri-urban agriculture to coastal storms.',
