@@ -284,7 +284,7 @@
       "homepage_name": "D\u014dnum"
     },
     "petra": {
-      "phase": "1C",
+      "phase": "DATA",
       "items": 0,
       "target": 100,
       "live": false,
@@ -4180,6 +4180,18 @@
       "atlas": "spiritus",
       "batch": "84-84",
       "items": 84
+    },
+    {
+      "atlas": "petra",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 0
+    },
+    {
+      "atlas": "petra",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
     }
   ],
   "assignments": {}
