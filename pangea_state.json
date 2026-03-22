@@ -958,12 +958,17 @@
       "validated_lenses": 20
     },
     "ignis": {
-      "phase": "1B",
-      "items": 100,
+      "phase": "DATA",
+      "items": 38,
       "target": 100,
       "live": false,
       "map": "world",
-      "section": "I"
+      "section": "I",
+      "validated_sha": "b1a367de5439569ff771f91f90ebc5f68a1cd7dd",
+      "validated_short": "b1a367d",
+      "validated_at": "2026-03-22T12:27:25.709371Z",
+      "validated_items": 100,
+      "validated_lenses": 30
     },
     "spiritus": {
       "phase": "1A",
@@ -3512,6 +3517,220 @@
       "phase_done": "1A",
       "phase_next": "1B",
       "items": 100
+    },
+    {
+      "atlas": "ignis",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "ignis",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "ignis",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "ignis",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "ignis",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "ignis",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "ignis",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "ignis",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "ignis",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "ignis",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "ignis",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "ignis",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "ignis",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "ignis",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "ignis",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "ignis",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "ignis",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "ignis",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "ignis",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "ignis",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "ignis",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "ignis",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "ignis",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "ignis",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "ignis",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "ignis",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "ignis",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "ignis",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "ignis",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "ignis",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "ignis",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "ignis",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "ignis",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "ignis",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "ignis",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "ignis",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "ignis",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "ignis",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "ignis",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "ignis",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "ignis",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "ignis",
+      "batch": "38-38",
+      "items": 38
     }
   ]
 }
