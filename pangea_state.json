@@ -958,12 +958,17 @@
       "validated_lenses": 20
     },
     "ignis": {
-      "phase": "1B",
-      "items": 100,
+      "phase": "DATA",
+      "items": 0,
       "target": 100,
       "live": false,
       "map": "world",
-      "section": "I"
+      "section": "I",
+      "validated_sha": "b1a367de5439569ff771f91f90ebc5f68a1cd7dd",
+      "validated_short": "b1a367d",
+      "validated_at": "2026-03-22T12:27:25.709371Z",
+      "validated_items": 100,
+      "validated_lenses": 30
     },
     "spiritus": {
       "phase": "1A",
@@ -3512,6 +3517,30 @@
       "phase_done": "1A",
       "phase_next": "1B",
       "items": 100
+    },
+    {
+      "atlas": "ignis",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "ignis",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "ignis",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "ignis",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
     }
   ]
 }
