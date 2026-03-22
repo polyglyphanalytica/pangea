@@ -4728,7 +4728,7 @@ function renderFingerprint(c){
     svg+=`<text x="${lx.toFixed(1)}" y="${(ly+dy).toFixed(1)}" text-anchor="${anchor}" class="fp-label">${SHORT[i]}</text>`;
   });
   svg+='</svg>';
-  return`<div class="fp-wrap"><div class="fp-title">Civilizational Fingerprint</div>${svg}</div>`;
+  return`<div class="fp-wrap"><div class="fp-title">Atmospheric Fingerprint</div>${svg}</div>`;
 }
 
 // ══════════════════════════════════════════════════════
@@ -5022,7 +5022,7 @@ function renderWhatIfDrawer(){
           <div style="font-size:12.5px;line-height:1.65;color:var(--txt2)">${t.desc}</div>
         </div>`;
       }).join('')
-    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this civilization in the current dataset.</div>`
+    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this phenomenon in the current dataset.</div>`
   }
 
   ${downstream.length?`
@@ -5109,7 +5109,7 @@ function renderHeritageDrawer(){
   </button>
   <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);letter-spacing:1px;margin-bottom:4px">${heritageRegion}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing phenomena · shown in blue on the map</div>
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your civilizational ancestry</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your atmospheric heritage</div>
   ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToItem('${c.id}')">
     <span class="heritage-civ-nm">${c.nm}</span>
     <span class="heritage-civ-why">${HERITAGE_REASONS[c.id]||''}</span>
@@ -5183,41 +5183,27 @@ function renderHerstoryDrawer(){
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:12px">Women who changed everything</div>
     ${(()=>{
       const ALL=[
-        {civ:'mesopotamia', nm:'Enheduanna', yr:-2285, desc:'World\'s first named author — high priestess of Ur who wrote hymns that shaped Mesopotamian religion for 500 years'},
-        {civ:'egypt', nm:'Hatshepsut', yr:-1479, desc:'Pharaoh of Egypt for 20 years — built more monuments than any ruler since Khufu, then erased from the record'},
-        {civ:'egypt', nm:'Nefertiti', yr:-1370, desc:'Co-ruler with Akhenaten during Egypt\'s monotheist revolution — may have ruled alone after his death'},
-        {civ:'persia', nm:'Artemisia I of Caria', yr:-480, desc:'Persian naval commander at Salamis — the only admiral Xerxes trusted enough to ask for advice after the battle'},
-        {civ:'greece', nm:'Sappho', yr:-610, desc:'The Tenth Muse — her lyric poetry was so admired in antiquity that Plato called her the tenth muse; fragments still devastating'},
-        {civ:'greece', nm:'Hypatia', yr:360, desc:'Philosopher and mathematician of Alexandria — murdered by a Christian mob, she became the symbol of reason against fanaticism'},
-        {civ:'rome', nm:'Hortensia', yr:-42, desc:'The only woman ever to address the Roman Forum — argued against an unjust war tax and won, forcing the Senate to back down'},
-        {civ:'rome', nm:'Livia Drusilla', yr:-58, desc:'Wife of Augustus — ran the imperial household and shaped Roman policy for 50 years; poisoning accusations followed her to history'},
-        {civ:'china', nm:'Wu Zetian', yr:624, desc:'The only woman to rule China as emperor — expanded the empire, reformed the civil service, and was never forgiven by male historians'},
-        {civ:'china', nm:'Lady Fu Hao', yr:-1200, desc:'Shang Dynasty general and high priestess — led an army of 13,000; her intact tomb proved women could hold supreme military command'},
-        {civ:'india', nm:'Mirabai', yr:1498, desc:'Rajput princess who abandoned queenship for devotional poetry — her bhajans are still sung; she refused to be silenced or poisoned'},
-        {civ:'india', nm:'Razia Sultana', yr:1205, desc:'First female Sultan of Delhi — rode unveiled, refused purdah, commanded armies; deposed by nobles who could not accept her authority'},
-        {civ:'japan', nm:'Murasaki Shikibu', yr:978, desc:'Lady-in-waiting who wrote The Tale of Genji — the world\'s first novel, still in print 1,000 years later'},
-        {civ:'japan', nm:'Tomoe Gozen', yr:1157, desc:'Samurai warrior of extraordinary skill — one of the few women recorded as a genuine battlefield commander in feudal Japan'},
-        {civ:'islamicworld', nm:'Fatima al-Fihri', yr:859, desc:'Founded al-Qarawiyyin in Fez — the world\'s oldest continuously operating university, still teaching today'},
-        {civ:'islamicworld', nm:'Aisha bint Abi Bakr', yr:614, desc:'Wife of Muhammad, political leader, and the source of thousands of hadith — her authority shaped Islamic jurisprudence for centuries'},
-        {civ:'islamicworld', nm:'Wallada bint al-Mustakfi', yr:994, desc:'Andalusian poet-princess who ran a literary salon, took lovers openly, and embroidered her own poems on her sleeves'},
-        {civ:'medieval', nm:'Hildegard of Bingen', yr:1098, desc:'Theologian, composer, naturalist, mystic — wrote on medicine, music, and theology; preached publicly when no woman was supposed to'},
-        {civ:'medieval', nm:'Eleanor of Aquitaine', yr:1122, desc:'Queen of both France and England, led a crusade, and governed England as regent — the most powerful woman in 12th-century Europe'},
-        {civ:'medieval', nm:'Christine de Pizan', yr:1364, desc:'First professional woman writer in Europe — her City of Ladies (1405) was the Middle Ages\' most systematic defence of women\'s worth'},
-        {civ:'aztec', nm:'Tlazolteotl', yr:1300, desc:'The goddess who was also the template — Aztec women wove, governed households, and served as midwives in a cosmology where female creative power was divine'},
-        {civ:'inca', nm:'Mama Ocllo', yr:1400, desc:'Co-founder of the Inca Empire with Manco Cápac — taught women weaving and household arts that formed the backbone of Andean economy'},
-        {civ:'ottoman', nm:'Kösem Sultan', yr:1589, desc:'Ruled the Ottoman Empire as regent for two sultans — the most powerful woman in Ottoman history; governed for nearly 30 years'},
-        {civ:'ottoman', nm:'Hurrem Sultan', yr:1502, desc:'Enslaved Ukrainian woman who became Suleiman the Magnificent\'s legal wife — broke every Ottoman convention and ran foreign policy'},
-        {civ:'renaissance', nm:'Sofonisba Anguissola', yr:1532, desc:'First woman to achieve international fame as a painter — court painter to Philip II of Spain; Michelangelo praised her drawings'},
-        {civ:'renaissance', nm:'Artemisia Gentileschi', yr:1593, desc:'Baroque master who survived rape, trial, and torture to become the most powerful female painter in history — her Judiths are revenge made magnificent'},
-        {civ:'colonial', nm:'Anacaona', yr:1474, desc:'Taíno cacica, poet, and the last great Indigenous leader of Hispaniola — welcomed the Spanish with ceremony; they hanged her for it'},
-        {civ:'industrial', nm:'Ada Lovelace', yr:1815, desc:'Mathematician who wrote the first algorithm for a computing machine in 1843 — a century before the computer was built'},
-        {civ:'industrial', nm:'Harriet Tubman', yr:1822, desc:'Escaped slavery and returned 13 times to free others — then served as a Union Army spy; called herself "Moses"'},
-        {civ:'modern', nm:'Rosalind Franklin', yr:1920, desc:'Her X-ray crystallography revealed the double helix structure of DNA — Watson and Crick used her data without credit'},
+        {civ:'climate_change', nm:'Eunice Newton Foote', yr:1856, desc:'First to demonstrate that CO₂ traps heat — three years before Tyndall, her paper was presented by a man because women could not present'},
+        {civ:'numerical_weather', nm:'Joanne Simpson', yr:1949, desc:'First American woman to earn a meteorology PhD — her hot tower hypothesis explained how tropical storms drive global weather'},
+        {civ:'ozone_hole', nm:'Susan Solomon', yr:1986, desc:'Led the Antarctic expedition that proved CFCs were destroying the ozone layer — her work saved the stratosphere'},
+        {civ:'indian_monsoon', nm:'Anna Mani', yr:1960, desc:'Built India\'s weather instrument network — her radiation and wind devices powered monsoon forecasting for a billion people'},
+        {civ:'ice_core_science', nm:'Valérie Masson-Delmotte', yr:2001, desc:'Ice core paleoclimatologist who co-chaired the IPCC — the most influential voice synthesising climate science for global policy'},
+        {civ:'arctic_amplification', nm:'Jennifer Francis', yr:2012, desc:'Proposed that Arctic warming weakens the jet stream — connecting ice loss to extreme weather felt by billions at mid-latitudes'},
+        {civ:'heat_dome_2021', nm:'Friederike Otto', yr:2021, desc:'Co-founded World Weather Attribution — proved within days that the heat dome was virtually impossible without climate change'},
+        {civ:'west_african_monsoon', nm:'Sharon Nicholson', yr:1980, desc:'Built the first comprehensive Sahel rainfall database — the leading authority on West African monsoon dynamics and drought'},
+        {civ:'saharan_dust', nm:'Natalie Mahowald', yr:2006, desc:'Revealed how Saharan dust fertilises the Amazon rainforest — connecting African atmosphere to South American ecology'},
+        {civ:'sea_level_rise', nm:'Andrea Dutton', yr:2015, desc:'Her geological research showed seas were 6–9m higher during past warm periods — placing current rise in deep-time context'},
+        {civ:'keeling_curve', nm:'Katharine Hayhoe', yr:2009, desc:'Became the most effective climate communicator in America — translating the Keeling Curve\'s implications for policy and public understanding'},
+        {civ:'tambora_1815', nm:'Mary Shelley', yr:1816, desc:'Tambora\'s volcanic winter trapped her indoors at Lake Geneva — she wrote Frankenstein, transforming atmospheric catastrophe into literature'},
+        {civ:'california_fires', nm:'Crystal Kolden', yr:2018, desc:'Revealed how climate change, land use, and fire suppression intersect in California\'s wildfire crisis — shaping adaptation strategy'},
+        {civ:'black_summer', nm:'Sarah Perkins-Kirkpatrick', yr:2019, desc:'Proved Australian heatwaves are becoming more frequent and intense — her heat metrics framed the atmospheric crisis behind Black Summer'},
+        {civ:'beaufort_scale', nm:'Mary Somerville', yr:1834, desc:'Her "Connexion of the Physical Sciences" synthesised meteorology for the public — helping establish weather science as a legitimate discipline'},
+        {civ:'pakistan_floods_2022', nm:'Friederike Otto', yr:2022, desc:'Attribution analysis of Pakistan floods connected climate change to monsoon intensification — providing scientific foundation for climate justice claims'},
       ];
       const shuffled=[...ALL].sort(()=>Math.random()-.5);
       return shuffled.slice(0,5).map(w=>{
         const c=ITEMS.find(x=>x&&x.id===w.civ);
-        return c?`<button onclick="navigateToItem('${c.id}')" 
+        return c?`<button onclick="navigateToItem('${c.id}')"
           style="width:100%;background:none;border:1px solid rgba(192,96,160,.25);padding:9px 12px;text-align:left;cursor:pointer;margin-bottom:4px;border-radius:2px;transition:all .15s"
           onmouseover="this.style.background='rgba(192,96,160,.08)'" onmouseout="this.style.background='none'">
           <div style="font-family:'Cinzel',serif;font-size:10px;color:#c060a0;margin-bottom:2px">${w.nm} · ${w.yr<0?Math.abs(w.yr)+' BCE':w.yr+' CE'}</div>
@@ -5235,7 +5221,7 @@ function renderHerstoryDrawer(){
   <button onclick="closeInfo()"
     style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px;transition:opacity .15s"
     onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-    ← All civilizations
+    ← All phenomena
   </button>
   <div class="hs-panel-hdr">${c.nm}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:14px">${c.sb}</div>
@@ -5538,7 +5524,7 @@ function initMapInteraction(){
   svg.addEventListener('click',function(e){if(_wasDragging){_wasDragging=false;return;}if(Date.now()-(_touchFiredAt||0)<500)return;mapClick(e);});
 }
 
-// Auto-zoom cluster: if tap finds 3+ civs within 40px, zoom in instead of picking
+// Auto-zoom cluster: if tap finds 3+ items within 40px, zoom in instead of picking
 
 function showClusterPicker(civs, screenX, screenY){
   const picker=document.getElementById('cluster-picker');
@@ -5744,9 +5730,9 @@ function updateTlFill(pct){
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 
   <!-- Cluster picker popup -->
-  <div id="cluster-picker" role="dialog" aria-label="Select civilization">
+  <div id="cluster-picker" role="dialog" aria-label="Select phenomenon">
     <div id="cluster-picker-hdr">
-      <span>Select civilization</span>
+      <span>Select phenomenon</span>
       <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">✕</button>
     </div>
     <div id="cluster-list"></div>
