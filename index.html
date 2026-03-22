@@ -142,6 +142,8 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
 .hero-desc{font-size:17px;line-height:1.8;color:var(--txt2);
   max-width:560px;margin:0 auto;font-style:italic}
 .hero-stats{display:flex;gap:32px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.hero-manifesto{font-family:'Crimson Pro',serif;font-size:15px;line-height:1.9;color:var(--txt2);
+  max-width:600px;margin:20px auto 0;text-align:center}
 .hero-stat{text-align:center}
 .hero-stat-n{font-family:'Cinzel',serif;font-size:26px;font-weight:600;
   color:var(--amber-b);display:block;line-height:1}
@@ -332,6 +334,7 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
         <span class="hero-stat-l">Themes</span>
       </div>
     </div>
+    <p class="hero-manifesto">Each atlas maps a single domain of human knowledge onto an interactive timeline — from cosmic deep time to the present day. Scrub through billions of years of stellar evolution, millions of years of geological and biological change, or thousands of years of human invention. See which ideas travelled between civilisations, which discoveries made others possible, and whose contributions were written out of the story. Find the women history left out. This is not the encyclopaedia you'd expect. Or the atlas you'd expect. This is a new way to read the human story.</p>
   </div>
 
   <!-- HOW IT STARTED — CONTINENTAL DRIFT -->
@@ -668,11 +671,12 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
 
       <div class="card card--live">
         <span class="status status--live">Live</span>
-        <a href="cursus/index.html">        <span class="card-icon">🌡</span>
-        <div class="card-name">Clima</div>
-        <div class="card-tagline">Climate is the hidden variable in every historical event.</div>
-        <div class="card-tags"><span class="tag">Climate</span><span class="tag">Collapse</span><span class="tag">Ice Age</span></div>
-        <span class="coming-soon">Coming Soon</span>
+        <a href="clima/index.html">
+          <span class="card-icon">🌡</span>
+          <div class="card-name">Clima</div>
+          <div class="card-tagline">Climate is the hidden variable in every historical event.</div>
+          <div class="card-tags"><span class="tag">Climate</span><span class="tag">Collapse</span><span class="tag">Ice Age</span></div>
+        </a>
       </div>
 
       <div class="card card--forthcoming">
@@ -685,11 +689,12 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
 
       <div class="card card--live">
         <span class="status status--live">Live</span>
-        <a href="via/index.html">        <span class="card-icon">💧</span>
-        <div class="card-name">Aqua</div>
-        <div class="card-tagline">Every civilisation that water built. Every one it ended.</div>
-        <div class="card-tags"><span class="tag">Rivers</span><span class="tag">Drought</span><span class="tag">Conflict</span></div>
-        <span class="coming-soon">Coming Soon</span>
+        <a href="aqua/index.html" style="text-decoration:none;color:inherit">
+          <span class="card-icon">💧</span>
+          <div class="card-name">Aqua</div>
+          <div class="card-tagline">100 water events. Every civilisation that water built. Every one it ended.</div>
+          <div class="card-tags"><span class="tag">Rivers</span><span class="tag">Drought</span><span class="tag">Conflict</span></div>
+        </a>
       </div>
 
       <div class="card card--forthcoming">
@@ -717,12 +722,14 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
         <div class="card-tags"><span class="tag">Domestication</span><span class="tag">Extinction</span><span class="tag">War</span></div>
         <span class="coming-soon">Coming Soon</span>
       </div>
-      <div class="card card--forthcoming">
+      <div class="card card--live">
+        <span class="status status--live">Live</span>
+        <a href="sylva/index.html" style="text-decoration:none;color:inherit">
         <span class="card-icon">🌳</span>
         <div class="card-name">Sylva</div>
         <div class="card-tagline">Every forest that fed, sheltered, or fell to civilisation.</div>
         <div class="card-tags"><span class="tag">Forest</span><span class="tag">Deforestation</span><span class="tag">Ecology</span></div>
-        <span class="coming-soon">Coming Soon</span>
+        </a>
       </div>
 
       <div class="card card--forthcoming">
@@ -740,12 +747,14 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
         <div class="card-tags"><span class="tag">Weather</span><span class="tag">Atmosphere</span><span class="tag">Climate</span></div>
         <span class="coming-soon">Coming Soon</span>
       </div>
-      <div class="card card--forthcoming">
-        <span class="card-icon">🌾</span>
-        <div class="card-name">Solum</div>
-        <div class="card-tagline">Civilisations don't collapse. Their soil does.</div>
-        <div class="card-tags"><span class="tag">Soil</span><span class="tag">Desertification</span><span class="tag">Collapse</span></div>
-        <span class="coming-soon">Coming Soon</span>
+      <div class="card card--live">
+        <span class="status status--live">Live</span>
+        <a href="solum/index.html">
+          <span class="card-icon">🌾</span>
+          <div class="card-name">Solum</div>
+          <div class="card-tagline">Civilisations don't collapse. Their soil does.</div>
+          <div class="card-tags"><span class="tag">Soil</span><span class="tag">Desertification</span><span class="tag">Collapse</span></div>
+        </a>
       </div>
 
 
@@ -1338,12 +1347,13 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
         </a>
       </div>
 
-      <div class="card card--forthcoming">
-        <span class="card-icon">🚂</span>
-        <div class="card-name">Cursus</div>
-        <div class="card-tagline">Every revolution in how fast humans could move changed who held power.</div>
-        <div class="card-tags"><span class="tag">Transport</span><span class="tag">Infrastructure</span><span class="tag">Speed</span></div>
-        
+      <div class="card card--live">
+        <span class="status status--live">Live</span>
+        <a href="cursus/index.html">
+          <span class="card-icon">🚂</span>
+          <div class="card-name">Cursus</div>
+          <div class="card-tagline">Every revolution in how fast humans could move changed who held power.</div>
+          <div class="card-tags"><span class="tag">Transport</span><span class="tag">Infrastructure</span><span class="tag">Speed</span></div>
         </a>
       </div>
 
@@ -1519,8 +1529,8 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
     </div>
     <div class="card-grid">
 
-      <div class="card card--building">
-        <span class="status status--building">Building</span>
+      <div class="card card--live">
+        <span class="status status--live">Live</span>
         <a href="anthrophone/index.html">
           <span class="card-icon">🎵</span>
           <div class="card-name">Anthrophone</div>
