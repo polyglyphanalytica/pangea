@@ -964,10 +964,10 @@
       "section": "I"
     },
     "solum": {
-      "phase": "5",
+      "phase": "DONE",
       "items": 120,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "I"
     },
@@ -1029,7 +1029,6 @@
     }
   },
   "queue": [
-    "solum",
     "sylva",
     "ignis",
     "spiritus",
@@ -1148,7 +1147,8 @@
     "via",
     "cursus",
     "clima",
-    "aqua"
+    "aqua",
+    "solum"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -2937,6 +2937,17 @@
       "atlas": "solum",
       "phase_done": "3",
       "phase_next": "5",
+      "items": 120
+    },
+    {
+      "atlas": "solum",
+      "phase_done": "5+6",
+      "phase_next": "GO_LIVE",
+      "items": 120
+    },
+    {
+      "atlas": "solum",
+      "phase_done": "GO_LIVE",
       "items": 120
     }
   ]
