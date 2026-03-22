@@ -3092,7 +3092,7 @@ function renderMap(){
     const womenCount=(WOMEN[c.id]||[]).length;
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
     // Drift 2: inactive items fully hidden (0 not 0.06). Drift 3: herstory items without WOMEN hidden (0 not 0.35).
-    const op=on?(herstory&&!womenCount?0:isWhatifLost?.2:1):(heritageInactive?.35:0);
+    const op=on?(herstory&&!womenCount?0:1):(heritageIds?(isHeritage?0.45:0.06):herstory?0.15:0);
     const [cx,cy]=itemPt(c);
     return {c,on,isSel,mcol,op,cx,cy};
   });
@@ -4534,7 +4534,7 @@ function _syncHerstoryBadge(){
 function toggleHerstory(){
   herstory=!herstory;
   document.body.classList.toggle('herstory',herstory);
-  const btn=document.getElementById('btn-herstory');
+  const btn=document.getElementById('menu-herstory');
   if(btn){
     btn.setAttribute('aria-pressed',herstory);
     btn.style.color=herstory?'#c060a0':'';
