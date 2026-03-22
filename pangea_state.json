@@ -287,7 +287,7 @@
       "phase": "3",
       "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "I"
     },
@@ -295,9 +295,14 @@
       "phase": "1A",
       "items": 0,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "I"
+      "section": "I",
+      "validated_sha": "8e939fb50cd18a90c0d44f689c9ac9e8421b7393",
+      "validated_short": "8e939fb",
+      "validated_at": "2026-03-22T22:19:16.207723Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "contagium": {
       "phase": "1A",
@@ -971,12 +976,17 @@
       "validated_lenses": 30
     },
     "spiritus": {
-      "phase": "DATA",
+      "phase": "DONE",
       "items": 84,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "I"
+      "section": "I",
+      "validated_sha": "920bd594d07295f3be5718879c73e2f3c9cf957a",
+      "validated_short": "920bd59",
+      "validated_at": "2026-03-22T22:17:32.100466Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "solum": {
       "phase": "DONE",

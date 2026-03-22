@@ -2592,8 +2592,8 @@ function renderMap(){
     const heritageIds=mode==='heritage'&&heritageRegion?new Set(HERITAGE_REGIONS[heritageRegion]||[]):null;
     const isHeritage=heritageIds&&heritageIds.has(c.id);
     const heritageInactive=isHeritage&&!on;
-    const isWhatifLost=whatifCiv&&whatifCiv!==c.id&&
-      TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifCiv);
+    const isWhatifLost=whatifItem&&whatifItem!==c.id&&
+      TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifItem);
     const womenCount=(WOMEN[c.id]||[]).length;
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
     // Drift 2: inactive items fully hidden (0 not 0.06). Drift 3: herstory items without WOMEN hidden (0 not 0.35).
@@ -2878,7 +2878,7 @@ function setYear(y){
   if(sel&&!active(sel))closeInfo();
   else renderDrawer();
   updateURL();
-  if(mode==='whatif'&&whatifCiv)renderWhatIfPaths();
+  if(mode==='whatif'&&whatifItem)renderWhatIfPaths();
 }
 
 function renderWorldMap(world){
@@ -2948,7 +2948,7 @@ function init(){
 // ── MODE MANAGEMENT ──
 function setMode(m){
   // Clear mode-specific state when leaving
-  if(m!=='whatif')whatifCiv=null;
+  if(m!=='whatif')whatifItem=null;
   if(m!=='heritage')heritageRegion=null;
   mode=m;
   ['explore','threads','compare','whatif','heritage'].forEach(id=>{
@@ -3591,7 +3591,7 @@ function renderFingerprint(c){
   }).join(' ');
   svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
   // Labels — placed outside the ring with enough clearance, wrapped in two lines where needed
-  const SHORT=['Military','Commerce','Arts','Science','Reach','Longevity'];
+  const SHORT=['Adaptability','Ecological Impact','Cultural Significance','Intelligence','Longevity','Size & Power'];
   angles.forEach((a,i)=>{
     const lr=R+26;
     const lx=cx+lr*Math.cos(a);
@@ -3733,15 +3733,15 @@ function renderDiplomaticSection(c){
 // ══════════════════════════════════════════════════════
 // WHAT-IF MODE
 // ══════════════════════════════════════════════════════
-let whatifCiv=null;
+let whatifItem=null;
 
 // ── WHAT-IF MAP RENDERING ──
 function renderWhatIfPaths(){
   const layer=document.getElementById('thread-layer');
   if(!layer){return;}
-  if(!whatifCiv){layer.innerHTML='';return;}
+  if(!whatifItem){layer.innerHTML='';return;}
 
-  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
   if(!c){layer.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -3821,7 +3821,7 @@ function renderWhatIfDrawer(){
   if(dt)dt.innerHTML='';
   if(!dc)return;
 
-  if(!whatifCiv){
+  if(!whatifItem){
     dc.innerHTML=`
     <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">What If?</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
@@ -3851,7 +3851,7 @@ function renderWhatIfDrawer(){
     return;
   }
 
-  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
   if(!c){dc.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -3916,7 +3916,7 @@ function renderWhatIfDrawer(){
   if(panel)setTimeout(()=>panel.scrollTop=0,0);
 }
 function setWhatIf(id){
-  whatifCiv=id;
+  whatifItem=id;
   renderWhatIfDrawer();
   renderWhatIfPaths();
   renderMap();
@@ -3924,7 +3924,7 @@ function setWhatIf(id){
 }
 
 function clearWhatIf(){
-  whatifCiv=null;
+  whatifItem=null;
   document.getElementById('thread-layer').innerHTML='';
   renderWhatIfDrawer();
   renderMap();
