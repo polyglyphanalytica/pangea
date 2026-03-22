@@ -284,7 +284,7 @@
       "homepage_name": "D\u014dnum"
     },
     "petra": {
-      "phase": "1A",
+      "phase": "1C",
       "items": 0,
       "target": 100,
       "live": false,
@@ -959,20 +959,20 @@
     },
     "ignis": {
       "phase": "DONE",
-      "items": 120,
+      "items": 100,
       "target": 100,
       "live": true,
       "map": "world",
       "section": "I",
-      "validated_sha": "5ca735a97cdb96c3829d340bdc603a440b928c55",
-      "validated_short": "5ca735a",
-      "validated_at": "2026-03-22T15:15:41.630057Z",
+      "validated_sha": "b1a367de5439569ff771f91f90ebc5f68a1cd7dd",
+      "validated_short": "b1a367d",
+      "validated_at": "2026-03-22T12:27:25.709371Z",
       "validated_items": 100,
-      "validated_lenses": 20
+      "validated_lenses": 30
     },
     "spiritus": {
       "phase": "DATA",
-      "items": 50,
+      "items": 84,
       "target": 100,
       "live": false,
       "map": "world",
@@ -1162,8 +1162,7 @@
     "clima",
     "aqua",
     "solum",
-    "sylva",
-    "ignis"
+    "sylva"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -4013,71 +4012,174 @@
       "items": 50
     },
     {
-      "atlas": "ignis",
-      "batch": "91-91",
-      "items": 91
+      "atlas": "spiritus",
+      "batch": "51-51",
+      "items": 51
     },
     {
-      "atlas": "ignis",
-      "batch": "92-92",
-      "items": 92
+      "atlas": "spiritus",
+      "batch": "52-52",
+      "items": 52
     },
     {
-      "atlas": "ignis",
-      "batch": "93-93",
-      "items": 93
+      "atlas": "spiritus",
+      "batch": "53-53",
+      "items": 53
     },
     {
-      "atlas": "ignis",
-      "batch": "94-94",
-      "items": 94
+      "atlas": "spiritus",
+      "batch": "54-54",
+      "items": 54
     },
     {
-      "atlas": "ignis",
-      "batch": "95-95",
-      "items": 95
+      "atlas": "spiritus",
+      "batch": "55-55",
+      "items": 55
     },
     {
-      "atlas": "ignis",
-      "batch": "96-96",
-      "items": 96
+      "atlas": "spiritus",
+      "batch": "56-56",
+      "items": 56
     },
     {
-      "atlas": "ignis",
-      "batch": "97-97",
-      "items": 97
+      "atlas": "spiritus",
+      "batch": "57-57",
+      "items": 57
     },
     {
-      "atlas": "ignis",
-      "batch": "98-98",
-      "items": 98
+      "atlas": "spiritus",
+      "batch": "58-58",
+      "items": 58
     },
     {
-      "atlas": "ignis",
-      "batch": "99-99",
-      "items": 99
+      "atlas": "spiritus",
+      "batch": "59-59",
+      "items": 59
     },
     {
-      "atlas": "ignis",
-      "batch": "100-100",
-      "items": 100
+      "atlas": "spiritus",
+      "batch": "60-60",
+      "items": 60
     },
     {
-      "atlas": "ignis",
-      "phase_done": "3",
-      "phase_next": "5",
-      "items": 120
+      "atlas": "spiritus",
+      "batch": "61-61",
+      "items": 61
     },
     {
-      "atlas": "ignis",
-      "phase_done": "5+6",
-      "phase_next": "GO_LIVE",
-      "items": 120
+      "atlas": "spiritus",
+      "batch": "62-62",
+      "items": 62
     },
     {
-      "atlas": "ignis",
-      "phase_done": "GO_LIVE",
-      "items": 120
+      "atlas": "spiritus",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "spiritus",
+      "batch": "84-84",
+      "items": 84
     }
   ],
   "assignments": {}
