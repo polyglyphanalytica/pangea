@@ -3014,8 +3014,12 @@ function toggleTheme(){
   // Prefer pangea-theme (project-wide), fall back to civ-theme (legacy), then system
   const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('civ-theme');
   if(saved){applyTheme(saved);}
-  else{document.documentElement.dataset.theme='dark';}
-}catch(e){document.documentElement.dataset.theme='dark';}})();
+  else{
+    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+    document.documentElement.dataset.theme=sys;
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
+  }
+}catch(e){}})();
 
 // ── MOBILE DRAWER ──
 const isMobile=()=>window.innerWidth<=768 && window.matchMedia('(orientation:portrait)').matches;
