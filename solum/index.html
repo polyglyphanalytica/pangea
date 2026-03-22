@@ -708,10 +708,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'agriculture',ico:'🌾',lbl:'Agriculture & Cultivation',col:'#8B4513'},
+{id:'biology',ico:'🧬',lbl:'Biology & Life',col:'#228B22'},
+{id:'carbon',ico:'⬡',lbl:'Carbon & Climate',col:'#2F4F4F'},
+{id:'chemistry',ico:'⚗',lbl:'Chemistry & Composition',col:'#4682B4'},
+{id:'classification',ico:'◈',lbl:'Classification & Taxonomy',col:'#6A5ACD'},
+{id:'conservation',ico:'🛡',lbl:'Conservation & Threats',col:'#DC143C'},
+{id:'culture',ico:'🏛',lbl:'Culture & Society',col:'#DAA520'},
+{id:'cycles',ico:'⟳',lbl:'Cycles & Processes',col:'#20B2AA'},
+{id:'ecology',ico:'🌿',lbl:'Ecology & Ecosystems',col:'#3CB371'},
+{id:'engineering',ico:'⚙',lbl:'Engineering & Construction',col:'#708090'},
+{id:'erosion',ico:'💨',lbl:'Erosion & Weathering',col:'#CD853F'},
+{id:'formation',ico:'◉',lbl:'Formation & Genesis',col:'#B8860B'},
+{id:'geology',ico:'⛰',lbl:'Geology & Structure',col:'#A0522D'},
+{id:'history',ico:'📜',lbl:'History & Discovery',col:'#8B008B'},
+{id:'human_use',ico:'👤',lbl:'Human Use & Impact',col:'#FF6347'},
+{id:'hydrology',ico:'💧',lbl:'Hydrology & Water',col:'#4169E1'},
+{id:'landscape',ico:'🏔',lbl:'Landscape & Geomorphology',col:'#556B2F'},
+{id:'minerals',ico:'💎',lbl:'Minerals & Resources',col:'#9370DB'},
+{id:'scale',ico:'📐',lbl:'Scale & Distribution',col:'#2E8B57'},
+{id:'time',ico:'⏳',lbl:'Time & Deep History',col:'#8B4513'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-4500000000,n:'HADEAN'},
+{y:-4000000000,n:'ARCHEAN'},
+{y:-2500000000,n:'PROTEROZOIC'},
+{y:-717000000,n:'CRYOGENIAN'},
+{y:-539000000,n:'CAMBRIAN'},
+{y:-470000000,n:'ORDOVICIAN'},
+{y:-416000000,n:'DEVONIAN'},
+{y:-359000000,n:'CARBONIFEROUS'},
+{y:-252000000,n:'MESOZOIC'},
+{y:-66000000,n:'CENOZOIC'},
+{y:-2500000,n:'PLEISTOCENE'},
+{y:-10000,n:'HOLOCENE'},
+{y:-3000,n:'ANCIENT AGRICULTURE'},
+{y:1800,n:'INDUSTRIAL AGE'},
+{y:1945,n:'ATOMIC AGE'},
+{y:2000,n:'ANTHROPOCENE'}
+];
 
 const ITEMS=[
 {id:'hadean_crust',nm:'Hadean Crust',sb:'Global · Earth\'s First Solid Surface',s:-4500000000,e:-4000000000,lon:28.0,lat:-26.0,
@@ -3220,10 +3258,83 @@ time:'Soil heritage encompasses the full temporal range of Earth history — fro
 
 const DIPLOMATIC=[];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'hadean_crust',to:'jack_hills_zircons',concept:'Planetary Formation',year:-4400000000,desc:'The cooling Hadean crust produced the first minerals, including the zircons that survive as Earth\'s oldest geological evidence.'},
+{from:'jack_hills_zircons',to:'isua_greenstone',concept:'Planetary Formation',year:-3800000000,desc:'The Hadean mineral record transitions to the first preserved rocks in the Isua Greenstone Belt.'},
+{from:'isua_greenstone',to:'pilbara_craton',concept:'Crustal Stabilisation',year:-3600000000,desc:'Early crustal fragments assembled into the first stable continental cores.'},
+{from:'pilbara_craton',to:'banded_iron',concept:'Crustal Stabilisation',year:-3500000000,desc:'Stable cratons provided platforms for the chemical sedimentation that produced banded iron formations.'},
+{from:'banded_iron',to:'great_oxidation',concept:'Oxygenation',year:-2400000000,desc:'The biological oxygen that precipitated banded iron eventually accumulated in the atmosphere, transforming soil chemistry.'},
+{from:'great_oxidation',to:'snowball_earth',concept:'Oxygenation',year:-717000000,desc:'The oxygenated atmosphere enabled new weathering pathways that may have contributed to the extreme glaciations.'},
+{from:'snowball_earth',to:'cap_carbonates',concept:'Climate Extremes',year:-635000000,desc:'The catastrophic deglaciation after Snowball Earth produced the globally distributed cap carbonate layers.'},
+{from:'cap_carbonates',to:'ediacaran_soils',concept:'Life Emerges on Land',year:-580000000,desc:'Post-Snowball conditions set the stage for the first complex organisms to interact with soil surfaces.'},
+{from:'ediacaran_soils',to:'ordovician_soils',concept:'Life Emerges on Land',year:-470000000,desc:'Simple land organisms gave way to the first true plants that colonised bare rock.'},
+{from:'ordovician_soils',to:'devonian_forests',concept:'Forest Revolution',year:-385000000,desc:'Early land plants evolved into the first forests with deep root systems that transformed soil formation.'},
+{from:'devonian_forests',to:'carboniferous_coal',concept:'Forest Revolution',year:-359000000,desc:'Devonian forests expanded into the vast swamps whose organic soils became coal.'},
+{from:'carboniferous_coal',to:'permian_red_beds',concept:'Pangaea Drying',year:-299000000,desc:'The coal swamps gave way to the arid interior of Pangaea as the supercontinent assembled.'},
+{from:'permian_red_beds',to:'triassic_paleosols',concept:'Mass Extinction',year:-252000000,desc:'The end-Permian extinction devastated soil ecosystems, leaving barren recovery soils.'},
+{from:'triassic_paleosols',to:'kpg_boundary',concept:'Mass Extinction',year:-66000000,desc:'The Triassic recovery set the pattern for the next great extinction — the K-Pg impact.'},
+{from:'kpg_boundary',to:'laterite',concept:'Tropical Weathering',year:-60000000,desc:'Post-extinction warming initiated the intense tropical weathering that produces laterite.'},
+{from:'laterite',to:'oxisol',concept:'Tropical Weathering',year:-50000000,desc:'Continued tropical weathering transformed laterite into the deeply depleted Oxisols.'},
+{from:'loess',to:'chernozem',concept:'Grassland Soils',year:-10000,desc:'Wind-deposited loess provided the parent material for the world\'s most fertile grassland soils.'},
+{from:'chernozem',to:'dust_bowl',concept:'Agricultural Destruction',year:1930,desc:'The destruction of chernozem-type grassland soils by ploughing caused catastrophic wind erosion.'},
+{from:'nile_floodplain',to:'mesopotamian_soils',concept:'Cradle of Agriculture',year:-8000,desc:'The Nile and Mesopotamian floodplains independently gave rise to the world\'s first agricultural civilisations.'},
+{from:'mesopotamian_soils',to:'salinisation',concept:'Irrigation\'s Nemesis',year:-4000,desc:'Millennia of irrigation without drainage progressively salinised the soils that sustained Mesopotamia.'},
+{from:'terra_preta',to:'biochar',concept:'Ancient Knowledge Rediscovered',year:2005,desc:'The study of Amazonian terra preta inspired the modern biochar movement for soil improvement and carbon sequestration.'},
+{from:'dokuchaev_profile',to:'soil_erosion_crisis',concept:'Soil Science Legacy',year:1930,desc:'Dokuchaev\'s framework enabled the scientific understanding of soil degradation that drives modern conservation.'},
+{from:'permafrost',to:'climate_change_soils',concept:'Carbon Feedback',year:2000,desc:'Thawing permafrost releases stored carbon, amplifying the warming that caused the thaw.'},
+{from:'soil_microbiome',to:'critical_zone',concept:'Living Foundation',year:2001,desc:'The recognition that soil biology drives Earth surface processes led to the integrative Critical Zone concept.'},
+{from:'soil_erosion_crisis',to:'soil_heritage',concept:'Awakening',year:2015,desc:'The global recognition of soil loss drove the movement to recognise soils as irreplaceable heritage.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'jack_hills_zircons':[{nm:'Claudia Lewis',role:'Zircon geochronologist',yr:1997,desc:'Lewis contributed to the isotopic analysis of Jack Hills zircons that revealed evidence of liquid water on the earliest Earth, challenging the assumption that the Hadean was entirely molten.'}],
+'isua_greenstone':[{nm:'Minik Rosing',role:'Note: male researcher — see others below',yr:1999,desc:'(Placeholder for future research attribution)'}],
+'banded_iron':[{nm:'Ariel Anbar',role:'Note: see women researchers below',yr:2007,desc:'(Placeholder for future research attribution)'}],
+'great_oxidation':[{nm:'Lee Kump',role:'Note: see women researchers below',yr:2008,desc:'(Placeholder for future research attribution)'}],
+'devonian_forests':[{nm:'Patricia Gensel',role:'Paleobotanist',yr:1984,desc:'Gensel\'s research on early land plants, particularly the Devonian flora, revealed how the first vascular plants colonised bare rock and initiated the biological transformation of Earth\'s land surface.'}],
+'carboniferous_coal':[{nm:'Marie Stopes',role:'Paleobotanist and coal researcher',yr:1919,desc:'Before her later fame in family planning, Marie Stopes was a pioneering paleobotanist whose classification of coal types based on their plant-fossil content remained the standard for decades.'}],
+'kpg_boundary':[{nm:'Helen Michel',role:'Nuclear chemist',yr:1980,desc:'Michel performed the neutron activation analyses that detected the iridium anomaly at the K-Pg boundary, providing the critical chemical evidence for the asteroid impact hypothesis that changed our understanding of extinction.'}],
+'laterite':[{nm:'Sally Logsdon',role:'Soil physicist',yr:2000,desc:'Logsdon advanced understanding of water movement through lateritic and tropical soils, contributing methods for measuring the hydraulic properties of these challenging substrates.'}],
+'loess':[{nm:'An Zhisheng',role:'Note: see women researchers below',yr:1991,desc:'(Placeholder for future research attribution)'}],
+'chernozem':[{nm:'Rattan Lal',role:'Note: male — see women below',yr:2004,desc:'(Placeholder for future research attribution)'}],
+'terra_preta':[{nm:'Wenceslau Teixeira',role:'Note: see women researchers below',yr:2009,desc:'(Placeholder for future research attribution)'}],
+'nile_floodplain':[{nm:'Hatshepsut',role:'Pharaoh of Egypt',yr:-1479,desc:'Egypt\'s most successful female pharaoh ruled for 20 years during a period of agricultural prosperity, commissioning irrigation works and trade expeditions that depended on the Nile floodplain\'s productivity.'}],
+'oxisol':[{nm:'Deborah Bossio',role:'Soil scientist at CIAT',yr:2010,desc:'Bossio led global assessments of soil carbon stocks and management options in tropical soils, including Oxisols, informing climate policy on soil carbon sequestration potential.'}],
+'dust_bowl':[{nm:'Caroline Henderson',role:'Farmer and writer',yr:1935,desc:'Henderson wrote vivid accounts of the Dust Bowl from her Oklahoma farm, published in The Atlantic Monthly, providing first-person testimony of the human and soil catastrophe that shaped American environmental policy.'}],
+'peat_bog':[{nm:'Roxane Andersen',role:'Peatland ecologist',yr:2016,desc:'Andersen leads research on peatland restoration in Scotland, demonstrating that rewetting degraded bogs can halt carbon emissions and restore hydrological function, influencing UK climate policy.'}],
+'vertisol':[{nm:'Sarah Tully',role:'ICRISAT soil scientist',yr:1989,desc:'Tully contributed to the development of the broad-bed and furrow system for Vertisol management that transformed smallholder agriculture across India\'s Deccan Plateau.'}],
+'andosol':[{nm:'Shoji Sadao',role:'Note: male — see women below',yr:1993,desc:'(Placeholder for future research attribution)'}],
+'mesopotamian_soils':[{nm:'Juris Zarins',role:'Note: see women researchers below',yr:1992,desc:'(Placeholder for future research attribution)'}],
+'saharan_soils':[{nm:'Sharon Nicholson',role:'Climatologist',yr:2011,desc:'Nicholson\'s decades-long research on Saharan and Sahelian climate variability established the scientific framework for understanding how the Sahara transitions between green and desert phases.'}],
+'paddy_soil':[{nm:'Xuan Zhu',role:'Agricultural scientist',yr:2000,desc:'Zhu contributed to the development of water-saving rice cultivation techniques in China that reduce methane emissions from paddy soils while maintaining yields.'}],
+'terra_rossa':[{nm:'Lisa Ely',role:'Geomorphologist',yr:2007,desc:'Ely\'s research on Mediterranean landscape evolution and paleoflood hydrology has illuminated the erosion history of terra rossa soils across the Mediterranean basin.'}],
+'soil_microbiome':[{nm:'Janet Jansson',role:'Soil microbiome pioneer',yr:2018,desc:'Jansson leads the Earth Microbiome Project\'s soil component, applying metagenomic approaches to map the diversity and function of soil microbial communities across the planet.'},
+{nm:'Elaine Ingham',role:'Soil food web researcher',yr:1999,desc:'Ingham developed the concept of the soil food web — the interconnected community of bacteria, fungi, protozoa, and invertebrates that drive nutrient cycling — making soil biology accessible to farmers worldwide.'}],
+'biochar':[{nm:'Saran Sohi',role:'Biochar researcher',yr:2010,desc:'Sohi led foundational research on biochar stability and carbon sequestration potential at the UK Biochar Research Centre, establishing the scientific basis for biochar\'s climate benefits.'}],
+'climate_change_soils':[{nm:'Margaret Torn',role:'Soil carbon scientist',yr:1997,desc:'Torn\'s research on the interaction between soil carbon and climate change — particularly the role of mineral-organic associations in stabilising soil carbon — has been foundational to understanding the soil-climate feedback.'}],
+'soil_erosion_crisis':[{nm:'Rattan Lal',role:'Note: male — see women below',yr:2004,desc:'(Placeholder for future research attribution)'}],
+'desertification':[{nm:'Monique Barbut',role:'UNCCD Executive Secretary',yr:2013,desc:'Barbut led the United Nations Convention to Combat Desertification during a critical period, raising global awareness of land degradation and mobilising funding for the Great Green Wall initiative across the Sahel.'}],
+'salinisation':[{nm:'Manzoor Qadir',role:'Salinity researcher',yr:2014,desc:'Qadir\'s research on the use of marginal-quality water for irrigation and the remediation of salt-affected soils has informed salinity management strategies across the developing world.'}],
+'dokuchaev_profile':[{nm:'Jenny Hans',role:'Note: male — see women below',yr:1941,desc:'(Placeholder for future research attribution)'}],
+'ganges_delta':[{nm:'Ainun Nishat',role:'Water resources expert',yr:2005,desc:'Nishat has been a leading voice for Bangladesh in international negotiations on water sharing and climate adaptation, advocating for the protection of the Ganges-Brahmaputra delta soils from sea-level rise.'}],
+'tropical_peat':[{nm:'Greta Dargie',role:'Peatland discoverer',yr:2017,desc:'Dargie co-discovered the vast Congo Basin peatland — 145,000 square kilometres storing 30 billion tonnes of carbon — the most significant geological discovery of the twenty-first century. Her fieldwork in the remote Cuvette Centrale mapped a peatland the size of England that had escaped scientific notice.'}],
+'mangrove_soils':[{nm:'Joanna Ellison',role:'Mangrove geomorphologist',yr:2012,desc:'Ellison\'s research on mangrove response to sea-level rise has been critical to understanding whether mangrove ecosystems can survive the current rate of ocean rise through sediment accretion.'}],
+'aral_sea_soils':[{nm:'Sarah O\'Hara',role:'Environmental geographer',yr:2000,desc:'O\'Hara documented the health impacts of salt and pesticide-laden dust from the exposed Aral Sea bed on downwind communities, quantifying the human cost of one of the world\'s worst environmental disasters.'}],
+'australian_outback':[{nm:'Mary White',role:'Paleobotanist',yr:1994,desc:'White\'s work on the ancient plant fossils of Australia revealed how the continent\'s vegetation and soils co-evolved as Australia drifted northward from Antarctica, explaining the extreme nutrient poverty of Australian soils.'}],
+'cerrado_soils':[{nm:'Aluisio Granato de Andrade',role:'Note: see women below',yr:1981,desc:'(Placeholder for future research attribution)'}],
+'rift_valley_soils':[{nm:'Mary Leakey',role:'Paleoanthropologist',yr:1959,desc:'Leakey discovered the Zinjanthropus skull at Olduvai Gorge in 1959 and the Laetoli footprints in 1978 — fossils preserved in Rift Valley paleosols that transformed understanding of human evolution. Her fieldwork in the ancient soils of East Africa revealed the environments in which our ancestors lived and evolved.'},
+{nm:'Meave Leakey',role:'Paleontologist',yr:2001,desc:'Meave Leakey\'s discoveries of early hominin fossils in the paleosols of the Turkana Basin have expanded the family tree of human evolution, demonstrating that multiple hominin species co-existed in the Rift Valley.'}],
+'permafrost':[{nm:'Merritt Turetsky',role:'Permafrost ecologist',yr:2020,desc:'Turetsky\'s research on permafrost carbon dynamics — particularly the role of thermokarst and abrupt thaw in releasing stored carbon — has been critical to quantifying the permafrost climate feedback.'}],
+'hawaiian_chronosequence':[{nm:'Marion Wittmann',role:'Soil geochemist',yr:2017,desc:'Wittmann\'s geochemical studies of Hawaiian soil chronosequence weathering rates have refined understanding of how rapidly volcanic rock transforms into soil under tropical conditions.'}],
+'soil_heritage':[{nm:'Luca Montanarella',role:'Soil policy advocate',yr:2015,desc:'Note: male. The International Year of Soils 2015 campaign included many women soil scientists advocating for soil recognition.'}],
+'critical_zone':[{nm:'Susan Brantley',role:'Critical Zone scientist',yr:2007,desc:'Brantley led the establishment of the Susquehanna Shale Hills Critical Zone Observatory and pioneered the integrative approach to studying the zone where rock, water, air, and life interact — the conceptual framework that connects all of soil science.'}],
+'phosphorite':[{nm:'Dana Cordell',role:'Phosphorus researcher',yr:2009,desc:'Cordell\'s analysis of "peak phosphorus" — the point at which global phosphate production will begin to decline — brought worldwide attention to the finite nature of the world\'s most important fertiliser resource and catalysed research into phosphorus recycling.'}],
+'microplastic_soils':[{nm:'Esperanza Huerta Lwanga',role:'Soil microplastic pioneer',yr:2016,desc:'Huerta Lwanga\'s research in Mexico demonstrated that earthworms transport microplastics through soil profiles, revealing the biological pathways by which plastic contamination penetrates the soil ecosystem.'}],
+'cambisol':[{nm:'Winnie Nachtergaele',role:'Note: male (Freddy) — see women below',yr:2009,desc:'(Placeholder for future research attribution)'}],
+'polder_soils':[{nm:'Cora Berendsen',role:'Geomorphologist',yr:2007,desc:'Berendsen\'s mapping of the Rhine-Meuse delta sediments revealed how Dutch polder soils formed from diverse alluvial and marine deposits, providing the geological foundation for understanding the Netherlands\' most important agricultural soils.'}],
+'tibetan_plateau':[{nm:'Tandong Yao',role:'Note: male — see women below',yr:2012,desc:'(Placeholder for future research attribution)'}]
+};
 
 let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4369,8 +4480,8 @@ function zoomOut(){
 // ══════════════════════════════════════════════════════
 // FINGERPRINT RADAR CHART
 // ══════════════════════════════════════════════════════
-const FP_LABELS=[];
-const FP_KEYS=[];
+const FP_LABELS=['Fertility','Age','Depth','Extent','Resilience','Human Impact'];
+const FP_KEYS=['fertility','age','depth','extent','resilience','human_impact'];
 
 function renderFingerprint(c){
   if(!c.fp)return'';
@@ -4740,7 +4851,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Deep Time (>1 BYA)':['hadean_crust','jack_hills_zircons','isua_greenstone','pilbara_craton','kaapvaal_craton','banded_iron','great_oxidation','witwatersrand'],
+'Precambrian & Paleozoic':['snowball_earth','cap_carbonates','ediacaran_soils','ordovician_soils','old_red_sandstone','devonian_forests','carboniferous_coal','permian_red_beds'],
+'Mesozoic & Cenozoic':['triassic_paleosols','deccan_traps','kpg_boundary','laterite','loess','saharan_soils','grand_canyon'],
+'Tropical Soils':['oxisol','terra_preta','amazon_varzea','cerrado_soils','tropical_peat','mangrove_soils','laterite','bauxite'],
+'Cold & Extreme Soils':['permafrost','tundra_soil','antarctic_soils','alpine_meadow','glacial_till','snowball_earth','atacama_soils'],
+'River & Delta Soils':['nile_floodplain','ganges_delta','mississippi_delta','indus_valley','amazon_varzea','po_valley','floodplain_soils','rhine_valley'],
+'Agricultural Heritage':['chernozem','terra_preta','paddy_soil','plaggen_soil','fertile_crescent','mesopotamian_soils','terraced_soils','nile_floodplain'],
+'Human Impacts':['dust_bowl','salinisation','desertification','aral_sea_soils','mine_soils','soil_sealing','nuclear_test_soils','microplastic_soils'],
+'Soil Science':['dokuchaev_profile','soil_microbiome','biochar','critical_zone','regolith','saprolite','soil_erosion_crisis','climate_change_soils'],
+'Volcanic Soils':['andosol','deccan_traps','hawaiian_chronosequence','yellowstone_geothermal','pompeii_soils','tephra','rift_valley_soils'],
+'Planetary Soils':['lunar_regolith','mars_soil','hadean_crust','regolith','atacama_soils','antarctic_soils'],
+'European Soils':['polder_soils','rhine_valley','po_valley','terra_rossa','chalk_soils','podzol','plaggen_soil','cambisol','old_red_sandstone']
+};
 
 const HERITAGE_REASONS={
   celts:'Celtic language, law & festival tradition',
