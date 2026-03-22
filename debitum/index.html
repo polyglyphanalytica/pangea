@@ -708,10 +708,38 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+  {id:'banking',     ico:'⊕', lbl:'Banking & Credit',          col:'#5a9a60'},
+  {id:'collapse',    ico:'↯', lbl:'Collapse & Default',        col:'#a04040'},
+  {id:'colonialism', ico:'⚑', lbl:'Colonialism & Extraction',  col:'#7a5030'},
+  {id:'contagion',   ico:'⤢', lbl:'Contagion & Spread',        col:'#4890a0'},
+  {id:'cultural',    ico:'◈', lbl:'Cultural Impact',            col:'#9b6fd4'},
+  {id:'enforcement', ico:'⛓', lbl:'Enforcement & Collection',  col:'#906040'},
+  {id:'ethics',      ico:'Ψ', lbl:'Ethics & Morality',         col:'#7060a8'},
+  {id:'gender',      ico:'⊗', lbl:'Gender & Debt',             col:'#c06090'},
+  {id:'inequality',  ico:'≠', lbl:'Inequality & Class',        col:'#8a6020'},
+  {id:'innovation',  ico:'⚙', lbl:'Innovation & Instruments',  col:'#608050'},
+  {id:'jubilee',     ico:'◉', lbl:'Jubilee & Forgiveness',     col:'#3a9fc0'},
+  {id:'labor',       ico:'⊛', lbl:'Labour & Bondage',          col:'#8a7030'},
+  {id:'law',         ico:'⚖', lbl:'Law & Regulation',          col:'#4a6fa5'},
+  {id:'legacy',      ico:'∞', lbl:'Legacy Today',              col:'#7890a8'},
+  {id:'military',    ico:'✦', lbl:'Military & War Finance',    col:'#b84040'},
+  {id:'political',   ico:'◎', lbl:'Political Impact',          col:'#4a7faa'},
+  {id:'religion',    ico:'◯', lbl:'Religion & Usury',          col:'#c8921c'},
+  {id:'resistance',  ico:'↑', lbl:'Resistance & Revolt',       col:'#b06020'},
+  {id:'sovereignty', ico:'⌂', lbl:'Sovereignty & Power',       col:'#5a7a8a'},
+  {id:'trade',       ico:'⟳', lbl:'Trade & Commerce',          col:'#4a8870'},
+];
 
 
-const ERAS=[];
+const ERAS=[
+  {y:-3000,n:'BRONZE AGE'},{y:-1500,n:'LATE BRONZE AGE'},{y:-800,n:'IRON AGE'},
+  {y:-500,n:'CLASSICAL ANTIQUITY'},{y:0,n:'LATE ANTIQUITY'},{y:400,n:'EARLY MEDIEVAL'},
+  {y:800,n:'HIGH MEDIEVAL'},{y:1200,n:'LATE MEDIEVAL'},{y:1450,n:'EARLY MODERN'},
+  {y:1600,n:'AGE OF EMPIRE'},{y:1750,n:'INDUSTRIAL AGE'},{y:1870,n:'GILDED AGE'},
+  {y:1914,n:'WORLD WARS'},{y:1945,n:'BRETTON WOODS ERA'},{y:1971,n:'FIAT MONEY ERA'},
+  {y:2000,n:'GLOBALISATION'},{y:2020,n:'POLYCRISIS'},
+];
 
 const ITEMS=[
 {id:'mesopotamian_grain_loans',nm:'Mesopotamian Grain Loans',sb:'Sumer · 3000 BCE',s:-3000,e:-1800,
@@ -3316,9 +3344,106 @@ sovereignty:'The debt crisis constrains the sovereignty of dozens of developing 
 trade:'Developing nations in debt distress are forced into export-oriented trade patterns that serve creditor interests rather than domestic development. Countries that need to grow food for their populations instead grow commodities for export to generate foreign currency for debt service. The trade patterns that the debt crisis enforces — raw material exports, manufactured imports — replicate the colonial trade structures that debt was supposed to help overcome.'}},
 ];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{id:'t1',concept:'Debt Cancellation Tradition',from:'mesopotamian_grain_loans',to:'solon_seisachtheia',year:-594,type:'transmitted',desc:'Mesopotamian amargi (debt cancellation) traditions influenced Solon\'s radical Seisachtheia in Athens.'},
+{id:'t2',concept:'Debt Cancellation Tradition',from:'solon_seisachtheia',to:'biblical_jubilee',year:-600,type:'transmitted',desc:'Greek and Near Eastern debt cancellation traditions informed the Biblical Jubilee concept in Leviticus.'},
+{id:'t3',concept:'Debt Cancellation Tradition',from:'biblical_jubilee',to:'jubilee_2000',year:1996,type:'transmitted',desc:'The Biblical Jubilee directly inspired the Jubilee 2000 campaign for developing-world debt cancellation.'},
+{id:'t4',concept:'Usury Prohibition',from:'biblical_jubilee',to:'christian_usury_ban',year:325,type:'transmitted',desc:'Biblical prohibitions on interest-charging formed the foundation of the medieval Christian usury ban.'},
+{id:'t5',concept:'Usury Prohibition',from:'christian_usury_ban',to:'islamic_riba',year:622,type:'transmitted',desc:'Christian theological arguments against usury influenced and paralleled the Quranic prohibition of riba.'},
+{id:'t6',concept:'Usury Prohibition',from:'islamic_riba',to:'islamic_banking_modern',year:1975,type:'transmitted',desc:'The ancient riba prohibition was revived as the basis for the modern Islamic banking industry.'},
+{id:'t7',concept:'Paper Money',from:'song_paper_money',to:'mongol_fiscal_crisis',year:1260,type:'transmitted',desc:'The Mongol Yuan adopted Song paper money technology — and repeated its inflationary failure at continental scale.'},
+{id:'t8',concept:'Paper Money',from:'mongol_fiscal_crisis',to:'assignat_france',year:1789,type:'transmitted',desc:'European awareness of Chinese paper money (through Marco Polo) eventually contributed to French Revolutionary assignats.'},
+{id:'t9',concept:'Paper Money',from:'assignat_france',to:'weimar_hyperinflation',year:1921,type:'transmitted',desc:'The assignat experience — currency backed by confiscated assets, then overprinted — prefigured Weimar Germany\'s hyperinflationary spiral.'},
+{id:'t10',concept:'Sovereign Default Pattern',from:'spanish_habsburg_default',to:'french_revolution_debt',year:1789,type:'transmitted',desc:'Spain\'s serial defaults demonstrated that even wealthy empires could be bankrupted by war — a lesson France failed to heed.'},
+{id:'t11',concept:'Sovereign Default Pattern',from:'french_revolution_debt',to:'latin_american_debt_1825',year:1822,type:'transmitted',desc:'French Revolutionary War debts destabilised European finance, creating the surplus capital that flowed into risky Latin American bonds.'},
+{id:'t12',concept:'Sovereign Default Pattern',from:'latin_american_debt_1825',to:'mexican_debt_crisis',year:1982,type:'transmitted',desc:'The 1820s Latin American default pattern — overborrowing, default, restructuring — repeated exactly in the 1982 crisis.'},
+{id:'t13',concept:'Central Banking',from:'bank_of_england',to:'hamilton_debt',year:1790,type:'transmitted',desc:'Hamilton modelled the First Bank of the United States on the Bank of England\'s management of government debt.'},
+{id:'t14',concept:'Central Banking',from:'hamilton_debt',to:'bretton_woods',year:1944,type:'transmitted',desc:'Hamilton\'s principle of funded national debt managed by central institutions informed the Bretton Woods system design.'},
+{id:'t15',concept:'Debt Colonisation',from:'egyptian_debt_colonisation',to:'ottoman_debt_crisis',year:1881,type:'transmitted',desc:'The Egyptian model of debt commissions controlling sovereign revenue was applied simultaneously to the Ottoman Empire.'},
+{id:'t16',concept:'Debt Colonisation',from:'ottoman_debt_crisis',to:'qing_opium_debt',year:1842,type:'transmitted',desc:'European debt-control techniques applied in Egypt and the Ottoman Empire were also imposed on Qing China.'},
+{id:'t17',concept:'Debt Colonisation',from:'qing_opium_debt',to:'african_structural_adjustment',year:1981,type:'transmitted',desc:'The colonial pattern of external financial control — from China\'s customs administration to Africa\'s structural adjustment — persisted across centuries.'},
+{id:'t18',concept:'Too Big to Fail',from:'barings_crisis_1890',to:'credit_anstalt',year:1931,type:'transmitted',desc:'The Barings rescue established the precedent of central bank-organised bailouts that the Credit-Anstalt crisis would test.'},
+{id:'t19',concept:'Too Big to Fail',from:'credit_anstalt',to:'lehman_brothers',year:2008,type:'transmitted',desc:'The Credit-Anstalt collapse demonstrated systemic risk from a single bank failure — a lesson the Lehman decision tragically confirmed.'},
+{id:'t20',concept:'Speculative Bubble',from:'dutch_tulip_mania',to:'south_sea_bubble',year:1720,type:'transmitted',desc:'The tulip mania established the pattern of credit-fuelled speculation that the South Sea Bubble replicated on a larger scale.'},
+{id:'t21',concept:'Speculative Bubble',from:'south_sea_bubble',to:'mississippi_bubble',year:1720,type:'transmitted',desc:'The South Sea and Mississippi bubbles occurred simultaneously — the first coordinated international financial mania.'},
+{id:'t22',concept:'Speculative Bubble',from:'mississippi_bubble',to:'us_subprime_mortgage',year:2007,type:'transmitted',desc:'Every speculative bubble from 1720 to 2007 follows the same pattern: innovation, excitement, leverage, peak, panic, collapse.'},
+{id:'t23',concept:'Colonial Labour Debt',from:'potosi_silver',to:'atlantic_slave_trade_debt',year:1619,type:'transmitted',desc:'Potosí\'s forced mining labour and the Atlantic slave trade were linked through Spanish imperial finance — both systems of coerced labour servicing European debt.'},
+{id:'t24',concept:'Colonial Labour Debt',from:'atlantic_slave_trade_debt',to:'debt_peonage_americas',year:1865,type:'transmitted',desc:'The financial exploitation of enslaved labour was reconstituted through sharecropping and debt peonage after abolition.'},
+{id:'t25',concept:'Reparations to Oppressors',from:'haitian_indemnity',to:'british_abolition_debt',year:1833,type:'transmitted',desc:'The Haitian model — compensating slaveholders rather than enslaved — was replicated in the British Abolition Act of 1833.'},
+{id:'t26',concept:'Punitive vs Generous Settlement',from:'versailles_reparations',to:'marshall_plan',year:1948,type:'transmitted',desc:'The Marshall Plan was explicitly designed as the anti-Versailles — generosity toward defeated enemies instead of punitive extraction.'},
+{id:'t27',concept:'Punitive vs Generous Settlement',from:'marshall_plan',to:'london_debt_agreement',year:1953,type:'transmitted',desc:'The Marshall Plan\'s philosophy of generous treatment culminated in the London Debt Agreement\'s restructuring of German debts.'},
+{id:'t28',concept:'IMF Crisis Management',from:'bretton_woods',to:'mexican_debt_crisis',year:1982,type:'transmitted',desc:'The IMF, created at Bretton Woods, became the crisis manager for the Third World debt crisis it had not been designed to handle.'},
+{id:'t29',concept:'IMF Crisis Management',from:'mexican_debt_crisis',to:'asian_financial_crisis',year:1997,type:'transmitted',desc:'The IMF\'s structural adjustment model, developed for Latin America in the 1980s, was applied to the Asian crisis with controversial results.'},
+{id:'t30',concept:'IMF Crisis Management',from:'asian_financial_crisis',to:'greek_debt_crisis',year:2010,type:'transmitted',desc:'The IMF\'s crisis management role expanded from the developing world to the eurozone — applying similar conditionality to a European democracy.'},
+{id:'t31',concept:'Financial Innovation Chain',from:'venetian_prestiti',to:'dutch_voc_debt',year:1602,type:'transmitted',desc:'Venetian bond market innovations influenced the Amsterdam Stock Exchange, created to trade VOC shares.'},
+{id:'t32',concept:'Financial Innovation Chain',from:'dutch_voc_debt',to:'bank_of_england',year:1694,type:'transmitted',desc:'Dutch financial innovations — stock exchanges, government bonds, central banking — directly inspired the Bank of England\'s creation.'},
+{id:'t33',concept:'Microfinance',from:'grameen_microcredit',to:'mpesa_mobile_money',year:2007,type:'transmitted',desc:'Grameen\'s demonstration that the poor are creditworthy inspired the mobile money revolution that M-Pesa represents.'},
+{id:'t34',concept:'Odious Debt',from:'mobutu_odious_debt',to:'apartheid_debt',year:1994,type:'transmitted',desc:'Mobutu\'s kleptocratic borrowing and apartheid South Africa\'s illegitimate debts together defined the modern concept of odious debt.'},
+];
 
-const WOMEN={};
+const WOMEN={
+mesopotamian_grain_loans:[
+{nm:'Enheduanna',yr:-2285,role:'High Priestess & Poet',desc:'World\'s first named author, who administered the temple economy of Ur. Her hymns describe the institutional power of the temple — the same institution that managed the earliest recorded debts.'},
+{nm:'Kubatum',yr:-2000,role:'Queen of Ur',desc:'Royal consort whose Sacred Marriage texts reveal the intimate economics of Sumerian court life — debts of love intertwined with debts of state.'}],
+code_of_hammurabi:[
+{nm:'Iltani',yr:-1780,role:'Priestess-Businesswoman',desc:'A naditu priestess of Sippar who operated extensive lending and property businesses under Hammurabi\'s legal code — one of the best-documented female financiers of the ancient world.'}],
+solon_seisachtheia:[
+{nm:'Aspasia of Miletus',yr:-470,role:'Philosopher & Political Advisor',desc:'Though a generation after Solon, Aspasia exemplified women\'s economic agency in Athens. She managed property, influenced policy, and navigated the financial constraints that Solon\'s reforms had shaped.'}],
+roman_twelve_tables:[
+{nm:'Terentia',yr:-98,role:'Financier',desc:'Cicero\'s wife managed a substantial fortune independently — including rental properties and loan portfolios. She navigated Roman debt law with sophistication that rivalled any male financier of the late Republic.'}],
+christian_usury_ban:[
+{nm:'Margery Kempe',yr:1373,role:'Mystic & Businesswoman',desc:'Medieval English woman who operated a brewery and grain mill before her religious conversion. Her Book describes the financial anxieties of a woman managing commercial debts under the usury prohibition.'},
+{nm:'Hildegard of Bingen',yr:1098,role:'Abbess & Economist',desc:'Managed the finances of two Benedictine convents, operating within the usury prohibition while financing construction, agriculture, and literary production.'}],
+templar_banking:[
+{nm:'Eleanor of Aquitaine',yr:1122,role:'Queen of France & England',desc:'Used Templar banking services for her Crusade financing. One of the most powerful women in medieval Europe, she managed enormous financial obligations across two kingdoms.'}],
+medici_bank:[
+{nm:'Contessina de\' Bardi',yr:1390,role:'Banker\'s Wife & Advisor',desc:'Brought substantial Bardi banking capital to her marriage with Cosimo de\' Medici, contributing the financial resources and banking connections that helped build the Medici fortune.'},
+{nm:'Lucrezia Tornabuoni',yr:1427,role:'Financial Manager',desc:'Wife of Piero de\' Medici, she managed family investments, maintained political correspondence, and negotiated marriages that consolidated Medici financial power.'}],
+south_sea_bubble:[
+{nm:'Sarah Churchill, Duchess of Marlborough',yr:1660,role:'Investor',desc:'Reportedly sold her South Sea shares before the crash, preserving her fortune — one of history\'s earliest examples of successful market timing by a woman investor.'}],
+french_revolution_debt:[
+{nm:'Olympe de Gouges',yr:1748,role:'Revolutionary & Feminist',desc:'Argued in her Declaration of the Rights of Woman (1791) that if women shared the nation\'s debts through taxation, they should share its political rights. Guillotined in 1793.'}],
+haitian_indemnity:[
+{nm:'Suzanne Simone Baptiste Louverture',yr:1742,role:'Revolution Matriarch',desc:'Wife of Toussaint Louverture, she managed the family\'s finances during the revolution and was deported to France, where she died in prison — a victim of the colonial system the indemnity perpetuated.'}],
+hamilton_debt:[
+{nm:'Abigail Adams',yr:1744,role:'Investor & Political Advisor',desc:'Managed the Adams family investments during her husband\'s presidency, including government bonds created by Hamilton\'s financial system. Her financial acumen sustained the family through decades of public service.'}],
+east_india_company_debt:[
+{nm:'Begum Samru',yr:1753,role:'Ruler & Financier',desc:'An Indian woman who rose from dancing girl to ruler of Sardhana, managing a principality\'s finances and lending money to the East India Company itself — a debtor and creditor in the colonial financial system simultaneously.'}],
+grameen_microcredit:[
+{nm:'Sufia Begum',yr:1976,role:'First Borrower',desc:'One of the 42 women in Jobra village who received Muhammad Yunus\'s first $27 loan in 1976 — the borrowers who proved that the poor, and especially poor women, were creditworthy.'}],
+african_structural_adjustment:[
+{nm:'Wangari Maathai',yr:1940,role:'Environmentalist & Activist',desc:'Nobel Peace Prize laureate who connected African debt to environmental destruction — arguing that structural adjustment forced deforestation for export revenue to service debts.'}],
+us_student_debt:[
+{nm:'Elizabeth Warren',yr:1949,role:'Senator & Consumer Advocate',desc:'Harvard bankruptcy law professor who documented the devastating impact of student debt on women, then created the Consumer Financial Protection Bureau and campaigned for debt cancellation as a US Senator.'}],
+indian_farmer_debt:[
+{nm:'Medha Patkar',yr:1954,role:'Social Activist',desc:'Led the Narmada Bachao Andolan (Save Narmada Movement) that connected displacement, debt, and development — arguing that development debt imposed on the poor without consent was a form of oppression.'}],
+jubilee_2000:[
+{nm:'Ann Pettifor',yr:1947,role:'Campaign Director',desc:'Directed the Jubilee 2000 campaign that gathered 24 million signatures and achieved $100 billion in debt cancellation — the most successful debt relief advocacy in history.'}],
+bank_of_england:[
+{nm:'Victoria Climbié (influence)',yr:2000,role:'Symbol of Austerity\'s Cost',desc:'While not directly bank-related, the case of Victoria Climbié — whose death exposed failures in underfunded social services — became a symbol of how fiscal austerity can cost lives.'}],
+great_depression:[
+{nm:'Frances Perkins',yr:1880,role:'US Secretary of Labor',desc:'First woman in the US Cabinet, she designed the New Deal\'s social programmes — Social Security, unemployment insurance, minimum wage — that protected Americans from the Depression\'s worst effects and from future debt crises.'},
+{nm:'Dorothea Lange',yr:1895,role:'Photographer',desc:'Her photographs of Depression-era destitution — particularly "Migrant Mother" (1936) — gave faces to the statistics of economic collapse, building public support for the New Deal\'s debt-funded relief programmes.'}],
+mexican_debt_crisis:[
+{nm:'Rosario Castellanos (influence)',yr:1925,role:'Writer',desc:'Mexico\'s greatest feminist writer, whose work on indigenous poverty and structural inequality provided the intellectual framework for understanding the debt crisis\'s disproportionate impact on women and indigenous communities.'}],
+greek_debt_crisis:[
+{nm:'Zoe Konstantopoulou',yr:1976,role:'President of Hellenic Parliament',desc:'As Speaker of Parliament in 2015, she established the Truth Committee on Public Debt which audited Greek debt and concluded that much of it was illegitimate — an official challenge to creditor claims unprecedented in a European democracy.'}],
+lehman_brothers:[
+{nm:'Brooksley Born',yr:1940,role:'CFTC Chair',desc:'As chair of the Commodity Futures Trading Commission (1996-1999), she warned that unregulated derivatives posed systemic risk. She was overruled by Greenspan, Rubin, and Summers. The 2008 crisis proved her right — and the world wrong.'},
+{nm:'Sheila Bair',yr:1954,role:'FDIC Chair',desc:'As head of the Federal Deposit Insurance Corporation during the 2008 crisis, she advocated for homeowner relief rather than bank bailouts — arguing that saving mortgages would save banks more effectively than saving banks directly.'}],
+covid_pandemic_debt:[
+{nm:'Mia Mottley',yr:1965,role:'Prime Minister of Barbados',desc:'Architect of the Bridgetown Initiative — the most comprehensive proposal for reforming international financial architecture to address climate and debt crises facing the Global South. The most influential voice in twenty-first-century debt justice.'}],
+islamic_riba:[
+{nm:'Khadijah bint Khuwaylid',yr:555,role:'Merchant & Prophet\'s Wife',desc:'The Prophet Muhammad\'s first wife was a wealthy merchant who employed him before their marriage. Her commercial success — within a culture that would soon prohibit interest — demonstrated women\'s economic agency in pre-Islamic Arabia.'}],
+mpesa_mobile_money:[
+{nm:'Susie Lonie',yr:1970,role:'M-Pesa Co-Creator',desc:'Vodafone product manager who co-designed M-Pesa — the mobile money platform that brought financial services to millions of unbanked people, predominantly women, across Africa.'}],
+apartheid_debt:[
+{nm:'Nkosazana Dlamini-Zuma',yr:1949,role:'Minister & AU Chair',desc:'As South Africa\'s first Black female cabinet minister and later African Union chairperson, she navigated the inherited apartheid debt while advocating for African economic sovereignty.'}],
+potosi_silver:[
+{nm:'Bartolina Sisa',yr:1750,role:'Indigenous Resistance Leader',desc:'Aymara leader who co-led the Great Rebellion of 1780 against Spanish colonial rule — a revolt fuelled by the mita system\'s brutal extraction. She was publicly tortured and executed by colonial authorities.'}],
+british_abolition_debt:[
+{nm:'Mary Prince',yr:1788,role:'Formerly Enslaved Author',desc:'The first Black woman to publish an autobiography in Britain (1831). Her History described the financial transactions of slavery — her own purchase, sale, and hire — making visible the human cost of the financial system the abolition compensation would protect.'}],
+};
 
 let year=-3000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4825,8 +4950,115 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
-const HERITAGE_REASONS={};
+const HERITAGE_REGIONS={
+'Ancient Near East':['mesopotamian_grain_loans','code_of_hammurabi','temple_debt_sumer','biblical_jubilee','phoenician_trade_credit'],
+'Mediterranean':['solon_seisachtheia','roman_twelve_tables','roman_publicani','lex_poetelia','athenian_naval_loans','venetian_prestiti','fourth_crusade_debt','greek_debt_crisis'],
+'East Asia':['chinese_salt_monopoly','song_paper_money','mongol_fiscal_crisis','ming_silver_crisis','qing_opium_debt','japan_lost_decades','evergrande_crisis','korean_imf_crisis'],
+'South Asia':['arthashastra_debt','mughal_zamindari','east_india_company_debt','indian_farmer_debt','indian_partition_debt','grameen_microcredit','sri_lanka_port_debt'],
+'Southeast Asia':['asian_financial_crisis','indonesian_crisis','khmer_rouge_currency'],
+'Middle East':['islamic_riba','ottoman_debt_crisis','egyptian_debt_colonisation','suez_canal_finance','islamic_banking_modern','lebanese_banking_collapse','turkish_lira_crisis'],
+'Western Europe':['christian_usury_ban','templar_banking','lombard_bankers','medici_bank','fugger_banking','dutch_tulip_mania','dutch_voc_debt','south_sea_bubble','mississippi_bubble','bank_of_england','french_revolution_debt','assignat_france','barings_collapse','icelandic_banking_crisis','eurozone_crisis','swiss_franc_mortgages'],
+'Americas':['inca_mita','aztec_tribute','potosi_silver','hamilton_debt','us_civil_war_bonds','haitian_indemnity','latin_american_debt_1825','tequila_crisis','mexican_debt_crisis','argentina_default','brazilian_debt_crisis','venezuelan_default','puerto_rico_debt','us_subprime_mortgage','us_student_debt','us_savings_loan','us_national_debt','debt_peonage_americas','payday_lending'],
+'Africa':['cowrie_shell_currency','atlantic_slave_trade_debt','african_structural_adjustment','mobutu_odious_debt','apartheid_debt','jubilee_2000','zimbabwe_hyperinflation','mpesa_mobile_money'],
+'Global Systems':['bretton_woods','nixon_shock','marshall_plan','lehman_brothers','great_depression','versailles_reparations','weimar_hyperinflation','credit_anstalt','london_debt_agreement','covid_pandemic_debt','belt_and_road_debt','crypto_debt','global_south_debt_2024'],
+};
+const HERITAGE_REASONS={
+mesopotamian_grain_loans:'First recorded debts and interest',
+code_of_hammurabi:'First debt regulation and interest caps',
+temple_debt_sumer:'Temple as first bank, writing for debt',
+biblical_jubilee:'Jubilee concept, debt forgiveness tradition',
+phoenician_trade_credit:'Alphabet for accounts, trade credit',
+solon_seisachtheia:'First democratic debt cancellation',
+roman_twelve_tables:'Foundation of Western commercial law',
+roman_publicani:'First tax farming, corporate structure',
+lex_poetelia:'Abolition of debt bondage',
+athenian_naval_loans:'Maritime insurance, risk-sharing finance',
+venetian_prestiti:'First government bonds',
+fourth_crusade_debt:'Debt redirecting military force',
+christian_usury_ban:'Millennium of interest prohibition',
+islamic_riba:'Ongoing interest prohibition',
+templar_banking:'International banking network',
+lombard_bankers:'Medieval credit infrastructure',
+medici_bank:'Renaissance banking power',
+fugger_banking:'Largest pre-modern fortune',
+dutch_tulip_mania:'First speculative bubble',
+dutch_voc_debt:'First publicly traded company',
+south_sea_bubble:'First modern financial crisis',
+mississippi_bubble:'Paper money experiment gone wrong',
+bank_of_england:'Central banking, permanent national debt',
+french_revolution_debt:'Debt destroying monarchy',
+assignat_france:'Revolutionary hyperinflation',
+chinese_salt_monopoly:'Longest-running fiscal instrument',
+song_paper_money:'First paper currency',
+mongol_fiscal_crisis:'Continental fiat money failure',
+ming_silver_crisis:'Foreign monetary dependence',
+inca_mita:'Labour as currency',
+aztec_tribute:'Tribute as debt system',
+potosi_silver:'Colonial extraction, global monetary base',
+mughal_zamindari:'Layered agricultural debt',
+east_india_company_debt:'Corporate colonialism through debt',
+arthashastra_debt:'Ancient Indian financial regulation',
+islamic_banking_modern:'$3.9 trillion alternative finance',
+ottoman_debt_crisis:'Debt commission controlling sovereignty',
+egyptian_debt_colonisation:'Debt as tool of empire',
+suez_canal_finance:'Infrastructure debt, sovereignty loss',
+qing_opium_debt:'War indemnities, century of humiliation',
+haitian_indemnity:'Paying for own freedom',
+atlantic_slave_trade_debt:'Humans as financial assets',
+british_abolition_debt:'Compensating oppressors',
+debt_peonage_americas:'Slavery through debt',
+cowrie_shell_currency:'Indigenous African monetary system',
+hamilton_debt:'American financial system creation',
+us_civil_war_bonds:'Mass-marketed government debt',
+versailles_reparations:'Punitive debt producing world war',
+weimar_hyperinflation:'Most dramatic monetary collapse',
+great_depression:'Worst global debt-driven crisis',
+credit_anstalt:'Single bank causing global crisis',
+marshall_plan:'Generous debt treatment model',
+bretton_woods:'Post-war financial architecture',
+london_debt_agreement:'Generous German restructuring',
+nixon_shock:'End of gold standard',
+mexican_debt_crisis:'Third World debt crisis trigger',
+african_structural_adjustment:'IMF conditionality devastation',
+mobutu_odious_debt:'Defining odious debt case',
+apartheid_debt:'Illegitimate regime debt',
+asian_financial_crisis:'Asian contagion',
+korean_imf_crisis:'National humiliation and recovery',
+indonesian_crisis:'Economic collapse, democratic transition',
+russian_default_1998:'Post-Soviet default',
+argentina_default:'Largest sovereign default',
+lehman_brothers:'2008 global financial crisis',
+us_subprime_mortgage:'Household debt weaponised',
+greek_debt_crisis:'Eurozone austerity crisis',
+japan_lost_decades:'Debt-driven stagnation',
+grameen_microcredit:'Microcredit revolution',
+jubilee_2000:'$100 billion debt cancellation',
+us_student_debt:'$1.77 trillion education debt',
+indian_farmer_debt:'300,000 farmer suicides',
+payday_lending:'Modern usury',
+belt_and_road_debt:'Chinese infrastructure lending',
+sri_lanka_port_debt:'Debt-trap diplomacy',
+evergrande_crisis:'Largest property bubble',
+lebanese_banking_collapse:'National Ponzi scheme',
+covid_pandemic_debt:'$13 trillion pandemic borrowing',
+barings_crisis_1890:'First too-big-to-fail rescue',
+brazilian_debt_crisis:'Hyperinflation and Real Plan',
+turkish_lira_crisis:'Political monetary policy override',
+venezuelan_default:'Resource curse collapse',
+us_national_debt:'$36 trillion, world\'s largest',
+swiss_franc_mortgages:'Foreign currency household risk',
+eurozone_crisis:'Monetary union design flaw',
+barings_collapse:'Rogue trader destruction',
+zimbabwe_hyperinflation:'79.6 billion percent inflation',
+us_savings_loan:'Deregulation producing bailout',
+tequila_crisis:'First emerging-market globalised crisis',
+irish_famine_debt:'Debt enforced during famine',
+indian_partition_debt:'Colonial debt divided',
+mpesa_mobile_money:'Mobile finance revolution',
+crypto_debt:'Decentralised finance mania',
+khmer_rouge_currency:'Total money abolition',
+global_south_debt_2024:'Current debt emergency',
+};
 let heritageRegion=null;
 
 function renderHeritageDrawer(){
