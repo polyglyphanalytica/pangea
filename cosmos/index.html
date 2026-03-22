@@ -4800,16 +4800,19 @@ function initModePanel(){
   });
 }
 
+(function(){try{
+  // Prefer pangea-theme (project-wide), fall back to cosmos-theme (legacy), then system
+  const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('cosmos-theme');
+  if(saved){applyTheme(saved);}
+  else{
+    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+    document.documentElement.dataset.theme=sys;
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
+  }
+}catch(e){}})();
+
 // ── INIT ──
 function init(){
-  // Restore theme (pangea-wide key, falls back to cosmos-theme)
-  try{
-    const t=localStorage.getItem('pangea-theme')||localStorage.getItem('cosmos-theme');
-    if(t)document.documentElement.dataset.theme=t;
-    else if(window.matchMedia('(prefers-color-scheme:light)').matches)document.documentElement.dataset.theme='light';
-    else document.documentElement.dataset.theme='dark';
-  }catch(e){}
-
   // Decode URL state
   decodeState();
 
