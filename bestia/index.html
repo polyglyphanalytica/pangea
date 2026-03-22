@@ -543,7 +543,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </head>
 <body>
 
-<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to civilization panel</button>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to species panel</button>
 <header class="hdr" role="banner">
   <div class="hdr-left">
     <span class="logo-t">BESTIA</span>
@@ -556,7 +556,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
   <div class="hdr-right">
     <div class="cnt-disp">
       <span class="cnt-n" id="cnt-n">2</span>
-      civilizations active
+      species present
     </div>
     <!-- Burger menu -->
     <div class="burger-wrap" id="burger-wrap">
@@ -577,7 +577,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
           <span>◉</span><span>Explore</span>
         </button>
         <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⟳</span><span>Threads</span>
+          <span>⟳</span><span>Evolutionary Chains</span>
         </button>
         <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
           <span>⊞</span><span>Compare</span>
@@ -586,7 +586,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
           <span>⟁</span><span>What If</span>
         </button>
         <button class="burger-item burger-mode" id="btn-heritage" onclick="setMode('heritage');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⌂</span><span>Heritage</span>
+          <span>⌂</span><span>Habitat Regions</span>
         </button>
         <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" role="menuitem">
           <span style="font-size:15px">♀</span>
@@ -612,7 +612,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 <div class="thread-panel" id="thread-panel" role="complementary" aria-label="Concept transmissions">
   <div class="thread-panel-inner">
     <div class="thread-panel-bar">
-      <span class="thread-panel-title" id="thread-panel-title">Concept Threads</span>
+      <span class="thread-panel-title" id="thread-panel-title">Evolutionary Chains</span>
       <div style="display:flex;align-items:center;gap:12px">
         <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">← All Threads</button>
         <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">✕</button>
@@ -628,7 +628,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 <div class="main">
   <div class="map-tl-col">
   <div class="map-c">
-    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with civilization markers" style="cursor:pointer">
+    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with species markers" style="cursor:pointer">
       <defs>
 
         <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
@@ -665,36 +665,36 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
       <g id="thread-layer"></g>
       <!-- Selected-item label only -->
       <g id="label-layer" pointer-events="none"></g>
-      <!-- Civilization markers -->
+      <!-- Species markers -->
       <g id="mark-layer"></g>
       <!-- Hover tooltip label (sits above markers) -->
       <g id="hover-label-layer" pointer-events="none"></g>
     </svg>
     <div class="hint" id="map-hint">
-      <span id="map-hint-text">TAP A CIVILIZATION  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
+      <span id="map-hint-text">TAP A SPECIES  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
       <button id="map-reset-btn" onclick="resetMapZoom()" style="display:none;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--amber-b);background:none;border:1px solid var(--bdr);padding:2px 8px;border-radius:10px;cursor:pointer;margin-left:10px;white-space:nowrap">⊙ RESET ZOOM</button>
     </div>
   </div>
   <div class="tl-wrap" role="navigation" aria-label="Timeline">
-  <svg id="density-bar" aria-label="Civilization density over time"></svg>
+  <svg id="density-bar" aria-label="Species density over time"></svg>
   <div class="tl-lbls">
-    <span class="tl-lbl">65,000 BCE</span>
-    <span class="tl-lbl">3000 BCE</span>
-    <span class="tl-lbl">2000 BCE</span>
-    <span class="tl-lbl">1000 BCE</span>
+    <span class="tl-lbl">500 MYA</span>
+    <span class="tl-lbl">250 MYA</span>
+    <span class="tl-lbl">66 MYA</span>
+    <span class="tl-lbl">1 MYA</span>
+    <span class="tl-lbl">10,000 BCE</span>
     <span class="tl-lbl">1 CE</span>
-    <span class="tl-lbl">1000 CE</span>
-    <span class="tl-lbl">2024 CE</span>
+    <span class="tl-lbl">2024</span>
   </div>
   <div class="tl-trk">
     <div class="tl-fill" id="tl-fill"></div>
     <div class="tl-thumb" id="tl-thumb"></div>
-    <input type="range" class="tl-range" id="tl" min="0" max="1000" value="0" step="1" aria-label="Timeline year" aria-valuemin="-65000" aria-valuemax="2024" aria-valuenow="-65000">
+    <input type="range" class="tl-range" id="tl" min="0" max="1000" value="0" step="1" aria-label="Timeline year" aria-valuemin="-500000000" aria-valuemax="2024" aria-valuenow="-500000000">
   </div>
 </div>
   </div><!-- /map-tl-col -->
 
-  <div class="info-panel" id="info-panel" role="complementary" aria-label="Civilization details">
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Species details">
     <div class="drawer-handle" id="drawer-handle" aria-label="Drag to resize"></div>
     <div id="drawer-top"></div>
     <div id="drawer-content"></div>
@@ -6449,11 +6449,17 @@ nabataean:[
   ],
 };
 
-let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
+let year=-500000000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
 const OVERVIEW_COL='#c8881c';
 
-function fmt(y){return y<0?`${Math.abs(y)} BCE`:y===0?'1 CE':`${y} CE`}
+function fmt(y){
+  if(y===null||y===undefined)return'?';
+  const a=Math.abs(Math.round(y));
+  if(a>=1000000)return`${(a/1000000).toFixed(a%1000000===0?0:1)} MYA`;
+  if(y<0)return`${a.toLocaleString()} BCE`;
+  return y===0?'1 CE':`${y} CE`;
+}
 function eraName(y){let n=ERAS[0].n;for(const e of ERAS){if(y>=e.y)n=e.n;}return n;}
 function active(c){return year>=c.s&&year<=c.e}
 function getLensCol(){
@@ -6470,7 +6476,7 @@ function toggleLensDD(){
 }
 
 function lensLabel(){
-  if(!lenses.size)return'Civilization Arc';
+  if(!lenses.size)return'Species Arc';
   const names=[...lenses].map(id=>{const L=LENSES.find(l=>l.id===id);return L?L.lbl:'';});
   if(names.length===1)return names[0];
   if(names.length<=3)return names.join(' · ');
@@ -6506,7 +6512,7 @@ function renderLensDD(){
       <div class="lens-row${arcOn?' on':''}" onclick="toggleLens('__arc__')">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Species Arc</span>
       </div>
       <div class="lens-row-sep"></div>
       ${rows}
@@ -6550,7 +6556,7 @@ function toggleLens(id){
       const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
       return`<button class="conn-item" tabindex="0"
           aria-label="${tip}"
-          onclick="navigateToCiv('${cid}')"
+          onclick="navigateToItem('${cid}')"
           style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
         <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
         <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -6566,27 +6572,32 @@ function toggleLens(id){
 
 
 // ── NON-LINEAR TIMELINE ──
-// Slider 0-1000 maps to year via two segments:
-// 0-80   → -65000 to -4000 (deep prehistory, 8% of slider)
-// 80-1000 → -4000 to 2024  (recorded history, 92% of slider)
+// Slider 0-1000 maps to year via three segments:
+// 0-50     → -500000000 to -1000000 (deep time, 5% of slider)
+// 50-150   → -1000000 to -10000 (megafauna era, 10% of slider)
+// 150-1000 → -10000 to 2024 (domestication to present, 85% of slider)
 function sliderToYear(v){
   v=parseInt(v);
-  if(v<=80){
-    return Math.round(-65000+((-4000-(-65000))*(v/80)));
+  if(v<=50){
+    return Math.round(-500000000+((-1000000-(-500000000))*(v/50)));
+  } else if(v<=150){
+    return Math.round(-1000000+((-10000-(-1000000))*((v-50)/100)));
   } else {
-    return Math.round(-4000+((2024-(-4000))*((v-80)/920)));
+    return Math.round(-10000+((2024-(-10000))*((v-150)/850)));
   }
 }
 function yearToSlider(yr){
   yr=parseInt(yr);
-  if(yr<=-4000){
-    return Math.round(80*((yr-(-65000))/(-4000-(-65000))));
+  if(yr<=-1000000){
+    return Math.round(50*((yr-(-500000000))/(-1000000-(-500000000))));
+  } else if(yr<=-10000){
+    return Math.round(50+100*((yr-(-1000000))/(-10000-(-1000000))));
   } else {
-    return Math.round(80+920*((yr-(-4000))/(2024-(-4000))));
+    return Math.round(150+850*((yr-(-10000))/(2024-(-10000))));
   }
 }
 
-function civPt(c){
+function itemPt(c){
   if(!c)return[500,260];
   if(!window._proj)return[c.x||500,c.y||260];
   if(typeof c.lon!=='number'||typeof c.lat!=='number')return[c.x||500,c.y||260];
@@ -6609,7 +6620,7 @@ function renderMap(){
       drawn.add(k);
       const o=ITEMS.find(x=>x&&x.id===id);
       if(!o)return;
-      const [cx,cy]=civPt(c),[ox,oy]=civPt(o);
+      const [cx,cy]=itemPt(c),[ox,oy]=itemPt(o);
       const mx=(cx+ox)/2,my=Math.min(cy,oy)-28;
       cl+=`<path d="M${cx},${cy} Q${mx},${my} ${ox},${oy}" stroke="#e8251a" stroke-width=".8" fill="none" stroke-dasharray="3,5" opacity="${sel?0.1:0.25}"/>`;
     });
@@ -6630,7 +6641,7 @@ function renderMap(){
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
     // Drift 2: inactive items fully hidden (0 not 0.06). Drift 3: herstory items without WOMEN hidden (0 not 0.35).
     const op=on?(herstory&&!womenCount?0:isWhatifLost?.2:1):(heritageInactive?.35:0);
-    const [cx,cy]=civPt(c);
+    const [cx,cy]=itemPt(c);
     return {c,on,isSel,mcol,op,cx,cy};
   });
   // Pass 1: decorative rings — pointer-events:none, never intercept clicks
@@ -6659,7 +6670,7 @@ function renderMap(){
       const pulseMax=Math.max(8, 16/zr);
       dots+=`<g role="button" tabindex="0" data-civ="${c.id}"
           aria-label="${c.nm} — click to explore"
-          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();civClick('${c.id}')}"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();itemClick('${c.id}')}"
           opacity="${op}" pointer-events="none">
           <circle cx="${cx}" cy="${cy}" r="${dotR.toFixed(1)}"
             fill="${mcol}" filter="url(#glow${isSel?'2':''})"
@@ -6680,7 +6691,7 @@ function renderMap(){
   document.getElementById('label-layer').innerHTML=ll;
 }
 
-function navigateToCiv(id){
+function navigateToItem(id){
   const c=ITEMS.find(x=>x&&x.id===id);
   if(!c)return;
   if(mode==='whatif'){
@@ -6706,9 +6717,9 @@ function navigateToCiv(id){
   document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
 }
 
-function civClick(id){
+function itemClick(id){
   _renderHoverLabel(null);
-  navigateToCiv(id);
+  navigateToItem(id);
 }
 
 
@@ -6746,7 +6757,7 @@ function renderDrawerContent(){
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -6877,7 +6888,7 @@ function renderDrawer(){
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -6941,15 +6952,15 @@ function renderWorldMap(world){
 
 function init(){
   const eraDefs=[
-    {l:'Deep Prehistory',s:-65000,e:-10000},
-    {l:'Neolithic',s:-10000,e:-4000},
-    {l:'Bronze Age',s:-4000,e:-1200},
-    {l:'Iron Age',s:-1200,e:-500},
-    {l:'Classical',s:-500,e:500},
+    {l:'Deep Time',s:-500000000,e:-66000000},
+    {l:'Age of Mammals',s:-66000000,e:-2000000},
+    {l:'Pleistocene',s:-2000000,e:-10000},
+    {l:'Holocene',s:-10000,e:-3000},
+    {l:'Ancient',s:-3000,e:500},
     {l:'Medieval',s:500,e:1500},
     {l:'Modern',s:1500,e:2024},
   ];
-  const total=2024-(-65000);
+  const total=2024-(-500000000);
 
   renderDensityBar();
   document.getElementById('tl').addEventListener('input',e=>setYear(sliderToYear(e.target.value)));
@@ -7035,7 +7046,7 @@ function renderThreadConceptList(){
     list.style.display='block';
     if(steps){steps.style.display='none';steps.innerHTML='';}
     if(backBtn)backBtn.style.display='none';
-    if(title)title.textContent='Concept Threads';
+    if(title)title.textContent='Evolutionary Chains';
     const concepts=getUniqueConcepts();
     list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
       const chain=getChain(c);
@@ -7107,7 +7118,7 @@ function renderThreadPaths(concept){
   chain.forEach(t=>{
     const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
-    const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-44;
     // Path with arrowhead
     out+=`<path id="tp-${t.id}" d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
@@ -7216,7 +7227,7 @@ function renderLensDDInline(){
       <div class="lens-row${arcOn?' on':''}" onclick="lenses.clear();lensDD=false;if(mode==='compare')renderCompareDrawer();else renderDrawerContent();">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Species Arc</span>
       </div>
       <div class="lens-row-sep"></div>${rows}
       <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done ▴</div>
@@ -7270,10 +7281,10 @@ function shareState(){
   catch(e){url='#'+encodeState();}
 
   const civName=sel?sel.nm:null;
-  const shareTitle='Civilitas — The Animal Atlas';
+  const shareTitle='Bestia — The Animal Atlas';
   const shareText=civName
-    ? `Explore ${civName} on Civilitas — 85 civilizations, 65,000 years of human history`
-    : 'Civilitas — 85 civilizations, 65,000 years of human history, all in one map';
+    ? `Explore ${civName} on Bestia — 100 animals, 500 million years of life on Earth`
+    : 'Bestia — 100 animals, 500 million years of life on Earth, all in one map';
 
   // Use native share sheet on devices that support it (iOS, Android, modern desktop)
   if(navigator.share){
@@ -7580,7 +7591,7 @@ function animateViewBox(target,duration=600){
 
 function zoomToCiv(c){
   if(!window._proj)return;
-  const [cx,cy]=civPt(c);
+  const [cx,cy]=itemPt(c);
   const zw=300,zh=156; // zoomed viewport size (same aspect ratio)
   const x=Math.max(0,Math.min(1000-zw,cx-zw/2));
   const y=Math.max(0,Math.min(520-zh,cy-zh/2));
@@ -7635,14 +7646,14 @@ function renderFingerprint(c){
     svg+=`<text x="${lx.toFixed(1)}" y="${(ly+dy).toFixed(1)}" text-anchor="${anchor}" class="fp-label">${SHORT[i]}</text>`;
   });
   svg+='</svg>';
-  return`<div class="fp-wrap"><div class="fp-title">Civilizational Fingerprint</div>${svg}</div>`;
+  return`<div class="fp-wrap"><div class="fp-title">Species Fingerprint</div>${svg}</div>`;
 }
 
 // ══════════════════════════════════════════════════════
 // ENHANCED SPAN BAR WITH CONTEMPORARIES
 // ══════════════════════════════════════════════════════
 function renderEnhancedSpanBar(c){
-  const MIN=-65000,MAX=2024,total=MAX-MIN;
+  const MIN=-500000000,MAX=2024,total=MAX-MIN;
   const left=Math.max(0,(c.s-MIN)/total*100);
   const width=Math.min(100-left,(c.e-c.s)/total*100);
 
@@ -7665,7 +7676,7 @@ function renderEnhancedSpanBar(c){
     const ol=Math.max(xl,left);
     const or_=Math.min(xl+xw,left+width);
     const ow=Math.max(0,or_-ol);
-    return`<div class="contemp-bar-row" onclick="navigateToCiv('${x.id}')" title="Navigate to ${x.nm}">
+    return`<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
       <div class="contemp-bar-nm">${x.nm}</div>
       <div class="contemp-bar-track">
         <div class="contemp-bar-fill" style="left:${(ol-left).toFixed(1)}%;width:${ow.toFixed(1)}%;background:${colors[i]}"></div>
@@ -7695,7 +7706,7 @@ function renderDensityBar(){
   if(!svg)return;
   const W=svg.parentElement?svg.parentElement.offsetWidth||600:600;
   svg.setAttribute('viewBox',`0 0 ${W} 18`);
-  const MIN=-65000,MAX=2024,total=MAX-MIN;
+  const MIN=-500000000,MAX=2024,total=MAX-MIN;
   const steps=200;
   const stepYr=total/steps;
   const counts=[];
@@ -7732,7 +7743,7 @@ function renderDiplomaticLayer(){
   DIPLOMATIC.forEach(d=>{
     const fc=ITEMS.find(x=>x&&x.id===d.from),tc=ITEMS.find(x=>x&&x.id===d.to);
     if(!fc||!tc||!ids.has(d.from)||!ids.has(d.to))return;
-    const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-36;
     dl+=`<path d="M${fx},${fy} Q${mx},${my} ${tx},${ty}" 
       stroke="#f0d060" stroke-width="1" fill="none" stroke-dasharray="4,3" opacity=".4"
@@ -7779,7 +7790,7 @@ function renderWhatIfPaths(){
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
   const downstreamConcepts=new Set(directOut.map(t=>t.concept));
   const downstream=TRANSMISSIONS.filter(t=>downstreamConcepts.has(t.concept)&&t.from!==c.id);
-  const [cx,cy]=civPt(c);
+  const [cx,cy]=itemPt(c);
 
   let out='<defs><marker id="wi-arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#e8251a" opacity=".7"/></marker></defs>';
 
@@ -7788,7 +7799,7 @@ function renderWhatIfPaths(){
   directOut.forEach((t,i)=>{
     const tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!tc)return;
-    const [tx,ty]=civPt(tc);
+    const [tx,ty]=itemPt(tc);
     const mx=(cx+tx)/2, my=Math.min(cy,ty)-40;
     const delay=(validDirect*0.2).toFixed(1);
     // Path with SVG animate for opacity fade-in + stroke-dashoffset crawl
@@ -7812,7 +7823,7 @@ function renderWhatIfPaths(){
   downstream.forEach((t,j)=>{
     const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
-    const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-24;
     out+=`<path d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
       stroke="#c06020" stroke-width="0.8" fill="none" stroke-dasharray="3,6" opacity="0" id="wi-down-${j}">
@@ -7929,7 +7940,7 @@ function renderWhatIfDrawer(){
           <div style="font-size:12.5px;line-height:1.65;color:var(--txt2)">${t.desc}</div>
         </div>`;
       }).join('')
-    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this civilization in the current dataset.</div>`
+    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this species in the current dataset.</div>`
   }
 
   ${downstream.length?`
@@ -8063,9 +8074,9 @@ function renderHeritageDrawer(){
     ← All regions
   </button>
   <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);letter-spacing:1px;margin-bottom:4px">${heritageRegion}</div>
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing civilizations · shown in blue on the map</div>
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your civilizational ancestry</div>
-  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToCiv('${c.id}')">
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} species in this region · shown in blue on the map</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your habitat heritage</div>
+  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToItem('${c.id}')">
     <span class="heritage-civ-nm">${c.nm}</span>
     <span class="heritage-civ-why">${HERITAGE_REASONS[c.id]||''}</span>
   </div>`).join('')}`;
@@ -8130,10 +8141,10 @@ function renderHerstoryDrawer(){
     dc.innerHTML=`
     <div class="hs-panel-hdr">♀ Herstory</div>
     <div class="hs-panel-sub">
-      A mirror to BESTIA — tracing 65,000 years of human history through the women who shaped it. Rulers, philosophers, warriors, artists, and mothers whose contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
+      A mirror to BESTIA — tracing 500 million years of animal history through the women who shaped our understanding of it. Naturalists, ethologists, conservationists, wildlife biologists, and veterinary scientists whose contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
     </div>
     <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Tap any civilization on the map to discover the women who shaped it — queens who governed, scholars who wrote, warriors who fought, and spiritual leaders who held communities together.
+      Tap any species on the map to discover the women who shaped our understanding of the animal world — naturalists who observed, ethologists who decoded behaviour, conservationists who saved species, and scientists whose work was credited to men.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:12px">Women who changed everything</div>
     ${(()=>{
@@ -8172,7 +8183,7 @@ function renderHerstoryDrawer(){
       const shuffled=[...ALL].sort(()=>Math.random()-.5);
       return shuffled.slice(0,5).map(w=>{
         const c=ITEMS.find(x=>x&&x.id===w.civ);
-        return c?`<button onclick="navigateToCiv('${c.id}')" 
+        return c?`<button onclick="navigateToItem('${c.id}')" 
           style="width:100%;background:none;border:1px solid rgba(192,96,160,.25);padding:9px 12px;text-align:left;cursor:pointer;margin-bottom:4px;border-radius:2px;transition:all .15s"
           onmouseover="this.style.background='rgba(192,96,160,.08)'" onmouseout="this.style.background='none'">
           <div style="font-family:'Cinzel',serif;font-size:10px;color:#c060a0;margin-bottom:2px">${w.nm} · ${w.yr<0?Math.abs(w.yr)+' BCE':w.yr+' CE'}</div>
@@ -8190,7 +8201,7 @@ function renderHerstoryDrawer(){
   <button onclick="closeInfo()"
     style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px;transition:opacity .15s"
     onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-    ← All civilizations
+    ← All species
   </button>
   <div class="hs-panel-hdr">${c.nm}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:14px">${c.sb}</div>
@@ -8227,7 +8238,7 @@ function mapClick(e){
     const candidates=[];
     ITEMS.forEach(c=>{
       if(!c||!c.id||!activeSet.has(c.id))return;
-      const pt=civPt(c);
+      const pt=itemPt(c);
       if(!pt||!isFinite(pt[0])||!isFinite(pt[1]))return;
       const d=Math.sqrt((pt[0]-svgX)**2+(pt[1]-svgY)**2);
       if(d<thresh)candidates.push({c,d,pt});
@@ -8243,7 +8254,7 @@ function mapClick(e){
     if(isCluster){
       showClusterPicker(candidates.map(x=>x.c),clientX,clientY);
     } else {
-      civClick(nearest.c.id);
+      itemClick(nearest.c.id);
     }
   }catch(err){console.warn('mapClick err:',err);}
 }
@@ -8377,7 +8388,7 @@ function _renderHoverLabel(c){
   const layer=document.getElementById('hover-label-layer');
   if(!layer)return;
   if(!c){layer.innerHTML='';return;}
-  const [cx,cy]=civPt(c);
+  const [cx,cy]=itemPt(c);
   const zr=1000/_vbW;
   const dotR=Math.max(2,7/zr);
   const labelY=cy-dotR-8;
@@ -8413,7 +8424,7 @@ function _onMapMouseMove(e){
   ITEMS.forEach(c=>{
     if(!c||!activeSet.has(c.id))return;
     if(sel&&sel.id===c.id)return; // skip selected — it already has persistent label
-    const pt=civPt(c);
+    const pt=itemPt(c);
     if(!pt||!isFinite(pt[0]))return;
     const d=Math.hypot(pt[0]-svgX,pt[1]-svgY);
     if(d<bestD){bestD=d;nearest=c;}
@@ -8493,7 +8504,7 @@ function initMapInteraction(){
   svg.addEventListener('click',function(e){if(_wasDragging){_wasDragging=false;return;}if(Date.now()-(_touchFiredAt||0)<500)return;mapClick(e);});
 }
 
-// Auto-zoom cluster: if tap finds 3+ civs within 40px, zoom in instead of picking
+// Auto-zoom cluster: if tap finds 3+ items within 40px, zoom in instead of picking
 
 function showClusterPicker(civs, screenX, screenY){
   const picker=document.getElementById('cluster-picker');
@@ -8501,7 +8512,7 @@ function showClusterPicker(civs, screenX, screenY){
   if(!picker||!list)return;
   picker._openedAt=Date.now();
   list.innerHTML=civs.map(c=>`
-    <div class="cluster-item" onclick="closeClusterPicker();civClick('${c.id}')">
+    <div class="cluster-item" onclick="closeClusterPicker();itemClick('${c.id}')">
       <div class="cluster-item-dot" style="background:${herstory?'#c060a0':'#e8251a'}"></div>
       <div>
         <div class="cluster-item-nm">${c.nm}</div>
@@ -8699,9 +8710,9 @@ function updateTlFill(pct){
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 
   <!-- Cluster picker popup -->
-  <div id="cluster-picker" role="dialog" aria-label="Select civilization">
+  <div id="cluster-picker" role="dialog" aria-label="Select species">
     <div id="cluster-picker-hdr">
-      <span>Select civilization</span>
+      <span>Select species</span>
       <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">✕</button>
     </div>
     <div id="cluster-list"></div>
