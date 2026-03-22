@@ -959,7 +959,7 @@
     },
     "ignis": {
       "phase": "DATA",
-      "items": 27,
+      "items": 38,
       "target": 100,
       "live": false,
       "map": "world",
@@ -3676,6 +3676,61 @@
       "atlas": "ignis",
       "batch": "27-27",
       "items": 27
+    },
+    {
+      "atlas": "ignis",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "ignis",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "ignis",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "ignis",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "ignis",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "ignis",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "ignis",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "ignis",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "ignis",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "ignis",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "ignis",
+      "batch": "38-38",
+      "items": 38
     }
   ]
 }
