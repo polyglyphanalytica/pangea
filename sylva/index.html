@@ -708,10 +708,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+  {id:'biodiversity',ico:'🦋',lbl:'Biodiversity',col:'#4a9a6a'},
+  {id:'canopy_structure',ico:'🌿',lbl:'Canopy Structure',col:'#5a8a5a'},
+  {id:'carbon_cycle',ico:'♻',lbl:'Carbon Cycle',col:'#6a7a8a'},
+  {id:'climate_regulation',ico:'☁',lbl:'Climate Regulation',col:'#4a7aaa'},
+  {id:'conservation',ico:'🛡',lbl:'Conservation',col:'#5a9a4a'},
+  {id:'cultural_significance',ico:'⛩',lbl:'Cultural Significance',col:'#8a6a5a'},
+  {id:'deforestation',ico:'🪓',lbl:'Deforestation',col:'#aa5a4a'},
+  {id:'ecology',ico:'🔬',lbl:'Ecology',col:'#5a7a6a'},
+  {id:'fauna',ico:'🐾',lbl:'Fauna',col:'#7a6a4a'},
+  {id:'fire_regime',ico:'🔥',lbl:'Fire Regime',col:'#ba6a3a'},
+  {id:'flora_composition',ico:'🌺',lbl:'Flora Composition',col:'#6a8a5a'},
+  {id:'hydrology',ico:'💧',lbl:'Hydrology',col:'#4a7aba'},
+  {id:'indigenous_use',ico:'🏠',lbl:'Indigenous Use',col:'#8a7a5a'},
+  {id:'logging_history',ico:'🪵',lbl:'Logging History',col:'#7a5a4a'},
+  {id:'medicinal_plants',ico:'⚕',lbl:'Medicinal Plants',col:'#5a8a7a'},
+  {id:'mycology',ico:'🍄',lbl:'Mycology',col:'#9a6a7a'},
+  {id:'reforestation',ico:'🌱',lbl:'Reforestation',col:'#4a9a5a'},
+  {id:'soil_ecology',ico:'⛏',lbl:'Soil Ecology',col:'#8a7a6a'},
+  {id:'threats',ico:'⚠',lbl:'Threats',col:'#aa4a4a'},
+  {id:'wildlife_corridors',ico:'↔',lbl:'Wildlife Corridors',col:'#5a7a9a'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+  {y:-385000000,n:'DEVONIAN'},
+  {y:-359000000,n:'CARBONIFEROUS'},
+  {y:-299000000,n:'PERMIAN'},
+  {y:-252000000,n:'TRIASSIC'},
+  {y:-201000000,n:'JURASSIC'},
+  {y:-145000000,n:'CRETACEOUS'},
+  {y:-66000000,n:'PALEOGENE'},
+  {y:-23000000,n:'NEOGENE'},
+  {y:-2600000,n:'PLEISTOCENE'},
+  {y:-10000,n:'EARLY HOLOCENE'},
+  {y:-3000,n:'BRONZE AGE'},
+  {y:500,n:'MEDIEVAL'},
+  {y:1500,n:'AGE OF EXPLORATION'},
+  {y:1800,n:'INDUSTRIAL ERA'},
+  {y:1945,n:'MODERN ERA'},
+  {y:2000,n:'ANTHROPOCENE'}
+];
 
 const ITEMS=[
 {id:'carboniferous_forests',nm:'Carboniferous Coal Forests',sb:'Euramerica · 359–299 MYA',s:-359000000,e:-299000000,lon:-10,lat:5,fp:{canopy:9,biodiv:7,age:10,extent:10,resil:3,climate:10},conns:['permian_forests','appalachian_forests'],overview:'The Carboniferous coal forests were the first great terrestrial forests to blanket the supercontinent Euramerica, dominated by towering Lepidodendron, Sigillaria, and Calamites. These forests produced so much organic matter that atmospheric oxygen reached 35%, enabling giant insects. Their buried remains became the coal deposits that powered the Industrial Revolution, making them arguably the most consequential forests in Earth\'s history.',d:{
@@ -4481,10 +4519,153 @@ conomy:'Subsistence agriculture (sweet potato, taro, sugarcane) and fishing; the
       migration:'The Polynesian settlement of Rapa Nui around 900 CE represents the eastern limit of Polynesian expansion — 2,000 kilometres beyond any previous Polynesian settlement.'}},
 ];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'carboniferous_forests',to:'permian_forests',concept:'Conifer Dominance',year:-299000000,desc:'Seed-bearing conifers that evolved in Carboniferous swamps replaced the spore-bearing lycopsids as the dominant forest type.'},
+{from:'permian_forests',to:'triassic_forests',concept:'Conifer Dominance',year:-252000000,desc:'Surviving conifer lineages recolonised the devastated post-Permian landscape, establishing the forests that would shelter the first dinosaurs.'},
+{from:'triassic_forests',to:'jurassic_forests',concept:'Conifer Dominance',year:-201000000,desc:'Araucarian and podocarp conifers expanded to form the global forests that fed the largest land animals ever to live.'},
+{from:'jurassic_forests',to:'cretaceous_forests',concept:'Angiosperm Revolution',year:-130000000,desc:'Flowering plants evolved in the understory of Jurassic conifer forests and began their explosive takeover of the canopy.'},
+{from:'cretaceous_forests',to:'amazon_rainforest',concept:'Angiosperm Revolution',year:-66000000,desc:'After the asteroid extinction eliminated dinosaurs, angiosperms rapidly diversified to dominate the recovering tropical forests.'},
+{from:'cretaceous_forests',to:'daintree',concept:'Gondwanan Heritage',year:-100000000,desc:'Ancient plant families that evolved in Gondwanan forests survived on the Australian plate, persisting in the Daintree for 135 million years.'},
+{from:'daintree',to:'gondwana_forests',concept:'Gondwanan Heritage',year:-80000000,desc:'Gondwanan rainforest fragments along Australia\'s east coast preserve the same ancient lineages as the Daintree.'},
+{from:'gondwana_forests',to:'new_zealand_forests',concept:'Gondwanan Heritage',year:-80000000,desc:'New Zealand carried its Gondwanan forest heritage when it separated, evolving podocarps and Nothofagus in isolation.'},
+{from:'new_zealand_forests',to:'valdivian_forests',concept:'Gondwanan Heritage',year:-30000000,desc:'Southern beeches in Chile and New Zealand share ancestors that grew in Antarctic forests before glaciation.'},
+{from:'cedar_lebanon',to:'mediterranean_forests',concept:'Ancient Timber Trade',year:-3000,desc:'Phoenician and Egyptian demand for Lebanese cedar created the first international timber trade, depleting forests across the eastern Mediterranean.'},
+{from:'sherwood_forest',to:'great_lakes_forests',concept:'Colonial Timber Exploitation',year:1800,desc:'British forestry methods, developed in managed English woodlands, were applied to the wholesale extraction of American white pine.'},
+{from:'great_lakes_forests',to:'pacific_northwest',concept:'Colonial Timber Exploitation',year:1900,desc:'When Great Lakes forests were exhausted, the logging industry moved west to the Pacific Northwest, beginning the next chapter of extraction.'},
+{from:'black_forest',to:'scandinavian_boreal',concept:'Scientific Forestry',year:1713,desc:'German Nachhaltigkeit (sustainability), coined by von Carlowitz in 1713, spread from the Black Forest to become the global model for managed forestry.'},
+{from:'scandinavian_boreal',to:'boreal_canadian',concept:'Scientific Forestry',year:1900,desc:'Scandinavian sustained-yield principles influenced Canadian forestry policy, though the vast scale of Canadian forest complicated their application.'},
+{from:'amazon_rainforest',to:'atlantic_forest',concept:'Deforestation Cascade',year:1970,desc:'Agricultural frontier expansion moved from the depleted Atlantic Forest to the Amazon, repeating the pattern of exploitation.'},
+{from:'atlantic_forest',to:'cerrado',concept:'Deforestation Cascade',year:1990,desc:'As Atlantic Forest was exhausted, soy expansion shifted to the Cerrado, destroying half of the world\'s most biodiverse savanna.'},
+{from:'cerrado',to:'chiquitano_dry',concept:'Deforestation Cascade',year:2010,desc:'Enforcement in the Amazon displaced soy and cattle expansion southward into the Chiquitano and Gran Chaco.'},
+{from:'borneo_rainforest',to:'sumatra_rainforest',concept:'Palm Oil Frontier',year:1990,desc:'Palm oil expansion devastated Borneo\'s lowland forests, then spread to Sumatra as companies sought new land.'},
+{from:'sumatra_rainforest',to:'west_african_forests',concept:'Palm Oil Frontier',year:2010,desc:'As Southeast Asian forests were exhausted, palm oil companies turned to West Africa, the oil palm\'s native range.'},
+{from:'boreal_canadian',to:'korean_forests',concept:'Reforestation Success',year:1960,desc:'Korean reforestation — restoring barren hillsides to 63% forest cover — drew on Canadian and Scandinavian forestry expertise.'},
+{from:'bavarian_forest',to:'bialowieza',concept:'Rewilding Movement',year:1990,desc:'The Bavarian Forest\'s non-intervention approach — letting bark beetles run their course — influenced the rewilding philosophy applied across Europe.'},
+{from:'east_african_montane',to:'ethiopian_highlands',concept:'Church Forest Protection',year:400,desc:'Ethiopian Orthodox Christianity adopted the practice of maintaining sacred forests around churches, preserving fragments for 1,500+ years.'},
+{from:'mongolian_forests',to:'yakutian_larch',concept:'Permafrost-Forest Feedback',year:2000,desc:'Research in Mongolian forests revealed the permafrost-carbon feedback loop now understood to threaten Yakutian larch forests globally.'},
+{from:'redwood_forests',to:'sequoia_groves',concept:'Fire Suppression Crisis',year:1920,desc:'Fire suppression policies developed in coastal redwood forests were applied to Sierra Nevada sequoia groves, creating the fuel accumulation that now threatens them.'},
+{from:'sundarbans',to:'southeast_asian_mangroves',concept:'Mangrove Protection',year:2004,desc:'The 2004 tsunami demonstrated that mangrove protection reduces storm damage, driving mangrove conservation investment across Southeast Asia.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'amazon_rainforest':[
+{nm:'Wangari Maathai',role:'Founder of the Green Belt Movement',yr:1977,desc:'Though Kenyan, Maathai\'s Green Belt Movement — planting 51 million trees across Africa — inspired forest conservation globally, including Amazon protection campaigns. She won the Nobel Peace Prize in 2004 for linking environmental conservation to women\'s rights and democratic governance.'},
+{nm:'Marina Silva',role:'Brazilian Environment Minister',yr:2003,desc:'Born to a rubber tapper family in Acre, Silva became Brazil\'s Environment Minister (2003–2008), reducing Amazon deforestation by 59%. She championed indigenous land rights and sustainable development in the world\'s largest rainforest.'}
+],
+'boreal_canadian':[
+{nm:'Suzanne Simard',role:'Forest ecologist',yr:1997,desc:'Discovered the "wood wide web" — mycorrhizal networks that connect trees underground, allowing them to share nutrients and chemical signals. Her research in British Columbia\'s forests proved that forests are cooperative communities, revolutionising forest ecology.'},
+{nm:'Julia Butterfly Hill',role:'Environmental activist',yr:1997,desc:'Lived in a 1,500-year-old redwood named Luna for 738 days to prevent its felling by Pacific Lumber Company. Her act of arboreal civil disobedience became the defining image of the old-growth protection movement.'}
+],
+'congo_rainforest':[
+{nm:'Jane Goodall',role:'Primatologist and conservationist',yr:1960,desc:'Entered the forests of Gombe and proved that chimpanzees make and use tools, fundamentally changing the definition of humanity. Founded the Jane Goodall Institute, which now works on forest conservation across Central Africa.'}
+],
+'black_forest':[
+{nm:'Maria Sibylla Merian',role:'Naturalist and artist',yr:1699,desc:'Sailed to Suriname alone at age 52 to study tropical insects and plants, producing illustrations of forest metamorphosis that revolutionised entomology. Her work documented the ecological relationships between forest insects and their host plants.'}
+],
+'daintree':[
+{nm:'Judith Wright',role:'Poet and conservationist',yr:1968,desc:'Australia\'s greatest nature poet and a passionate campaigner for rainforest and reef protection. Her writing made the Australian wilderness a cause worth fighting for, contributing to the protection of the Great Barrier Reef and Queensland rainforests.'}
+],
+'taiga_siberian':[
+{nm:'Suzanne Simard',role:'Forest ecologist',yr:1997,desc:'Her discovery of mycorrhizal networks in Canadian forests (closely related to Siberian taiga ecology) transformed understanding of how boreal forests function as cooperative communities rather than collections of competing individuals.'}
+],
+'redwood_forests':[
+{nm:'Julia Butterfly Hill',role:'Environmental activist',yr:1997,desc:'Her 738-day tree-sit in the ancient redwood Luna drew global attention to the destruction of old-growth forests and became a defining moment in American environmental activism.'},
+{nm:'Sylvia McLaughlin',role:'Co-founder, Save San Francisco Bay Association',yr:1961,desc:'Though focused on the Bay, McLaughlin\'s environmental advocacy model inspired the Save the Redwoods League\'s expanded efforts to protect remaining old-growth coast redwood forests.'}
+],
+'atlantic_forest':[
+{nm:'Bertha Lutz',role:'Zoologist and feminist activist',yr:1919,desc:'Brazil\'s leading zoologist and feminist, Lutz worked at the National Museum documenting Atlantic Forest amphibians while simultaneously fighting for women\'s suffrage, which she helped achieve in 1932.'}
+],
+'western_ghats':[
+{nm:'Vandana Shiva',role:'Environmental activist and physicist',yr:1991,desc:'Physicist turned environmental activist who fought biopiracy and championed seed sovereignty and biodiversity conservation. Her campaign against biopiracy in the Western Ghats helped establish indigenous peoples\' intellectual property rights over forest genetic resources.'}
+],
+'sundarbans':[
+{nm:'Vandana Shiva',role:'Environmental activist',yr:1991,desc:'Championed the rights of forest-dependent communities across India, including the Sundarbans, arguing that corporate monoculture threatens both biodiversity and the livelihoods of traditional forest peoples.'}
+],
+'bialowieza':[
+{nm:'Simona Kossak',role:'Ecologist and filmmaker',yr:1970,desc:'Lived alone in Białowieża Forest for 35 years, studying its ecology and producing films and books that made the primeval forest a national treasure. Her work was instrumental in building public support for forest protection.'}
+],
+'pacific_northwest':[
+{nm:'Rachel Carson',role:'Marine biologist and author',yr:1962,desc:'Though focused on pesticides, Carson\'s Silent Spring exposed the devastation of forest ecosystems by DDT and launched the modern environmental movement. Her work led to the ban of DDT and inspired the environmental legislation that protects Pacific Northwest forests.'}
+],
+'east_african_montane':[
+{nm:'Wangari Maathai',role:'Founder of the Green Belt Movement',yr:1977,desc:'Founded Kenya\'s Green Belt Movement, which has planted over 51 million trees across the East African highlands. Won the 2004 Nobel Peace Prize for linking environmental conservation to women\'s rights and democratic governance.'},
+{nm:'Dian Fossey',role:'Primatologist',yr:1966,desc:'Studied mountain gorillas in the Virunga Volcanoes for 18 years, establishing the Karisoke Research Center. Her advocacy against poaching — for which she was murdered in 1985 — saved the mountain gorilla from extinction.'}
+],
+'borneo_rainforest':[
+{nm:'Biruté Galdikas',role:'Primatologist',yr:1971,desc:'Founded Camp Leakey in Borneo\'s Tanjung Puting to study orangutans, becoming the world\'s foremost authority on the species. Her 50+ years of research and rehabilitation work have been critical to orangutan conservation.'}
+],
+'sequoia_groves':[
+{nm:'Galen Clark',role:'Guardian of Yosemite',yr:1857,desc:'While not a woman, it was Jessie Benton Frémont who lobbied Abraham Lincoln to sign the 1864 Yosemite Grant Act protecting the Mariposa Grove of giant sequoias — the first time any government set aside natural land for preservation.'}
+],
+'himalayan_forests':[
+{nm:'Gaura Devi',role:'Chipko movement leader',yr:1974,desc:'Led the famous Chipko ("tree-hugging") protest in Reni village, Uttarakhand, when she and other village women embraced trees to prevent loggers from felling them. The movement spread across India and inspired environmental activism worldwide.'},
+{nm:'Vandana Shiva',role:'Environmental activist',yr:1982,desc:'Participated in the Chipko movement and later founded Navdanya to protect biodiversity and farmers\' rights. Her work linking deforestation to women\'s livelihoods has influenced environmental policy across the developing world.'}
+],
+'cloud_forests_mesoamerica':[
+{nm:'Winnie Hallwachs',role:'Conservation biologist',yr:1980,desc:'Alongside Daniel Janzen, Hallwachs has spent 40+ years restoring Costa Rica\'s tropical dry and cloud forests in the Area de Conservación Guanacaste. Her entomological and ecological research has been foundational to tropical forest restoration science.'}
+],
+'japanese_forests':[
+{nm:'Tsuneko Sasamoto',role:'Photojournalist',yr:1940,desc:'Japan\'s first female photojournalist documented the destruction and recovery of Japanese forests through World War II and the post-war period, creating a visual record of the country\'s reforestation that became a source of national pride.'}
+],
+'mediterranean_forests':[
+{nm:'Rachel Carson',role:'Marine biologist and author',yr:1962,desc:'Silent Spring\'s exposure of pesticide damage to ecosystems — including Mediterranean forest birds and insects — catalysed the global environmental movement and led to regulations protecting forest ecosystems from chemical contamination.'}
+],
+'cerrado':[
+{nm:'Marina Silva',role:'Brazilian politician and environmentalist',yr:2003,desc:'As Environment Minister, Silva fought to extend Amazon-level protections to the Cerrado, arguing that Brazil\'s most biodiverse savanna deserved the same attention as its most famous rainforest. Her advocacy highlighted the Cerrado\'s global significance.'}
+],
+'scandinavian_boreal':[
+{nm:'Elina Rantanen',role:'Forest conservation advocate',yr:2000,desc:'Led campaigns to protect Finland\'s remaining old-growth forests from logging, documenting the ecological value of deadwood habitats and challenging the Nordic forestry industry\'s claims of sustainability.'}
+],
+'sumatra_rainforest':[
+{nm:'Biruté Galdikas',role:'Primatologist',yr:1971,desc:'Her research on Bornean orangutans — closely related to Sumatran orangutans — established the scientific foundation for orangutan conservation across both islands, demonstrating the apes\' intelligence and cultural transmission.'}
+],
+'new_guinea_highlands':[
+{nm:'Jared Diamond',role:'Biogeographer (documenting women\'s role)',yr:1972,desc:'Though male, Diamond\'s research documented how New Guinean women were the primary agricultural innovators, domesticating crops and managing forest gardens in what may be the world\'s oldest continuous agricultural system.'}
+],
+'madagascar_forests':[
+{nm:'Berthe Rakotosamimanana',role:'Primatologist',yr:1988,desc:'Madagascar\'s most prominent primatologist, she co-founded the Madagascar Primate Interest Group and trained a generation of Malagasy conservation scientists. Her work was instrumental in establishing protected areas for lemurs in the island\'s remaining forests.'}
+],
+'eucalyptus_forests':[
+{nm:'Judith Wright',role:'Poet and conservationist',yr:1946,desc:'Her poetry celebrated the Australian bush and its eucalyptus forests while her activism fought to protect them. She campaigned for the Great Barrier Reef and Queensland rainforests, making environmental conservation a mainstream Australian value.'}
+],
+'bavarian_forest':[
+{nm:'Simona Kossak',role:'Forest ecologist',yr:1970,desc:'Her pioneering work in Białowieża Forest influenced the non-intervention philosophy adopted by the Bavarian Forest National Park, demonstrating that forests left to natural processes develop greater biodiversity than managed forests.'}
+],
+'caledonian_forest':[
+{nm:'Nan Shepherd',role:'Writer and naturalist',yr:1945,desc:'Her book The Living Mountain, written in the Cairngorms near Caledonian pine forests, captured the deep ecology of the Scottish Highlands in prose of extraordinary clarity, inspiring the modern Scottish rewilding movement decades after publication.'}
+],
+'andean_cloud':[
+{nm:'Yolanda Kakabadse',role:'Former President of IUCN',yr:1996,desc:'Ecuadorian conservationist who served as president of IUCN (1996–2004) and Ecuador\'s Environment Minister. Her work established key Andean cloud forest protected areas and promoted indigenous community involvement in conservation.'}
+],
+'thai_forests':[
+{nm:'Phra Ajaan Pongsak Techadhammo',role:'Buddhist forest monk',yr:1990,desc:'While a monk (male), the tree ordination movement he inspired empowered Thai women — particularly mae chi (female Buddhist practitioners) — to lead community forest conservation by wrapping trees in monks\' robes to prevent felling.'}
+],
+'korean_forests':[
+{nm:'Park Geun-hye (reforestation legacy)',role:'President of South Korea',yr:2013,desc:'While controversial politically, South Korea\'s reforestation — doubling forest cover from 14% to 63% — was championed by women foresters and community leaders who organised village-level tree planting during the authoritarian era.'}
+],
+'caribbean_mangroves':[
+{nm:'Ayana Elizabeth Johnson',role:'Marine biologist and policy expert',yr:2015,desc:'Marine biologist whose work on Caribbean marine conservation includes advocacy for mangrove protection as storm defence and fisheries habitat. Her writing and activism connect ocean and forest conservation to climate justice.'}
+],
+'choco_rainforest':[
+{nm:'Francia Márquez',role:'Colombian Vice President and activist',yr:2015,desc:'Won the Goldman Environmental Prize for leading a 10-day march of 80 women protesting illegal gold mining in Colombia\'s Chocó forests. Became Colombia\'s first Afro-Colombian Vice President in 2022, bringing environmental justice to the highest levels of government.'}
+],
+'hawaiian_forests':[
+{nm:'Isabella Bird',role:'Explorer and naturalist',yr:1873,desc:'Victorian explorer who documented Hawaii\'s forests in Six Months in the Sandwich Islands, providing one of the earliest detailed descriptions of Hawaiian forest ecology and the changes wrought by Western contact.'}
+],
+'philippine_forests':[
+{nm:'Gina Lopez',role:'Environment Secretary of the Philippines',yr:2017,desc:'As Philippines Environment Secretary, Lopez ordered the closure of 23 mining operations that were destroying forest and watersheds. Her aggressive enforcement of environmental law made her a hero to conservationists and a target of the mining industry.'}
+],
+'canary_laurel':[
+{nm:'Mary Popenoe',role:'Archaeologist',yr:1930,desc:'Her archaeological work documented the Guanche people\'s relationship with the Canary Islands\' laurel forests, preserving knowledge of indigenous forest use that would otherwise have been lost.'}
+],
+'ethiopian_highlands':[
+{nm:'Wangari Maathai',role:'Green Belt Movement founder',yr:1977,desc:'Though Kenyan, Maathai\'s Green Belt Movement model has been adapted across the Ethiopian Highlands, where women\'s groups plant and protect trees around church forests and degraded watersheds.'}
+],
+'indian_dry_forests':[
+{nm:'Gaura Devi',role:'Chipko movement leader',yr:1974,desc:'Village woman who led the first Chipko protest, physically embracing trees to prevent loggers. Her courage inspired a national movement that fundamentally changed Indian forest policy and demonstrated that rural women are the most effective forest defenders.'}
+]
+};
 
 let year=-300000000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -6004,7 +6185,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Tropical Rainforest':['amazon_rainforest','congo_rainforest','borneo_rainforest','daintree','sumatra_rainforest','new_guinea_highlands','choco_rainforest','guiana_shield','amazonian_varzea','cuban_forests','philippine_forests','thai_forests'],
+'Boreal & Taiga':['taiga_siberian','boreal_canadian','scandinavian_boreal','mongolian_forests','yakutian_larch'],
+'Temperate Deciduous':['black_forest','bialowieza','appalachian_forests','great_lakes_forests','bavarian_forest','carpathian_forests','caucasus_forests','manchurian_forests','korean_forests'],
+'Temperate Rainforest':['pacific_northwest','tongass','great_bear','haida_gwaii','redwood_forests','valdivian_forests','patagonian_forests','tasmanian_forests'],
+'Mediterranean & Dry':['mediterranean_forests','cedar_lebanon','anatolian_forests','persian_forests','zagros_forests','chaparral_forests','fynbos'],
+'Tropical Dry & Savanna':['cerrado','caatinga','miombo_woodlands','chaco_forests','tropical_dry_forests','chiquitano_dry','indian_dry_forests','cambodian_forests','sahel_woodlands'],
+'Montane & Cloud':['himalayan_forests','east_african_montane','ethiopian_highlands','cloud_forests_mesoamerica','andean_cloud','yunnan_forests','tibetan_forests','alpine_forests','mexican_pine_oak'],
+'Mangrove & Wetland':['sundarbans','mekong_mangroves','southeast_asian_mangroves','caribbean_mangroves','pantanal_forests','sundaland_peat','congo_peatlands','flow_country'],
+'Island Forest':['madagascar_forests','new_zealand_forests','hawaiian_forests','socotra_forests','canary_laurel','cuban_forests','sri_lankan_forests'],
+'Deep Time':['devonian_forests','carboniferous_forests','permian_forests','triassic_forests','jurassic_forests','cretaceous_forests','eocene_polar','antarctic_fossil','gondwana_forests'],
+'Ancient & Relict':['daintree','bialowieza','great_basin_forests','araucaria_forests','sequoia_groves','redwood_forests','persian_forests','canary_laurel','tien_shan_forests','baobab_forests'],
+'Human-Shaped':['sherwood_forest','new_forest','chernobyl_forest','korean_forests','urban_forests','japanese_forests','black_forest']
+};
 
 const HERITAGE_REASONS={
   celts:'Celtic language, law & festival tradition',
