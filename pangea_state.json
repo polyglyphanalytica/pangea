@@ -4732,6 +4732,12 @@
       "atlas": "debitum",
       "phase_done": "GO_LIVE",
       "items": 100
+    },
+    {
+      "atlas": "debitum",
+      "phase_done": "6",
+      "phase_next": "DONE",
+      "items": 100
     }
   ],
   "assignments": {}
