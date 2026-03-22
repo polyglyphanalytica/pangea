@@ -945,17 +945,17 @@
       "section": "XII"
     },
     "sylva": {
-      "phase": "3",
+      "phase": "5",
       "items": 100,
       "target": 100,
       "live": false,
       "map": "world",
       "section": "I",
-      "validated_sha": "7ec508f4972a42066caac4c4bce9f8cda7e2d908",
-      "validated_short": "7ec508f",
-      "validated_at": "2026-03-22T10:02:05.514826Z",
+      "validated_sha": "7dfee37bb5cf401c9cea1ea906e41c0dcc743f0e",
+      "validated_short": "7dfee37",
+      "validated_at": "2026-03-22T12:13:24.835580Z",
       "validated_items": 100,
-      "validated_lenses": 30
+      "validated_lenses": 20
     },
     "ignis": {
       "phase": "1A",
@@ -3488,6 +3488,12 @@
     {
       "atlas": "sylva",
       "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "sylva",
+      "phase_done": "3",
+      "phase_next": "5",
       "items": 100
     }
   ]
