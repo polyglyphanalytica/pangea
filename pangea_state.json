@@ -285,7 +285,7 @@
     },
     "petra": {
       "phase": "DATA",
-      "items": 18,
+      "items": 30,
       "target": 100,
       "live": false,
       "map": "world",
@@ -4282,6 +4282,66 @@
       "atlas": "petra",
       "batch": "18-18",
       "items": 18
+    },
+    {
+      "atlas": "petra",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "petra",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "petra",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "petra",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "petra",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "petra",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "petra",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "petra",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "petra",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "petra",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "petra",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "petra",
+      "batch": "30-30",
+      "items": 30
     }
   ],
   "assignments": {}
