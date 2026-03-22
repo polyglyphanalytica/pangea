@@ -964,8 +964,8 @@
       "section": "I"
     },
     "solum": {
-      "phase": "DATA",
-      "items": 88,
+      "phase": "5",
+      "items": 120,
       "target": 100,
       "live": false,
       "map": "world",
@@ -2872,6 +2872,72 @@
       "atlas": "solum",
       "batch": "88-88",
       "items": 88
+    },
+    {
+      "atlas": "solum",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "solum",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "solum",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "solum",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "solum",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "solum",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "solum",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "solum",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "solum",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "solum",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "solum",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "solum",
+      "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "solum",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 120
     }
   ]
 }
