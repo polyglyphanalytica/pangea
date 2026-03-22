@@ -285,7 +285,7 @@
     },
     "petra": {
       "phase": "DATA",
-      "items": 70,
+      "items": 75,
       "target": 100,
       "live": false,
       "map": "world",
@@ -4542,6 +4542,31 @@
       "atlas": "petra",
       "batch": "70-70",
       "items": 70
+    },
+    {
+      "atlas": "petra",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "petra",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "petra",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "petra",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "petra",
+      "batch": "75-75",
+      "items": 75
     }
   ],
   "assignments": {}
