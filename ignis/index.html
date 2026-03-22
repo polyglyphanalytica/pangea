@@ -6801,42 +6801,24 @@ function renderDrawer(){
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Pivotal moments to try</div>
       ${(()=>{
         const ALL=[
-          [-65000,'Aboriginal Australia begins','The oldest continuous culture on earth — 65,000 unbroken years'],
-          [-10000,'The Agricultural Revolution','Humans stop following herds and start growing food — nothing is the same again'],
-          [-3500,'Writing is invented','The Sumerians of Mesopotamia begin storing memory outside the human mind'],
-          [-3100,'Egypt unified under one pharaoh','Upper and Lower Egypt merge — one of the longest-lasting states in history begins'],
-          [-2600,'Indus Valley at its peak','Mohenjo-daro and Harappa are among the world\'s largest cities, with running water'],
-          [-2560,'The Great Pyramid completed','The only surviving Ancient Wonder — built with a precision that still puzzles engineers'],
-          [-1800,'The Code of Hammurabi','The most complete ancient law code — 282 laws carved in stone for all to read'],
-          [-1350,'Akhenaten\'s monotheism','Egypt\'s pharaoh erases all gods but one — the world\'s first state monotheism, then erased itself'],
-          [-1200,'Bronze Age Collapse','Five great civilizations fail within decades of each other — the ancient world\'s extinction event'],
-          [-800,'Homer composes the Iliad','The oral tradition crystallises into the text that will define Western storytelling for 3,000 years'],
-          [-776,'The first Olympic Games','Greeks pause their wars every four years to compete — sport as diplomacy'],
-          [-604,'Laozi writes the Tao Te Ching','Eighty-one short verses that become the foundation of Taoism and influence billions'],
-          [-563,'The Buddha is born','Siddhartha Gautama\'s life and teachings will reshape Asia and eventually the world'],
-          [-551,'Confucius is born','His ideas on duty, family, and governance will shape Chinese civilization for 2,500 years'],
-          [-500,'The Axial Age','Confucius, Buddha, Socrates, and Isaiah are alive simultaneously — humanity\'s great leap'],
-          [-490,'Battle of Marathon','A smaller Athenian force defeats the Persian invasion — democracy survives its first test'],
-          [-334,'Alexander begins his conquest','A 22-year-old Macedonian sets out to conquer the known world — and nearly does'],
-          [-221,'China unified under Qin','The Warring States end; the Great Wall begins; the template for Chinese empire is set'],
-          [-44,'Julius Caesar assassinated','The Roman Republic dies with him — the age of emperors begins'],
-          [33,'Crucifixion of Jesus','A wandering teacher\'s execution becomes the founding moment of Western civilization'],
-          [105,'Paper invented in China','Cai Lun\'s invention will eventually carry every idea in the world'],
-          [306,'Constantine converts to Christianity','The Roman Emperor\'s conversion turns a persecuted sect into the world\'s dominant religion'],
-          [476,'Fall of Western Rome','The empire that defined Europe for 500 years collapses — the medieval world begins'],
-          [610,'Muhammad receives first revelation','In a cave near Mecca, a religion begins that will reshape a third of the world'],
-          [800,'Charlemagne crowned emperor','The Frankish king unites Western Europe — the idea of Europe as a political entity is born'],
-          [1000,'Peak civilizational diversity','More simultaneous civilizations than any other moment in history'],
-          [1066,'Battle of Hastings','The Norman conquest reshapes England — and through it, the English language and common law'],
-          [1206,'Mongol Empire begins','Genghis Khan unites the steppe — within 70 years his descendants will rule from Korea to Poland'],
-          [1347,'Black Death arrives in Europe','The Mongol trade network carries plague from Central Asia — one third of Europe will die'],
-          [1440,'Gutenberg\'s printing press','The first mass-produced book — the information revolution that makes the Reformation possible'],
-          [1492,'Columbus reaches the Americas','Two worlds collide — the beginning of global trade, colonialism, and the modern world'],
-          [1543,'Copernicus publishes','The Earth is not the centre of the universe — science begins its long war with authority'],
-          [1648,'Peace of Westphalia','The Thirty Years\' War ends — the modern system of sovereign nation-states is born'],
-          [1789,'The French Revolution begins','Liberty, Equality, Fraternity — the ideas that will topple monarchies across two centuries'],
-          [1848,'Year of Revolutions','Nineteen countries convulse simultaneously — the modern left-right political divide crystallises'],
-          [1905,'Einstein\'s annus mirabilis','Special relativity, the photoelectric effect, Brownian motion — physics transformed in one year'],
+          [-400000,'Controlled fire at Gesher Benot Ya\'aqov','The earliest evidence of deliberate fire use — Homo erectus hearths by the Jordan River'],
+          [-100000,'Cooking transforms the human body','Regular cooking shrinks guts, grows brains — fire makes us human'],
+          [-40000,'Fire-hardened spears','Neanderthals and early humans harden wooden spear tips in fire — the first fire technology'],
+          [-10000,'Slash-and-burn agriculture begins','Fire becomes the tool that clears forest for farming — civilisation\'s founding act of destruction'],
+          [-3000,'Copper smelting in the Levant','Fire hot enough to melt metal transforms human society — the Bronze Age begins'],
+          [-1200,'Iron smelting spreads','Higher-temperature charcoal fires unlock iron — the metal that democratises warfare and farming'],
+          [64,'Great Fire of Rome','Nero\'s city burns for six days — the fire that may or may not have been set by its emperor'],
+          [1666,'Great Fire of London','Four days of flame destroy 13,200 houses — London rebuilds in stone and creates the first fire insurance'],
+          [1769,'Watt\'s steam engine','James Watt harnesses fire in a machine — the Industrial Revolution begins'],
+          [1871,'Great Chicago Fire','300 people dead, 100,000 homeless — the fire that rebuilt a city in steel and concrete'],
+          [1872,'Peshtigo Fire','The deadliest wildfire in American history kills 1,500–2,500 on the same night as the Chicago Fire'],
+          [1906,'San Francisco earthquake fires','The earthquake lasted 42 seconds; the fires lasted three days and destroyed 80% of the city'],
+          [1942,'Firebombing of cities begins','Incendiary warfare reaches industrial scale — Hamburg, Dresden, Tokyo reduced to ash'],
+          [1945,'Hiroshima','A single weapon creates a firestorm that kills 80,000 instantly — fire enters the nuclear age'],
+          [1986,'Chernobyl','The reactor fire that contaminated a continent and ended the Soviet nuclear dream'],
+          [2010,'Deepwater Horizon','The oil well fire that became the worst marine oil spill in history'],
+          [2019,'Amazon fires','The fires that brought global attention to the burning of Earth\'s largest rainforest'],
+          [2020,'Australian Black Summer','18 million hectares burn — the fire season that changed a continent\'s relationship with flame'],
         ];
         const shuffled=[...ALL].sort(()=>Math.random()-.5);
         return shuffled.slice(0,5).map(([yr,title,desc])=>`
@@ -8153,41 +8135,19 @@ function renderHerstoryDrawer(){
       A mirror to IGNIS — tracing 400,000 years of fire history through the women who shaped it. Fire scientists, safety pioneers, disaster responders, and energy innovators whose contributions were minimised, erased, or credited to others. The record is incomplete because the record was kept by men. That absence is itself the argument.
     </div>
     <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Tap any civilization on the map to discover the women who shaped it — queens who governed, scholars who wrote, warriors who fought, and spiritual leaders who held communities together.
+      Tap any fire on the map to discover the women who shaped its story — chemists who understood combustion, firefighters who broke barriers, energy pioneers who changed how we harness flame, and safety advocates who saved lives.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:12px">Women who changed everything</div>
     ${(()=>{
       const ALL=[
-        {civ:'mesopotamia', nm:'Enheduanna', yr:-2285, desc:'World\'s first named author — high priestess of Ur who wrote hymns that shaped Mesopotamian religion for 500 years'},
-        {civ:'egypt', nm:'Hatshepsut', yr:-1479, desc:'Pharaoh of Egypt for 20 years — built more monuments than any ruler since Khufu, then erased from the record'},
-        {civ:'egypt', nm:'Nefertiti', yr:-1370, desc:'Co-ruler with Akhenaten during Egypt\'s monotheist revolution — may have ruled alone after his death'},
-        {civ:'persia', nm:'Artemisia I of Caria', yr:-480, desc:'Persian naval commander at Salamis — the only admiral Xerxes trusted enough to ask for advice after the battle'},
-        {civ:'greece', nm:'Sappho', yr:-610, desc:'The Tenth Muse — her lyric poetry was so admired in antiquity that Plato called her the tenth muse; fragments still devastating'},
-        {civ:'greece', nm:'Hypatia', yr:360, desc:'Philosopher and mathematician of Alexandria — murdered by a Christian mob, she became the symbol of reason against fanaticism'},
-        {civ:'rome', nm:'Hortensia', yr:-42, desc:'The only woman ever to address the Roman Forum — argued against an unjust war tax and won, forcing the Senate to back down'},
-        {civ:'rome', nm:'Livia Drusilla', yr:-58, desc:'Wife of Augustus — ran the imperial household and shaped Roman policy for 50 years; poisoning accusations followed her to history'},
-        {civ:'china', nm:'Wu Zetian', yr:624, desc:'The only woman to rule China as emperor — expanded the empire, reformed the civil service, and was never forgiven by male historians'},
-        {civ:'china', nm:'Lady Fu Hao', yr:-1200, desc:'Shang Dynasty general and high priestess — led an army of 13,000; her intact tomb proved women could hold supreme military command'},
-        {civ:'india', nm:'Mirabai', yr:1498, desc:'Rajput princess who abandoned queenship for devotional poetry — her bhajans are still sung; she refused to be silenced or poisoned'},
-        {civ:'india', nm:'Razia Sultana', yr:1205, desc:'First female Sultan of Delhi — rode unveiled, refused purdah, commanded armies; deposed by nobles who could not accept her authority'},
-        {civ:'japan', nm:'Murasaki Shikibu', yr:978, desc:'Lady-in-waiting who wrote The Tale of Genji — the world\'s first novel, still in print 1,000 years later'},
-        {civ:'japan', nm:'Tomoe Gozen', yr:1157, desc:'Samurai warrior of extraordinary skill — one of the few women recorded as a genuine battlefield commander in feudal Japan'},
-        {civ:'islamicworld', nm:'Fatima al-Fihri', yr:859, desc:'Founded al-Qarawiyyin in Fez — the world\'s oldest continuously operating university, still teaching today'},
-        {civ:'islamicworld', nm:'Aisha bint Abi Bakr', yr:614, desc:'Wife of Muhammad, political leader, and the source of thousands of hadith — her authority shaped Islamic jurisprudence for centuries'},
-        {civ:'islamicworld', nm:'Wallada bint al-Mustakfi', yr:994, desc:'Andalusian poet-princess who ran a literary salon, took lovers openly, and embroidered her own poems on her sleeves'},
-        {civ:'medieval', nm:'Hildegard of Bingen', yr:1098, desc:'Theologian, composer, naturalist, mystic — wrote on medicine, music, and theology; preached publicly when no woman was supposed to'},
-        {civ:'medieval', nm:'Eleanor of Aquitaine', yr:1122, desc:'Queen of both France and England, led a crusade, and governed England as regent — the most powerful woman in 12th-century Europe'},
-        {civ:'medieval', nm:'Christine de Pizan', yr:1364, desc:'First professional woman writer in Europe — her City of Ladies (1405) was the Middle Ages\' most systematic defence of women\'s worth'},
-        {civ:'aztec', nm:'Tlazolteotl', yr:1300, desc:'The goddess who was also the template — Aztec women wove, governed households, and served as midwives in a cosmology where female creative power was divine'},
-        {civ:'inca', nm:'Mama Ocllo', yr:1400, desc:'Co-founder of the Inca Empire with Manco Cápac — taught women weaving and household arts that formed the backbone of Andean economy'},
-        {civ:'ottoman', nm:'Kösem Sultan', yr:1589, desc:'Ruled the Ottoman Empire as regent for two sultans — the most powerful woman in Ottoman history; governed for nearly 30 years'},
-        {civ:'ottoman', nm:'Hurrem Sultan', yr:1502, desc:'Enslaved Ukrainian woman who became Suleiman the Magnificent\'s legal wife — broke every Ottoman convention and ran foreign policy'},
-        {civ:'renaissance', nm:'Sofonisba Anguissola', yr:1532, desc:'First woman to achieve international fame as a painter — court painter to Philip II of Spain; Michelangelo praised her drawings'},
-        {civ:'renaissance', nm:'Artemisia Gentileschi', yr:1593, desc:'Baroque master who survived rape, trial, and torture to become the most powerful female painter in history — her Judiths are revenge made magnificent'},
-        {civ:'colonial', nm:'Anacaona', yr:1474, desc:'Taíno cacica, poet, and the last great Indigenous leader of Hispaniola — welcomed the Spanish with ceremony; they hanged her for it'},
-        {civ:'industrial', nm:'Ada Lovelace', yr:1815, desc:'Mathematician who wrote the first algorithm for a computing machine in 1843 — a century before the computer was built'},
-        {civ:'industrial', nm:'Harriet Tubman', yr:1822, desc:'Escaped slavery and returned 13 times to free others — then served as a Union Army spy; called herself "Moses"'},
-        {civ:'modern', nm:'Rosalind Franklin', yr:1920, desc:'Her X-ray crystallography revealed the double helix structure of DNA — Watson and Crick used her data without credit'},
+        {civ:'controlled_fire', nm:'Marie Curie', yr:1898, desc:'Discovered radium and polonium — her work on radioactivity unlocked nuclear fire. Died of radiation exposure from the very phenomenon she revealed to the world.'},
+        {civ:'great_fire_london', nm:'Rachel Carson', yr:1962, desc:'Silent Spring exposed the chemical fires of pesticide devastation across ecosystems, launching the environmental movement that would challenge industrial burning of the natural world.'},
+        {civ:'steam_engine', nm:'Hedy Lamarr', yr:1942, desc:'Hollywood actress who co-invented frequency-hopping spread spectrum technology — the basis for modern wireless communication that now coordinates firefighting and emergency response globally.'},
+        {civ:'hiroshima', nm:'Sadako Sasaki', yr:1955, desc:'Hibakusha who folded 1,000 paper cranes before dying of leukaemia from the Hiroshima bomb at age 12 — her story became the world\'s most powerful symbol of nuclear fire\'s human cost.'},
+        {civ:'chernobyl', nm:'Lyudmila Ignatenko', yr:1986, desc:'Wife of Chernobyl firefighter Vasily Ignatenko — stayed by his side as he died of acute radiation syndrome, documenting the human cost of nuclear disaster in testimony that became the basis of the HBO series.'},
+        {civ:'industrial_revolution', nm:'Florence Nightingale', yr:1854, desc:'Pioneer of modern nursing who used statistical evidence to prove that fire-related causes — poor ventilation, contaminated air, overcrowded conditions — killed more soldiers than combat wounds.'},
+        {civ:'california_wildfires', nm:'Crystal Kolden', yr:2010, desc:'Fire scientist whose research on wildfire ecology and the wildland-urban interface has shaped modern understanding of why fires are becoming more catastrophic and how communities can adapt.'},
+        {civ:'great_fire_rome', nm:'Agrippina the Younger', yr:54, desc:'Mother of Nero, she wielded political fire — manipulating succession and governance in Imperial Rome during the era of the Great Fire, demonstrating that women shaped history\'s most fire-defined era.'},
       ];
       const shuffled=[...ALL].sort(()=>Math.random()-.5);
       return shuffled.slice(0,5).map(w=>{
@@ -8210,7 +8170,7 @@ function renderHerstoryDrawer(){
   <button onclick="closeInfo()"
     style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px;transition:opacity .15s"
     onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-    ← All civilizations
+    ← All fires
   </button>
   <div class="hs-panel-hdr">${c.nm}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:14px">${c.sb}</div>
