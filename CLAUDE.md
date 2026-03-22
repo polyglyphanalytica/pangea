@@ -403,10 +403,10 @@ The SVG always has `viewBox="0 0 1000 520"`. The map layer `<g id="map-layer">` 
 <g id="conn-layer"></g>         <!-- Connection lines between items -->
 <g id="thread-layer"></g>       <!-- Thread/chain animated arrows -->
 <g id="label-layer" pointer-events="none"></g>       <!-- Selected item label only -->
-<g id="hover-label-layer" pointer-events="none"></g> <!-- Hover tooltip (see Drift 1) -->
 <g id="mark-layer"></g>         <!-- Item marker circles -->
+<g id="hover-label-layer" pointer-events="none"></g> <!-- Hover tooltip (see Drift 1) -->
 ```
-Order matters — markers must render above map paths and labels above markers.
+Order matters — markers must render above map paths, and hover tooltips must render above markers.
 > ▲ **DRIFT 1 — MAP LABELS:** The `hover-label-layer` group is a drift addition. See Section 8.7 below.
 8.7 Map Labels — Hover-Only
 > ▲ **DRIFT 1**
@@ -417,7 +417,7 @@ Hover tooltip — moving the cursor within the hit threshold of any unselected a
 Rationale: At 100+ items, persistent labels overlap catastrophically in any geographically dense region. Overlapping labels actively mislead — a user reads the wrong label for a nearby dot. Hover-only eliminates all overlap while preserving full discoverability.
 Implementation:
 `label-layer` SVG group receives only the selected item label, gated on `isSel`
-`hover-label-layer` SVG group sits above `mark-layer`, managed by `_renderHoverLabel(c)`
+`hover-label-layer` SVG group is the topmost layer (above `mark-layer`), managed by `_renderHoverLabel(c)`
 `_onMapMouseMove` fires on `window.mousemove`, separate from the drag handler `_onMouseMove`
 `itemClick()` calls `_renderHoverLabel(null)` before `navigateToItem()` to clear any residual hover label
 Touch devices: hover layer is never populated. Selected-item label still works.
@@ -425,7 +425,7 @@ Touch devices: hover layer is never populated. Selected-item label still works.
 For atlases whose items exist in non-geographic space (e.g. Cosmos — celestial objects), use an appropriate alternative coordinate system:
 Define your own `lon`/`lat` equivalents (e.g. Right Ascension / Declination)
 Keep the same SVG canvas size (1000×520) and zoom/pan system
-Keep the same layer structure (map-layer, conn-layer, thread-layer, label-layer, hover-label-layer, mark-layer)
+Keep the same layer structure (map-layer, conn-layer, thread-layer, label-layer, mark-layer, hover-label-layer)
 Replace the world map background with an appropriate alternative (e.g. star field, abstract grid)
 The `itemPt()` function maps your coordinates to SVG x/y
 ---
@@ -981,7 +981,7 @@ Drift 1 — Map Labels — Hover-Only
 Scope: All atlases.
 Default: Persistent text labels below every active item marker.
 Revised: No persistent labels. Two contexts only: (1) selected item shows gold name label below its enlarged dot; (2) unselected active dots show a pill tooltip on hover (Cinzel font, `--bdr` border, dark bg). Touch devices: no hover layer; selected-item label still active.
-SVG change: Add `<g id="hover-label-layer" pointer-events="none"></g>` between `label-layer` and `mark-layer`. Managed by `_renderHoverLabel(c)`. Cleared on click, mouseout, and SVG leave.
+SVG change: Add `<g id="hover-label-layer" pointer-events="none"></g>` after `mark-layer` (topmost layer, so hover tooltips render above markers). Managed by `_renderHoverLabel(c)`. Cleared on click, mouseout, and SVG leave.
 ---
 Drift 2 — Inactive Items — Fully Hidden on Timeline Scrub
 Scope: All atlases.
