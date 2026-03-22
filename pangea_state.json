@@ -959,7 +959,7 @@
     },
     "ignis": {
       "phase": "DATA",
-      "items": 38,
+      "items": 44,
       "target": 100,
       "live": false,
       "map": "world",
@@ -3731,6 +3731,36 @@
       "atlas": "ignis",
       "batch": "38-38",
       "items": 38
+    },
+    {
+      "atlas": "ignis",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "ignis",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "ignis",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "ignis",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "ignis",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "ignis",
+      "batch": "44-44",
+      "items": 44
     }
   ],
   "assignments": {}
