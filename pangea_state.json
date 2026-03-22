@@ -285,7 +285,7 @@
     },
     "petra": {
       "phase": "DATA",
-      "items": 39,
+      "items": 70,
       "target": 100,
       "live": false,
       "map": "world",
@@ -4387,6 +4387,161 @@
       "atlas": "petra",
       "batch": "39-39",
       "items": 39
+    },
+    {
+      "atlas": "petra",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "petra",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "petra",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "petra",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "petra",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "petra",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "petra",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "petra",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "petra",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "petra",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "petra",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "petra",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "petra",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "petra",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "petra",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "petra",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "petra",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "petra",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "petra",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "petra",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "petra",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "petra",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "petra",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "petra",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "petra",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "petra",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "petra",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "petra",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "petra",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "petra",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "petra",
+      "batch": "70-70",
+      "items": 70
     }
   ],
   "assignments": {}
