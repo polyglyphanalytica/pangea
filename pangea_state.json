@@ -959,7 +959,7 @@
     },
     "ignis": {
       "phase": "DONE",
-      "items": 100,
+      "items": 90,
       "target": 100,
       "live": true,
       "map": "world",
