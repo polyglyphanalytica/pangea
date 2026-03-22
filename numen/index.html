@@ -5095,13 +5095,15 @@ function toggleTheme(){
     (window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
   applyTheme(cur==='dark'?'light':'dark');
 }
-(function(){
-  try{
-    const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('numen-theme');
-    if(saved){applyTheme(saved);}
-    else{document.documentElement.dataset.theme='dark';}
-  }catch(e){document.documentElement.dataset.theme='dark';}
-})();
+(function(){try{
+  const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('numen-theme');
+  if(saved){applyTheme(saved);}
+  else{
+    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+    document.documentElement.dataset.theme=sys;
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
+  }
+}catch(e){}})();
 
 // ── BURGER MENU ──
 function toggleBurger(){

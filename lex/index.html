@@ -4727,15 +4727,24 @@ function closeMobileSheet(){document.getElementById('mob-map-btn').classList.add
 // ══════════════════════════════════════════════════════
 // THEME
 // ══════════════════════════════════════════════════════
-function toggleTheme(){
-  const d=document.documentElement;
-  const cur=d.dataset.theme;
-  const next=cur==='dark'?'light':cur==='light'?'dark':null;
-  if(next)d.dataset.theme=next;
-  else d.dataset.theme=window.matchMedia('(prefers-color-scheme:dark)').matches?'light':'dark';
-  try{localStorage.setItem('lex-theme',d.dataset.theme);}catch(e){}
+function applyTheme(t){
+  document.documentElement.dataset.theme=t;
+  const _tb=document.getElementById('theme-btn');if(_tb)_tb.textContent=t==='dark'?'◑':'◐';
+  try{localStorage.setItem('pangea-theme',t);localStorage.setItem('lex-theme',t);}catch(e){}
 }
-(function(){try{const t=localStorage.getItem('lex-theme');if(t)document.documentElement.dataset.theme=t;else document.documentElement.dataset.theme='dark';}catch(e){document.documentElement.dataset.theme='dark';}})();
+function toggleTheme(){
+  const cur=document.documentElement.dataset.theme||(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
+  applyTheme(cur==='dark'?'light':'dark');
+}
+(function(){try{
+  const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('lex-theme');
+  if(saved){applyTheme(saved);}
+  else{
+    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+    document.documentElement.dataset.theme=sys;
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
+  }
+}catch(e){}})();
 
 // ══════════════════════════════════════════════════════
 // ABOUT MODAL
