@@ -958,10 +958,10 @@
       "validated_lenses": 20
     },
     "ignis": {
-      "phase": "DATA",
-      "items": 38,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "I",
       "validated_sha": "b1a367de5439569ff771f91f90ebc5f68a1cd7dd",
@@ -971,8 +971,8 @@
       "validated_lenses": 30
     },
     "spiritus": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "1C",
+      "items": 100,
       "target": 100,
       "live": false,
       "map": "world",
@@ -1044,7 +1044,6 @@
     }
   },
   "queue": [
-    "ignis",
     "spiritus",
     "petra",
     "bestia",
@@ -3731,6 +3730,18 @@
       "atlas": "ignis",
       "batch": "38-38",
       "items": 38
+    },
+    {
+      "atlas": "spiritus",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "spiritus",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
     }
   ],
   "assignments": {}
