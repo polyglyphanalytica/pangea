@@ -169,10 +169,10 @@
       "section": "I"
     },
     "debitum": {
-      "phase": "5",
-      "items": 134,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "VII",
       "validated_sha": "00be8e07e0dac33dd54da8b126358a75d09752f7",
@@ -1052,7 +1052,6 @@
     "spiritus",
     "petra",
     "bestia",
-    "debitum",
     "sophia",
     "codex",
     "graphe",
@@ -1167,7 +1166,8 @@
     "clima",
     "aqua",
     "solum",
-    "sylva"
+    "sylva",
+    "debitum"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -4721,6 +4721,17 @@
       "phase_done": "3",
       "phase_next": "5",
       "items": 134
+    },
+    {
+      "atlas": "debitum",
+      "phase_done": "5+6",
+      "phase_next": "GO_LIVE",
+      "items": 100
+    },
+    {
+      "atlas": "debitum",
+      "phase_done": "GO_LIVE",
+      "items": 100
     }
   ],
   "assignments": {}
