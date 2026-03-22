@@ -958,17 +958,17 @@
       "validated_lenses": 20
     },
     "ignis": {
-      "phase": "3",
-      "items": 100,
+      "phase": "5",
+      "items": 120,
       "target": 100,
       "live": true,
       "map": "world",
       "section": "I",
-      "validated_sha": "b1a367de5439569ff771f91f90ebc5f68a1cd7dd",
-      "validated_short": "b1a367d",
-      "validated_at": "2026-03-22T12:27:25.709371Z",
+      "validated_sha": "5ca735a97cdb96c3829d340bdc603a440b928c55",
+      "validated_short": "5ca735a",
+      "validated_at": "2026-03-22T15:15:41.630057Z",
       "validated_items": 100,
-      "validated_lenses": 30
+      "validated_lenses": 20
     },
     "spiritus": {
       "phase": "DATA",
@@ -4060,6 +4060,12 @@
       "atlas": "ignis",
       "batch": "100-100",
       "items": 100
+    },
+    {
+      "atlas": "ignis",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 120
     }
   ],
   "assignments": {}
