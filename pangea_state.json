@@ -169,8 +169,8 @@
       "section": "I"
     },
     "debitum": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DATA",
+      "items": 84,
       "target": 100,
       "live": false,
       "map": "world",
@@ -972,7 +972,7 @@
     },
     "spiritus": {
       "phase": "DATA",
-      "items": 84,
+      "items": 85,
       "target": 100,
       "live": false,
       "map": "world",
@@ -4178,6 +4178,456 @@
     },
     {
       "atlas": "spiritus",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "debitum",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "debitum",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "debitum",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "debitum",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "debitum",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "debitum",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "debitum",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "debitum",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "debitum",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "debitum",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "debitum",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "debitum",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "debitum",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "debitum",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "debitum",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "debitum",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "debitum",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "debitum",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "debitum",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "debitum",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "debitum",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "debitum",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "debitum",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "debitum",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "debitum",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "debitum",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "debitum",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "debitum",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "debitum",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "debitum",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "debitum",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "debitum",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "debitum",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "debitum",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "debitum",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "debitum",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "debitum",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "debitum",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "debitum",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "debitum",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "debitum",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "debitum",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "debitum",
+      "batch": "38-38",
+      "items": 38
+    },
+    {
+      "atlas": "debitum",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "debitum",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "debitum",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "debitum",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "debitum",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "debitum",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "debitum",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "debitum",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "debitum",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "debitum",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "debitum",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "debitum",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "debitum",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "debitum",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "debitum",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "debitum",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "debitum",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "debitum",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "debitum",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "debitum",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "debitum",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "debitum",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "debitum",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "debitum",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "debitum",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "debitum",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "debitum",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "debitum",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "debitum",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "debitum",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "debitum",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "debitum",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "debitum",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "debitum",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "debitum",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "debitum",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "debitum",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "debitum",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "debitum",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "debitum",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "debitum",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "debitum",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "debitum",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "debitum",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "debitum",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "debitum",
       "batch": "84-84",
       "items": 84
     }
