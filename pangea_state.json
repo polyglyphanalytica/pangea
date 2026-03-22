@@ -285,7 +285,7 @@
     },
     "petra": {
       "phase": "DATA",
-      "items": 0,
+      "items": 1,
       "target": 100,
       "live": false,
       "map": "world",
@@ -4192,6 +4192,11 @@
       "phase_done": "1F",
       "phase_next": "DATA",
       "items": 0
+    },
+    {
+      "atlas": "petra",
+      "batch": "1-1",
+      "items": 1
     }
   ],
   "assignments": {}
