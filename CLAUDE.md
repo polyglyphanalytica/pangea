@@ -869,8 +869,17 @@ URL encode/decode, `shareState()`, `toggleTheme()`, `toggleBurger()`, `showAbout
 Phase 5 — All Five Modes
 Threads/chains panel + animated SVG arrows, compare dual-drawer, what-if removal + broken path rendering, heritage/address region picker, Herstory toggle + dedicated drawer panel (Drift 4). Commit.
 ---
-Phase 6 — Polish & QA
-Run the full verification checklist (Section 18). Fix any issues found. Final commit.
+Phase 6 — Polish, QA & Go-Live
+Run the full verification checklist (Section 18). Fix any issues found. When the validator returns **ELIGIBLE FOR GO-LIVE**, the final commit of Phase 6 must also:
+1. Update `pangea_state.json` — set the atlas entry to `"phase": "DONE"` and `"live": true`.
+2. Update the homepage (`index.html`) — change the atlas card from `card--forthcoming` to `card--live`. This means:
+   - Replace `<div class="card card--forthcoming">` with `<div class="card card--live">`
+   - Add `<span class="status status--live">Live</span>` as the first child
+   - Wrap the card contents in `<a href="atlasname/index.html">…</a>`
+   - Remove the `<span class="coming-soon">Coming Soon</span>` element
+3. Commit all three files (`atlasname/index.html`, `pangea_state.json`, `index.html`) together in a single commit with a message like `atlasname: Phase 6 — go live`.
+
+Do not create a separate commit for the homepage update. The go-live change is part of Phase 6, not a follow-up task.
 ---
 Phase Confirmation Protocol
 Stop after every phase and sub-phase. Wait for explicit confirmation before beginning the next. Do not chain phases. After each commit, state:
