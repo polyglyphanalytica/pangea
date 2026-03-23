@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema_note": "phase: 1A/1B/1C/1D/1E/1F/DATA/3/4A/4B/4C/5/6/DONE. DATA = write items 1 at a time until target reached. live=true means card--live on homepage.",
-  "active_atlas": null,
+  "active_atlas": "aeon",
   "atlases": {
     "civilitas": {
       "phase": "3",
@@ -1056,6 +1056,19 @@
       "live": false,
       "map": "world",
       "section": "V"
+    },
+    "aeon": {
+      "phase": "DONE",
+      "items": 100,
+      "target": 100,
+      "live": true,
+      "map": "world",
+      "section": "VIII",
+      "validated_sha": "b3ec47b86ef0457ab8cd8dac5f419f610f6089a6",
+      "validated_short": "b3ec47b",
+      "validated_at": "2026-03-23T12:49:29.044436Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     }
   },
   "queue": [
@@ -1177,7 +1190,8 @@
     "clima",
     "aqua",
     "solum",
-    "sylva"
+    "sylva",
+    "aeon"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -5083,6 +5097,553 @@
       "atlas": "labor",
       "batch": "74-74",
       "items": 74
+    },
+    {
+      "atlas": "aeon",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "aeon",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "aeon",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "aeon",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "aeon",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "aeon",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "aeon",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "aeon",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "aeon",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "aeon",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "aeon",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "aeon",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "aeon",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "aeon",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "aeon",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "aeon",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "aeon",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "aeon",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "aeon",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "aeon",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "aeon",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "aeon",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "aeon",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "aeon",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "aeon",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "aeon",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "aeon",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "aeon",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "aeon",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "aeon",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "aeon",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "aeon",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "aeon",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "aeon",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "aeon",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "aeon",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "aeon",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "aeon",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "aeon",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "aeon",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "aeon",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "aeon",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "aeon",
+      "batch": "38-38",
+      "items": 38
+    },
+    {
+      "atlas": "aeon",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "aeon",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "aeon",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "aeon",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "aeon",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "aeon",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "aeon",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "aeon",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "aeon",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "aeon",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "aeon",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "aeon",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "aeon",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "aeon",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "aeon",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "aeon",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "aeon",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "aeon",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "aeon",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "aeon",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "aeon",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "aeon",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "aeon",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "aeon",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "aeon",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "aeon",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "aeon",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "aeon",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "aeon",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "aeon",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "aeon",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "aeon",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "aeon",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "aeon",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "aeon",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "aeon",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "aeon",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "aeon",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "aeon",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "aeon",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "aeon",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "aeon",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "aeon",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "aeon",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "aeon",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "aeon",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "aeon",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "aeon",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "aeon",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "aeon",
+      "batch": "88-88",
+      "items": 88
+    },
+    {
+      "atlas": "aeon",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "aeon",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "aeon",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "aeon",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "aeon",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "aeon",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "aeon",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "aeon",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "aeon",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "aeon",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "aeon",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "aeon",
+      "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "aeon",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 100
+    },
+    {
+      "atlas": "aeon",
+      "phase_done": "5+6",
+      "phase_next": "GO_LIVE",
+      "items": 100
+    },
+    {
+      "atlas": "aeon",
+      "phase_done": "GO_LIVE",
+      "items": 100
     }
   ],
   "assignments": {}
