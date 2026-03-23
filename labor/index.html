@@ -708,10 +708,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+  {id:'automation',ico:'⚙',lbl:'Automation & Mechanisation',col:'#e89820'},
+  {id:'children',ico:'💒',lbl:'Child Labour',col:'#d06030'},
+  {id:'class',ico:'◆',lbl:'Class & Hierarchy',col:'#c8a848'},
+  {id:'collapse',ico:'⊘',lbl:'Collapse & Decline',col:'#a04040'},
+  {id:'culture',ico:'♫',lbl:'Culture of Work',col:'#60a0c0'},
+  {id:'economics',ico:'◎',lbl:'Economics & Wages',col:'#40b080'},
+  {id:'exploitation',ico:'⛓',lbl:'Exploitation & Coercion',col:'#c04040'},
+  {id:'food',ico:'⊕',lbl:'Food & Sustenance',col:'#80b040'},
+  {id:'gender',ico:'♀',lbl:'Gender & Labour',col:'#c060a0'},
+  {id:'global',ico:'⊗',lbl:'Global Connections',col:'#4a9fc0'},
+  {id:'health',ico:'✚',lbl:'Health & Safety',col:'#e05050'},
+  {id:'housing',ico:'⌂',lbl:'Housing & Living Conditions',col:'#b08040'},
+  {id:'ideology',ico:'☆',lbl:'Ideology & Justification',col:'#a070c0'},
+  {id:'law',ico:'§',lbl:'Law & Regulation',col:'#6080c0'},
+  {id:'legacy',ico:'∞',lbl:'Legacy & Impact',col:'#c0a030'},
+  {id:'migration',ico:'→',lbl:'Migration & Movement',col:'#50b0a0'},
+  {id:'organisation',ico:'⊞',lbl:'Organisation & Unions',col:'#e0a020'},
+  {id:'resistance',ico:'✊',lbl:'Resistance & Struggle',col:'#e04040'},
+  {id:'scale',ico:'▲',lbl:'Scale & Numbers',col:'#80a060'},
+  {id:'technology',ico:'⊛',lbl:'Technology & Tools',col:'#6090b0'},
+];
 
-
-const ERAS=[];
+const ERAS=[
+  {y:-8000,n:'NEOLITHIC ORIGINS'},
+  {y:-3000,n:'ANCIENT EMPIRES'},
+  {y:-800,n:'CLASSICAL ANTIQUITY'},
+  {y:300,n:'LATE ANTIQUITY'},
+  {y:700,n:'MEDIEVAL WORLD'},
+  {y:1200,n:'HIGH MIDDLE AGES'},
+  {y:1500,n:'EARLY MODERN'},
+  {y:1700,n:'PROTO-INDUSTRIAL'},
+  {y:1760,n:'INDUSTRIAL REVOLUTION'},
+  {y:1850,n:'HIGH IMPERIALISM'},
+  {y:1900,n:'WORKERS\' CENTURY'},
+  {y:1914,n:'WORLD WARS'},
+  {y:1945,n:'GOLDEN AGE OF LABOUR'},
+  {y:1973,n:'NEOLIBERAL ERA'},
+  {y:2000,n:'PLATFORM AGE'},
+  {y:2020,n:'POST-PANDEMIC'},
+];
 
 const ITEMS=[
 {id:'neolithic_agriculture',fp:{org:3,tech:4,res:2,exp:3,scale:10,dur:10},lon:38,lat:36,nm:'Neolithic Agricultural Revolution',sb:'Fertile Crescent · First Division of Labour',s:-8000,e:2024,conns:['egyptian_corvee','mesopotamian_guilds','indian_caste_labour'],
@@ -3213,10 +3250,132 @@ technology:'UBI has become feasible partly because of technology: digital paymen
 
 ];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+// Chain 1: From Field to Factory
+{from:'neolithic_agriculture',to:'egyptian_corvee',concept:'From Field to Factory',year:-3000,desc:'Agriculture\'s surplus enabled state-directed labour mobilisation.'},
+{from:'egyptian_corvee',to:'european_serfdom',concept:'From Field to Factory',year:800,desc:'Feudal serfdom adapted ancient corvée obligations to the European manor.'},
+{from:'european_serfdom',to:'putting_out',concept:'From Field to Factory',year:1500,desc:'Rural textile production loosened feudal bonds while maintaining exploitation.'},
+{from:'putting_out',to:'british_factory',concept:'From Field to Factory',year:1760,desc:'Domestic production concentrated into factory discipline.'},
+{from:'british_factory',to:'fordism',concept:'From Field to Factory',year:1913,desc:'The assembly line perfected factory production into mass manufacturing.'},
+// Chain 2: Chains of Bondage
+{from:'greek_slavery',to:'roman_slavery',concept:'Chains of Bondage',year:-200,desc:'Rome industrialised the Greek model of slave labour.'},
+{from:'roman_slavery',to:'atlantic_slave_trade',concept:'Chains of Bondage',year:1500,desc:'The Atlantic trade revived and vastly expanded ancient slave systems.'},
+{from:'atlantic_slave_trade',to:'plantation_slavery',concept:'Chains of Bondage',year:1530,desc:'Caribbean plantations created industrial slavery at unprecedented scale.'},
+{from:'plantation_slavery',to:'cotton_slavery',concept:'Chains of Bondage',year:1793,desc:'The cotton gin linked American slavery to British industrial demand.'},
+{from:'cotton_slavery',to:'convict_leasing',concept:'Chains of Bondage',year:1865,desc:'Abolition was circumvented by criminalising freedom and leasing prisoners.'},
+{from:'convict_leasing',to:'prison_labour_us',concept:'Chains of Bondage',year:1979,desc:'The Thirteenth Amendment\'s exception continued forced labour in prisons.'},
+// Chain 3: Workers Rise
+{from:'luddites',to:'chartism',concept:'Workers Rise',year:1838,desc:'Machine-breaking resistance evolved into political demands for democracy.'},
+{from:'chartism',to:'haymarket',concept:'Workers Rise',year:1886,desc:'British working-class politics crossed the Atlantic to American labour.'},
+{from:'haymarket',to:'iww',concept:'Workers Rise',year:1905,desc:'May Day\'s legacy inspired revolutionary industrial unionism.'},
+{from:'iww',to:'spanish_anarchism',concept:'Workers Rise',year:1910,desc:'One Big Union\'s vision found its fullest expression in Spain\'s CNT.'},
+// Chain 4: State Power Over Labour
+{from:'chinese_corvee',to:'inca_mita',concept:'State Power Over Labour',year:1400,desc:'Independent invention of rotational state labour obligations.'},
+{from:'russian_serfdom',to:'russian_revolution',concept:'State Power Over Labour',year:1917,desc:'Feudal bondage provoked revolutionary worker seizure of the state.'},
+{from:'russian_revolution',to:'gulag',concept:'State Power Over Labour',year:1930,desc:'The workers\' state built forced labour camps for its own citizens.'},
+{from:'gulag',to:'chinese_laogai',concept:'State Power Over Labour',year:1949,desc:'China replicated and expanded the Soviet forced labour model.'},
+// Chain 5: The Women\'s Thread
+{from:'lowell_mills',to:'matchgirls_strike',concept:'The Women\'s Thread',year:1888,desc:'Women factory workers inspired women strikers across the Atlantic.'},
+{from:'matchgirls_strike',to:'triangle_fire',concept:'The Women\'s Thread',year:1911,desc:'Women\'s industrial activism crossed from London to New York.'},
+{from:'triangle_fire',to:'new_deal',concept:'The Women\'s Thread',year:1933,desc:'Frances Perkins witnessed the fire and later designed the New Deal.'},
+// Chain 6: Colonial Extraction
+{from:'spanish_encomienda',to:'potosi_silver',concept:'Colonial Extraction',year:1545,desc:'Spanish labour grants directed indigenous workers to silver mines.'},
+{from:'potosi_silver',to:'belgian_congo',concept:'Colonial Extraction',year:1885,desc:'Colonial forced extraction migrated from the Americas to Africa.'},
+{from:'belgian_congo',to:'rubber_labour',concept:'Colonial Extraction',year:1890,desc:'Congo\'s terror model spread to rubber extraction across the tropics.'},
+{from:'rubber_labour',to:'cobalt_mining',concept:'Colonial Extraction',year:1998,desc:'Colonial extraction logic continues in modern mineral supply chains.'},
+// Chain 7: The Gig Trajectory
+{from:'putting_out',to:'gig_economy',concept:'The Gig Trajectory',year:2009,desc:'Distributed piecework returns in digital form after two centuries.'},
+{from:'gig_economy',to:'delivery_riders',concept:'The Gig Trajectory',year:2010,desc:'Platform capitalism creates the algorithmic putting-out system.'},
+{from:'delivery_riders',to:'content_moderation',concept:'The Gig Trajectory',year:2014,desc:'Digital piecework extends from physical delivery to psychological labour.'},
+// Chain 8: Asian Industrial Miracles
+{from:'meiji_japan',to:'korean_industrial',concept:'Asian Industrial Miracles',year:1961,desc:'Japan\'s state-led industrialisation model transplanted to South Korea.'},
+{from:'korean_industrial',to:'chinese_factory',concept:'Asian Industrial Miracles',year:1980,desc:'East Asian export-manufacturing spread to China\'s special economic zones.'},
+{from:'chinese_factory',to:'foxconn',concept:'Asian Industrial Miracles',year:1988,desc:'Electronics assembly concentrated in Chinese mega-factories.'},
+{from:'foxconn',to:'bangladesh_garments',concept:'Asian Industrial Miracles',year:1990,desc:'Low-wage manufacturing cascades from electronics to garments.'},
+// Chain 9: Sugar and Empire
+{from:'sugar_labour',to:'indian_indentured',concept:'Sugar and Empire',year:1834,desc:'Abolition of slavery created demand for indentured colonial labour.'},
+{from:'indian_indentured',to:'gulf_migrant',concept:'Sugar and Empire',year:1970,desc:'Colonial labour migration patterns repeated in Gulf state construction.'},
+// Chain 10: The Social Contract
+{from:'new_zealand_welfare',to:'ilo_formation',concept:'The Social Contract',year:1919,desc:'Progressive labour experiments inspired international institution-building.'},
+{from:'ilo_formation',to:'new_deal',concept:'The Social Contract',year:1933,desc:'ILO standards influenced American New Deal labour legislation.'},
+{from:'new_deal',to:'welfare_state',concept:'The Social Contract',year:1945,desc:'American social legislation inspired European welfare state construction.'},
+{from:'welfare_state',to:'universal_basic_income',concept:'The Social Contract',year:2011,desc:'The welfare state evolves toward unconditional income guarantees.'},
+// Chain 11: Craft Lineage
+{from:'mesopotamian_guilds',to:'byzantine_guilds',concept:'Craft Lineage',year:330,desc:'Mesopotamian artisan traditions transmitted through Roman to Byzantine guilds.'},
+{from:'byzantine_guilds',to:'medieval_guilds',concept:'Craft Lineage',year:1100,desc:'Byzantine guild regulation influenced Western European craft organisation.'},
+{from:'medieval_guilds',to:'cooperative_movement',concept:'Craft Lineage',year:1844,desc:'Guild principles of mutual aid evolved into modern cooperativism.'},
+// Chain 12: The Automation Question
+{from:'british_factory',to:'fordism',concept:'The Automation Question',year:1913,desc:'Factory mechanisation evolved into assembly-line mass production.'},
+{from:'fordism',to:'toyota_lean',concept:'The Automation Question',year:1950,desc:'Mass production refined into lean manufacturing and just-in-time.'},
+{from:'toyota_lean',to:'amazon_warehouses',concept:'The Automation Question',year:2000,desc:'Lean manufacturing meets algorithmic warehouse management.'},
+{from:'amazon_warehouses',to:'ai_automation',concept:'The Automation Question',year:2022,desc:'Physical automation gives way to cognitive automation by AI.'},
+// Chain 13: Revolution and Counter-Revolution
+{from:'paris_commune',to:'russian_revolution',concept:'Revolution and Counter-Revolution',year:1917,desc:'The Commune\'s vision of workers\' government seized state power in Russia.'},
+{from:'russian_revolution',to:'chinese_communes',concept:'Revolution and Counter-Revolution',year:1958,desc:'Soviet collectivisation inspired China\'s even more radical attempt.'},
+{from:'solidarity',to:'gig_economy',concept:'Revolution and Counter-Revolution',year:2009,desc:'Solidarity\'s victory over communism enabled unchecked capitalism\'s gig model.'},
+// Chain 14: Slave-Soldiers
+{from:'mamluk_soldiers',to:'ottoman_devshirme',concept:'Slave-Soldiers',year:1380,desc:'The Mamluk slave-soldier model inspired the Ottoman devshirme system.'},
+// Chain 15: Mining Depths
+{from:'coal_mining',to:'south_african_mines',concept:'Mining Depths',year:1886,desc:'Coal mining techniques and labour regimes exported to gold mining.'},
+{from:'south_african_mines',to:'cobalt_mining',concept:'Mining Depths',year:1998,desc:'Racial mining capitalism continued in different mineral form.'},
+// Chain 16: Water and Labour
+{from:'persian_qanats',to:'suez_canal',concept:'Water and Labour',year:1859,desc:'Three millennia of hydraulic labour concentrated into canal mega-projects.'},
+{from:'suez_canal',to:'panama_canal',concept:'Water and Labour',year:1881,desc:'The Suez model of colonial canal construction applied to Central America.'},
+// Chain 17: Textile Thread
+{from:'textile_india',to:'british_factory',concept:'Textile Thread',year:1760,desc:'Destruction of Indian textiles created the market for British factory production.'},
+{from:'british_factory',to:'lowell_mills',concept:'Textile Thread',year:1823,desc:'British factory methods transplanted to American textile mills.'},
+{from:'lowell_mills',to:'bangladesh_garments',concept:'Textile Thread',year:1980,desc:'Textile exploitation migrates from Massachusetts to Dhaka.'},
+// Chain 18: Wartime Transformation
+{from:'wwi_labour',to:'fordism',concept:'Wartime Transformation',year:1918,desc:'Wartime mass production methods transformed peacetime manufacturing.'},
+{from:'wwi_labour',to:'russian_revolution',concept:'Wartime Transformation',year:1917,desc:'Total war labour mobilisation collapsed into revolution.'},
+// Chain 19: Care Economy
+{from:'domestic_workers',to:'healthcare_workers',concept:'Care Economy',year:1850,desc:'Domestic care professionalised into healthcare institutions.'},
+{from:'healthcare_workers',to:'teacher_labour',concept:'Care Economy',year:1900,desc:'Care professions shared the pattern of feminisation and undervaluation.'},
+// Chain 20: Land and Liberty
+{from:'mexican_revolution',to:'bracero',concept:'Land and Liberty',year:1942,desc:'Revolutionary land reform\'s limits drove labour migration northward.'},
+{from:'bracero',to:'cesar_chavez',concept:'Land and Liberty',year:1962,desc:'Bracero programme\'s exploitation galvanised farmworker organising.'},
+];
 
 
-const WOMEN={};
+const WOMEN={
+'neolithic_agriculture':[{nm:'Unnamed Women Farmers',role:'Primary cultivators and seed selectors',yr:-8000,desc:'Archaeological and anthropological evidence strongly suggests women were the primary developers of plant cultivation. Women\'s gathering knowledge — identifying edible plants, observing growth cycles, selecting seeds — was the foundation of agriculture. The Neolithic revolution was, in significant part, women\'s invention.'}],
+'egyptian_corvee':[{nm:'Hatshepsut',role:'Pharaoh and monumental builder',yr:-1473,desc:'Hatshepsut ruled Egypt for over twenty years, commissioning massive construction projects including her mortuary temple at Deir el-Bahri. She mobilised corvée labour for some of antiquity\'s finest architecture. One of the few women to command a state labour system at imperial scale.'}],
+'british_factory':[{nm:'Frances Trollope',role:'Author and factory conditions exposer',yr:1840,desc:'Frances Trollope\'s The Life and Adventures of Michael Armstrong, the Factory Boy (1840) was one of the first novels to expose child factory labour conditions. Her work galvanised middle-class opinion against industrial exploitation and supported the campaign for factory reform legislation.'}],
+'lowell_mills':[{nm:'Sarah Bagley',role:'Labour organiser and telegraph operator',yr:1845,desc:'Sarah Bagley founded the Lowell Female Labor Reform Association in 1845, leading the first organised campaign for a ten-hour workday in the United States. She collected thousands of signatures and testified before the Massachusetts legislature — one of the first women to address a state legislative committee on labour issues.'}],
+'matchgirls_strike':[{nm:'Annie Besant',role:'Strike leader and social reformer',yr:1888,desc:'Annie Besant\'s article "White Slavery in London" exposed Bryant & May\'s exploitation of match girls — low wages, phosphorus poisoning, fines for minor infractions. Her reporting triggered the 1888 strike by 1,400 women and girls that became a landmark in British labour history and proved that unorganised women workers could win.'},{nm:'Sarah Chapman',role:'Strike committee leader',yr:1888,desc:'Sarah Chapman was one of the leaders of the match girls\' strike committee, negotiating directly with Bryant & May management. She helped found the Matchmakers\' Union after the strike\'s success, one of the first unions for women workers in Britain.'}],
+'triangle_fire':[{nm:'Frances Perkins',role:'Witness and future US Secretary of Labor',yr:1911,desc:'Frances Perkins witnessed the Triangle fire from the street, watching workers jump to their deaths. The experience transformed her life — she became the first female US Cabinet member as FDR\'s Secretary of Labor and architected the New Deal\'s labour protections, Social Security, and the Fair Labor Standards Act. She said the New Deal "was born in that fire."'},{nm:'Rose Schneiderman',role:'Union organiser',yr:1911,desc:'Rose Schneiderman\'s eulogy speech after the Triangle fire — "I would be a traitor to these poor burned bodies if I came here to talk good fellowship" — galvanised the American labour movement. She led the Women\'s Trade Union League and advised FDR on labour policy.'}],
+'haymarket':[{nm:'Lucy Parsons',role:'Labour organiser and anarchist',yr:1886,desc:'Lucy Parsons — born enslaved, of African American, Mexican, and Native American heritage — was one of the most powerful voices in American labour history. After her husband Albert was executed for the Haymarket affair, she continued organising for decades, helping found the IWW and fighting for workers\' rights until her death in 1942.'}],
+'russian_revolution':[{nm:'Alexandra Kollontai',role:'Revolutionary and first female cabinet minister',yr:1917,desc:'Alexandra Kollontai was the world\'s first female government minister, serving as People\'s Commissar for Social Welfare. She championed women\'s labour rights, maternity protections, and communal childcare — policies designed to free women from domestic labour. Her vision of women\'s liberation through socialised care work remains influential.'},{nm:'Nadezhda Krupskaya',role:'Education reformer',yr:1917,desc:'Nadezhda Krupskaya shaped Soviet education policy, establishing universal literacy programmes and worker education initiatives. Her work transformed millions of workers from illiterate labourers into educated citizens capable of participating in governance and industrial management.'}],
+'new_deal':[{nm:'Frances Perkins',role:'US Secretary of Labor',yr:1933,desc:'Frances Perkins served as Secretary of Labor from 1933 to 1945, the longest tenure in the position\'s history. She drafted the legislation that created Social Security, established the minimum wage, standardised the forty-hour work week, and banned child labour. More than any other individual, she built the legal framework of American workers\' rights.'}],
+'wwi_labour':[{nm:'Lilian Barker',role:'Superintendent of Woolwich Arsenal women workers',yr:1916,desc:'Lilian Barker managed over 30,000 women workers at Woolwich Arsenal during WWI, creating welfare programmes, nurseries, and training systems that demonstrated women could perform industrial work safely and productively. Her management innovations influenced post-war factory welfare.'}],
+'fordism':[{nm:'Mary van Kleeck',role:'Industrial researcher and women\'s labour advocate',yr:1918,desc:'Mary van Kleeck directed the Russell Sage Foundation\'s Department of Industrial Studies and served as the first director of the Women in Industry Service (precursor to the Women\'s Bureau). Her research on women factory workers during and after WWI documented working conditions and argued for equal pay and protective legislation.'}],
+'paris_commune':[{nm:'Louise Michel',role:'Communard and revolutionary educator',yr:1871,desc:'Louise Michel — the "Red Virgin of Montmartre" — was a teacher, anarchist, and one of the most prominent fighters of the Paris Commune. She led women\'s battalions, organised barricades, and surrendered voluntarily after the Commune\'s fall to draw attention away from fleeing comrades. She spent nine years in penal exile and returned to a hero\'s welcome.'}],
+'cooperative_movement':[{nm:'Beatrice Webb',role:'Co-founder of modern cooperative and labour research',yr:1891,desc:'Beatrice Webb co-authored The Co-operative Movement in Great Britain (1891), the first systematic study of worker cooperatives. With Sidney Webb, she founded the London School of Economics and developed the intellectual framework for the British welfare state. Her research on labour conditions shaped policy for generations.'}],
+'solidarity':[{nm:'Anna Walentynowicz',role:'Crane operator and Solidarity catalyst',yr:1980,desc:'Anna Walentynowicz was a crane operator at the Gdańsk Shipyard whose firing for union activity triggered the strike that created Solidarity. Her decades of workplace activism — documenting safety violations, organising memorials for workers killed on the job — built the trust networks that made the 1980 strike possible.'}],
+'cesar_chavez':[{nm:'Dolores Huerta',role:'Co-founder of the United Farm Workers',yr:1962,desc:'Dolores Huerta co-founded the United Farm Workers with César Chávez and was the driving force behind the grape boycott that became the most successful consumer boycott in American history. She coined the phrase "Sí, se puede" (Yes, we can). Her organising among the poorest agricultural workers demonstrated that women could lead the most challenging labour campaigns.'}],
+'welfare_state':[{nm:'Barbara Castle',role:'British politician and equal pay champion',yr:1970,desc:'Barbara Castle, as Secretary of State for Employment, pushed through the Equal Pay Act 1970 — the UK\'s first legislation mandating equal pay for equal work between men and women. She also introduced the breathalyser, reformed pension law, and was one of the most consequential British politicians of the twentieth century.'}],
+'ilo_formation':[{nm:'Marguerite Thibert',role:'ILO women\'s labour specialist',yr:1928,desc:'Marguerite Thibert headed the ILO\'s section on women\'s work from 1928 and shaped international standards on women\'s employment, maternity protection, and equal pay. Her research documented women\'s working conditions across dozens of countries and laid the groundwork for the ILO\'s gender equality conventions.'}],
+'child_labour_industrial':[{nm:'Elizabeth Barrett Browning',role:'Poet and child labour campaigner',yr:1843,desc:'Elizabeth Barrett Browning\'s poem "The Cry of the Children" (1843) was one of the most influential literary interventions against child labour. Read by millions, it transformed public opinion by making readers hear the voices of children working in mines and factories. Poetry as political action — her words helped change the law.'}],
+'textile_india':[{nm:'Ela Bhatt',role:'Founder of SEWA',yr:1972,desc:'Ela Bhatt founded the Self-Employed Women\'s Association (SEWA) in 1972, organising informal women workers — street vendors, waste pickers, home-based garment workers — into a union of over 2 million members. SEWA demonstrated that women in the informal economy could organise collectively for better wages, credit access, and social protections.'}],
+'cotton_slavery':[{nm:'Harriet Tubman',role:'Escaped slave, conductor, and spy',yr:1849,desc:'Harriet Tubman escaped slavery and returned to the South thirteen times to lead approximately seventy enslaved people to freedom via the Underground Railroad. During the Civil War, she served as a scout, spy, and the first woman to lead an armed assault during the war. Her labour — physical, strategic, and moral — was extraordinary.'}],
+'sugar_labour':[{nm:'Nanny of the Maroons',role:'Military leader of escaped slaves',yr:1730,desc:'Queen Nanny was a military and spiritual leader of the Windward Maroons in Jamaica — communities of escaped slaves who fought the British from mountain strongholds. She led guerrilla warfare that kept Maroon territories free for decades. She is the only woman designated as a National Hero of Jamaica.'}],
+'domestic_workers':[{nm:'Ai-jen Poo',role:'Domestic workers\' organiser',yr:2000,desc:'Ai-jen Poo co-founded the National Domestic Workers Alliance in the United States, organising nannies, housekeepers, and caregivers — workers historically excluded from labour protections. She led the campaign for the New York Domestic Workers\' Bill of Rights (2010), the first legislation granting domestic workers overtime, rest days, and protection from harassment.'}],
+'spanish_anarchism':[{nm:'Federica Montseny',role:'First female cabinet minister in Western Europe',yr:1936,desc:'Federica Montseny became Spain\'s Minister of Health in 1936 — the first woman to hold a cabinet position in Western European history. She legalised abortion, established maternity homes, and reformed healthcare during the Civil War. As an anarchist in government — a philosophical contradiction she acknowledged — she prioritised women\'s health and workers\' welfare.'},{nm:'Lucía Sánchez Saornil',role:'Co-founder of Mujeres Libres',yr:1936,desc:'Lucía Sánchez Saornil co-founded Mujeres Libres (Free Women), an anarchist feminist organisation that reached 20,000 members. She argued that women\'s liberation required both social revolution and specific feminist struggle — that male anarchists would not liberate women voluntarily. Her dual commitment — to workers\' revolution and women\'s freedom — defined a new politics.'}],
+'teacher_labour':[{nm:'Margaret Haley',role:'Pioneer of teacher unionism',yr:1901,desc:'Margaret Haley, a Chicago elementary school teacher, became the first woman to speak from the floor at the National Education Association convention in 1901, demanding that teachers organise as workers rather than accept their treatment as genteel professionals. She led the Chicago Teachers\' Federation\'s campaign for tax reform to fund teacher salaries.'}],
+'healthcare_workers':[{nm:'Florence Nightingale',role:'Founder of modern nursing',yr:1860,desc:'Florence Nightingale transformed nursing from disreputable drudgery into a respected profession through her work during the Crimean War and subsequent founding of the Nightingale Training School. Her statistical analysis of mortality — she invented the polar area chart — proved that sanitary conditions saved more lives than medicine. She professionalised care work.'},{nm:'Mary Seacole',role:'Nurse and war heroine',yr:1855,desc:'Mary Seacole, a Jamaican-Scottish nurse, travelled to the Crimean War at her own expense after being rejected by the War Office. She established the "British Hotel" near the battlefield, treating wounded soldiers of all ranks and nationalities. Rejected by the establishment because of her race, she provided care that soldiers themselves recognised as exceptional.'}],
+'kibbutz':[{nm:'Golda Meir',role:'Kibbutz member and future Prime Minister',yr:1921,desc:'Golda Meir lived and worked at Kibbutz Merhavia in the 1920s, experiencing collective labour and communal living before her political career. Her kibbutz experience shaped her Labour Zionist politics and her understanding of workers\' solidarity. She rose from kibbutz chicken-farming to become Israel\'s first and only female Prime Minister.'}],
+'mexican_revolution':[{nm:'Hermila Galindo',role:'Feminist and revolutionary intellectual',yr:1915,desc:'Hermila Galindo was Venustiano Carranza\'s personal secretary and Mexico\'s most prominent feminist during the revolution. She founded the feminist journal La Mujer Moderna, advocated for women\'s suffrage, and pushed for women\'s labour rights to be included in the revolutionary programme. She ran for congress in 1917 — decades before Mexican women could legally vote.'}],
+'south_african_mines':[{nm:'Frances Baard',role:'Trade unionist and anti-apartheid activist',yr:1954,desc:'Frances Baard organised African women in the Northern Cape, connecting workers\' rights to the anti-apartheid struggle. She was one of the four women named in the preamble of the Freedom Charter (1955). Arrested and imprisoned multiple times, she never stopped organising. A municipality in the Northern Cape is named after her.'}],
+'japanese_karoshi':[{nm:'Takahashi Matsuri',role:'Victim of karoshi at Dentsu',yr:2015,desc:'Takahashi Matsuri was a 24-year-old employee at Dentsu, Japan\'s largest advertising company, who died by suicide in 2015 after working over 100 hours of overtime per month. Her death, and her mother\'s subsequent campaign, catalysed Japan\'s work reform legislation and brought international attention to karoshi. Her case changed Japanese labour law.'}],
+'gig_economy':[{nm:'Veena Dubal',role:'Labour law scholar and gig worker advocate',yr:2015,desc:'Veena Dubal\'s research on algorithmic wage discrimination and platform worker exploitation has shaped legal and policy debates about gig economy labour classification. Her work documenting how algorithms manipulate driver earnings provided evidence used in California\'s AB5 legislation and subsequent classification challenges.'}],
+'coffee_labour':[{nm:'Meaza Ashenafi',role:'Ethiopian women\'s rights lawyer',yr:2018,desc:'Meaza Ashenafi, appointed president of Ethiopia\'s Federal Supreme Court in 2018, has championed women\'s rights in Ethiopia\'s coffee sector — where women perform 70% of farm labour but receive a fraction of income. Her legal work on women\'s property rights has direct implications for millions of women coffee farmers.'}],
+'iww':[{nm:'Elizabeth Gurley Flynn',role:'IWW organiser and "Rebel Girl"',yr:1906,desc:'Elizabeth Gurley Flynn joined the IWW at age fifteen and became one of its most effective organisers, leading the Lawrence textile strike of 1912 and the Paterson silk strike of 1913. Joe Hill\'s song "Rebel Girl" was written about her. She organised predominantly immigrant women workers, combining labour militancy with feminist consciousness.'}],
+'atlantic_slave_trade':[{nm:'Phillis Wheatley',role:'Poet and abolitionist voice',yr:1773,desc:'Phillis Wheatley, kidnapped from West Africa and enslaved in Boston, became the first African American to publish a book of poetry (1773). Her literary achievement challenged the ideology that justified slavery — the claim that Africans were intellectually inferior. Her work was cited by abolitionists as proof that slavery destroyed talent rather than reflecting natural capacity.'}],
+'chartism':[{nm:'Elizabeth Pease',role:'Chartist and abolitionist',yr:1840,desc:'Elizabeth Pease was one of the most active women in the Chartist movement, connecting British working-class politics to American abolitionism. She corresponded with Frederick Douglass, William Lloyd Garrison, and Lucretia Mott, building transatlantic solidarity between workers\' rights and anti-slavery movements.'}],
+'waste_pickers':[{nm:'Maqbool Wani',role:'Waste picker organiser, India',yr:2000,desc:'Women waste pickers across India — many of them Dalit — have organised through SEWA and the Alliance of Indian Wastepickers to demand recognition, fair prices, and integration into formal waste management systems. Their collective organising has achieved legal recognition and improved conditions in several Indian cities.'}],
+'new_zealand_welfare':[{nm:'Kate Sheppard',role:'Women\'s suffrage leader',yr:1893,desc:'Kate Sheppard led the campaign that made New Zealand the first country to grant women the right to vote in 1893. She gathered over 30,000 signatures — nearly a quarter of the adult female population — on a petition to Parliament. Her suffrage victory was inseparable from the broader progressive labour reform movement.'}],
+'content_moderation':[{nm:'Isabella Plunkett',role:'Content moderator whistleblower',yr:2022,desc:'Multiple women content moderators in Kenya, working for Sama on Meta\'s contract, have come forward publicly despite NDAs to expose working conditions: trauma from reviewing violent content, inadequate psychological support, and poverty wages. Their courage in speaking publicly has been essential to exposing the hidden human cost of social media.'}],
+};
 
 let year=-8000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4723,7 +4882,38 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient World':[
+'neolithic_agriculture','egyptian_corvee','mesopotamian_guilds','indus_craft','chinese_corvee','greek_slavery','indian_caste_labour','roman_slavery','roman_collegia','chinese_salt_iron','persian_qanats'
+],
+'Medieval & Early Modern':[
+'byzantine_guilds','islamic_futuwwa','european_serfdom','medieval_guilds','hanseatic_trade_labour','inca_mita','ottoman_devshirme','mamluk_soldiers','silk_road_labour','spanish_encomienda','potosi_silver'
+],
+'Slavery & Bondage':[
+'greek_slavery','roman_slavery','atlantic_slave_trade','plantation_slavery','cotton_slavery','sugar_labour','convict_leasing','debt_bondage','prison_labour_us','indian_indentured','nazi_forced','gulag','chinese_laogai','belgian_congo'
+],
+'Industrial Revolution':[
+'putting_out','british_factory','luddites','coal_mining','child_labour_industrial','lowell_mills','us_railroad','textile_india','suez_canal','panama_canal','meiji_japan'
+],
+'Workers\' Movements':[
+'chartism','haymarket','matchgirls_strike','paris_commune','iww','pullman_strike','solidarity','spanish_anarchism','cooperative_movement','cesar_chavez','mexican_revolution'
+],
+'State & War Labour':[
+'wwi_labour','russian_revolution','fordism','new_deal','nazi_forced','gulag','chinese_communes','vietnam_war_labour','chinese_laogai','welfare_state'
+],
+'Global South':[
+'indian_caste_labour','apartheid_labour','south_african_mines','bangladesh_garments','gulf_migrant','cobalt_mining','maquiladora','rubber_labour','coffee_labour','waste_pickers','textile_india','chinese_factory'
+],
+'Digital & Modern':[
+'gig_economy','amazon_warehouses','foxconn','remote_work','ai_automation','content_moderation','delivery_riders','call_centres','japanese_karoshi','universal_basic_income'
+],
+'Invisible Labour':[
+'domestic_workers','informal_economy','healthcare_workers','teacher_labour','sex_work','construction_labour','maritime_labour','waste_pickers','debt_bondage'
+],
+'International Institutions':[
+'ilo_formation','new_deal','welfare_state','new_zealand_welfare','kibbutz','cooperative_movement','universal_basic_income'
+],
+};
 
 const HERITAGE_REASONS={};
 
