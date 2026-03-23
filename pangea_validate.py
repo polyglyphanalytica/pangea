@@ -248,6 +248,18 @@ def validate(atlas, force=False):
     item_count = len(re.findall(r"^\{id:'", items_region, re.MULTILINE))
     checks.append(("item_count >= 100", item_count >= 100, f"found {item_count}"))
 
+    # ── Duplicate item IDs ───────────────────────────────────────────────────
+    all_item_ids = re.findall(r"^\{id:'([^']+)'", items_region, re.MULTILINE)
+    seen_ids = set()
+    duplicate_ids = []
+    for iid in all_item_ids:
+        if iid in seen_ids:
+            duplicate_ids.append(iid)
+        seen_ids.add(iid)
+    checks.append(("no duplicate item IDs",
+                   len(duplicate_ids) == 0,
+                   f"duplicates: {duplicate_ids}" if duplicate_ids else "OK"))
+
     # ── Meta description count ──────────────────────────────────────────────
     m = re.search(r'<meta name="description"[^>]*content="([^"]*)"', html)
     meta_text = m.group(1) if m else ""
@@ -453,6 +465,46 @@ def validate(atlas, force=False):
                    "FAIL: theme IIFE sets document.documentElement.dataset.theme in else "
                    "branch — remove it so CSS @media prefers-color-scheme handles system default"
                    if forces_theme else "OK"))
+
+    # ── Undefined data constants referenced in functions ────────────────────
+    # Detect functions that reference array/object constants (e.g. DIPLOMATIC,
+    # CATEGORIES) that are never declared with const/let/var. These cause
+    # ReferenceError at runtime, crashing the calling code silently.
+    # Extract the main script block for analysis.
+    script_lines = html.split('\n')
+    script_start = -1
+    script_end = -1
+    for si, sline in enumerate(script_lines):
+        if sline.strip() == '<script>' and si > 100:
+            script_start = si
+        if script_start > 0 and sline.strip() == '</script>' and si > script_start + 100:
+            script_end = si
+            break
+    if script_start > 0 and script_end > 0:
+        script_text = '\n'.join(script_lines[script_start + 1:script_end])
+        # Find all UPPER_CASE identifiers used in the script (potential constants)
+        used_upper = set(re.findall(r'\b([A-Z][A-Z_]{2,})\b', script_text))
+        # Find all declared constants/variables
+        declared = set(re.findall(r'(?:const|let|var)\s+([A-Z][A-Z_]{2,})\b', script_text))
+        # Known globals/builtins to exclude
+        builtins = {'URL', 'JSON', 'SVG', 'CSS', 'DOM', 'NAN', 'SET', 'MAP',
+                    'YEAR_MIN', 'YEAR_MAX', 'VB_MIN_W', 'VB_MAX_W',
+                    'HTML', 'GET', 'POST', 'IMPORTANT', 'FUTURE', 'AGENTS',
+                    'NOTE', 'ALL', 'ACTIVE', 'JUMP', 'MISSING', 'BCE', 'BCE',
+                    'DONE', 'CLUSTER', 'RESET', 'ZOOM', 'HERITAGE', 'MARGIN'}
+        # Only flag UPPER_CASE names that appear as standalone identifiers
+        # (not inside strings) and are used as .filter/.forEach/.map receivers
+        undefined_consts = []
+        for name in used_upper - declared - builtins:
+            # Check if this name is used as a variable (e.g. NAME.filter, NAME.forEach, NAME[)
+            if re.search(r'\b' + re.escape(name) + r'\s*[\.\[\(]', script_text):
+                # But not inside a string
+                if not re.search(r"'[^']*" + re.escape(name) + r"[^']*'", script_text):
+                    undefined_consts.append(name)
+        checks.append(("no undefined data constants referenced in functions",
+                       len(undefined_consts) == 0,
+                       f"undefined: {sorted(undefined_consts)} — add const declarations"
+                       if undefined_consts else "OK"))
 
     # ── Map SVG elements ────────────────────────────────────────────────────
     checks.append(("SVG id=wsvg present", 'id="wsvg"' in html, ""))
