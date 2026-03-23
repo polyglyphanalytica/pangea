@@ -422,6 +422,23 @@ def build_atlas(atlas, engine_html=None):
     # Update meta description item count
     html = re.sub(r'(content="Explore )\d+', rf'\g<1>{item_count}', html, count=1)
 
+    # ── Enforce system-default theme on first load ──
+    # The theme IIFE must NOT set data-theme when no preference is saved.
+    # CSS @media prefers-color-scheme handles system default dynamically.
+    # This normalisation catches any bad pattern inherited from an older civilitas.
+    html = re.sub(
+        r"(if\(saved\)\{applyTheme\(saved\);\}\s*\n\s*else\{)\s*\n"
+        r"\s*const sys=window\.matchMedia\('.*?'\)\.matches\?'light':'dark';\s*\n"
+        r"\s*document\.documentElement\.dataset\.theme=sys;\s*\n"
+        r"\s*(const _tb2=document\.getElementById\('theme-btn'\);.*?)\s*\n"
+        r"\s*(\})",
+        r"\1\n"
+        r"    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';\n"
+        r"    \2\n"
+        r"  \3",
+        html, count=1
+    )
+
     # ── Write output ──
     out_path = Path(f"{atlas}/index.html")
     out_path.parent.mkdir(exist_ok=True)

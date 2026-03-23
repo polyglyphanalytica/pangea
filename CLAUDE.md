@@ -584,6 +584,38 @@ function init() {
 }
 document.addEventListener('DOMContentLoaded', init);
 ```
+9.12 Theme System — System Default on First Load
+The theme IIFE runs immediately (before `init()`) and determines the initial theme:
+```javascript
+function applyTheme(t) {
+  document.documentElement.dataset.theme = t;
+  const _tb = document.getElementById('theme-btn');
+  if (_tb) _tb.textContent = t === 'dark' ? '◑' : '◐';
+  localStorage.setItem('pangea-theme', t);
+  localStorage.setItem('civ-theme', t);
+}
+
+function toggleTheme() {
+  const cur = document.documentElement.dataset.theme ||
+    (window.matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark');
+  applyTheme(cur === 'dark' ? 'light' : 'dark');
+}
+
+(function(){try{
+  const saved = localStorage.getItem('pangea-theme') || localStorage.getItem('civ-theme');
+  if (saved) { applyTheme(saved); }
+  else {
+    // NO data-theme set — CSS @media prefers-color-scheme handles system default.
+    // Only sync the toggle button icon.
+    const sys = window.matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark';
+    const _tb2 = document.getElementById('theme-btn');
+    if (_tb2) _tb2.textContent = sys === 'dark' ? '◑' : '◐';
+  }
+}catch(e){}})();
+```
+Critical rule: When no saved preference exists (`localStorage` empty), the IIFE must **not** set `document.documentElement.dataset.theme`. The CSS `@media (prefers-color-scheme: light)` block with `:root:not([data-theme="dark"])` handles the system default dynamically. Setting `data-theme` explicitly overrides the media query, breaking real-time OS theme following.
+Only `applyTheme()` (called on explicit user toggle or from a saved preference) may set `data-theme`. The else branch must only sync the button icon.
+The validator (`pangea_validate.py`) enforces this: any atlas whose else branch contains `document.documentElement.dataset.theme=sys` will fail validation.
 ---
 10. External Libraries
 Always loaded from CDN in `<script>` tags immediately before the main `<script>` block. For geographic atlases:
@@ -933,6 +965,7 @@ Before considering any phase or the full atlas complete, verify:
 [ ] Share link copies correctly (no exception in sandboxed iframe)
 [ ] No civilitas-specific terminology remains in UI strings (except Herstory, which is kept)
 [ ] Colour scheme matches civilitas exactly — no per-atlas accent colour changes
+[ ] Theme IIFE does not force `data-theme` on first load — system default via CSS `@media prefers-color-scheme` (Section 9.12)
 [ ] About modal content is correct for this atlas
 [ ] The back link points to `../index.html`
 ---
