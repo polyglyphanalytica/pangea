@@ -289,7 +289,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "I"
+      "section": "I",
+      "validated_sha": "a0777f4d462a933bffcab164df5e2f00cfcec8bb",
+      "validated_short": "a0777f4",
+      "validated_at": "2026-03-23T08:37:04.422615Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "bestia": {
       "phase": "1A",
