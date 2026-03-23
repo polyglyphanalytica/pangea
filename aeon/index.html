@@ -6,7 +6,7 @@
 <title>Aeon — The Epoch Atlas | 100 Eras From Earth's Formation to the Anthropocene</title>
 
 <!-- Primary SEO -->
-<meta name="description" content="Explore 100 geological, evolutionary, and historical eras across 4.5 billion years on an interactive world map. Navigate from Earth's formation through ice ages, mass extinctions, and continental drift to the Anthropocene, with 20 interpretive lenses, epochal transmissions, What-If scenarios, and a Herstory mode tracing women who defined every age.">
+<meta name="description" content="Explore 102 geological, evolutionary, and historical eras across 4.5 billion years on an interactive world map. Navigate from Earth's formation through ice ages, mass extinctions, and continental drift to the Anthropocene, with 20 interpretive lenses, epochal transmissions, What-If scenarios, and a Herstory mode tracing women who defined every age.">
 <meta name="keywords" content="historical eras, epochs, ages of history, interactive timeline, world history, historical periods, epoch atlas, history education, era map, age of exploration">
 <meta name="author" content="Polyglyph Analytica">
 <meta name="robots" content="index, follow">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/aeon/">
 <meta property="og:title" content="Aeon — The Epoch Atlas">
-<meta property="og:description" content="100 eras. 4.5 billion years. From Earth's formation through ice ages, mass extinctions, and continental drift to the Anthropocene — mapped, connected, and explorable.">
+<meta property="og:description" content="102 eras. 4.5 billion years. From Earth's formation through ice ages, mass extinctions, and continental drift to the Anthropocene — mapped, connected, and explorable.">
 <meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/aeon/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@polyglyphanalytica">
 <meta name="twitter:title" content="Aeon — The Epoch Atlas">
-<meta name="twitter:description" content="100 eras. 4.5 billion years. From Earth's formation through ice ages, mass extinctions, and continental drift to the Anthropocene — mapped, connected, and explorable.">
+<meta name="twitter:description" content="102 eras. 4.5 billion years. From Earth's formation through ice ages, mass extinctions, and continental drift to the Anthropocene — mapped, connected, and explorable.">
 <meta name="twitter:image" content="https://polyglyphanalytica.github.io/pangea/aeon/og-image.png">
 
 <!-- Structured Data -->
@@ -36,7 +36,7 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Aeon — The Epoch Atlas",
-  "description": "An interactive deep-time application exploring 100 geological, evolutionary, and historical eras across 4.5 billion years. Features a real geographic map, continuous timeline, 20 interpretive lenses, epochal transmissions, What-If scenarios, and a Herstory mode tracing women who defined every age.",
+  "description": "An interactive deep-time application exploring 102 geological, evolutionary, and historical eras across 4.5 billion years. Features a real geographic map, continuous timeline, 20 interpretive lenses, epochal transmissions, What-If scenarios, and a Herstory mode tracing women who defined every age.",
   "url": "https://polyglyphanalytica.github.io/pangea/aeon/",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Web Browser",
@@ -50,7 +50,7 @@
     "name": "Polyglyph Analytica"
   },
   "featureList": [
-    "100 eras from Earth's formation to the Anthropocene",
+    "102 eras from Earth's formation to the Anthropocene",
     "4.5-billion-year interactive timeline",
     "20 interpretive lenses including Culture, Technology, Governance, Economy, and Legacy",
     "Epochal transmission tracking across eras",
@@ -3821,7 +3821,7 @@ function renderDrawer(){
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Epoch Atlas</div>
 
       <div style="font-size:13.5px;line-height:1.85;color:var(--txt2);margin-bottom:18px">
-        100 eras. 4.5 billion years. From Earth\'s formation through ice ages, mass extinctions, and continental drift to the Anthropocene — every geological, evolutionary, and historical epoch mapped, connected, and explorable on a real geographic projection with a continuous deep-time timeline.
+        102 eras. 4.5 billion years. From Earth\'s formation through ice ages, mass extinctions, and continental drift to the Anthropocene — every geological, evolutionary, and historical epoch mapped, connected, and explorable on a real geographic projection with a continuous deep-time timeline.
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">The Map</div>
@@ -5669,8 +5669,9 @@ function toggleTheme(){
   const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('civ-theme');
   if(saved){applyTheme(saved);}
   else{
+    // No saved preference — let CSS @media prefers-color-scheme handle it dynamically.
+    // Just sync the toggle button icon to match the current system preference.
     const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
-    document.documentElement.dataset.theme=sys;
     const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
   }
 }catch(e){}})();
