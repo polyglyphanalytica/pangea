@@ -708,10 +708,38 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+  {id:'biology',       ico:'🧬', lbl:'Biology & Life',          col:'#4a9a5a'},
+  {id:'chemistry',     ico:'⚗',  lbl:'Chemistry & Elements',    col:'#7a6ab0'},
+  {id:'climate',       ico:'🌡', lbl:'Climate & Atmosphere',    col:'#5a8ab0'},
+  {id:'culture',       ico:'🎭', lbl:'Culture & Society',       col:'#b07a4a'},
+  {id:'ecology',       ico:'🌿', lbl:'Ecology & Ecosystems',    col:'#3a8a4a'},
+  {id:'energy',        ico:'⚡', lbl:'Energy & Resources',      col:'#c08a2a'},
+  {id:'extinction',    ico:'💀', lbl:'Extinction & Collapse',   col:'#8a2a2a'},
+  {id:'geology',       ico:'🪨', lbl:'Geology & Tectonics',     col:'#6a5a4a'},
+  {id:'governance',    ico:'⚖',  lbl:'Governance & Power',      col:'#4a6a8a'},
+  {id:'innovation',    ico:'💡', lbl:'Innovation & Technology',  col:'#8a7a2a'},
+  {id:'legacy',        ico:'🏛', lbl:'Legacy & Inheritance',    col:'#5a7a6a'},
+  {id:'migration',     ico:'🦅', lbl:'Migration & Movement',    col:'#6a8a5a'},
+  {id:'ocean',         ico:'🌊', lbl:'Ocean & Water',           col:'#2a6a8a'},
+  {id:'philosophy',    ico:'💭', lbl:'Philosophy & Ideas',      col:'#7a5a8a'},
+  {id:'scale',         ico:'📏', lbl:'Scale & Magnitude',       col:'#5a5a7a'},
+  {id:'survival',      ico:'🛡', lbl:'Survival & Adaptation',   col:'#6a7a4a'},
+  {id:'tipping_point', ico:'⚠',  lbl:'Tipping Points',          col:'#a05a2a'},
+  {id:'trade',         ico:'🤝', lbl:'Trade & Exchange',        col:'#7a6a5a'},
+  {id:'transformation',ico:'🔄', lbl:'Transformation & Change', col:'#5a6a8a'},
+  {id:'violence',      ico:'⚔',  lbl:'Violence & Conflict',     col:'#8a3a3a'},
+];
 
 
-const ERAS=[];
+const ERAS=[
+  {y:-4500000000,n:'HADEAN'},{y:-4000000000,n:'ARCHEAN'},{y:-2500000000,n:'PROTEROZOIC'},
+  {y:-541000000,n:'PALEOZOIC'},{y:-252000000,n:'MESOZOIC'},{y:-66000000,n:'CENOZOIC'},
+  {y:-2600000,n:'PLEISTOCENE'},{y:-10000,n:'NEOLITHIC'},{y:-3300,n:'BRONZE AGE'},
+  {y:-1200,n:'IRON AGE'},{y:-500,n:'CLASSICAL'},{y:500,n:'MEDIEVAL'},
+  {y:1500,n:'EARLY MODERN'},{y:1760,n:'INDUSTRIAL'},{y:1914,n:'WORLD WARS'},
+  {y:1945,n:'ATOMIC AGE'},{y:1970,n:'DIGITAL AGE'},{y:2000,n:'ANTHROPOCENE'},
+];
 
 const ITEMS=[
 {id:'hadean',nm:'Hadean Eon',sb:'Formation of Earth · 4.5–4.0 Ga',s:-4500000000,e:-4000000000,lon:0,lat:0,
@@ -3311,3 +3339,2467 @@ trade:'The Age of Absolutism was governed by mercantilism: the belief that natio
 transformation:'The Age of Absolutism transformed European governance from feudal decentralisation to centralised state power, and European economics from local subsistence to global mercantile trade. The transformation created the institutional framework — centralised states, professional bureaucracies, colonial empires, standing armies — that the modern world inherited, adapted, and continues to use.',
 violence:'The Age of Absolutism was extraordinarily violent: the Thirty Years\' War (1618-1648, 8 million killed) that preceded it; Louis XIV\'s wars (the War of the Spanish Succession alone killed approximately 400,000); the colonial exploitation that sustained it (the Atlantic slave trade, the plantation system); and the religious persecution it practised (the revocation of the Edict of Nantes, the persecution of Protestant minorities). Absolute power produced absolute violence.'}},
 ];
+
+const DIPLOMATIC=[];
+
+const TRANSMISSIONS=[
+  {id:'t1',concept:'Photosynthesis to Oxygenation',from:'photosynthesis',to:'great_oxygenation',year:-2700000000,type:'transmitted',
+   desc:'Cyanobacterial photosynthesis produced oxygen that accumulated over hundreds of millions of years, eventually oxygenating the atmosphere.'},
+  {id:'t2',concept:'Photosynthesis to Oxygenation',from:'great_oxygenation',to:'eukaryotes',year:-2100000000,type:'transmitted',
+   desc:'Atmospheric oxygen enabled aerobic respiration, which provided the energy for the evolution of complex eukaryotic cells.'},
+  {id:'t3',concept:'Endosymbiosis Chain',from:'eoarchean_life',to:'eukaryotes',year:-2100000000,type:'transmitted',
+   desc:'Simple prokaryotic life gave rise to complex eukaryotic cells through endosymbiosis — the merger of two organisms into one.'},
+  {id:'t4',concept:'Endosymbiosis Chain',from:'eukaryotes',to:'multicellularity',year:-1000000000,type:'transmitted',
+   desc:'Eukaryotic cells evolved the capacity for cooperation and specialisation, enabling the transition to multicellular organisms.'},
+  {id:'t5',concept:'Endosymbiosis Chain',from:'multicellularity',to:'cambrian_explosion',year:-541000000,type:'transmitted',
+   desc:'Multicellular body plans diversified explosively in the Cambrian, producing every major animal phylum.'},
+  {id:'t6',concept:'Land Colonisation',from:'stromatolites',to:'land_plants',year:-470000000,type:'transmitted',
+   desc:'Photosynthetic organisms that built stromatolites were the ancestors of the first land plants that colonised continental surfaces.'},
+  {id:'t7',concept:'Land Colonisation',from:'land_plants',to:'devonian',year:-419000000,type:'transmitted',
+   desc:'Land plants created soils and habitats that enabled the Devonian radiation of terrestrial vertebrates.'},
+  {id:'t8',concept:'Land Colonisation',from:'devonian',to:'carboniferous',year:-359000000,type:'transmitted',
+   desc:'Devonian forests expanded into the vast coal swamps of the Carboniferous, producing the fossil fuels that power modern civilisation.'},
+  {id:'t9',concept:'Ice Age Chain',from:'great_oxygenation',to:'huronian_glaciation',year:-2400000000,type:'transmitted',
+   desc:'The oxygenation of the atmosphere destroyed methane greenhouse gas, triggering the first Snowball Earth glaciation.'},
+  {id:'t10',concept:'Ice Age Chain',from:'huronian_glaciation',to:'snowball_earth',year:-720000000,type:'transmitted',
+   desc:'The pattern of global glaciation established by the Huronian repeated in the Cryogenian Snowball Earth events.'},
+  {id:'t11',concept:'Ice Age Chain',from:'snowball_earth',to:'pleistocene',year:-2600000,type:'transmitted',
+   desc:'Earth\'s tendency toward glaciation continued through the Cenozoic into the Pleistocene ice ages that shaped human evolution.'},
+  {id:'t12',concept:'Mass Extinction Cascade',from:'ordovician_extinction',to:'devonian_extinction',year:-375000000,type:'transmitted',
+   desc:'The pattern of mass extinction — environmental change overwhelming biological adaptation — repeated from the Ordovician to the Devonian.'},
+  {id:'t13',concept:'Mass Extinction Cascade',from:'devonian_extinction',to:'permian_triassic',year:-252000000,type:'transmitted',
+   desc:'The Devonian extinction\'s mechanism — ocean anoxia from terrestrial change — foreshadowed the Great Dying\'s volcanic carbon release.'},
+  {id:'t14',concept:'Mass Extinction Cascade',from:'permian_triassic',to:'kpg_extinction',year:-66000000,type:'transmitted',
+   desc:'The pattern of catastrophic extinction followed by evolutionary radiation repeated from the Permian-Triassic to the K-Pg event.'},
+  {id:'t15',concept:'Human Origin Chain',from:'grassland_revolution',to:'human_evolution',year:-7000000,type:'transmitted',
+   desc:'Expanding grasslands drove the evolution of bipedalism and savanna adaptation in early hominids.'},
+  {id:'t16',concept:'Human Origin Chain',from:'human_evolution',to:'homo_sapiens',year:-300000,type:'transmitted',
+   desc:'The long sequence of hominid evolution produced anatomically modern humans in Africa.'},
+  {id:'t17',concept:'Human Origin Chain',from:'homo_sapiens',to:'cognitive_revolution',year:-70000,type:'transmitted',
+   desc:'Anatomically modern humans developed fully modern cognition — language, art, and symbolic thought.'},
+  {id:'t18',concept:'Human Origin Chain',from:'cognitive_revolution',to:'out_of_africa',year:-70000,type:'transmitted',
+   desc:'Cognitively modern humans dispersed from Africa to colonise every habitable continent.'},
+  {id:'t19',concept:'Civilisation Chain',from:'neolithic',to:'urban_revolution',year:-4000,type:'transmitted',
+   desc:'The Neolithic agricultural revolution created the surplus that enabled the first cities and civilisations.'},
+  {id:'t20',concept:'Civilisation Chain',from:'urban_revolution',to:'bronze_age',year:-3300,type:'transmitted',
+   desc:'The first cities developed metallurgy, writing, and institutional governance — the foundations of the Bronze Age.'},
+  {id:'t21',concept:'Civilisation Chain',from:'bronze_age',to:'iron_age',year:-1200,type:'transmitted',
+   desc:'The Bronze Age\'s technological and institutional achievements were democratised by cheap iron technology.'},
+  {id:'t22',concept:'Knowledge Transmission',from:'classical_greece',to:'roman_empire',year:-146,type:'transmitted',
+   desc:'Greek philosophy, science, and art were transmitted to and preserved by Roman civilisation.'},
+  {id:'t23',concept:'Knowledge Transmission',from:'roman_empire',to:'islamic_golden_age',year:750,type:'transmitted',
+   desc:'Greek and Roman texts, preserved in Byzantium and translated into Arabic, fuelled the Islamic Golden Age.'},
+  {id:'t24',concept:'Knowledge Transmission',from:'islamic_golden_age',to:'renaissance',year:1200,type:'transmitted',
+   desc:'Arabic translations of Greek texts, plus original Islamic scholarship, were transmitted to Europe via Spain and Sicily.'},
+  {id:'t25',concept:'Knowledge Transmission',from:'renaissance',to:'scientific_revolution',year:1543,type:'transmitted',
+   desc:'Renaissance humanism and the recovery of classical knowledge enabled the Scientific Revolution.'},
+  {id:'t26',concept:'Modernity Chain',from:'scientific_revolution',to:'enlightenment',year:1687,type:'transmitted',
+   desc:'The Scientific Revolution\'s rational method was applied to politics, society, and governance by the Enlightenment.'},
+  {id:'t27',concept:'Modernity Chain',from:'enlightenment',to:'age_of_revolution',year:1776,type:'transmitted',
+   desc:'Enlightenment ideas of liberty, equality, and popular sovereignty were translated into political reality.'},
+  {id:'t28',concept:'Modernity Chain',from:'age_of_revolution',to:'industrial_revolution',year:1760,type:'transmitted',
+   desc:'Revolutionary political liberation enabled the economic liberalisation that drove industrialisation.'},
+  {id:'t29',concept:'Modernity Chain',from:'industrial_revolution',to:'world_wars',year:1914,type:'transmitted',
+   desc:'Industrial technology applied to warfare produced the most destructive conflicts in human history.'},
+  {id:'t30',concept:'Modernity Chain',from:'world_wars',to:'nuclear_age',year:1945,type:'transmitted',
+   desc:'World War II\'s Manhattan Project produced nuclear weapons, introducing existential risk to human civilisation.'},
+  {id:'t31',concept:'Modernity Chain',from:'nuclear_age',to:'digital_age',year:1970,type:'transmitted',
+   desc:'Cold War military-industrial research produced the computing and networking technologies that created the digital age.'},
+  {id:'t32',concept:'Modernity Chain',from:'digital_age',to:'anthropocene',year:1950,type:'transmitted',
+   desc:'Industrial and digital civilisation\'s cumulative environmental impact has made humanity a geological force.'},
+  {id:'t33',concept:'Continental Cycle',from:'rodinia',to:'pangaea',year:-335000000,type:'transmitted',
+   desc:'The supercontinent cycle that assembled Rodinia repeated with the assembly of Pangaea 700 million years later.'},
+  {id:'t34',concept:'Printing Revolution',from:'han_dynasty',to:'printing_revolution',year:1440,type:'transmitted',
+   desc:'Chinese papermaking (invented in the Han Dynasty) reached Europe via the Islamic world, enabling Gutenberg\'s printing revolution.'},
+  {id:'t35',concept:'Printing Revolution',from:'printing_revolution',to:'reformation',year:1517,type:'transmitted',
+   desc:'The printing press amplified Luther\'s message, enabling the Reformation that shattered Christian unity.'},
+];
+
+
+const WOMEN={
+  classical_greece:[
+    {nm:'Sappho',yr:-610,role:'Poet',desc:'The \"Tenth Muse\" — her lyric poetry from the island of Lesbos was so admired in antiquity that Plato called her wise. Only fragments survive, but those fragments remain devastating.'},
+    {nm:'Hypatia',yr:360,role:'Philosopher & Mathematician',desc:'Head of the Neoplatonist school of Alexandria — murdered by a Christian mob in 415 CE. She became the symbol of reason against fanaticism and the last great philosopher of the ancient world.'},
+    {nm:'Aspasia',yr:-470,role:'Intellectual & Political Advisor',desc:'Partner of Pericles and intellectual equal of Socrates, who credited her with teaching him rhetoric. She influenced Athenian politics from a position no woman was supposed to occupy.'},
+  ],
+  roman_empire:[
+    {nm:'Livia Drusilla',yr:-58,role:'Empress',desc:'Wife of Augustus, she ran the imperial household and shaped Roman policy for 50 years. The first Roman empress, she set the template for female political power within imperial constraints.'},
+    {nm:'Hortensia',yr:-42,role:'Orator',desc:'The only woman ever to address the Roman Forum publicly — she argued against an unjust war tax on women and won, forcing the Senate to back down.'},
+  ],
+  rise_of_christianity:[
+    {nm:'Mary Magdalene',yr:5,role:'Apostle',desc:'First witness to the resurrection according to all four Gospels — the \"apostle to the apostles.\" Her role was systematically diminished by later Church tradition but is being reclaimed by modern scholarship.'},
+  ],
+  rise_of_islam:[
+    {nm:'Khadijah bint Khuwaylid',yr:555,role:'Merchant & First Muslim',desc:'Muhammad\'s first wife, employer, and the first person to accept Islam. A successful merchant in her own right, she financed and supported the early Muslim community.'},
+    {nm:'Fatima al-Fihri',yr:800,role:'Founder of University',desc:'Founded al-Qarawiyyin in Fez (859 CE) — the world\'s oldest continuously operating university, still teaching today.'},
+  ],
+  islamic_golden_age:[
+    {nm:'Lubna of Cordoba',yr:940,role:'Scholar & Librarian',desc:'Secretary to Caliph al-Hakam II, she managed the royal library of over 500,000 volumes — one of the largest in the medieval world — and was renowned for her mathematical and literary scholarship.'},
+  ],
+  medieval_period:[
+    {nm:'Hildegard of Bingen',yr:1098,role:'Polymath',desc:'Theologian, composer, naturalist, mystic — wrote on medicine, music, theology, and natural history; preached publicly when no woman was supposed to speak in church.'},
+    {nm:'Eleanor of Aquitaine',yr:1122,role:'Queen',desc:'Queen of both France and England, she led a crusade, governed England as regent, and was the most powerful woman in 12th-century Europe.'},
+    {nm:'Christine de Pizan',yr:1364,role:'Writer',desc:'The first professional woman writer in Europe — her City of Ladies (1405) was the Middle Ages\' most systematic defence of women\'s intellectual worth.'},
+  ],
+  renaissance:[
+    {nm:'Sofonisba Anguissola',yr:1532,role:'Painter',desc:'First woman to achieve international fame as a painter — court painter to Philip II of Spain. Michelangelo praised her drawings. She proved women could master the highest art.'},
+    {nm:'Artemisia Gentileschi',yr:1593,role:'Painter',desc:'Baroque master who survived rape, trial, and public torture to become the most powerful female painter in history. Her Judiths are revenge made magnificent.'},
+  ],
+  scientific_revolution:[
+    {nm:'Margaret Cavendish',yr:1623,role:'Natural Philosopher',desc:'The first woman to attend a meeting of the Royal Society (1667). She published six books on natural philosophy — a staggering output for anyone, unprecedented for a woman of her era.'},
+    {nm:'Maria Sibylla Merian',yr:1647,role:'Entomologist & Artist',desc:'Travelled to Suriname in 1699 to document insect metamorphosis — her Metamorphosis Insectorum Surinamensium (1705) combined art and science in ways that influenced both fields for centuries.'},
+  ],
+  enlightenment:[
+    {nm:'Émilie du Châtelet',yr:1706,role:'Physicist & Mathematician',desc:'Translated Newton\'s Principia into French (still the standard translation), proved that kinetic energy is proportional to velocity squared, and was Voltaire\'s intellectual partner and sometimes superior.'},
+    {nm:'Mary Wollstonecraft',yr:1759,role:'Philosopher',desc:'Author of A Vindication of the Rights of Woman (1792) — the foundational text of modern feminism. She argued that women\'s apparent inferiority was the result of education, not nature.'},
+  ],
+  industrial_revolution:[
+    {nm:'Ada Lovelace',yr:1815,role:'Mathematician',desc:'Wrote the first algorithm for a computing machine (Babbage\'s Analytical Engine) in 1843 — a century before the computer was built. She is recognised as the first computer programmer.'},
+    {nm:'Harriet Tubman',yr:1822,role:'Abolitionist',desc:'Escaped slavery and returned 13 times to free approximately 70 others via the Underground Railroad. She later served as a Union Army spy — the first woman to lead an armed raid in the Civil War.'},
+    {nm:'Mary Anning',yr:1799,role:'Palaeontologist',desc:'Discovered the first correctly identified ichthyosaur (1811) and plesiosaur (1823) fossils. Her work transformed understanding of prehistoric life, yet she was excluded from the Geological Society because she was a woman.'},
+  ],
+  world_wars:[
+    {nm:'Marie Curie',yr:1867,role:'Physicist & Chemist',desc:'The only person to win Nobel Prizes in two different sciences (Physics 1903, Chemistry 1911). She discovered radium and polonium and drove mobile X-ray units to the Western Front, saving countless soldiers\' lives.'},
+    {nm:'Rosalind Franklin',yr:1920,role:'Biophysicist',desc:'Her X-ray crystallography (Photo 51, 1952) revealed the double helix structure of DNA. Watson and Crick used her data without proper credit. She died at 37; they won the Nobel Prize.'},
+  ],
+  nuclear_age:[
+    {nm:'Lise Meitner',yr:1878,role:'Nuclear Physicist',desc:'Co-discovered nuclear fission (1938) but was denied the Nobel Prize awarded to her collaborator Otto Hahn. Einstein called her \"our Marie Curie.\" Her exclusion is one of the most notorious injustices in Nobel history.'},
+    {nm:'Chien-Shiung Wu',yr:1912,role:'Experimental Physicist',desc:'Disproved the law of conservation of parity (1957) through a brilliant experiment — but the Nobel Prize went to the two theorists who proposed the experiment. Known as the \"First Lady of Physics.\"'},
+  ],
+  digital_age:[
+    {nm:'Grace Hopper',yr:1906,role:'Computer Scientist',desc:'Developed the first compiler (1952) and was instrumental in creating COBOL — one of the first high-level programming languages. She popularised the term \"bug\" for a computer error.'},
+    {nm:'Katherine Johnson',yr:1918,role:'Mathematician',desc:'Calculated the trajectory for Alan Shepard\'s spaceflight (1961) and John Glenn\'s orbital mission (1962) at NASA. Her mathematical precision was trusted over the computers that were replacing her.'},
+  ],
+  cold_war:[
+    {nm:'Rachel Carson',yr:1907,role:'Marine Biologist & Writer',desc:'Silent Spring (1962) documented the ecological devastation caused by pesticides — launching the modern environmental movement. She faced vicious personal attacks from the chemical industry but was vindicated by history.'},
+    {nm:'Valentina Tereshkova',yr:1937,role:'Cosmonaut',desc:'The first woman in space (1963) — she orbited Earth 48 times in Vostok 6. No other woman would fly in space for 19 years. She remains the only woman to have completed a solo space mission.'},
+  ],
+  neolithic:[
+    {nm:'Unknown Women Farmers',yr:-8000,role:'Agricultural Pioneers',desc:'Archaeological evidence suggests women were the primary plant domesticators in many early agricultural societies — selecting, planting, and processing the crops (wheat, barley, rice) that made civilisation possible.'},
+  ],
+  axial_age:[
+    {nm:'Ban Zhao',yr:45,role:'Historian & Scholar',desc:'First known female Chinese historian — completed her brother\'s Han Shu (Book of Han). She also wrote Lessons for Women, the most influential text on women\'s education in Chinese history.'},
+  ],
+  han_dynasty:[
+    {nm:'Wang Zhaojun',yr:-52,role:'Diplomat',desc:'One of the Four Beauties of ancient China — sent as a diplomatic bride to the Xiongnu king. Her sacrifice secured peace between Han China and the northern nomads. Her story has inspired Chinese poetry and opera for 2,000 years.'},
+  ],
+  gupta_golden_age:[
+    {nm:'Lilavati',yr:500,role:'Mathematician',desc:'Whether historical or literary, Lilavati gave her name to Bhaskara II\'s famous 12th-century mathematical text — one of the most important mathematical works of medieval India, covering arithmetic, algebra, and geometry.'},
+  ],
+  mongol_empire:[
+    {nm:'Sorghagtani Beki',yr:1190,role:'Political Leader',desc:'Mother of four khans including Kublai Khan — she manoeuvred her sons to power across the Mongol Empire through diplomatic brilliance. Rashid al-Din called her \"the most intelligent woman in the world.\"'},
+  ],
+  abolitionism:[
+    {nm:'Sojourner Truth',yr:1797,role:'Abolitionist & Women\'s Rights Activist',desc:'Born enslaved, she became one of the most powerful voices against slavery and for women\'s rights. Her 1851 speech \"Ain\'t I a Woman?\" remains one of the most quoted in American history.'},
+    {nm:'Harriet Beecher Stowe',yr:1811,role:'Writer',desc:'Author of Uncle Tom\'s Cabin (1852) — the best-selling novel of the 19th century, which Abraham Lincoln reportedly credited with starting the Civil War. She turned moral argument into mass cultural force.'},
+  ],
+  age_of_revolution:[
+    {nm:'Olympe de Gouges',yr:1748,role:'Political Activist',desc:'Author of the Declaration of the Rights of Woman and the Female Citizen (1791) — challenging the French Revolution\'s failure to extend rights to women. She was guillotined in 1793 for her political writings.'},
+  ],
+  meiji_restoration:[
+    {nm:'Tsuda Umeko',yr:1864,role:'Educator',desc:'One of the first Japanese women to study abroad (sent to the US at age 6 in 1871). She founded Tsuda University — Japan\'s first institution of higher education for women — transforming women\'s education in Japan.'},
+  ],
+  scramble_for_africa:[
+    {nm:'Yaa Asantewaa',yr:1840,role:'Queen Mother & Military Leader',desc:'Led the Ashanti resistance against British colonialism in the War of the Golden Stool (1900). She rallied Ashanti warriors when the male chiefs hesitated, asking: \"If you the men of Ashanti will not go forward, then we will.\"'},
+  ],
+  covid_pandemic:[
+    {nm:'Katalin Karikó',yr:1955,role:'Biochemist',desc:'Her decades of research on mRNA — pursued despite repeated rejection and demotion — enabled the rapid development of COVID-19 vaccines that saved millions of lives. She received the Nobel Prize in 2023.'},
+    {nm:'Sarah Gilbert',yr:1962,role:'Vaccinologist',desc:'Led the development of the Oxford-AstraZeneca COVID-19 vaccine — the most widely distributed vaccine globally, provided at cost to developing nations. Her work saved millions of lives, particularly in the Global South.'},
+  ],
+  green_revolution:[
+    {nm:'Vandana Shiva',yr:1952,role:'Environmental Activist & Scholar',desc:'Indian physicist turned environmental activist who has challenged the Green Revolution\'s impact on small farmers and biodiversity. Her work on seed sovereignty and traditional agriculture has influenced global debates about sustainable food production.'},
+  ],
+};
+
+let year=-4500000000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
+
+const OVERVIEW_COL='#c8881c';
+
+function fmt(y){
+  if(y===null||y===undefined)return'?';
+  const a=Math.abs(Math.round(y));
+  if(a>=1000000000)return`${(a/1000000000).toFixed(1)} Ga`;
+  if(a>=1000000)return`${(a/1000000).toFixed(1)} Ma`;
+  if(a>=10000&&y<0)return`${(a/1000).toFixed(0)}k BCE`;
+  return y<0?`${a} BCE`:y===0?'1 CE':`${y} CE`;
+}
+function eraName(y){let n=ERAS[0].n;for(const e of ERAS){if(y>=e.y)n=e.n;}return n;}
+function active(c){return year>=c.s&&year<=c.e}
+function getLensCol(){
+  if(!lenses.size)return OVERVIEW_COL;
+  const L=LENSES.find(l=>l.id===[...lenses][0]);
+  return L?L.col:OVERVIEW_COL;
+}
+
+function toggleLensDD(){
+  lensDD=!lensDD;
+  document.getElementById('lens-dd-list').classList.toggle('open',lensDD);
+  document.getElementById('lens-dd-hdr').classList.toggle('open',lensDD);
+  document.getElementById('lens-dd-arrow').classList.toggle('open',lensDD);
+}
+
+function lensLabel(){
+  if(!lenses.size)return'Epoch Arc';
+  const names=[...lenses].map(id=>{const L=LENSES.find(l=>l.id===id);return L?L.lbl:'';});
+  if(names.length===1)return names[0];
+  if(names.length<=3)return names.join(' · ');
+  return names.slice(0,2).join(' · ')+` +${names.length-2}`;
+}
+
+function renderLensDD(){
+  const hook=document.getElementById('lens-position-hook');
+  const dt=hook||document.getElementById('drawer-top');
+  if(!dt)return;
+  if(hook){
+    hook.style.cssText='padding:8px 0 4px';
+    // Clear drawer-top so lens only renders below civ header
+    const drawerTop=document.getElementById('drawer-top');
+    if(drawerTop)drawerTop.innerHTML='';
+  }
+  const arcOn=!lenses.size;
+  const rows=LENSES.map(l=>{
+    const on=lenses.has(l.id);
+    return`<div class="lens-row${on?' on':''}" onclick="toggleLens('${l.id}')">
+      <div class="lens-row-chk${on?' on':''}">${on?'✓':''}</div>
+      <span class="lens-row-ico">${l.ico}</span>
+      <span class="lens-row-lbl">${l.lbl}</span>
+    </div>`;
+  }).join('');
+  dt.innerHTML=`<div class="lens-dd-wrap">
+    <div class="lens-dd-hdr${lensDD?' open':''}" id="lens-dd-hdr" onclick="toggleLensDD()">
+      <span class="lens-dd-title">Lens</span>
+      <span class="lens-dd-summary">${lensLabel()}</span>
+      <span class="lens-dd-arrow${lensDD?' open':''}" id="lens-dd-arrow">▾</span>
+    </div>
+    <div class="lens-dd-list${lensDD?' open':''}" id="lens-dd-list">
+      <div class="lens-row${arcOn?' on':''}" onclick="toggleLens('__arc__')">
+        <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
+        <span class="lens-row-ico">◎</span>
+        <span class="lens-row-lbl">Epoch Arc</span>
+      </div>
+      <div class="lens-row-sep"></div>
+      ${rows}
+      <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done ▴</div>
+    </div>
+  </div>`;
+}
+
+function toggleLens(id){
+  if(id==='__arc__'){lenses.clear();}
+  else{
+    if(lenses.has(id))lenses.delete(id);
+    else lenses.add(id);
+  }
+  // partial update: re-render dropdown in-place, update content below civ header
+  renderLensDD();
+  if(sel){
+    const c=sel;
+    let body='';
+    if(!lenses.size){
+      body=`<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}`;
+    } else {
+      body=[...lenses].map(lid=>{
+        const L=LENSES.find(l=>l.id===lid);
+        if(!L)return'';
+        return`<div class="lens-section">
+          <div class="lens-section-hdr">
+            <span class="lens-section-ico">${L.ico}</span>
+            <span class="lens-section-lbl">${L.lbl}</span>
+          </div>
+          <div class="info-txt">${c.d[lid]||'No data for this lens.'}</div>
+        </div>`;
+      }).join('');
+    }
+    const col=lenses.size?getLensCol():OVERVIEW_COL;
+    const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
+    const connHTML=c.conns.length?`<div class="conn-hdr" id="conn-hdr">Historical connections</div>`+c.conns.map(cid=>{
+      const o=ITEMS.find(x=>x&&x.id===cid);if(!o)return'';
+      const isA=actIds.has(cid);
+      const badge=isA?'ACTIVE':'→ JUMP';
+      const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
+      return`<button class="conn-item" tabindex="0"
+          aria-label="${tip}"
+          onclick="navigateToItem('${cid}')"
+          style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
+        <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
+        <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
+        <span style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:1px;color:${isA?'var(--amber-b)':'var(--amber)'};white-space:nowrap">${badge}</span>
+      </button>`;
+    }).join(''):'';
+    // replace only content below the lens dd (keep civ header intact)
+    const lensDiv=document.getElementById('drawer-lens-body');
+    if(lensDiv) lensDiv.innerHTML=body+connHTML;
+  }
+  renderMap();
+}
+
+
+// ── NON-LINEAR TIMELINE ──
+// Slider 0-1000 maps to year via five segments for deep time:
+// 0-100   → -4,500,000,000 to -541,000,000 (Hadean–Precambrian)
+// 100-250 → -541,000,000 to -66,000,000    (Paleozoic–Mesozoic)
+// 250-400 → -66,000,000 to -2,600,000      (Cenozoic pre-Quaternary)
+// 400-550 → -2,600,000 to -10,000          (Pleistocene / Ice Ages)
+// 550-1000 → -10,000 to 2024               (Human history)
+const _TL_SEGS=[
+  {sv:0,ev:100,sy:-4500000000,ey:-541000000},
+  {sv:100,ev:250,sy:-541000000,ey:-66000000},
+  {sv:250,ev:400,sy:-66000000,ey:-2600000},
+  {sv:400,ev:550,sy:-2600000,ey:-10000},
+  {sv:550,ev:1000,sy:-10000,ey:2024}
+];
+function sliderToYear(v){
+  v=parseInt(v);
+  for(const s of _TL_SEGS){
+    if(v<=s.ev) return Math.round(s.sy+((s.ey-s.sy)*((v-s.sv)/(s.ev-s.sv))));
+  }
+  return 2024;
+}
+function yearToSlider(yr){
+  yr=parseInt(yr);
+  for(const s of _TL_SEGS){
+    if(yr<=s.ey) return Math.round(s.sv+((s.ev-s.sv)*((yr-s.sy)/(s.ey-s.sy))));
+  }
+  return 1000;
+}
+
+function itemPt(c){
+  if(!c)return[500,260];
+  if(!window._proj)return[c.x||500,c.y||260];
+  if(typeof c.lon!=='number'||typeof c.lat!=='number')return[c.x||500,c.y||260];
+  try{const pt=window._proj([c.lon,c.lat]);return pt&&isFinite(pt[0])&&isFinite(pt[1])?pt:[c.x||500,c.y||260];}
+  catch(e){return[c.x||500,c.y||260];}
+}
+
+function renderMap(){
+  const ids=new Set(ITEMS.filter(c=>active(c)).map(c=>c.id));
+  window.ids_cache=ids;
+  const col=lenses.size?getLensCol():OVERVIEW_COL;
+
+  const drawn=new Set();
+  let cl='';
+  ITEMS.forEach(c=>{
+    if(!ids.has(c.id))return;
+    c.conns.forEach(id=>{
+      const k=[c.id,id].sort().join('-');
+      if(drawn.has(k)||!ids.has(id))return;
+      drawn.add(k);
+      const o=ITEMS.find(x=>x&&x.id===id);
+      if(!o)return;
+      const [cx,cy]=itemPt(c),[ox,oy]=itemPt(o);
+      const mx=(cx+ox)/2,my=Math.min(cy,oy)-28;
+      cl+=`<path d="M${cx},${cy} Q${mx},${my} ${ox},${oy}" stroke="#e8251a" stroke-width=".8" fill="none" stroke-dasharray="3,5" opacity="${sel?0.1:0.25}"/>`;
+    });
+  });
+  document.getElementById('conn-layer').innerHTML=cl;
+
+  // TWO-PASS: rings first (all), then dots on top (all) — prevents hit area overlap
+  let rings='', dots='', ll='';
+  const civData=ITEMS.map(c=>{
+    const on=ids.has(c.id);
+    const isSel=sel&&sel.id===c.id;
+    const heritageIds=mode==='heritage'&&heritageRegion?new Set(HERITAGE_REGIONS[heritageRegion]||[]):null;
+    const isHeritage=heritageIds&&heritageIds.has(c.id);
+    const heritageInactive=isHeritage&&!on;
+    const isWhatifLost=whatifItem&&whatifItem!==c.id&&
+      TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifItem);
+    const womenCount=(WOMEN[c.id]||[]).length;
+    const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
+    // Drift 2: inactive items fully hidden (0 not 0.06). Drift 3: herstory items without WOMEN hidden (0 not 0.35).
+    const op=on?(herstory&&!womenCount?0:isWhatifLost?.2:1):(heritageInactive?.35:0);
+    const [cx,cy]=itemPt(c);
+    return {c,on,isSel,mcol,op,cx,cy};
+  });
+  // Pass 1: decorative rings — pointer-events:none, never intercept clicks
+  civData.filter(Boolean).forEach(({c,on,isSel,mcol,op,cx,cy})=>{
+    const _zr=1000/_vbW;
+    const _rR=Math.max(4,(16/_zr)).toFixed(1);
+    const _pR=Math.max(2,(6/_zr)).toFixed(1);
+    const _pMax=Math.max(5,(16/_zr)).toFixed(1);
+    rings+=`<g opacity="${op}" pointer-events="none">
+      <circle cx="${cx}" cy="${cy}" r="${_rR}" fill="none" stroke="${mcol}" stroke-width=".5" opacity=".15"/>
+      <circle cx="${cx}" cy="${cy}" r="${(Math.max(3,10/_zr)).toFixed(1)}" fill="${mcol}" fill-opacity=".06"/>
+      ${on?`<circle cx="${cx}" cy="${cy}" r="${_pR}" fill="${mcol}" opacity=".45">
+        <animate attributeName="r" values="${_pR};${_pMax};${_pR}" dur="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values=".45;0;.45" dur="2.8s" repeatCount="indefinite"/>
+      </circle>`:''}
+    </g>`;
+  });
+  // Pass 2: clickable dots — all on top of all rings; selected civ last (topmost)
+  const sorted=[...civData].filter(Boolean).sort((a,b)=>a.isSel?1:b.isSel?-1:0);
+  sorted.forEach(({c,on,isSel,mcol,op,cx,cy})=>{
+    if(on){
+      // Scale dot radius inversely with zoom so screen size stays ~constant
+      const zr=1000/_vbW; // zoom ratio: 1=full, 6=max
+      const dotR=Math.max(2, (isSel?9:7)/zr);
+      const ringR=Math.max(3, 16/zr);
+      const pulseMax=Math.max(8, 16/zr);
+      dots+=`<g role="button" tabindex="0" data-civ="${c.id}"
+          aria-label="${c.nm} — click to explore"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();itemClick('${c.id}')}"
+          opacity="${op}" pointer-events="none">
+          <circle cx="${cx}" cy="${cy}" r="${dotR.toFixed(1)}"
+            fill="${mcol}" filter="url(#glow${isSel?'2':''})"
+          />
+        </g>`;
+      // Drift 1: only selected item gets a persistent label
+      if(isSel){
+        ll+=`<text x="${cx}" y="${cy+26}" font-family="Cinzel,serif" font-size="11"
+          letter-spacing="1" fill="#f0d060"
+          text-anchor="middle" pointer-events="none">${c.nm}</text>`;
+      }
+    } else if(op>0){
+      // Drift 2: ghost dot only when op>0 (heritage-active-but-inactive-era case)
+      dots+=`<circle cx="${cx}" cy="${cy}" r="4" fill="${mcol}" opacity=".12" pointer-events="none"/>`;
+    }
+  });
+  document.getElementById('mark-layer').innerHTML=rings+dots;
+  document.getElementById('label-layer').innerHTML=ll;
+}
+
+function navigateToItem(id){
+  const c=ITEMS.find(x=>x&&x.id===id);
+  if(!c)return;
+  if(mode==='whatif'){
+    setWhatIf(id);
+    return;
+  }
+  if(mode==='compare'){
+    if(!sel){sel=c;}
+    else if(!sel2&&sel.id!==c.id){sel2=c;}
+    else{sel=c;sel2=null;}
+    renderDrawer();renderMap();updateURL();
+    openMobileSheet();
+    return;
+  }
+  if(!active(c)){
+    const targetYear=c.s;
+    document.getElementById('tl').value=yearToSlider(targetYear);
+    setYear(targetYear);
+  }
+  sel=c;lensDD=false;
+  renderDrawer();renderMap();updateURL();
+  openMobileSheet();
+  document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
+}
+
+function itemClick(id){
+  _renderHoverLabel(null);
+  navigateToItem(id);
+}
+
+
+
+function renderDrawerContent(){
+  const c=sel;
+  const dc=document.getElementById('drawer-content');
+  if(!dc)return;
+  if(!c){
+    // app overview — don't re-render if already showing (no civ selected)
+    return;
+  }
+  let body='';
+  if(!lenses.size){
+    body=`<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}${renderFingerprint(c)}`;
+  } else {
+    body=[...lenses].map(id=>{
+      const L=LENSES.find(l=>l.id===id);
+      if(!L)return'';
+      return`<div class="lens-section">
+        <div class="lens-section-hdr">
+          <span class="lens-section-ico">${L.ico}</span>
+          <span class="lens-section-lbl">${L.lbl}</span>
+        </div>
+        <div class="info-txt">${c.d[id]||'No data for this lens.'}</div>
+      </div>`;
+    }).join('');
+  }
+  const col=lenses.size?getLensCol():OVERVIEW_COL;
+  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
+  const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
+    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
+    const isA=actIds.has(id);
+    const badge=isA?'ACTIVE':'→ JUMP';
+    const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
+    return`<button class="conn-item" tabindex="0"
+        aria-label="${tip}"
+        onclick="navigateToItem('${id}')"
+        style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
+      <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
+      <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
+      <span style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:1px;color:${isA?'var(--amber-b)':'var(--amber)'};white-space:nowrap">${badge}</span>
+    </button>`;
+  }).join(''):'';
+  dc.innerHTML=body+connHTML;
+}
+
+function renderDrawer(){
+  if(herstory){renderHerstoryDrawer();return;}
+  if(mode==='compare'){renderCompareDrawer();return;}
+  if(mode==='whatif'){renderWhatIfDrawer();return;}
+  if(mode==='heritage'){renderHeritageDrawer();return;}
+  const dc=document.getElementById('drawer-content');
+  if(!sel){
+    document.getElementById('drawer-top').innerHTML='';
+    dc.innerHTML=`
+    <div style="padding:4px 0 16px">
+
+      <div style="font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--amber-b);letter-spacing:2px;margin-bottom:2px">AEON</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Epoch Atlas</div>
+
+      <div style="font-size:13.5px;line-height:1.85;color:var(--txt2);margin-bottom:18px">
+        100 eras. 4.5 billion years. From Earth\'s formation through ice ages, mass extinctions, and continental drift to the Anthropocene — every geological, evolutionary, and historical epoch mapped, connected, and explorable on a real geographic projection with a continuous deep-time timeline.
+      </div>
+
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">The Map</div>
+      <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
+        Drag the <span style="color:var(--amber-b)">timeline</span> at the bottom across 4.5 billion years — from the Hadean to the Anthropocene. Gold markers show active epochs. Tap any to open its full profile and explore its connections.
+      </div>
+
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">20 Lenses</div>
+      <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
+        Apply a <span style="color:var(--amber-b)">lens</span> to read all of history through a single idea — Culture, Technology, Governance, Economy, Philosophy, and 15 more. Compare any two eras side by side under the same lens.
+      </div>
+
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">5 Modes</div>
+      <div style="font-size:12.5px;line-height:1.8;color:var(--txt2);margin-bottom:18px">
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟳ EPOCH CHAINS</span> — Watch ideas and innovations travel across eras. Animated gold arrows trace the path of agriculture, metallurgy, printing, and more across millennia.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⊞ COMPARE</span> — Tap two eras to read them side by side under any lens.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟁ WHAT IF</span> — Remove an era from history. Red arrows on the map show every transmission that would have been lost.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⌂ CRADLE</span> — Select a world region to see the eras that originated or flourished there highlighted on the map.</div>
+        <div><span style="color:#c060a0;font-family:'Cinzel',serif;font-size:9px">♀ HERSTORY</span> — A mirror dimension tracing human epochs through the women who defined every age — rulers, thinkers, scientists, and revolutionaries whose contributions history forgot.</div>
+      </div>
+
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Each era profile includes</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:18px;font-size:11.5px">
+        ${[['◈','20 interpretive lenses'],['⟳','Epoch transmission chains'],['◎','Era fingerprint chart'],['⊞','Side-by-side comparison'],['↗','Connected eras'],['⌂','Cradle region mapping'],['♀','Women in Herstory mode'],['◉','What-If impact analysis']].map(([ico,lbl])=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--bdr2);border-radius:2px;color:var(--txt2)"><span style="color:var(--amber-b);font-size:13px">${ico}</span>${lbl}</div>`).join('')}
+      </div>
+
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Pivotal moments to try</div>
+      ${(()=>{
+        const ALL=[
+          [-4500000000,'Earth forms','Accretion from the solar nebula — a molten world bombarded by planetesimals'],
+          [-3800000000,'First life appears','The earliest microbial life in the Archean oceans — everything that follows descends from this'],
+          [-2400000000,'The Great Oxygenation Event','Cyanobacteria flood the atmosphere with oxygen — the worst mass extinction, and the foundation of all complex life'],
+          [-541000000,'The Cambrian Explosion','Complex animal life appears in an evolutionary burst — nearly every modern body plan originates here'],
+          [-252000000,'The Great Dying','The Permian-Triassic extinction kills 96% of marine species — the worst mass extinction in Earth\'s history'],
+          [-66000000,'The K-Pg Extinction','An asteroid ends the age of dinosaurs — mammals inherit the Earth'],
+          [-2600000,'The Ice Ages begin','The Pleistocene glaciations reshape continents and drive human evolution'],
+          [-300000,'Homo sapiens emerges','Anatomically modern humans appear in Africa — the species that will reshape the planet'],
+          [-10000,'The Neolithic Revolution','Humans begin farming — the single most transformative shift in all of human history'],
+          [-3000,'The Bronze Age begins','Metalworking transforms warfare, trade, and governance across Eurasia'],
+          [-500,'Classical Athens','Democracy, philosophy, theatre, and science converge in a single city-state'],
+          [476,'Fall of Western Rome','The end of antiquity — the medieval world begins'],
+          [1492,'The Age of Exploration','Columbus reaches the Americas — the world becomes connected and colonial'],
+          [1760,'The Industrial Revolution','Steam power, factories, and urbanisation transform human existence permanently'],
+          [1945,'The Atomic Age','Hiroshima — humanity gains the power to destroy itself'],
+          [1991,'The Digital Age','The World Wide Web launches — information becomes instant and global'],
+        ];
+        const shuffled=[...ALL].sort(()=>Math.random()-.5);
+        return shuffled.slice(0,5).map(([yr,title,desc])=>`
+        <div onclick="setYear(${yr});"
+          style="padding:8px 0;border-bottom:1px solid var(--bdr2);cursor:pointer;transition:opacity .15s"
+          onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:3px">
+            <span style="font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b)">${yr<0?Math.abs(yr)+' BCE':yr+' CE'}</span>
+            <span style="font-size:12.5px;color:var(--txt2)">${title}</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--txt3);font-style:italic">${desc}</div>
+        </div>`).join('');
+      })()}`;
+    document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
+    return;
+  }
+  const c=sel;
+  const dc2=document.getElementById('drawer-content');
+
+  let civHdr=`<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:2px">
+      <div class="info-nm" style="margin-bottom:0">${c.nm}</div>
+      <button class="info-close" onclick="closeInfo()" style="position:static;flex-shrink:0;margin-top:2px">✕</button>
+    </div>
+    <div class="info-sb">${c.sb}</div>
+    <div class="info-dates">
+      <div class="info-dt">${fmt(c.s)}</div>
+      <span class="info-arr">→</span>
+      <div class="info-dt">${fmt(c.e)}</div>
+    </div>
+    ${c.music?`<div class="sound-artifact" style="display:flex;align-items:flex-start;gap:8px">
+      <button class="sound-btn" onclick="toggleSound(sel)" aria-label="Play musical theme" style="flex-shrink:0;margin-top:1px">♪ Listen</button>
+      <span>♩ ${c.music.artifact}</span>
+    </div>`:''}`;
+
+  let body='';
+  if(!lenses.size){
+    body=`<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}${renderFingerprint(c)}`;
+  } else {
+    body=[...lenses].map(id=>{
+      const L=LENSES.find(l=>l.id===id);
+      if(!L)return'';
+      return`<div class="lens-section">
+        <div class="lens-section-hdr">
+          <span class="lens-section-ico">${L.ico}</span>
+          <span class="lens-section-lbl">${L.lbl}</span>
+        </div>
+        <div class="info-txt">${c.d[id]||'No data for this lens.'}</div>
+      </div>`;
+    }).join('');
+  }
+
+  const col=lenses.size?getLensCol():OVERVIEW_COL;
+  const actIds=new Set(ITEMS.filter(x=>active(x)).map(x=>x.id));
+  const connHTML=c.conns.length?`<div class="conn-hdr">Historical connections</div>`+c.conns.map(id=>{
+    const o=ITEMS.find(x=>x&&x.id===id);if(!o)return'';
+    const isA=actIds.has(id);
+    const badge=isA?'ACTIVE':'→ JUMP';
+    const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
+    return`<button class="conn-item" tabindex="0"
+        aria-label="${tip}"
+        onclick="navigateToItem('${id}')"
+        style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
+      <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
+      <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
+      <span style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:1px;color:${isA?'var(--amber-b)':'var(--amber)'};white-space:nowrap">${badge}</span>
+    </button>`;
+  }).join(''):'';
+
+  dc2.innerHTML=civHdr+'<div id="lens-position-hook" style="padding:8px 0 2px"></div><hr class="info-div"><div id="drawer-lens-body">'+body+renderDiplomaticSection(c)+connHTML+'</div>';
+  renderLensDD();
+  document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
+}
+
+function closeInfo(){stopTheme();sel=null;lenses.clear();lensDD=false;renderDrawer();renderMap();closeMobileSheet();}
+
+function setYear(y){
+  year=parseInt(y);
+  const sl=document.getElementById('tl');
+  const sliderVal=yearToSlider(year);
+  if(sl.value!=sliderVal) sl.value=sliderVal;
+  const pct=sliderVal/10; // 0-1000 → 0-100%
+  document.getElementById('tl-thumb').style.left=pct+'%';
+  updateTlFill(pct);
+  const tlEl=document.getElementById('tl');
+  tlEl.setAttribute('aria-valuenow',sliderVal);
+  tlEl.setAttribute('aria-valuetext',fmt(year));
+  document.getElementById('era-y').textContent=fmt(year);
+  document.getElementById('era-n').textContent=eraName(year);
+  document.getElementById('cnt-n').textContent=ITEMS.filter(c=>active(c)).length;
+  renderMap();
+  if(sel&&!active(sel))closeInfo();
+  else renderDrawer();
+  updateURL();
+  if(mode==='whatif'&&whatifItem)renderWhatIfPaths();
+}
+
+function renderWorldMap(world){
+  const svg=document.getElementById('wsvg');
+  const W=1000,H=520;
+  const proj=d3.geoMercator().scale(158).translate([W/2,H/2+40]);
+  window._proj=proj;
+  const pathGen=d3.geoPath().projection(proj);
+  const land=topojson.feature(world,world.objects.land);
+  const countries=topojson.feature(world,world.objects.countries);
+  // Build SVG path strings
+  const isDark=()=>document.documentElement.dataset.theme!=='light';
+  let g=document.getElementById('map-layer');
+  // Graticule
+  const graticule=d3.geoGraticule()();
+  const gratPath=pathGen(graticule)||'';
+  // Land path
+  const landPath=pathGen(land)||'';
+  // Country borders
+  const borders=topojson.mesh(world,world.objects.countries,(a,b)=>a!==b);
+  const borderPath=pathGen(borders)||'';
+  g.innerHTML=
+    `<path d="${gratPath}" fill="none" stroke="var(--bdr2)" stroke-width=".3"/>` +
+    `<path id="land-path" d="${landPath}" fill="var(--land)" stroke="var(--land-s)" stroke-width=".4"/>` +
+    `<path d="${borderPath}" fill="none" stroke="var(--land-s)" stroke-width=".3" opacity=".6"/>`;
+}
+
+
+function init(){
+  const eraDefs=[
+    {l:'Hadean',s:-4500000000,e:-4000000000},
+    {l:'Archean',s:-4000000000,e:-2500000000},
+    {l:'Proterozoic',s:-2500000000,e:-541000000},
+    {l:'Paleozoic',s:-541000000,e:-252000000},
+    {l:'Mesozoic',s:-252000000,e:-66000000},
+    {l:'Cenozoic',s:-66000000,e:-2600000},
+    {l:'Pleistocene',s:-2600000,e:-10000},
+    {l:'Holocene',s:-10000,e:1945},
+    {l:'Anthropocene',s:1945,e:2024},
+  ];
+  const total=2024-(-4500000000);
+
+  renderDensityBar();
+  document.getElementById('tl').addEventListener('input',e=>setYear(sliderToYear(e.target.value)));
+  decodeState();
+  renderDrawer();
+  document.getElementById('tl').value=yearToSlider(year);
+  setYear(year);
+  if(activeThread&&mode==='threads'){
+    setTimeout(()=>{
+      setMode('threads');
+      activateThread(activeThread);
+    },1000);
+  }
+
+
+  // Load world topojson
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(r=>r.json())
+    .then(world=>{
+      renderWorldMap(world);
+      renderMap(); // re-render markers with correct projection
+    })
+    .catch(()=>console.warn('World map data unavailable — using fallback'));
+  initMapInteraction();
+}
+
+
+// ── MODE MANAGEMENT ──
+function setMode(m){
+  // Clear mode-specific state when leaving
+  if(m!=='whatif')whatifItem=null;
+  if(m!=='heritage')heritageRegion=null;
+  mode=m;
+  ['explore','threads','compare','whatif','heritage'].forEach(id=>{
+    const b=document.getElementById('btn-'+id);
+    if(b){b.classList.toggle('active',id===m);b.setAttribute('aria-pressed',id===m);}
+  });
+  const tp=document.getElementById('thread-panel');
+  if(tp)tp.classList.toggle('open',m==='threads');
+  if(m==='threads'){
+    renderThreadConceptList();
+  }
+  if(m!=='threads'){
+    activeThread=null;
+    document.getElementById('thread-layer').innerHTML='';
+  }
+  if(m==='compare'&&!sel2){
+    // show compare prompt
+    renderDrawer();
+  }
+  if(m==='explore'&&sel2){sel2=null;}
+  renderMap();
+  renderDrawer();
+  updateURL();
+}
+
+// ── THREAD VIEW ──
+function getUniqueConcepts(){
+  const seen=new Set();
+  return TRANSMISSIONS.filter(t=>{if(seen.has(t.concept))return false;seen.add(t.concept);return true;})
+    .map(t=>t.concept);
+}
+
+function getChain(concept){
+  return TRANSMISSIONS.filter(t=>t.concept===concept).sort((a,b)=>a.year-b.year);
+}
+
+function renderThreadConceptList(){
+  const list=document.getElementById('thread-concept-list');
+  const steps=document.getElementById('thread-active-steps');
+  const title=document.getElementById('thread-panel-title');
+  const backBtn=document.getElementById('thread-back-btn');
+  if(!list)return;
+
+  if(activeThread){
+    // Concept list hidden, steps visible
+    list.style.display='none';
+    if(steps)steps.style.display='block';
+    if(backBtn)backBtn.style.display='inline-block';
+    if(title)title.textContent=activeThread;
+  } else {
+    // Show concept grid, hide steps
+    list.style.display='block';
+    if(steps){steps.style.display='none';steps.innerHTML='';}
+    if(backBtn)backBtn.style.display='none';
+    if(title)title.textContent='Epoch Chains';
+    const concepts=getUniqueConcepts();
+    list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
+      const chain=getChain(c);
+      return`<button class="thread-concept-btn" onclick="activateThread('${c.replace(/'/g,"\\'")}')" >
+        <span class="thread-concept-name">${c}</span>
+        <span class="thread-concept-chain">${chain.map(t=>{
+          const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+          return(fc?fc.nm:'?')+' → '+(tc?tc.nm:'?');
+        }).join('<br>')}</span>
+      </button>`;
+    }).join('')+'</div>';
+  }
+}
+
+function activateThread(concept){
+  activeThread=concept;
+  renderThreadConceptList();
+  renderThreadSteps(concept);
+  renderThreadPaths(concept);
+  // Scroll the inner wrapper back to top
+  const inner=document.querySelector('.thread-panel-inner');
+  if(inner)setTimeout(()=>inner.scrollTop=0,0);
+}
+
+function closeThread(){
+  activeThread=null;
+  renderThreadConceptList();
+  document.getElementById('thread-layer').innerHTML='';
+}
+
+function renderThreadSteps(concept){
+  const steps=document.getElementById('thread-active-steps');
+  if(!steps)return;
+  const chain=getChain(concept);
+  if(!chain.length){steps.innerHTML='';return;}
+  const LINK=`<div class="thread-chain-link">
+    <div class="thread-chain-line"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+    </svg>
+    <div class="thread-chain-line"></div>
+  </div>`;
+  const items=chain.map(t=>{
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+    return`<div class="thread-step">
+      <div class="thread-step-yr">${fmt(t.year)}</div>
+      <div class="thread-step-civ">${fc?fc.nm:'?'} → ${tc?tc.nm:'?'}</div>
+      <div class="thread-step-txt">${t.desc}</div>
+    </div>`;
+  });
+  steps.innerHTML='<div class="thread-steps-grid">'+
+    items.join(LINK)+
+    '</div>';
+}
+
+let _threadAnim=null;
+function renderThreadPaths(concept){
+  const layer=document.getElementById('thread-layer');
+  if(!layer)return;
+  const chain=getChain(concept);
+  if(!chain.length){layer.innerHTML='';return;}
+  if(_threadAnim){clearTimeout(_threadAnim);_threadAnim=null;}
+
+  // Build SVG: arrowhead marker + paths + dots + labels
+  let out='<defs><marker id="tarrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f0d060" opacity=".9"/></marker></defs>';
+  const drawn=[];
+  chain.forEach(t=>{
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+    if(!fc||!tc)return;
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
+    const mx=(fx+tx)/2,my=Math.min(fy,ty)-44;
+    // Path with arrowhead
+    out+=`<path id="tp-${t.id}" d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
+      stroke="#f0d060" stroke-width="1.8" fill="none" stroke-dasharray="6,4"
+      marker-end="url(#tarrow)" opacity="0" style="transition:opacity .4s"/>`;
+    // Glow dot at destination
+    out+=`<circle id="tc-${t.id}" cx="${tx}" cy="${ty}" r="7" fill="#f0d060" opacity="0" style="transition:opacity .4s"/>`;
+    // Year + civ name label mid-path
+    const lx=(fx+tx)/2+(my<Math.min(fy,ty)?0:0),ly=my-10;
+    out+=`<text id="tl-${t.id}" x="${lx}" y="${ly}"
+      font-family="Cinzel,serif" font-size="10" fill="#f0d060"
+      text-anchor="middle" opacity="0" style="transition:opacity .4s">${fmt(t.year)}</text>`;
+    const nm=tc?tc.nm:'';
+    out+=`<text id="tn-${t.id}" x="${tx}" y="${ty+22}"
+      font-family="Cinzel,serif" font-size="9.5" fill="#f0d060"
+      text-anchor="middle" opacity="0" style="transition:opacity .4s">${nm}</text>`;
+    drawn.push(t.id);
+  });
+  layer.innerHTML=out;
+
+  // Animate each step sequentially
+  drawn.forEach((id,i)=>{
+    setTimeout(()=>{
+      ['tp','tc','tl','tn'].forEach(prefix=>{
+        const el=document.getElementById(prefix+'-'+id);
+        if(el)el.style.opacity=prefix==='tc'?'0.9':'0.85';
+      });
+    },i*700);
+  });
+}
+
+// ── COMPARE MODE ──
+function addToCompare(id){
+  const c=ITEMS.find(x=>x&&x.id===id);
+  if(!c)return;
+  if(!sel){sel=c;mode='compare';}
+  else{sel2=c;mode='compare';}
+  setMode('compare');
+  renderDrawer();
+  renderMap();
+}
+
+function renderCompareDrawer(){
+  const dc=document.getElementById('drawer-content');
+  const dt=document.getElementById('drawer-top');
+  if(dt)dt.innerHTML='';
+  if(!sel&&!sel2){
+    dc.innerHTML=`<div class="compare-prompt">
+      <div>⊞</div>
+      <div>Select two civilizations on the map to compare them side by side</div>
+    </div>`;
+    return;
+  }
+  const renderCol=(c,slot)=>{
+    if(!c)return`<div class="compare-col">
+      <div class="compare-prompt" style="height:200px"><div>Click a civilization on the map to add it here</div></div>
+    </div>`;
+    const body=lenses.size?[...lenses].map(lid=>{
+      const L=LENSES.find(l=>l.id===lid);
+      if(!L)return'';
+      return`<div class="lens-section">
+        <div class="lens-section-hdr">
+          <span class="lens-section-ico">${L.ico}</span>
+          <span class="lens-section-lbl">${L.lbl}</span>
+        </div>
+        <div class="info-txt">${c.d[lid]||'No data.'}</div>
+      </div>`;
+    }).join(''):
+    `<div class="overview-arc"><p>${c.overview||c.d.legacy}</p></div>${renderEnhancedSpanBar(c)}`;
+    return`<div class="compare-col">
+      <div class="compare-col-hdr">
+        <span>${c.nm}</span>
+        <button class="compare-remove" onclick="${slot===1?'sel=null':'sel2=null'};renderCompareDrawer();renderMap()" aria-label="Remove">✕</button>
+      </div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:10px;text-transform:uppercase">${c.sb}</div>
+      <div class="info-dates" style="margin-bottom:14px">
+        <div class="info-dt">${fmt(c.s)}</div>
+        <span class="info-arr">→</span>
+        <div class="info-dt">${fmt(c.e)}</div>
+      </div>
+      ${body}
+    </div>`;
+  };
+  // Lens selector at top spanning both cols
+  const lensBar=`<div style="padding:12px 0 10px;border-bottom:1px solid var(--bdr);margin-bottom:12px">${renderLensDDInline()}</div>`;
+  dc.innerHTML=`<div>${lensBar}<div class="compare-wrap">${renderCol(sel,1)}${renderCol(sel2,2)}</div></div>`;
+}
+
+function renderLensDDInline(){
+  const arcOn=!lenses.size;
+  const rows=LENSES.map(l=>{
+    const on=lenses.has(l.id);
+    return`<div class="lens-row${on?' on':''}" onclick="toggleLens('${l.id}');if(mode==='compare')renderCompareDrawer();">
+      <div class="lens-row-chk${on?' on':''}">${on?'✓':''}</div>
+      <span class="lens-row-ico">${l.ico}</span>
+      <span class="lens-row-lbl">${l.lbl}</span>
+    </div>`;
+  }).join('');
+  return`<div class="lens-dd-wrap">
+    <div class="lens-dd-hdr${lensDD?' open':''}" onclick="toggleLensDD()">
+      <span class="lens-dd-title">Lens</span>
+      <span class="lens-dd-summary">${lensLabel()}</span>
+      <span class="lens-dd-arrow${lensDD?' open':''}">▾</span>
+    </div>
+    <div class="lens-dd-list${lensDD?' open':''}" id="lens-dd-list">
+      <div class="lens-row${arcOn?' on':''}" onclick="lenses.clear();lensDD=false;if(mode==='compare')renderCompareDrawer();else renderDrawerContent();">
+        <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
+        <span class="lens-row-ico">◎</span>
+        <span class="lens-row-lbl">Epoch Arc</span>
+      </div>
+      <div class="lens-row-sep"></div>${rows}
+      <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done ▴</div>
+    </div>
+  </div>`;
+}
+
+// ── URL STATE ──
+function encodeState(){
+  const params=new URLSearchParams();
+  params.set('y',year);
+  if(sel)params.set('c',sel.id);
+  if(sel2)params.set('c2',sel2.id);
+  if(lenses.size)params.set('l',[...lenses].join(','));
+  if(mode!=='explore')params.set('m',mode);
+  if(activeThread)params.set('t',activeThread);
+  return params.toString();
+}
+
+function decodeState(){
+  let hash='';
+  try{hash=window.location.hash.replace('#','');}catch(e){return;}
+  if(!hash)return;
+  try{
+    const params=new URLSearchParams(hash);
+    if(params.get('y')){
+      const y=parseInt(params.get('y'));
+      year=y;
+      document.getElementById('tl').value=y;
+    }
+    if(params.get('c')){sel=ITEMS.find(x=>x&&x.id===params.get('c'))||null;}
+    if(params.get('c2')){sel2=ITEMS.find(x=>x&&x.id===params.get('c2'))||null;}
+    if(params.get('l')){params.get('l').split(',').forEach(id=>lenses.add(id));}
+    if(params.get('m'))mode=params.get('m');
+    if(params.get('t'))activeThread=params.get('t');
+  }catch(e){console.warn('Failed to decode state',e);}
+}
+
+function updateURL(){
+  try{
+    const state=encodeState();
+    if(history.replaceState&&window.location.href!=='about:srcdoc'){
+      history.replaceState(null,'',state?'#'+state:'#');
+    }
+  }catch(e){/* sandboxed iframe — URL state unavailable */}
+}
+
+function shareState(){
+  let url='';
+  try{url=window.location.href.split('#')[0]+'#'+encodeState();}
+  catch(e){url='#'+encodeState();}
+
+  const civName=sel?sel.nm:null;
+  const shareTitle='Aeon — The Epoch Atlas';
+  const shareText=civName
+    ? `Explore ${civName} on Civilitas — 85 civilizations, 65,000 years of human history`
+    : 'Civilitas — 85 civilizations, 65,000 years of human history, all in one map';
+
+  // Use native share sheet on devices that support it (iOS, Android, modern desktop)
+  if(navigator.share){
+    navigator.share({title:shareTitle,text:shareText,url:url})
+      .catch(err=>{
+        // User cancelled or share failed — fall back to clipboard silently
+        if(err.name!=='AbortError') copyToClipboard(url);
+      });
+    return;
+  }
+  // Desktop fallback: clipboard
+  copyToClipboard(url);
+}
+
+function copyToClipboard(url){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(()=>showToast()).catch(()=>legacyCopy(url));
+  } else {
+    legacyCopy(url);
+  }
+}
+
+function legacyCopy(url){
+  const ta=document.createElement('textarea');
+  ta.value=url;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');showToast();}catch(e){}
+  document.body.removeChild(ta);
+}
+
+function showToast(){
+  const t=document.getElementById('share-toast');
+  if(!t)return;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// ── COMPARE BUTTON IN CIV HEADER ──
+function addCompareBtn(){
+  if(mode!=='compare')return'';
+  const other=sel2?null:(sel?'add-sel2':'');
+  return`<button onclick="event.stopPropagation();${sel2?'':'addToCompare(sel.id)'}" 
+    style="background:none;border:1px solid var(--bdr);padding:3px 8px;font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:1px;color:var(--amber-b);cursor:pointer;border-radius:2px;margin-left:8px"
+    title="Add to comparison">⊞ Compare</button>`;
+}
+
+
+// ══════════════════════════════════════════
+// WEB AUDIO ENGINE
+// ══════════════════════════════════════════
+let _actx=null,_soundNodes=[],_soundPlaying=false,_soundMuted=false;
+
+const SCALES={
+  pentatonic:[0,2,4,7,9],
+  pentatonic_minor:[0,3,5,7,10],
+  dorian:[0,2,3,5,7,9,10],
+  phrygian:[0,1,3,5,7,8,10],
+  lydian:[0,2,4,6,7,9,11],
+  mixolydian:[0,2,4,5,7,9,10],
+  aeolian:[0,2,3,5,7,8,10],
+  byzantine:[0,1,4,5,7,8,11],
+  arabic:[0,2,3,6,7,8,11],
+  turkish:[0,1,4,5,7,8,10],
+  japanese:[0,1,5,7,8],
+  slendro:[0,2,5,7,10],
+  pelog:[0,1,3,7,8],
+  andean:[0,2,4,7,9],
+  ethiopian:[0,2,3,5,7,9,11],
+  celtic:[0,2,3,5,7,9,10],
+  blues:[0,3,5,6,7,10],
+};
+
+function getActx(){
+  if(!_actx){_actx=new(window.AudioContext||window.webkitAudioContext)();}
+  if(_actx.state==='suspended')_actx.resume();
+  return _actx;
+}
+
+function makeReverb(ctx,dur=1.8,decay=2.5){
+  const len=ctx.sampleRate*dur;
+  const buf=ctx.createBuffer(2,len,ctx.sampleRate);
+  for(let c=0;c<2;c++){const d=buf.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,decay);}
+  const v=ctx.createConvolver();v.buffer=buf;return v;
+}
+
+function midiToHz(m){return 440*Math.pow(2,(m-69)/12);}
+
+function scheduleNote(ctx,master,timbre,freq,when,dur,vol){
+  switch(timbre){
+    case 'pluck':{
+      const o=ctx.createOscillator(),f=ctx.createBiquadFilter(),e=ctx.createGain();
+      o.type='sawtooth';o.frequency.value=freq;
+      f.type='lowpass';f.frequency.setValueAtTime(freq*5,when);f.frequency.exponentialRampToValueAtTime(freq*1.5,when+dur*0.5);
+      e.gain.setValueAtTime(vol,when);e.gain.exponentialRampToValueAtTime(0.001,when+dur);
+      o.connect(f);f.connect(e);e.connect(master);
+      o.start(when);o.stop(when+dur);
+      break;}
+    case 'flute':{
+      const o=ctx.createOscillator(),vib=ctx.createOscillator(),vg=ctx.createGain(),e=ctx.createGain();
+      o.type='sine';o.frequency.value=freq;
+      vib.frequency.value=5.5;vg.gain.value=freq*0.018;
+      vib.connect(vg);vg.connect(o.frequency);
+      e.gain.setValueAtTime(0,when);e.gain.linearRampToValueAtTime(vol,when+0.04);e.gain.setValueAtTime(vol,when+dur-0.08);e.gain.linearRampToValueAtTime(0,when+dur);
+      o.connect(e);e.connect(master);
+      o.start(when);o.stop(when+dur);vib.start(when);vib.stop(when+dur);
+      break;}
+    case 'drone':{
+      [0,7,12].forEach((int,i)=>{
+        const o=ctx.createOscillator(),g=ctx.createGain();
+        o.type=i===0?'sawtooth':'sine';
+        o.frequency.value=freq*Math.pow(2,int/12);
+        g.gain.setValueAtTime(0,when);g.gain.linearRampToValueAtTime(vol*(i===0?.4:.12),when+0.2);
+        g.gain.setValueAtTime(vol*(i===0?.4:.12),when+dur-0.2);g.gain.linearRampToValueAtTime(0,when+dur);
+        o.connect(g);g.connect(master);o.start(when);o.stop(when+dur);
+      });
+      break;}
+    case 'drum':{
+      const nb=ctx.createBuffer(1,Math.floor(ctx.sampleRate*.35),ctx.sampleRate);
+      const nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=(Math.random()*2-1)*Math.pow(1-i/nd.length,5);
+      const ns=ctx.createBufferSource(),nf=ctx.createBiquadFilter(),ne=ctx.createGain();
+      ns.buffer=nb;nf.type='lowpass';nf.frequency.value=120+freq*.3;
+      ne.gain.setValueAtTime(vol*1.4,when);ne.gain.exponentialRampToValueAtTime(0.001,when+.35);
+      ns.connect(nf);nf.connect(ne);ne.connect(master);ns.start(when);
+      break;}
+    case 'bell':{
+      [1,2.756,5.404].forEach((r,i)=>{
+        const o=ctx.createOscillator(),e=ctx.createGain();
+        o.type='sine';o.frequency.value=freq*r;
+        e.gain.setValueAtTime(vol/(r*1.2),when);e.gain.exponentialRampToValueAtTime(0.001,when+dur*(1.2/(r+.5)));
+        o.connect(e);e.connect(master);o.start(when);o.stop(when+dur);
+      });
+      break;}
+    case 'mbira':{
+      const o=ctx.createOscillator(),o2=ctx.createOscillator(),e=ctx.createGain(),g2=ctx.createGain();
+      o.type='triangle';o2.type='sine';o.frequency.value=freq;o2.frequency.value=freq*3.1;
+      e.gain.setValueAtTime(vol,when);e.gain.exponentialRampToValueAtTime(0.001,when+dur*.9);
+      g2.gain.value=vol*.25;
+      o.connect(e);e.connect(master);o2.connect(g2);g2.connect(master);
+      o.start(when);o.stop(when+dur);o2.start(when);o2.stop(when+dur);
+      break;}
+    case 'brass':{
+      const o=ctx.createOscillator(),f=ctx.createBiquadFilter(),e=ctx.createGain();
+      o.type='sawtooth';o.frequency.value=freq;
+      f.type='bandpass';f.frequency.value=freq*1.8;f.Q.value=0.8;
+      e.gain.setValueAtTime(0,when);e.gain.linearRampToValueAtTime(vol,when+.06);e.gain.setValueAtTime(vol*.7,when+.1);e.gain.linearRampToValueAtTime(0,when+dur);
+      o.connect(f);f.connect(e);e.connect(master);o.start(when);o.stop(when+dur);
+      break;}
+    case 'sitar':{
+      const o=ctx.createOscillator(),o2=ctx.createOscillator(),f=ctx.createBiquadFilter(),e=ctx.createGain(),g2=ctx.createGain();
+      o.type='sawtooth';o2.type='sawtooth';o.frequency.value=freq;o2.frequency.value=freq*1.003;
+      f.type='bandpass';f.frequency.value=freq*3;f.Q.value=1.2;
+      e.gain.setValueAtTime(vol,when);e.gain.exponentialRampToValueAtTime(0.12,when+dur*.55);e.gain.linearRampToValueAtTime(0,when+dur);
+      g2.gain.value=vol*.35;
+      o.connect(f);f.connect(e);e.connect(master);o2.connect(g2);g2.connect(master);
+      o.start(when);o.stop(when+dur);o2.start(when);o2.stop(when+dur);
+      // Drone fifth
+      const dr=ctx.createOscillator(),dg=ctx.createGain();
+      dr.type='sawtooth';dr.frequency.value=freq*.5;
+      dg.gain.setValueAtTime(vol*.15,when);dg.gain.linearRampToValueAtTime(0,when+dur);
+      dr.connect(dg);dg.connect(master);dr.start(when);dr.stop(when+dur);
+      break;}
+    case 'oud':{
+      const o=ctx.createOscillator(),f=ctx.createBiquadFilter(),e=ctx.createGain(),h=ctx.createOscillator(),hg=ctx.createGain();
+      o.type='triangle';o.frequency.value=freq;h.type='sawtooth';h.frequency.value=freq*2;
+      f.type='lowpass';f.frequency.value=freq*7;
+      e.gain.setValueAtTime(vol,when);e.gain.exponentialRampToValueAtTime(0.001,when+dur*.65);
+      hg.gain.value=vol*.18;
+      o.connect(f);f.connect(e);e.connect(master);h.connect(hg);hg.connect(master);
+      o.start(when);o.stop(when+dur);h.start(when);h.stop(when+dur);
+      break;}
+    case 'panpipe':{
+      const o=ctx.createOscillator(),nb=ctx.createBuffer(1,Math.floor(ctx.sampleRate*dur),ctx.sampleRate);
+      o.type='sine';o.frequency.value=freq;
+      const nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=(Math.random()*2-1)*.04;
+      const ns=ctx.createBufferSource(),nf=ctx.createBiquadFilter(),e=ctx.createGain();
+      ns.buffer=nb;nf.type='bandpass';nf.frequency.value=freq;nf.Q.value=12;
+      e.gain.setValueAtTime(0,when);e.gain.linearRampToValueAtTime(vol,when+.04);e.gain.setValueAtTime(vol*.8,when+dur-.08);e.gain.linearRampToValueAtTime(0,when+dur);
+      o.connect(e);ns.connect(nf);nf.connect(master);e.connect(master);
+      o.start(when);o.stop(when+dur);ns.start(when);ns.stop(when+dur);
+      break;}
+    case 'didgeridoo':{
+      const o=ctx.createOscillator(),f=ctx.createBiquadFilter(),e=ctx.createGain();
+      o.type='sawtooth';o.frequency.value=freq*.25;
+      f.type='bandpass';f.Q.value=2.5;
+      f.frequency.setValueAtTime(180,when);f.frequency.linearRampToValueAtTime(480,when+1.5);f.frequency.linearRampToValueAtTime(180,when+3);f.frequency.linearRampToValueAtTime(350,when+dur);
+      e.gain.setValueAtTime(vol,when);e.gain.setValueAtTime(vol,when+dur-.15);e.gain.linearRampToValueAtTime(0,when+dur);
+      o.connect(f);f.connect(e);e.connect(master);o.start(when);o.stop(when+dur);
+      break;}
+  }
+}
+
+function playTheme(c){
+  if(_soundMuted||!c.music)return;
+  stopTheme();
+  try{
+    const ctx=getActx();
+    const m=c.music;
+    const scale=SCALES[m.scale]||SCALES.pentatonic;
+    const beatDur=60/m.tempo;
+    const noteDur=beatDur*.88;
+    const totalBeats=m.rhythm.length*4; // 4 loops
+    const totalDur=totalBeats*beatDur+1.5;
+
+    // Master gain
+    const master=ctx.createGain();
+    master.gain.setValueAtTime(0,ctx.currentTime);
+    master.gain.linearRampToValueAtTime(.32,ctx.currentTime+.4);
+    master.gain.setValueAtTime(.32,ctx.currentTime+totalDur-1.2);
+    master.gain.linearRampToValueAtTime(0,ctx.currentTime+totalDur);
+
+    // Optional reverb
+    let output=master;
+    if(m.reverb>0.05){
+      const rev=makeReverb(ctx);
+      const dryG=ctx.createGain(),wetG=ctx.createGain();
+      dryG.gain.value=1-m.reverb*.5;wetG.gain.value=m.reverb*.6;
+      master.connect(dryG);master.connect(rev);rev.connect(wetG);
+      dryG.connect(ctx.destination);wetG.connect(ctx.destination);
+    } else {
+      master.connect(ctx.destination);
+    }
+
+    // Walk up/down scale melodically
+    let scalePos=0,direction=1;
+    let beat=0;
+    for(let loop=0;loop<4;loop++){
+      for(let step=0;step<m.rhythm.length;step++){
+        if(m.rhythm[step]){
+          const semitone=scale[scalePos%scale.length];
+          const octaveShift=Math.floor(scalePos/scale.length);
+          const midiNote=m.root+semitone+octaveShift*12;
+          const freq=midiToHz(midiNote);
+          const when=ctx.currentTime+beat*beatDur;
+          scheduleNote(ctx,master,m.timbre,freq,when,noteDur,.7);
+          // Walk scale
+          scalePos+=direction;
+          if(scalePos>=scale.length*2||scalePos<0){direction*=-1;scalePos+=direction*2;}
+        }
+        beat++;
+      }
+    }
+
+    _soundPlaying=true;
+    // Auto-stop and update UI
+    const stopAt=totalDur*1000;
+    setTimeout(()=>{_soundPlaying=false;updateSoundBtn(false);},stopAt);
+    updateSoundBtn(true);
+  }catch(e){console.warn('Audio playback failed:',e);}
+}
+
+function stopTheme(){
+  try{
+    if(_actx){
+      // Disconnect all gains by creating a short new context isn't viable;
+      // instead close and recreate
+      _actx.close();_actx=null;
+    }
+  }catch(e){}
+  _soundPlaying=false;
+  updateSoundBtn(false);
+}
+
+function toggleSound(c){
+  if(_soundMuted){_soundMuted=false;playTheme(c);}
+  else if(_soundPlaying){stopTheme();}
+  else{playTheme(c);}
+}
+
+function updateSoundBtn(playing){
+  const btns=document.querySelectorAll('.sound-btn');
+  btns.forEach(b=>{
+    b.textContent=playing?'◼ Stop':'♪ Listen';
+    b.classList.toggle('playing',playing);
+    b.setAttribute('aria-label',playing?'Stop music':'Play musical theme');
+  });
+}
+// End Web Audio Engine
+
+
+// ══════════════════════════════════════════════════════
+// MAP ZOOM ANIMATION
+// ══════════════════════════════════════════════════════
+const VB_DEFAULT=[0,0,1000,520];
+let _vbCurrent=[0,0,1000,520],_vbAnim=null;
+
+function animateViewBox(target,duration=600){
+  if(_vbAnim)cancelAnimationFrame(_vbAnim);
+  const svg=document.getElementById('wsvg');
+  if(!svg)return;
+  const start=[..._vbCurrent];
+  const t0=performance.now();
+  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+  function frame(now){
+    const raw=Math.min(1,(now-t0)/duration);
+    const p=ease(raw);
+    const vb=start.map((s,i)=>s+(target[i]-s)*p);
+    svg.setAttribute('viewBox',vb.join(' '));
+    _vbCurrent=[...vb];
+    if(raw<1)_vbAnim=requestAnimationFrame(frame);
+    else{_vbCurrent=[...target];_vbAnim=null;}
+  }
+  _vbAnim=requestAnimationFrame(frame);
+}
+
+function zoomToCiv(c){
+  if(!window._proj)return;
+  const [cx,cy]=itemPt(c);
+  const zw=300,zh=156; // zoomed viewport size (same aspect ratio)
+  const x=Math.max(0,Math.min(1000-zw,cx-zw/2));
+  const y=Math.max(0,Math.min(520-zh,cy-zh/2));
+  animateViewBox([x,y,zw,zh],600);
+}
+
+function zoomOut(){
+  animateViewBox(VB_DEFAULT,500);
+}
+
+// ══════════════════════════════════════════════════════
+// FINGERPRINT RADAR CHART
+// ══════════════════════════════════════════════════════
+const FP_LABELS=['Duration','Impact','Scale','Complexity','Legacy','Evidence'];
+const FP_KEYS=['dur','imp','scl','cpx','leg','evi'];
+
+function renderFingerprint(c){
+  if(!c.fp)return'';
+  // Larger canvas with generous padding so labels never clip
+  const W=360,H=300,cx=W/2,cy=H/2+10,R=88;
+  const n=FP_LABELS.length;
+  const angles=FP_LABELS.map((_,i)=>(i*2*Math.PI/n)-Math.PI/2);
+
+  let svg=`<svg class="fp-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">`;
+  // Grid rings
+  [2,4,6,8,10].forEach(level=>{
+    const r=R*(level/10);
+    const pts=angles.map(a=>`${cx+r*Math.cos(a)},${cy+r*Math.sin(a)}`).join(' ');
+    svg+=`<polygon points="${pts}" class="fp-grid"/>`;
+  });
+  // Axis lines
+  angles.forEach(a=>{
+    svg+=`<line x1="${cx}" y1="${cy}" x2="${(cx+R*Math.cos(a)).toFixed(1)}" y2="${(cy+R*Math.sin(a)).toFixed(1)}" class="fp-grid"/>`;
+  });
+  // Data polygon
+  const vals=FP_KEYS.map(k=>c.fp[k]||0);
+  const dataPts=angles.map((a,i)=>{
+    const r=R*(vals[i]/10);
+    return`${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`;
+  }).join(' ');
+  svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
+  // Labels — placed outside the ring with enough clearance, wrapped in two lines where needed
+  const SHORT=['Duration','Impact','Scale','Complexity','Legacy','Evidence'];
+  angles.forEach((a,i)=>{
+    const lr=R+26;
+    const lx=cx+lr*Math.cos(a);
+    const ly=cy+lr*Math.sin(a);
+    const cosA=Math.cos(a);
+    const anchor=cosA>0.15?'start':cosA<-0.15?'end':'middle';
+    // Vertical centering: shift up/down based on sin
+    const dy=Math.sin(a)>0.15?4:Math.sin(a)<-0.15?-4:4;
+    svg+=`<text x="${lx.toFixed(1)}" y="${(ly+dy).toFixed(1)}" text-anchor="${anchor}" class="fp-label">${SHORT[i]}</text>`;
+  });
+  svg+='</svg>';
+  return`<div class="fp-wrap"><div class="fp-title">Civilizational Fingerprint</div>${svg}</div>`;
+}
+
+// ══════════════════════════════════════════════════════
+// ENHANCED SPAN BAR WITH CONTEMPORARIES
+// ══════════════════════════════════════════════════════
+function renderEnhancedSpanBar(c){
+  const MIN=-4500000000,MAX=2024,total=MAX-MIN;
+  const left=Math.max(0,(c.s-MIN)/total*100);
+  const width=Math.min(100-left,(c.e-c.s)/total*100);
+
+  // Find up to 4 contemporaries that overlap with this epoch's lifespan
+  const overlap=ITEMS.filter(x=>x.id!==c.id&&x.s<c.e&&x.e>c.s)
+    .map(x=>{
+      const overlapStart=Math.max(x.s,c.s);
+      const overlapEnd=Math.min(x.e,c.e);
+      return{...x,overlapYrs:overlapEnd-overlapStart};
+    })
+    .sort((a,b)=>b.overlapYrs-a.overlapYrs)
+    .slice(0,4);
+
+  const colors=['#e89820','#4a8870','#4a7faa','#9b6fd4'];
+
+  let bars=overlap.map((x,i)=>{
+    const xl=Math.max(0,(x.s-MIN)/total*100);
+    const xw=Math.min(100-xl,(x.e-x.s)/total*100);
+    // Show only the portion overlapping with c
+    const ol=Math.max(xl,left);
+    const or_=Math.min(xl+xw,left+width);
+    const ow=Math.max(0,or_-ol);
+    return`<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
+      <div class="contemp-bar-nm">${x.nm}</div>
+      <div class="contemp-bar-track">
+        <div class="contemp-bar-fill" style="left:${(ol-left).toFixed(1)}%;width:${ow.toFixed(1)}%;background:${colors[i]}"></div>
+      </div>
+      <div class="contemp-bar-yr">${fmt(x.s)}–${fmt(x.e)}</div>
+    </div>`;
+  }).join('');
+
+  const mainBar=`<div class="civ-span-bar" title="${fmt(c.s)} to ${fmt(c.e)}">
+    <div class="civ-span-fill" style="left:${left.toFixed(1)}%;width:${width.toFixed(1)}%"></div>
+  </div>
+  <div class="civ-span-lbls"><span>${fmt(c.s)}</span><span style="color:var(--txt3);font-size:8px">${c.e-c.s} years</span><span>${fmt(c.e)}</span></div>`;
+
+  const contemp=overlap.length?`<div class="contemp-wrap">
+    <div class="fp-title" style="margin-top:10px">Active at the same time</div>
+    ${bars}
+  </div>`:'';
+
+  return mainBar+contemp;
+}
+
+// ══════════════════════════════════════════════════════
+// TIMELINE DENSITY SPARKLINE
+// ══════════════════════════════════════════════════════
+function renderDensityBar(){
+  const svg=document.getElementById('density-bar');
+  if(!svg)return;
+  const W=svg.parentElement?svg.parentElement.offsetWidth||600:600;
+  svg.setAttribute('viewBox',`0 0 ${W} 18`);
+  const MIN=-4500000000,MAX=2024,total=MAX-MIN;
+  const steps=200;
+  const stepYr=total/steps;
+  const counts=[];
+  let mx=0;
+  for(let i=0;i<steps;i++){
+    const yr=MIN+i*stepYr;
+    const n=ITEMS.filter(c=>c.s<=yr&&c.e>=yr).length;
+    counts.push(n);
+    if(n>mx)mx=n;
+  }
+  if(!mx)return;
+  const pts=counts.map((n,i)=>{
+    const x=(i/steps)*W;
+    const y=18-(n/mx)*14-1;
+    return`${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+  // Close the polygon at the bottom
+  const poly=`0,18 ${pts.join(' ')} ${W},18`;
+  svg.innerHTML=`<polygon points="${poly}" fill="rgba(232,152,32,.25)" stroke="rgba(232,152,32,.5)" stroke-width=".5"/>
+    <line x1="0" y1="18" x2="${W}" y2="18" stroke="var(--bdr2)" stroke-width=".5"/>`;
+}
+
+// ══════════════════════════════════════════════════════
+// DIPLOMATIC CONNECTION LAYER
+// ══════════════════════════════════════════════════════
+function renderDiplomaticLayer(){
+  const layer=document.getElementById('conn-layer');
+  if(!layer)return;
+  // Add diplomatic lines on top of regular connections when in explore mode
+  // and no civ selected (so they're visible on the map)
+  if(sel)return; // only show when no civ selected
+  const ids=new Set(ITEMS.filter(c=>active(c)).map(c=>c.id));
+  let dl='';
+  DIPLOMATIC.forEach(d=>{
+    const fc=ITEMS.find(x=>x&&x.id===d.from),tc=ITEMS.find(x=>x&&x.id===d.to);
+    if(!fc||!tc||!ids.has(d.from)||!ids.has(d.to))return;
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
+    const mx=(fx+tx)/2,my=Math.min(fy,ty)-36;
+    dl+=`<path d="M${fx},${fy} Q${mx},${my} ${tx},${ty}" 
+      stroke="#f0d060" stroke-width="1" fill="none" stroke-dasharray="4,3" opacity=".4"
+      title="${d.title}"/>`;
+  });
+  // Append to existing conn-layer content
+  layer.innerHTML+=dl;
+}
+
+// ══════════════════════════════════════════════════════
+// DIPLOMATIC INFO in drawer
+// ══════════════════════════════════════════════════════
+function renderDiplomaticSection(c){
+  const relevant=DIPLOMATIC.filter(d=>d.from===c.id||d.to===c.id);
+  if(!relevant.length)return'';
+  return`<div class="conn-hdr">Diplomatic Record</div>`+
+    relevant.map(d=>{
+      const other=ITEMS.find(x=>x&&x.id===(d.from===c.id?d.to:d.from));
+      return`<div style="padding:8px 0;border-bottom:1px solid var(--bdr2)">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+          <span class="diplom-icon"></span>
+          <span style="font-family:'Cinzel',serif;font-size:9.5px;color:var(--amber-b)">${d.title} · ${fmt(d.year)}</span>
+        </div>
+        <div style="font-size:12px;color:var(--txt3);margin-bottom:3px">with ${other?other.nm:'Unknown'}</div>
+        <div style="font-size:12.5px;line-height:1.65;color:var(--txt2);font-style:italic">${d.desc}</div>
+      </div>`;
+    }).join('');
+}
+
+// ══════════════════════════════════════════════════════
+// WHAT-IF MODE
+// ══════════════════════════════════════════════════════
+let whatifItem=null;
+
+// ── WHAT-IF MAP RENDERING ──
+function renderWhatIfPaths(){
+  const layer=document.getElementById('thread-layer');
+  if(!layer){return;}
+  if(!whatifItem){layer.innerHTML='';return;}
+
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
+  if(!c){layer.innerHTML='';return;}
+
+  const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
+  const downstreamConcepts=new Set(directOut.map(t=>t.concept));
+  const downstream=TRANSMISSIONS.filter(t=>downstreamConcepts.has(t.concept)&&t.from!==c.id);
+  const [cx,cy]=itemPt(c);
+
+  let out='<defs><marker id="wi-arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#e8251a" opacity=".7"/></marker></defs>';
+
+  // Direct broken paths — animated red dashed lines with stroke-dashoffset animation
+  let validDirect=0;
+  directOut.forEach((t,i)=>{
+    const tc=ITEMS.find(x=>x&&x.id===t.to);
+    if(!tc)return;
+    const [tx,ty]=itemPt(tc);
+    const mx=(cx+tx)/2, my=Math.min(cy,ty)-40;
+    const delay=(validDirect*0.2).toFixed(1);
+    // Path with SVG animate for opacity fade-in + stroke-dashoffset crawl
+    out+=`<path d="M${cx},${cy} Q${mx},${my} ${tx},${ty}"
+      stroke="#e8251a" stroke-width="1.6" fill="none" stroke-dasharray="5,4"
+      marker-end="url(#wi-arrow)" opacity="0" id="wi-direct-${i}">
+      <animate attributeName="opacity" from="0" to="0.85" dur="0.5s" begin="${delay}s" fill="freeze"/>
+      <animate attributeName="stroke-dashoffset" from="50" to="0" dur="1s" begin="${delay}s" fill="freeze"/>
+    </path>`;
+    // Label concept at midpoint
+    out+=`<text x="${mx}" y="${my-8}" font-family="Cinzel,serif" font-size="9"
+      fill="#e8251a" text-anchor="middle" opacity="0" id="wi-lbl-${i}">
+      <animate attributeName="opacity" from="0" to="0.9" dur="0.4s" begin="${(parseFloat(delay)+0.15).toFixed(2)}s" fill="freeze"/>
+    </text>`;
+    // Text content must be set after to avoid XSS-like issues with template strings
+    validDirect++;
+  });
+
+  // Downstream broken paths — dimmer orange dashes
+  const downDelay=(validDirect*0.2+0.4).toFixed(1);
+  downstream.forEach((t,j)=>{
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
+    if(!fc||!tc)return;
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
+    const mx=(fx+tx)/2,my=Math.min(fy,ty)-24;
+    out+=`<path d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
+      stroke="#c06020" stroke-width="0.8" fill="none" stroke-dasharray="3,6" opacity="0" id="wi-down-${j}">
+      <animate attributeName="opacity" from="0" to="0.45" dur="0.6s" begin="${downDelay}s" fill="freeze"/>
+    </path>`;
+  });
+
+  layer.innerHTML=out;
+
+  // Set text content separately for label safety
+  validDirect=0;
+  directOut.forEach((t,i)=>{
+    const tc=ITEMS.find(x=>x&&x.id===t.to);
+    if(!tc)return;
+    const lbl=document.getElementById('wi-lbl-'+i);
+    if(lbl)lbl.textContent=t.concept;
+    validDirect++;
+  });
+}
+
+// Per-civ "what would not exist" summary
+const WHATIF_IMPACT={};
+
+function renderWhatIfDrawer(){
+  const dc=document.getElementById('drawer-content');
+  const dt=document.getElementById('drawer-top');
+  if(dt)dt.innerHTML='';
+  if(!dc)return;
+
+  if(!whatifItem){
+    dc.innerHTML=`
+    <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">What If?</div>
+    <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
+      Remove an era from history. Red lines animate on the map as the transmission chain breaks. See every innovation and transformation the world would lose.
+    </div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Tap a marker on the map — or try one of these</div>
+    ${[
+    ].map(s=>{
+      const c=ITEMS.find(x=>x&&x.id===s.id);
+      if(!c)return'';
+      return`<button class="whatif-civ-btn" onclick="setWhatIf('${c.id}')">
+        <div style="flex:1">
+          <div style="font-size:11px;font-family:'Cinzel',serif;color:var(--amber-b);margin-bottom:3px">${c.nm}</div>
+          <div style="font-size:11px;color:var(--txt3);font-style:italic;line-height:1.5">${s.why}</div>
+        </div>
+        <span style="font-size:16px;color:var(--amber-b);margin-left:8px;flex-shrink:0">→</span>
+      </button>`;
+    }).join('')}`;
+    return;
+  }
+
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
+  if(!c){dc.innerHTML='';return;}
+
+  const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
+  const downstreamConcepts=new Set(directOut.map(t=>t.concept));
+  const downstream=TRANSMISSIONS.filter(t=>downstreamConcepts.has(t.concept)&&t.from!==c.id);
+  const lostConcepts=[...new Set(directOut.map(t=>t.concept))];
+  const impact=WHATIF_IMPACT[c.id]||null;
+
+  dc.innerHTML=`
+  <button onclick="clearWhatIf()"
+    style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px;transition:opacity .15s"
+    onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+    ← All experiments
+  </button>
+
+  <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:#e8251a;letter-spacing:1px;margin-bottom:4px">Without ${c.nm}</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:14px">${fmt(c.s)} – ${fmt(c.e)} · ${c.sb}</div>
+
+  ${impact?`<div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px;padding:12px;background:rgba(232,37,26,.07);border-left:3px solid #e8251a;">${impact}</div>`:''}
+
+  <div style="display:flex;gap:10px;margin-bottom:14px">
+    <div style="flex:1;padding:10px;background:var(--panel2);border:1px solid rgba(232,37,26,.3);border-radius:3px;text-align:center">
+      <div style="font-size:22px;font-family:'Cinzel',serif;color:#e8251a;font-weight:700">${lostConcepts.length}</div>
+      <div style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:.8px;color:var(--txt3);text-transform:uppercase;line-height:1.4">direct<br>transmissions broken</div>
+    </div>
+    <div style="flex:1;padding:10px;background:var(--panel2);border:1px solid rgba(200,96,32,.3);border-radius:3px;text-align:center">
+      <div style="font-size:22px;font-family:'Cinzel',serif;color:var(--amber-b);font-weight:700">${downstream.length}</div>
+      <div style="font-size:9px;font-family:'Cinzel',serif;letter-spacing:.8px;color:var(--txt3);text-transform:uppercase;line-height:1.4">downstream<br>consequences</div>
+    </div>
+  </div>
+
+  <div style="font-size:11.5px;color:var(--txt3);font-style:italic;margin-bottom:14px">Red arrows on the map show broken transmissions. Amber dashes show the downstream unravelling.</div>
+
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:#e8251a;text-transform:uppercase;margin-bottom:8px">Direct transmissions broken</div>
+  ${directOut.length
+    ? directOut.map(t=>{
+        const tc=ITEMS.find(x=>x&&x.id===t.to);
+        return`<div style="padding:9px 0;border-bottom:1px solid var(--bdr2)">
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap">
+            <span style="font-family:'Cinzel',serif;font-size:10px;color:#e8251a;text-decoration:line-through;opacity:.8">${t.concept}</span>
+            <span style="font-size:10px;color:var(--txt3)">→ ${tc?tc.nm:'?'} · ${fmt(t.year)}</span>
+          </div>
+          <div style="font-size:12.5px;line-height:1.65;color:var(--txt2)">${t.desc}</div>
+        </div>`;
+      }).join('')
+    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this civilization in the current dataset.</div>`
+  }
+
+  ${downstream.length?`
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;margin:16px 0 8px">Downstream unravelling</div>
+  <div style="font-size:12px;color:var(--txt3);margin-bottom:10px;font-style:italic;line-height:1.6">These transmissions were only possible because of what ${c.nm} first made happen:</div>
+  ${downstream.map(t=>{
+    const fc=ITEMS.find(x=>x&&x.id===t.from),tc2=ITEMS.find(x=>x&&x.id===t.to);
+    return`<div style="padding:6px 0;border-bottom:1px solid var(--bdr2);font-size:12px">
+      <span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9.5px">${t.concept}</span>
+      <span style="color:var(--txt3)"> · ${fc?fc.nm:'?'} → ${tc2?tc2.nm:'?'} · ${fmt(t.year)}</span>
+    </div>`;
+  }).join('')}`:''}`;
+
+  // Scroll to top immediately so result is the first thing seen
+  const panel=document.getElementById('info-panel');
+  if(panel)setTimeout(()=>panel.scrollTop=0,0);
+}
+function setWhatIf(id){
+  whatifItem=id;
+  renderWhatIfDrawer();
+  renderWhatIfPaths();
+  renderMap();
+  openMobileSheet();
+}
+
+function clearWhatIf(){
+  whatifItem=null;
+  document.getElementById('thread-layer').innerHTML='';
+  renderWhatIfDrawer();
+  renderMap();
+}
+
+// ══════════════════════════════════════════════════════
+// HERITAGE MODE
+// ══════════════════════════════════════════════════════
+const HERITAGE_REGIONS={
+  'Deep Time':['hadean','theia_impact','late_heavy_bombardment','eoarchean_life','archean','photosynthesis','stromatolites'],
+  'Precambrian Life':['great_oxygenation','huronian_glaciation','proterozoic','eukaryotes','boring_billion','rodinia','snowball_earth','sexual_reproduction','multicellularity'],
+  'Paleozoic World':['ediacaran','cambrian_explosion','ordovician','ordovician_extinction','silurian','devonian','devonian_extinction','carboniferous','permian','land_plants','rise_of_insects'],
+  'Mesozoic Era':['permian_triassic','pangaea','triassic','jurassic','cretaceous','flowering_plants','kpg_extinction'],
+  'Cenozoic Life':['mammal_radiation','petm','antarctic_glaciation','grassland_revolution','himalayan_orogeny','messinian_crisis'],
+  'Human Origins':['human_evolution','pleistocene','homo_sapiens','cognitive_revolution','out_of_africa','megafauna_extinction','younger_dryas'],
+  'Ancient Civilisations':['neolithic','urban_revolution','bronze_age','bronze_age_collapse','iron_age','axial_age','classical_greece','persian_empire','alexander_conquests','roman_empire','han_dynasty','qin_unification','gupta_golden_age','silk_road','polynesian_navigation','bantu_migration'],
+  'Medieval World':['fall_of_rome','rise_of_christianity','rise_of_islam','islamic_golden_age','medieval_period','viking_age','mongol_empire','crusades','black_death','ottoman_empire'],
+  'Early Modern':['renaissance','reformation','printing_revolution','age_of_exploration','columbian_exchange','age_of_absolutism','atlantic_slave_trade','colonial_age'],
+  'Modern Era':['enlightenment','age_of_revolution','napoleonic_wars','industrial_revolution','abolitionism','scramble_for_africa','meiji_restoration'],
+  'Contemporary':['world_wars','nuclear_age','cold_war','decolonisation','space_age','green_revolution','digital_age','fall_of_ussr','covid_pandemic','anthropocene','holocene'],
+};
+
+const HERITAGE_REASONS={
+  hadean:'Formation of the planet we inhabit',
+  theia_impact:'Created the Moon that stabilises Earth\'s axis',
+  late_heavy_bombardment:'Delivered water and volatiles to early Earth',
+  eoarchean_life:'The origin of all living things',
+  archean:'Age of microbial life and early continents',
+  photosynthesis:'The reaction that produces the air we breathe',
+  stromatolites:'First visible evidence of life on Earth',
+  great_oxygenation:'Transformed the atmosphere for complex life',
+  huronian_glaciation:'First global ice age',
+  proterozoic:'Evolution of complex cells and multicellularity',
+  eukaryotes:'Foundation of all complex life',
+  boring_billion:'The long pause before the Cambrian Explosion',
+  rodinia:'Supercontinent whose breakup triggered Snowball Earth',
+  snowball_earth:'Most extreme climate events of the last 2 billion years',
+  sexual_reproduction:'Accelerated evolution through genetic mixing',
+  multicellularity:'Cells cooperating to build complex organisms',
+  ediacaran:'First large complex organisms',
+  cambrian_explosion:'Birth of all major animal body plans',
+  ordovician:'Great biodiversification of marine life',
+  ordovician_extinction:'First of the Big Five mass extinctions',
+  silurian:'Recovery and the first land colonisation',
+  devonian:'Age of fishes and the first forests',
+  devonian_extinction:'Reef collapse and the longest reef gap',
+  carboniferous:'Coal forests and giant insects',
+  permian:'Age of synapsids — ancestors of mammals',
+  land_plants:'The greening of the continents',
+  rise_of_insects:'The most species-rich animal group on Earth',
+  permian_triassic:'The worst mass extinction in Earth\'s history',
+  pangaea:'The last supercontinent',
+  triassic:'Rise of dinosaurs and first mammals',
+  jurassic:'Golden age of dinosaurs, first birds',
+  cretaceous:'Flowering plants and the end of the dinosaurs',
+  flowering_plants:'90% of modern plant species are angiosperms',
+  kpg_extinction:'The asteroid that killed the dinosaurs',
+  mammal_radiation:'Rise of mammals after the dinosaurs',
+  petm:'Closest geological analogue to modern warming',
+  antarctic_glaciation:'Beginning of the modern icehouse world',
+  grassland_revolution:'Cradle environment of human evolution',
+  himalayan_orogeny:'Mountains that drive the Asian monsoon',
+  messinian_crisis:'The Mediterranean Sea vanishes and returns',
+  human_evolution:'From bipedal ape to tool-using hominid',
+  pleistocene:'Ice ages that shaped human evolution',
+  homo_sapiens:'Our species emerges in Africa',
+  cognitive_revolution:'Birth of language, art, and symbolic thought',
+  out_of_africa:'Humans colonise every continent',
+  megafauna_extinction:'Death of the ice age giants',
+  younger_dryas:'The climate crisis that may have started agriculture',
+  neolithic:'The agricultural revolution that built civilisation',
+  urban_revolution:'The first cities and writing',
+  bronze_age:'Metallurgy, pyramids, and the first empires',
+  bronze_age_collapse:'Cascading systems failure',
+  iron_age:'Democratisation of metal tools and weapons',
+  axial_age:'Birth of philosophy, religion, and rational thought',
+  classical_greece:'Democracy, philosophy, and science',
+  persian_empire:'The first world empire',
+  alexander_conquests:'Greek culture spread across the known world',
+  roman_empire:'Law, engineering, and the institutional framework of the West',
+  han_dynasty:'Chinese classical civilisation and the Silk Road',
+  qin_unification:'Birth of unified China',
+  gupta_golden_age:'Invention of zero and the decimal system',
+  silk_road:'Eurasian knowledge and trade network',
+  polynesian_navigation:'Greatest feat of pre-modern navigation',
+  bantu_migration:'Transformation of sub-Saharan Africa',
+  fall_of_rome:'End of antiquity and the ancient world',
+  rise_of_christianity:'From persecuted sect to state religion',
+  rise_of_islam:'A new civilisation in a century',
+  islamic_golden_age:'Preservation and advancement of classical knowledge',
+  medieval_period:'Cathedrals, universities, and parliamentary governance',
+  viking_age:'Norse expansion across four continents',
+  mongol_empire:'The largest contiguous land empire',
+  crusades:'Holy war and cultural exchange',
+  black_death:'The plague that reshaped European society',
+  ottoman_empire:'Islamic superpower spanning three continents',
+  renaissance:'Rebirth of learning and art',
+  reformation:'Fracture of Christendom and birth of the nation-state',
+  printing_revolution:'Gutenberg\'s world-changing invention',
+  age_of_exploration:'Global connection and colonial conquest',
+  columbian_exchange:'Biological globalisation of the modern world',
+  age_of_absolutism:'Divine right and centralised state power',
+  atlantic_slave_trade:'The largest forced migration in history',
+  colonial_age:'European empires governing 84% of the world',
+  enlightenment:'Reason, liberty, and the rights of man',
+  age_of_revolution:'Liberty, equality, fraternity',
+  napoleonic_wars:'Europe remade by revolution and war',
+  industrial_revolution:'Steam power transforms human existence',
+  abolitionism:'The end of slavery',
+  scramble_for_africa:'Continental partition in 30 years',
+  meiji_restoration:'Japan\'s extraordinary modernisation',
+  world_wars:'Industrial warfare at global scale',
+  nuclear_age:'Humanity gains the power to destroy itself',
+  cold_war:'Bipolar world and the threat of annihilation',
+  decolonisation:'End of European empires',
+  space_age:'Humanity reaches beyond Earth',
+  green_revolution:'Agricultural transformation saving a billion lives',
+  digital_age:'Information becomes instant and global',
+  fall_of_ussr:'End of the Cold War and the Soviet system',
+  covid_pandemic:'The pandemic that shut down the world',
+  anthropocene:'Human-dominated Earth',
+  holocene:'The warm epoch of human civilisation',
+};
+
+let heritageRegion=null;
+
+function renderHeritageDrawer(){
+  const dc=document.getElementById('drawer-content');
+  const dt=document.getElementById('drawer-top');
+  if(dt)dt.innerHTML='';
+  if(!dc)return;
+
+  if(!heritageRegion){
+    const regionBtns=Object.keys(HERITAGE_REGIONS).map(r=>
+      `<button class="heritage-btn" onclick="setHeritage('${r}')">${r}</button>`
+    ).join('');
+    dc.innerHTML=`
+    <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">Cradle</div>
+    <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
+      Select a world region to see the eras that originated or flourished there — the epochs that shaped its culture, technology, and identity. Blue markers on the map show the region\'s defining ages.
+    </div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Choose your region</div>
+    <div class="heritage-grid">${regionBtns}</div>`;
+    return;
+  }
+
+  const civIds=HERITAGE_REGIONS[heritageRegion];
+  const civs=civIds.map(id=>ITEMS.find(c=>c.id===id)).filter(Boolean);
+
+  dc.innerHTML=`
+  <button onclick="clearHeritage()"
+    style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px;transition:opacity .15s"
+    onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+    ← All regions
+  </button>
+  <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);letter-spacing:1px;margin-bottom:4px">${heritageRegion}</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing epochs · shown in blue on the map</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Defining epochs</div>
+  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToItem('${c.id}')">
+    <span class="heritage-civ-nm">${c.nm}</span>
+    <span class="heritage-civ-why">${HERITAGE_REASONS[c.id]||''}</span>
+  </div>`).join('')}`;
+
+  const panel=document.getElementById('info-panel');
+  if(panel)setTimeout(()=>panel.scrollTop=0,0);
+}
+
+function setHeritage(region){
+  heritageRegion=region;
+  renderHeritageDrawer();
+  renderMap();
+}
+
+function clearHeritage(){
+  heritageRegion=null;
+  renderHeritageDrawer();
+  renderMap();
+}
+
+
+// ══════════════════════════════════════════════════════
+// OVERRIDE setMode to handle new modes
+// ══════════════════════════════════════════════════════
+
+
+
+// ══════════════════════════════════════════════════════
+// HERSTORY MODE
+// ══════════════════════════════════════════════════════
+let herstory=false;
+
+function _syncHerstoryBadge(){
+  const badge=document.getElementById('herstory-badge');
+  const item=document.getElementById('menu-herstory');
+  if(badge){badge.textContent=herstory?'ON':'';badge.classList.toggle('on',herstory);}
+  if(item){item.style.color=herstory?'#c060a0':'var(--txt2)';}
+}
+function toggleHerstory(){
+  herstory=!herstory;
+  document.body.classList.toggle('herstory',herstory);
+  const btn=document.getElementById('btn-herstory');
+  if(btn){
+    btn.setAttribute('aria-pressed',herstory);
+    btn.style.color=herstory?'#c060a0':'';
+    btn.style.borderColor=herstory?'rgba(192,96,160,.6)':'';
+    btn.style.background=herstory?'rgba(192,96,160,.1)':'';
+  }
+  renderMap();
+  renderDrawer();
+  _syncHerstoryBadge();
+}
+
+function renderHerstoryDrawer(){
+  const dc=document.getElementById('drawer-content');
+  const dt=document.getElementById('drawer-top');
+  if(dt)dt.innerHTML='';
+  if(!dc)return;
+
+  if(!sel){
+    // Herstory home — overview
+    dc.innerHTML=`
+    <div class="hs-panel-hdr">♀ Herstory</div>
+    <div class="hs-panel-sub">
+      A mirror to AEON — tracing the ages of human history through the women who defined every epoch. Rulers, thinkers, scientists, revolutionaries, and creators whose contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
+    </div>
+    <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
+      Tap any era on the map to discover the women who defined it — queens who governed, scholars who wrote, scientists who discovered, and leaders who held communities together.
+    </div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:12px">Women who changed everything</div>
+    ${(()=>{
+      const ALL=[];
+      const shuffled=[...ALL].sort(()=>Math.random()-.5);
+      return shuffled.slice(0,5).map(w=>{
+        const c=ITEMS.find(x=>x&&x.id===w.civ);
+        return c?`<button onclick="navigateToItem('${c.id}')" 
+          style="width:100%;background:none;border:1px solid rgba(192,96,160,.25);padding:9px 12px;text-align:left;cursor:pointer;margin-bottom:4px;border-radius:2px;transition:all .15s"
+          onmouseover="this.style.background='rgba(192,96,160,.08)'" onmouseout="this.style.background='none'">
+          <div style="font-family:'Cinzel',serif;font-size:10px;color:#c060a0;margin-bottom:2px">${w.nm} · ${w.yr<0?Math.abs(w.yr)+' BCE':w.yr+' CE'}</div>
+          <div style="font-size:11.5px;color:var(--txt2)">${w.desc}</div>
+          <div style="font-size:10px;color:var(--txt3);margin-top:2px">${c.nm}</div>
+        </button>`:''
+      }).join('');
+    })()}`;
+    return;
+  }
+
+  const c=sel;
+  const women=(WOMEN[c.id]||[]);
+  dc.innerHTML=`
+  <button onclick="closeInfo()"
+    style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px;transition:opacity .15s"
+    onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+    ← All epochs
+  </button>
+  <div class="hs-panel-hdr">${c.nm}</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:14px">${c.sb}</div>
+  ${women.length
+    ? women.map(w=>`<div class="hs-woman">
+        <div class="hs-woman-nm">${w.nm}</div>
+        <div style="display:flex;gap:8px;align-items:baseline;margin-bottom:5px">
+          <span class="hs-woman-yr">${w.yr<0?Math.abs(w.yr)+' BCE':w.yr+' CE'}</span>
+          <span class="hs-woman-role">${w.role}</span>
+        </div>
+        <div class="hs-woman-desc">${w.desc}</div>
+      </div>`).join('')
+    : `<div class="hs-no-data">The historical record for women in ${c.nm} is sparse — not because women were absent, but because those who recorded history did not record them. Their presence was the water the civilisation swam in.</div>`
+  }`;
+
+  const panel=document.getElementById('info-panel');
+  if(panel)setTimeout(()=>panel.scrollTop=0,0);
+}
+
+
+
+
+
+function mapClick(e){
+  try{
+    if(_wasDragging){_wasDragging=false;return;}
+    const src=e.touches?.[0]||e.changedTouches?.[0]||e;
+    const clientX=src.clientX, clientY=src.clientY;
+    const [svgX,svgY]=screenToSVG(clientX,clientY);
+    const isTouch='ontouchstart' in window||navigator.maxTouchPoints>0;
+    const zr=1000/_vbW;
+    const thresh=(isTouch?55:35)/zr;
+    const activeSet=window.ids_cache||new Set(ITEMS.filter(c=>c&&active(c)).map(c=>c.id));
+    const candidates=[];
+    ITEMS.forEach(c=>{
+      if(!c||!c.id||!activeSet.has(c.id))return;
+      const pt=itemPt(c);
+      if(!pt||!isFinite(pt[0])||!isFinite(pt[1]))return;
+      const d=Math.sqrt((pt[0]-svgX)**2+(pt[1]-svgY)**2);
+      if(d<thresh)candidates.push({c,d,pt});
+    });
+    if(!candidates.length)return;
+    candidates.sort((a,b)=>a.d-b.d);
+    const nearest=candidates[0];
+    const second=candidates[1];
+    const isZoomedIn=zr>=2;
+    const neighbourDist=second?Math.sqrt((nearest.pt[0]-second.pt[0])**2+(nearest.pt[1]-second.pt[1])**2):Infinity;
+    const clusterSep=35/zr;
+    const isCluster=!isZoomedIn&&(candidates.length>=3||neighbourDist<clusterSep);
+    if(isCluster){
+      showClusterPicker(candidates.map(x=>x.c),clientX,clientY);
+    } else {
+      itemClick(nearest.c.id);
+    }
+  }catch(err){console.warn('mapClick err:',err);}
+}
+
+
+
+
+// ══════════════════════════════════════════════════════
+// MAP ZOOM / PAN
+// ══════════════════════════════════════════════════════
+let _vbX=0,_vbY=0,_vbW=1000,_vbH=520;
+let _dragging=false,_wasDragging=false,_lastX=0,_lastY=0,_dragDist=0;
+let _pinchDist=0;
+const VB_MIN_W=150, VB_MAX_W=1000;
+
+function _applyVB(){
+  const svg=document.getElementById('wsvg');
+  if(svg) svg.setAttribute('viewBox',`${_vbX} ${_vbY} ${_vbW} ${_vbH}`);
+  // Re-render markers so dot sizes adjust to zoom level
+  renderMap();
+}
+
+function zoomMap(factor, cx, cy){
+  // cx,cy = SVG coords to zoom toward (default: center)
+  cx = cx ?? (_vbX + _vbW/2);
+  cy = cy ?? (_vbY + _vbH/2);
+  const newW = Math.max(VB_MIN_W, Math.min(VB_MAX_W, _vbW/factor));
+  const newH = newW * (520/1000);
+  const scale = newW/_vbW;
+  _vbX = cx - (cx-_vbX)*scale;
+  _vbY = cy - (cy-_vbY)*scale;
+  _vbW = newW; _vbH = newH;
+  _clampVB();
+  _applyVB();
+  _updateZoomHint();
+}
+
+function resetMapZoom(){
+  _vbX=0;_vbY=0;_vbW=1000;_vbH=520;
+  _applyVB();
+  _hideClusterHint();
+  const btn=document.getElementById('map-reset-btn');
+  if(btn) btn.style.display='none';
+}
+
+function _clampVB(){
+  _vbX = Math.max(0, Math.min(1000-_vbW, _vbX));
+  _vbY = Math.max(0, Math.min(520-_vbH, _vbY));
+}
+
+function _updateZoomHint(){
+  const btn=document.getElementById('map-reset-btn');
+  if(btn) btn.style.display=_vbW<999?'inline-block':'none';
+  // legacy cluster-hint fallback
+  const hint=document.getElementById('cluster-hint');
+  if(hint&&_vbW<999){
+    hint.classList.add('show');
+    clearTimeout(hint._t);
+    hint._t=setTimeout(()=>hint.classList.remove('show'),3000);
+  }
+}
+
+function _hideClusterHint(){
+  const hint=document.getElementById('cluster-hint');
+  if(hint){hint.classList.remove('show');hint.style.pointerEvents='none';}
+}
+
+function showClusterHint(){
+  const hint=document.getElementById('cluster-hint');
+  if(!hint)return;
+  hint.textContent='Pinch or scroll to zoom in and separate';
+  hint.style.pointerEvents='none';
+  hint.classList.add('show');
+  clearTimeout(hint._t);
+  hint._t=setTimeout(()=>hint.classList.remove('show'),3000);
+}
+
+// Screen → SVG coords accounting for current viewBox
+// ── Letterbox-aware coordinate helpers ──────────────────
+// SVG uses preserveAspectRatio="xMidYMid meet": content is scaled uniformly
+// to fit the element, centred with padding bars on the shorter axis.
+// All screen→SVG transforms must account for those bars.
+function _svgScale(rect){
+  return Math.min(rect.width/_vbW, rect.height/_vbH);
+}
+function _svgOffsets(rect, scale){
+  return [(rect.width -_vbW*scale)/2, (rect.height-_vbH*scale)/2];
+}
+
+function screenToSVG(clientX, clientY){
+  const svg=document.getElementById('wsvg');
+  const rect=svg.getBoundingClientRect();
+  const s=_svgScale(rect);
+  const [xOff,yOff]=_svgOffsets(rect,s);
+  return [
+    _vbX + (clientX-rect.left-xOff)/s,
+    _vbY + (clientY-rect.top -yOff)/s
+  ];
+}
+
+// Mouse wheel zoom
+function _onWheel(e){
+  e.preventDefault();
+  const [svgX,svgY]=screenToSVG(e.clientX,e.clientY);
+  const factor = e.deltaY<0 ? 1.15 : 1/1.15;
+  zoomMap(factor, svgX, svgY);
+}
+
+// Mouse drag pan
+function _onMouseDown(e){
+  if(e.button!==0)return;
+  _dragging=true;_wasDragging=false;_dragDist=0; _lastX=e.clientX; _lastY=e.clientY;
+}
+function _onMouseMove(e){
+  if(!_dragging)return;
+  const svg=document.getElementById('wsvg');
+  const rect=svg.getBoundingClientRect();
+  const s=_svgScale(rect);
+  const dx=(e.clientX-_lastX)/s;
+  const dy=(e.clientY-_lastY)/s;
+  _dragDist+=Math.abs(dx)+Math.abs(dy);
+  if(_dragDist>3)_wasDragging=true;
+  _vbX-=dx; _vbY-=dy;
+  _clampVB(); _applyVB();
+  _lastX=e.clientX; _lastY=e.clientY;
+}
+function _onMouseUp(){ if(_dragDist>5)_wasDragging=true; _dragging=false; _dragDist=0; }
+
+// Drift 1: Hover-only labels — render pill tooltip above hovered dot
+function _renderHoverLabel(c){
+  const layer=document.getElementById('hover-label-layer');
+  if(!layer)return;
+  if(!c){layer.innerHTML='';return;}
+  const [cx,cy]=itemPt(c);
+  const zr=1000/_vbW;
+  const dotR=Math.max(2,7/zr);
+  const labelY=cy-dotR-8;
+  const pad=8, fh=11;
+  // measure approx width via char count
+  const approxW=Math.max(40, c.nm.length*6.5+pad*2);
+  const rx=approxW/2;
+  layer.innerHTML=`
+    <g>
+      <rect x="${cx-rx}" y="${labelY-fh-pad/2}" width="${approxW}" height="${fh+pad}"
+        rx="4" fill="var(--panel)" stroke="var(--bdr)" stroke-width=".8" opacity=".95"/>
+      <text x="${cx}" y="${labelY}" font-family="Cinzel,serif" font-size="${fh}"
+        letter-spacing="1" fill="var(--txt)" text-anchor="middle" dominant-baseline="auto"
+        pointer-events="none">${c.nm}</text>
+    </g>`;
+}
+
+// Drift 1: mousemove on window — find nearest active civ and show hover label
+function _onMapMouseMove(e){
+  if(_dragging)return;
+  const svg=document.getElementById('wsvg');
+  if(!svg)return;
+  const rect=svg.getBoundingClientRect();
+  // Check if cursor is inside SVG bounds
+  if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom){
+    _renderHoverLabel(null);return;
+  }
+  const [svgX,svgY]=screenToSVG(e.clientX,e.clientY);
+  const zr=1000/_vbW;
+  const thresh=28/zr;
+  const activeSet=window.ids_cache||new Set(ITEMS.filter(c=>c&&active(c)).map(c=>c.id));
+  let nearest=null, bestD=thresh;
+  ITEMS.forEach(c=>{
+    if(!c||!activeSet.has(c.id))return;
+    if(sel&&sel.id===c.id)return; // skip selected — it already has persistent label
+    const pt=itemPt(c);
+    if(!pt||!isFinite(pt[0]))return;
+    const d=Math.hypot(pt[0]-svgX,pt[1]-svgY);
+    if(d<bestD){bestD=d;nearest=c;}
+  });
+  _renderHoverLabel(nearest||null);
+}
+
+// Touch events
+let _touches={};
+let _tapStartX=0,_tapStartY=0,_tapMoved=false,_touchFiredAt=0;
+function _onTouchStart(e){
+  Array.from(e.changedTouches).forEach(t=>{ _touches[t.identifier]={x:t.clientX,y:t.clientY}; });
+  if(Object.keys(_touches).length===1){
+    const t=e.changedTouches[0];
+    _lastX=t.clientX; _lastY=t.clientY;
+    _tapStartX=t.clientX; _tapStartY=t.clientY; _tapMoved=false;
+  } else if(Object.keys(_touches).length===2){
+    const pts=Object.values(_touches);
+    _pinchDist=Math.hypot(pts[1].x-pts[0].x, pts[1].y-pts[0].y);
+    _tapMoved=true; // multi-touch cancels tap
+  }
+}
+function _onTouchMove(e){
+  e.preventDefault();
+  const keys=Object.keys(_touches);
+  Array.from(e.changedTouches).forEach(t=>{ if(_touches[t.identifier]) _touches[t.identifier]={x:t.clientX,y:t.clientY}; });
+  
+  if(keys.length===1){
+    // Single finger pan
+    const t=e.changedTouches[0];
+    // Mark as moved if finger travelled > 8px (not a tap)
+    if(Math.hypot(t.clientX-_tapStartX, t.clientY-_tapStartY)>8) _tapMoved=true;
+    const svg=document.getElementById('wsvg');
+    const rect=svg.getBoundingClientRect();
+    const s=_svgScale(rect);
+    const dx=(t.clientX-_lastX)/s;
+    const dy=(t.clientY-_lastY)/s;
+    _vbX-=dx; _vbY-=dy;
+    _clampVB(); _applyVB();
+    _lastX=t.clientX; _lastY=t.clientY;
+  } else if(keys.length===2){
+    // Pinch zoom
+    const pts=Object.values(_touches);
+    const newDist=Math.hypot(pts[1].x-pts[0].x, pts[1].y-pts[0].y);
+    if(_pinchDist>0){
+      const midX=(pts[0].x+pts[1].x)/2;
+      const midY=(pts[0].y+pts[1].y)/2;
+      const [svgX,svgY]=screenToSVG(midX,midY);
+      zoomMap(newDist/_pinchDist, svgX, svgY);
+    }
+    _pinchDist=newDist;
+  }
+}
+function _onTouchEnd(e){
+  const wasMulti=Object.keys(_touches).length>=2;
+  Array.from(e.changedTouches).forEach(t=>{ delete _touches[t.identifier]; });
+  _pinchDist=0;
+  // Fire mapClick only for single-finger taps (finger didn't move, no multi-touch)
+  if(!wasMulti && !_tapMoved && e.changedTouches.length===1){
+    _touchFiredAt=Date.now();
+    mapClick(e);
+  }
+  _tapMoved=false;
+}
+
+function initMapInteraction(){
+  const svg=document.getElementById('wsvg');
+  if(!svg)return;
+  svg.addEventListener('wheel',_onWheel,{passive:false});
+  svg.addEventListener('mousedown',_onMouseDown);
+  window.addEventListener('mousemove',_onMouseMove);
+  window.addEventListener('mousemove',_onMapMouseMove);
+  window.addEventListener('mouseup',_onMouseUp);
+  svg.addEventListener('touchstart',_onTouchStart,{passive:false});
+  svg.addEventListener('touchmove',_onTouchMove,{passive:false});
+  svg.addEventListener('touchend',_onTouchEnd,{passive:false});
+  svg.addEventListener('click',function(e){if(_wasDragging){_wasDragging=false;return;}if(Date.now()-(_touchFiredAt||0)<500)return;mapClick(e);});
+}
+
+// Auto-zoom cluster: if tap finds 3+ civs within 40px, zoom in instead of picking
+
+function showClusterPicker(civs, screenX, screenY){
+  const picker=document.getElementById('cluster-picker');
+  const list=document.getElementById('cluster-list');
+  if(!picker||!list)return;
+  picker._openedAt=Date.now();
+  list.innerHTML=civs.map(c=>`
+    <div class="cluster-item" onclick="closeClusterPicker();itemClick('${c.id}')">
+      <div class="cluster-item-dot" style="background:${herstory?'#c060a0':'#e8251a'}"></div>
+      <div>
+        <div class="cluster-item-nm">${c.nm}</div>
+        <div class="cluster-item-sb">${c.sb||''}</div>
+      </div>
+    </div>`).join('');
+
+  // Render off-screen so we can measure actual dimensions
+  const MARGIN = 12;
+  picker.style.left = '-9999px';
+  picker.style.top  = '-9999px';
+  picker.style.width = Math.min(260, window.innerWidth - MARGIN * 2) + 'px';
+  picker.classList.add('open');
+
+  // Measure real rendered size, then reposition within viewport
+  const pw = picker.offsetWidth;
+  const ph = picker.offsetHeight;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  // Prefer: right of tap, offset slightly up
+  let left = screenX + 10;
+  let top  = screenY - 24;
+
+  // Flip left if it would overflow right edge
+  if (left + pw + MARGIN > vw) left = screenX - pw - 10;
+  // Hard-clamp to viewport
+  left = Math.max(MARGIN, Math.min(left, vw - pw - MARGIN));
+  top  = Math.max(MARGIN, Math.min(top,  vh - ph - MARGIN));
+
+  picker.style.left = left + 'px';
+  picker.style.top  = top  + 'px';
+}
+function closeClusterPicker(){
+  const p=document.getElementById('cluster-picker');
+  if(p) p.classList.remove('open');
+}
+
+document.addEventListener('click', function(e){
+  const picker=document.getElementById('cluster-picker');
+  if(picker&&picker.classList.contains('open')&&!picker.contains(e.target)
+    &&(!picker._openedAt||Date.now()-picker._openedAt>350))
+    closeClusterPicker();
+});
+
+function toggleBurger(){
+  const m=document.getElementById('burger-menu');
+  const btn=document.getElementById('burger-btn');
+  if(!m)return;
+  const open=m.classList.toggle('open');
+  btn.setAttribute('aria-expanded',open);
+}
+function closeBurger(){
+  const m=document.getElementById('burger-menu');
+  const btn=document.getElementById('burger-btn');
+  if(m){m.classList.remove('open');}
+  if(btn){btn.setAttribute('aria-expanded','false');}
+}
+function showAbout(){
+  const modal=document.getElementById('about-modal');
+  if(!modal)return;
+  const _ay=document.getElementById('about-year');if(_ay)_ay.textContent=new Date().getFullYear();
+  modal.style.display='flex';
+  modal.addEventListener('click',function(e){if(e.target===modal)closeAbout();},{once:true});
+}
+function closeAbout(){
+  const modal=document.getElementById('about-modal');
+  if(modal)modal.style.display='none';
+}
+// Close burger on outside click
+document.addEventListener('click',function(e){
+  const wrap=document.getElementById('burger-wrap');
+  if(wrap&&!wrap.contains(e.target))closeBurger();
+});
+// Close about on Escape
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeAbout();closeBurger();}
+  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
+    const tag=document.activeElement&&document.activeElement.tagName;
+    if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT')return;
+    e.preventDefault();
+    const tl=document.getElementById('tl');
+    if(!tl)return;
+    const step=e.shiftKey?10:e.ctrlKey||e.metaKey?50:1;
+    const dir=e.key==='ArrowRight'?1:-1;
+    const newVal=Math.max(0,Math.min(1000,parseInt(tl.value)+dir*step));
+    tl.value=newVal;
+    setYear(sliderToYear(newVal));
+  }
+});
+// Update herstory badge in burger menu when toggled
+const _origToggleHerstory=typeof toggleHerstory==='function'?toggleHerstory:null;
+
+document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeClusterPicker();});
+
+// ── THEME ──
+function applyTheme(t){
+  document.documentElement.dataset.theme=t;
+  const _tb=document.getElementById('theme-btn');if(_tb)_tb.textContent=t==='dark'?'◑':'◐';
+  // Write to both keys so Pangea hub and Civilitas share the preference
+  localStorage.setItem('pangea-theme',t);
+  localStorage.setItem('civ-theme',t);
+}
+function toggleTheme(){
+  const cur=document.documentElement.dataset.theme||
+    (window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
+  applyTheme(cur==='dark'?'light':'dark');
+}
+
+(function(){try{
+  // Prefer pangea-theme (project-wide), fall back to civ-theme (legacy), then system
+  const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('civ-theme');
+  if(saved){applyTheme(saved);}
+  else{
+    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+    document.documentElement.dataset.theme=sys;
+    const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
+  }
+}catch(e){}})();
+
+// ── MOBILE DRAWER ──
+const isMobile=()=>window.innerWidth<=768 && window.matchMedia('(orientation:portrait)').matches;
+const _drawer=document.getElementById('info-panel');
+const _handle=document.getElementById('drawer-handle');
+let _drawerOpen=false;
+
+function openMobileSheet(){
+  if(!isMobile())return;
+  _drawerOpen=true;
+  _drawer.classList.add('mob-open');
+  _drawer.style.top='';
+}
+
+function closeMobileSheet(){
+  if(!isMobile()&&!_drawerOpen)return;
+  _drawerOpen=false;
+  _drawer.classList.remove('mob-open');
+  _drawer.style.top='';
+}
+
+// ── DRAWER DRAG TO SNAP ──
+if(_handle){
+  let _touchId=null,_startY=0,_startTop=0,_dragging=false;
+
+  _handle.addEventListener('touchstart',function(e){
+    if(!isMobile()||!_drawerOpen)return;
+    const t=e.changedTouches[0];
+    _touchId=t.identifier;
+    _dragging=true;
+    _startY=t.clientY;
+    _startTop=_drawer.getBoundingClientRect().top-52; // relative to .main top (header=52px)
+    _drawer.style.transition='none';
+  },{passive:true});
+
+  _handle.addEventListener('touchmove',function(e){
+    if(!_dragging||!isMobile())return;
+    const t=Array.from(e.changedTouches).find(x=>x.identifier===_touchId);
+    if(!t)return;
+    e.preventDefault();
+    const dy=t.clientY-_startY;
+    // Clamp: min top = 21vh worth of px, max top = halfway point (50% of .main)
+    const mainH=window.innerHeight-52;
+    const minTop=window.innerHeight*0.21;
+    const maxTop=mainH*0.5;
+    const newTop=Math.max(minTop,Math.min(maxTop,_startTop+dy));
+    _drawer.style.top=newTop+'px';
+  },{passive:false});
+
+  function endDrag(){
+    if(!_dragging)return;
+    _dragging=false;
+    _drawer.style.transition='';
+    // Snap: if dragged past 40% of .main height, snap to collapsed (flex layout)
+    const mainH=window.innerHeight-52;
+    const curTop=_drawer.getBoundingClientRect().top-52;
+    if(curTop>mainH*0.4){
+      closeMobileSheet();
+    }else{
+      _drawer.style.top='';
+      openMobileSheet();
+    }
+  }
+  _handle.addEventListener('touchend',endDrag);
+  _handle.addEventListener('touchcancel',endDrag);
+}
+
+// ── TIMELINE FILL ──
+function updateTlFill(pct){
+  const f=document.getElementById('tl-fill');
+  if(f)f.style.width=pct+'%';
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+
+  <!-- Cluster picker popup -->
+  <div id="cluster-picker" role="dialog" aria-label="Select civilization">
+    <div id="cluster-picker-hdr">
+      <span>Select civilization</span>
+      <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">✕</button>
+    </div>
+    <div id="cluster-list"></div>
+  </div>
+
+<!-- About modal -->
+<div id="about-modal" role="dialog" aria-modal="true" aria-label="About Aeon" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center">
+  <div style="background:var(--panel);border:1px solid var(--bdr);border-radius:6px;padding:28px 32px;max-width:420px;width:calc(100% - 40px);position:relative;box-shadow:0 16px 48px rgba(0,0,0,.6)">
+    <button onclick="closeAbout()" aria-label="Close" style="position:absolute;top:12px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1">✕</button>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px">AEON</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">The Epoch Atlas</div>
+    <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:12px">
+      Created by <a href="https://polyglyphanalytica.com" target="_blank" rel="noopener" style="color:var(--amber-b);text-decoration:underline;text-underline-offset:3px">Polyglyph Analytica</a> &copy; <span id="about-year"></span>
+    </p>
+    <p style="font-size:12px;line-height:1.7;color:var(--txt3)">
+      Offered under the MIT License. Permission is granted to use, copy, modify, and distribute this software, with attribution, without warranties of any kind.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
