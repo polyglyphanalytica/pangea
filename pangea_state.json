@@ -182,10 +182,10 @@
       "validated_lenses": 20
     },
     "sophia": {
-      "phase": "3",
+      "phase": "DONE",
       "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "IV",
       "validated_sha": "237e7df62e107531312d743d3ed2240033b7e438",
