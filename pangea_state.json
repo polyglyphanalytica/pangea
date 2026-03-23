@@ -982,7 +982,7 @@
     },
     "spiritus": {
       "phase": "DONE",
-      "items": 120,
+      "items": 100,
       "target": 100,
       "live": true,
       "map": "world",
@@ -990,7 +990,7 @@
       "validated_sha": "920bd594d07295f3be5718879c73e2f3c9cf957a",
       "validated_short": "920bd59",
       "validated_at": "2026-03-22T22:17:32.100466Z",
-      "validated_items": 120,
+      "validated_items": 100,
       "validated_lenses": 20
     },
     "solum": {
