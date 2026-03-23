@@ -442,6 +442,18 @@ def validate(atlas, force=False):
                    "MISSING: @media prefers-color-scheme light block and toggleTheme function"
                    if not (has_pcs_light and has_toggle) else "OK"))
 
+    # ── THEME: must NOT force data-theme on first load (system default) ────
+    # The theme IIFE's else branch must not set document.documentElement.dataset.theme
+    # when no saved preference exists — CSS @media prefers-color-scheme handles it.
+    forces_theme = bool(re.search(
+        r'else\s*\{[^}]*document\.documentElement\.dataset\.theme\s*=\s*sys',
+        html))
+    checks.append(("theme IIFE does not force data-theme on first load",
+                   not forces_theme,
+                   "FAIL: theme IIFE sets document.documentElement.dataset.theme in else "
+                   "branch — remove it so CSS @media prefers-color-scheme handles system default"
+                   if forces_theme else "OK"))
+
     # ── Map SVG elements ────────────────────────────────────────────────────
     checks.append(("SVG id=wsvg present", 'id="wsvg"' in html, ""))
     checks.append(("map-layer group present", 'id="map-layer"' in html, ""))

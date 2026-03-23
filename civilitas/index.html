@@ -8634,12 +8634,13 @@ function toggleTheme(){
 }
 
 (function(){try{
-  // Prefer pangea-theme (project-wide), fall back to civ-theme (legacy), then system
+  // Prefer pangea-theme (project-wide), fall back to civ-theme (legacy), then system.
+  // If no saved preference, do NOT set data-theme — let CSS @media prefers-color-scheme
+  // handle it dynamically so the site follows OS theme changes in real time.
   const saved=localStorage.getItem('pangea-theme')||localStorage.getItem('civ-theme');
   if(saved){applyTheme(saved);}
   else{
     const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
-    document.documentElement.dataset.theme=sys;
     const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
   }
 }catch(e){}})();
