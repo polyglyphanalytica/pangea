@@ -188,11 +188,11 @@
       "live": false,
       "map": "world",
       "section": "IV",
-      "validated_sha": "ed339a46f38f21d394c46e49a552ea7930c2f548",
-      "validated_short": "ed339a4",
-      "validated_at": "2026-03-23T13:52:58.047113Z",
+      "validated_sha": "237e7df62e107531312d743d3ed2240033b7e438",
+      "validated_short": "237e7df",
+      "validated_at": "2026-03-23T19:45:13.201483Z",
       "validated_items": 100,
-      "validated_lenses": 30
+      "validated_lenses": 20
     },
     "manifesto": {
       "phase": "1A",
