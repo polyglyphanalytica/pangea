@@ -434,18 +434,13 @@ def validate(atlas, force=False):
     # NEW: Code-level naming leaks (not content — function/variable names)
     # ══════════════════════════════════════════════════════════════════════════
 
-    # ── DARK THEME FORCED ON LOAD ───────────────────────────────────────────
-    forces_dark = any([
-        "document.documentElement.dataset.theme='dark'" in html,
-        'document.documentElement.dataset.theme = "dark"' in html,
-        'setAttribute("data-theme","dark")' in html,
-        "setAttribute('data-theme','dark')" in html,
-    ])
+    # ── THEME: system default with light/dark support ────────────────────────
     has_pcs_light = bool(re.search(r'prefers-color-scheme:\s*light', html))
-    checks.append(("dark theme forced on load (prevents light-mode blank map)",
-                   forces_dark or not has_pcs_light,
-                   "MISSING: add document.documentElement.dataset.theme='dark'; to init()"
-                   if not forces_dark and has_pcs_light else "OK"))
+    has_toggle = 'toggleTheme' in html
+    checks.append(("theme supports system default (prefers-color-scheme + toggle)",
+                   has_pcs_light and has_toggle,
+                   "MISSING: @media prefers-color-scheme light block and toggleTheme function"
+                   if not (has_pcs_light and has_toggle) else "OK"))
 
     # ── Map SVG elements ────────────────────────────────────────────────────
     checks.append(("SVG id=wsvg present", 'id="wsvg"' in html, ""))
