@@ -243,10 +243,10 @@
       "section": "VI"
     },
     "labor": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "VII"
     },
@@ -982,7 +982,7 @@
     },
     "spiritus": {
       "phase": "DONE",
-      "items": 84,
+      "items": 120,
       "target": 100,
       "live": true,
       "map": "world",
@@ -990,7 +990,7 @@
       "validated_sha": "920bd594d07295f3be5718879c73e2f3c9cf957a",
       "validated_short": "920bd59",
       "validated_at": "2026-03-22T22:17:32.100466Z",
-      "validated_items": 100,
+      "validated_items": 120,
       "validated_lenses": 20
     },
     "solum": {
@@ -1059,6 +1059,7 @@
     }
   },
   "queue": [
+    "labor",
     "spiritus",
     "petra",
     "bestia",
@@ -1102,7 +1103,6 @@
     "tributum",
     "murus",
     "armamentum",
-    "labor",
     "machina",
     "mercatus",
     "lucrum",
@@ -4707,6 +4707,382 @@
       "atlas": "petra",
       "batch": "100-100",
       "items": 100
+    },
+    {
+      "atlas": "labor",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "labor",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "labor",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "labor",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "labor",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "labor",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "labor",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "labor",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "labor",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "labor",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "labor",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "labor",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "labor",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "labor",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "labor",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "labor",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "labor",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "labor",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "labor",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "labor",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "labor",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "labor",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "labor",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "labor",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "labor",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "labor",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "labor",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "labor",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "labor",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "labor",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "labor",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "labor",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "labor",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "labor",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "labor",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "labor",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "labor",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "labor",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "labor",
+      "batch": "38-38",
+      "items": 38
+    },
+    {
+      "atlas": "labor",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "labor",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "labor",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "labor",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "labor",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "labor",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "labor",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "labor",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "labor",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "labor",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "labor",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "labor",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "labor",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "labor",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "labor",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "labor",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "labor",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "labor",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "labor",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "labor",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "labor",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "labor",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "labor",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "labor",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "labor",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "labor",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "labor",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "labor",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "labor",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "labor",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "labor",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "labor",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "labor",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "labor",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "labor",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "labor",
+      "batch": "74-74",
+      "items": 74
     }
   ],
   "assignments": {}
