@@ -174,7 +174,12 @@
       "target": 100,
       "live": false,
       "map": "world",
-      "section": "VII"
+      "section": "VII",
+      "validated_sha": "fcd181239f7f53cd88a2d2d7168af2c7c0f39097",
+      "validated_short": "fcd1812",
+      "validated_at": "2026-03-23T13:40:48.952570Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "sophia": {
       "phase": "1A",
