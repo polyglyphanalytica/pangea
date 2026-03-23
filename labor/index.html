@@ -4993,7 +4993,7 @@ function _syncHerstoryBadge(){
 function toggleHerstory(){
   herstory=!herstory;
   document.body.classList.toggle('herstory',herstory);
-  const btn=document.getElementById('btn-herstory');
+  const btn=document.getElementById('menu-herstory');
   if(btn){
     btn.setAttribute('aria-pressed',herstory);
     btn.style.color=herstory?'#c060a0':'';
