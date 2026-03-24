@@ -4536,7 +4536,6 @@ function toggleTheme(){
   if(saved){applyTheme(saved);}
   else{
     const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
-    document.documentElement.dataset.theme=sys;
     const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
   }
 }catch(e){}})();
