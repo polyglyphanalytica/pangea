@@ -507,12 +507,17 @@
       "section": "IV"
     },
     "codex": {
-      "phase": "3",
+      "phase": "DONE",
       "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "IV"
+      "section": "IV",
+      "validated_sha": "f2ae1a2c5dd0325dddcbb60023e6dfb24bd4eb1d",
+      "validated_short": "f2ae1a2",
+      "validated_at": "2026-03-24T07:53:53.940539Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "cruor": {
       "phase": "1A",
@@ -1082,7 +1087,6 @@
     }
   },
   "queue": [
-    "codex",
     "graphe",
     "experimenta",
     "quantum",
@@ -1196,7 +1200,8 @@
     "solum",
     "sylva",
     "aeon",
-    "debitum"
+    "debitum",
+    "codex"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -6500,6 +6505,23 @@
     {
       "atlas": "codex",
       "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "5+6",
+      "phase_next": "GO_LIVE",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "GO_LIVE",
       "items": 100
     }
   ],
