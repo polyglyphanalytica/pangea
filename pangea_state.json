@@ -433,8 +433,8 @@
       "homepage_name": "Trib\u016b"
     },
     "graphe": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "1D",
+      "items": 100,
       "target": 100,
       "live": false,
       "map": "world",
@@ -6522,6 +6522,24 @@
     {
       "atlas": "codex",
       "phase_done": "GO_LIVE",
+      "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1C",
+      "phase_next": "1D",
       "items": 100
     }
   ],
