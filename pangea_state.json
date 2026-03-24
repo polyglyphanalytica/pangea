@@ -433,8 +433,8 @@
       "homepage_name": "Trib\u016b"
     },
     "graphe": {
-      "phase": "1D",
-      "items": 100,
+      "phase": "DATA",
+      "items": 7,
       "target": 100,
       "live": false,
       "map": "world",
@@ -6541,6 +6541,53 @@
       "phase_done": "1C",
       "phase_next": "1D",
       "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "graphe",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "graphe",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "graphe",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "graphe",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "graphe",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "graphe",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "graphe",
+      "batch": "7-7",
+      "items": 7
     }
   ],
   "assignments": {}
