@@ -513,7 +513,7 @@
     },
     "codex": {
       "phase": "DATA",
-      "items": 0,
+      "items": 25,
       "target": 100,
       "live": false,
       "map": "world",
@@ -6011,6 +6011,131 @@
       "phase_done": "1F",
       "phase_next": "DATA",
       "items": 0
+    },
+    {
+      "atlas": "codex",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "codex",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "codex",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "codex",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "codex",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "codex",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "codex",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "codex",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "codex",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "codex",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "codex",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "codex",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "codex",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "codex",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "codex",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "codex",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "codex",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "codex",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "codex",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "codex",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "codex",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "codex",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "codex",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "codex",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "codex",
+      "batch": "25-25",
+      "items": 25
     }
   ],
   "assignments": {}
