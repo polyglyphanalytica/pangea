@@ -543,7 +543,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </head>
 <body>
 
-<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to civilization panel</button>
+<button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to breakthrough panel</button>
 <header class="hdr" role="banner">
   <div class="hdr-left">
     <span class="logo-t">EXPERIMENTA</span>
@@ -556,7 +556,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
   <div class="hdr-right">
     <div class="cnt-disp">
       <span class="cnt-n" id="cnt-n">2</span>
-      civilizations active
+      breakthroughs known
     </div>
     <!-- Burger menu -->
     <div class="burger-wrap" id="burger-wrap">
@@ -577,7 +577,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
           <span>◉</span><span>Explore</span>
         </button>
         <button class="burger-item burger-mode" id="btn-threads" onclick="setMode('threads');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⟳</span><span>Threads</span>
+          <span>⟳</span><span>Discovery Chains</span>
         </button>
         <button class="burger-item burger-mode" id="btn-compare" onclick="setMode('compare');closeBurger()" role="menuitem" aria-pressed="false">
           <span>⊞</span><span>Compare</span>
@@ -586,7 +586,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
           <span>⟁</span><span>What If</span>
         </button>
         <button class="burger-item burger-mode" id="btn-heritage" onclick="setMode('heritage');closeBurger()" role="menuitem" aria-pressed="false">
-          <span>⌂</span><span>Heritage</span>
+          <span>⌂</span><span>Scientific Heritage</span>
         </button>
         <button class="burger-item" id="menu-herstory" onclick="toggleHerstory();closeBurger()" role="menuitem">
           <span style="font-size:15px">♀</span>
@@ -609,10 +609,10 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </header>
 
 
-<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Concept transmissions">
+<div class="thread-panel" id="thread-panel" role="complementary" aria-label="Discovery Chains">
   <div class="thread-panel-inner">
     <div class="thread-panel-bar">
-      <span class="thread-panel-title" id="thread-panel-title">Concept Threads</span>
+      <span class="thread-panel-title" id="thread-panel-title">Discovery Chains</span>
       <div style="display:flex;align-items:center;gap:12px">
         <button class="thread-back-btn" id="thread-back-btn" onclick="closeThread()" style="display:none">← All Threads</button>
         <button class="thread-close-btn" onclick="setMode('explore')" aria-label="Close threads">✕</button>
@@ -628,7 +628,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 <div class="main">
   <div class="map-tl-col">
   <div class="map-c">
-    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with civilization markers" style="cursor:pointer">
+    <svg id="wsvg" viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="World map with scientific breakthrough markers" style="cursor:pointer">
       <defs>
 
         <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
@@ -665,25 +665,25 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
       <g id="thread-layer"></g>
       <!-- Selected-item label only -->
       <g id="label-layer" pointer-events="none"></g>
-      <!-- Civilization markers -->
+      <!-- Breakthrough markers -->
       <g id="mark-layer"></g>
       <!-- Hover tooltip label (sits above markers) -->
       <g id="hover-label-layer" pointer-events="none"></g>
     </svg>
     <div class="hint" id="map-hint">
-      <span id="map-hint-text">TAP A CIVILIZATION  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
+      <span id="map-hint-text">TAP A BREAKTHROUGH  ·  PINCH TO ZOOM  ·  DRAG TO PAN</span>
       <button id="map-reset-btn" onclick="resetMapZoom()" style="display:none;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--amber-b);background:none;border:1px solid var(--bdr);padding:2px 8px;border-radius:10px;cursor:pointer;margin-left:10px;white-space:nowrap">⊙ RESET ZOOM</button>
     </div>
   </div>
   <div class="tl-wrap" role="navigation" aria-label="Timeline">
-  <svg id="density-bar" aria-label="Civilization density over time"></svg>
+  <svg id="density-bar" aria-label="Breakthrough density over time"></svg>
   <div class="tl-lbls">
-    <span class="tl-lbl">65,000 BCE</span>
     <span class="tl-lbl">3000 BCE</span>
-    <span class="tl-lbl">2000 BCE</span>
-    <span class="tl-lbl">1000 BCE</span>
-    <span class="tl-lbl">1 CE</span>
-    <span class="tl-lbl">1000 CE</span>
+    <span class="tl-lbl">1500 BCE</span>
+    <span class="tl-lbl">500 BCE</span>
+    <span class="tl-lbl">500 CE</span>
+    <span class="tl-lbl">1500 CE</span>
+    <span class="tl-lbl">1800 CE</span>
     <span class="tl-lbl">2024 CE</span>
   </div>
   <div class="tl-trk">
@@ -694,7 +694,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 </div>
   </div><!-- /map-tl-col -->
 
-  <div class="info-panel" id="info-panel" role="complementary" aria-label="Civilization details">
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Breakthrough details">
     <div class="drawer-handle" id="drawer-handle" aria-label="Drag to resize"></div>
     <div id="drawer-top"></div>
     <div id="drawer-content"></div>
@@ -6470,7 +6470,7 @@ function toggleLensDD(){
 }
 
 function lensLabel(){
-  if(!lenses.size)return'Civilization Arc';
+  if(!lenses.size)return'Discovery Arc';
   const names=[...lenses].map(id=>{const L=LENSES.find(l=>l.id===id);return L?L.lbl:'';});
   if(names.length===1)return names[0];
   if(names.length<=3)return names.join(' · ');
@@ -6506,7 +6506,7 @@ function renderLensDD(){
       <div class="lens-row${arcOn?' on':''}" onclick="toggleLens('__arc__')">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Discovery Arc</span>
       </div>
       <div class="lens-row-sep"></div>
       ${rows}
@@ -6550,7 +6550,7 @@ function toggleLens(id){
       const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
       return`<button class="conn-item" tabindex="0"
           aria-label="${tip}"
-          onclick="navigateToCiv('${cid}')"
+          onclick="navigateToItem('${cid}')"
           style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
         <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
         <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -6586,7 +6586,7 @@ function yearToSlider(yr){
   }
 }
 
-function civPt(c){
+function itemPt(c){
   if(!c)return[500,260];
   if(!window._proj)return[c.x||500,c.y||260];
   if(typeof c.lon!=='number'||typeof c.lat!=='number')return[c.x||500,c.y||260];
@@ -6609,7 +6609,7 @@ function renderMap(){
       drawn.add(k);
       const o=ITEMS.find(x=>x&&x.id===id);
       if(!o)return;
-      const [cx,cy]=civPt(c),[ox,oy]=civPt(o);
+      const [cx,cy]=itemPt(c),[ox,oy]=itemPt(o);
       const mx=(cx+ox)/2,my=Math.min(cy,oy)-28;
       cl+=`<path d="M${cx},${cy} Q${mx},${my} ${ox},${oy}" stroke="#e8251a" stroke-width=".8" fill="none" stroke-dasharray="3,5" opacity="${sel?0.1:0.25}"/>`;
     });
@@ -6624,13 +6624,13 @@ function renderMap(){
     const heritageIds=mode==='heritage'&&heritageRegion?new Set(HERITAGE_REGIONS[heritageRegion]||[]):null;
     const isHeritage=heritageIds&&heritageIds.has(c.id);
     const heritageInactive=isHeritage&&!on;
-    const isWhatifLost=whatifCiv&&whatifCiv!==c.id&&
-      TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifCiv);
+    const isWhatifLost=whatifItem&&whatifItem!==c.id&&
+      TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifItem);
     const womenCount=(WOMEN[c.id]||[]).length;
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
     // Drift 2: inactive items fully hidden (0 not 0.06). Drift 3: herstory items without WOMEN hidden (0 not 0.35).
     const op=on?(herstory&&!womenCount?0:isWhatifLost?.2:1):(heritageInactive?.35:0);
-    const [cx,cy]=civPt(c);
+    const [cx,cy]=itemPt(c);
     return {c,on,isSel,mcol,op,cx,cy};
   });
   // Pass 1: decorative rings — pointer-events:none, never intercept clicks
@@ -6659,7 +6659,7 @@ function renderMap(){
       const pulseMax=Math.max(8, 16/zr);
       dots+=`<g role="button" tabindex="0" data-civ="${c.id}"
           aria-label="${c.nm} — click to explore"
-          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();civClick('${c.id}')}"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();itemClick('${c.id}')}"
           opacity="${op}" pointer-events="none">
           <circle cx="${cx}" cy="${cy}" r="${dotR.toFixed(1)}"
             fill="${mcol}" filter="url(#glow${isSel?'2':''})"
@@ -6680,7 +6680,7 @@ function renderMap(){
   document.getElementById('label-layer').innerHTML=ll;
 }
 
-function navigateToCiv(id){
+function navigateToItem(id){
   const c=ITEMS.find(x=>x&&x.id===id);
   if(!c)return;
   if(mode==='whatif'){
@@ -6706,9 +6706,9 @@ function navigateToCiv(id){
   document.getElementById('info-panel').scrollTo({top:0,behavior:'smooth'});
 }
 
-function civClick(id){
+function itemClick(id){
   _renderHoverLabel(null);
-  navigateToCiv(id);
+  navigateToItem(id);
 }
 
 
@@ -6746,7 +6746,7 @@ function renderDrawerContent(){
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -6771,72 +6771,56 @@ function renderDrawer(){
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Science Atlas</div>
 
       <div style="font-size:13.5px;line-height:1.85;color:var(--txt2);margin-bottom:18px">
-        100 civilizations. 65,000 years. Every idea, technology, religion, and political system that made the modern world — mapped, connected, and explorable. From Aboriginal Australia's 65,000-year culture to the present day, rendered on a real geographic projection and navigable across a continuous timeline.
+        100 breakthroughs. 5,000 years. Every experiment, discovery, and insight that changed the world — mapped to where it happened, connected through discovery chains, and explorable across a continuous timeline from ancient Babylonian astronomy to CRISPR gene editing.
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">The Map</div>
       <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-        Drag the <span style="color:var(--amber-b)">timeline</span> at the bottom across 65,000 years — civilizations emerge and collapse in real time. <span style="color:#e8251a">Red markers</span> show active civilizations. Tap any to open its full profile, play its musical signature, and explore its connections.
+        Drag the <span style="color:var(--amber-b)">timeline</span> at the bottom across 5,000 years — breakthroughs appear as they happen. Tap any marker to open its full profile and explore its connections to other discoveries.
       </div>
 
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">21 Lenses</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">20 Lenses</div>
       <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-        Apply a <span style="color:var(--amber-b)">lens</span> to read all of history through a single idea — Economy, Military, Gender, Slavery, Collapse, Trade Routes, Philosophy, Science, and 13 more. Compare any two civilizations side by side under the same lens.
+        Apply a <span style="color:var(--amber-b)">lens</span> to read every breakthrough through a single theme — Method, Ethics, Technology, Institutions, Resistance, and 15 more. Compare any two discoveries side by side under the same lens.
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">5 Modes</div>
       <div style="font-size:12.5px;line-height:1.8;color:var(--txt2);margin-bottom:18px">
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟳ THREADS</span> — Watch ideas travel across civilizations. Animated gold arrows trace the path of Zero, Gunpowder, Buddhism, Coffee, and 16 more concepts across centuries.</div>
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⊞ COMPARE</span> — Tap two civilizations to read them side by side under any lens.</div>
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟁ WHAT IF</span> — Remove a civilization from history. Red arrows on the map show every transmission that would have been lost.</div>
-        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⌂ HERITAGE</span> — Select your regional background to see your civilizational ancestry highlighted on the map in blue.</div>
-        <div><span style="color:#c060a0;font-family:'Cinzel',serif;font-size:9px">♀ HERSTORY</span> — A mirror dimension tracing the same 65,000 years through the women who shaped every civilisation — rulers, philosophers, warriors, and knowledge-keepers whose contributions history forgot.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟳ DISCOVERY CHAINS</span> — Watch breakthroughs enable later ones. Animated gold arrows trace the path of the telescope, vaccination, electromagnetism, and more across centuries.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⊞ COMPARE</span> — Tap two breakthroughs to read them side by side under any lens.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⟁ WHAT IF</span> — Remove a discovery from history. Red arrows on the map show every subsequent breakthrough that would have been lost.</div>
+        <div style="margin-bottom:7px"><span style="color:var(--amber-b);font-family:'Cinzel',serif;font-size:9px">⌂ SCIENTIFIC HERITAGE</span> — Select a scientific tradition to see its breakthroughs highlighted on the map in blue.</div>
+        <div><span style="color:#c060a0;font-family:'Cinzel',serif;font-size:9px">♀ HERSTORY</span> — The women scientists whose breakthroughs were overlooked, credited to others, or actively suppressed. Every field has them. Herstory makes them visible.</div>
       </div>
 
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Each civilization profile includes</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Each breakthrough profile includes</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:18px;font-size:11.5px">
-        ${[['◈','30 interpretive lenses'],['⟳','Concept transmission chains'],['♪','Synthesized musical theme'],['◎','Civilizational fingerprint chart'],['⊞','Side-by-side comparison'],['⬡','Diplomatic archive'],['↗','Contemporary civilizations'],['⌂','Heritage ancestry'],['♀','Women in Herstory mode'],['◉','What-If impact analysis']].map(([ico,lbl])=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--bdr2);border-radius:2px;color:var(--txt2)"><span style="color:var(--amber-b);font-size:13px">${ico}</span>${lbl}</div>`).join('')}
+        ${[['◈','20 interpretive lenses'],['⟳','Discovery chain links'],['◎','Breakthrough fingerprint chart'],['⊞','Side-by-side comparison'],['↗','Connected discoveries'],['⌂','Scientific heritage'],['♀','Women in Herstory mode'],['◉','What-If impact analysis']].map(([ico,lbl])=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--bdr2);border-radius:2px;color:var(--txt2)"><span style="color:var(--amber-b);font-size:13px">${ico}</span>${lbl}</div>`).join('')}
       </div>
 
       <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Pivotal moments to try</div>
       ${(()=>{
         const ALL=[
-          [-65000,'Aboriginal Australia begins','The oldest continuous culture on earth — 65,000 unbroken years'],
-          [-10000,'The Agricultural Revolution','Humans stop following herds and start growing food — nothing is the same again'],
-          [-3500,'Writing is invented','The Sumerians of Mesopotamia begin storing memory outside the human mind'],
-          [-3100,'Egypt unified under one pharaoh','Upper and Lower Egypt merge — one of the longest-lasting states in history begins'],
-          [-2600,'Indus Valley at its peak','Mohenjo-daro and Harappa are among the world\'s largest cities, with running water'],
-          [-2560,'The Great Pyramid completed','The only surviving Ancient Wonder — built with a precision that still puzzles engineers'],
-          [-1800,'The Code of Hammurabi','The most complete ancient law code — 282 laws carved in stone for all to read'],
-          [-1350,'Akhenaten\'s monotheism','Egypt\'s pharaoh erases all gods but one — the world\'s first state monotheism, then erased itself'],
-          [-1200,'Bronze Age Collapse','Five great civilizations fail within decades of each other — the ancient world\'s extinction event'],
-          [-800,'Homer composes the Iliad','The oral tradition crystallises into the text that will define Western storytelling for 3,000 years'],
-          [-776,'The first Olympic Games','Greeks pause their wars every four years to compete — sport as diplomacy'],
-          [-604,'Laozi writes the Tao Te Ching','Eighty-one short verses that become the foundation of Taoism and influence billions'],
-          [-563,'The Buddha is born','Siddhartha Gautama\'s life and teachings will reshape Asia and eventually the world'],
-          [-551,'Confucius is born','His ideas on duty, family, and governance will shape Chinese civilization for 2,500 years'],
-          [-500,'The Axial Age','Confucius, Buddha, Socrates, and Isaiah are alive simultaneously — humanity\'s great leap'],
-          [-490,'Battle of Marathon','A smaller Athenian force defeats the Persian invasion — democracy survives its first test'],
-          [-334,'Alexander begins his conquest','A 22-year-old Macedonian sets out to conquer the known world — and nearly does'],
-          [-221,'China unified under Qin','The Warring States end; the Great Wall begins; the template for Chinese empire is set'],
-          [-44,'Julius Caesar assassinated','The Roman Republic dies with him — the age of emperors begins'],
-          [33,'Crucifixion of Jesus','A wandering teacher\'s execution becomes the founding moment of Western civilization'],
-          [105,'Paper invented in China','Cai Lun\'s invention will eventually carry every idea in the world'],
-          [306,'Constantine converts to Christianity','The Roman Emperor\'s conversion turns a persecuted sect into the world\'s dominant religion'],
-          [476,'Fall of Western Rome','The empire that defined Europe for 500 years collapses — the medieval world begins'],
-          [610,'Muhammad receives first revelation','In a cave near Mecca, a religion begins that will reshape a third of the world'],
-          [800,'Charlemagne crowned emperor','The Frankish king unites Western Europe — the idea of Europe as a political entity is born'],
-          [1000,'Peak civilizational diversity','More simultaneous civilizations than any other moment in history'],
-          [1066,'Battle of Hastings','The Norman conquest reshapes England — and through it, the English language and common law'],
-          [1206,'Mongol Empire begins','Genghis Khan unites the steppe — within 70 years his descendants will rule from Korea to Poland'],
-          [1347,'Black Death arrives in Europe','The Mongol trade network carries plague from Central Asia — one third of Europe will die'],
-          [1440,'Gutenberg\'s printing press','The first mass-produced book — the information revolution that makes the Reformation possible'],
-          [1492,'Columbus reaches the Americas','Two worlds collide — the beginning of global trade, colonialism, and the modern world'],
+          [-3000,'Babylonian astronomy begins','The first systematic observations of the sky — recording planetary motions that will seed all later astronomy'],
+          [-300,'Euclid\'s Elements','The axiomatic method that will define mathematical reasoning for two thousand years'],
+          [-250,'Archimedes\' lever and buoyancy','The first mathematical physics — "Give me a place to stand and I will move the earth"'],
+          [105,'Paper invented in China','Cai Lun\'s invention will eventually carry every scientific idea in the world'],
+          [830,'Al-Khwarizmi\'s algebra','A Persian mathematician names a new branch of mathematics — and gives us the word algorithm'],
+          [1025,'Ibn al-Haytham\'s Book of Optics','The first systematic experimental science — light, vision, and the camera obscura'],
           [1543,'Copernicus publishes','The Earth is not the centre of the universe — science begins its long war with authority'],
-          [1648,'Peace of Westphalia','The Thirty Years\' War ends — the modern system of sovereign nation-states is born'],
-          [1789,'The French Revolution begins','Liberty, Equality, Fraternity — the ideas that will topple monarchies across two centuries'],
-          [1848,'Year of Revolutions','Nineteen countries convulse simultaneously — the modern left-right political divide crystallises'],
-          [1905,'Einstein\'s annus mirabilis','Special relativity, the photoelectric effect, Brownian motion — physics transformed in one year'],
+          [1609,'Galileo\'s telescope','A Dutch invention in Italian hands reveals moons around Jupiter — the heavens are not perfect'],
+          [1628,'Harvey discovers circulation','Blood moves in a circle — the body is a machine, not a mystery'],
+          [1665,'Newton\'s annus mirabilis','Gravity, calculus, optics — the laws of nature written in mathematics'],
+          [1687,'Newton\'s Principia published','Three laws and universal gravitation — the most influential scientific book ever written'],
+          [1752,'Franklin\'s lightning experiment','Electricity tamed from the sky — the first step toward the electrical age'],
+          [1796,'Jenner\'s smallpox vaccine','A country doctor proves that cowpox prevents smallpox — vaccination saves more lives than any other medical invention'],
+          [1859,'Darwin publishes Origin of Species','Natural selection — the idea that changed humanity\'s understanding of itself'],
+          [1869,'Mendeleev\'s periodic table','The elements arranged by atomic weight — predicting elements that hadn\'t been discovered yet'],
+          [1895,'X-rays discovered','Röntgen sees through flesh — the human body made transparent for the first time'],
+          [1905,'Einstein\'s special relativity','E = mc² — mass and energy are the same thing, and time is not absolute'],
+          [1928,'Penicillin discovered','Fleming\'s mould kills bacteria — the antibiotic revolution begins'],
+          [1953,'DNA structure solved','Watson, Crick, and Franklin reveal the double helix — the code of life decoded'],
+          [2012,'CRISPR gene editing','Doudna and Charpentier create a tool to edit DNA itself — biology becomes programmable'],
         ];
         const shuffled=[...ALL].sort(()=>Math.random()-.5);
         return shuffled.slice(0,5).map(([yr,title,desc])=>`
@@ -6897,7 +6881,7 @@ function renderDrawer(){
     const tip=isA?`View ${o.nm} (active in this era)`:`Jump to ${o.nm} (${fmt(o.s)} – ${fmt(o.e)})`;
     return`<button class="conn-item" tabindex="0"
         aria-label="${tip}"
-        onclick="navigateToCiv('${id}')"
+        onclick="navigateToItem('${id}')"
         style="width:100%;background:none;border:none;border-bottom:1px solid var(--conn-bdr);text-align:left;cursor:pointer;opacity:${isA?1:.7}">
       <div class="conn-dot" style="background:${isA?col:'var(--txt3)'}"></div>
       <span style="flex:1;color:var(--txt${isA?'':'3'})">${o.nm}</span>
@@ -6930,7 +6914,7 @@ function setYear(y){
   if(sel&&!active(sel))closeInfo();
   else renderDrawer();
   updateURL();
-  if(mode==='whatif'&&whatifCiv)renderWhatIfPaths();
+  if(mode==='whatif'&&whatifItem)renderWhatIfPaths();
 }
 
 function renderWorldMap(world){
@@ -7000,7 +6984,7 @@ function init(){
 // ── MODE MANAGEMENT ──
 function setMode(m){
   // Clear mode-specific state when leaving
-  if(m!=='whatif')whatifCiv=null;
+  if(m!=='whatif')whatifItem=null;
   if(m!=='heritage')heritageRegion=null;
   mode=m;
   ['explore','threads','compare','whatif','heritage'].forEach(id=>{
@@ -7055,7 +7039,7 @@ function renderThreadConceptList(){
     list.style.display='block';
     if(steps){steps.style.display='none';steps.innerHTML='';}
     if(backBtn)backBtn.style.display='none';
-    if(title)title.textContent='Concept Threads';
+    if(title)title.textContent='Discovery Chains';
     const concepts=getUniqueConcepts();
     list.innerHTML='<div class="thread-grid">'+concepts.map(c=>{
       const chain=getChain(c);
@@ -7127,7 +7111,7 @@ function renderThreadPaths(concept){
   chain.forEach(t=>{
     const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
-    const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-44;
     // Path with arrowhead
     out+=`<path id="tp-${t.id}" d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
@@ -7236,7 +7220,7 @@ function renderLensDDInline(){
       <div class="lens-row${arcOn?' on':''}" onclick="lenses.clear();lensDD=false;if(mode==='compare')renderCompareDrawer();else renderDrawerContent();">
         <div class="lens-row-chk${arcOn?' on':''}">${arcOn?'✓':''}</div>
         <span class="lens-row-ico">◎</span>
-        <span class="lens-row-lbl">Civilization Arc</span>
+        <span class="lens-row-lbl">Discovery Arc</span>
       </div>
       <div class="lens-row-sep"></div>${rows}
       <div class="lens-dd-close-btn" onclick="toggleLensDD()">Done ▴</div>
@@ -7600,7 +7584,7 @@ function animateViewBox(target,duration=600){
 
 function zoomToCiv(c){
   if(!window._proj)return;
-  const [cx,cy]=civPt(c);
+  const [cx,cy]=itemPt(c);
   const zw=300,zh=156; // zoomed viewport size (same aspect ratio)
   const x=Math.max(0,Math.min(1000-zw,cx-zw/2));
   const y=Math.max(0,Math.min(520-zh,cy-zh/2));
@@ -7614,8 +7598,8 @@ function zoomOut(){
 // ══════════════════════════════════════════════════════
 // FINGERPRINT RADAR CHART
 // ══════════════════════════════════════════════════════
-const FP_LABELS=['Military','Commerce','Arts','Science','Reach','Longevity'];
-const FP_KEYS=['mil','com','art','sci','reach','lon'];
+const FP_LABELS=['Impact','Novelty','Reproducibility','Precision','Reach','Longevity'];
+const FP_KEYS=['imp','nov','rep','pre','reach','lon'];
 
 function renderFingerprint(c){
   if(!c.fp)return'';
@@ -7643,7 +7627,7 @@ function renderFingerprint(c){
   }).join(' ');
   svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
   // Labels — placed outside the ring with enough clearance, wrapped in two lines where needed
-  const SHORT=['Military','Commerce','Arts','Science','Reach','Longevity'];
+  const SHORT=['Impact','Novelty','Reproducibility','Precision','Reach','Longevity'];
   angles.forEach((a,i)=>{
     const lr=R+26;
     const lx=cx+lr*Math.cos(a);
@@ -7685,7 +7669,7 @@ function renderEnhancedSpanBar(c){
     const ol=Math.max(xl,left);
     const or_=Math.min(xl+xw,left+width);
     const ow=Math.max(0,or_-ol);
-    return`<div class="contemp-bar-row" onclick="navigateToCiv('${x.id}')" title="Navigate to ${x.nm}">
+    return`<div class="contemp-bar-row" onclick="navigateToItem('${x.id}')" title="Navigate to ${x.nm}">
       <div class="contemp-bar-nm">${x.nm}</div>
       <div class="contemp-bar-track">
         <div class="contemp-bar-fill" style="left:${(ol-left).toFixed(1)}%;width:${ow.toFixed(1)}%;background:${colors[i]}"></div>
@@ -7752,7 +7736,7 @@ function renderDiplomaticLayer(){
   DIPLOMATIC.forEach(d=>{
     const fc=ITEMS.find(x=>x&&x.id===d.from),tc=ITEMS.find(x=>x&&x.id===d.to);
     if(!fc||!tc||!ids.has(d.from)||!ids.has(d.to))return;
-    const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-36;
     dl+=`<path d="M${fx},${fy} Q${mx},${my} ${tx},${ty}" 
       stroke="#f0d060" stroke-width="1" fill="none" stroke-dasharray="4,3" opacity=".4"
@@ -7785,21 +7769,21 @@ function renderDiplomaticSection(c){
 // ══════════════════════════════════════════════════════
 // WHAT-IF MODE
 // ══════════════════════════════════════════════════════
-let whatifCiv=null;
+let whatifItem=null;
 
 // ── WHAT-IF MAP RENDERING ──
 function renderWhatIfPaths(){
   const layer=document.getElementById('thread-layer');
   if(!layer){return;}
-  if(!whatifCiv){layer.innerHTML='';return;}
+  if(!whatifItem){layer.innerHTML='';return;}
 
-  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
   if(!c){layer.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
   const downstreamConcepts=new Set(directOut.map(t=>t.concept));
   const downstream=TRANSMISSIONS.filter(t=>downstreamConcepts.has(t.concept)&&t.from!==c.id);
-  const [cx,cy]=civPt(c);
+  const [cx,cy]=itemPt(c);
 
   let out='<defs><marker id="wi-arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#e8251a" opacity=".7"/></marker></defs>';
 
@@ -7808,7 +7792,7 @@ function renderWhatIfPaths(){
   directOut.forEach((t,i)=>{
     const tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!tc)return;
-    const [tx,ty]=civPt(tc);
+    const [tx,ty]=itemPt(tc);
     const mx=(cx+tx)/2, my=Math.min(cy,ty)-40;
     const delay=(validDirect*0.2).toFixed(1);
     // Path with SVG animate for opacity fade-in + stroke-dashoffset crawl
@@ -7832,7 +7816,7 @@ function renderWhatIfPaths(){
   downstream.forEach((t,j)=>{
     const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
-    const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-24;
     out+=`<path d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
       stroke="#c06020" stroke-width="0.8" fill="none" stroke-dasharray="3,6" opacity="0" id="wi-down-${j}">
@@ -7873,7 +7857,7 @@ function renderWhatIfDrawer(){
   if(dt)dt.innerHTML='';
   if(!dc)return;
 
-  if(!whatifCiv){
+  if(!whatifItem){
     dc.innerHTML=`
     <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">What If?</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
@@ -7903,7 +7887,7 @@ function renderWhatIfDrawer(){
     return;
   }
 
-  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
   if(!c){dc.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -7968,7 +7952,7 @@ function renderWhatIfDrawer(){
   if(panel)setTimeout(()=>panel.scrollTop=0,0);
 }
 function setWhatIf(id){
-  whatifCiv=id;
+  whatifItem=id;
   renderWhatIfDrawer();
   renderWhatIfPaths();
   renderMap();
@@ -7976,7 +7960,7 @@ function setWhatIf(id){
 }
 
 function clearWhatIf(){
-  whatifCiv=null;
+  whatifItem=null;
   document.getElementById('thread-layer').innerHTML='';
   renderWhatIfDrawer();
   renderMap();
@@ -8085,7 +8069,7 @@ function renderHeritageDrawer(){
   <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);letter-spacing:1px;margin-bottom:4px">${heritageRegion}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing civilizations · shown in blue on the map</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your civilizational ancestry</div>
-  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToCiv('${c.id}')">
+  ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToItem('${c.id}')">
     <span class="heritage-civ-nm">${c.nm}</span>
     <span class="heritage-civ-why">${HERITAGE_REASONS[c.id]||''}</span>
   </div>`).join('')}`;
@@ -8153,7 +8137,7 @@ function renderHerstoryDrawer(){
       A mirror to EXPERIMENTA — tracing 5,000 years of scientific discovery through the women who made it possible. Astronomers, physicists, chemists, biologists, and mathematicians whose breakthroughs were overlooked, credited to male colleagues, or deliberately suppressed. The record is incomplete because the record was kept by men. That absence is itself the argument.
     </div>
     <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Tap any civilization on the map to discover the women who shaped it — queens who governed, scholars who wrote, warriors who fought, and spiritual leaders who held communities together.
+      Tap any breakthrough on the map to discover the women behind it — astronomers who measured the stars, physicists who split the atom, chemists who decoded molecules, and biologists who mapped genomes.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:12px">Women who changed everything</div>
     ${(()=>{
@@ -8192,7 +8176,7 @@ function renderHerstoryDrawer(){
       const shuffled=[...ALL].sort(()=>Math.random()-.5);
       return shuffled.slice(0,5).map(w=>{
         const c=ITEMS.find(x=>x&&x.id===w.civ);
-        return c?`<button onclick="navigateToCiv('${c.id}')" 
+        return c?`<button onclick="navigateToItem('${c.id}')" 
           style="width:100%;background:none;border:1px solid rgba(192,96,160,.25);padding:9px 12px;text-align:left;cursor:pointer;margin-bottom:4px;border-radius:2px;transition:all .15s"
           onmouseover="this.style.background='rgba(192,96,160,.08)'" onmouseout="this.style.background='none'">
           <div style="font-family:'Cinzel',serif;font-size:10px;color:#c060a0;margin-bottom:2px">${w.nm} · ${w.yr<0?Math.abs(w.yr)+' BCE':w.yr+' CE'}</div>
@@ -8247,7 +8231,7 @@ function mapClick(e){
     const candidates=[];
     ITEMS.forEach(c=>{
       if(!c||!c.id||!activeSet.has(c.id))return;
-      const pt=civPt(c);
+      const pt=itemPt(c);
       if(!pt||!isFinite(pt[0])||!isFinite(pt[1]))return;
       const d=Math.sqrt((pt[0]-svgX)**2+(pt[1]-svgY)**2);
       if(d<thresh)candidates.push({c,d,pt});
@@ -8263,7 +8247,7 @@ function mapClick(e){
     if(isCluster){
       showClusterPicker(candidates.map(x=>x.c),clientX,clientY);
     } else {
-      civClick(nearest.c.id);
+      itemClick(nearest.c.id);
     }
   }catch(err){console.warn('mapClick err:',err);}
 }
@@ -8397,7 +8381,7 @@ function _renderHoverLabel(c){
   const layer=document.getElementById('hover-label-layer');
   if(!layer)return;
   if(!c){layer.innerHTML='';return;}
-  const [cx,cy]=civPt(c);
+  const [cx,cy]=itemPt(c);
   const zr=1000/_vbW;
   const dotR=Math.max(2,7/zr);
   const labelY=cy-dotR-8;
@@ -8433,7 +8417,7 @@ function _onMapMouseMove(e){
   ITEMS.forEach(c=>{
     if(!c||!activeSet.has(c.id))return;
     if(sel&&sel.id===c.id)return; // skip selected — it already has persistent label
-    const pt=civPt(c);
+    const pt=itemPt(c);
     if(!pt||!isFinite(pt[0]))return;
     const d=Math.hypot(pt[0]-svgX,pt[1]-svgY);
     if(d<bestD){bestD=d;nearest=c;}
@@ -8521,7 +8505,7 @@ function showClusterPicker(civs, screenX, screenY){
   if(!picker||!list)return;
   picker._openedAt=Date.now();
   list.innerHTML=civs.map(c=>`
-    <div class="cluster-item" onclick="closeClusterPicker();civClick('${c.id}')">
+    <div class="cluster-item" onclick="closeClusterPicker();itemClick('${c.id}')">
       <div class="cluster-item-dot" style="background:${herstory?'#c060a0':'#e8251a'}"></div>
       <div>
         <div class="cluster-item-nm">${c.nm}</div>
