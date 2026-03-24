@@ -253,7 +253,7 @@
       "section": "VI"
     },
     "labor": {
-      "phase": "DONE",
+      "phase": "1A",
       "items": 100,
       "target": 100,
       "live": true,
@@ -433,13 +433,18 @@
       "homepage_name": "Trib\u016b"
     },
     "graphe": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "IV",
-      "homepage_name": "Graph\u0113"
+      "homepage_name": "Graph\u0113",
+      "validated_sha": "3669c2ecc12b4270ef85d8daeca74bf9f6d35edf",
+      "validated_short": "3669c2e",
+      "validated_at": "2026-03-24T15:05:02.031333Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "experimenta": {
       "phase": "1A",
@@ -507,12 +512,17 @@
       "section": "IV"
     },
     "codex": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "IV"
+      "section": "IV",
+      "validated_sha": "f2ae1a2c5dd0325dddcbb60023e6dfb24bd4eb1d",
+      "validated_short": "f2ae1a2",
+      "validated_at": "2026-03-24T07:53:53.940539Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "cruor": {
       "phase": "1A",
@@ -1082,12 +1092,6 @@
     }
   },
   "queue": [
-    "labor",
-    "spiritus",
-    "petra",
-    "bestia",
-    "sophia",
-    "codex",
     "graphe",
     "experimenta",
     "quantum",
@@ -1201,7 +1205,8 @@
     "solum",
     "sylva",
     "aeon",
-    "debitum"
+    "debitum",
+    "codex"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -5973,6 +5978,1024 @@
     },
     {
       "atlas": "sophia",
+      "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "labor",
+      "phase_done": "CLEANUP",
+      "phase_next": "1A",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "codex",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "codex",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "codex",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "codex",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "codex",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "codex",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "codex",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "codex",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "codex",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "codex",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "codex",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "codex",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "codex",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "codex",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "codex",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "codex",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "codex",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "codex",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "codex",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "codex",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "codex",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "codex",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "codex",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "codex",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "codex",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "codex",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "codex",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "codex",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "codex",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "codex",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "codex",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "codex",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "codex",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "codex",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "codex",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "codex",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "codex",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "codex",
+      "batch": "38-38",
+      "items": 38
+    },
+    {
+      "atlas": "codex",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "codex",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "codex",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "codex",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "codex",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "codex",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "codex",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "codex",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "codex",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "codex",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "codex",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "codex",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "codex",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "codex",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "codex",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "codex",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "codex",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "codex",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "codex",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "codex",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "codex",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "codex",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "codex",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "codex",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "codex",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "codex",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "codex",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "codex",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "codex",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "codex",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "codex",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "codex",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "codex",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "codex",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "codex",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "codex",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "codex",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "codex",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "codex",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "codex",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "codex",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "codex",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "codex",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "codex",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "codex",
+      "batch": "83-84",
+      "items": 84
+    },
+    {
+      "atlas": "codex",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "codex",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "codex",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "codex",
+      "batch": "88-88",
+      "items": 88
+    },
+    {
+      "atlas": "codex",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "codex",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "codex",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "codex",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "codex",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "codex",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "codex",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "codex",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "codex",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "codex",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "codex",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "codex",
+      "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "5+6",
+      "phase_next": "GO_LIVE",
+      "items": 100
+    },
+    {
+      "atlas": "codex",
+      "phase_done": "GO_LIVE",
+      "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "graphe",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "graphe",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "graphe",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "graphe",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "graphe",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "graphe",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "graphe",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "graphe",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "graphe",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "graphe",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "graphe",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "graphe",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "graphe",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "graphe",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "graphe",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "graphe",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "graphe",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "graphe",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "graphe",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "graphe",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "graphe",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "graphe",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "graphe",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "graphe",
+      "batch": "23-24",
+      "items": 24
+    },
+    {
+      "atlas": "graphe",
+      "batch": "25-26",
+      "items": 26
+    },
+    {
+      "atlas": "graphe",
+      "batch": "27-28",
+      "items": 28
+    },
+    {
+      "atlas": "graphe",
+      "batch": "29-30",
+      "items": 30
+    },
+    {
+      "atlas": "graphe",
+      "batch": "31-32",
+      "items": 32
+    },
+    {
+      "atlas": "graphe",
+      "batch": "33-34",
+      "items": 34
+    },
+    {
+      "atlas": "graphe",
+      "batch": "35-36",
+      "items": 36
+    },
+    {
+      "atlas": "graphe",
+      "batch": "37-38",
+      "items": 38
+    },
+    {
+      "atlas": "graphe",
+      "batch": "39-40",
+      "items": 40
+    },
+    {
+      "atlas": "graphe",
+      "batch": "41-44",
+      "items": 44
+    },
+    {
+      "atlas": "graphe",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "graphe",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "graphe",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "graphe",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "graphe",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "graphe",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "graphe",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "graphe",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "graphe",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "graphe",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "graphe",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "graphe",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "graphe",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "graphe",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "graphe",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "graphe",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "graphe",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "graphe",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "graphe",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "graphe",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "graphe",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "graphe",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "graphe",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "graphe",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "graphe",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "graphe",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "graphe",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "graphe",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "graphe",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "graphe",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "graphe",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "graphe",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "graphe",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "graphe",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "graphe",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "graphe",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "graphe",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "graphe",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "graphe",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "graphe",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "graphe",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "graphe",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "graphe",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "graphe",
+      "batch": "88-88",
+      "items": 88
+    },
+    {
+      "atlas": "graphe",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "graphe",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "graphe",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "graphe",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "graphe",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "graphe",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "graphe",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "graphe",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "graphe",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "graphe",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "graphe",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "graphe",
       "batch": "100-100",
       "items": 100
     }
