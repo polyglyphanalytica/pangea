@@ -452,8 +452,8 @@
       "validated_lenses": 20
     },
     "experimenta": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "1B",
+      "items": 100,
       "target": 100,
       "live": false,
       "map": "world",
@@ -7001,6 +7001,12 @@
     {
       "atlas": "graphe",
       "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "experimenta",
+      "phase_done": "1A",
+      "phase_next": "1B",
       "items": 100
     }
   ],
