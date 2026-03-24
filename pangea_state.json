@@ -433,8 +433,8 @@
       "homepage_name": "Trib\u016b"
     },
     "graphe": {
-      "phase": "DATA",
-      "items": 75,
+      "phase": "3",
+      "items": 100,
       "target": 100,
       "live": false,
       "map": "world",
@@ -6868,6 +6868,131 @@
       "atlas": "graphe",
       "batch": "75-75",
       "items": 75
+    },
+    {
+      "atlas": "graphe",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "graphe",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "graphe",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "graphe",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "graphe",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "graphe",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "graphe",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "graphe",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "graphe",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "graphe",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "graphe",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "graphe",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "graphe",
+      "batch": "88-88",
+      "items": 88
+    },
+    {
+      "atlas": "graphe",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "graphe",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "graphe",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "graphe",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "graphe",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "graphe",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "graphe",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "graphe",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "graphe",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "graphe",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "graphe",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "graphe",
+      "batch": "100-100",
+      "items": 100
     }
   ],
   "assignments": {}
