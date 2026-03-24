@@ -445,9 +445,9 @@
       "map": "world",
       "section": "IV",
       "homepage_name": "Graph\u0113",
-      "validated_sha": "3669c2ecc12b4270ef85d8daeca74bf9f6d35edf",
-      "validated_short": "3669c2e",
-      "validated_at": "2026-03-24T15:05:02.031333Z",
+      "validated_sha": "7a5b0e9bd6be639b2a06e9ed00ecf3ec2675f8fb",
+      "validated_short": "7a5b0e9",
+      "validated_at": "2026-03-24T21:47:31.756069Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -1097,7 +1097,6 @@
     }
   },
   "queue": [
-    "graphe",
     "experimenta",
     "quantum",
     "terraincognita",
