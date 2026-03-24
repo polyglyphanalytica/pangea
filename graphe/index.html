@@ -6931,15 +6931,15 @@ function renderWorldMap(world){
 
 function init(){
   const eraDefs=[
-    {l:'Deep Prehistory',s:-65000,e:-10000},
-    {l:'Neolithic',s:-10000,e:-4000},
-    {l:'Bronze Age',s:-4000,e:-1200},
-    {l:'Iron Age',s:-1200,e:-500},
-    {l:'Classical',s:-500,e:500},
-    {l:'Medieval',s:500,e:1500},
-    {l:'Modern',s:1500,e:2024},
+    {l:'Proto-Writing',s:-3400,e:-2000},
+    {l:'Early Scripts',s:-2000,e:-1000},
+    {l:'Alphabet Age',s:-1000,e:0},
+    {l:'Classical Scripts',s:0,e:600},
+    {l:'Medieval Scripts',s:600,e:1400},
+    {l:'Print Revolution',s:1400,e:1800},
+    {l:'Modern Scripts',s:1800,e:2024},
   ];
-  const total=2024-(-65000);
+  const total=2024-(-3400);
 
   renderDensityBar();
   document.getElementById('tl').addEventListener('input',e=>setYear(sliderToYear(e.target.value)));
@@ -7262,8 +7262,8 @@ function shareState(){
   const itemName=sel?sel.nm:null;
   const shareTitle='Graphē — The Script Atlas';
   const shareText=itemName
-    ? `Explore ${itemName} on Civilitas — 85 civilizations, 65,000 years of human history`
-    : 'Civilitas — 85 civilizations, 65,000 years of human history, all in one map';
+    ? `Explore ${itemName} on Graphē — 100 writing systems, 5,400 years of the written mark`
+    : 'Graphē — 100 writing systems, 5,400 years of the written mark, all in one map';
 
   // Use native share sheet on devices that support it (iOS, Android, modern desktop)
   if(navigator.share){
@@ -7847,7 +7847,7 @@ function renderWhatIfDrawer(){
     dc.innerHTML=`
     <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">What If?</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Remove a civilization from history. Red lines animate on the map as the transmission chain breaks. See below for every idea and technology the world would lose.
+      Remove a script from history. Red lines animate on the map as the transmission chain breaks. See below for every descendant script and literacy tradition the world would lose.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Tap a marker on the map — or try one of these</div>
     ${[
@@ -8036,7 +8036,7 @@ function renderHeritageDrawer(){
     dc.innerHTML=`
     <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">Heritage</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Select your regional background to see every civilization that shaped your cultural DNA — linguistically, religiously, scientifically, and genetically. Blue markers on the map show your ancestral civilizations.
+      Select a script family to see its members highlighted on the map. Blue markers show scripts belonging to that lineage.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Choose your region</div>
     <div class="heritage-grid">${regionBtns}</div>`;
@@ -8053,8 +8053,8 @@ function renderHeritageDrawer(){
     ← All regions
   </button>
   <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);letter-spacing:1px;margin-bottom:4px">${heritageRegion}</div>
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing civilizations · shown in blue on the map</div>
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your civilizational ancestry</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} scripts in this family · shown in blue on the map</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Scripts in this family</div>
   ${civs.map(c=>`<div class="heritage-item" onclick="navigateToItem('${c.id}')">
     <span class="heritage-item-nm">${c.nm}</span>
     <span class="heritage-item-why">${HERITAGE_REASONS[c.id]||''}</span>
@@ -8180,7 +8180,7 @@ function renderHerstoryDrawer(){
   <button onclick="closeInfo()"
     style="display:flex;align-items:center;gap:6px;background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;border-bottom:1px solid var(--bdr);width:100%;margin-bottom:14px;transition:opacity .15s"
     onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
-    ← All civilizations
+    ← All scripts
   </button>
   <div class="hs-panel-hdr">${c.nm}</div>
   <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:14px">${c.sb}</div>
@@ -8690,9 +8690,9 @@ function updateTlFill(pct){
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 
   <!-- Cluster picker popup -->
-  <div id="cluster-picker" role="dialog" aria-label="Select civilization">
+  <div id="cluster-picker" role="dialog" aria-label="Select script">
     <div id="cluster-picker-hdr">
-      <span>Select civilization</span>
+      <span>Select script</span>
       <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">✕</button>
     </div>
     <div id="cluster-list"></div>
