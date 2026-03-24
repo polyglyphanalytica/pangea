@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema_note": "phase: 1A/1B/1C/1D/1E/1F/DATA/3/4A/4B/4C/5/6/DONE. DATA = write items 1 at a time until target reached. live=true means card--live on homepage.",
-  "active_atlas": "aeon",
+  "active_atlas": "codex",
   "atlases": {
     "civilitas": {
       "phase": "3",
@@ -523,9 +523,9 @@
       "live": true,
       "map": "world",
       "section": "IV",
-      "validated_sha": "f2ae1a2c5dd0325dddcbb60023e6dfb24bd4eb1d",
-      "validated_short": "f2ae1a2",
-      "validated_at": "2026-03-24T07:53:53.940539Z",
+      "validated_sha": "8e4c4df5872b84c057c0c90e59957f2a8a40b932",
+      "validated_short": "8e4c4df",
+      "validated_at": "2026-03-24T22:12:04.693455Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
