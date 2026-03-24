@@ -707,10 +707,38 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+  {id:'authorship',ico:'✍',lbl:'Authorship',col:'#7a8a5a'},
+  {id:'censorship',ico:'🚫',lbl:'Censorship',col:'#8b1a1a'},
+  {id:'commentary',ico:'📝',lbl:'Commentary Tradition',col:'#6a7a9a'},
+  {id:'cultural_impact',ico:'🌍',lbl:'Cultural Impact',col:'#c8881c'},
+  {id:'form_genre',ico:'📖',lbl:'Form & Genre',col:'#5a8a7a'},
+  {id:'historical_context',ico:'⏳',lbl:'Historical Context',col:'#9a7a5a'},
+  {id:'language_translation',ico:'🔤',lbl:'Language & Translation',col:'#5a7a8a'},
+  {id:'legacy',ico:'🏛',lbl:'Legacy',col:'#8a6a9a'},
+  {id:'literary_influence',ico:'📚',lbl:'Literary Influence',col:'#6a8a5a'},
+  {id:'material_form',ico:'📜',lbl:'Material Form',col:'#7a6a5a'},
+  {id:'moral_philosophy',ico:'⚖',lbl:'Moral Philosophy',col:'#5a6a8a'},
+  {id:'narrative',ico:'📕',lbl:'Narrative Structure',col:'#9a5a6a'},
+  {id:'political_thought',ico:'🏴',lbl:'Political Thought',col:'#6a5a8a'},
+  {id:'preservation',ico:'🛡',lbl:'Preservation',col:'#8a8a5a'},
+  {id:'reception',ico:'👁',lbl:'Reception History',col:'#5a8a6a'},
+  {id:'religious_significance',ico:'✦',lbl:'Religious Significance',col:'#9a6a5a'},
+  {id:'rhetoric',ico:'🗣',lbl:'Rhetoric & Persuasion',col:'#7a5a8a'},
+  {id:'scientific_content',ico:'🔬',lbl:'Scientific Content',col:'#5a9a7a'},
+  {id:'social_critique',ico:'⚡',lbl:'Social Critique',col:'#8a5a7a'},
+  {id:'transmission_history',ico:'🔗',lbl:'Transmission History',col:'#6a8a8a'},
+];
 
 
-const ERAS=[];
+const ERAS=[
+  {y:-3000,n:'EARLIEST WRITING'},{y:-2000,n:'BRONZE AGE LITERATURE'},{y:-1200,n:'LATE BRONZE / VEDIC'},
+  {y:-800,n:'AXIAL AGE'},{y:-500,n:'CLASSICAL ANTIQUITY'},{y:-200,n:'HELLENISTIC / MAURYA'},
+  {y:0,n:'ROMAN / HAN'},{y:300,n:'LATE ANTIQUITY'},{y:600,n:'EARLY MEDIEVAL'},
+  {y:900,n:'GOLDEN AGES'},{y:1200,n:'HIGH MEDIEVAL'},{y:1400,n:'RENAISSANCE'},
+  {y:1600,n:'EARLY MODERN'},{y:1750,n:'ENLIGHTENMENT'},{y:1850,n:'MODERN ERA'},
+  {y:1945,n:'CONTEMPORARY'},
+];
 
 const ITEMS=[
 {id:'gilgamesh',nm:'Epic of Gilgamesh',sb:'Mesopotamia · Oldest Surviving Epic',s:-2100,e:2024,lon:44.4,lat:32.5,
@@ -3219,10 +3247,88 @@ d:{
 
 const DIPLOMATIC=[];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+  {from:'gilgamesh',to:'torah',concept:'Flood Narrative',year:-600,desc:'The Gilgamesh flood tablet directly influenced the Genesis flood story through Canaanite and early Hebrew oral traditions.'},
+  {from:'torah',to:'quran',concept:'Flood Narrative',year:620,desc:'The Quran retells the Noah flood narrative, transmitted through Jewish and Christian traditions in Arabia.'},
+  {from:'pyramid_texts',to:'book_of_dead',concept:'Egyptian Afterlife Texts',year:-1550,desc:'The Pyramid Texts evolved into the Coffin Texts and then the Book of the Dead, democratising afterlife knowledge.'},
+  {from:'book_of_dead',to:'tibetan_book_dead',concept:'Afterlife Guides',year:800,desc:'Buddhist afterlife concepts, influenced by Egyptian ideas through Hellenistic syncretism, shaped the Tibetan bardo tradition.'},
+  {from:'rigveda',to:'upanishads',concept:'Vedic Philosophy',year:-800,desc:'The Upanishads developed the Rigveda\'s ritual theology into systematic metaphysical philosophy — Brahman, Atman, and moksha.'},
+  {from:'upanishads',to:'bhagavad_gita',concept:'Vedic Philosophy',year:-200,desc:'The Bhagavad Gita synthesised Upanishadic metaphysics with devotional theism and practical ethics.'},
+  {from:'bhagavad_gita',to:'dhammapada',concept:'Indian Ethics',year:-300,desc:'Buddhist ethics responded to the same Brahmanical tradition that produced the Gita, creating a parallel path to liberation.'},
+  {from:'iliad',to:'aeneid',concept:'Epic Tradition',year:-29,desc:'Virgil modelled the Aeneid on Homer, transforming the Greek epic tradition into the founding myth of Rome.'},
+  {from:'aeneid',to:'divine_comedy',concept:'Epic Tradition',year:1308,desc:'Dante chose Virgil as his guide through Hell, making the Aeneid the bridge between classical and medieval epic.'},
+  {from:'divine_comedy',to:'paradise_lost',concept:'Epic Tradition',year:1667,desc:'Milton\'s Paradise Lost responds to Dante\'s afterlife vision while creating a Protestant epic of cosmic scope.'},
+  {from:'analects',to:'mencius_text',concept:'Confucian Tradition',year:-300,desc:'Mencius developed Confucius\'s ethical philosophy, arguing that human nature is innately good.'},
+  {from:'tao_te_ching',to:'zhuangzi',concept:'Taoist Philosophy',year:-350,desc:'The Zhuangzi radicalised the Tao Te Ching\'s philosophy into absolute relativism and freedom.'},
+  {from:'republic',to:'utopia',concept:'Ideal Society',year:1516,desc:'Thomas More\'s Utopia responds directly to Plato\'s Republic, inventing the genre of utopian fiction.'},
+  {from:'utopia',to:'nineteen_eighty_four',concept:'Ideal Society',year:1949,desc:'Orwell\'s dystopia inverts the utopian tradition that More founded, warning against its totalitarian potential.'},
+  {from:'prince',to:'leviathan',concept:'Political Realism',year:1651,desc:'Hobbes developed Machiavelli\'s political realism into a systematic theory of sovereignty and the social contract.'},
+  {from:'leviathan',to:'social_contract',concept:'Social Contract Theory',year:1762,desc:'Rousseau transformed Hobbes\'s authoritarian contract into a theory of popular sovereignty and the general will.'},
+  {from:'social_contract',to:'rights_of_man',concept:'Revolutionary Rights',year:1791,desc:'Paine applied Rousseau\'s contractarian theory to defend the French Revolution against Burke\'s conservative critique.'},
+  {from:'rights_of_man',to:'communist_manifesto',concept:'Revolutionary Rights',year:1848,desc:'Marx extended the rights tradition into a critique of capitalism, arguing that economic liberation completes political liberation.'},
+  {from:'vindication_rights_woman',to:'second_sex',concept:'Feminist Theory',year:1949,desc:'Beauvoir extended Wollstonecraft\'s argument for women\'s rational equality into a comprehensive existentialist feminism.'},
+  {from:'elements',to:'principia',concept:'Mathematical Science',year:1687,desc:'Newton modelled the Principia on Euclid\'s axiomatic method, applying mathematical rigour to natural philosophy.'},
+  {from:'principia',to:'origin_of_species',concept:'Scientific Revolution',year:1859,desc:'Darwin applied the empirical method Newton established to biology, replacing divine design with natural selection.'},
+  {from:'copernicus_revolutions',to:'principia',concept:'Heliocentric Physics',year:1687,desc:'Newton provided the gravitational physics that explained why Copernicus\'s heliocentric model works.'},
+  {from:'art_of_war',to:'prince',concept:'Strategic Realism',year:1513,desc:'Machiavelli\'s political pragmatism parallels Sun Tzu\'s military realism, applying strategic thinking to governance.'},
+  {from:'odyssey',to:'don_quixote',concept:'Journey Narrative',year:1605,desc:'Cervantes transformed the Odyssean journey into the modern novel, creating the archetype of the deluded quester.'},
+  {from:'don_quixote',to:'ulysses',concept:'Novel Form',year:1922,desc:'Joyce\'s Ulysses maps Homer\'s Odyssey onto a single day in Dublin, completing the transformation of epic into novel.'},
+  {from:'torah',to:'king_james_bible',concept:'Biblical Translation',year:1611,desc:'The King James translators rendered the Hebrew Torah into English, creating the prose standard of the language.'},
+  {from:'king_james_bible',to:'leaves_of_grass',concept:'Biblical Rhetoric',year:1855,desc:'Whitman absorbed the KJB\'s cadences into his free verse, creating a democratic scripture for America.'},
+  {from:'histories_herodotus',to:'thucydides',concept:'Historical Method',year:-411,desc:'Thucydides sharpened Herodotus\'s investigative method into rigorous analytical history, excluding divine causation.'},
+  {from:'thucydides',to:'muqaddimah',concept:'Philosophy of History',year:1377,desc:'Ibn Khaldun developed the most systematic pre-modern philosophy of history, anticipating modern social science.'},
+  {from:'confessions_augustine',to:'discourse_method',concept:'Philosophical Self',year:1637,desc:'Descartes\'s Cogito extends Augustine\'s turn to inner experience as the foundation of philosophical certainty.'},
+  {from:'hammurabi',to:'torah',concept:'Ancient Law',year:-600,desc:'Biblical law codes in Exodus share specific provisions with Hammurabi, transmitted through Canaanite legal traditions.'},
+  {from:'tale_of_genji',to:'dream_red_chamber',concept:'Asian Novel',year:1740,desc:'Cao Xueqin\'s Dream echoes the Tale of Genji\'s themes of aristocratic decline, aesthetic refinement, and Buddhist impermanence.'},
+  {from:'shahnameh',to:'masnavi',concept:'Persian Literature',year:1258,desc:'Rumi inherited the Persian literary tradition Firdawsi established, transforming epic narrative into mystical poetry.'},
+  {from:'things_fall_apart',to:'wretched_of_earth',concept:'Anti-Colonial Thought',year:1961,desc:'Fanon\'s revolutionary theory and Achebe\'s literary reclamation together defined the intellectual framework of decolonisation.'},
+  {from:'frankenstein',to:'nineteen_eighty_four',concept:'Dystopian Warning',year:1949,desc:'Shelley\'s warning about unchecked creation evolved through Wells and Huxley into Orwell\'s definitive political dystopia.'},
+];
 
 
-const WOMEN={};
+const WOMEN={
+  gilgamesh:[{nm:'Enheduanna',yr:-2285,role:'High Priestess, First Named Author',desc:'Daughter of Sargon of Akkad and the world\'s first known author by name. Her 42 hymns to Inanna predate the Gilgamesh epic\'s standard version and establish women\'s literary authority at the very dawn of writing.'}],
+  pyramid_texts:[{nm:'Merit-Ptah',yr:-2700,role:'Physician',desc:'Named on a tomb at Saqqara as "chief physician" — the earliest named woman in the history of science. Her existence demonstrates that women held professional roles in the same culture that produced the Pyramid Texts.'}],
+  rigveda:[{nm:'Gargi Vachaknavi',yr:-700,role:'Philosopher',desc:'One of the few women philosophers named in the Vedic tradition, Gargi debates the sage Yajnavalkya in the Brihadaranyaka Upanishad, challenging him with questions about the ultimate nature of reality.'}],
+  iliad:[{nm:'Sappho',yr:-610,role:'Lyric Poet',desc:'Called the "Tenth Muse" by Plato, Sappho of Lesbos was the greatest female poet of antiquity. Her lyric poetry responded to the Homeric epic tradition by centring personal emotion over martial glory.'}],
+  odyssey:[{nm:'Emily Wilson',yr:2017,role:'Translator',desc:'The first woman to translate the Odyssey into English (2017), Wilson confronted the poem\'s slavery and gender politics with a clarity that male translators had avoided for centuries.'}],
+  torah:[{nm:'Huldah',yr:-622,role:'Prophet',desc:'The prophetess who authenticated the Book of Deuteronomy when it was "discovered" in the Temple, effectively authorising the most consequential textual reform in Israelite history.'}],
+  analects:[{nm:'Ban Zhao',yr:45,role:'Scholar, Historian',desc:'Completed her brother Ban Gu\'s History of the Han Dynasty and wrote Lessons for Women — the most influential text on female education in Chinese history, shaped by Confucian principles.'}],
+  republic:[{nm:'Aspasia of Miletus',yr:-470,role:'Philosopher, Rhetorician',desc:'Pericles\'s partner, reputed to have taught rhetoric and influenced Socratic philosophy. Plato\'s Menexenus attributes a funeral oration to her — a woman shaping the philosophical tradition the Republic represents.'}],
+  quran:[{nm:'Khadijah bint Khuwaylid',yr:555,role:'First Muslim',desc:'Muhammad\'s first wife and the first person to accept Islam. A wealthy merchant in her own right, Khadijah supported Muhammad financially and spiritually during the earliest revelations — without her, the Quran might never have been preserved.'}],
+  divine_comedy:[{nm:'Beatrice Portinari',yr:1266,role:'Muse and Theological Guide',desc:'Dante\'s guide through Paradise, Beatrice represents divine wisdom and love. While her role is symbolic, she is the theological centre of the Commedia — God\'s truth is revealed through a woman\'s guidance.'}],
+  tale_of_genji:[{nm:'Murasaki Shikibu',yr:978,role:'Author',desc:'The author of the Tale of Genji herself — a court lady who created the world\'s first novel. Her achievement demolishes any argument that women were incapable of the highest literary art.'}],
+  don_quixote:[{nm:'Sor Juana Inés de la Cruz',yr:1648,role:'Poet, Intellectual',desc:'The greatest writer of colonial Latin America and a contemporary of Cervantes\'s legacy, Sor Juana defended women\'s right to intellectual life in her Reply to Sor Filotea — a landmark of feminist literary criticism.'}],
+  origin_of_species:[{nm:'Mary Anning',yr:1799,role:'Paleontologist',desc:'The self-taught fossil hunter who discovered the first complete ichthyosaur and plesiosaur skeletons. Her work provided crucial evidence for extinction and geological time that Darwin\'s theory required, yet she was excluded from the scientific societies that used her discoveries.'}],
+  communist_manifesto:[{nm:'Rosa Luxemburg',yr:1871,role:'Revolutionary Theorist',desc:'The most brilliant Marxist theorist after Marx himself. Her The Accumulation of Capital (1913) challenged Marx\'s economics, and her critique of Leninist authoritarianism proved prophetic.'}],
+  principia:[{nm:'Émilie du Châtelet',yr:1706,role:'Physicist, Translator',desc:'Translated Newton\'s Principia into French (published 1749) — the translation that made Newtonian physics accessible to continental Europe. Her commentary included original contributions to the conservation of energy.'}],
+  shahnameh:[{nm:'Rudabeh',yr:977,role:'Literary Character',desc:'The Kabuli princess whose love for Zal defies social convention in the Shahnameh. Rudabeh represents female agency within the epic tradition — she initiates the romance and determines its course.'}],
+  war_and_peace:[{nm:'Sophia Tolstaya',yr:1844,role:'Copyist, Editor',desc:'Tolstoy\'s wife copied the entire manuscript of War and Peace seven times by hand, edited passages, and managed the household that enabled his writing. The novel\'s existence is inseparable from her labour.'}],
+  things_fall_apart:[{nm:'Chimamanda Ngozi Adichie',yr:1977,role:'Novelist',desc:'Achebe\'s most celebrated literary heir, Adichie\'s novels (Purple Hibiscus, Half of a Yellow Sun, Americanah) extend the tradition he founded while centring women\'s experience in Nigerian literary fiction.'}],
+  paradise_lost:[{nm:'Mary Shelley',yr:1797,role:'Novelist',desc:'The author of Frankenstein read Paradise Lost as a foundational text — her Monster identifies with both Adam and Satan. Shelley transformed Milton\'s theological epic into the founding myth of science fiction.'}],
+  second_sex:[{nm:'Simone de Beauvoir',yr:1908,role:'Author',desc:'The author herself — Beauvoir wrote the founding text of modern feminism, establishing the principle that gender is constructed rather than natural. "One is not born, but rather becomes, a woman" changed the world.'}],
+  frankenstein:[{nm:'Mary Wollstonecraft Shelley',yr:1797,role:'Author',desc:'Wrote Frankenstein at eighteen — the daughter of Mary Wollstonecraft and the creator of science fiction. Her novel, written by a teenager, proved that women could produce literature of the highest philosophical ambition.'}],
+  silent_spring:[{nm:'Rachel Carson',yr:1907,role:'Author',desc:'The marine biologist who launched the environmental movement with Silent Spring, enduring a vicious corporate campaign against her while dying of cancer. She changed how humanity understands its relationship to nature.'}],
+  vindication_rights_woman:[{nm:'Mary Wollstonecraft',yr:1759,role:'Author',desc:'The author of the founding text of feminist philosophy — Wollstonecraft argued that women are rational beings entitled to education and equal rights, establishing the intellectual framework for two centuries of feminism.'}],
+  pride_and_prejudice:[{nm:'Jane Austen',yr:1775,role:'Author',desc:'The greatest English novelist before the Victorians, Austen wrote Pride and Prejudice anonymously — "By a Lady." Her achievement demonstrated that the domestic novel, centring women\'s experience, was as serious as any literary form.'}],
+  narrative_douglass:[{nm:'Harriet Jacobs',yr:1813,role:'Author',desc:'Her Incidents in the Life of a Slave Girl (1861) was the first autobiography by a formerly enslaved woman, revealing the specific sexual exploitation that women endured under slavery — a dimension Douglass\'s narrative could not address.'}],
+  critique_pure_reason:[{nm:'Hannah Arendt',yr:1906,role:'Political Philosopher',desc:'The greatest political philosopher of the 20th century, Arendt\'s work on totalitarianism, evil, and the human condition extended the Kantian tradition into the era of mass politics and genocide.'}],
+  one_hundred_solitude:[{nm:'Isabel Allende',yr:1942,role:'Novelist',desc:'The House of the Spirits (1982) extended García Márquez\'s magical realism to centre women\'s experience in Latin American history, becoming the most widely read novel by a Latin American woman.'}],
+  pillow_book:[{nm:'Sei Shōnagon',yr:966,role:'Author',desc:'The author herself — Sei Shōnagon invented the zuihitsu genre with her sharp observations, devastating wit, and unapologetic opinions, proving that women\'s personal writing could constitute major literature.'}],
+  udhr:[{nm:'Eleanor Roosevelt',yr:1884,role:'Committee Chair',desc:'Chaired the UN Human Rights Commission that drafted the UDHR. Her diplomatic skill navigated Cold War tensions to produce the most consequential human rights document in history.'},
+  {nm:'Hansa Mehta',yr:1897,role:'Delegate, India',desc:'Successfully argued for changing "All men are born free and equal" to "All human beings are born free and equal" — ensuring that the UDHR\'s language explicitly included women.'}],
+  anna_karenina:[{nm:'Anna Karenina (character)',yr:1877,role:'Literary Character',desc:'Literature\'s most complex portrait of a woman destroyed by the contradiction between desire and social convention — Anna claims her own sexuality and pays with her life.'}],
+  candide:[{nm:'Émilie du Châtelet',yr:1706,role:'Voltaire\'s Partner',desc:'Voltaire\'s intellectual partner for fifteen years, du Châtelet was a physicist and philosopher whose translation of Newton\'s Principia surpassed Voltaire\'s own scientific work.'}],
+  book_of_songs:[{nm:'Anonymous Women Poets',yr:-800,role:'Folk Poets',desc:'Many of the Shijing\'s most celebrated love poems are composed from women\'s perspectives — women waiting for lovers, lamenting abandonment, celebrating desire — making anonymous women among China\'s earliest poets.'}],
+  dream_red_chamber:[{nm:'Lin Daiyu (character)',yr:1740,role:'Literary Character',desc:'The brilliant, fragile poet at the heart of the Dream — Daiyu represents the tragedy of female genius constrained by patriarchal society. Her poetry within the novel is among the finest in Chinese fiction.'}],
+  laws_of_manu:[{nm:'Savitribai Phule',yr:1831,role:'Educator, Reformer',desc:'India\'s first female teacher, who challenged the Manusmriti\'s restrictions on women\'s and Dalit education by opening the first school for girls in India (1848). She endured public abuse for defying caste law.'}],
+  wretched_of_earth:[{nm:'Djamila Bouhired',yr:1935,role:'Revolutionary',desc:'Algerian revolutionary whose arrest and torture during the Battle of Algiers became a cause célèbre. Her resistance embodied the anti-colonial struggle that Fanon theorised.'}],
+  oresteia:[{nm:'Clytemnestra (character)',yr:-458,role:'Literary Character',desc:'The most powerful female figure in Greek tragedy — Clytemnestra murders her husband Agamemnon to avenge her daughter Iphigenia. Her suppression by Athena in the Eumenides dramatises the patriarchal silencing of female rage.'}],
+  decameron:[{nm:'The Seven Women Narrators',yr:1353,role:'Storytellers',desc:'Seven of the Decameron\'s ten narrators are women who control much of the storytelling — Boccaccio gave women literary authority in a patriarchal culture that denied them real power.'}],
+  hamlet:[{nm:'Sarah Bernhardt',yr:1844,role:'Actor',desc:'The legendary French actress who played Hamlet in 1899 — a woman inhabiting literature\'s most famous male role, challenging the assumption that Shakespeare\'s greatest creation could only be embodied by a man.'}],
+  masnavi:[{nm:'Rabia al-Adawiyya',yr:717,role:'Sufi Mystic',desc:'The most celebrated female Sufi saint, whose concept of divine love without hope of reward or fear of punishment influenced the entire mystical tradition that Rumi inherited and transformed.'}],
+};
+
 
 let year=-3000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4719,9 +4825,25 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+  'Ancient Near Eastern':['gilgamesh','pyramid_texts','enuma_elish','hammurabi','book_of_dead','avesta','dead_sea_scrolls','torah'],
+  'South Asian':['rigveda','upanishads','mahabharata','bhagavad_gita','ramayana','dhammapada','arthashastra','laws_of_manu','tibetan_book_dead'],
+  'East Asian':['i_ching','analects','tao_te_ching','art_of_war','zhuangzi','mencius_text','book_of_songs','dream_red_chamber'],
+  'Japanese':['tale_of_genji','kojiki','pillow_book','book_five_rings'],
+  'Greco-Roman':['iliad','odyssey','republic','nicomachean_ethics','oresteia','histories_herodotus','thucydides','elements','aeneid','metamorphoses','meditations','de_rerum_natura','almagest','organon','enchiridion'],
+  'Islamic World':['quran','arabian_nights','shahnameh','masnavi','muqaddimah','gospel_john'],
+  'Medieval European':['beowulf','divine_comedy','canterbury_tales','decameron','summa_theologica','prose_edda'],
+  'Renaissance & Early Modern':['prince','utopia','don_quixote','hamlet','king_james_bible','paradise_lost','ninety_five_theses','discourse_method','copernicus_revolutions'],
+  'Enlightenment':['leviathan','social_contract','wealth_of_nations','candide','critique_pure_reason','principia','federalist_papers','rights_of_man','vindication_rights_woman'],
+  'Modern Western':['communist_manifesto','origin_of_species','war_and_peace','crime_and_punishment','anna_karenina','moby_dick','leaves_of_grass','faust','pride_and_prejudice','capital','narrative_douglass','frankenstein','interpretation_dreams','ulysses','the_trial','heart_of_darkness','second_sex','nineteen_eighty_four','silent_spring'],
+  'African & Diaspora':['sundiata','things_fall_apart','wretched_of_earth','narrative_douglass'],
+  'Latin American':['popol_vuh','one_hundred_solitude'],
+  'Global Modern':['udhr','silent_spring','second_sex','wretched_of_earth','things_fall_apart','one_hundred_solitude','nineteen_eighty_four'],
+};
 
-const HERITAGE_REASONS={};
+const HERITAGE_REASONS={
+  gilgamesh:'Oldest epic, flood narrative, mortality meditation',pyramid_texts:'Oldest religious texts, afterlife theology',enuma_elish:'Babylonian creation myth, cosmic combat',hammurabi:'First law code, proportional justice',book_of_dead:'Afterlife guide, moral judgment',avesta:'Zoroastrian scripture, cosmic dualism',dead_sea_scrolls:'Oldest biblical manuscripts',torah:'Foundation of Abrahamic religions',rigveda:'Oldest Vedic hymns, Indo-European roots',upanishads:'Brahman-Atman philosophy',mahabharata:'Longest epic, dharma meditation',bhagavad_gita:'Paths to liberation, karma yoga',ramayana:'Epic of dharmic kingship',dhammapada:'Buddhist core teachings',arthashastra:'Political realism, statecraft',laws_of_manu:'Hindu law code',tibetan_book_dead:'Bardo navigation, consciousness after death',i_ching:'Binary divination, cyclical change',analects:'Confucian ethics, benevolence',tao_te_ching:'Wu wei, paradoxical wisdom',art_of_war:'Strategic thinking, minimal force',zhuangzi:'Radical freedom, perspectival relativity',mencius_text:'Innate goodness, political revolution',book_of_songs:'Oldest Chinese poetry, folk tradition',dream_red_chamber:'Greatest Chinese novel',tale_of_genji:'First novel, mono no aware',kojiki:'Japanese origin myth, Shinto foundation',pillow_book:'Zuihitsu invention, aesthetic observation',book_five_rings:'Martial strategy, mastery philosophy',iliad:'Western literature foundation, heroic code',odyssey:'Journey archetype, homecoming',republic:'Political philosophy, Forms theory',nicomachean_ethics:'Virtue ethics foundation',oresteia:'Birth of drama, justice vs revenge',histories_herodotus:'Father of history, ethnography',thucydides:'Political realism, analytical history',elements:'Mathematical proof, axiomatic method',aeneid:'Roman epic, empire mythology',metamorphoses:'Mythological compendium',meditations:'Stoic practice, inner freedom',de_rerum_natura:'Atomic theory, Epicurean physics',almagest:'Geocentric astronomy',organon:'Foundation of logic',enchiridion:'Stoic handbook, control distinction',quran:'Islamic scripture, Arabic literature',arabian_nights:'Frame tales, storytelling power',shahnameh:'Persian identity, heroic tradition',masnavi:'Sufi mysticism, divine love',muqaddimah:'Philosophy of history, social science',gospel_john:'Logos theology, incarnation',beowulf:'Anglo-Saxon epic, heroic elegy',divine_comedy:'Afterlife vision, vernacular ambition',canterbury_tales:'Social panorama, English literary voice',decameron:'Birth of novella, plague response',summa_theologica:'Systematic theology, faith and reason',prose_edda:'Norse mythology, Tolkien source',prince:'Political realism, statecraft manual',utopia:'Ideal society, social criticism',don_quixote:'First modern novel, reality vs illusion',hamlet:'Psychological tragedy, existential crisis',king_james_bible:'English prose standard, biblical language',paradise_lost:'Christian epic, Satan as character',ninety_five_theses:'Reformation spark, protest publishing',discourse_method:'Cogito, modern philosophy foundation',copernicus_revolutions:'Heliocentric revolution',leviathan:'Social contract, sovereignty theory',social_contract:'Popular sovereignty, general will',wealth_of_nations:'Free market economics',candide:'Satirical philosophy, anti-optimism',critique_pure_reason:'Epistemological revolution',principia:'Laws of motion, mathematical physics',federalist_papers:'Constitutional design, federalism',rights_of_man:'Democratic rights, revolution defence',vindication_rights_woman:'Feminist philosophy, equal education',communist_manifesto:'Class struggle, revolutionary politics',origin_of_species:'Natural selection, evolution',war_and_peace:'Epic realism, philosophy of history',crime_and_punishment:'Psychological fiction, ideological murder',anna_karenina:'Psychological novel, moral complexity',moby_dick:'American epic, obsession narrative',leaves_of_grass:'Democratic poetry, free verse',faust:'Knowledge quest, Faustian bargain',pride_and_prejudice:'Romantic comedy, social observation',capital:'Critique of capitalism, surplus value',narrative_douglass:'Slave narrative, literacy as freedom',frankenstein:'Science fiction origin, creator responsibility',interpretation_dreams:'Unconscious mind, dream analysis',ulysses:'Modernist revolution, stream of consciousness',the_trial:'Kafkaesque bureaucracy, alienation',heart_of_darkness:'Colonial critique, moral ambiguity',second_sex:'Gender as construction, existentialist feminism',nineteen_eighty_four:'Totalitarian warning, surveillance state',silent_spring:'Environmental movement, ecological awareness',one_hundred_solitude:'Magical realism, Latin American identity',popol_vuh:'Maya creation myth, cultural survival',sundiata:'West African epic, griot tradition',things_fall_apart:'African literature foundation, colonial response',wretched_of_earth:'Anti-colonial theory, decolonisation',udhr:'Universal human rights, post-war consensus',
+};
 
 let heritageRegion=null;
 
