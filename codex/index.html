@@ -743,7 +743,7 @@ const ERAS=[
 const ITEMS=[
 {id:'gilgamesh',nm:'Epic of Gilgamesh',sb:'Mesopotamia · Oldest Surviving Epic',s:-2100,e:2024,lon:44.4,lat:32.5,
 fp:{inf:10,reach:9,art:10,phil:9,antiq:10,pres:7},
-conns:['pyramid_texts','iliad','genesis','enuma_elish'],
+conns:['pyramid_texts','iliad','torah','enuma_elish'],
 overview:'The Epic of Gilgamesh is the oldest surviving great work of literature, composed in Sumerian around 2100 BCE and later compiled into a Standard Babylonian version by the scribe Sin-leqi-unninni around 1200 BCE. It tells the story of Gilgamesh, king of Uruk, whose friendship with Enkidu, confrontation with mortality, and failed quest for eternal life form the archetypal hero\'s journey. The flood narrative in Tablet XI directly influenced the biblical story of Noah, and the epic\'s themes of friendship, loss, and the search for meaning remain startlingly modern.',
 d:{
   authorship:'The earliest Sumerian poems about Gilgamesh date to the Third Dynasty of Ur, around 2100 BCE, composed by anonymous court poets. The Standard Babylonian version was compiled by Sin-leqi-unninni around 1200 BCE, making him one of the earliest named editors in literary history. His achievement was synthetic — weaving independent Sumerian tales into a unified twelve-tablet narrative with a coherent emotional arc.',
@@ -768,7 +768,7 @@ d:{
   transmission_history:'The epic was transmitted through Mesopotamian scribal schools for over a millennium, with copies produced from Anatolia to the Levant. The destruction of cuneiform culture after the Persian conquest severed the transmission chain entirely. The text was lost for over two thousand years until Austen Henry Layard and Hormuzd Rassam excavated Ashurbanipal\'s library at Nineveh in the 1850s, initiating one of the great recoveries in literary history.'}},
 {id:'pyramid_texts',nm:'Pyramid Texts',sb:'Egypt · Oldest Religious Corpus',s:-2400,e:2024,lon:31.2,lat:29.9,
 fp:{inf:8,reach:6,art:7,phil:7,antiq:10,pres:8},
-conns:['gilgamesh','book_of_dead','coffin_texts','rigveda'],
+conns:['gilgamesh','book_of_dead','enuma_elish','rigveda'],
 overview:'The Pyramid Texts are the oldest known religious writings in the world, inscribed on the walls and sarcophagi of pyramids at Saqqara beginning around 2400 BCE during the Fifth Dynasty of Egypt. Comprising over 800 individual spells and utterances, they were intended to ensure the pharaoh\'s resurrection and ascent to the stars. Their imagery — the king climbing a ladder of light, sailing with the sun god Ra, becoming one with Osiris — established the mythological framework that would dominate Egyptian religion for three thousand years.',
 d:{
   authorship:'The Pyramid Texts were composed by anonymous Egyptian priests over centuries, with individual utterances dating from different periods of the Old Kingdom. No single author is identifiable; the corpus represents the accumulated theological production of the Heliopolis priesthood. The earliest attestation appears in the pyramid of Unas (c. 2353 BCE), though many spells are demonstrably older, preserving archaic language forms.',
@@ -893,7 +893,7 @@ d:{
   transmission_history:'The Tao Te Ching was transmitted through copying, memorisation, and commentary within Taoist and broader Chinese scholarly traditions. The Guodian bamboo slips (c. 300 BCE) show the text was already circulating in something close to its current form by the Warring States period. The imperial library system, Buddhist-Taoist printing culture, and the examination system all contributed to its continuous reproduction.'}},
 {id:'torah',nm:'Torah',sb:'Israel · Five Books of Moses',s:-600,e:2024,lon:35.2,lat:31.8,
 fp:{inf:10,reach:10,art:8,phil:9,antiq:8,pres:10},
-conns:['genesis','dead_sea_scrolls','quran','talmud'],
+conns:['torah','dead_sea_scrolls','quran','dead_sea_scrolls'],
 overview:'The Torah — the first five books of the Hebrew Bible (Genesis, Exodus, Leviticus, Numbers, Deuteronomy) — is the foundational text of Judaism and, through its incorporation into Christianity and its influence on Islam, one of the most consequential documents in human history. Compiled in something close to its final form during the Babylonian Exile (6th century BCE) from earlier sources spanning centuries, it combines creation mythology, ancestral narratives, legal codes, and theological argument into a unified narrative from the creation of the world to the death of Moses.',
 d:{
   authorship:'Tradition attributes the Torah to Moses, but modern biblical scholarship identifies at least four major source documents: the Yahwist (J), Elohist (E), Deuteronomist (D), and Priestly (P) sources, composed between approximately 950 and 500 BCE and compiled by a final redactor. This "Documentary Hypothesis," developed by Julius Wellhausen in the 1870s, remains the framework of academic study, though its details are constantly debated.',
@@ -918,7 +918,7 @@ d:{
   transmission_history:'The Torah was transmitted through a combination of oral teaching and scribal copying within the Israelite priestly and prophetic traditions. The Babylonian Exile (586 BCE) was the critical moment of textual consolidation. The Masoretic scribes (6th–10th centuries CE) added vowel pointing and cantillation marks to the consonantal text, creating the definitive version used today. The Dead Sea Scrolls provide the oldest manuscript witnesses.'}},
 {id:'analects',nm:'Analects',sb:'China · Teachings of Confucius',s:-475,e:2024,lon:117.0,lat:35.6,
 fp:{inf:10,reach:9,art:7,phil:10,antiq:8,pres:9},
-conns:['tao_te_ching','art_of_war','mencius','i_ching'],
+conns:['tao_te_ching','art_of_war','mencius_text','i_ching'],
 overview:'The Analects (Lunyu) is a collection of sayings and conversations attributed to Confucius (551–479 BCE) and his disciples, compiled by subsequent generations of students over perhaps two centuries. In twenty books of brief, often enigmatic passages, it articulates the ethical philosophy of ren (benevolence), li (ritual propriety), and junzi (the exemplary person) that would govern Chinese civilisation for two and a half millennia. No other philosophical text has shaped the daily moral conduct of more people over a longer period.',
 d:{
   authorship:'The Analects were not written by Confucius himself but compiled by his disciples and their students over several generations, probably reaching their current form by the 2nd century BCE. The earliest stratum (Books III–IX) is considered closest to the historical Confucius, while later books (particularly XVI–XX) show different philosophical concerns and may be additions by the Zengzi and Zisi schools. The text is a collective creation attributed to a single voice.',
@@ -968,7 +968,7 @@ d:{
   transmission_history:'The Republic was transmitted through the Platonic Academy (which lasted until 529 CE), through Neoplatonist schools in Athens and Alexandria, and through Byzantine manuscript copying. Arabic translations (particularly by Hunayn ibn Ishaq, 9th century) kept Plato alive in the Islamic world during the early medieval period. The text re-entered Western Europe through Latin translations from Arabic and Greek, culminating in Marsilio Ficino\'s complete Latin translation in 1484.'}},
 {id:'art_of_war',nm:'The Art of War',sb:'China · Classical Military Strategy',s:-500,e:2024,lon:119.0,lat:35.0,
 fp:{inf:9,reach:9,art:6,phil:8,antiq:8,pres:9},
-conns:['analects','tao_te_ching','prince','book_of_five_rings'],
+conns:['analects','tao_te_ching','prince','book_five_rings'],
 overview:'The Art of War (Sunzi Bingfa), attributed to the military strategist Sun Tzu and composed around the 5th century BCE, is the oldest and most influential treatise on warfare and strategy ever written. In thirteen concise chapters, it articulates principles — know your enemy, exploit weakness, win without fighting, adapt to changing conditions — that transcend their military context to become a universal philosophy of strategic thinking. Its influence extends from Chinese imperial strategy through Japanese bushido to modern business management, making it the most widely read strategy text in the world.',
 d:{
   authorship:'Tradition attributes the Art of War to Sun Wu (Sun Tzu), a military commander who served the state of Wu in the late 6th century BCE. Modern scholarship debates whether Sun Tzu was a historical figure or a composite. The 1972 discovery of bamboo-slip manuscripts at Yinqueshan confirmed the text\'s antiquity and distinguished it from the later Art of War attributed to Sun Bin. The text may have been compiled and refined over the 5th–3rd centuries BCE.',
@@ -1043,7 +1043,7 @@ d:{
   transmission_history:'The Elements was transmitted through the Alexandrian mathematical tradition to Byzantine copyists and, crucially, to Arabic translators in the 8th–9th centuries. The Arabic tradition preserved and enriched the text while knowledge of it was lost in Western Europe. Latin translations from Arabic (12th century) and directly from Greek (15th century) restored it to the West. The 1482 printed edition made it universally accessible.'}},
 {id:'quran',nm:'Quran',sb:'Arabia · Scripture of Islam',s:609,e:2024,lon:39.8,lat:21.4,
 fp:{inf:10,reach:10,art:9,phil:9,antiq:5,pres:10},
-conns:['torah','gospel_of_matthew','hadith','shahnameh'],
+conns:['torah','gospel_john','torah','shahnameh'],
 overview:'The Quran (al-Qur\'an, "the Recitation"), revealed to the Prophet Muhammad between 609 and 632 CE and compiled into written form within two decades of his death, is the central religious text of Islam and, as such, the most widely recited book in human history. Its 114 surahs (chapters) of Arabic verse address theology, law, ethics, and narrative in a style unlike any other scripture — non-chronological, intensely rhetorical, and designed for oral performance. For 1.8 billion Muslims, it is the literal word of God in Arabic, unaltered and unalterable.',
 d:{
   authorship:'Islamic tradition holds that the Quran is the direct speech of God (Allah), revealed to Muhammad through the angel Jibril (Gabriel) over approximately 23 years. Muhammad is the recipient, not the author — he is the conduit through which divine speech entered the world. The text was memorised by companions and written on various materials (palm leaves, bones, leather) during Muhammad\'s lifetime. The caliph Uthman (r. 644–656) commissioned the standardised written compilation.',
@@ -1143,7 +1143,7 @@ d:{
   transmission_history:'Don Quixote spread with extraordinary speed — translated into English (1612), French (1614), Italian (1622), and German (1648) within decades of publication. The novel\'s commercial success ensured continuous reprinting. By the 18th century it was established as the foundational European novel. Its transmission has been unbroken since 1605, making it the most continuously read work of prose fiction in the world.'}},
 {id:'origin_of_species',nm:'On the Origin of Species',sb:'England · Theory of Evolution',s:1859,e:2024,lon:-0.1,lat:51.5,
 fp:{inf:10,reach:10,art:6,phil:9,antiq:2,pres:9},
-conns:['principia','communist_manifesto','descent_of_man','silent_spring'],
+conns:['principia','communist_manifesto','principia','silent_spring'],
 overview:'On the Origin of Species by Means of Natural Selection, published by Charles Darwin on 24 November 1859, is the most consequential scientific text since Newton\'s Principia. In a single volume of careful argument and overwhelming evidence, Darwin demonstrated that species are not fixed creations but evolving populations shaped by natural selection — the survival and reproduction of organisms best adapted to their environments. The book transformed biology, challenged theology, and permanently altered humanity\'s understanding of its own place in nature.',
 d:{
   authorship:'Charles Darwin (1809–1882) developed his theory of evolution by natural selection over twenty years before publishing, spurred to action by Alfred Russel Wallace\'s independent formulation of the same idea in 1858. The Origin was written in haste — Darwin called it an "abstract" of a longer planned work — yet its prose is remarkably lucid and persuasive. Darwin\'s strategy was to overwhelm opposition with the sheer volume and variety of his evidence.',
@@ -1193,7 +1193,7 @@ d:{
   transmission_history:'The Manifesto spread through revolutionary networks — smuggled across borders, translated by activists, distributed in factories and workers\' meetings. After the Paris Commune (1871), it gained wider attention. The Russian Revolution (1917) transformed it from a theoretical text into a programme of government. By the mid-20th century, it was one of the most widely distributed texts on earth, available in virtually every language.'}},
 {id:'tale_of_genji',nm:'The Tale of Genji',sb:'Japan · World\'s First Novel',s:1008,e:2024,lon:135.8,lat:35.0,
 fp:{inf:9,reach:7,art:10,phil:8,antiq:4,pres:8},
-conns:['don_quixote','pillow_book','arabian_nights','dream_of_red_chamber'],
+conns:['don_quixote','pillow_book','arabian_nights','dream_red_chamber'],
 overview:'The Tale of Genji (Genji Monogatari), written by the court lady Murasaki Shikibu around 1008 CE during Japan\'s Heian period, is widely regarded as the world\'s first novel. In 54 chapters spanning three generations, it follows the life, loves, and political intrigues of Prince Genji — the shining prince of the imperial court — with a psychological subtlety and narrative sophistication that anticipates the European novel by six centuries. The work is the supreme achievement of classical Japanese literature and a founding text of the world\'s novelistic tradition.',
 d:{
   authorship:'Murasaki Shikibu (c. 973–c. 1014/1025) was a lady-in-waiting at the court of Empress Shoshi. She was a member of the Fujiwara clan, educated in Chinese literature (unusual for women of her era), and kept a diary that provides context for the novel\'s composition. The Tale of Genji was likely written in stages, with the later chapters (the "Uji chapters") possibly representing a distinct compositional phase. Some scholars have questioned whether a single author wrote the entire work.',
@@ -1468,7 +1468,7 @@ d:{
   transmission_history:'The Prince was transmitted through manuscript copies from 1513, through the first printed edition in 1532, and through its papal condemnation in 1559, which paradoxically ensured its fame. The text spread rapidly across Europe despite censorship, translated into Latin, French, English, and other languages within decades. Its transmission has been continuous since the 16th century, making it one of the most persistently read political texts in Western history.'}},
 {id:'hamlet',nm:'Hamlet',sb:'England · The Ultimate Tragedy',s:1600,e:2024,lon:-0.1,lat:51.5,
 fp:{inf:10,reach:10,art:10,phil:9,antiq:3,pres:10},
-conns:['divine_comedy','don_quixote','king_lear','faust'],
+conns:['divine_comedy','don_quixote','faust','faust'],
 overview:'Hamlet, Prince of Denmark, composed by William Shakespeare around 1600 and first published in 1603, is the most performed, most studied, and most quoted play in the English language — and arguably the most influential single work of literature in any language. The story of a prince commanded by his father\'s ghost to avenge his murder, who delays and deliberates while the court around him descends into corruption and death, has been interpreted as a tragedy of indecision, a psychological study of melancholy, a political drama, and a philosophical meditation on the meaning of existence itself.',
 d:{
   authorship:'William Shakespeare (1564–1616) composed Hamlet around 1600–01, drawing on a lost earlier play (the "Ur-Hamlet," possibly by Thomas Kyd) and ultimately on Saxo Grammaticus\'s 12th-century Historia Danica. Shakespeare transformed this revenge tale into a psychological drama of unprecedented depth. The play exists in three early texts: the "bad" First Quarto (1603), the "good" Second Quarto (1604–05), and the First Folio (1623), each presenting a somewhat different version.',
@@ -1518,7 +1518,7 @@ d:{
   transmission_history:'The Wealth of Nations spread rapidly through translation, reprinting, and political application. Pitt\'s adoption of Smith\'s trade policies gave the text immediate political influence in Britain. French translation (1778–79) spread it to continental Europe. The text entered university curricula in the 19th century and has been studied continuously in economics, political science, and philosophy. Its influence on economic policy has been continuous for nearly 250 years.'}},
 {id:'beowulf',nm:'Beowulf',sb:'England · Anglo-Saxon Epic',s:750,e:2024,lon:1.1,lat:52.0,
 fp:{inf:8,reach:7,art:9,phil:7,antiq:5,pres:6},
-conns:['iliad','divine_comedy','shahnameh','edda'],
+conns:['iliad','divine_comedy','shahnameh','prose_edda'],
 overview:'Beowulf is the oldest surviving long poem in Old English and the greatest literary work of the Anglo-Saxon period. Composed between roughly 700 and 1000 CE, it tells the story of a Geatish hero who travels to Denmark to slay the monster Grendel and Grendel\'s mother, then returns home to rule for fifty years before dying in combat with a dragon. Beneath the monster-slaying adventure lies a profound meditation on heroism, mortality, the transience of glory, and the duty of a king to his people — themes that give the poem its enduring power.',
 d:{
   authorship:'The Beowulf poet is anonymous — a single author working within the conventions of Germanic oral-formulaic poetry, probably in the 8th to 10th century CE. The poet was clearly Christian (the poem contains biblical references) but draws on pagan Germanic heroic tradition, creating a distinctive hybrid voice. Whether the poet was a monk, a court poet, or a literate layperson remains debated. The poem\'s sophisticated literary artistry suggests a highly educated author.',
@@ -1743,7 +1743,7 @@ d:{
   transmission_history:'One Hundred Years of Solitude spread with extraordinary speed — published in Buenos Aires in 1967, it was translated into English (1970), French (1968), German (1970), and most other major languages within a few years. The Latin American Boom created international distribution networks for Spanish-language literature. The novel\'s commercial success and Nobel Prize recognition ensured its permanent place in the global literary canon.'}},
 {id:'popol_vuh',nm:'Popol Vuh',sb:'Guatemala · Maya Creation Myth',s:1554,e:2024,lon:-91.5,lat:14.6,
 fp:{inf:7,reach:6,art:9,phil:8,antiq:5,pres:6},
-conns:['gilgamesh','torah','rigveda','codex_mendoza'],
+conns:['gilgamesh','torah','rigveda','sundiata'],
 overview:'The Popol Vuh (Book of the Community or Book of Counsel) is the creation mythology and historical narrative of the K\'iche\' Maya people of highland Guatemala, transcribed in Latin script around 1554 from an older hieroglyphic manuscript. It tells the story of the creation of the world, the adventures of the Hero Twins Hunahpu and Xbalanque in the underworld of Xibalba, and the founding of the K\'iche\' kingdom — the most complete surviving account of pre-Columbian Maya mythology and the most important indigenous literary text of the Americas.',
 d:{
   authorship:'The Popol Vuh was transcribed by anonymous K\'iche\' nobles around 1554, shortly after the Spanish conquest of Guatemala. They wrote in the K\'iche\' language using the Latin alphabet they had learned from missionaries, preserving an older oral and possibly hieroglyphic tradition. The transcription was a deliberate act of cultural preservation — the authors knew their civilisation was being destroyed and wrote to save what they could for future generations.',
