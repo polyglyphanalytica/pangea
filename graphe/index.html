@@ -707,10 +707,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'aesthetics',ico:'✦',lbl:'Aesthetics & Design',col:'#e89820'},
+{id:'cultural_context',ico:'⊙',lbl:'Cultural Context',col:'#d4a028'},
+{id:'decipherment',ico:'🔓',lbl:'Decipherment',col:'#c8881c'},
+{id:'directionality',ico:'↔',lbl:'Directionality',col:'#b89030'},
+{id:'endangered',ico:'⚠',lbl:'Endangered Status',col:'#d08820'},
+{id:'evolution',ico:'⟳',lbl:'Evolution & Development',col:'#c09028'},
+{id:'influence',ico:'⊛',lbl:'Influence & Spread',col:'#d4a830'},
+{id:'legacy',ico:'◈',lbl:'Legacy & Significance',col:'#c89020'},
+{id:'literacy_impact',ico:'📖',lbl:'Literacy Impact',col:'#b88818'},
+{id:'material_media',ico:'◧',lbl:'Material & Media',col:'#d09828'},
+{id:'morphology',ico:'✎',lbl:'Morphology & Form',col:'#c8a030'},
+{id:'notation',ico:'#',lbl:'Notation Systems',col:'#b89828'},
+{id:'phonology',ico:'◎',lbl:'Phonology & Sound',col:'#d0a020'},
+{id:'political_role',ico:'⚑',lbl:'Political Role',col:'#c09820'},
+{id:'reform',ico:'⟐',lbl:'Reform & Standardisation',col:'#b8a028'},
+{id:'religious_use',ico:'☽',lbl:'Religious Use',col:'#d08828'},
+{id:'script_family',ico:'⊕',lbl:'Script Family',col:'#c8a828'},
+{id:'technology',ico:'⚙',lbl:'Technology & Tools',col:'#b09020'},
+{id:'typology',ico:'▣',lbl:'Typology & Classification',col:'#d0b030'},
+{id:'unicode',ico:'⌘',lbl:'Unicode & Digital',col:'#c0a020'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-3400,n:'PROTO-LITERATE'},
+{y:-2600,n:'EARLY SCRIPTS'},
+{y:-1500,n:'BRONZE AGE WRITING'},
+{y:-1000,n:'ALPHABET REVOLUTION'},
+{y:-500,n:'CLASSICAL SCRIPTS'},
+{y:-100,n:'IMPERIAL SCRIPTS'},
+{y:300,n:'SACRED SCRIPTS'},
+{y:600,n:'MEDIEVAL SCRIPTS'},
+{y:900,n:'EAST ASIAN PEAK'},
+{y:1200,n:'SCRIPT PROLIFERATION'},
+{y:1450,n:'PRINTING AGE'},
+{y:1700,n:'COLONIAL ERA'},
+{y:1800,n:'REFORM ERA'},
+{y:1900,n:'MODERN SCRIPTS'},
+{y:1960,n:'DIGITAL DAWN'},
+{y:2000,n:'UNICODE AGE'}
+];
 
 const ITEMS=[
 {id:'sumerian_cuneiform',nm:'Sumerian Cuneiform',sb:'Mesopotamia · First Writing System',s:-3400,e:-75,lon:45.5,lat:31.3,
@@ -3217,12 +3255,172 @@ d:{
 
 
 
-const DIPLOMATIC=[];
+const DIPLOMATIC=[
+{from:'sumerian_cuneiform',to:'akkadian_cuneiform',rel:'Parent script adopted by Akkadian speakers'},
+{from:'phoenician',to:'greek_alphabet',rel:'Phoenician alphabet adapted with vowels to create Greek'},
+{from:'greek_alphabet',to:'latin_alphabet',rel:'Greek transmitted through Etruscan to become Latin'},
+{from:'aramaic',to:'arabic_script',rel:'Arabic script evolved from Nabataean Aramaic'},
+{from:'brahmi',to:'devanagari',rel:'Brahmi ancestor of Devanagari through Gupta and Nagari'},
+{from:'chinese_characters',to:'japanese_writing',rel:'Chinese characters adopted and adapted in Japan'},
+{from:'greek_alphabet',to:'cyrillic',rel:'Cyrillic created from Greek uncial for Slavic languages'},
+{from:'latin_alphabet',to:'braille',rel:'Braille encodes the Latin alphabet in tactile form'}
+];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+// Chain 1: The Alphabet Chain (Proto-Sinaitic → Phoenician → Greek → Latin)
+{from:'proto_sinaitic',to:'proto_canaanite',concept:'The Alphabet Chain',year:-1200,desc:'Proto-Sinaitic pictographic letters simplified into the Proto-Canaanite transitional forms.'},
+{from:'proto_canaanite',to:'phoenician',concept:'The Alphabet Chain',year:-1050,desc:'Proto-Canaanite signs standardised into the canonical 22-letter Phoenician alphabet.'},
+{from:'phoenician',to:'greek_alphabet',concept:'The Alphabet Chain',year:-800,desc:'Greek traders adopted the Phoenician alphabet and added vowel letters — creating the first true alphabet.'},
+{from:'greek_alphabet',to:'etruscan',concept:'The Alphabet Chain',year:-700,desc:'Western Greek colonists transmitted their alphabet to the Etruscans of central Italy.'},
+{from:'etruscan',to:'latin_alphabet',concept:'The Alphabet Chain',year:-600,desc:'Romans adapted the Etruscan alphabet, reversing its direction and modifying letters for Latin.'},
+// Chain 2: The Aramaic Diaspora
+{from:'phoenician',to:'aramaic',concept:'The Aramaic Diaspora',year:-900,desc:'Aramaic adopted the Phoenician alphabet and carried it across the Near East as a lingua franca.'},
+{from:'aramaic',to:'hebrew',concept:'The Aramaic Diaspora',year:-500,desc:'Jews adopted the Aramaic square script during the Babylonian exile, replacing Paleo-Hebrew.'},
+{from:'aramaic',to:'syriac',concept:'The Aramaic Diaspora',year:-100,desc:'Syriac developed from Aramaic cursive in Edessa, becoming the script of Eastern Christianity.'},
+{from:'aramaic',to:'arabic_script',concept:'The Aramaic Diaspora',year:400,desc:'The Arabic script emerged from Nabataean Aramaic cursive in the pre-Islamic period.'},
+{from:'aramaic',to:'pahlavi',concept:'The Aramaic Diaspora',year:-200,desc:'The Pahlavi script evolved from Aramaic in the Parthian and Sasanian periods.'},
+// Chain 3: The Brahmic Radiation
+{from:'brahmi',to:'devanagari',concept:'The Brahmic Radiation',year:700,desc:'Devanagari evolved from Nagari, itself from the Gupta script descended from Brahmi.'},
+{from:'brahmi',to:'tamil',concept:'The Brahmic Radiation',year:300,desc:'Tamil Brahmi evolved into the distinctive Tamil script with its reduced consonant inventory.'},
+{from:'brahmi',to:'tibetan',concept:'The Brahmic Radiation',year:640,desc:'Thonmi Sambhota adapted a North Indian Brahmic script to write Tibetan.'},
+{from:'brahmi',to:'grantha',concept:'The Brahmic Radiation',year:500,desc:'The Grantha script developed from Pallava Brahmi to write Sanskrit in Tamil-speaking South India.'},
+{from:'grantha',to:'malayalam',concept:'The Brahmic Radiation',year:830,desc:'Malayalam script evolved from a fusion of Grantha and Tamil scribal traditions.'},
+// Chain 4: The Silk Road Scripts
+{from:'aramaic',to:'sogdian',concept:'The Silk Road Scripts',year:100,desc:'Sogdian merchants adapted Aramaic for their language, carrying it across Central Asia.'},
+{from:'sogdian',to:'uyghur_old',concept:'The Silk Road Scripts',year:700,desc:'Old Uyghur adapted the Sogdian script for the Turkic Uyghur language.'},
+{from:'sogdian',to:'mongolian_script',concept:'The Silk Road Scripts',year:1204,desc:'Genghis Khan commissioned a Mongolian script adapted from the Uyghur/Sogdian tradition.'},
+{from:'mongolian_script',to:'manchu',concept:'The Silk Road Scripts',year:1599,desc:'Nurhaci adapted the Mongolian alphabet with disambiguating dots for the Manchu language.'},
+// Chain 5: The Cuneiform Legacy
+{from:'sumerian_cuneiform',to:'akkadian_cuneiform',concept:'The Cuneiform Legacy',year:-2400,desc:'Akkadian speakers adopted Sumerian cuneiform, adapting it for a Semitic language.'},
+{from:'akkadian_cuneiform',to:'hittite_cuneiform',concept:'The Cuneiform Legacy',year:-1650,desc:'The Hittites borrowed Mesopotamian cuneiform for their Indo-European language.'},
+{from:'sumerian_cuneiform',to:'ugaritic',concept:'The Cuneiform Legacy',year:-1400,desc:'Ugarit created an alphabetic cuneiform — cuneiform wedge technique with alphabetic principle.'},
+// Chain 6: The Southeast Asian Scripts
+{from:'grantha',to:'khmer',concept:'The Southeast Asian Scripts',year:611,desc:'Pallava Grantha was transmitted to Cambodia, becoming the Khmer script.'},
+{from:'brahmi',to:'javanese',concept:'The Southeast Asian Scripts',year:800,desc:'Indian Brahmic scripts traveled to Java, evolving into the distinctive Javanese script.'},
+{from:'javanese',to:'balinese',concept:'The Southeast Asian Scripts',year:1000,desc:'Balinese script developed from the Javanese Kawi tradition.'},
+{from:'khmer',to:'thai',concept:'The Southeast Asian Scripts',year:1283,desc:'King Ramkhamhaeng adapted the Khmer script to create the Thai alphabet.'},
+// Chain 7: The Chinese Character Sphere
+{from:'chinese_characters',to:'japanese_writing',concept:'The Chinese Character Sphere',year:500,desc:'Chinese characters were adopted in Japan, eventually spawning kana syllabaries.'},
+{from:'chinese_characters',to:'korean_hanja',concept:'The Chinese Character Sphere',year:400,desc:'Chinese characters (hanja) were used in Korea before Hangul was created.'},
+{from:'chinese_characters',to:'tangut',concept:'The Chinese Character Sphere',year:1036,desc:'The Tangut script was inspired by Chinese character structure for the Xi Xia empire.'},
+{from:'chinese_characters',to:'khitan_large',concept:'The Chinese Character Sphere',year:920,desc:'The Khitan created a logographic script modeled on Chinese for the Liao dynasty.'},
+// Chain 8: The Cyrillic Chain
+{from:'greek_alphabet',to:'glagolitic',concept:'The Cyrillic Chain',year:863,desc:'Saints Cyril and Methodius created Glagolitic from Greek for the Slavic languages.'},
+{from:'glagolitic',to:'cyrillic',concept:'The Cyrillic Chain',year:893,desc:'Cyrillic was created from Greek uncial with some Glagolitic additions for Slavic sounds.'},
+// Chain 9: The African Independent Scripts
+{from:'vai',to:'mende_kikakui',concept:'African Independent Scripts',year:1921,desc:'The Vai syllabary may have inspired Kisimi Kamara to create Mende Kikakui.'},
+{from:'vai',to:'bamum',concept:'African Independent Scripts',year:1896,desc:'King Njoya may have been aware of Vai when he created the Bamum script.'},
+{from:'arabic_script',to:'nko',concept:'African Independent Scripts',year:1949,desc:'Solomana Kanté created N\'Ko as an alternative to Arabic for Manding languages.'},
+{from:'latin_alphabet',to:'adlam',concept:'African Independent Scripts',year:1989,desc:'The Barry brothers created Adlam as an indigenous Fulani alternative to Latin.'},
+// Chain 10: Decipherment Chain
+{from:'egyptian_hieroglyphs',to:'coptic',concept:'The Decipherment Chain',year:200,desc:'Coptic used Greek letters plus Demotic supplements — the key to reading hieroglyphs.'},
+{from:'linear_b',to:'cypriot',concept:'The Decipherment Chain',year:-1100,desc:'The Cypriot syllabary descended from Aegean scripts, aiding Ventris\'s decipherment of Linear B.'},
+// Chain 11: The Hebrew Chain
+{from:'phoenician',to:'samaritan',concept:'The Hebrew Chain',year:-600,desc:'The Samaritans preserved the Paleo-Hebrew (Phoenician-derived) script after the exile.'},
+{from:'hebrew',to:'yiddish',concept:'The Hebrew Chain',year:1200,desc:'The Hebrew alphabet was adapted to write Yiddish (Germanic) and Ladino (Romance).'},
+// Chain 12: The Missionary Scripts
+{from:'latin_alphabet',to:'cherokee',concept:'Missionary & Contact Scripts',year:1821,desc:'Sequoyah created Cherokee after seeing European literacy, though his script is original.'},
+{from:'pitman_shorthand',to:'cree_syllabics',concept:'Missionary & Contact Scripts',year:1840,desc:'James Evans likely adapted Pitman shorthand principles for Canadian Aboriginal syllabics.'},
+{from:'latin_alphabet',to:'pollard',concept:'Missionary & Contact Scripts',year:1905,desc:'Sam Pollard created the Pollard script for A-Hmao speakers in southwestern China.'},
+// Chain 13: The South Arabian Branch
+{from:'proto_sinaitic',to:'south_arabian',concept:'The South Arabian Branch',year:-1200,desc:'South Arabian script branched from the early alphabet independently of the Phoenician line.'},
+{from:'south_arabian',to:'geez',concept:'The South Arabian Branch',year:-500,desc:'South Arabian script crossed the Red Sea to become the Ge\'ez script of Ethiopia.'},
+// Chain 14: Modern Script Engineering
+{from:'latin_alphabet',to:'international_phonetic_alphabet',concept:'Modern Script Engineering',year:1888,desc:'The IPA was created from Latin letters to provide universal phonetic notation.'},
+{from:'international_phonetic_alphabet',to:'bopomofo',concept:'Modern Script Engineering',year:1913,desc:'Bopomofo drew on phonetic principles for Chinese pronunciation notation.'},
+{from:'latin_alphabet',to:'deseret',concept:'Modern Script Engineering',year:1854,desc:'The Deseret alphabet was designed as a phonetic replacement for English spelling.'},
+// Chain 15: The Proto-Elamite Enigma
+{from:'sumerian_cuneiform',to:'proto_elamite',concept:'The Proto-Elamite Enigma',year:-3100,desc:'Proto-Elamite may have been inspired by early Sumerian writing, though it remains undeciphered.'},
+{from:'proto_elamite',to:'linear_elamite',concept:'The Proto-Elamite Enigma',year:-2300,desc:'Linear Elamite may descend from Proto-Elamite, continuing Iran\'s independent writing tradition.'},
+// Chain 16: Writing for Sign
+{from:'international_phonetic_alphabet',to:'signwriting',concept:'Beyond Sound',year:1974,desc:'SignWriting transcended sound-based writing, creating notation for visual-spatial language.'},
+{from:'latin_alphabet',to:'braille',concept:'Beyond Sound',year:1824,desc:'Braille transformed alphabetic literacy into a tactile system for the blind.'},
+{from:'latin_alphabet',to:'morse_code',concept:'Beyond Sound',year:1837,desc:'Morse Code encoded the alphabet into electrical signals for telegraph communication.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'sumerian_cuneiform':[
+{nm:'Enheduanna',role:'High Priestess & First Known Author',yr:-2285,desc:'Enheduanna, daughter of Sargon of Akkad, is the first author in history known by name. Her hymns and poems, written in Sumerian cuneiform, established literary conventions that endured for centuries. She composed the Temple Hymns and the Exaltation of Inanna.'}],
+'egyptian_hieroglyphs':[
+{nm:'Hatshepsut',role:'Pharaoh & Monumental Inscriber',yr:-1478,desc:'Hatshepsut commissioned some of Egypt\'s most significant hieroglyphic inscriptions at Deir el-Bahri, using the script to legitimate her unprecedented rule as female pharaoh. Her inscriptions are masterworks of royal Egyptian writing.'},
+{nm:'Merit Ptah',role:'Chief Physician',yr:-2700,desc:'Merit Ptah is one of the earliest women named in the historical record, identified in a hieroglyphic inscription as "Chief Physician" — evidence that women held professional roles in literate Egyptian society.'}],
+'chinese_characters':[
+{nm:'Ban Zhao',role:'Historian & Scholar',yr:80,desc:'Ban Zhao completed the Han Shu (Book of Han), one of China\'s most important dynastic histories. She was the first known female Chinese historian and a court instructor to the empress and court ladies.'},
+{nm:'Wu Zetian',role:'Empress & Character Creator',yr:690,desc:'Wu Zetian, China\'s only female emperor, commissioned the creation of new Chinese characters during her reign, including a character for her own name. Her reign demonstrated the political power of script authority.'}],
+'greek_alphabet':[
+{nm:'Sappho',role:'Poet of Lesbos',yr:-610,desc:'Sappho\'s lyric poetry, written in the Greek alphabet, is among the greatest literature of the ancient world. Her work shaped Greek literary conventions and demonstrated the alphabet\'s capacity for profound personal expression.'},
+{nm:'Hypatia',role:'Mathematician & Philosopher',yr:400,desc:'Hypatia of Alexandria was a leading mathematician, astronomer, and philosopher who wrote commentaries and taught using Greek. Her murder in 415 CE symbolises the transition from classical to medieval learning.'}],
+'latin_alphabet':[
+{nm:'Christine de Pizan',role:'Author & Feminist Philosopher',yr:1405,desc:'Christine de Pizan was the first European woman to earn a living through writing. Her Book of the City of Ladies (1405) used the Latin literary tradition to argue for women\'s intellectual equality.'},
+{nm:'Hildegard of Bingen',role:'Abbess, Polymath & Script Creator',yr:1150,desc:'Hildegard created the Lingua Ignota — a constructed language with its own alphabet of 23 letters — making her one of the earliest known female script creators. She also wrote extensively in Latin on theology, science, and music.'}],
+'devanagari':[
+{nm:'Gargi Vachaknavi',role:'Vedic Scholar & Philosopher',yr:-700,desc:'Gargi was a Vedic sage who participated in philosophical debates at the court of King Janaka. Her dialogues in the Brihadaranyaka Upanishad demonstrate women\'s participation in the highest levels of Sanskrit learning.'},
+{nm:'Mirabai',role:'Poet-Saint',yr:1530,desc:'Mirabai\'s devotional poetry in Hindi/Rajasthani, written in Devanagari, is among the most beloved literature in India. Her verses challenged social conventions and became central to the bhakti devotional movement.'}],
+'arabic_script':[
+{nm:'Fatima al-Fihri',role:'Founder of the World\'s Oldest University',yr:859,desc:'Fatima al-Fihri founded the University of al-Qarawiyyin in Fez, Morocco (859 CE) — recognised by UNESCO as the world\'s oldest continuously operating university, a centre of Arabic-script learning for over 1,100 years.'},
+{nm:'Lubna of Córdoba',role:'Secretary & Scholar',yr:970,desc:'Lubna was secretary to the Caliph of Córdoba and one of the most learned women of Islamic Spain. She was a renowned mathematician and calligrapher who copied and annotated Arabic manuscripts.'}],
+'hangul':[
+{nm:'Queen Sohye',role:'Royal Patron of Hangul',yr:1475,desc:'Queen Sohye championed Hangul literacy and commissioned the Naehun (Internal Instructions for Women), one of the earliest major works published in Hangul, helping to establish the script for practical use.'}],
+'cyrillic':[
+{nm:'Anna Akhmatova',role:'Poet',yr:1940,desc:'Akhmatova\'s Requiem, written in Russian Cyrillic, is one of the 20th century\'s greatest literary achievements — a cycle of poems documenting the Stalinist Terror that demonstrated literature\'s power to bear witness.'},
+{nm:'Princess Olga',role:'Regent & Christian Convert',yr:957,desc:'Princess Olga of Kyiv was the first Rus\' ruler to convert to Christianity, paving the way for the adoption of Church Slavonic literacy and Cyrillic script in Kievan Rus\'.'}],
+'hebrew':[
+{nm:'Deborah',role:'Judge & Prophet',yr:-1200,desc:'Deborah\'s Song (Judges 5) is one of the oldest passages in the Hebrew Bible — an epic poem celebrating military victory. Deborah served as judge, prophet, and military leader.'},
+{nm:'Beruriah',role:'Talmudic Scholar',yr:150,desc:'Beruriah is the only woman whose legal opinions are recorded in the Talmud. Her scholarship challenged the exclusion of women from rabbinic learning and her interpretations are still cited.'}],
+'geez':[
+{nm:'Queen of Sheba (Makeda)',role:'Legendary Queen & Patron of Learning',yr:-950,desc:'The Ethiopian tradition credits Queen Makeda with establishing the connection between Ethiopia and Solomonic learning. The Kebra Nagast, written in Ge\'ez, centres on her story as the foundation of Ethiopian civilisation.'}],
+'tibetan':[
+{nm:'Yeshe Tsogyal',role:'Tantric Master & Script Preserver',yr:757,desc:'Yeshe Tsogyal is credited with encoding and concealing many terma (treasure texts) in Tibetan script for future discovery. She was the primary disciple and consort of Padmasambhava and is revered as a fully enlightened Buddha.'}],
+'japanese_writing':[
+{nm:'Murasaki Shikibu',role:'Novelist',yr:1008,desc:'Murasaki Shikibu wrote The Tale of Genji in Japanese kana — widely considered the world\'s first novel. Her work demonstrated that kana (rather than Chinese characters) could sustain the highest literary achievement.'},
+{nm:'Sei Shōnagon',role:'Essayist',yr:1000,desc:'Sei Shōnagon\'s Pillow Book, written in kana, is one of the masterpieces of Japanese literature — a witty, observant, and deeply personal work that helped establish the Japanese prose tradition.'}],
+'tamil':[
+{nm:'Avvaiyar',role:'Tamil Poet',yr:200,desc:'Avvaiyar (a title meaning "wise woman") is one of the most celebrated poets in Tamil literature. Multiple women bore this title across centuries, producing poetry that became central to Tamil education and culture.'}],
+'korean_hanja':[
+{nm:'Heo Nanseolheon',role:'Poet',yr:1580,desc:'Heo Nanseolheon was a Joseon-era poet who wrote in both classical Chinese (hanja) and Korean. Her poetry challenged gender conventions and her work was published in China before Korea.'}],
+'mayan_hieroglyphs':[
+{nm:'Lady Six Sky',role:'Queen of Naranjo',yr:682,desc:'Lady Six Sky (Wak Chanil Ajaw) ruled the Maya city-state of Naranjo and commissioned monumental inscriptions celebrating her political and military achievements — among the most important Maya hieroglyphic texts associated with a female ruler.'}],
+'braille':[
+{nm:'Helen Keller',role:'Author & Advocate',yr:1903,desc:'Helen Keller, deafblind from infancy, mastered Braille and became a prolific author and political activist. Her life demonstrated Braille\'s power to enable full intellectual participation for blind individuals.'}],
+'cherokee':[
+{nm:'Catherine Brown',role:'Early Cherokee Literate',yr:1820,desc:'Catherine Brown was among the first Cherokee to become literate in both English and Cherokee. She championed Cherokee education and literacy before the creation of the Sequoyah syllabary.'}],
+'phoenician':[
+{nm:'Jezebel',role:'Phoenician Princess & Queen of Israel',yr:-870,desc:'Jezebel brought Phoenician culture and literacy to the Kingdom of Israel. Whatever the Biblical portrayal, she represented the transmission of Phoenician writing culture to neighbouring states.'}],
+'coptic':[
+{nm:'Shenoute of Atripe\'s Female Monastics',role:'Scribes & Scholars',yr:400,desc:'The White Monastery under Shenoute included a women\'s community where nuns copied Coptic manuscripts. These women scribes were among the earliest documented female copyists in Christian history.'}],
+'ethiopic_numerals':[],
+'syriac':[
+{nm:'Egeria',role:'Pilgrim & Travel Writer',yr:381,desc:'Egeria\'s Itinerarium is one of the earliest travel accounts by a woman. Her detailed descriptions of Syriac Christian liturgy and holy sites preserve invaluable evidence of early Syriac Christianity.'}],
+'old_persian_cuneiform':[
+{nm:'Atossa',role:'Queen of the Achaemenid Empire',yr:-520,desc:'Atossa, wife of Darius I, wielded significant political power in the Achaemenid court. Greek sources credit her with substantial influence over imperial policy in the era when Old Persian cuneiform was created.'}],
+'vai':[
+{nm:'Female Vai Scribes',role:'Syllabary Users & Transmitters',yr:1850,desc:'Vai women were among the earliest users of the Vai syllabary, using it for personal correspondence and record-keeping. Their adoption of the script helped ensure its survival and community-wide spread.'}],
+'glagolitic':[
+{nm:'Saint Ludmila',role:'Patron Saint & Literacy Advocate',yr:880,desc:'Saint Ludmila of Bohemia was among the earliest Slavic converts and champions of Slavic-language literacy using Glagolitic. She supported the mission of Cyril and Methodius\'s disciples in Bohemia.'}],
+'signwriting':[
+{nm:'Valerie Sutton',role:'Creator of SignWriting',yr:1974,desc:'Valerie Sutton created SignWriting in 1974 — the only widely used writing system for sign languages. Her invention expanded the very definition of writing beyond sound-based systems, giving deaf communities a tool for written linguistic expression.'}],
+'nko':[
+{nm:'N\'Ko Female Literacy Advocates',role:'Teachers & Community Leaders',yr:1960,desc:'Women played a crucial role in spreading N\'Ko literacy across West Africa, serving as teachers in informal N\'Ko schools and demonstrating that the script empowered women\'s education in communities where French-language schooling was inaccessible.'}],
+'adlam':[
+{nm:'Fulani Women Educators',role:'Adlam Teachers',yr:2000,desc:'Fulani women have been central to the spread of Adlam literacy, serving as teachers and community organisers in Adlam literacy programs across Guinea and the Fulani diaspora.'}],
+'bamum':[
+{nm:'Queen Njapndunke',role:'Mother of King Njoya',yr:1895,desc:'Queen Njapndunke, mother of the Bamum script creator King Njoya, was a powerful political figure who supported her son\'s cultural innovations. Her influence helped create the conditions for the Bamum script\'s development.'}],
+'international_phonetic_alphabet':[
+{nm:'Laura Soames',role:'Phonetician',yr:1891,desc:'Laura Soames was a pioneering British phonetician who contributed to the early development of the IPA. She published important work on English pronunciation and helped establish phonetics as an academic discipline.'}],
+'cree_syllabics':[
+{nm:'Charlotte Fiddler',role:'Cree Syllabics Educator',yr:1960,desc:'Charlotte Fiddler and other Indigenous women educators were essential to the transmission of Cree syllabics across generations, teaching in communities and ensuring the script\'s survival through the residential school era.'}],
+'osage':[
+{nm:'Osage Women Language Keepers',role:'Language Preservers',yr:2010,desc:'Osage women elders have been central to the language revitalisation movement, serving as fluent speakers and teachers whose knowledge enabled the creation and meaningful use of the Osage script.'}],
+'linear_b':[
+{nm:'Alice Kober',role:'Classicist & Cryptanalyst',yr:1946,desc:'Alice Kober\'s meticulous analysis of Linear B sign patterns laid the essential groundwork for Michael Ventris\'s 1952 decipherment. Her discovery of inflectional patterns in the script was the crucial breakthrough that made decipherment possible. She died in 1950, just two years before the full decipherment.'}],
+'proto_sinaitic':[
+{nm:'Hilda Petrie',role:'Archaeologist & Epigrapher',yr:1905,desc:'Hilda Petrie, wife and collaborator of Flinders Petrie, participated in the excavations at Serabit el-Khadim where Proto-Sinaitic inscriptions were discovered. Her archaeological work helped bring the earliest alphabet to scholarly attention.'}],
+'khmer':[
+{nm:'Indradevi',role:'Scholar & Patron of Learning',yr:1200,desc:'Indradevi, wife of Jayavarman VII, was a renowned Buddhist scholar and teacher at the Angkorian court. Inscriptions in Khmer praise her learning and her role in promoting Buddhist education.'}],
+'aramaic':[
+{nm:'Babata',role:'Legal Document Owner',yr:130,desc:'Babata\'s archive — a cache of Aramaic, Nabataean, and Greek legal documents found in the Cave of Letters — reveals a Jewish woman actively managing property, litigation, and family affairs using the Aramaic scribal system.'}]
+};
 
 let year=-3400,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4720,9 +4918,33 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Fertile Crescent':['sumerian_cuneiform','akkadian_cuneiform','proto_elamite','ugaritic','aramaic','hebrew','syriac','mandaic','phoenician','samaritan','nabataean','proto_sinaitic','proto_canaanite','linear_elamite','old_persian_cuneiform','pahlavi','avestan'],
+'Nile Valley':['egyptian_hieroglyphs','coptic','meroitic','demotic'],
+'East Asia':['chinese_characters','japanese_writing','tangut','khitan_large','bopomofo','yi_script','manchu'],
+'South Asia':['brahmi','devanagari','tamil','tibetan','grantha','malayalam','sinhala','kharosthi','gujarati'],
+'Southeast Asia':['khmer','thai','javanese','balinese','burmese','baybayin','sundanese'],
+'Europe':['greek_alphabet','latin_alphabet','cyrillic','glagolitic','elder_futhark','ogham','etruscan','hungarian_runes','linear_a','linear_b','phaistos_disc'],
+'Korea & Hangul':['hangul'],
+'Africa':['geez','tifinagh','vai','nko','adlam','bamum','mende_kikakui','osmanya'],
+'Americas':['mayan_hieroglyphs','cherokee','cree_syllabics','aztec_pictographs','zapotec','deseret','osage','rongorongo'],
+'Central & Inner Asia':['mongolian_script','armenian','georgian','sogdian','old_turkic'],
+'Modern Innovations':['international_phonetic_alphabet','braille','morse_code','signwriting','pitman_shorthand','pollard']
+};
 
-const HERITAGE_REASONS={};
+const HERITAGE_REASONS={
+'Fertile Crescent':'The cradle of writing — where cuneiform, the alphabet, and the Aramaic scribal tradition emerged.',
+'Nile Valley':'Home to Egyptian hieroglyphs and their descendants, the Nile valley produced Africa\'s oldest literate tradition.',
+'East Asia':'The Chinese character tradition and its sphere of influence — logographic writing at its most elaborate.',
+'South Asia':'The Brahmic script family radiated from India to create the writing systems of half a billion people.',
+'Southeast Asia':'Brahmic scripts traveled by sea, producing the rich scribal traditions of mainland and island Southeast Asia.',
+'Europe':'From Greek to Latin to Cyrillic — European scripts became the world\'s most widely used writing systems.',
+'Korea & Hangul':'Hangul stands alone as the most scientifically designed alphabet in history.',
+'Africa':'From Ge\'ez to modern N\'Ko and Adlam — Africa\'s independent script traditions span three millennia.',
+'Americas':'From Maya hieroglyphs to Cherokee — the Americas produced independent writing traditions and modern revivals.',
+'Central & Inner Asia':'The Silk Road carried scripts across Inner Asia, producing Armenian, Georgian, Mongolian, and Turkic scripts.',
+'Modern Innovations':'Scripts created for specific purposes — phonetics, accessibility, speed, and sign language.'
+};
 
 let heritageRegion=null;
 
