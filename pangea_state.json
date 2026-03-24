@@ -258,7 +258,12 @@
       "target": 100,
       "live": true,
       "map": "world",
-      "section": "VII"
+      "section": "VII",
+      "validated_sha": "fd5743878f2b2e745e12d5e8cd0938ff345c1add",
+      "validated_short": "fd57438",
+      "validated_at": "2026-03-24T15:37:01.260770Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "machina": {
       "phase": "1A",
