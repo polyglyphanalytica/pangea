@@ -3368,7 +3368,7 @@ const WOMEN={
 'south_african_mines':[{nm:'Frances Baard',role:'Trade unionist and anti-apartheid activist',yr:1954,desc:'Frances Baard organised African women in the Northern Cape, connecting workers\' rights to the anti-apartheid struggle. She was one of the four women named in the preamble of the Freedom Charter (1955). Arrested and imprisoned multiple times, she never stopped organising. A municipality in the Northern Cape is named after her.'}],
 'japanese_karoshi':[{nm:'Takahashi Matsuri',role:'Victim of karoshi at Dentsu',yr:2015,desc:'Takahashi Matsuri was a 24-year-old employee at Dentsu, Japan\'s largest advertising company, who died by suicide in 2015 after working over 100 hours of overtime per month. Her death, and her mother\'s subsequent campaign, catalysed Japan\'s work reform legislation and brought international attention to karoshi. Her case changed Japanese labour law.'}],
 'gig_economy':[{nm:'Veena Dubal',role:'Labour law scholar and gig worker advocate',yr:2015,desc:'Veena Dubal\'s research on algorithmic wage discrimination and platform worker exploitation has shaped legal and policy debates about gig economy labour classification. Her work documenting how algorithms manipulate driver earnings provided evidence used in California\'s AB5 legislation and subsequent classification challenges.'}],
-'coffee_labour':[{nm:'Meaza Ashenafi',role:'Ethiopian women\'s rights lawyer',yr:2018,desc:'Meaza Ashenafi, appointed president of Ethiopia\'s Federal Supreme Court in 2018, has championed women\'s rights in Ethiopia\'s coffee sector — where women perform 70% of farm labour but receive a fraction of income. Her legal work on women\'s property rights has direct implications for millions of women coffee farmers.'}],
+'ethiopian_coffee':[{nm:'Meaza Ashenafi',role:'Ethiopian women\'s rights lawyer',yr:2018,desc:'Meaza Ashenafi, appointed president of Ethiopia\'s Federal Supreme Court in 2018, has championed women\'s rights in Ethiopia\'s coffee sector — where women perform 70% of farm labour but receive a fraction of income. Her legal work on women\'s property rights has direct implications for millions of women coffee farmers.'}],
 'iww':[{nm:'Elizabeth Gurley Flynn',role:'IWW organiser and "Rebel Girl"',yr:1906,desc:'Elizabeth Gurley Flynn joined the IWW at age fifteen and became one of its most effective organisers, leading the Lawrence textile strike of 1912 and the Paterson silk strike of 1913. Joe Hill\'s song "Rebel Girl" was written about her. She organised predominantly immigrant women workers, combining labour militancy with feminist consciousness.'}],
 'atlantic_slave_trade':[{nm:'Phillis Wheatley',role:'Poet and abolitionist voice',yr:1773,desc:'Phillis Wheatley, kidnapped from West Africa and enslaved in Boston, became the first African American to publish a book of poetry (1773). Her literary achievement challenged the ideology that justified slavery — the claim that Africans were intellectually inferior. Her work was cited by abolitionists as proof that slavery destroyed talent rather than reflecting natural capacity.'}],
 'chartism':[{nm:'Elizabeth Pease',role:'Chartist and abolitionist',yr:1840,desc:'Elizabeth Pease was one of the most active women in the Chartist movement, connecting British working-class politics to American abolitionism. She corresponded with Frederick Douglass, William Lloyd Garrison, and Lucretia Mott, building transatlantic solidarity between workers\' rights and anti-slavery movements.'}],
@@ -4540,7 +4540,7 @@ function renderFingerprint(c){
   }).join(' ');
   svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
   // Labels — placed outside the ring with enough clearance, wrapped in two lines where needed
-  const SHORT=['Org','Tech','Resist','Exploit','Scale','Duration'];
+  const SHORT=['Organisation','Technology','Resistance','Exploitation','Scale','Duration'];
   angles.forEach((a,i)=>{
     const lr=R+26;
     const lx=cx+lr*Math.cos(a);
@@ -4902,7 +4902,7 @@ const HERITAGE_REGIONS={
 'wwi_labour','russian_revolution','fordism','new_deal','nazi_forced','gulag','chinese_communes','vietnam_war_labour','chinese_laogai','welfare_state'
 ],
 'Global South':[
-'indian_caste_labour','apartheid_labour','south_african_mines','bangladesh_garments','gulf_migrant','cobalt_mining','maquiladora','rubber_labour','coffee_labour','waste_pickers','textile_india','chinese_factory'
+'indian_caste_labour','apartheid_labour','south_african_mines','bangladesh_garments','gulf_migrant','cobalt_mining','maquiladora','rubber_labour','ethiopian_coffee','waste_pickers','textile_india','chinese_factory'
 ],
 'Digital & Modern':[
 'gig_economy','amazon_warehouses','foxconn','remote_work','ai_automation','content_moderation','delivery_riders','call_centres','japanese_karoshi','universal_basic_income'
