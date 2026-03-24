@@ -1087,7 +1087,6 @@
     }
   },
   "queue": [
-    "labor",
     "spiritus",
     "petra",
     "bestia",
@@ -5979,6 +5978,12 @@
     {
       "atlas": "sophia",
       "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "labor",
+      "phase_done": "CLEANUP",
+      "phase_next": "1A",
       "items": 100
     }
   ],
