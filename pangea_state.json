@@ -312,15 +312,15 @@
       "validated_lenses": 20
     },
     "bestia": {
-      "phase": "1A",
+      "phase": "DONE",
       "items": 0,
       "target": 100,
       "live": true,
       "map": "world",
       "section": "I",
-      "validated_sha": "8e939fb50cd18a90c0d44f689c9ac9e8421b7393",
-      "validated_short": "8e939fb",
-      "validated_at": "2026-03-22T22:19:16.207723Z",
+      "validated_sha": "d1b3279a5efc45262e5e3b7d2784033735096e9c",
+      "validated_short": "d1b3279",
+      "validated_at": "2026-03-24T15:39:40.489348Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -1087,7 +1087,6 @@
     }
   },
   "queue": [
-    "bestia",
     "codex",
     "graphe",
     "experimenta",
