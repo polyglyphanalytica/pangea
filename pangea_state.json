@@ -247,7 +247,12 @@
       "target": 100,
       "live": false,
       "map": "world",
-      "section": "VI"
+      "section": "VI",
+      "validated_sha": "a8fb070762cabced927f1a19a32a490839118ed0",
+      "validated_short": "a8fb070",
+      "validated_at": "2026-03-25T20:56:32.480865Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "vindica": {
       "phase": "1A",
@@ -8974,5 +8979,10 @@
       "items": 100
     }
   ],
-  "assignments": {}
+  "assignments": {},
+  "corruptio": {
+    "phase": "DONE",
+    "items": 100,
+    "live": true
+  }
 }
