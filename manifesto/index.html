@@ -709,10 +709,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'adaptation',ico:'⟳',lbl:'Adaptation & Evolution',col:'#e89820'},
+{id:'class',ico:'⚖',lbl:'Class & Inequality',col:'#f0b040'},
+{id:'critique',ico:'△',lbl:'Critique & Opposition',col:'#d4a030'},
+{id:'culture',ico:'◎',lbl:'Culture & Expression',col:'#c89828'},
+{id:'doctrine',ico:'✦',lbl:'Doctrine & Principles',col:'#e0a020'},
+{id:'economics',ico:'⊕',lbl:'Economic Program',col:'#d8a828'},
+{id:'education',ico:'✎',lbl:'Education & Transmission',col:'#e89030'},
+{id:'environment',ico:'♻',lbl:'Environment & Nature',col:'#d09020'},
+{id:'ethics',ico:'⊘',lbl:'Ethics & Morality',col:'#c8a030'},
+{id:'freedom',ico:'◇',lbl:'Freedom & Liberty',col:'#e0b830'},
+{id:'gender',ico:'♀',lbl:'Gender Politics',col:'#d4a820'},
+{id:'governance',ico:'▣',lbl:'Governance & Institutions',col:'#c89020'},
+{id:'international',ico:'◯',lbl:'International Dimensions',col:'#e0a830'},
+{id:'legacy',ico:'◆',lbl:'Legacy & Influence',col:'#d8b030'},
+{id:'media',ico:'▦',lbl:'Media & Communication',col:'#e89828'},
+{id:'opposition',ico:'⚡',lbl:'Opposition & Enemies',col:'#c8a828'},
+{id:'origins',ico:'⊗',lbl:'Origins & Context',col:'#d0a030'},
+{id:'race',ico:'⟷',lbl:'Race & Ethnicity',col:'#e0a020'},
+{id:'religion',ico:'✝',lbl:'Religion & Spirituality',col:'#d4b020'},
+{id:'violence',ico:'⚔',lbl:'Violence & Resistance',col:'#c89830'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-508,n:'CLASSICAL DEMOCRACY'},
+{y:-300,n:'HELLENISTIC THOUGHT'},
+{y:0,n:'IMPERIAL IDEOLOGIES'},
+{y:500,n:'MEDIEVAL ORDER'},
+{y:1200,n:'SCHOLASTIC REVIVAL'},
+{y:1500,n:'REFORMATION ERA'},
+{y:1640,n:'REVOLUTIONARY IDEAS'},
+{y:1776,n:'AGE OF REVOLUTION'},
+{y:1848,n:'SPRING OF NATIONS'},
+{y:1870,n:'IMPERIAL AGE'},
+{y:1917,n:'REVOLUTIONARY CENTURY'},
+{y:1945,n:'COLD WAR IDEOLOGIES'},
+{y:1968,n:'NEW MOVEMENTS'},
+{y:1989,n:'POST-COLD WAR'},
+{y:2010,n:'DIGITAL POLITICS'}
+];
 
 const ITEMS=[
 {id:'athenian_democracy',nm:'Athenian Democracy',sb:'Greece · 508-322 BCE',s:-508,e:-322,lon:23.73,lat:37.97,fp:{rad:7,reach:5,dur:5,coh:7,infl:10,mob:8},conns:['roman_republicanism','liberalism','direct_democracy'],overview:'Cleisthenes\' reforms created the world\'s first democracy — citizens voting directly on laws, serving on juries, and holding office by lot. Athenian democracy excluded women, slaves, and foreigners, yet its radical premise that ordinary people could govern themselves shaped political thought for millennia.',d:{origins:'The historical origins and founding conditions of this ideology reveal how specific crises, intellectual traditions, and social pressures combined to produce a new political vision.',doctrine:'The core doctrinal commitments of this ideology define its vision of justice, authority, human nature, and the proper organization of society.',economics:'The economic program of this ideology prescribes specific relationships between labor, capital, property, and the state that reflect its deeper assumptions about human motivation and social good.',opposition:'The opposition and enemies defined by this ideology reveal as much about its character as its positive program, shaping who is included, excluded, and targeted.',spread:'The mechanisms by which this ideology spread — pamphlets, parties, armies, missionaries, or media — shaped both its content and its capacity to transform societies.',violence:'The relationship between this ideology and political violence ranges from principled nonviolence to revolutionary terror, revealing fundamental assumptions about how change occurs.',governance:'The institutional arrangements this ideology prescribes or produces — constitutions, parties, bureaucracies, councils — determine how power is exercised and contested.',culture:'The cultural dimensions of this ideology — art, education, language, ritual — reveal how political ideas are embedded in everyday life and transmitted across generations.',critique:'The most powerful critiques of this ideology expose its internal contradictions, unintended consequences, and the gap between its promises and its outcomes.',legacy:'The lasting legacy of this ideology extends far beyond its original context, shaping political vocabulary, institutional design, and moral assumptions that persist today.',gender:'The gender politics of this ideology reveal whether it challenged or reinforced patriarchal structures, and how women\'s liberation was included, deferred, or opposed.',race:'The racial dimensions of this ideology expose how it addressed, ignored, or reinforced systems of racial hierarchy and the legacies of colonialism and slavery.',class:'The class analysis embedded in this ideology determines whose interests it serves, whose labor it values, and how it understands inequality and social mobility.',freedom:'The concept of freedom central to this ideology — negative or positive, individual or collective, political or economic — defines its deepest commitments.',international:'The international dimensions of this ideology shaped foreign policy, alliance systems, and the global order, from imperialism to internationalism to isolationism.',religion:'The relationship between this ideology and religious traditions — alliance, opposition, or transformation — reveals fundamental assumptions about moral authority and social order.',environment:'The environmental implications of this ideology emerge from its assumptions about nature, progress, growth, and humanity\'s relationship to the material world.',youth:'The role of youth movements in this ideology reveals how political ideas are transmitted to new generations and how young people\'s energy is channeled into political action.',media:'The media strategies of this ideology — from revolutionary pamphlets to state television to social media — shaped how political messages reach and mobilize populations.',adaptation:'The capacity of this ideology to adapt to new circumstances — or its rigidity in the face of change — determines its longevity and relevance across different eras.'}},
@@ -820,10 +857,62 @@ const ITEMS=[
 
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'athenian_democracy',to:'roman_republicanism',concept:'Democratic Lineage',year:-300,desc:'Athenian democratic principles influenced Roman republican thought through Greek philosophy.'},
+{from:'roman_republicanism',to:'american_revolution',concept:'Democratic Lineage',year:1776,desc:'Roman republican ideals of mixed government shaped the American founders\' constitutional design.'},
+{from:'american_revolution',to:'french_revolution',concept:'Democratic Lineage',year:1789,desc:'The American Revolution demonstrated that Enlightenment principles could overthrow monarchy.'},
+{from:'french_revolution',to:'socialism',concept:'Radical Tradition',year:1825,desc:'The French Revolution\'s egalitarian promise inspired socialist critiques of industrial capitalism.'},
+{from:'socialism',to:'marxism',concept:'Radical Tradition',year:1848,desc:'Marx transformed utopian socialism into a scientific theory of historical change.'},
+{from:'marxism',to:'bolshevism',concept:'Radical Tradition',year:1903,desc:'Lenin adapted Marx\'s theory to Russian conditions through the vanguard party concept.'},
+{from:'bolshevism',to:'maoism',concept:'Radical Tradition',year:1935,desc:'Mao adapted Leninist revolution to agrarian China with peasant-based guerrilla warfare.'},
+{from:'liberalism',to:'constitutionalism',concept:'Liberal Order',year:1787,desc:'Lockean liberalism found institutional expression in written constitutional government.'},
+{from:'constitutionalism',to:'human_rights',concept:'Liberal Order',year:1948,desc:'Constitutional rights expanded into universal human rights through international declarations.'},
+{from:'human_rights',to:'lgbtq_rights',concept:'Liberal Order',year:1969,desc:'The human rights framework provided the legal and moral basis for LGBTQ+ equality claims.'},
+{from:'nationalism',to:'fascism',concept:'Dark Nationalism',year:1919,desc:'Extreme nationalism combined with post-war trauma produced fascist ideology.'},
+{from:'fascism',to:'nazism',concept:'Dark Nationalism',year:1920,desc:'Mussolini\'s fascist model was radicalized by Hitler\'s racial ideology into National Socialism.'},
+{from:'nazism',to:'apartheid_ideology',concept:'Dark Nationalism',year:1948,desc:'Racial supremacist ideology was institutionalized in South Africa\'s apartheid system.'},
+{from:'gandhism',to:'civil_rights',concept:'Nonviolent Resistance',year:1955,desc:'Gandhi\'s satyagraha methods directly inspired Martin Luther King Jr.\'s civil rights campaign.'},
+{from:'civil_rights',to:'anti_apartheid',concept:'Nonviolent Resistance',year:1960,desc:'American civil rights strategies influenced the anti-apartheid movement in South Africa.'},
+{from:'anti_apartheid',to:'solidarity_movement',concept:'Nonviolent Resistance',year:1980,desc:'Nonviolent mass resistance models traveled from South Africa to Poland\'s Solidarity.'},
+{from:'conservatism',to:'neoliberalism',concept:'Right Evolution',year:1980,desc:'Burke\'s organic conservatism evolved through Hayek and Friedman into market fundamentalism.'},
+{from:'neoliberalism',to:'populism',concept:'Right Evolution',year:2016,desc:'Neoliberal inequality and dislocation fueled populist backlash against established elites.'},
+{from:'feminism',to:'intersectionality',concept:'Liberation Theory',year:1989,desc:'Feminist theory evolved to recognize overlapping systems of gender, race, and class oppression.'},
+{from:'intersectionality',to:'decolonization_thought',concept:'Liberation Theory',year:2010,desc:'Intersectional analysis expanded into demands for decolonizing knowledge and institutions.'},
+{from:'environmentalism',to:'climate_justice',concept:'Green Evolution',year:2009,desc:'Environmental concern evolved into climate justice demanding equity in climate response.'},
+{from:'climate_justice',to:'degrowth',concept:'Green Evolution',year:2015,desc:'Climate crisis arguments radicalized into demands for abandoning economic growth entirely.'},
+{from:'confucianism',to:'maoism',concept:'Chinese Dialectic',year:1949,desc:'Mao both rejected and absorbed Confucian patterns of moral authority and mass campaigns.'},
+{from:'maoism',to:'confucian_capitalism',concept:'Chinese Dialectic',year:1990,desc:'Post-Mao China synthesized market economics with Confucian-inflected authoritarian governance.'},
+{from:'techno_utopianism',to:'digital_authoritarianism',concept:'Digital Politics',year:2014,desc:'The same digital tools promised for liberation were deployed for surveillance and control.'},
+{from:'digital_authoritarianism',to:'ai_governance',concept:'Digital Politics',year:2023,desc:'Digital surveillance concerns expanded into broader debates about governing artificial intelligence.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'suffragism':[{nm:'Emmeline Pankhurst',role:'Suffragette leader',yr:1903,desc:'Emmeline Pankhurst founded the Women\'s Social and Political Union and led the militant suffragette campaign in Britain. Her willingness to endure imprisonment, hunger strikes, and force-feeding demonstrated that women\'s political rights were worth fighting for.'},
+{nm:'Elizabeth Cady Stanton',role:'Women\'s rights pioneer',yr:1848,desc:'Elizabeth Cady Stanton organized the Seneca Falls Convention and drafted the Declaration of Sentiments demanding women\'s suffrage. Her fifty-year partnership with Susan B. Anthony created the organizational foundation for the American suffrage movement.'}],
+'feminism':[{nm:'Simone de Beauvoir',role:'Feminist philosopher',yr:1949,desc:'Simone de Beauvoir\'s The Second Sex argued that women are not born but made — that femininity is a social construction imposed by patriarchal culture. The book became the foundational text of second-wave feminism and transformed how gender is understood.'},
+{nm:'bell hooks',role:'Feminist theorist',yr:1981,desc:'bell hooks integrated race, class, and gender into feminist analysis, arguing that feminism must address the experiences of Black women and working-class women. Her accessible writing brought feminist theory to broad audiences.'}],
+'abolitionism':[{nm:'Harriet Tubman',role:'Abolitionist and Underground Railroad conductor',yr:1850,desc:'Harriet Tubman escaped slavery and returned thirteen times to lead approximately seventy enslaved people to freedom. She served as a Union spy during the Civil War and became the most iconic figure of the abolitionist movement.'},
+{nm:'Sojourner Truth',role:'Abolitionist and women\'s rights activist',yr:1851,desc:'Sojourner Truth\'s Ain\'t I a Woman? speech challenged both racial and gender oppression simultaneously, demonstrating that abolitionism and women\'s rights were inseparable causes.'}],
+'civil_rights':[{nm:'Rosa Parks',role:'Civil rights activist',yr:1955,desc:'Rosa Parks\'s refusal to yield her bus seat in Montgomery sparked the bus boycott that launched the modern civil rights movement. Her act of dignified resistance became the defining symbol of nonviolent civil disobedience.'},
+{nm:'Fannie Lou Hamer',role:'Civil rights organizer',yr:1964,desc:'Fannie Lou Hamer organized voter registration in Mississippi\'s most dangerous counties and challenged the all-white Mississippi delegation at the 1964 Democratic Convention. Her testimony exposed the violence underlying Southern racial politics.'}],
+'french_revolution':[{nm:'Olympe de Gouges',role:'Revolutionary feminist',yr:1791,desc:'Olympe de Gouges wrote the Declaration of the Rights of Woman and of the Female Citizen, demanding that the revolution\'s promise of equality extend to women. She was guillotined in 1793 for her political writings.'}],
+'marxism':[{nm:'Rosa Luxemburg',role:'Revolutionary socialist theorist',yr:1905,desc:'Rosa Luxemburg developed influential critiques of both capitalism and Leninist authoritarianism, arguing for mass democratic action over vanguard politics. Her murder in 1919 made her a martyr for democratic socialism.'}],
+'gandhism':[{nm:'Sarojini Naidu',role:'Independence leader and poet',yr:1925,desc:'Sarojini Naidu was the first Indian woman to become president of the Indian National Congress and led the salt march alongside Gandhi. She combined literary achievement with political leadership in the independence movement.'}],
+'environmentalism':[{nm:'Rachel Carson',role:'Environmental scientist and author',yr:1962,desc:'Rachel Carson\'s Silent Spring documented the devastating effects of pesticides on ecosystems and human health. Her rigorous science and elegant writing launched the modern environmental movement despite fierce industry opposition.'},
+{nm:'Wangari Maathai',role:'Environmental and democracy activist',yr:1977,desc:'Wangari Maathai founded the Green Belt Movement, planting over fifty million trees across Kenya while connecting environmental restoration to women\'s empowerment and democratic governance. She was the first African woman to win the Nobel Peace Prize.'}],
+'anti_colonialism':[{nm:'Funmilayo Ransome-Kuti',role:'Nigerian independence activist',yr:1947,desc:'Funmilayo Ransome-Kuti led the Abeokuta Women\'s Union in campaigns against colonial taxation and for women\'s suffrage in Nigeria. Her organizing demonstrated that anti-colonial struggle and women\'s liberation were inseparable.'}],
+'human_rights':[{nm:'Eleanor Roosevelt',role:'Human rights champion',yr:1948,desc:'Eleanor Roosevelt chaired the UN commission that drafted the Universal Declaration of Human Rights. Her diplomatic skill and moral authority were essential to creating the foundational document of international human rights law.'}],
+'intersectionality':[{nm:'Kimberle Crenshaw',role:'Legal scholar',yr:1989,desc:'Kimberle Crenshaw coined the term intersectionality to describe how overlapping identities create unique experiences of discrimination. Her framework transformed legal theory, feminist thought, and social justice activism.'}],
+'black_power':[{nm:'Angela Davis',role:'Activist and scholar',yr:1970,desc:'Angela Davis connected Black liberation, feminism, prison abolition, and anti-capitalism into a unified analysis of American oppression. Her scholarship and activism influenced generations of social justice movements.'}],
+'climate_justice':[{nm:'Greta Thunberg',role:'Climate activist',yr:2018,desc:'Greta Thunberg\'s school strike for climate sparked a global youth movement demanding urgent action on climate change. At fifteen, she challenged world leaders with moral clarity that adults had failed to muster.'}],
+'anti_apartheid':[{nm:'Winnie Madikizela-Mandela',role:'Anti-apartheid leader',yr:1969,desc:'Winnie Mandela sustained resistance to apartheid through decades of imprisonment, banishment, and surveillance while her husband was jailed. She became the symbol of Black South African defiance, though her legacy includes controversy over political violence.'}],
+'liberation_theology':[{nm:'Dorothy Day',role:'Catholic social activist',yr:1933,desc:'Dorothy Day cofounded the Catholic Worker Movement, combining radical pacifism with direct service to the poor. Her lived commitment to Gospel justice influenced liberation theology and Catholic social teaching worldwide.'}],
+'lgbtq_rights':[{nm:'Marsha P. Johnson',role:'LGBTQ+ rights pioneer',yr:1969,desc:'Marsha P. Johnson was a central figure at the Stonewall uprising that launched the modern LGBTQ+ rights movement. She cofounded STAR, providing shelter for homeless transgender youth in New York City.'}],
+'rojava_experiment':[{nm:'Kurdish Women Fighters',role:'YPJ commanders and soldiers',yr:2014,desc:'The Women\'s Protection Units (YPJ) fought ISIS while implementing Rojava\'s feminist governance model. Kurdish women\'s leadership in both combat and democratic self-governance challenged patriarchal norms across the Middle East.'}],
+'disability_rights':[{nm:'Judith Heumann',role:'Disability rights pioneer',yr:1977,desc:'Judith Heumann led the Section 504 sit-in, the longest non-violent occupation of a federal building in US history. Her lifelong advocacy was instrumental in passing the Americans with Disabilities Act.'}],
+'solidarity_movement':[{nm:'Anna Walentynowicz',role:'Labor activist',yr:1980,desc:'Anna Walentynowicz\'s firing from the Gdansk shipyard triggered the strike that created Solidarity. Her decades of labor organizing preceded and enabled Walesa\'s leadership of the movement that brought down Polish communism.'}]
+};
 
 let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -2361,7 +2450,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient World':['athenian_democracy','roman_republicanism','confucianism','legalism','stoicism_political'],
+'Enlightenment & Revolution':['natural_law','absolutism','divine_right','english_civil_war_ideas','liberalism','american_revolution','french_revolution','jacobinism'],
+'Nineteenth Century':['conservatism','utilitarianism','socialism','marxism','anarchism','nationalism','abolitionism','suffragism','syndicalism'],
+'Fascism & Totalitarianism':['fascism','nazism','eugenics','stalinism','totalitarianism','social_darwinism'],
+'Communist World':['bolshevism','leninism','maoism','cultural_revolution','cuban_revolution','juche','titoism'],
+'Decolonization':['anti_colonialism','gandhism','pan_africanism','arab_nationalism','african_socialism','non_aligned'],
+'Western Democracy':['social_democracy','welfare_state','constitutionalism','christian_democracy','neoliberalism','neoconservatism'],
+'Liberation Movements':['civil_rights','black_power','feminism','lgbtq_rights','disability_rights','anti_apartheid','indigenous_rights'],
+'Religious Politics':['islamism','theocracy','liberation_theology','secularism','hindu_nationalism'],
+'Green & Justice':['environmentalism','green_politics','climate_justice','eco_socialism','degrowth'],
+'Digital Age':['techno_utopianism','transhumanism','digital_authoritarianism','ai_governance','effective_altruism'],
+'Contemporary Left & Right':['populism','democratic_socialism','intersectionality','critical_race_theory','white_nationalism','authoritarianism']
+};
 
 const HERITAGE_REASONS={};
 
