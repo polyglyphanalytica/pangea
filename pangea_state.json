@@ -458,9 +458,9 @@
       "live": true,
       "map": "world",
       "section": "IV",
-      "validated_sha": "4bbb04617bee7c6279cd759c8931ec456575d02f",
-      "validated_short": "4bbb046",
-      "validated_at": "2026-03-25T01:11:19.240021Z",
+      "validated_sha": "6d065043f4af566c27508c8e5c41e249705b542b",
+      "validated_short": "6d06504",
+      "validated_at": "2026-03-25T18:41:56.783423Z",
       "validated_items": 100,
       "validated_lenses": 20
     },
@@ -492,7 +492,7 @@
       "validated_lenses": 20
     },
     "obscura": {
-      "phase": "1A",
+      "phase": "DATA",
       "items": 0,
       "target": 100,
       "live": false,
@@ -8562,6 +8562,11 @@
       "atlas": "terraincognita",
       "batch": "101-117",
       "items": 117
+    },
+    {
+      "atlas": "obscura",
+      "batch": "1-100",
+      "items": 100
     }
   ],
   "assignments": {}
