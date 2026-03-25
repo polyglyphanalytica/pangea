@@ -709,10 +709,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'calendar',ico:'📅',lbl:'Calendars & Timekeeping',col:'#7ac0a0'},
+{id:'controversy',ico:'⚡',lbl:'Controversies & Debates',col:'#c07a60'},
+{id:'cosmology',ico:'🌌',lbl:'Cosmological Models',col:'#607ac0'},
+{id:'crisis',ico:'🔥',lbl:'Crisis & Transformation',col:'#c0607a'},
+{id:'culture',ico:'🎭',lbl:'Cultural Impact',col:'#c07aa0'},
+{id:'divination',ico:'🔮',lbl:'Divination & Astrology',col:'#a060c0'},
+{id:'education',ico:'📚',lbl:'Education & Outreach',col:'#7a7ac0'},
+{id:'global',ico:'🌐',lbl:'Global Dimensions',col:'#c09a7a'},
+{id:'instruments',ico:'🔭',lbl:'Instruments & Tools',col:'#60a0c0'},
+{id:'institutional',ico:'🏛',lbl:'Institutional Frameworks',col:'#c0a060'},
+{id:'legacy',ico:'⏳',lbl:'Legacy & Aftermath',col:'#60c07a'},
+{id:'mathematics',ico:'∑',lbl:'Mathematics & Computation',col:'#7ac0c0'},
+{id:'navigation',ico:'🧭',lbl:'Navigation & Exploration',col:'#a0c07a'},
+{id:'networks',ico:'🔗',lbl:'Networks & Transmission',col:'#c0c07a'},
+{id:'observation',ico:'👁',lbl:'Observational Methods',col:'#7a9fc0'},
+{id:'power',ico:'⚖',lbl:'Power & Authority',col:'#c0a07a'},
+{id:'precision',ico:'🎯',lbl:'Precision & Measurement',col:'#a07ac0'},
+{id:'religion',ico:'✝',lbl:'Religion & Spirituality',col:'#c07a7a'},
+{id:'technology',ico:'⚙',lbl:'Technology & Engineering',col:'#60c0a0'},
+{id:'theory',ico:'💡',lbl:'Theory & Models',col:'#7a60c0'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-3000,n:'EARLY SKY-WATCHING'},
+{y:-2000,n:'BRONZE AGE ASTRONOMY'},
+{y:-700,n:'CLASSICAL OBSERVATION'},
+{y:-200,n:'HELLENISTIC ASTRONOMY'},
+{y:100,n:'PTOLEMAIC ERA'},
+{y:500,n:'EASTERN GOLDEN AGES'},
+{y:800,n:'ISLAMIC ASTRONOMY'},
+{y:1200,n:'MEDIEVAL SYNTHESIS'},
+{y:1500,n:'COPERNICAN REVOLUTION'},
+{y:1600,n:'TELESCOPIC AGE'},
+{y:1700,n:'NEWTONIAN ERA'},
+{y:1800,n:'PRECISION ASTRONOMY'},
+{y:1900,n:'ASTROPHYSICS ERA'},
+{y:1957,n:'SPACE AGE'},
+{y:2000,n:'NEW WINDOWS ON THE COSMOS'}
+];
 
 const ITEMS=[
 {id:'sumerian_star_catalogues',nm:'Sumerian Star Catalogues',sb:'Mesopotamia · c. 3000 BCE',s:-3000,e:-1900,lon:45.64,lat:30.96,fp:{prec:5,reach:6,dur:8,innov:9,infl:10,leg:10},conns:['babylonian_astronomy','mul_apin','egyptian_star_clocks'],overview:'Sumerian astronomers created the earliest known systematic records of celestial observation, identifying constellations and tracking the movements of visible planets. Their cuneiform star lists laid the foundation for all subsequent Mesopotamian astronomy.',d:{observation:'The observational methods and techniques employed in this milestone advanced humanity ability to perceive and record celestial phenomena, building on accumulated knowledge while enabling new discoveries.',instruments:'The instruments and tools associated with this milestone shaped what could be observed and measured, with each technological advance opening new windows onto the cosmos.',cosmology:'This milestone contributed to evolving models of the cosmos, challenging or reinforcing prevailing understandings of the structure, origin, and fate of the universe.',mathematics:'Mathematical frameworks were essential to this milestone, providing the language for describing celestial motion, predicting events, and testing theoretical models against observation.',calendar:'The calendrical implications of this milestone reflect the deep connection between sky observation and the organization of human time, agriculture, and ritual life.',navigation:'Celestial navigation depended on accurate sky knowledge, and this milestone contributed to the ability of travelers, sailors, and explorers to find their way across the Earth.',religion:'Religious and spiritual interpretations of the sky were inseparable from astronomical observation for most of human history, with this milestone reflecting that intertwined relationship.',divination:'Astrological and divinatory practices connected to this milestone reveal how celestial observation served political, personal, and spiritual purposes beyond pure scientific inquiry.',power:'Political authorities recognized the power of sky knowledge and sought to control its production and interpretation, linking astronomical expertise to statecraft and legitimacy.',culture:'Cultural responses to this milestone — in art, literature, philosophy, and public imagination — reveal how celestial knowledge shapes human self-understanding and worldview.',controversy:'The controversies surrounding this milestone expose fundamental tensions between observation and authority, innovation and tradition, evidence and belief.',legacy:'The lasting legacy of this milestone extends far beyond its immediate context, shaping subsequent astronomical discoveries and continuing to influence how we understand the cosmos.',crisis:'Moments of crisis — whether intellectual, political, or technological — tested the astronomical knowledge systems this milestone represented and sometimes catalyzed transformation.',education:'Educational practices surrounding this milestone shaped how astronomical knowledge was transmitted to new generations, determining who learned to read the sky and how.',networks:'The networks of knowledge transmission that connected this milestone to others reveal how astronomical ideas traveled across geographic, linguistic, and cultural boundaries.',technology:'Technological developments both enabled and were enabled by this milestone, with astronomical needs driving engineering innovation and new tools opening unexpected discoveries.',theory:'Theoretical frameworks shaped the interpretation of observations, with this milestone contributing to or challenging the conceptual models that give raw data meaning.',precision:'The pursuit of ever-greater precision in measurement drove this milestone, as small improvements in accuracy could reveal fundamental truths about celestial mechanics.',institutional:'The institutional frameworks supporting this milestone — observatories, academies, universities, space agencies — provided the organizational infrastructure necessary for sustained astronomical work.',global:'The global dimensions of this milestone reveal how sky knowledge developed independently across cultures while also cross-pollinating through trade, conquest, and scholarly exchange.'}},
@@ -820,10 +857,49 @@ const ITEMS=[
 
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'sumerian_star_catalogues',to:'babylonian_astronomy',concept:'Mesopotamian Tradition',year:-1800,desc:'Sumerian star knowledge was systematized into Babylonian mathematical astronomy.'},
+{from:'babylonian_astronomy',to:'greek_astronomy',concept:'East to West',year:-600,desc:'Babylonian astronomical data and methods were transmitted to Greek natural philosophers.'},
+{from:'greek_astronomy',to:'ptolemy_almagest',concept:'East to West',year:150,desc:'Greek astronomical tradition culminated in Ptolemy comprehensive synthesis.'},
+{from:'ptolemy_almagest',to:'islamic_observatories',concept:'Translation Movement',year:800,desc:'The Almagest was translated into Arabic and became the foundation of Islamic astronomy.'},
+{from:'islamic_observatories',to:'copernicus_revolution',concept:'Translation Movement',year:1543,desc:'Islamic astronomical innovations may have influenced Copernicus through Latin translations.'},
+{from:'copernicus_revolution',to:'tycho_brahe',concept:'Scientific Revolution',year:1572,desc:'Tycho tested the Copernican model with unprecedented observational precision.'},
+{from:'tycho_brahe',to:'kepler_laws',concept:'Scientific Revolution',year:1609,desc:'Tycho meticulous data enabled Kepler discovery of elliptical orbits.'},
+{from:'kepler_laws',to:'newton_principia',concept:'Scientific Revolution',year:1687,desc:'Kepler laws of motion were explained by Newton universal gravitation.'},
+{from:'newton_principia',to:'halley_comet',concept:'Newtonian Triumph',year:1705,desc:'Halley used Newtonian mechanics to predict the return of a comet.'},
+{from:'newton_principia',to:'neptune_discovery',concept:'Newtonian Triumph',year:1846,desc:'Newtonian gravity predicted the existence and position of Neptune.'},
+{from:'spectroscopy',to:'stellar_classification',concept:'Astrophysics Revolution',year:1890,desc:'Spectroscopy enabled the physical classification of stars by type.'},
+{from:'stellar_classification',to:'hertzsprung_russell',concept:'Astrophysics Revolution',year:1911,desc:'Stellar classification data revealed evolutionary patterns in the HR diagram.'},
+{from:'hertzsprung_russell',to:'stellar_evolution',concept:'Astrophysics Revolution',year:1920,desc:'The HR diagram guided the development of stellar evolution theory.'},
+{from:'einstein_relativity',to:'hubble_expansion',concept:'Modern Cosmology',year:1929,desc:'General relativity predicted an expanding universe that Hubble confirmed observationally.'},
+{from:'hubble_expansion',to:'cosmic_microwave',concept:'Modern Cosmology',year:1964,desc:'The expanding universe implied a hot beginning confirmed by the cosmic microwave background.'},
+{from:'cosmic_microwave',to:'dark_energy',concept:'Modern Cosmology',year:1998,desc:'Precise cosmological measurements revealed the unexpected acceleration of expansion.'},
+{from:'radio_astronomy',to:'pulsar_discovery',concept:'New Windows',year:1967,desc:'Radio astronomy discovered pulsars — a phenomenon invisible to optical telescopes.'},
+{from:'space_age_sputnik',to:'apollo_moon_landing',concept:'Space Exploration',year:1969,desc:'The Space Age culminated in humanity landing on the Moon.'},
+{from:'apollo_moon_landing',to:'hubble_space_telescope',concept:'Space Exploration',year:1990,desc:'Space-based observatories followed human spaceflight into orbit.'},
+{from:'hubble_space_telescope',to:'james_webb',concept:'Space Exploration',year:2021,desc:'JWST extended Hubble legacy into infrared wavelengths.'},
+{from:'exoplanet_detection',to:'kepler_mission',concept:'Exoplanet Revolution',year:2009,desc:'The Kepler mission conducted the first space-based exoplanet survey.'},
+{from:'kepler_mission',to:'james_webb',concept:'Exoplanet Revolution',year:2021,desc:'JWST began characterizing the atmospheres of exoplanets discovered by Kepler.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'stellar_classification':[{nm:'Williamina Fleming',role:'Stellar Classifier',yr:1890,desc:'Williamina Fleming, a former maid hired as a computer at Harvard, classified over 10,000 stellar spectra and discovered the Horsehead Nebula. She developed the first stellar classification system, laying the foundation for modern astrophysics.'},{nm:'Annie Jump Cannon',role:'Harvard Computer',yr:1901,desc:'Annie Jump Cannon classified over 350,000 stellar spectra and created the OBAFGKM classification still used today. She was the most prolific astronomer in history by volume of work, yet was denied a Harvard faculty position until age 74.'},{nm:'Cecilia Payne-Gaposchkin',role:'Astrophysicist',yr:1925,desc:'Cecilia Payne-Gaposchkin discovered that stars are composed primarily of hydrogen and helium — the most fundamental insight in stellar astrophysics. Her 1925 thesis was described by Otto Struve as the most brilliant PhD thesis ever written in astronomy.'}],
+'hertzsprung_russell':[{nm:'Henrietta Swan Leavitt',role:'Cepheid Period-Luminosity Discoverer',yr:1908,desc:'Henrietta Leavitt discovered the period-luminosity relation for Cepheid variable stars, providing the first reliable method for measuring cosmic distances. Her discovery was the key that unlocked the scale of the universe.'}],
+'pulsar_discovery':[{nm:'Jocelyn Bell Burnell',role:'Pulsar Discoverer',yr:1967,desc:'Jocelyn Bell Burnell discovered pulsars as a graduate student in 1967. Though her supervisor received the Nobel Prize for the discovery, she has been widely recognized as the true discoverer and has become one of astronomy most influential voices.'}],
+'hubble_expansion':[{nm:'Vera Rubin',role:'Dark Matter Pioneer',yr:1970,desc:'Vera Rubin measured galaxy rotation curves that provided the strongest evidence for dark matter, revealing that most of the universe is invisible. She was denied access to Palomar Observatory because of her gender and never received the Nobel Prize despite transforming cosmology.'}],
+'dark_matter':[{nm:'Vera Rubin',role:'Galaxy Dynamics Pioneer',yr:1978,desc:'Vera Rubin definitive measurements of galaxy rotation curves proved that galaxies contain far more mass than is visible. Her work established dark matter as a fundamental component of the universe and opened one of the biggest unsolved problems in physics.'}],
+'nuclear_astrophysics':[{nm:'Margaret Burbidge',role:'Stellar Nucleosynthesis Pioneer',yr:1957,desc:'Margaret Burbidge was co-author of the foundational B2FH paper on stellar nucleosynthesis and served as the first woman director of the Royal Greenwich Observatory. She was excluded from using the Mount Wilson telescope because of her gender early in her career.'}],
+'space_age_sputnik':[{nm:'Valentina Tereshkova',role:'First Woman in Space',yr:1963,desc:'Valentina Tereshkova became the first woman in space in 1963 aboard Vostok 6. Her flight demonstrated that women could endure spaceflight, though it would be 19 years before another woman flew in space.'}],
+'apollo_moon_landing':[{nm:'Margaret Hamilton',role:'Apollo Software Engineer',yr:1969,desc:'Margaret Hamilton led the team that wrote the Apollo guidance computer software. Her work prevented an abort during the Apollo 11 landing and established the field of software engineering as a critical discipline.'}],
+'hubble_space_telescope':[{nm:'Nancy Grace Roman',role:'Mother of Hubble',yr:1990,desc:'Nancy Grace Roman was NASA first chief of astronomy and the driving force behind the Hubble Space Telescope. Known as the Mother of Hubble, she navigated the politics and engineering challenges that made the most productive scientific instrument in history possible.'}],
+'cosmic_microwave':[{nm:'Alpher and Herman Team',role:'CMB Prediction Team',yr:1948,desc:'While the CMB was accidentally discovered by Penzias and Wilson, women scientists contributed to the theoretical framework. The COBE and WMAP missions that mapped the CMB included significant contributions from women physicists and engineers.'}],
+'indian_astronomy':[{nm:'Khana',role:'Legendary Astronomer-Astrologer',yr:800,desc:'Khana is a legendary figure in Bengali tradition, celebrated as an astronomer and astrologer whose predictions were so accurate that they threatened male authority. Whether historical or mythical, her story reflects women presence in Indian astronomical practice.'}],
+'islamic_observatories':[{nm:'Mariam al-Astrulabi',role:'Astrolabe Maker',yr:944,desc:'Mariam al-Astrulabi was a 10th-century Syrian instrument maker who crafted astrolabes employed by the ruler of Aleppo. She represents the often-invisible role of women in Islamic astronomical instrumentation.'}],
+'mayan_astronomy':[{nm:'Lady Six Sky',role:'Maya Queen and Calendar Keeper',yr:682,desc:'Lady Six Sky of Naranjo was a Maya queen who commissioned astronomical monuments and maintained the calendar rituals essential to Maya sky observation. Women rulers in Maya civilization were active patrons and practitioners of astronomical knowledge.'}],
+'exoplanet_detection':[{nm:'Sara Seager',role:'Exoplanet Atmospheres Pioneer',yr:2000,desc:'Sara Seager pioneered the theoretical framework for characterizing exoplanet atmospheres, enabling the detection of biosignatures on distant worlds. Her work has been central to transforming exoplanet science from discovery to characterization.'}],
+'james_webb':[{nm:'Jane Rigby',role:'JWST Operations Project Scientist',yr:2021,desc:'Jane Rigby served as the operations project scientist for the James Webb Space Telescope, guiding the scientific mission of the most powerful space observatory ever launched. Her leadership was essential to the success of this transformative mission.'}]
+};
 
 let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -2350,7 +2426,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient Near East':['sumerian_star_catalogues','babylonian_astronomy','mul_apin','ancient_eclipse_records','zodiac_development'],
+'Classical World':['greek_astronomy','aristarchus_heliocentric','ptolemy_almagest','antikythera_mechanism','constellation_myths'],
+'Islamic Golden Age':['islamic_observatories','ulugh_beg','tusi_couple','islamic_astrolabe_perfection','islamic_zij_tables','arab_navigation','arabic_calligraphy_astrolabe'],
+'East Asian':['chinese_oracle_bones','chinese_astronomical_records','guest_star_1054','chinese_compass','jesuit_astronomy_china'],
+'South Asian':['vedic_astronomy','indian_astronomy','observatory_jaipur'],
+'Indigenous':['mayan_astronomy','mayan_calendar','aztec_sun_stone','inca_astronomy','polynesian_navigation','stonehenge','newgrange'],
+'Scientific Revolution':['copernicus_revolution','tycho_brahe','galileo_telescope','kepler_laws','galileo_sunspots','supernova_1572'],
+'Newtonian Era':['newton_principia','halley_comet','greenwich_observatory','paris_observatory','cassini_saturn','herschel_uranus','transit_venus','wright_telescope'],
+'Modern Astrophysics':['spectroscopy','stellar_classification','hertzsprung_russell','einstein_relativity','hubble_expansion','stellar_evolution','nuclear_astrophysics'],
+'Space Age':['space_age_sputnik','apollo_moon_landing','hubble_space_telescope','james_webb','mars_rovers','voyager_missions','new_horizons'],
+'New Frontiers':['gravitational_waves','event_horizon_telescope','exoplanet_detection','kepler_mission','dark_matter','dark_energy','gaia_mission'],
+'Timekeeping':['egyptian_calendar','julian_calendar','gregorian_reform','almanac_tradition','egyptian_star_clocks']
+};
 
 const HERITAGE_REASONS={};
 
