@@ -709,10 +709,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'consequences',ico:'⚖',lbl:'Consequences',col:'#e8a040'},
+{id:'culture',ico:'🎭',lbl:'Culture & Meaning',col:'#c87820'},
+{id:'enablers',ico:'🏦',lbl:'Enablers & Conditions',col:'#d09030'},
+{id:'exposure',ico:'🔦',lbl:'Exposure & Critique',col:'#b8a040'},
+{id:'financial',ico:'💰',lbl:'Financial Dimensions',col:'#e0c050'},
+{id:'historical',ico:'📜',lbl:'Historical Context',col:'#c8b060'},
+{id:'impunity',ico:'🛡',lbl:'Impunity & Abuse',col:'#d0a848'},
+{id:'institutional',ico:'🏛',lbl:'Institutional Frameworks',col:'#b89838'},
+{id:'international',ico:'🌐',lbl:'International Dimensions',col:'#c0a850'},
+{id:'legal',ico:'⚙',lbl:'Legal Dimensions',col:'#d8b848'},
+{id:'mechanism',ico:'🔧',lbl:'Mechanism',col:'#e09028'},
+{id:'media',ico:'📰',lbl:'Media & Representation',col:'#c89830'},
+{id:'networks',ico:'🕸',lbl:'Networks & Systems',col:'#d0b040'},
+{id:'political',ico:'🏴',lbl:'Political Dimensions',col:'#b8a038'},
+{id:'power',ico:'👑',lbl:'Power Dynamics',col:'#e0b840'},
+{id:'prevention',ico:'🔒',lbl:'Prevention & Protection',col:'#c8a848'},
+{id:'reform',ico:'📋',lbl:'Reform & Change',col:'#d8a838'},
+{id:'scale',ico:'📊',lbl:'Scale & Magnitude',col:'#c0b048'},
+{id:'victims',ico:'👥',lbl:'Victims & Marginalization',col:'#b89040'},
+{id:'whistleblower',ico:'📢',lbl:'Whistleblowers & Dissenters',col:'#d0a040'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-600,n:'ANCIENT MEDICINE'},
+{y:-400,n:'HIPPOCRATIC ERA'},
+{y:130,n:'GALENIC AUTHORITY'},
+{y:700,n:'ISLAMIC GOLDEN AGE'},
+{y:1450,n:'RENAISSANCE ANATOMY'},
+{y:1628,n:'SCIENTIFIC REVOLUTION'},
+{y:1796,n:'VACCINATION ERA'},
+{y:1846,n:'SURGICAL REVOLUTION'},
+{y:1861,n:'GERM THEORY'},
+{y:1895,n:'IMAGING & RADIATION'},
+{y:1928,n:'ANTIBIOTIC ERA'},
+{y:1953,n:'GENETIC ERA'},
+{y:1978,n:'BIOETHICS ERA'},
+{y:2003,n:'GENOMIC ERA'},
+{y:2020,n:'PANDEMIC BODIES'}
+];
 
 const ITEMS=[
 {id:'hippocratic_body',nm:'Hippocratic Medicine',sb:'Greece · Humoral Theory',s:-400,e:-300,lon:27.2,lat:36.8,fp:{pwr:8,reach:9,dur:10,cont:3,impact:10,resist:2},conns:['galenic_medicine','ayurveda','chinese_medicine'],overview:'Hippocratic medicine established the humoral theory of the body — blood, phlegm, yellow bile, and black bile — that dominated Western medicine for two millennia. The Hippocratic Corpus shifted disease from divine punishment to natural causes, founding clinical observation. The Hippocratic Oath remains the symbolic foundation of medical ethics.',d:{mechanism:'The mechanisms through which this episode shaped understandings of the human body reveal the interplay of power, knowledge, and embodied experience in constructing bodily norms.',scale:'The scale of this episode — measured in populations affected, institutional reach, and temporal duration — reveals its magnitude in reshaping human relationships to the body.',enablers:'The conditions enabling this episode — medical authority, state power, cultural beliefs, and technological capacity — demonstrate how body knowledge is produced and enforced.',exposure:'The exposure and critique of this episode reveals how challenges to bodily orthodoxy emerge from scientific discovery, activist pressure, and the testimony of those whose bodies were most affected.',consequences:'The consequences of this episode extend far beyond medicine, reshaping law, identity, social hierarchy, and the fundamental question of who owns the human body.',impunity:'The abuses enabled by this episode — conducted with institutional sanction and often without consent — demonstrate how medical authority can mask violations of bodily autonomy.',reform:'The reforms triggered by this episode demonstrate how scandal, suffering, and activism drive changes in medical ethics, consent practices, and legal protections for bodily integrity.',victims:'The victims of this episode were overwhelmingly drawn from marginalized populations — the poor, colonized peoples, women, disabled persons, and racial minorities whose bodies were treated as objects.',networks:'The networks sustaining this episode crossed institutional boundaries, linking medical establishments, state authorities, religious institutions, and commercial interests in systems of bodily control.',culture:'The cultural dimensions of this episode reveal how societies construct, regulate, and contest the meanings attached to human bodies through art, religion, law, and everyday practice.',media:'The media representation of this episode shaped public understanding of the body, normalizing some practices while making others visible for critique and resistance.',legal:'The legal dimensions of this episode reveal how law constructs the body as property, evidence, territory, and rights-bearing subject — and how these constructions change over time.',political:'The political dimensions of this episode reveal how the body becomes a site of governance — regulated, disciplined, and deployed in service of state power and social order.',financial:'The economic dimensions of this episode — from the commodification of bodies to the industries built on bodily modification — reveal how capitalism shapes corporeal experience.',historical:'The historical context of this episode shows how prior understandings of the body, existing power structures, and prevailing cultural beliefs shaped its development and reception.',international:'The international dimensions of this episode demonstrate how body knowledge, practices, and politics cross borders through colonialism, medical exchange, and global health governance.',institutional:'The institutional frameworks of this episode — hospitals, universities, churches, militaries — reveal how organizations produce and enforce authoritative knowledge about the human body.',whistleblower:'The individuals who challenged this episode — dissenting physicians, patient advocates, investigative journalists — often faced professional ruin for questioning bodily orthodoxies.',prevention:'The prevention strategies developed in response to this episode offer lessons about protecting bodily autonomy, informed consent, and the ethical limits of medical and state authority.',power:'The power dynamics of this episode reveal how control over bodies — who can examine, modify, confine, and define them — reflects and reinforces broader hierarchies of race, gender, and class.'}},
@@ -820,10 +857,58 @@ const ITEMS=[
 
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'hippocratic_body',to:'galenic_medicine',concept:'Medical Authority',year:130,desc:'Galen built his system on Hippocratic humoral theory, extending its authority for 1400 years.'},
+{from:'galenic_medicine',to:'islamic_medicine',concept:'Medical Authority',year:800,desc:'Islamic physicians translated and expanded Galenic texts, preserving classical medicine.'},
+{from:'islamic_medicine',to:'vesalius_anatomy',concept:'Medical Authority',year:1543,desc:'Vesalius challenged Galenic authority using direct human dissection.'},
+{from:'vesalius_anatomy',to:'harvey_circulation',concept:'Anatomical Revolution',year:1628,desc:'Harvey\'s experimental physiology built on Vesalius\'s anatomical foundations.'},
+{from:'harvey_circulation',to:'germ_theory',concept:'Anatomical Revolution',year:1861,desc:'Physiological understanding enabled the conceptual leap to microbial disease causation.'},
+{from:'germ_theory',to:'antisepsis',concept:'Infection Control',year:1867,desc:'Lister applied Pasteur\'s germ theory to create antiseptic surgery.'},
+{from:'antisepsis',to:'antibiotics',concept:'Infection Control',year:1928,desc:'Antibiotics represented the ultimate victory of germ theory over infection.'},
+{from:'antibiotics',to:'antimicrobial_resistance',concept:'Infection Control',year:1945,desc:'Antibiotic overuse created the conditions for microbial resistance.'},
+{from:'anesthesia',to:'surgical_revolution',concept:'Surgical Progress',year:1867,desc:'Anesthesia and antisepsis together made modern surgery possible.'},
+{from:'surgical_revolution',to:'organ_transplant',concept:'Surgical Progress',year:1954,desc:'Surgical advances enabled the transplantation of organs between bodies.'},
+{from:'organ_transplant',to:'brain_death',concept:'Surgical Progress',year:1968,desc:'Transplantation required redefining death to enable organ harvesting.'},
+{from:'phrenology',to:'scientific_racism',concept:'Racial Body Science',year:1839,desc:'Phrenology\'s cranial measurements evolved into systematic racial classification.'},
+{from:'scientific_racism',to:'eugenics',concept:'Racial Body Science',year:1883,desc:'Racial science provided the intellectual foundation for eugenic programs.'},
+{from:'eugenics',to:'forced_sterilization',concept:'Racial Body Science',year:1907,desc:'Eugenic theory was implemented through forced sterilization of "unfit" bodies.'},
+{from:'forced_sterilization',to:'nazi_medicine',concept:'Racial Body Science',year:1933,desc:'American eugenics influenced Nazi racial hygiene programs.'},
+{from:'nazi_medicine',to:'nuremberg_code',concept:'Medical Ethics',year:1947,desc:'Nazi atrocities produced the first international code of research ethics.'},
+{from:'nuremberg_code',to:'informed_consent',concept:'Medical Ethics',year:1957,desc:'Nuremberg principles evolved into the legal doctrine of informed consent.'},
+{from:'informed_consent',to:'patients_rights',concept:'Medical Ethics',year:1973,desc:'Informed consent expanded into a broader patients\' rights movement.'},
+{from:'dna_discovery',to:'human_genome',concept:'Genetic Body',year:1990,desc:'DNA structure discovery made sequencing the entire genome conceivable.'},
+{from:'human_genome',to:'genetic_testing',concept:'Genetic Body',year:2000,desc:'Genomic knowledge enabled predictive genetic testing.'},
+{from:'genetic_testing',to:'crispr',concept:'Genetic Body',year:2012,desc:'Genetic understanding led to the ability to edit genes directly.'},
+{from:'crispr',to:'designer_babies',concept:'Genetic Body',year:2018,desc:'Gene editing technology was applied to human embryos.'},
+{from:'vaccination_invention',to:'anti_vaccination',concept:'Vaccine Politics',year:1853,desc:'Mandatory vaccination immediately provoked organized resistance.'},
+{from:'anti_vaccination',to:'covid_body_politics',concept:'Vaccine Politics',year:2020,desc:'Anti-vaccine movements shaped pandemic body politics.'},
+{from:'xray_discovery',to:'medical_imaging',concept:'Body Visualization',year:1971,desc:'X-rays led to CT, MRI, and PET — making the interior body routinely visible.'},
+{from:'medical_imaging',to:'brain_scanning',concept:'Body Visualization',year:1990,desc:'Imaging technology extended to functional brain activity mapping.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'henrietta_lacks':[{nm:'Henrietta Lacks',role:'Unwitting Cell Donor',yr:1951,desc:'Lacks\'s cervical cancer cells, taken without consent, became the immortal HeLa line used in countless medical breakthroughs. Her family received no compensation until 2023, and her story became a symbol of the exploitation of Black women\'s bodies by medical institutions.'}],
+'dna_discovery':[{nm:'Rosalind Franklin',role:'X-ray Crystallographer',yr:1952,desc:'Franklin\'s Photo 51 provided the crucial evidence for DNA\'s double helix structure, but Watson and Crick used her data without permission. She died at 37 without receiving the Nobel Prize that her work made possible.'}],
+'vaccination_invention':[{nm:'Lady Mary Wortley Montagu',role:'Variolation Advocate',yr:1721,desc:'Montagu introduced smallpox variolation to Britain after observing the practice in the Ottoman Empire, championing the procedure against fierce medical establishment opposition and saving countless lives.'}],
+'thalidomide':[{nm:'Frances Oldham Kelsey',role:'FDA Reviewer',yr:1960,desc:'Kelsey refused to approve thalidomide for the US market despite pharmaceutical industry pressure, preventing thousands of birth defects. She received the President\'s Award for Distinguished Federal Civilian Service.'}],
+'contraception':[{nm:'Margaret Sanger',role:'Birth Control Pioneer',yr:1916,desc:'Sanger opened the first birth control clinic in the US and founded what became Planned Parenthood. Despite controversial eugenic associations, her campaign for contraceptive access transformed women\'s bodily autonomy worldwide.'}],
+'midwifery':[{nm:'Ina May Gaskin',role:'Midwifery Revival Leader',yr:1971,desc:'Gaskin founded The Farm Midwifery Center and authored "Spiritual Midwifery," catalyzing the natural birth movement. The "Gaskin Maneuver" for shoulder dystocia is the only obstetric procedure named after a midwife.'}],
+'reproductive_rights':[{nm:'Ruth Bader Ginsburg',role:'Supreme Court Justice',yr:1993,desc:'Ginsburg\'s legal career and Supreme Court tenure advanced reproductive rights as essential to gender equality. Her dissents in cases restricting abortion access became foundational texts of bodily autonomy jurisprudence.'}],
+'disability_rights':[{nm:'Judith Heumann',role:'Disability Rights Activist',yr:1977,desc:'Heumann organized the 504 Sit-In — the longest occupation of a federal building — to force implementation of disability rights regulations. Her activism led to the ADA and transformed how society accommodates bodily difference.'}],
+'psychiatric_confinement':[{nm:'Nellie Bly',role:'Investigative Journalist',yr:1887,desc:'Bly went undercover in the Blackwell\'s Island asylum for 10 days, exposing brutal conditions in her groundbreaking "Ten Days in a Mad-House." Her reporting led to increased funding and oversight of psychiatric institutions.'}],
+'tuskegee_experiment':[{nm:'Eunice Rivers Laurie',role:'Public Health Nurse',yr:1932,desc:'Rivers served as the primary point of contact between the Tuskegee study subjects and the researchers for 40 years. Her complex role — providing some care while facilitating unethical research — exemplifies how institutional structures implicate individuals in systemic harm.'}],
+'germ_theory':[{nm:'Fanny Hesse',role:'Laboratory Innovator',yr:1882,desc:'Hesse suggested using agar instead of gelatin as a bacterial culture medium — a simple innovation that was essential to Koch\'s identification of tuberculosis and became the foundation of all subsequent microbiology.'}],
+'childbirth_pain':[{nm:'Queen Victoria',role:'Sovereign & Patient',yr:1853,desc:'Victoria\'s use of chloroform during childbirth challenged the religious doctrine that women should suffer in labor. Her royal endorsement of anesthesia in obstetrics accelerated its acceptance across British medical practice.'}],
+'environmental_bodies':[{nm:'Rachel Carson',role:'Marine Biologist & Author',yr:1962,desc:'Carson\'s "Silent Spring" revealed how industrial chemicals accumulate in human and animal bodies, launching the environmental movement. She wrote the book while dying of breast cancer, facing vicious industry attacks on her scientific credibility.'}],
+'antisepsis':[{nm:'Florence Nightingale',role:'Nursing Pioneer & Statistician',yr:1860,desc:'Nightingale\'s statistical demonstrations that sanitation reduced mortality transformed hospital design and nursing practice. Her work established evidence-based approaches to infection control that preceded and complemented Lister\'s antisepsis.'}],
+'eating_disorders':[{nm:'Hilde Bruch',role:'Psychiatrist',yr:1973,desc:'Bruch\'s "Eating Disorders: Obesity, Anorexia Nervosa and the Person Within" established the modern understanding of eating disorders as psychological conditions rooted in distorted body image rather than simply willful behavior.'}],
+'gender_medicine':[{nm:'Marci Bowers',role:'Surgeon',yr:2003,desc:'Bowers, herself a transgender woman, became one of the world\'s leading gender-affirming surgeons, advancing surgical techniques while advocating for trans healthcare access and challenging the pathologization of gender diversity.'}],
+'intersex_history':[{nm:'Georgiann Davis',role:'Sociologist & Intersex Advocate',yr:2015,desc:'Davis, herself intersex, challenged the medical framing of intersex as disorder through scholarship and activism, advocating for bodily autonomy and against non-consensual surgical "normalization" of intersex infants.'}],
+'forensic_science':[{nm:'Frances Glessner Lee',role:'Forensic Science Pioneer',yr:1943,desc:'Lee, the "mother of forensic science," established Harvard\'s Department of Legal Medicine and created the Nutshell Studies of Unexplained Death — miniature crime scene dioramas still used in forensic training today.'}],
+'covid_body_politics':[{nm:'Katalin Karikó',role:'mRNA Vaccine Pioneer',yr:2005,desc:'Karikó spent decades researching mRNA technology despite losing funding and academic positions. Her persistence enabled the COVID-19 vaccines, winning the 2023 Nobel Prize and demonstrating that transformative science requires supporting overlooked researchers.'}],
+'crispr':[{nm:'Jennifer Doudna',role:'CRISPR Co-developer',yr:2012,desc:'Doudna co-developed CRISPR-Cas9 gene editing technology, winning the 2020 Nobel Prize in Chemistry. She has been a leading voice in ethical debates about human germline editing, advocating for responsible governance of the technology she helped create.'},{nm:'Emmanuelle Charpentier',role:'CRISPR Co-developer',yr:2012,desc:'Charpentier co-discovered the CRISPR-Cas9 mechanism with Doudna, sharing the 2020 Nobel Prize. Her work on the natural immune system of bacteria led to the most powerful gene editing tool in history.'}]
+};
 
 let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -2361,7 +2446,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient & Classical Medicine':['hippocratic_body','ayurveda','chinese_medicine','galenic_medicine','islamic_medicine','unani_medicine','acupuncture','smallpox_variolation'],
+'Anatomy & Dissection':['vesalius_anatomy','harvey_circulation','anatomy_acts','burke_hare','cadaver_trade','body_farms'],
+'Surgery & Intervention':['anesthesia','antisepsis','surgical_revolution','organ_transplant','plastic_surgery','xray_discovery','medical_imaging'],
+'Genetics & Molecular':['dna_discovery','human_genome','genetic_testing','crispr','designer_babies','microbiome'],
+'Race Science & Eugenics':['phrenology','scientific_racism','skull_measurement','criminal_anthropology','eugenics','forced_sterilization','nazi_medicine'],
+'Reproductive Bodies':['contraception','reproductive_rights','abortion_history','childbirth_pain','midwifery','ivf','surrogacy'],
+'Psychiatry & Mind':['lobotomy','electroshock','psychiatric_confinement','psychopharmacology','brain_scanning'],
+'Body Modification & Beauty':['beauty_standards','corsetry','foot_binding','fgm','circumcision','body_modification','tattoo_history','plastic_surgery','skin_bleaching','eating_disorders','cosmetic_industry'],
+'Medical Ethics':['nuremberg_code','tuskegee_experiment','informed_consent','henrietta_lacks','thalidomide','patients_rights'],
+'Pharmaceuticals':['antibiotics','penicillin_production','pharmaceutical_regulation','opioid_bodies','psychopharmacology','antimicrobial_resistance'],
+'Environmental & Toxic':['radiation_medicine','nuclear_testing_body','environmental_bodies','lead_poisoning','endocrine_disruptors'],
+'Digital & Future Bodies':['social_media_body','cyborg_body','biohacking','bodily_autonomy_modern','covid_body_politics','long_covid_body','alternative_medicine']
+};
 
 const HERITAGE_REASONS={};
 
