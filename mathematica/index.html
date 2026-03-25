@@ -709,10 +709,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'abstraction',ico:'∞',lbl:'Abstraction & Generalization',col:'#e89820'},
+{id:'applications',ico:'⚙',lbl:'Applications & Impact',col:'#f0b040'},
+{id:'beauty',ico:'✦',lbl:'Beauty & Elegance',col:'#d4a030'},
+{id:'collaboration',ico:'⊕',lbl:'Collaboration & Community',col:'#c89828'},
+{id:'computation',ico:'▦',lbl:'Computation & Calculation',col:'#e0a020'},
+{id:'connections',ico:'⟷',lbl:'Connections & Unity',col:'#d8a828'},
+{id:'controversy',ico:'⚡',lbl:'Controversy & Debate',col:'#e89030'},
+{id:'crisis',ico:'△',lbl:'Crisis & Revolution',col:'#d09020'},
+{id:'culture',ico:'◎',lbl:'Culture & Society',col:'#c8a030'},
+{id:'education',ico:'✎',lbl:'Education & Pedagogy',col:'#e0b830'},
+{id:'global',ico:'◯',lbl:'Global Development',col:'#d4a820'},
+{id:'institutions',ico:'▣',lbl:'Institutions & Infrastructure',col:'#c89020'},
+{id:'legacy',ico:'◆',lbl:'Legacy & Influence',col:'#e0a830'},
+{id:'notation',ico:'∑',lbl:'Notation & Symbolism',col:'#d8b030'},
+{id:'open_problems',ico:'?',lbl:'Open Problems & Frontiers',col:'#e89828'},
+{id:'philosophy',ico:'φ',lbl:'Philosophy & Foundations',col:'#c8a828'},
+{id:'physics',ico:'⊗',lbl:'Physics & Natural Science',col:'#d0a030'},
+{id:'power',ico:'⚖',lbl:'Power & Access',col:'#e0a020'},
+{id:'proof',ico:'∴',lbl:'Proof & Rigor',col:'#d4b020'},
+{id:'technology',ico:'⚒',lbl:'Technology & Tools',col:'#c89830'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-3000,n:'ANCIENT COUNTING'},
+{y:-600,n:'GREEK GOLDEN AGE'},
+{y:-300,n:'HELLENISTIC MATHEMATICS'},
+{y:200,n:'MATHEMATICAL DORMANCY'},
+{y:500,n:'INDIAN FLOWERING'},
+{y:800,n:'ISLAMIC GOLDEN AGE'},
+{y:1200,n:'MEDIEVAL TRANSMISSION'},
+{y:1500,n:'RENAISSANCE MATHEMATICS'},
+{y:1600,n:'EARLY MODERN REVOLUTION'},
+{y:1700,n:'AGE OF ANALYSIS'},
+{y:1800,n:'GOLDEN AGE OF RIGOR'},
+{y:1870,n:'FOUNDATIONS ERA'},
+{y:1900,n:'CRISIS AND ABSTRACTION'},
+{y:1940,n:'COMPUTATIONAL AGE'},
+{y:2000,n:'DIGITAL MATHEMATICS'}
+];
 
 const ITEMS=[
 {id:'tally_marks',nm:'Tally Marks and Early Counting',sb:'Global · c. 30000 BCE',s:-3000,e:-2000,lon:25.0,lat:0.0,fp:{abs:2,reach:10,dur:10,rig:2,infl:10,app:10},conns:['babylonian_base60','egyptian_mathematics','ishango_bone'],overview:'The earliest mathematical activity — marking tallies on bone, stone, and clay — represents the birth of abstract numerical thought. From the Ishango bone to Sumerian tokens, counting systems emerged independently across every inhabited continent.',d:{proof:'The proof methods and logical structures associated with this milestone advanced the standards of mathematical rigor, establishing new norms for what constitutes valid mathematical reasoning.',notation:'The notational innovations connected to this milestone shaped how mathematical ideas could be expressed, communicated, and manipulated, often enabling discoveries that were impossible in earlier symbolic systems.',abstraction:'The level of abstraction introduced by this milestone expanded the boundaries of mathematical thought, moving from concrete calculation toward universal principles applicable across domains.',applications:'The practical applications of this milestone demonstrate how pure mathematical discovery enables technological, scientific, and engineering advances that transform everyday life.',education:'The educational impact of this milestone shaped how mathematics was taught and learned, influencing curricula, textbooks, and pedagogical methods for generations.',philosophy:'The philosophical implications of this milestone raised fundamental questions about the nature of mathematical truth, the foundations of knowledge, and the relationship between mathematics and reality.',computation:'The computational dimensions of this milestone reflect the evolving relationship between mathematical theory and practical calculation, from abacus to algorithm to computer.',beauty:'The aesthetic qualities of this milestone — elegance, symmetry, surprise — reveal mathematics as an art form as much as a science, with beauty serving as a guide to truth.',controversy:'The controversies surrounding this milestone expose fundamental disagreements about mathematical foundations, methods, and the nature of mathematical existence.',culture:'The cultural context of this milestone reveals how mathematical development is shaped by and shapes the societies in which it occurs.',institutions:'The institutional frameworks supporting this milestone — academies, universities, journals, prizes — provided the organizational infrastructure for mathematical research.',legacy:'The lasting legacy of this milestone extends far beyond its immediate context, shaping subsequent mathematical discoveries and continuing to influence active research.',connections:'The connections between this milestone and other areas of mathematics reveal the deep unity underlying apparently disparate branches of the discipline.',crisis:'Moments of crisis — paradoxes, contradictions, or conceptual revolutions — tested and ultimately strengthened the mathematical framework this milestone represented.',global:'The global dimensions of this milestone reveal how mathematical ideas developed independently across cultures while also cross-pollinating through trade and scholarly exchange.',physics:'The relationship between this milestone and physics illustrates the unreasonable effectiveness of mathematics in describing the natural world.',technology:'Technological developments both enabled and were enabled by this milestone, with mathematical needs driving tool innovation and new tools opening unexpected mathematical territory.',collaboration:'The collaborative dimensions of this milestone reflect how mathematical knowledge is built through community effort, correspondence, competition, and shared standards of proof.',open_problems:'The open problems and unresolved questions connected to this milestone reveal the living frontier of mathematical research and the questions that drive current work.',power:'The power dynamics surrounding this milestone reflect how access to mathematical knowledge has been controlled, restricted, and democratized throughout history.'}},
@@ -820,10 +857,60 @@ const ITEMS=[
 
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'tally_marks',to:'babylonian_base60',concept:'Number Systems',year:-3000,desc:'Tally counting evolved into the first positional number system in Mesopotamia.'},
+{from:'babylonian_base60',to:'egyptian_mathematics',concept:'Number Systems',year:-2000,desc:'Mesopotamian numerical ideas influenced Egyptian mathematical development through trade.'},
+{from:'egyptian_mathematics',to:'greek_geometry',concept:'Number Systems',year:-600,desc:'Egyptian practical mathematics inspired Greek theoretical geometry.'},
+{from:'greek_geometry',to:'euclid_elements',concept:'Axiomatic Method',year:-300,desc:'Greek geometric tradition culminated in Euclid\'s axiomatic system.'},
+{from:'euclid_elements',to:'non_euclidean_geometry',concept:'Axiomatic Method',year:1826,desc:'Two millennia of attempts to prove the parallel postulate led to non-Euclidean geometry.'},
+{from:'non_euclidean_geometry',to:'general_relativity_math',concept:'Axiomatic Method',year:1915,desc:'Non-Euclidean geometry provided the mathematical language for general relativity.'},
+{from:'indian_zero',to:'al_khwarizmi',concept:'Zero and Algebra',year:820,desc:'Indian zero and decimal numerals reached Baghdad through trade and translation.'},
+{from:'al_khwarizmi',to:'fibonacci_liber_abaci',concept:'Zero and Algebra',year:1202,desc:'Islamic algebra reached Europe through Fibonacci\'s Liber Abaci.'},
+{from:'fibonacci_liber_abaci',to:'analytic_geometry',concept:'Zero and Algebra',year:1637,desc:'Algebraic methods matured until Descartes unified algebra with geometry.'},
+{from:'calculus_newton_leibniz',to:'euler',concept:'Analysis Chain',year:1730,desc:'Newton and Leibniz\'s calculus was systematized and extended by Euler.'},
+{from:'euler',to:'fourier_analysis',concept:'Analysis Chain',year:1822,desc:'Euler\'s analytical methods led to Fourier\'s revolutionary decomposition theorem.'},
+{from:'fourier_analysis',to:'measure_theory',concept:'Analysis Chain',year:1902,desc:'The need to handle Fourier series rigorously drove Lebesgue\'s measure theory.'},
+{from:'measure_theory',to:'probability_theory',concept:'Analysis Chain',year:1933,desc:'Measure theory provided the rigorous foundation for Kolmogorov\'s probability axioms.'},
+{from:'set_theory',to:'zermelo_fraenkel',concept:'Foundations',year:1908,desc:'Paradoxes in naive set theory demanded Zermelo\'s axiomatic reformulation.'},
+{from:'zermelo_fraenkel',to:'godel_incompleteness',concept:'Foundations',year:1931,desc:'Godel proved that no consistent axiom system can be complete.'},
+{from:'godel_incompleteness',to:'turing_computability',concept:'Foundations',year:1936,desc:'Godel\'s methods inspired Turing\'s formalization of computability and its limits.'},
+{from:'boolean_algebra',to:'information_theory',concept:'Digital Revolution',year:1948,desc:'Boolean logic provided the mathematical basis for Shannon\'s information theory.'},
+{from:'information_theory',to:'cryptography_modern',concept:'Digital Revolution',year:1976,desc:'Information theory guided the development of public-key cryptography.'},
+{from:'cryptography_modern',to:'machine_learning',concept:'Digital Revolution',year:1990,desc:'Computational infrastructure built on cryptography enabled machine learning at scale.'},
+{from:'group_theory',to:'abstract_algebra',concept:'Algebraic Structures',year:1920,desc:'Galois\'s group theory was generalized by Noether into abstract algebra.'},
+{from:'abstract_algebra',to:'category_theory',concept:'Algebraic Structures',year:1945,desc:'Abstract algebraic structures found their unifying language in category theory.'},
+{from:'category_theory',to:'algebraic_geometry',concept:'Algebraic Structures',year:1960,desc:'Grothendieck used category theory to rebuild algebraic geometry from the ground up.'},
+{from:'topology',to:'poincare_conjecture',concept:'Topological Vision',year:1904,desc:'Poincare\'s foundational work posed the conjecture that took a century to resolve.'},
+{from:'poincare_conjecture',to:'string_theory_math',concept:'Topological Vision',year:1984,desc:'Topological methods developed for the Poincare conjecture found unexpected applications in string theory.'},
+{from:'von_neumann_game_theory',to:'nash_equilibrium',concept:'Strategic Mathematics',year:1950,desc:'Von Neumann\'s game theory framework led to Nash\'s equilibrium concept.'},
+{from:'nash_equilibrium',to:'mathematical_finance',concept:'Strategic Mathematics',year:1973,desc:'Game-theoretic rational agent models shaped the mathematical approach to financial markets.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'abstract_algebra':[{nm:'Emmy Noether',role:'Founder of abstract algebra',yr:1920,desc:'Emmy Noether transformed algebra from the study of equations into the study of abstract structures. Her theorem connecting symmetries to conservation laws revolutionized physics, and her students carried her methods across the world.'}],
+'topology':[{nm:'Grace Chisholm Young',role:'Early topologist and analyst',yr:1895,desc:'Grace Chisholm Young was the first woman to earn a doctoral degree in Germany and made significant contributions to set theory, measure theory, and the foundations of analysis that underpin topology.'}],
+'mathematical_logic':[{nm:'Christine Ladd-Franklin',role:'Logician and mathematician',yr:1882,desc:'Christine Ladd-Franklin completed all requirements for a PhD at Johns Hopkins in 1882 but was denied the degree because of her sex. Her work on the algebra of logic contributed to the development of modern symbolic logic.'}],
+'statistics':[{nm:'Florence Nightingale David',role:'Statistician',yr:1938,desc:'F.N. David developed foundational work in combinatorics and probability, authored Games, Gods and Gambling on the history of probability, and trained a generation of statisticians at University College London.'}],
+'probability_theory':[{nm:'Olga Ladyzhenskaya',role:'Mathematician and analyst',yr:1959,desc:'Olga Ladyzhenskaya made fundamental contributions to partial differential equations and fluid dynamics, proving existence and uniqueness theorems for the Navier-Stokes equations that remain central to mathematical physics.'}],
+'machine_learning':[{nm:'Cynthia Dwork',role:'Computer scientist and mathematician',yr:2006,desc:'Cynthia Dwork developed the mathematical foundations of differential privacy, creating rigorous mathematical guarantees for protecting individual data in statistical databases and machine learning systems.'}],
+'algebraic_geometry':[{nm:'Sophie Germain',role:'Number theorist and elasticity pioneer',yr:1816,desc:'Sophie Germain, denied university education, corresponded with Gauss under a male pseudonym and proved a special case of Fermat\'s Last Theorem. Her work on elastic surfaces won a prize from the French Academy of Sciences.'}],
+'calculus_newton_leibniz':[{nm:'Maria Gaetana Agnesi',role:'Mathematician and author',yr:1748,desc:'Maria Gaetana Agnesi wrote the first comprehensive textbook on differential and integral calculus, Instituzioni analitiche, which served as a standard reference across Europe for decades.'}],
+'fourier_analysis':[{nm:'Ingrid Daubechies',role:'Physicist and mathematician',yr:1988,desc:'Ingrid Daubechies created the compactly supported orthonormal wavelet bases that revolutionized signal processing, image compression, and data analysis. Her wavelets are used in JPEG 2000 and FBI fingerprint compression.'}],
+'functional_analysis':[{nm:'Anna Pell Wheeler',role:'Mathematician',yr:1927,desc:'Anna Pell Wheeler was a pioneer in functional analysis and integral equations, becoming the first woman to deliver an invited address at an American Mathematical Society colloquium in 1927.'}],
+'combinatorics':[{nm:'Marjorie Rice',role:'Amateur mathematician',yr:1975,desc:'Marjorie Rice, a homemaker with no formal training beyond high school, discovered four new types of convex pentagons that tile the plane — a feat that had eluded professional mathematicians for decades.'}],
+'set_theory':[{nm:'Hanna Neumann',role:'Group theorist',yr:1949,desc:'Hanna Neumann made fundamental contributions to group theory, particularly the theory of varieties of groups. The Hanna Neumann conjecture about intersections of finitely generated subgroups remained open for sixty years.'}],
+'differential_equations':[{nm:'Sofia Kovalevskaya',role:'Mathematician and first female professor',yr:1874,desc:'Sofia Kovalevskaya proved the Cauchy-Kovalevskaya theorem for partial differential equations and became the first woman appointed to a full professorship in Northern Europe. She also won the Prix Bordin for work on rigid body rotation.'}],
+'number_theory_modern':[{nm:'Julia Robinson',role:'Number theorist and logician',yr:1970,desc:'Julia Robinson made essential contributions to the solution of Hilbert\'s Tenth Problem, proving that the exponential function is Diophantine. She was the first woman elected to the mathematical section of the National Academy of Sciences.'}],
+'information_theory':[{nm:'Evelyn Boyd Granville',role:'Mathematician and computer scientist',yr:1949,desc:'Evelyn Boyd Granville was one of the first African American women to earn a doctorate in mathematics. She worked on orbit computation for NASA\'s Apollo program, applying information theory and numerical analysis.'}],
+'graph_theory':[{nm:'Fan Chung',role:'Graph theorist',yr:1980,desc:'Fan Chung is one of the leading figures in graph theory and combinatorics, with foundational work on spectral graph theory, random graphs, and the mathematics of internet and social networks.'}],
+'chaos_theory':[{nm:'Mary Cartwright',role:'Mathematician',yr:1945,desc:'Dame Mary Cartwright, with J.E. Littlewood, proved results on the dynamics of nonlinear differential equations that anticipated chaos theory by decades. She was the first woman elected a Fellow of the Royal Society for mathematics.'}],
+'stochastic_calculus':[{nm:'Nicole El Karoui',role:'Mathematician and financial modeller',yr:1990,desc:'Nicole El Karoui developed key results in backward stochastic differential equations and trained an entire generation of quantitative analysts. Her mathematical finance program at Paris VI shaped modern risk management.'}],
+'algorithms':[{nm:'Frances Allen',role:'Computer scientist',yr:1970,desc:'Frances Allen pioneered compiler optimization and program analysis at IBM, developing the mathematical foundations for automatic program optimization. She was the first woman to receive the Turing Award.'}],
+'coding_theory':[{nm:'Vera Pless',role:'Mathematician',yr:1968,desc:'Vera Pless made foundational contributions to error-correcting codes, particularly the classification of self-dual codes. Her textbook Introduction to the Theory of Error-Correcting Codes became a standard reference in the field.'}],
+'indian_mathematics':[{nm:'Lilavati',role:'Subject of mathematical treatise',yr:1150,desc:'Lilavati, daughter of Bhaskaracharya, inspired one of the most important medieval mathematical texts, written in her name with problems addressed directly to her. The Lilavati became a foundational text for Indian mathematical education.'}],
+'linear_algebra':[{nm:'Olga Taussky-Todd',role:'Matrix theorist',yr:1950,desc:'Olga Taussky-Todd was the foremost expert on matrix theory of her generation, making fundamental contributions to the stability of matrices and the relationship between matrix theory and number theory.'}]
+};
 
 let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -2350,7 +2437,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient Near East':['tally_marks','babylonian_base60','babylonian_algebra','plimpton_322','egyptian_mathematics','rhind_papyrus'],
+'Greek World':['pythagorean_theorem','greek_geometry','euclid_elements','archimedes'],
+'India & South Asia':['indian_zero','indian_mathematics','ramanujan'],
+'China & East Asia':['chinese_mathematics','nine_chapters','japanese_mathematics','korean_mathematics'],
+'Islamic World':['al_khwarizmi','omar_khayyam','islamic_golden_age_math'],
+'Medieval & Renaissance Europe':['fibonacci_liber_abaci','analytic_geometry','fermat','projective_geometry'],
+'Continental Analysis':['calculus_newton_leibniz','euler','gauss','differential_equations','calculus_of_variations'],
+'German Foundations':['riemann','set_theory','cantor_infinity','zermelo_fraenkel','number_systems','hilbert_problems'],
+'French School':['galois_theory','group_theory','topology','fourier_analysis','complex_analysis','measure_theory','algebraic_geometry'],
+'British Tradition':['boolean_algebra','graph_theory','turing_computability','fermat_last_theorem','knot_theory'],
+'American Mathematics':['von_neumann_game_theory','nash_equilibrium','information_theory','algorithms','machine_learning','chaos_theory'],
+'Africa & Mesoamerica':['african_mathematics','mayan_mathematics']
+};
 
 const HERITAGE_REASONS={};
 
