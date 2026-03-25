@@ -531,12 +531,17 @@
       "validated_lenses": 20
     },
     "mathematica": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "IV"
+      "section": "IV",
+      "validated_sha": "780c2075323ee27f9210bc139827095295309a47",
+      "validated_short": "780c207",
+      "validated_at": "2026-03-25T20:24:27.295084Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "techne": {
       "phase": "1A",
@@ -8946,6 +8951,16 @@
     {
       "atlas": "augur",
       "batch": "91-100",
+      "items": 100
+    },
+    {
+      "atlas": "mathematica",
+      "batch": "1-25",
+      "items": 25
+    },
+    {
+      "atlas": "mathematica",
+      "batch": "26-100",
       "items": 100
     }
   ],
