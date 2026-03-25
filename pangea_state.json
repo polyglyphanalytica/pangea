@@ -195,12 +195,17 @@
       "validated_lenses": 20
     },
     "manifesto": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "VI"
+      "section": "VI",
+      "validated_sha": "e97598a8060273b82345a19e347c784a14510019",
+      "validated_short": "e97598a",
+      "validated_at": "2026-03-25T20:45:06.699073Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "servitus": {
       "phase": "1A",
