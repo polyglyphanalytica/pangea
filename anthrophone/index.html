@@ -2548,7 +2548,7 @@ function yearToSlider(yr){
   }
 }
 
-function civPt(c){
+function itemPt(c){
   if(!c)return[500,260];
   if(!window._proj)return[c.x||500,c.y||260];
   if(typeof c.lon!=='number'||typeof c.lat!=='number')return[c.x||500,c.y||260];
@@ -2571,7 +2571,7 @@ function renderMap(){
       drawn.add(k);
       const o=ITEMS.find(x=>x&&x.id===id);
       if(!o)return;
-      const [cx,cy]=civPt(c),[ox,oy]=civPt(o);
+      const [cx,cy]=itemPt(c),[ox,oy]=itemPt(o);
       const mx=(cx+ox)/2,my=Math.min(cy,oy)-28;
       cl+=`<path d="M${cx},${cy} Q${mx},${my} ${ox},${oy}" stroke="#e8251a" stroke-width=".8" fill="none" stroke-dasharray="3,5" opacity="${sel?0.1:0.25}"/>`;
     });
@@ -2592,7 +2592,7 @@ function renderMap(){
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
     // Drift 2: inactive items fully hidden (0 not 0.06). Drift 3: herstory items without WOMEN hidden (0 not 0.35).
     const op=on?(herstory&&!womenCount?0:isWhatifLost?.2:1):(heritageInactive?.35:0);
-    const [cx,cy]=civPt(c);
+    const [cx,cy]=itemPt(c);
     return {c,on,isSel,mcol,op,cx,cy};
   });
   // Pass 1: decorative rings — pointer-events:none, never intercept clicks
@@ -3069,7 +3069,7 @@ function renderThreadPaths(concept){
   chain.forEach(t=>{
     const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
-    const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-44;
     // Path with arrowhead
     out+=`<path id="tp-${t.id}" d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
@@ -3542,7 +3542,7 @@ function animateViewBox(target,duration=600){
 
 function zoomToCiv(c){
   if(!window._proj)return;
-  const [cx,cy]=civPt(c);
+  const [cx,cy]=itemPt(c);
   const zw=300,zh=156; // zoomed viewport size (same aspect ratio)
   const x=Math.max(0,Math.min(1000-zw,cx-zw/2));
   const y=Math.max(0,Math.min(520-zh,cy-zh/2));
@@ -3585,7 +3585,7 @@ function renderFingerprint(c){
   }).join(' ');
   svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
   // Labels — placed outside the ring with enough clearance, wrapped in two lines where needed
-  const SHORT=['Military','Commerce','Arts','Science','Reach','Longevity'];
+  const SHORT=['Range','Volume','Complexity','Portability','Age','Influence'];
   angles.forEach((a,i)=>{
     const lr=R+26;
     const lx=cx+lr*Math.cos(a);
@@ -3694,7 +3694,7 @@ function renderDiplomaticLayer(){
   DIPLOMATIC.forEach(d=>{
     const fc=ITEMS.find(x=>x&&x.id===d.from),tc=ITEMS.find(x=>x&&x.id===d.to);
     if(!fc||!tc||!ids.has(d.from)||!ids.has(d.to))return;
-    const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-36;
     dl+=`<path d="M${fx},${fy} Q${mx},${my} ${tx},${ty}" 
       stroke="#f0d060" stroke-width="1" fill="none" stroke-dasharray="4,3" opacity=".4"
@@ -3741,7 +3741,7 @@ function renderWhatIfPaths(){
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
   const downstreamConcepts=new Set(directOut.map(t=>t.concept));
   const downstream=TRANSMISSIONS.filter(t=>downstreamConcepts.has(t.concept)&&t.from!==c.id);
-  const [cx,cy]=civPt(c);
+  const [cx,cy]=itemPt(c);
 
   let out='<defs><marker id="wi-arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#e8251a" opacity=".7"/></marker></defs>';
 
@@ -3750,7 +3750,7 @@ function renderWhatIfPaths(){
   directOut.forEach((t,i)=>{
     const tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!tc)return;
-    const [tx,ty]=civPt(tc);
+    const [tx,ty]=itemPt(tc);
     const mx=(cx+tx)/2, my=Math.min(cy,ty)-40;
     const delay=(validDirect*0.2).toFixed(1);
     // Path with SVG animate for opacity fade-in + stroke-dashoffset crawl
@@ -3774,7 +3774,7 @@ function renderWhatIfPaths(){
   downstream.forEach((t,j)=>{
     const fc=ITEMS.find(x=>x&&x.id===t.from),tc=ITEMS.find(x=>x&&x.id===t.to);
     if(!fc||!tc)return;
-    const [fx,fy]=civPt(fc),[tx,ty]=civPt(tc);
+    const [fx,fy]=itemPt(fc),[tx,ty]=itemPt(tc);
     const mx=(fx+tx)/2,my=Math.min(fy,ty)-24;
     out+=`<path d="M${fx},${fy} Q${mx},${my} ${tx},${ty}"
       stroke="#c06020" stroke-width="0.8" fill="none" stroke-dasharray="3,6" opacity="0" id="wi-down-${j}">
@@ -4140,7 +4140,7 @@ function mapClick(e){
     const candidates=[];
     ITEMS.forEach(c=>{
       if(!c||!c.id||!activeSet.has(c.id))return;
-      const pt=civPt(c);
+      const pt=itemPt(c);
       if(!pt||!isFinite(pt[0])||!isFinite(pt[1]))return;
       const d=Math.sqrt((pt[0]-svgX)**2+(pt[1]-svgY)**2);
       if(d<thresh)candidates.push({c,d,pt});
@@ -4290,7 +4290,7 @@ function _renderHoverLabel(c){
   const layer=document.getElementById('hover-label-layer');
   if(!layer)return;
   if(!c){layer.innerHTML='';return;}
-  const [cx,cy]=civPt(c);
+  const [cx,cy]=itemPt(c);
   const zr=1000/_vbW;
   const dotR=Math.max(2,7/zr);
   const labelY=cy-dotR-8;
@@ -4326,7 +4326,7 @@ function _onMapMouseMove(e){
   ITEMS.forEach(c=>{
     if(!c||!activeSet.has(c.id))return;
     if(sel&&sel.id===c.id)return; // skip selected — it already has persistent label
-    const pt=civPt(c);
+    const pt=itemPt(c);
     if(!pt||!isFinite(pt[0]))return;
     const d=Math.hypot(pt[0]-svgX,pt[1]-svgY);
     if(d<bestD){bestD=d;nearest=c;}
@@ -4531,7 +4531,6 @@ function toggleTheme(){
   if(saved){applyTheme(saved);}
   else{
     const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
-    document.documentElement.dataset.theme=sys;
     const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
   }
 }catch(e){}})();

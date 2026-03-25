@@ -498,8 +498,16 @@ def validate(atlas, force=False):
         for name in used_upper - declared - builtins:
             # Check if this name is used as a variable (e.g. NAME.filter, NAME.forEach, NAME[)
             if re.search(r'\b' + re.escape(name) + r'\s*[\.\[\(]', script_text):
-                # But not inside a string
-                if not re.search(r"'[^']*" + re.escape(name) + r"[^']*'", script_text):
+                # Check if ALL occurrences of NAME.xxx are inside strings.
+                # Use per-line check to avoid cross-line false positives.
+                has_real_usage = False
+                for sline in script_text.split('\n'):
+                    if re.search(r'\b' + re.escape(name) + r'\s*[\.\[\(]', sline):
+                        # This line uses the name as a variable; check if it's inside a string
+                        if not re.search(r"'[^']*" + re.escape(name) + r"[^']*'", sline):
+                            has_real_usage = True
+                            break
+                if has_real_usage:
                     undefined_consts.append(name)
         checks.append(("no undefined data constants referenced in functions",
                        len(undefined_consts) == 0,
