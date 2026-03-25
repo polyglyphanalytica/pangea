@@ -341,12 +341,10 @@
       "map": "world"
     },
     "corpus": {
-      "phase": "1A",
-      "items": 0,
-      "target": 100,
-      "live": false,
-      "map": "world",
-      "section": "II"
+      "phase": "DONE",
+      "items": 100,
+      "live": true,
+      "map": "world"
     },
     "animus": {
       "phase": "1A",
