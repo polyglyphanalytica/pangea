@@ -709,10 +709,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'access',ico:'🔓',lbl:'Access & Gatekeeping',col:'#7ac0a0'},
+{id:'aesthetics',ico:'🎨',lbl:'Aesthetics & Design',col:'#c07aa0'},
+{id:'commerce',ico:'💰',lbl:'Commerce & Trade',col:'#a07ac0'},
+{id:'crisis',ico:'⚡',lbl:'Crisis & Resilience',col:'#c07a60'},
+{id:'destruction',ico:'🔥',lbl:'Destruction & Loss',col:'#c0607a'},
+{id:'digital',ico:'💻',lbl:'Digital Dimensions',col:'#607ac0'},
+{id:'education',ico:'📚',lbl:'Education & Pedagogy',col:'#7a7ac0'},
+{id:'global',ico:'🌐',lbl:'Global Dimensions',col:'#c09a7a'},
+{id:'innovation',ico:'💡',lbl:'Innovation & Invention',col:'#a0c07a'},
+{id:'institutional',ico:'🏛',lbl:'Institutional Frameworks',col:'#c0a060'},
+{id:'legacy',ico:'⏳',lbl:'Legacy & Aftermath',col:'#60c07a'},
+{id:'materials',ico:'📜',lbl:'Materials & Media',col:'#7ac0c0'},
+{id:'networks',ico:'🔗',lbl:'Networks & Transmission',col:'#c0c07a'},
+{id:'oral',ico:'🗣',lbl:'Oral & Written Traditions',col:'#60c0a0'},
+{id:'power',ico:'⚖',lbl:'Power & Authority',col:'#c0a07a'},
+{id:'preservation',ico:'🛡',lbl:'Preservation & Conservation',col:'#7a9fc0'},
+{id:'religion',ico:'✝',lbl:'Religion & Sacred Texts',col:'#c07a7a'},
+{id:'scholarship',ico:'🎓',lbl:'Scholarship & Learning',col:'#a060c0'},
+{id:'technology',ico:'⚙',lbl:'Technology & Methods',col:'#60a0c0'},
+{id:'translation',ico:'🔤',lbl:'Translation & Transmission',col:'#7a60c0'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-3400,n:'EARLY WRITING'},
+{y:-2000,n:'BRONZE AGE LITERACY'},
+{y:-700,n:'CLASSICAL LIBRARIES'},
+{y:-200,n:'HELLENISTIC LEARNING'},
+{y:100,n:'ROMAN CODEX AGE'},
+{y:400,n:'MONASTIC PRESERVATION'},
+{y:800,n:'ISLAMIC GOLDEN AGE'},
+{y:1100,n:'MEDIEVAL UNIVERSITIES'},
+{y:1400,n:'EARLY PRINTING'},
+{y:1500,n:'PRINT REVOLUTION'},
+{y:1700,n:'ENLIGHTENMENT PUBLISHING'},
+{y:1800,n:'INDUSTRIAL PRINTING'},
+{y:1900,n:'MASS MEDIA AGE'},
+{y:1970,n:'DIGITAL DAWN'},
+{y:2000,n:'INFORMATION AGE'}
+];
 
 const ITEMS=[
 {id:'sumerian_clay_tablets',nm:'Sumerian Clay Tablets',sb:'Mesopotamia · c. 3400 BCE',s:-3400,e:-1750,lon:45.64,lat:30.96,fp:{mat:9,reach:6,lon:10,innov:10,infl:10,pres:9},conns:['egyptian_papyrus','akkadian_archives','library_ashurbanipal'],overview:'The earliest known writing system emerged in Sumer around 3400 BCE, with cuneiform pressed into wet clay tablets using a reed stylus. These tablets recorded everything from grain inventories to epic poetry, creating the foundation for all subsequent literate civilization.',d:{technology:'The technological methods employed in this milestone represented significant advances in how knowledge could be recorded, reproduced, and preserved, building on prior innovations while enabling new possibilities.',materials:'The physical materials used were central to this milestone, determining the durability, portability, and accessibility of the knowledge it carried, as well as the economic costs of production.',preservation:'Preservation efforts surrounding this milestone reflect the constant tension between the fragility of physical knowledge carriers and the human drive to protect accumulated wisdom for future generations.',destruction:'The vulnerability of this knowledge to destruction — whether through fire, war, decay, or deliberate erasure — reveals how precarious the survival of human knowledge has always been.',access:'Questions of who could access this knowledge and under what conditions shaped its impact, with literacy, language, cost, and institutional control all serving as gatekeepers.',commerce:'The commercial dimensions of this milestone shaped its reach and influence, as the economics of knowledge production determined what was created, who could afford it, and how widely it spread.',power:'Political and religious authorities recognized the power contained in written knowledge and sought to control its production, distribution, and interpretation to serve their own purposes.',scholarship:'The scholarly traditions surrounding this milestone reflect how communities of learning organized themselves to create, interpret, and transmit knowledge across generations.',translation:'Translation played a crucial role in the transmission of knowledge across linguistic and cultural boundaries, enabling ideas to survive the decline of the civilizations that produced them.',aesthetics:'The aesthetic dimensions of this milestone reveal how knowledge carriers were valued not merely as containers of information but as objects of beauty, craftsmanship, and cultural expression.',religion:'Religious institutions and traditions were deeply intertwined with knowledge preservation, serving simultaneously as the greatest patrons and the most powerful censors of written knowledge.',education:'The educational systems built around this milestone shaped how knowledge was transmitted to new generations, determining what was considered worth knowing and who was permitted to learn it.',innovation:'The innovations introduced by this milestone changed the fundamental possibilities of knowledge preservation and transmission, often in ways that contemporaries could not fully anticipate.',networks:'The networks of knowledge transmission that connected this milestone to others reveal how ideas traveled across geographic, linguistic, and temporal boundaries through physical carriers.',legacy:'The lasting legacy of this milestone extends far beyond its immediate context, shaping subsequent developments in knowledge preservation and continuing to influence how we think about information today.',crisis:'Moments of crisis — whether political upheaval, natural disaster, or technological disruption — tested the resilience of the knowledge systems this milestone represented.',oral:'The relationship between written and oral knowledge traditions shaped this milestone, as written records both preserved and transformed knowledge that had previously existed only in living memory.',institutional:'The institutional frameworks supporting this milestone — libraries, universities, monasteries, publishing houses — provided the organizational infrastructure necessary for sustained knowledge work.',digital:'The digital revolution has transformed how we understand this milestone, offering both new tools for studying historical knowledge systems and new challenges to the primacy of physical text.',global:'The global dimensions of this milestone reveal how knowledge preservation practices developed independently across cultures while also cross-pollinating through trade, conquest, and cultural exchange.'}},
@@ -820,10 +857,54 @@ const ITEMS=[
 
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'sumerian_clay_tablets',to:'akkadian_archives',concept:'Cuneiform Tradition',year:-2300,desc:'Akkadian scribes adopted and adapted Sumerian cuneiform for their own language and administrative needs.'},
+{from:'akkadian_archives',to:'library_ashurbanipal',concept:'Cuneiform Tradition',year:-668,desc:'Ashurbanipal collected and preserved Sumerian and Akkadian texts in the first systematically organized library.'},
+{from:'library_ashurbanipal',to:'behistun_inscription',concept:'Cuneiform Tradition',year:-515,desc:'The cuneiform tradition continued through Persian royal inscriptions carved into cliff faces.'},
+{from:'egyptian_papyrus',to:'library_alexandria',concept:'Papyrus Networks',year:-300,desc:'Alexandria built the greatest papyrus scroll library, exploiting Egypt monopoly on papyrus production.'},
+{from:'library_alexandria',to:'library_pergamum',concept:'Papyrus Networks',year:-200,desc:'Pergamum competed with Alexandria, driving innovation when papyrus exports were restricted.'},
+{from:'library_pergamum',to:'parchment_development',concept:'Material Innovation',year:-200,desc:'Pergamum response to papyrus restrictions led to the development of parchment as an alternative medium.'},
+{from:'parchment_development',to:'codex_format',concept:'Material Innovation',year:100,desc:'Parchment durability enabled the codex format, which required a medium that could be folded and bound.'},
+{from:'codex_format',to:'monastery_scriptoria',concept:'Material Innovation',year:500,desc:'Monastic scriptoria adopted the parchment codex as the standard format for preserving knowledge.'},
+{from:'chinese_paper',to:'paper_reaches_islamic',concept:'Paper Spread',year:751,desc:'Chinese papermaking knowledge spread to the Islamic world after the Battle of Talas.'},
+{from:'paper_reaches_islamic',to:'arabic_paper_mills',concept:'Paper Spread',year:800,desc:'Islamic papermakers improved Chinese techniques and established mills across the caliphate.'},
+{from:'arabic_paper_mills',to:'european_paper_mills',concept:'Paper Spread',year:1150,desc:'Paper production reached Europe through Islamic Spain and Italy.'},
+{from:'european_paper_mills',to:'gutenberg_bible',concept:'Paper Spread',year:1455,desc:'Cheap European paper made Gutenberg printing revolution economically viable.'},
+{from:'chinese_woodblock',to:'diamond_sutra',concept:'Printing Evolution',year:868,desc:'Chinese woodblock printing produced the oldest known dated printed book.'},
+{from:'bi_sheng_movable_type',to:'korean_jikji',concept:'Printing Evolution',year:1377,desc:'East Asian movable type concepts culminated in Korean metal type printing.'},
+{from:'gutenberg_bible',to:'aldine_press',concept:'European Print Revolution',year:1494,desc:'Aldus Manutius refined Gutenberg invention into the modern portable book format.'},
+{from:'aldine_press',to:'venetian_publishing',concept:'European Print Revolution',year:1500,desc:'Venice became Europe printing capital building on Aldine innovations.'},
+{from:'gutenberg_bible',to:'caxton_press',concept:'European Print Revolution',year:1476,desc:'Caxton brought printing to England, standardizing the English language.'},
+{from:'steam_printing',to:'penny_press',concept:'Industrial Publishing',year:1833,desc:'Steam-powered presses enabled cheap mass-circulation newspapers.'},
+{from:'penny_press',to:'linotype_machine',concept:'Industrial Publishing',year:1886,desc:'The Linotype automated typesetting to meet newspaper demand.'},
+{from:'digital_books',to:'world_wide_web',concept:'Digital Knowledge',year:1991,desc:'The web created a new paradigm for knowledge sharing beyond digital books.'},
+{from:'world_wide_web',to:'wikipedia_launch',concept:'Digital Knowledge',year:2001,desc:'Wikipedia became the largest collaborative knowledge project in history.'},
+{from:'wikipedia_launch',to:'open_access_movement',concept:'Digital Knowledge',year:2002,desc:'The open access movement extended the principle of free knowledge beyond encyclopedias to all scholarship.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'library_alexandria':[{nm:'Hypatia of Alexandria',role:'Mathematician and Philosopher',yr:400,desc:'Hypatia was the last great scholar associated with the Library of Alexandria, teaching mathematics, astronomy, and philosophy. Her murder in 415 CE by a Christian mob symbolizes the violent end of classical learning in the ancient world.'}],
+'monastery_scriptoria':[{nm:'Diemud of Wessobrunn',role:'Monastic Scribe',yr:1100,desc:'Diemud was one of the most prolific scribes of medieval Germany, single-handedly copying at least 45 manuscripts including liturgical books and theological works. Her output was extraordinary for any scribe of her era, male or female.'}],
+'book_of_kells':[{nm:'Anonymous Nuns of Kildare',role:'Illuminators and Scribes',yr:800,desc:'Recent scholarship suggests that some of the finest insular manuscripts may have been produced in double monasteries where both monks and nuns worked as scribes. The contributions of women to insular manuscript art are only now being recognized.'}],
+'house_of_wisdom':[{nm:'Fatima al-Fihri',role:'Founder of al-Qarawiyyin',yr:859,desc:'Fatima al-Fihri founded the al-Qarawiyyin mosque and university in Fez in 859 CE, which UNESCO recognizes as the world oldest existing university. Her endowment created an institution that has preserved and transmitted Islamic learning for over a millennium.'}],
+'gutenberg_bible':[{nm:'Anna Rugerin',role:'Early Woman Printer',yr:1484,desc:'Anna Rugerin of Augsburg was one of the first women identified as a printer in her own right, not merely as a widow continuing a husband business. Women printers were more common in the early print era than previously recognized.'}],
+'venetian_publishing':[{nm:'Gaspara Stampa',role:'Poet and Literary Figure',yr:1554,desc:'Gaspara Stampa was one of the first women to benefit from Venetian printing culture, publishing her poetry to wide acclaim. The Venetian press enabled women writers to reach audiences beyond the constraints of manuscript circulation.'}],
+'encyclopedie':[{nm:'Marie-Anne Paulze Lavoisier',role:'Scientific Illustrator and Translator',yr:1771,desc:'Marie-Anne Paulze Lavoisier translated scientific works from English, illustrated her husband experiments, and helped edit the Encyclopedie entries on chemistry. Her intellectual partnership exemplified the role of women in Enlightenment knowledge production.'}],
+'public_lending_library':[{nm:'Mary Titcomb',role:'Pioneer of Mobile Libraries',yr:1905,desc:'Mary Titcomb invented the bookmobile in 1905, bringing library services to rural communities who could not reach a library building. Her innovation extended the democratic promise of public libraries to the most isolated populations.'}],
+'carnegie_libraries':[{nm:'Anne Carroll Moore',role:'Pioneer of Children Library Services',yr:1906,desc:'Anne Carroll Moore transformed children library services at the New York Public Library, establishing the principle that children deserved dedicated spaces, collections, and librarians. Her work made libraries welcoming to an entirely new generation of readers.'}],
+'dewey_decimal':[{nm:'Mary Wright Plummer',role:'Library Science Educator',yr:1895,desc:'Mary Wright Plummer was a pioneering library educator who helped professionalize librarianship and advocated for women access to library training. She served as president of the American Library Association and shaped the profession for generations.'}],
+'paperback_revolution':[{nm:'Norah Smallwood',role:'Chatto and Windus Publisher',yr:1946,desc:'Norah Smallwood became one of the most influential publishers in 20th-century Britain, championing literary fiction at Chatto and Windus for three decades. She published Iris Murdoch, among many others, shaping postwar British literary culture.'}],
+'braille_system':[{nm:'Helen Keller',role:'Advocate for Accessible Knowledge',yr:1903,desc:'Helen Keller was the most famous advocate for accessible knowledge formats, demonstrating that deafblind individuals could engage with the full range of human learning. Her advocacy transformed public understanding of the right to access knowledge regardless of disability.'}],
+'samizdat_publishing':[{nm:'Natalya Gorbanevskaya',role:'Samizdat Poet and Editor',yr:1968,desc:'Natalya Gorbanevskaya founded the Chronicle of Current Events, the Soviet Union most important samizdat periodical documenting human rights abuses. She was imprisoned in a psychiatric hospital for her publishing work but continued writing after her release.'}],
+'wikipedia_launch':[{nm:'Sue Gardner',role:'Wikimedia Executive Director',yr:2007,desc:'Sue Gardner transformed the Wikimedia Foundation as executive director, growing Wikipedia from a project into a global institution. She also highlighted the gender gap in Wikipedia editing, advocating for more women contributors and more balanced coverage.'}],
+'internet_archive':[{nm:'Lisa Radha Weaver',role:'Digital Preservation Advocate',yr:2010,desc:'Women librarians and archivists have been central to the digital preservation movement, ensuring that born-digital knowledge is preserved with the same rigor applied to physical collections. Their work addresses the paradox that digital information is both infinitely reproducible and extremely fragile.'}],
+'open_access_movement':[{nm:'Jean-Claude Guedon',role:'Open Access Pioneer',yr:2002,desc:'Women scholars and librarians have been disproportionately active in the open access movement, recognizing that paywalled knowledge perpetuates existing inequalities. Their advocacy has helped make publicly funded research publicly accessible.'}],
+'desktop_publishing':[{nm:'Susan Kare',role:'Typeface and Icon Designer',yr:1984,desc:'Susan Kare designed the original Macintosh fonts and icons that made desktop publishing visually intuitive. Her Chicago, Geneva, and Monaco typefaces and her iconic trash can and paint bucket shaped how a generation interacted with digital text.'}],
+'kindle_launch':[{nm:'Victoria Barnsley',role:'HarperCollins UK CEO',yr:2004,desc:'Victoria Barnsley led HarperCollins UK through the digital transition, becoming one of the most powerful women in global publishing. Her strategic vision helped traditional publishers adapt to e-books without abandoning their commitment to physical books.'}],
+'arabic_calligraphy':[{nm:'Shirin Neshat',role:'Contemporary Calligraphic Artist',yr:1993,desc:'Shirin Neshat transformed Arabic calligraphy into contemporary art, using calligraphic text on photographs and film to explore questions of identity, gender, and power in the Islamic world. Her work connects the ancient tradition of beautiful writing to modern feminist expression.'}],
+'timbuktu_manuscripts':[{nm:'Women Manuscript Custodians of Timbuktu',role:'Family Library Keepers',yr:1500,desc:'Women in Timbuktu families have served as custodians of private manuscript collections for centuries, passing knowledge of the libraries contents and care from mother to daughter. Their role in preserving African intellectual heritage is only now being documented.'}]
+};
 
 let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -2350,7 +2431,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient Near East':['sumerian_clay_tablets','akkadian_archives','ebla_tablets','library_ashurbanipal','behistun_inscription'],
+'Classical Mediterranean':['egyptian_papyrus','library_alexandria','library_pergamum','roman_libraries','rosetta_stone','coptic_manuscripts'],
+'Medieval Europe':['monastery_scriptoria','insular_manuscripts','book_of_kells','lindisfarne_gospels','byzantine_manuscripts','book_of_hours','bayeux_tapestry','parchment_development','codex_format'],
+'Islamic World':['house_of_wisdom','al_azhar_library','paper_reaches_islamic','arabic_calligraphy','arabic_paper_mills','ottoman_calligraphy','timbuktu_manuscripts'],
+'East Asia':['chinese_paper','chinese_woodblock','diamond_sutra','dunhuang_caves','bi_sheng_movable_type','korean_jikji','korean_tripitaka','japanese_woodblock','ukiyo_e_books','stele_inscriptions','confucian_classics'],
+'Print Revolution':['gutenberg_bible','aldine_press','caxton_press','venetian_publishing','plantijn_press','stationers_company','nuremberg_chronicle','spanish_printing','printing_in_india'],
+'Enlightenment & Industrial':['encyclopedie','steam_printing','penny_press','linotype_machine','newspaper_revolution','licensing_act','offset_lithography'],
+'Great Libraries':['library_congress','british_library','national_library_france','bodleian_library','vatican_library','carnegie_libraries','public_lending_library','franklin_lending'],
+'Americas & Indigenous':['mayan_codices','aztec_codices','quipu_records','mesoamerican_bark_paper','spanish_printing'],
+'Digital Age':['digital_books','world_wide_web','wikipedia_launch','internet_archive','kindle_launch','open_access_movement','google_books','desktop_publishing','pdf_format','svalbard_seed_vault_model'],
+'Sacred Texts':['dead_sea_scrolls','torah_scroll_tradition','nag_hammadi','ethiopian_manuscripts','armenian_manuscripts','tibetan_printing','palm_leaf_manuscripts'],
+'Preservation & Access':['dewey_decimal','braille_system','isbn_system','microfilm_preservation','acid_free_paper','xerox_photocopier','samizdat_publishing']
+};
 
 const HERITAGE_REASONS={};
 
