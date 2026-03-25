@@ -518,12 +518,17 @@
       "validated_lenses": 20
     },
     "augur": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "IV"
+      "section": "IV",
+      "validated_sha": "16c0354e23aefa8fb0c9cd52a6a8ca74fb5aad7f",
+      "validated_short": "16c0354",
+      "validated_at": "2026-03-25T20:05:38.608495Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "mathematica": {
       "phase": "1A",
@@ -8910,6 +8915,36 @@
     },
     {
       "atlas": "scriptorium",
+      "batch": "91-100",
+      "items": 100
+    },
+    {
+      "atlas": "augur",
+      "batch": "1-10",
+      "items": 10
+    },
+    {
+      "atlas": "augur",
+      "batch": "11-30",
+      "items": 30
+    },
+    {
+      "atlas": "augur",
+      "batch": "31-50",
+      "items": 50
+    },
+    {
+      "atlas": "augur",
+      "batch": "51-70",
+      "items": 70
+    },
+    {
+      "atlas": "augur",
+      "batch": "71-90",
+      "items": 90
+    },
+    {
+      "atlas": "augur",
       "batch": "91-100",
       "items": 100
     }
