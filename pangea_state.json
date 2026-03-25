@@ -544,12 +544,17 @@
       "validated_lenses": 20
     },
     "techne": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "IV"
+      "section": "IV",
+      "validated_sha": "5f57492ebbdfcbca2dffcf178caca87d997b3d20",
+      "validated_short": "5f57492",
+      "validated_at": "2026-03-25T20:35:34.332988Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "codex": {
       "phase": "DONE",
