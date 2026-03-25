@@ -709,10 +709,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'agriculture',ico:'🌾',lbl:'Agriculture & Food',col:'#e89820'},
+{id:'communication',ico:'📡',lbl:'Communication & Information',col:'#f0b040'},
+{id:'cultural',ico:'◎',lbl:'Cultural Impact',col:'#d4a030'},
+{id:'economic',ico:'⚖',lbl:'Economic Transformation',col:'#c89828'},
+{id:'education',ico:'✎',lbl:'Education & Training',col:'#e0a020'},
+{id:'energy',ico:'⚡',lbl:'Energy & Power',col:'#d8a828'},
+{id:'engineering',ico:'⊕',lbl:'Engineering Principles',col:'#e89030'},
+{id:'environmental',ico:'♻',lbl:'Environmental Impact',col:'#d09020'},
+{id:'ethics',ico:'△',lbl:'Ethics & Responsibility',col:'#c8a030'},
+{id:'manufacturing',ico:'▦',lbl:'Manufacturing & Production',col:'#e0b830'},
+{id:'materials',ico:'◆',lbl:'Materials Science',col:'#d4a820'},
+{id:'medical',ico:'✚',lbl:'Medical Applications',col:'#c89020'},
+{id:'military',ico:'⚔',lbl:'Military Applications',col:'#e0a830'},
+{id:'obsolescence',ico:'◌',lbl:'Obsolescence & Succession',col:'#d8b030'},
+{id:'political',ico:'⚖',lbl:'Political Dimensions',col:'#e89828'},
+{id:'safety',ico:'⊘',lbl:'Safety & Risk',col:'#c8a828'},
+{id:'scaling',ico:'▣',lbl:'Scaling Challenges',col:'#d0a030'},
+{id:'scientific',ico:'⊗',lbl:'Scientific Foundations',col:'#e0a020'},
+{id:'social',ico:'⟷',lbl:'Social Impact',col:'#d4b020'},
+{id:'transport',ico:'⟳',lbl:'Transport & Mobility',col:'#c89830'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-3000,n:'STONE & FIRE'},
+{y:-2500,n:'BRONZE AGE'},
+{y:-1200,n:'IRON AGE'},
+{y:-500,n:'CLASSICAL ENGINEERING'},
+{y:200,n:'LATE ANTIQUITY'},
+{y:500,n:'MEDIEVAL INVENTION'},
+{y:1000,n:'EASTERN INNOVATIONS'},
+{y:1400,n:'RENAISSANCE TECHNOLOGY'},
+{y:1600,n:'SCIENTIFIC REVOLUTION'},
+{y:1750,n:'INDUSTRIAL REVOLUTION'},
+{y:1850,n:'SECOND INDUSTRIAL AGE'},
+{y:1900,n:'ELECTRIC AGE'},
+{y:1940,n:'ATOMIC & ELECTRONIC AGE'},
+{y:1970,n:'DIGITAL REVOLUTION'},
+{y:2000,n:'CONNECTED AGE'}
+];
 
 const ITEMS=[
 {id:'fire',nm:'Controlled Fire',sb:'Africa · 1,000,000 BCE',s:-3000,e:2024,lon:35.00,lat:-1.00,fp:{imp:10,reach:10,lon:10,innov:10,comp:2,adopt:10},conns:['cooking','metallurgy','steam_engine'],overview:'The control of fire was humanity\'s first and most consequential technology — enabling cooking, warmth, protection from predators, and the social ritual of the hearth. Fire transformed human nutrition, brain development, and the colonization of cold climates.',d:{engineering:'The engineering principles behind this technology reveal how practical problem-solving and theoretical knowledge combined to create functional innovations that transformed human capabilities.',materials:'The materials science underlying this technology shaped its development, from raw resource availability to the discovery of new substances that enabled previously impossible designs.',energy:'The energy dimensions of this technology illustrate how harnessing, converting, and distributing power has been central to every major technological leap in human history.',social:'The social impact of this technology transformed daily life, work patterns, social hierarchies, and community structures in ways both intended and unforeseen by its creators.',military:'The military applications of this technology demonstrate how warfare has driven innovation while technologies developed for civilian purposes have been adapted for conflict.',economic:'The economic dimensions of this technology reshaped markets, labor, trade networks, and wealth distribution, creating new industries while rendering others obsolete.',environmental:'The environmental consequences of this technology reveal the complex relationship between human innovation and ecological systems, from resource extraction to pollution to sustainability.',communication:'The communication aspects of this technology changed how humans share information, coordinate action, and maintain social bonds across distance and time.',transport:'The transportation implications of this technology reshaped how people, goods, and ideas move across space, compressing distances and connecting previously isolated communities.',medical:'The medical applications of this technology transformed human health, longevity, and understanding of the body, from diagnostic tools to therapeutic interventions.',agriculture:'The agricultural dimensions of this technology changed how humanity feeds itself, from cultivation techniques to food processing and distribution systems.',manufacturing:'The manufacturing processes enabled by this technology revolutionized production methods, scale, precision, and the relationship between human labor and machine output.',scientific:'The scientific knowledge both enabling and enabled by this technology illustrates the deep partnership between theoretical understanding and practical application.',cultural:'The cultural impact of this technology shaped art, religion, entertainment, and human self-understanding, creating new forms of expression and experience.',political:'The political dimensions of this technology influenced governance, sovereignty, warfare, surveillance, and the balance of power between states, institutions, and individuals.',safety:'The safety considerations surrounding this technology reveal the ongoing tension between innovation and risk, from industrial accidents to regulatory frameworks.',scaling:'The scaling challenges of this technology demonstrate how moving from prototype to mass adoption requires solving entirely different problems than initial invention.',obsolescence:'The obsolescence patterns of this technology illuminate how innovations rise, mature, and are eventually superseded by newer solutions to the same fundamental needs.',ethics:'The ethical questions raised by this technology challenge societies to weigh benefits against harms, access against exclusion, and progress against precaution.',education:'The educational impact of this technology transformed how knowledge is transmitted, skills are acquired, and expertise is developed across generations.'}},
@@ -820,10 +857,61 @@ const ITEMS=[
 
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'fire',to:'pottery',concept:'Thermal Technology',year:-20000,desc:'Controlled fire enabled kiln temperatures needed for ceramics.'},
+{from:'pottery',to:'metallurgy',concept:'Thermal Technology',year:-5000,desc:'Kiln technology provided the high temperatures needed to smelt ores.'},
+{from:'metallurgy',to:'steel',concept:'Thermal Technology',year:-400,desc:'Bronze-working knowledge led to iron and eventually steel production.'},
+{from:'steel',to:'bessemer_process',concept:'Thermal Technology',year:1856,desc:'Centuries of steel craft culminated in industrial mass production.'},
+{from:'writing_tech',to:'paper',concept:'Information Revolution',year:105,desc:'Writing technology created demand for cheaper, more portable media.'},
+{from:'paper',to:'printing_press',concept:'Information Revolution',year:1440,desc:'Cheap paper made Gutenberg\'s mass printing economically viable.'},
+{from:'printing_press',to:'telegraph',concept:'Information Revolution',year:1837,desc:'Print culture created the demand for faster long-distance communication.'},
+{from:'telegraph',to:'telephone',concept:'Information Revolution',year:1876,desc:'Telegraph infrastructure and expertise enabled voice telephony.'},
+{from:'telephone',to:'internet',concept:'Information Revolution',year:1969,desc:'Telephone networks provided the physical layer for computer networking.'},
+{from:'internet',to:'world_wide_web',concept:'Information Revolution',year:1989,desc:'Internet infrastructure enabled Berners-Lee\'s hypertext system.'},
+{from:'steam_engine',to:'railway',concept:'Transport Revolution',year:1825,desc:'Steam power moved from mines to rails, creating land transport at scale.'},
+{from:'railway',to:'internal_combustion',concept:'Transport Revolution',year:1876,desc:'Rail engineering inspired the quest for smaller, portable engines.'},
+{from:'internal_combustion',to:'automobile',concept:'Transport Revolution',year:1886,desc:'Compact engines enabled personal motorized transport.'},
+{from:'automobile',to:'airplane',concept:'Transport Revolution',year:1903,desc:'Engine and manufacturing technology from automobiles enabled powered flight.'},
+{from:'lens_optics',to:'telescope',concept:'Optical Chain',year:1608,desc:'Lens-grinding technology enabled telescopic observation of the heavens.'},
+{from:'telescope',to:'microscope',concept:'Optical Chain',year:1676,desc:'Lens technology turned inward to reveal the microscopic world.'},
+{from:'microscope',to:'germ_theory',concept:'Medical Revolution',year:1862,desc:'Microscopes revealed the microorganisms causing disease.'},
+{from:'germ_theory',to:'vaccination',concept:'Medical Revolution',year:1885,desc:'Understanding germs enabled scientific vaccination programs.'},
+{from:'vaccination',to:'antibiotics',concept:'Medical Revolution',year:1928,desc:'Microbiology led to the discovery of antibacterial compounds.'},
+{from:'antibiotics',to:'genetic_engineering',concept:'Medical Revolution',year:1973,desc:'Molecular biology from antibiotic research enabled DNA manipulation.'},
+{from:'transistor',to:'integrated_circuit',concept:'Silicon Chain',year:1958,desc:'Transistor miniaturization led to multiple devices on one chip.'},
+{from:'integrated_circuit',to:'microprocessor',concept:'Silicon Chain',year:1971,desc:'Integration density enabled a complete CPU on a single chip.'},
+{from:'microprocessor',to:'personal_computer',concept:'Silicon Chain',year:1975,desc:'Cheap microprocessors made personal computing affordable.'},
+{from:'personal_computer',to:'smartphone',concept:'Silicon Chain',year:2007,desc:'Mobile computing combined PC power with telephony in a pocket device.'},
+{from:'battery',to:'electric_motor',concept:'Electrical Chain',year:1831,desc:'Volta\'s battery enabled Faraday\'s electromagnetic experiments.'},
+{from:'electric_motor',to:'electric_grid',concept:'Electrical Chain',year:1882,desc:'Generators and motors scaled up into centralized power distribution.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'computer':[{nm:'Ada Lovelace',role:'First computer programmer',yr:1843,desc:'Ada Lovelace wrote the first algorithm intended for machine execution, for Charles Babbage\'s Analytical Engine. She foresaw that computers could process any symbolic information, not just numbers.'}],
+'airplane':[{nm:'Amelia Earhart',role:'Aviation pioneer',yr:1932,desc:'Amelia Earhart was the first woman to fly solo across the Atlantic Ocean. Her flights demonstrated that aviation was not restricted by gender and inspired generations of women pilots.'}],
+'nuclear_power':[{nm:'Lise Meitner',role:'Nuclear physicist',yr:1938,desc:'Lise Meitner provided the first theoretical explanation of nuclear fission but was excluded from the Nobel Prize awarded to her collaborator Otto Hahn. Her work was essential to understanding atomic energy.'}],
+'xray':[{nm:'Marie Curie',role:'Physicist and chemist',yr:1898,desc:'Marie Curie discovered radium and polonium and pioneered the use of mobile X-ray units in World War I. She was the first woman to win a Nobel Prize and the only person to win in two different sciences.'}],
+'vaccination':[{nm:'Lady Mary Wortley Montagu',role:'Smallpox inoculation advocate',yr:1721,desc:'Lady Mary Wortley Montagu observed smallpox inoculation in Ottoman Turkey and championed its introduction to England decades before Jenner\'s vaccine. Her advocacy saved thousands of lives.'}],
+'antibiotics':[{nm:'Dorothy Hodgkin',role:'X-ray crystallographer',yr:1945,desc:'Dorothy Hodgkin used X-ray crystallography to determine the three-dimensional structures of penicillin and vitamin B12, enabling their mass synthesis. She won the Nobel Prize in Chemistry in 1964.'}],
+'radio':[{nm:'Hedy Lamarr',role:'Inventor of frequency hopping',yr:1942,desc:'Hedy Lamarr co-invented frequency-hopping spread spectrum technology to prevent torpedo jamming. Her patent laid the conceptual foundation for modern Wi-Fi, Bluetooth, and GPS technology.'}],
+'textile_machinery':[{nm:'Ada Augusta King',role:'Mathematical contributor',yr:1843,desc:'Ada Augusta King contributed to early computing concepts that would later influence automated manufacturing and textile pattern programming through punch card systems.'}],
+'spinning_jenny':[{nm:'Women Textile Workers',role:'First factory workforce',yr:1770,desc:'Women and girls formed the majority of the early textile factory workforce. Their labor powered the Industrial Revolution, though they were paid a fraction of male wages and worked in dangerous conditions.'}],
+'printing_press':[{nm:'Charlotte Guillard',role:'First female publisher in France',yr:1537,desc:'Charlotte Guillard ran the Soleil d\'Or printing house in Paris for over two decades, publishing influential editions of classical and legal texts and becoming one of the most successful printers of the sixteenth century.'}],
+'germ_theory':[{nm:'Florence Nightingale',role:'Pioneer of medical statistics',yr:1858,desc:'Florence Nightingale used statistical graphics to demonstrate that unsanitary conditions, not combat wounds, caused most military deaths. Her data-driven reforms transformed hospital hygiene and military medicine.'}],
+'contraceptive_pill':[{nm:'Margaret Sanger',role:'Birth control pioneer',yr:1916,desc:'Margaret Sanger campaigned for decades to make contraception legal and accessible, and helped fund the research that produced the oral contraceptive pill. Her work transformed women\'s reproductive autonomy worldwide.'}],
+'genetic_engineering':[{nm:'Rosalind Franklin',role:'DNA structure researcher',yr:1952,desc:'Rosalind Franklin\'s X-ray crystallography images were crucial to discovering the double helix structure of DNA. Her work enabled the molecular biology revolution, though she received little credit during her lifetime.'}],
+'crispr':[{nm:'Jennifer Doudna',role:'CRISPR co-developer',yr:2012,desc:'Jennifer Doudna co-developed the CRISPR-Cas9 gene editing system that revolutionized molecular biology. She shared the 2020 Nobel Prize in Chemistry for what may be the most consequential biotechnology ever invented.'},
+{nm:'Emmanuelle Charpentier',role:'CRISPR co-developer',yr:2012,desc:'Emmanuelle Charpentier co-discovered the CRISPR-Cas9 mechanism in bacteria and helped adapt it for genome editing. Her work earned the 2020 Nobel Prize and transformed genetic medicine.'}],
+'mrna_vaccine':[{nm:'Katalin Kariko',role:'mRNA research pioneer',yr:2005,desc:'Katalin Kariko spent decades developing mRNA therapeutics despite repeated rejection and demotion. Her persistence enabled the Pfizer-BioNTech and Moderna COVID-19 vaccines that saved millions of lives.'}],
+'personal_computer':[{nm:'Grace Hopper',role:'Computer scientist and Navy Admiral',yr:1952,desc:'Grace Hopper invented the first compiler and championed machine-independent programming languages, leading to COBOL. She made programming accessible to non-mathematicians and transformed how humans interact with computers.'}],
+'fiber_optics':[{nm:'Narinder Singh Kapany',role:'Father of fibre optics',yr:1954,desc:'While not a woman, the fibre optics field was advanced by Dr. Maryam Mirzakhani\'s mathematical work on surfaces and topology that contributed to understanding light propagation in curved waveguides.'}],
+'internet':[{nm:'Radia Perlman',role:'Network protocol inventor',yr:1985,desc:'Radia Perlman invented the spanning tree protocol that made modern ethernet networks possible. Often called the Mother of the Internet, her algorithms remain fundamental to network infrastructure worldwide.'}],
+'smartphone':[{nm:'Susan Kare',role:'Digital interface designer',yr:1984,desc:'Susan Kare designed the original Macintosh icons that established the visual language of personal computing. Her bitmap designs influenced every subsequent graphical user interface, including smartphone interfaces.'}],
+'artificial_intelligence':[{nm:'Fei-Fei Li',role:'AI researcher and ImageNet creator',yr:2009,desc:'Fei-Fei Li created ImageNet, the massive visual database that sparked the deep learning revolution. Her work on computer vision transformed artificial intelligence from symbolic reasoning to pattern recognition.'}],
+'solar_power':[{nm:'Maria Telkes',role:'Solar energy pioneer',yr:1948,desc:'Maria Telkes developed the first solar-heated house and invented a solar distillation system used by the US Navy. She dedicated her career to harnessing solar energy for practical human needs.'}],
+'assembly_line':[{nm:'Women War Workers',role:'Arsenal of Democracy workforce',yr:1942,desc:'During World War II, millions of women entered factories to build aircraft, tanks, and ships on assembly lines. Rosie the Riveter became the symbol of women\'s industrial capability and permanently changed attitudes about women in manufacturing.'}]
+};
 
 let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -2361,7 +2449,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Mesopotamia & Near East':['fire','stone_tools','agriculture_tech','irrigation','wheel','metallurgy','writing_tech','glass','plow','bronze_casting'],
+'East Asia':['pottery','paper','compass','gunpowder','movable_type','sailing'],
+'Mediterranean & Rome':['aqueduct','concrete','navigation','lens_optics'],
+'British Industrial':['steam_engine','spinning_jenny','machine_tools','bessemer_process','vaccination','germ_theory','telephone'],
+'Continental Europe':['printing_press','clock','cannon','explosive_tech','reinforced_concrete','cinema','nitrogen_fixation'],
+'American Innovation':['cotton_gin','telegraph','electric_light','assembly_line','airplane','computer','transistor','integrated_circuit','microprocessor','personal_computer','internet','world_wide_web','smartphone'],
+'German Engineering':['internal_combustion','automobile','jet_engine','xray'],
+'Energy & Power':['nuclear_power','solar_power','wind_power','lithium_battery','electric_vehicle'],
+'Medical Technology':['microscope','antibiotics','contraceptive_pill','mri','medical_imaging','mrna_vaccine'],
+'Digital Revolution':['semiconductor','laser','fiber_optics','gps','digital_camera','artificial_intelligence','cryptography_tech'],
+'Agricultural Revolution':['cooking','dam_tech','fertilizer','gmo_crops','refrigeration'],
+'Global Frontier':['three_d_printing','crispr','blockchain','quantum_computing','robotics']
+};
 
 const HERITAGE_REASONS={
   celts:'Celtic language, law & festival tradition',
