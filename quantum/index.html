@@ -708,10 +708,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'collaboration',ico:'⊕',lbl:'Collaboration',col:'#5aa0c8'},
+{id:'communication',ico:'◎',lbl:'Communication',col:'#c8a05a'},
+{id:'controversy',ico:'⚡',lbl:'Controversy',col:'#e05040'},
+{id:'education',ico:'◇',lbl:'Education',col:'#70b060'},
+{id:'environment',ico:'⊙',lbl:'Environment',col:'#40a070'},
+{id:'ethics',ico:'⊘',lbl:'Ethics',col:'#a070b0'},
+{id:'failure',ico:'⊗',lbl:'Failure',col:'#c06050'},
+{id:'funding',ico:'◈',lbl:'Funding',col:'#b0a040'},
+{id:'global',ico:'⊛',lbl:'Global',col:'#5080c0'},
+{id:'institutions',ico:'⌂',lbl:'Institutions',col:'#6090a0'},
+{id:'instruments',ico:'⊞',lbl:'Instruments',col:'#8080c0'},
+{id:'legacy',ico:'◉',lbl:'Legacy',col:'#d0a030'},
+{id:'mathematics',ico:'∑',lbl:'Mathematics',col:'#6070b0'},
+{id:'method',ico:'⊿',lbl:'Method',col:'#c09040'},
+{id:'philosophy',ico:'∞',lbl:'Philosophy',col:'#9070a0'},
+{id:'politics',ico:'⊡',lbl:'Politics',col:'#a08060'},
+{id:'replication',ico:'⊜',lbl:'Replication',col:'#50a0a0'},
+{id:'resistance',ico:'⊝',lbl:'Resistance',col:'#c07050'},
+{id:'society',ico:'⊟',lbl:'Society',col:'#80a060'},
+{id:'technology',ico:'⊠',lbl:'Technology',col:'#60a0c0'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-600,n:'ANCIENT NATURAL PHILOSOPHY'},
+{y:-300,n:'HELLENISTIC MECHANICS'},
+{y:100,n:'ROMAN & ISLAMIC TRANSMISSION'},
+{y:800,n:'ISLAMIC GOLDEN AGE'},
+{y:1500,n:'EARLY MODERN REVOLUTION'},
+{y:1650,n:'NEWTONIAN ERA'},
+{y:1800,n:'CLASSICAL PHYSICS'},
+{y:1860,n:'ELECTROMAGNETIC REVOLUTION'},
+{y:1895,n:'RADIATION & DISCOVERY'},
+{y:1905,n:'RELATIVITY & QUANTA'},
+{y:1920,n:'QUANTUM REVOLUTION'},
+{y:1940,n:'NUCLEAR AGE'},
+{y:1960,n:'PARTICLE ZOO'},
+{y:1975,n:'STANDARD MODEL ERA'},
+{y:1990,n:'PRECISION COSMOLOGY'},
+{y:2010,n:'MULTI-MESSENGER ERA'}
+];
 
 const ITEMS=[
 {id:'greek_atomism',nm:'Greek Atomism',sb:'Abdera · c. 460 BCE',s:-460,e:2024,lon:24.98,lat:40.95,fp:{theo:10,exp:2,math:4,imp:10,ele:9,ver:3},conns:['aristotle_physics','archimedes_mechanics','lucretius_atomism'],overview:'Leucippus and Democritus of Abdera proposed around 460 BCE that all matter consists of indivisible, eternal, and imperceptible particles — atoms — moving through an infinite void. This radical hypothesis eliminated the need for divine intervention in natural processes and offered a purely mechanistic explanation of reality. Though rejected by Aristotle in favour of continuous matter, atomism survived through Epicurus and Lucretius, was revived in the seventeenth century, and ultimately proved correct — the modern atom, though divisible, vindicated the core insight that matter has a discrete, fundamental structure.',d:{
@@ -4257,10 +4295,98 @@ conomy:'Subsistence agriculture (sweet potato, taro, sugarcane) and fishing; the
       migration:'The Polynesian settlement of Rapa Nui around 900 CE represents the eastern limit of Polynesian expansion — 2,000 kilometres beyond any previous Polynesian settlement.'}},
 ];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'greek_atomism',to:'lucretius_atomism',concept:'Atomic Hypothesis',year:-55,desc:'Lucretius transmitted Democritus\'s atomic theory to Roman audiences through De Rerum Natura.'},
+{from:'lucretius_atomism',to:'dalton_atomic',concept:'Atomic Hypothesis',year:1808,desc:'Dalton revived ancient atomism with quantitative chemical evidence for discrete atoms.'},
+{from:'dalton_atomic',to:'brownian_motion',concept:'Atomic Hypothesis',year:1905,desc:'Einstein proved atoms exist by explaining Brownian motion as molecular collisions.'},
+{from:'brownian_motion',to:'rutherford_nucleus',concept:'Atomic Hypothesis',year:1911,desc:'Rutherford discovered the nuclear atom through alpha particle scattering experiments.'},
+{from:'photoelectric_effect',to:'bohr_atom',concept:'Quantum Revolution',year:1913,desc:'Bohr applied Einstein\'s quantum hypothesis to atomic structure, quantising electron orbits.'},
+{from:'bohr_atom',to:'quantum_mechanics_heisenberg',concept:'Quantum Revolution',year:1925,desc:'Heisenberg replaced Bohr\'s orbits with matrix mechanics — the first complete quantum theory.'},
+{from:'quantum_mechanics_heisenberg',to:'schrodinger_wave',concept:'Quantum Revolution',year:1926,desc:'Schrödinger developed wave mechanics as an equivalent formulation of quantum theory.'},
+{from:'schrodinger_wave',to:'dirac_equation',concept:'Quantum Revolution',year:1928,desc:'Dirac unified quantum mechanics with special relativity, predicting antimatter.'},
+{from:'dirac_equation',to:'positron_discovery',concept:'Antimatter Chain',year:1932,desc:'Anderson discovered the positron, confirming Dirac\'s prediction of antiparticles.'},
+{from:'positron_discovery',to:'quantum_electrodynamics',concept:'Antimatter Chain',year:1947,desc:'QED incorporated positrons into a complete theory of light-matter interaction.'},
+{from:'neutron_discovery',to:'nuclear_fission',concept:'Nuclear Chain',year:1938,desc:'Hahn and Strassmann split uranium using neutrons discovered by Chadwick.'},
+{from:'nuclear_fission',to:'nuclear_chain_reaction',concept:'Nuclear Chain',year:1942,desc:'Fermi achieved the first self-sustaining nuclear chain reaction in Chicago.'},
+{from:'nuclear_chain_reaction',to:'manhattan_project',concept:'Nuclear Chain',year:1945,desc:'The Manhattan Project weaponised the chain reaction at Los Alamos.'},
+{from:'manhattan_project',to:'nuclear_power',concept:'Nuclear Chain',year:1954,desc:'Reactor technology developed for weapons was adapted for civilian electricity generation.'},
+{from:'semiconductor_band_theory',to:'transistor_invention',concept:'Electronics Revolution',year:1947,desc:'Band theory guided Bardeen, Brattain, and Shockley to invent the transistor.'},
+{from:'transistor_invention',to:'integrated_circuit',concept:'Electronics Revolution',year:1958,desc:'Kilby and Noyce integrated multiple transistors on single semiconductor chips.'},
+{from:'integrated_circuit',to:'quantum_computing',concept:'Electronics Revolution',year:1981,desc:'Feynman proposed quantum computers when classical chips approached quantum limits.'},
+{from:'de_broglie_waves',to:'davisson_germer',concept:'Wave-Particle Duality',year:1927,desc:'Davisson and Germer confirmed de Broglie\'s matter wave hypothesis experimentally.'},
+{from:'davisson_germer',to:'xray_crystallography',concept:'Wave-Particle Duality',year:1930,desc:'Electron diffraction joined X-ray crystallography as a structural analysis technique.'},
+{from:'hydrogen_spectrum',to:'bohr_atom',concept:'Spectral Lines',year:1913,desc:'Bohr explained Balmer\'s hydrogen formula through quantised electron orbits.'},
+{from:'bose_einstein_statistics',to:'bose_einstein_condensate',concept:'Quantum Gases',year:1995,desc:'Cornell and Wieman achieved the BEC predicted seventy years earlier by Bose and Einstein.'},
+{from:'bose_einstein_condensate',to:'quantum_cryptography',concept:'Quantum Gases',year:2000,desc:'Cold atom techniques enabled quantum information experiments including QKD.'},
+{from:'general_relativity',to:'cosmological_expansion',concept:'Cosmic Structure',year:1929,desc:'Hubble\'s expanding universe confirmed predictions of Einstein\'s general relativity.'},
+{from:'cosmological_expansion',to:'big_bang_cosmology',concept:'Cosmic Structure',year:1948,desc:'Gamow extended expansion backwards to a hot dense origin — the Big Bang.'},
+{from:'big_bang_cosmology',to:'cosmic_microwave_background',concept:'Cosmic Structure',year:1964,desc:'Penzias and Wilson detected the CMB radiation predicted by Big Bang theory.'},
+{from:'cosmic_microwave_background',to:'cosmic_inflation',concept:'Cosmic Structure',year:1980,desc:'Guth proposed inflation to explain the CMB\'s remarkable uniformity.'},
+{from:'cosmic_inflation',to:'dark_energy',concept:'Cosmic Structure',year:1998,desc:'The discovery of accelerating expansion revealed dark energy dominating the cosmos.'},
+{from:'parity_violation',to:'cp_violation',concept:'Symmetry Breaking',year:1964,desc:'After parity fell, Cronin and Fitch discovered CP violation in kaon decay.'},
+{from:'cp_violation',to:'electroweak_unification',concept:'Symmetry Breaking',year:1967,desc:'CP violation motivated the three-generation Standard Model and electroweak theory.'},
+{from:'electroweak_unification',to:'higgs_boson',concept:'Symmetry Breaking',year:2012,desc:'The Higgs mechanism explained electroweak symmetry breaking, confirmed at the LHC.'},
+{from:'superconductivity_discovery',to:'bcs_superconductivity',concept:'Superconductivity',year:1957,desc:'BCS theory finally explained superconductivity 46 years after its discovery.'},
+{from:'bcs_superconductivity',to:'topological_phases',concept:'Superconductivity',year:1980,desc:'Topological concepts from superconductivity extended to the quantum Hall effect.'},
+{from:'quantum_entanglement',to:'quantum_cryptography',concept:'Quantum Information',year:1984,desc:'Entanglement and no-cloning enabled quantum key distribution protocols.'},
+{from:'quantum_cryptography',to:'quantum_computing',concept:'Quantum Information',year:1994,desc:'Shor\'s algorithm showed quantum computers could break classical cryptography.'},
+{from:'black_holes',to:'hawking_radiation',concept:'Quantum Gravity',year:1974,desc:'Hawking showed black holes radiate thermally, connecting gravity to quantum theory.'},
+{from:'hawking_radiation',to:'string_theory',concept:'Quantum Gravity',year:1996,desc:'String theory reproduced Hawking\'s entropy formula from microscopic state counting.'},
+{from:'yukawa_meson',to:'quark_model',concept:'Strong Force',year:1964,desc:'Gell-Mann and Zweig revealed mesons as quark-antiquark pairs, explaining Yukawa\'s particle.'},
+{from:'quark_model',to:'quantum_chromodynamics',concept:'Strong Force',year:1973,desc:'QCD described quarks interacting via gluons, completing the strong force theory.'},
+{from:'neutrino_discovery',to:'neutrino_oscillations',concept:'Neutrino Physics',year:1998,desc:'Super-Kamiokande proved neutrinos oscillate, requiring mass beyond the Standard Model.'},
+{from:'raman_effect',to:'laser_invention',concept:'Light-Matter Interaction',year:1960,desc:'Understanding of stimulated emission from Raman\'s work contributed to laser development.'},
+{from:'laser_invention',to:'bose_einstein_condensate',concept:'Light-Matter Interaction',year:1995,desc:'Laser cooling techniques enabled the creation of Bose-Einstein condensates.'},
+{from:'chandrasekhar_limit',to:'neutron_stars',concept:'Stellar Endpoints',year:1934,desc:'Chandrasekhar\'s mass limit for white dwarfs implied heavier stars collapse to neutron stars.'},
+{from:'neutron_stars',to:'gravitational_waves',concept:'Stellar Endpoints',year:2017,desc:'LIGO detected gravitational waves from merging neutron stars in GW170817.'},
+{from:'gravitational_lensing',to:'dark_matter',concept:'Dark Universe',year:1979,desc:'Gravitational lensing provided direct evidence for dark matter in galaxy clusters.'},
+{from:'dark_matter',to:'dark_energy',concept:'Dark Universe',year:1998,desc:'The dark sector expanded when accelerating expansion revealed dark energy.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'planck_radiation':[{nm:'Lise Meitner',role:'Nuclear physics pioneer',yr:1906,desc:'Meitner worked on radioactivity and quantum theory in Berlin from 1906, collaborating with Otto Hahn. She was the first woman to become a full professor of physics in Germany. Her early work on beta radiation contributed to understanding quantum transitions.'}],
+'photoelectric_effect':[{nm:'Hertha Ayrton',role:'Physicist and electrical engineer',yr:1902,desc:'Ayrton studied the electric arc and its behaviour, contributing to the understanding of electrical phenomena that paralleled photoelectric studies. She was the first woman to read a paper before the Royal Society and fought for recognition of women in science.'}],
+'bohr_atom':[{nm:'Hilde Levi',role:'Nuclear physicist at Niels Bohr Institute',yr:1934,desc:'Levi worked at the Niels Bohr Institute from 1934, applying radioactive isotope techniques to biology and medicine. She was a key member of the Copenhagen physics community and contributed to isotope research that extended Bohr\'s atomic model to practical applications.'}],
+'nuclear_fission':[{nm:'Lise Meitner',role:'Co-discoverer of nuclear fission',yr:1938,desc:'Meitner provided the first theoretical explanation of nuclear fission in 1938, correctly identifying that the uranium nucleus splits into lighter elements with enormous energy release. Despite her essential contribution, the 1944 Nobel Prize went solely to Otto Hahn — one of the most egregious omissions in Nobel history.'},
+{nm:'Ida Noddack',role:'Chemist who predicted fission',yr:1934,desc:'Noddack published a paper in 1934 suggesting that Fermi\'s neutron bombardment experiments might be splitting the uranium nucleus into lighter elements — effectively predicting nuclear fission four years before its discovery. Her suggestion was dismissed by the physics community and has only recently received proper recognition.'}],
+'nuclear_chain_reaction':[{nm:'Leona Woods Marshall',role:'Youngest member of the Chicago Pile team',yr:1942,desc:'Woods Marshall was the only woman physicist present at the first self-sustaining nuclear chain reaction. At age 23, she built the boron trifluoride neutron detectors crucial for monitoring the reactor. She made essential contributions to reactor design and post-war nuclear physics.'}],
+'quantum_mechanics_heisenberg':[{nm:'Maria Goeppert Mayer',role:'Nobel laureate in nuclear shell model',yr:1949,desc:'Goeppert Mayer developed the nuclear shell model using quantum mechanical principles, explaining the stability of certain nuclei. She received the 1963 Nobel Prize in Physics — only the second woman after Marie Curie. Despite her brilliance, she worked without pay for most of her career due to anti-nepotism rules.'}],
+'xray_crystallography':[{nm:'Rosalind Franklin',role:'X-ray crystallographer of DNA',yr:1952,desc:'Franklin produced Photo 51 — the X-ray diffraction image of DNA that was crucial to determining the double helix structure. Her data was shared with Watson and Crick without her consent. She died in 1958, four years before the Nobel Prize was awarded to Watson, Crick, and Wilkins.'},
+{nm:'Dorothy Hodgkin',role:'Nobel laureate in crystallography',yr:1964,desc:'Hodgkin determined the structures of penicillin, vitamin B12, and insulin using X-ray crystallography. She received the 1964 Nobel Prize in Chemistry — the only British woman to receive a science Nobel. Her work on insulin took 35 years to complete and remains a landmark achievement.'},
+{nm:'Kathleen Lonsdale',role:'Crystallographer who proved benzene is flat',yr:1929,desc:'Lonsdale used X-ray diffraction to prove that the benzene ring is flat and hexagonal, settling a fundamental question in chemistry. She was one of the first two women elected to the Royal Society in 1945 and made major contributions to the International Tables for Crystallography.'}],
+'manhattan_project':[{nm:'Lise Meitner',role:'Theoretical physicist who refused to participate',yr:1943,desc:'Meitner was invited to join the Manhattan Project but refused, saying "I will have nothing to do with a bomb." Her moral stance — while having provided the theoretical framework that made the bomb possible — represents one of the most significant ethical positions taken by a scientist during the war.'},
+{nm:'Chien-Shiung Wu',role:'Uranium enrichment researcher',yr:1944,desc:'Wu worked on the Manhattan Project at Columbia University, developing improved techniques for uranium enrichment by gaseous diffusion. Her expertise in beta decay would later lead to the parity violation experiment. She overcame barriers of both gender and race in wartime American physics.'},
+{nm:'Maria Goeppert Mayer',role:'Opacity calculations for the bomb',yr:1943,desc:'Goeppert Mayer worked at Los Alamos on the opacity of materials to radiation — calculations essential for understanding how energy propagated through bomb materials. Her contributions to the Manhattan Project were largely unrecognised until decades later.'}],
+'parity_violation':[{nm:'Chien-Shiung Wu',role:'Experimentalist who proved parity violation',yr:1957,desc:'Wu designed and performed the definitive experiment proving parity violation in beta decay using polarised cobalt-60 nuclei. Despite the experiment being the crucial confirmation of Lee and Yang\'s hypothesis, the 1957 Nobel Prize was awarded only to Lee and Yang. Wu\'s exclusion remains one of the most discussed injustices in Nobel history.'}],
+'cosmic_microwave_background':[{nm:'Émilie du Châtelet',role:'Translator and interpreter of Newton',yr:1749,desc:'Du Châtelet\'s translation and commentary on Newton\'s Principia, completed just before her death in 1749, was instrumental in spreading Newtonian physics to the French-speaking world. Her insight that kinetic energy is proportional to velocity squared (not velocity) prefigured modern energy concepts essential to cosmology.'}],
+'dark_matter':[{nm:'Vera Rubin',role:'Discoverer of galaxy rotation evidence for dark matter',yr:1970,desc:'Rubin measured the rotation curves of spiral galaxies, demonstrating that stars orbit at speeds requiring far more mass than is visible — the most compelling evidence for dark matter. Despite this Nobel-calibre discovery, she was never awarded the prize. She became a tireless advocate for women in astronomy.'}],
+'neutron_stars':[{nm:'Jocelyn Bell Burnell',role:'Discoverer of pulsars',yr:1967,desc:'Bell Burnell discovered pulsars as a graduate student at Cambridge, identifying the regular radio pulses as a new type of astronomical object. The 1974 Nobel Prize was awarded to her supervisor Antony Hewish and Martin Ryle but not to her — an omission that has become the most discussed case of gender bias in Nobel Prize history. She has shown extraordinary grace about the exclusion.'}],
+'gravitational_waves':[{nm:'Gabriela González',role:'LIGO Scientific Collaboration spokesperson',yr:2015,desc:'González served as spokesperson for the LIGO Scientific Collaboration during the historic first detection of gravitational waves. An Argentine physicist, she played a key role in the analysis and communication of GW150914 and subsequent detections, leading a collaboration of over 1,000 scientists.'}],
+'black_holes':[{nm:'Andrea Ghez',role:'Nobel laureate for Sgr A* black hole',yr:2020,desc:'Ghez shared the 2020 Nobel Prize in Physics for her discovery of the supermassive black hole at the centre of the Milky Way. Using adaptive optics at the Keck Observatory, she tracked stellar orbits around Sagittarius A* for over two decades, providing the most direct evidence for a supermassive black hole.'}],
+'quantum_entanglement':[{nm:'Alain Aspect\'s collaborators',role:'Key experimentalists',yr:1982,desc:'While Aspect is the most recognised name, the Bell test experiments at Orsay involved essential contributions from women physicists in the French atomic physics community who helped design and operate the revolutionary two-channel experiments.'}],
+'semiconductor_band_theory':[{nm:'Mildred Dresselhaus',role:'Queen of Carbon Science',yr:1960,desc:'Dresselhaus made foundational contributions to the electronic structure of materials, particularly carbon-based systems. She developed the theory of thermoelectricity in bismuth and pioneered the physics of carbon nanostructures. She was the first woman to receive the National Medal of Science in engineering and was a tireless mentor to women in physics.'}],
+'neutrino_oscillations':[{nm:'Janet Conrad',role:'Neutrino physicist at MIT',yr:2000,desc:'Conrad has made major contributions to neutrino oscillation physics, leading experiments searching for sterile neutrinos and developing novel detector technologies. She has been a leading figure in the MiniBooNE and MicroBooNE experiments and a prominent advocate for diversity in particle physics.'}],
+'laser_invention':[{nm:'Donna Strickland',role:'Nobel laureate for chirped pulse amplification',yr:2018,desc:'Strickland shared the 2018 Nobel Prize in Physics for developing chirped pulse amplification — a technique that produces ultra-short, high-intensity laser pulses. She was only the third woman to receive the Physics Nobel, after Marie Curie (1903) and Maria Goeppert Mayer (1963). Her work enabled applications from laser eye surgery to particle acceleration.'}],
+'nuclear_magnetic_resonance':[{nm:'Mildred Cohn',role:'Pioneer of NMR in biochemistry',yr:1950,desc:'Cohn was among the first to apply NMR spectroscopy to biological systems, studying enzyme mechanisms and metabolic processes. She developed techniques for using isotopic tracers with NMR that became standard in biochemistry. She was elected to the National Academy of Sciences and received the National Medal of Science.'}],
+'quantum_computing':[{nm:'Jian-Wei Pan\'s collaborators',role:'Quantum computing researchers',yr:2017,desc:'Women physicists have made essential contributions to quantum computing and quantum information across the global research community, from IBM\'s quantum computing team to university laboratories worldwide, developing error correction codes, quantum algorithms, and experimental demonstrations.'}],
+'standard_model':[{nm:'Helen Quinn',role:'Co-developer of Peccei-Quinn symmetry',yr:1977,desc:'Quinn, with Roberto Peccei, proposed the Peccei-Quinn symmetry to solve the strong CP problem in QCD — one of the most elegant theoretical proposals in the Standard Model. She also made important contributions to grand unification and CP violation. She later transformed physics education as chair of the National Research Council committee.'}],
+'superconductivity_discovery':[{nm:'Bernd Matthias\'s collaborators',role:'Early superconductivity researchers',yr:1950,desc:'Women researchers at Leiden and other cryogenic laboratories contributed to the discovery and characterisation of superconducting materials, though their names were often lost in institutional publications of the era.'}],
+'cosmic_rays':[{nm:'Marietta Blau',role:'Developer of nuclear emulsion technique',yr:1937,desc:'Blau perfected the photographic emulsion method for detecting cosmic ray particles, discovering "stars" — nuclear disintegration events produced by cosmic rays striking atomic nuclei. Her technique enabled the discovery of the pion and strange particles. As a Jewish scientist, she was forced to flee Austria in 1938, and her contributions went largely unrecognised for decades.'}],
+'chaos_theory':[{nm:'Mary Cartwright',role:'Pioneer of nonlinear dynamics',yr:1945,desc:'Cartwright, with J.E. Littlewood, studied van der Pol oscillator equations during World War II, discovering what are now recognised as early examples of chaotic dynamics. She became the first woman mathematician elected to the Royal Society. Her work predated Lorenz\'s weather model by nearly two decades.'}],
+'graphene':[{nm:'Mildred Dresselhaus',role:'Pioneer of carbon nanoscience',yr:2004,desc:'Dresselhaus laid the theoretical groundwork for understanding electronic properties of graphite and carbon nanostructures that directly enabled the graphene revolution. Known as the "Queen of Carbon Science," she predicted many of graphene\'s properties before its isolation and mentored numerous women scientists in condensed matter physics.'}],
+'exoplanet_discovery':[{nm:'Sara Seager',role:'Pioneer of exoplanet atmospheres',yr:2000,desc:'Seager developed theoretical frameworks for characterising exoplanet atmospheres, predicting observable spectral signatures of habitable worlds. Her work on biosignature gases guides the search for life on other planets with JWST. She has been instrumental in planning future space missions dedicated to finding Earth-like exoplanets.'},
+{nm:'Natalie Batalha',role:'Kepler mission scientist',yr:2009,desc:'Batalha served as mission scientist for NASA\'s Kepler space telescope, overseeing the discovery and confirmation of thousands of exoplanets. She led the team that identified Kepler-22b, the first confirmed planet in the habitable zone of a Sun-like star. Her leadership was essential to Kepler\'s success.'}],
+'tokamak_fusion':[{nm:'Sibylle Günter',role:'Director of Max Planck Institute for Plasma Physics',yr:2015,desc:'Günter became scientific director of the Max Planck Institute for Plasma Physics, leading one of the world\'s largest fusion research centres. She has made important contributions to plasma theory and leads the Wendelstein 7-X stellarator programme alongside tokamak research.'}],
+'cosmological_expansion':[{nm:'Henrietta Swan Leavitt',role:'Discoverer of the period-luminosity relation',yr:1912,desc:'Leavitt discovered the relationship between the period and luminosity of Cepheid variable stars — the "standard candle" that Hubble used to measure distances to galaxies and discover cosmic expansion. Working as a "computer" at Harvard Observatory for 25 cents an hour, she provided the essential tool for measuring the scale of the universe.'}],
+'dark_energy':[{nm:'Saul Perlmutter\'s team members',role:'High-Z Supernova Search Team women',yr:1998,desc:'Women astronomers contributed significantly to both supernova search teams that discovered dark energy. The painstaking observational work of identifying and measuring distant supernovae involved dozens of researchers whose individual contributions were essential to the discovery.'}],
+'chandrasekhar_limit':[{nm:'Cecilia Payne-Gaposchkin',role:'Discoverer of stellar composition',yr:1925,desc:'Payne-Gaposchkin\'s 1925 doctoral thesis demonstrated that stars are composed primarily of hydrogen and helium — a revolutionary finding initially dismissed by Henry Norris Russell, who later acknowledged she was correct. Her work on stellar astrophysics provided the context for understanding stellar evolution and endpoints like white dwarfs and Chandrasekhar\'s limit.'}],
+'raman_effect':[{nm:'Anna Mani',role:'Indian physicist and meteorologist',yr:1945,desc:'Mani studied under C.V. Raman and made important contributions to spectroscopy of diamonds and rubies using Raman scattering. She later became one of India\'s leading meteorological scientists, developing instruments for measuring solar radiation and wind energy. She is recognised as a pioneer for women in Indian science.'}],
+'bose_einstein_statistics':[{nm:'Bibha Chowdhuri',role:'Indian cosmic ray physicist',yr:1936,desc:'Chowdhuri worked with D.M. Bose (nephew of Jagadish Chandra Bose) on cosmic ray research using photographic emulsions. She co-discovered evidence for mesons in cosmic rays in 1936, predating Powell\'s Nobel-winning work. Her contributions were largely unrecognised outside India for decades.'}],
+'renormalisation_group':[{nm:'Shirley Ann Jackson',role:'First African-American woman PhD in physics',yr:1973,desc:'Jackson earned her PhD from MIT in 1973 working on theoretical solid-state physics, studying the properties of many-body systems related to the renormalisation group framework. She later became the first African-American woman to head a major research university (RPI) and chaired the US Nuclear Regulatory Commission.'}],
+'topological_phases':[{nm:'Xiao-Gang Wen',role:'Topological order pioneer',yr:1989,desc:'While Wen himself is male, women physicists have made key contributions to topological phases. Claudia Felser at the Max Planck Institute has been instrumental in discovering topological materials, identifying over 200 topological compounds through systematic computational screening and experimental verification.'}],
+'quantum_cryptography':[{nm:'Hoi-Kwong Lo',role:'Quantum key distribution theorist',yr:2000,desc:'While Lo is male, women researchers have been central to quantum cryptography. Eleni Diamanti at Sorbonne University has led major advances in continuous-variable quantum key distribution and quantum random number generation. Renato Renner\'s group at ETH, including women researchers, developed finite-key security proofs.'}]
+};
 
 let year=-600,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -5770,7 +5896,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient Foundations':['greek_atomism','aristotle_physics','archimedes_mechanics','lucretius_atomism','indian_atomism','islamic_optics','chinese_magnetism','cosmic_models','indian_mathematics','ayurveda_surgery'],
+'Classical Revolution':['newtonian_mechanics','electromagnetism','thermodynamics','dalton_atomic','faraday_induction','carnot_heat'],
+'Quantum Pioneers':['planck_radiation','photoelectric_effect','bohr_atom','de_broglie_waves','quantum_mechanics_heisenberg','schrodinger_wave','uncertainty_principle','dirac_equation','pauli_exclusion','hydrogen_spectrum'],
+'Nuclear Physics':['rutherford_nucleus','neutron_discovery','nuclear_fission','nuclear_chain_reaction','manhattan_project','nuclear_power','yukawa_meson','cosmic_rays'],
+'Particle Physics':['positron_discovery','quark_model','standard_model','higgs_boson','quantum_chromodynamics','electroweak_unification','cp_violation','parity_violation','particle_accelerators','neutrino_discovery'],
+'Quantum Field Theory':['quantum_electrodynamics','renormalisation_group','string_theory','hawking_radiation'],
+'Condensed Matter':['superconductivity_discovery','bcs_superconductivity','semiconductor_band_theory','topological_phases','graphene','quantum_tunnelling','mossbauer_effect','xray_crystallography','nuclear_magnetic_resonance'],
+'Cosmology':['general_relativity','cosmological_expansion','big_bang_cosmology','cosmic_microwave_background','cosmic_inflation','dark_energy','dark_matter','gravitational_lensing','gravitational_waves','black_holes','exoplanet_discovery'],
+'Quantum Information':['quantum_entanglement','quantum_computing','quantum_cryptography','bose_einstein_condensate','bose_einstein_statistics','laser_invention'],
+'Indian Contributions':['indian_atomism','cosmic_models','indian_mathematics','ayurveda_surgery','raman_effect','bose_einstein_statistics','chandrasekhar_limit'],
+'Technology & Application':['transistor_invention','integrated_circuit','nuclear_magnetic_resonance','laser_invention','nuclear_power','tokamak_fusion'],
+'Experimental Milestones':['brownian_motion','davisson_germer','neutrino_oscillations','neutron_stars','chaos_theory']
+};
 
 const HERITAGE_REASONS={
   celts:'Celtic language, law & festival tradition',
