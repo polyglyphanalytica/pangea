@@ -708,10 +708,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'alternatives',ico:'⊕',lbl:'Alternatives',col:'#4a9fc0'},
+{id:'analogy',ico:'≈',lbl:'Analogy',col:'#7a6fb0'},
+{id:'authority',ico:'⚖',lbl:'Authority',col:'#b08040'},
+{id:'communication',ico:'📡',lbl:'Communication',col:'#6090b0'},
+{id:'correction',ico:'✓',lbl:'Correction',col:'#50a060'},
+{id:'culture',ico:'🎭',lbl:'Culture',col:'#a06080'},
+{id:'economics',ico:'💰',lbl:'Economics',col:'#80a040'},
+{id:'education',ico:'📖',lbl:'Education',col:'#5080a0'},
+{id:'ethics',ico:'⊘',lbl:'Ethics',col:'#c06040'},
+{id:'evidence',ico:'🔬',lbl:'Evidence',col:'#4080a0'},
+{id:'global',ico:'🌍',lbl:'Global Reach',col:'#408080'},
+{id:'harm',ico:'⚠',lbl:'Harm',col:'#c04040'},
+{id:'legacy',ico:'📜',lbl:'Legacy',col:'#906040'},
+{id:'method',ico:'⟳',lbl:'Method',col:'#b07030'},
+{id:'persistence',ico:'⏳',lbl:'Persistence',col:'#907050'},
+{id:'philosophy',ico:'φ',lbl:'Philosophy',col:'#8070a0'},
+{id:'politics',ico:'🏛',lbl:'Politics',col:'#708090'},
+{id:'psychology',ico:'🧠',lbl:'Psychology',col:'#a07060'},
+{id:'resistance',ico:'⛨',lbl:'Resistance',col:'#a05050'},
+{id:'technology',ico:'⚙',lbl:'Technology',col:'#607090'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-500,n:'CLASSICAL ERRORS'},
+{y:200,n:'LATE ANTIQUITY'},
+{y:500,n:'MEDIEVAL MISCONCEPTIONS'},
+{y:1000,n:'HIGH MEDIEVAL'},
+{y:1400,n:'EARLY MODERN FALLACIES'},
+{y:1600,n:'SCIENTIFIC REVOLUTION'},
+{y:1700,n:'ENLIGHTENMENT ERRORS'},
+{y:1800,n:'INDUSTRIAL AGE MYTHS'},
+{y:1860,n:'DARWIN TO PASTEUR'},
+{y:1900,n:'EARLY 20TH CENTURY'},
+{y:1930,n:'INTERWAR PSEUDOSCIENCE'},
+{y:1950,n:'POST-WAR PARADIGMS'},
+{y:1970,n:'LATE MODERN ERRORS'},
+{y:1990,n:'DIGITAL AGE MYTHS'},
+{y:2010,n:'MISINFORMATION ERA'}
+];
 
 const ITEMS=[
 {id:'geocentrism',nm:'Geocentric Universe',sb:'Athens → Rome → Europe · 350 BCE – 1687 CE',s:-350,e:1687,lon:23.73,lat:37.97,fp:{per:10,auth:10,harm:6,reach:10,res:9,dur:10},conns:['ptolemaic_epicycles','flat_earth_medieval','aristotelian_physics','celestial_spheres'],overview:'The geocentric model — placing Earth motionless at the centre of the universe with all celestial bodies orbiting around it — was the longest-enduring scientific error in Western history. Codified by Aristotle around 350 BCE and mathematised by Ptolemy in 150 CE, it reigned as orthodoxy for over two thousand years, endorsed by the Catholic Church as theologically necessary and by virtually every educated person in Europe, the Islamic world, and beyond. Copernicus proposed heliocentrism in 1543, Galileo provided telescopic evidence from 1610, and Newton\'s gravitational mechanics in 1687 finally rendered geocentrism untenable — yet the Church did not formally accept heliocentrism until 1822.',d:{
@@ -2820,10 +2857,80 @@ global:'Eugenics was a global movement. Programmes existed in the United States,
 
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'humoral_theory',to:'bloodletting',concept:'Medical Dogma Chain',year:-300,desc:'Humoral theory provided the theoretical justification for bloodletting as standard practice.'},
+{from:'bloodletting',to:'heroic_medicine',concept:'Medical Dogma Chain',year:1780,desc:'Heroic medicine amplified bloodletting into an aggressive therapeutic philosophy.'},
+{from:'heroic_medicine',to:'mercury_cure',concept:'Medical Dogma Chain',year:1800,desc:'Heroic medicine embraced mercury purging as the most dramatic available treatment.'},
+{from:'mercury_cure',to:'patent_medicine',concept:'Medical Dogma Chain',year:1850,desc:'The failure of heroic medicine drove patients to unregulated patent medicine alternatives.'},
+{from:'scientific_racism',to:'eugenics',concept:'Racial Science Pipeline',year:1883,desc:'Scientific racism provided the theoretical framework that eugenics operationalised into policy.'},
+{from:'eugenics',to:'criminal_born',concept:'Racial Science Pipeline',year:1876,desc:'Lombroso\'s born criminal theory applied eugenic thinking to criminology.'},
+{from:'criminal_born',to:'drapetomania',concept:'Racial Science Pipeline',year:1851,desc:'Both pathologised normal behaviour in marginalised populations using medical authority.'},
+{from:'scientific_racism',to:'dark_continent',concept:'Colonial Mythology',year:1830,desc:'Scientific racism provided the intellectual justification for dismissing African civilisations.'},
+{from:'dark_continent',to:'benevolent_colonialism',concept:'Colonial Mythology',year:1870,desc:'The myth of African historylessness justified the colonial civilising mission.'},
+{from:'benevolent_colonialism',to:'noble_savage',concept:'Colonial Mythology',year:1580,desc:'Both myths reduced colonised peoples to stereotypes serving European interests.'},
+{from:'miasma_theory',to:'humoral_theory',concept:'Ancient Medical Errors',year:-400,desc:'Miasma and humoral theories co-evolved as complementary frameworks for disease.'},
+{from:'humoral_theory',to:'telegony',concept:'Ancient Medical Errors',year:-350,desc:'Aristotelian biology generated both humoral theory and telegony from the same speculative framework.'},
+{from:'phlogiston',to:'luminiferous_ether',concept:'Invisible Substance Fallacy',year:1678,desc:'Both theories posited invisible substances to explain observed phenomena.'},
+{from:'luminiferous_ether',to:'spontaneous_generation',concept:'Invisible Substance Fallacy',year:1700,desc:'All three required invisible mechanisms that seemed necessary but did not exist.'},
+{from:'sugar_fat_swap',to:'food_pyramid_myth',concept:'Nutrition Corruption Chain',year:1977,desc:'Sugar industry manipulation directly shaped the dietary guidelines that produced the food pyramid.'},
+{from:'food_pyramid_myth',to:'dietary_cholesterol',concept:'Nutrition Corruption Chain',year:1968,desc:'Both the food pyramid and cholesterol fear arose from the same oversimplified nutrition science.'},
+{from:'dietary_cholesterol',to:'spinach_iron',concept:'Nutrition Corruption Chain',year:1870,desc:'All three show how nutritional misinformation persists through institutional repetition.'},
+{from:'trickle_down',to:'efficient_market',concept:'Economic Orthodoxy Chain',year:1965,desc:'Efficient market theory provided academic cover for trickle-down policy prescriptions.'},
+{from:'efficient_market',to:'shock_therapy_economics',concept:'Economic Orthodoxy Chain',year:1975,desc:'Market fundamentalism drove the shock therapy prescription for transitioning economies.'},
+{from:'shock_therapy_economics',to:'gold_standard_myth',concept:'Economic Orthodoxy Chain',year:1980,desc:'Both reflect nostalgia for simple economic rules in a complex world.'},
+{from:'radium_health',to:'asbestos_safety',concept:'Industrial Poison Denial',year:1930,desc:'Both involved corporate knowledge of harm concealed from workers and consumers.'},
+{from:'asbestos_safety',to:'opioid_safety',concept:'Industrial Poison Denial',year:1996,desc:'Purdue Pharma\'s concealment of OxyContin risks followed the asbestos industry playbook.'},
+{from:'opioid_safety',to:'infant_formula_crisis',concept:'Industrial Poison Denial',year:1960,desc:'All three show corporations prioritising profit over consumer safety.'},
+{from:'recovered_memory',to:'satanic_panic',concept:'Moral Panic Cascade',year:1980,desc:'Recovered memory therapy provided the mechanism for satanic ritual abuse allegations.'},
+{from:'satanic_panic',to:'multiple_personality',concept:'Moral Panic Cascade',year:1980,desc:'The same therapists promoted both satanic memories and multiple personality diagnoses.'},
+{from:'vaccine_autism',to:'flat_earth',concept:'Digital Conspiracy Pipeline',year:2010,desc:'Anti-vaccine content and flat Earth content share algorithmic amplification pathways.'},
+{from:'flat_earth',to:'hollow_earth',concept:'Digital Conspiracy Pipeline',year:2015,desc:'Flat Earth communities overlap with and recruit from broader Earth conspiracy communities.'},
+{from:'lie_detector',to:'conversion_therapy',concept:'Pseudoscience Institutions',year:1950,desc:'Both represent pseudoscientific practices sustained by institutional authority despite scientific rejection.'},
+{from:'conversion_therapy',to:'soviet_psychiatry',concept:'Pseudoscience Institutions',year:1960,desc:'Both weaponised psychiatric authority against individuals for political or ideological purposes.'},
+{from:'recapitulation_theory',to:'junk_dna',concept:'Biology Misnaming Chain',year:1972,desc:'Both dismissed biological complexity by labelling the unknown as vestigial or functionless.'},
+{from:'scientific_forestry',to:'rain_follows_plow',concept:'Nature Control Hubris',year:1870,desc:'Both assumed that human intervention could reshape natural systems to serve human purposes.'},
+{from:'rain_follows_plow',to:'population_bomb',concept:'Nature Control Hubris',year:1968,desc:'Both reflect oversimplified models of human-environment interaction.'},
+{from:'population_bomb',to:'limits_to_growth',concept:'Nature Control Hubris',year:1972,desc:'Both predicted catastrophe from extrapolating current trends without accounting for adaptation.'},
+{from:'learning_styles',to:'hemispheric_dominance',concept:'Neuromyth Chain',year:1970,desc:'Both reduce complex brain function to simple typologies for commercial and educational use.'},
+{from:'hemispheric_dominance',to:'fan_death',concept:'Neuromyth Chain',year:1960,desc:'Both persist because institutional authority reinforces culturally embedded false beliefs.'},
+{from:'prester_john',to:'el_dorado',concept:'Mythical Geography',year:1530,desc:'Both drove costly expeditions in search of legendary wealthy kingdoms.'},
+{from:'el_dorado',to:'land_bridges',concept:'Mythical Geography',year:1860,desc:'All three invented geography to explain what was not yet understood.'},
+{from:'velikovsky',to:'catastrophism',concept:'Catastrophist Tradition',year:1950,desc:'Velikovsky revived catastrophist thinking that had been discredited by uniformitarian geology.'},
+{from:'catastrophism',to:'hollow_earth',concept:'Catastrophist Tradition',year:1692,desc:'Both proposed dramatic alternative models of Earth that contradicted mainstream science.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'miasma_theory':[{nm:'Florence Nightingale',role:'Nursing pioneer who used miasma theory',yr:1854,desc:'Though a miasma believer, Nightingale\'s insistence on hygiene and ventilation in hospitals saved thousands of lives during the Crimean War. Her statistical work on mortality rates pioneered evidence-based public health, even when her theoretical framework was wrong.'}],
+'bloodletting':[{nm:'Hildegard of Bingen',role:'Abbess, physician, and medical writer',yr:1150,desc:'Hildegard wrote extensively on bloodletting in her medical works Causae et Curae, adapting humoral theory to her own observations. She was one of the few medieval women whose medical writing survived, and her work reveals how women practitioners navigated the male-dominated medical establishment.'}],
+'phlogiston':[{nm:'Marie-Anne Paulze Lavoisier',role:'Chemist and translator who helped overthrow phlogiston',yr:1789,desc:'Marie-Anne translated Richard Kirwan\'s defense of phlogiston theory from English, adding critical footnotes that undermined its arguments. Her laboratory illustrations and translations were essential to her husband Antoine\'s work that replaced phlogiston with oxygen chemistry.'}],
+'spontaneous_generation':[{nm:'Fanny Hesse',role:'Microbiologist who enabled germ theory experiments',yr:1882,desc:'Fanny Hesse suggested using agar (from her cooking knowledge) as a solidifying agent for bacterial culture media, replacing gelatin which melted at incubation temperatures. This technical innovation was crucial for the experiments that definitively refuted spontaneous generation and established germ theory.'}],
+'luminiferous_ether':[{nm:'Hertha Ayrton',role:'Physicist and electrical engineer',yr:1902,desc:'Hertha Ayrton\'s experimental work on electric arcs and sand ripple formation demonstrated rigorous experimental physics at a time when ether theory was being challenged. She was the first woman to present a paper to the Royal Society, though institutional barriers prevented her election as a Fellow.'}],
+'scientific_racism':[{nm:'Zora Neale Hurston',role:'Anthropologist and writer who challenged racial science',yr:1935,desc:'Trained by Franz Boas, Hurston\'s ethnographic work documented the richness and complexity of African American culture, directly contradicting scientific racism\'s claims of cultural and intellectual inferiority. Her anthropological research was as rigorous as her fiction was celebrated.'},{nm:'Caroline Bond Day',role:'Physical anthropologist who challenged racial categories',yr:1932,desc:'Day\'s Harvard doctoral dissertation studied mixed-race families, demonstrating the arbitrariness of racial categories that scientific racism treated as natural. Her work showed that the racial boundaries that eugenicists and scientific racists relied upon did not correspond to biological reality.'}],
+'eugenics':[{nm:'Jessie Daniel Ames',role:'Anti-lynching activist who challenged eugenic racism',yr:1930,desc:'Ames founded the Association of Southern Women for the Prevention of Lynching, directly challenging the eugenic narrative that racial violence was necessary for racial purity. Her work demonstrated that white Southern women could reject the mythology that lynching was done in their name.'},{nm:'Pearl Buck',role:'Nobel laureate who fought eugenic sterilisation',yr:1950,desc:'Buck, mother of a disabled daughter, became a vocal opponent of eugenic sterilisation programmes. Her public advocacy helped shift American opinion against forced sterilisation, using her Nobel Prize prestige to challenge the scientific establishment\'s eugenic consensus.'}],
+'phrenology':[{nm:'Clemence Royer',role:'Translator and critic of biological determinism',yr:1862,desc:'Royer translated Darwin\'s Origin of Species into French and wrote extensively on evolutionary theory. While her work had its own controversies, she challenged the easy application of biological determinism to social questions, including the phrenological claims about women\'s intellectual inferiority.'}],
+'recapitulation_theory':[{nm:'Florence Sabin',role:'Anatomist who advanced embryology beyond recapitulation',yr:1917,desc:'Sabin\'s meticulous research on the lymphatic system and blood cell development helped establish modern embryology, replacing the speculative recapitulation framework with evidence-based developmental biology. She was the first woman elected to the National Academy of Sciences.'}],
+'radium_health':[{nm:'Grace Fryer',role:'Radium Girl who fought for workers\' rights',yr:1928,desc:'Fryer was one of the five Radium Girls who sued US Radium Corporation, establishing the right of workers to sue employers for occupational illness. Her case, fought while dying of radiation poisoning, established precedents that protect workers to this day.'},{nm:'Marie Curie',role:'Discoverer of radium who died from radiation exposure',yr:1898,desc:'Curie\'s discovery of radium enabled both its legitimate scientific applications and its harmful commercial exploitation. Her own death from aplastic anaemia caused by radiation exposure demonstrated the dangers that the radium health product industry ignored.'}],
+'infant_formula_crisis':[{nm:'Cicely Williams',role:'Paediatrician who first identified the formula crisis',yr:1939,desc:'Williams gave the landmark speech "Milk and Murder" to the Singapore Rotary Club, accusing the infant formula industry of causing infant deaths through aggressive marketing. She was one of the first medical professionals to publicly challenge the formula industry\'s practices.'}],
+'tonsillectomy_mania':[{nm:'Josephine Baker',role:'Public health pioneer',yr:1908,desc:'Baker transformed child health in New York City through evidence-based public health interventions. Her work demonstrated that improving sanitation and nutrition was more effective than surgical intervention, implicitly challenging the routine tonsillectomy paradigm.'}],
+'food_pyramid_myth':[{nm:'Marion Nestle',role:'Nutritionist who exposed food industry influence',yr:2002,desc:'Nestle\'s book Food Politics documented how the food industry shaped US dietary guidelines, including the food pyramid. Her work revealed the political and economic forces behind nutritional recommendations that were presented as purely scientific.'}],
+'sugar_fat_swap':[{nm:'Cristin Kearns',role:'Researcher who uncovered sugar industry documents',yr:2016,desc:'Kearns discovered the internal sugar industry documents proving that the Sugar Research Foundation had funded research to shift blame from sugar to fat. Her archival detective work, published in JAMA Internal Medicine, exposed one of the most consequential cases of scientific corruption in nutrition history.'}],
+'opioid_safety':[{nm:'Nan Goldin',role:'Artist and activist against Sackler family',yr:2018,desc:'Goldin, who survived OxyContin addiction, led the campaign to remove the Sackler name from museums worldwide. Her activism forced cultural institutions to confront their complicity in accepting donations from the family whose company had fuelled the opioid epidemic.'}],
+'conversion_therapy':[{nm:'Evelyn Hooker',role:'Psychologist who proved homosexuality is not pathological',yr:1957,desc:'Hooker\'s groundbreaking research demonstrated that clinical experts could not distinguish the psychological profiles of homosexual and heterosexual men, undermining the foundation of conversion therapy. Her work was instrumental in the 1973 removal of homosexuality from the DSM.'}],
+'recovered_memory':[{nm:'Elizabeth Loftus',role:'Memory researcher who debunked recovered memory therapy',yr:1994,desc:'Loftus\'s experimental research on the malleability of memory demonstrated that false memories could be implanted through suggestion, providing the scientific basis for challenging recovered memory therapy. Her work helped free people wrongfully convicted on the basis of implanted memories.'}],
+'vaccine_autism':[{nm:'Fiona Godlee',role:'BMJ editor who exposed Wakefield fraud',yr:2011,desc:'Godlee published the investigative series by Brian Deer that proved Andrew Wakefield\'s vaccine-autism study was fraudulent. Her editorial decision to devote the BMJ\'s resources to exposing the fraud was a landmark in scientific integrity journalism.'}],
+'dark_continent':[{nm:'Flora Shaw',role:'Journalist who named Nigeria and challenged Africa narratives',yr:1897,desc:'Shaw, as colonial correspondent for The Times, was complicit in some colonial narratives but also documented African societies with more nuance than many contemporaries. Her work inadvertently preserved records of African political complexity that the Dark Continent myth denied.'},{nm:'Sylvia Wynter',role:'Philosopher who deconstructed colonial knowledge',yr:1984,desc:'Wynter\'s philosophical work systematically deconstructed the epistemological frameworks that produced the Dark Continent myth, showing how Western knowledge systems defined humanity in ways that excluded non-European peoples. Her work is foundational to decolonial thought.'}],
+'benevolent_colonialism':[{nm:'Funmilayo Ransome-Kuti',role:'Nigerian independence activist',yr:1947,desc:'Ransome-Kuti led mass women\'s movements against colonial taxation and governance in Nigeria, directly challenging the benevolent colonialism narrative by demonstrating that colonised peoples were fighting against, not grateful for, colonial rule.'}],
+'population_bomb':[{nm:'Betsy Hartmann',role:'Scholar who challenged population control narrative',yr:1987,desc:'Hartmann\'s Reproductive Rights and Wrongs exposed how population control programmes, justified by Malthusian fears, often targeted women of colour and the Global South with coercive contraception. Her work reframed population discourse from control to reproductive rights.'}],
+'soviet_psychiatry':[{nm:'Natalya Gorbanevskaya',role:'Poet and dissident diagnosed with sluggish schizophrenia',yr:1969,desc:'Gorbanevskaya was forcibly committed to a psychiatric hospital after protesting the Soviet invasion of Czechoslovakia. Her case became internationally known and helped expose the Soviet abuse of psychiatry as a tool of political repression.'}],
+'lie_detector':[{nm:'Aldrich Ames (exposed by)',role:'CIA officer whose case exposed polygraph failure',yr:1994,desc:'While Ames is male, the CIA analysts who identified his espionage — including Jeanne Vertefeuille and Sandy Grimes — did so despite Ames having passed multiple polygraph examinations. Their investigative work demonstrated that human intelligence analysis was superior to the polygraph that their agency relied upon.'}],
+'learning_styles':[{nm:'Beth Rogowsky',role:'Researcher who tested and refuted learning styles',yr:2015,desc:'Rogowsky conducted rigorous experimental studies demonstrating that matching teaching methods to students\' self-reported learning styles produced no improvement in learning outcomes. Her work provided definitive experimental evidence against a theory that had shaped education policy worldwide.'}],
+'junk_dna':[{nm:'Mary-Claire King',role:'Geneticist who mapped non-coding regulatory regions',yr:1975,desc:'King\'s work showing that humans and chimpanzees share 99% of coding DNA implied that the differences must lie in non-coding regulatory regions — challenging the "junk" designation decades before ENCODE. Her later work on BRCA1 further demonstrated the importance of understanding the full genome.'}],
+'scientific_forestry':[{nm:'Vandana Shiva',role:'Environmental activist who challenged monoculture forestry',yr:1988,desc:'Shiva documented how scientific forestry destroyed diverse Indian forests and the communities that depended on them. Her work connected the monoculture forestry model to broader patterns of colonial and corporate exploitation of natural resources.'}],
+'dietary_cholesterol':[{nm:'Ancel Keys\'s wife Margaret',role:'Nutritional epidemiologist',yr:1975,desc:'Margaret Keys co-authored much of the research attributed solely to her husband Ancel, including fieldwork for the Seven Countries Study. Her contributions to nutritional epidemiology were systematically underattributed, reflecting the broader pattern of women\'s scientific work being credited to male collaborators.'}],
+'patent_medicine':[{nm:'Alice Lakey',role:'Consumer protection activist',yr:1906,desc:'Lakey was a key advocate for the Pure Food and Drug Act of 1906, organising women\'s groups to pressure Congress for regulation of patent medicines. Her activism directly contributed to ending the patent medicine era that had poisoned consumers for over a century.'}],
+'heroic_medicine':[{nm:'Harriot Kezia Hunt',role:'Pioneer woman physician who rejected heroic methods',yr:1835,desc:'Hunt practised medicine in Boston using gentle, supportive methods rather than heroic treatments, achieving better outcomes than her aggressive male colleagues. She was twice rejected from Harvard Medical School because of her sex, but her success demonstrated that less intervention could mean better medicine.'}]
+};
 
 let year=-500,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4315,7 +4422,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Medical Errors':['humoral_theory','miasma_theory','bloodletting','heroic_medicine','mercury_cure','tonsillectomy_mania','hormone_replacement','focal_infection','radium_health','patent_medicine'],
+'Racial & Colonial Myths':['scientific_racism','eugenics','drapetomania','dark_continent','benevolent_colonialism','noble_savage','criminal_born'],
+'Nutrition & Diet Myths':['food_pyramid_myth','sugar_fat_swap','dietary_cholesterol','spinach_iron'],
+'Psychology & Mind':['recovered_memory','satanic_panic','multiple_personality','conversion_therapy','lie_detector','learning_styles','hemispheric_dominance'],
+'Physics & Chemistry':['phlogiston','luminiferous_ether','perpetual_motion','spontaneous_generation'],
+'Economic Fallacies':['trickle_down','efficient_market','gold_standard_myth','shock_therapy_economics'],
+'Corporate Deception':['asbestos_safety','opioid_safety','infant_formula_crisis','sugar_fat_swap'],
+'Geographic & Earth Myths':['flat_earth','hollow_earth','land_bridges','el_dorado','prester_john','rain_follows_plow'],
+'Biology & Evolution':['recapitulation_theory','telegony','junk_dna','eugenics','scientific_racism'],
+'Political & Social':['soviet_psychiatry','benevolent_colonialism','warfare_mythology','population_bomb','limits_to_growth'],
+'Digital Age Errors':['vaccine_autism','flat_earth','fan_death','learning_styles'],
+'Pseudoscience & Fringe':['velikovsky','catastrophism','hollow_earth','perpetual_motion','phrenology']
+};
 
 const HERITAGE_REASONS={};
 
