@@ -708,10 +708,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'alternatives',ico:'⟐',lbl:'Alternative Narratives',col:'#7a9fc0'},
+{id:'analogy',ico:'≈',lbl:'Analogies & Parallels',col:'#c07a7a'},
+{id:'authority',ico:'⚖',lbl:'Authority & Power',col:'#c0a07a'},
+{id:'communication',ico:'📡',lbl:'Communication Impact',col:'#7ac0a0'},
+{id:'correction',ico:'↩',lbl:'Correction & Reversal',col:'#a0c07a'},
+{id:'culture',ico:'🎭',lbl:'Cultural Impact',col:'#c07aa0'},
+{id:'economics',ico:'💰',lbl:'Economic Dimensions',col:'#a07ac0'},
+{id:'education',ico:'📚',lbl:'Education Effects',col:'#7a7ac0'},
+{id:'ethics',ico:'⊕',lbl:'Ethical Debates',col:'#c0c07a'},
+{id:'evidence',ico:'📜',lbl:'Evidence & Records',col:'#7ac0c0'},
+{id:'global',ico:'🌐',lbl:'Global Reach',col:'#c09a7a'},
+{id:'harm',ico:'⚡',lbl:'Harm & Destruction',col:'#c07a60'},
+{id:'legacy',ico:'⏳',lbl:'Legacy & Aftermath',col:'#60c07a'},
+{id:'method',ico:'🔧',lbl:'Methods of Suppression',col:'#c0607a'},
+{id:'persistence',ico:'♻',lbl:'Persistence Patterns',col:'#7a60c0'},
+{id:'philosophy',ico:'💭',lbl:'Philosophical Dimensions',col:'#607ac0'},
+{id:'politics',ico:'🏛',lbl:'Political Dynamics',col:'#c0a060'},
+{id:'psychology',ico:'🧠',lbl:'Psychology of Control',col:'#60c0a0'},
+{id:'resistance',ico:'✊',lbl:'Resistance & Defiance',col:'#a060c0'},
+{id:'technology',ico:'⚙',lbl:'Technology & Censorship',col:'#60a0c0'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-500,n:'CLASSICAL ANTIQUITY'},
+{y:200,n:'LATE ANTIQUITY'},
+{y:500,n:'EARLY MEDIEVAL'},
+{y:800,n:'HIGH MEDIEVAL'},
+{y:1100,n:'LATE MEDIEVAL'},
+{y:1400,n:'RENAISSANCE'},
+{y:1500,n:'REFORMATION'},
+{y:1600,n:'EARLY MODERN'},
+{y:1700,n:'ENLIGHTENMENT'},
+{y:1800,n:'INDUSTRIAL AGE'},
+{y:1900,n:'EARLY 20TH CENTURY'},
+{y:1945,n:'COLD WAR'},
+{y:1970,n:'LATE COLD WAR'},
+{y:1990,n:'POST-COLD WAR'},
+{y:2010,n:'DIGITAL AGE'}
+];
 
 const ITEMS=[
 {id:'socrates_trial',nm:'Trial of Socrates',sb:'Athens · 399 BCE',s:-399,e:-399,lon:23.73,lat:37.97,fp:{sev:9,reach:10,dur:10,auth:8,res:7,leg:10},conns:['burning_alexandria','plato_ban','aristotle_exile'],overview:'The trial and execution of Socrates in 399 BCE is the founding event in the history of intellectual censorship. Charged with impiety and corrupting the youth of Athens, Socrates was sentenced to death by drinking hemlock. His refusal to flee and his calm acceptance of the verdict transformed him into the archetype of the philosopher martyred for free thought.',d:{method:'The Athenian court used a public trial with a jury of 501 citizens, employing the legal mechanisms of graphe asebeias (impiety charge) and corruption of youth. The prosecution relied on guilt by association with oligarchic figures like Critias and Alcibiades, turning political grudges into religious accusations.',evidence:'The primary evidence against Socrates was his own public questioning of Athenian democratic assumptions. His daimonion (inner divine voice) was recast as introducing new gods. No written works existed to ban; the prosecution targeted his speech and method of inquiry itself.',authority:'The authority behind the prosecution was the restored Athenian democracy, still traumatised by the oligarchic coup of the Thirty Tyrants. Anytus, a democratic politician, and Meletus, a poet, brought the charges. The democratic majority voted for death by a margin of approximately 60 votes.',psychology:'The trial reveals the psychology of a wounded democracy lashing out at perceived internal threats. Athens had just survived civil war and plague. Socrates, with his aristocratic students and his questioning of democratic competence, became the scapegoat for collective anxiety about the fragility of self-governance.',harm:'The execution silenced the most original philosophical voice in Western history and created a chilling effect on Athenian intellectual life. Several of Socrates\'s students fled Athens. The harm extended across millennia as the trial established the template for prosecuting thinkers whose ideas disturb the powerful.',correction:'Plato\'s dialogues, written after the execution, constituted the most effective correction in intellectual history. By immortalising Socrates\'s method and arguments, Plato ensured that the suppression achieved the opposite of its intent. Athens itself came to regret the verdict within a generation.',resistance:'Socrates himself was the primary agent of resistance, refusing to propose exile as an alternative sentence and refusing to escape when given the opportunity. His insistence on facing death rather than abandoning his principles established the model of philosophical civil disobedience.',persistence:'The ideas Athens tried to suppress persisted through Plato\'s Academy, Aristotle\'s Lyceum, and the entire Western philosophical tradition. The Socratic method of dialectical questioning became the foundational technique of philosophy, law, science, and education across the world.',legacy:'The trial created the archetype of the intellectual martyr that echoes through Galileo, Bruno, and every subsequent case of a thinker punished for questioning authority. The phrase "I know that I know nothing" became the foundation stone of epistemological humility and scientific inquiry.',technology:'The trial was conducted entirely through oral testimony and public speech, as Athens had no formal prosecutorial apparatus. The technology of writing was crucial to its legacy: without Plato\'s written dialogues, Socrates would have been remembered only as a local eccentric rather than the founder of Western philosophy.',culture:'The trial reflected the cultural tension between Athenian democratic egalitarianism and the aristocratic intellectualism of Socrates\'s circle. It also exposed the limits of democratic tolerance when a society perceives its foundational values as under threat from internal critics.',politics:'The political context was the restoration of Athenian democracy after the brutal rule of the Thirty Tyrants, several of whom had been Socrates\'s students. The trial was a political purge disguised as a religious prosecution, targeting the intellectual mentor of Athens\'s recent oppressors.',economics:'The trial had minimal direct economic dimension, but Socrates\'s critique of Athenian commercial culture and his own deliberate poverty were implicitly threatening to a mercantile democracy that prized wealth as a marker of civic virtue and divine favour.',education:'The trial was fundamentally about education: the charge of corrupting youth was a direct attack on Socrates\'s role as a teacher. His method of questioning assumptions rather than transmitting received knowledge was perceived as undermining the traditional educational framework of Athenian society.',communication:'Socrates communicated exclusively through face-to-face dialogue, never writing anything down. This made suppression seemingly simple: silence the man, silence the ideas. The failure of this strategy demonstrated that ideas transmitted through human relationships resist censorship more effectively than written texts.',philosophy:'The trial posed the central question of political philosophy: can a just society kill a just man? Socrates\'s argument that the examined life is the only life worth living directly challenged the authority of the state to define what constitutes acceptable thought.',alternatives:'Had Athens exiled rather than executed Socrates, Western philosophy might have developed along entirely different lines. An exiled Socrates might have founded his own school abroad, potentially creating a rival philosophical tradition outside Athenian control.',analogy:'The trial parallels every subsequent case of a state prosecuting an intellectual for the crime of asking uncomfortable questions, from Galileo before the Inquisition to Ai Weiwei before the Chinese state. The pattern is identical: charge the thinker with a proxy crime to suppress the real offence of independent thought.',ethics:'The ethical dimension of the trial centres on the conflict between individual conscience and democratic authority. Socrates argued that obedience to his inner daimonion and to truth took precedence over obedience to the state, establishing the principle of conscientious objection.',global:'The trial of Socrates resonated across the ancient world and continues to resonate globally. Confucian, Islamic, and Enlightenment thinkers all engaged with the question it raised: what does a society owe to its most challenging critics?'}},
@@ -819,10 +856,60 @@ const ITEMS=[
 
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'qin_book_burning',to:'chinese_literary_inquisition',concept:'State Book Burning',year:-213,desc:'Qin dynasty precedent of destroying texts to control thought inspired later Chinese literary inquisitions.'},
+{from:'chinese_literary_inquisition',to:'mao_cultural_revolution',concept:'State Book Burning',year:1662,desc:'The Qing literary inquisition model of prosecuting authors for textual crimes was replicated at massive scale during the Cultural Revolution.'},
+{from:'mao_cultural_revolution',to:'internet_censorship',concept:'State Book Burning',year:1966,desc:'Chinese state censorship evolved from physical book burning to digital content control through the Great Firewall.'},
+{from:'burning_alexandria',to:'nalanda_destruction',concept:'Library Destruction',year:-48,desc:'The pattern of destroying knowledge centers during conquest repeated from Alexandria to Nalanda.'},
+{from:'nalanda_destruction',to:'mayan_codex_destruction',concept:'Library Destruction',year:1193,desc:'Colonial and conquest-driven library destruction continued from India to the Americas.'},
+{from:'mayan_codex_destruction',to:'mesoamerican_codex_burning',concept:'Library Destruction',year:1562,desc:'The systematic destruction of indigenous American knowledge systems expanded across Mesoamerica.'},
+{from:'galileo_trial',to:'heliocentrism_suppression',concept:'Science vs Authority',year:1633,desc:'The Galileo trial became the defining case of religious authority suppressing scientific truth.'},
+{from:'heliocentrism_suppression',to:'darwin_suppression',concept:'Science vs Authority',year:1758,desc:'The pattern of religious opposition to scientific discoveries continued from astronomy to biology.'},
+{from:'darwin_suppression',to:'scopes_trial',concept:'Science vs Authority',year:1859,desc:'Religious suppression of evolution culminated in the legal prosecution of teaching scientific theory.'},
+{from:'scopes_trial',to:'lysenko_genetics',concept:'Science vs Authority',year:1925,desc:'Ideological suppression of science took political form as Soviet state doctrine replaced genetics.'},
+{from:'index_librorum',to:'comstock_laws',concept:'Moral Censorship',year:1559,desc:'The Catholic Index model of listing forbidden works influenced secular obscenity laws in America.'},
+{from:'comstock_laws',to:'hays_code',concept:'Moral Censorship',year:1873,desc:'Comstock-era moral censorship expanded from literature into film through the Hollywood Production Code.'},
+{from:'hays_code',to:'banned_in_boston',concept:'Moral Censorship',year:1930,desc:'American moral censorship created a patchwork of local bans that made certain cities arbiters of national culture.'},
+{from:'soviet_censorship',to:'soviet_samizdat',concept:'Underground Publishing',year:1922,desc:'Soviet state censorship created the conditions for the samizdat underground publishing movement.'},
+{from:'soviet_samizdat',to:'samizdat_czechoslovakia',concept:'Underground Publishing',year:1956,desc:'The Soviet samizdat model spread to satellite states as dissidents built parallel information networks.'},
+{from:'samizdat_czechoslovakia',to:'polish_solidarity_censorship',concept:'Underground Publishing',year:1968,desc:'Czechoslovak underground publishing techniques were adopted by the Polish Solidarity movement.'},
+{from:'spanish_inquisition',to:'witch_trial_suppression',concept:'Heresy Prosecution',year:1478,desc:'Inquisitorial methods of prosecuting religious deviance spread from Spain across Europe as witch trials.'},
+{from:'witch_trial_suppression',to:'cathar_crusade',concept:'Heresy Prosecution',year:1450,desc:'The persecution of alternative beliefs connected medieval heresy trials to the broader witch trial phenomenon.'},
+{from:'nazi_book_burning',to:'degenerate_art',concept:'Totalitarian Culture War',year:1933,desc:'Nazi book burnings and art confiscation were part of a unified campaign to purge culture of undesirable influences.'},
+{from:'degenerate_art',to:'khmer_rouge',concept:'Totalitarian Culture War',year:1937,desc:'The totalitarian impulse to destroy existing culture reached its extreme in the Khmer Rouge Year Zero policy.'},
+{from:'tiananmen_censorship',to:'internet_censorship',concept:'Digital Authoritarianism',year:1989,desc:'The suppression of Tiananmen memory became a founding mission of Chinese internet censorship.'},
+{from:'internet_censorship',to:'great_firewall_china',concept:'Digital Authoritarianism',year:1998,desc:'Chinese internet censorship evolved into the Great Firewall, the most sophisticated digital control system ever built.'},
+{from:'great_firewall_china',to:'russian_internet_censorship',concept:'Digital Authoritarianism',year:2003,desc:'Russia adopted elements of the Chinese internet control model for its own sovereign internet project.'},
+{from:'russian_internet_censorship',to:'myanmar_internet_shutdown',concept:'Digital Authoritarianism',year:2012,desc:'Digital authoritarianism techniques spread globally as regimes learned to weaponize internet shutdowns.'},
+{from:'apartheid_censorship',to:'argentinian_dirty_war',concept:'Authoritarian Media Control',year:1950,desc:'Authoritarian media control techniques were shared across Cold War-era military regimes in the Global South.'},
+{from:'argentinian_dirty_war',to:'brazilian_military_censorship',concept:'Authoritarian Media Control',year:1976,desc:'Latin American military dictatorships shared censorship and disappearance techniques across borders.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'sappho_suppression':[{nm:'Sappho',role:'Poet of Lesbos',yr:-600,desc:'Sappho was one of the greatest lyric poets of antiquity whose work was systematically destroyed by Christian authorities. Of her nine volumes of poetry, only one complete poem and fragments survive, representing one of the most devastating losses in literary history.'}],
+'hypatia_murder':[{nm:'Hypatia of Alexandria',role:'Philosopher and Mathematician',yr:415,desc:'Hypatia was the leading mathematician and philosopher of late antiquity, murdered by a Christian mob in 415 CE. Her death symbolizes the suppression of pagan learning and the violent silencing of women intellectuals in the ancient world.'}],
+'witch_trial_suppression':[{nm:'Agnes Waterhouse',role:'First Woman Executed for Witchcraft in England',yr:1566,desc:'Agnes Waterhouse was the first woman executed for witchcraft under English law in 1566. Her trial established legal precedents that would be used to persecute thousands of women accused of witchcraft across Europe.'},{nm:'Tituba',role:'Key Figure in Salem Trials',yr:1692,desc:'Tituba, an enslaved woman, was the first person accused in the Salem witch trials. Her forced confession under duress set off the chain of accusations that consumed the community and became a defining example of mass persecution.'}],
+'galileo_trial':[{nm:'Maria Celeste',role:'Galileo Daughter and Advocate',yr:1633,desc:'Sister Maria Celeste, born Virginia Galilei, maintained correspondence with her father during his persecution and trial. Her letters reveal the personal toll of intellectual suppression on families and the quiet resistance of women within religious institutions.'}],
+'french_revolution_censorship':[{nm:'Olympe de Gouges',role:'Author and Feminist Revolutionary',yr:1791,desc:'Olympe de Gouges wrote the Declaration of the Rights of Woman and was executed during the Terror in 1793. Her suppression embodied the revolutionary paradox of demanding universal rights while silencing women who took those ideals seriously.'}],
+'comstock_laws':[{nm:'Margaret Sanger',role:'Birth Control Advocate',yr:1914,desc:'Margaret Sanger was arrested and prosecuted under Comstock Laws for distributing information about birth control. Her persecution galvanized the reproductive rights movement and exposed how obscenity laws were weaponized against women health information.'},{nm:'Ida Craddock',role:'Sex Education Author',yr:1902,desc:'Ida Craddock was prosecuted repeatedly under Comstock Laws for publishing sex education materials and died by suicide on the eve of her imprisonment. Anthony Comstock personally pursued her destruction as a test case for his censorship crusade.'}],
+'soviet_censorship':[{nm:'Anna Akhmatova',role:'Poet Under Soviet Suppression',yr:1946,desc:'Anna Akhmatova was denounced by the Soviet state, her work banned for decades, and her son imprisoned to pressure her silence. She preserved her masterpiece Requiem by having trusted friends memorize it, an extraordinary act of literary resistance against totalitarian erasure.'}],
+'nazi_book_burning':[{nm:'Hannah Arendt',role:'Political Philosopher',yr:1933,desc:'Hannah Arendt fled Nazi Germany after being briefly imprisoned for researching antisemitic propaganda. Her subsequent work on totalitarianism and the banality of evil became the definitive philosophical analysis of how censorship enables state atrocity.'}],
+'apartheid_censorship':[{nm:'Nadine Gordimer',role:'Writer Against Apartheid',yr:1958,desc:'Nadine Gordimer had multiple novels banned under apartheid censorship laws while documenting the moral corruption of racial oppression. She won the Nobel Prize for Literature in 1991, vindicating decades of resistance to state censorship of anti-apartheid writing.'}],
+'lgbtq_literature_suppression':[{nm:'Radclyffe Hall',role:'Author of The Well of Loneliness',yr:1928,desc:'Radclyffe Hall wrote The Well of Loneliness, which was prosecuted for obscenity in Britain simply for depicting lesbian relationships sympathetically. The trial and ban became a landmark case in LGBTQ censorship history and literary freedom.'},{nm:'Audre Lorde',role:'Writer and Activist',yr:1978,desc:'Audre Lorde challenged the suppression of Black lesbian voices in literature and academia throughout her career. Her work was frequently banned or excluded from curricula, and she became a powerful advocate for the intersection of racial, gender, and sexual justice in publishing.'}],
+'alan_turing_persecution':[{nm:'Joan Clarke',role:'Codebreaker at Bletchley Park',yr:1940,desc:'Joan Clarke was one of the few women working as a full codebreaker at Bletchley Park, where her contributions were suppressed by wartime secrecy and postwar gender discrimination. Her work remained classified for decades, denying her recognition she deserved.'}],
+'indian_emergency_censorship':[{nm:'Arundhati Roy',role:'Writer and Activist',yr:1997,desc:'While not directly part of the Emergency, Arundhati Roy became India most prominent voice against censorship and state suppression. She has faced sedition charges and contempt of court proceedings for her writing, embodying ongoing tensions between free expression and state power in India.'}],
+'solzhenitsyn_suppression':[{nm:'Nadezhda Mandelstam',role:'Memoirist and Preserver of Literature',yr:1970,desc:'Nadezhda Mandelstam preserved her husband Osip poems by memorizing them after his death in a Soviet labor camp. Her memoirs Hope Against Hope and Hope Abandoned became foundational texts documenting Soviet literary persecution.'}],
+'ulysses_ban':[{nm:'Sylvia Beach',role:'Publisher of Ulysses',yr:1922,desc:'Sylvia Beach defied American and British censorship by publishing James Joyce Ulysses through her Paris bookshop Shakespeare and Company. Her courage in publishing what authorities called obscene literature preserved one of the twentieth century greatest novels.'}],
+'lady_chatterley':[{nm:'Joy Davidman',role:'Writer and Intellectual',yr:1955,desc:'Joy Davidman navigated the censorious literary environment that targeted works exploring female sexuality, writing poetry and fiction that challenged conventional morality. The Lady Chatterley trial helped create space for women writers to address sexuality honestly.'}],
+'rushdie_fatwa':[{nm:'Taslima Nasreen',role:'Writer Under Fatwa',yr:1994,desc:'Bangladeshi writer Taslima Nasreen faced a fatwa and death threats for her novel Lajja and her feminist criticism of religious patriarchy. She has lived in exile since 1994, her persecution demonstrating how women writers face compounded dangers from both religious and state censorship.'}],
+'arab_spring_censorship':[{nm:'Tawakkol Karman',role:'Press Freedom Activist',yr:2011,desc:'Tawakkol Karman became the first Arab woman to win the Nobel Peace Prize for her activism during the Arab Spring, fighting for press freedom and women rights in Yemen. Her work exposed how censorship and the suppression of women voices are deeply intertwined.'}],
+'banned_in_boston':[{nm:'Lillian Smith',role:'Author Banned for Racial Themes',yr:1944,desc:'Lillian Smith novel Strange Fruit about an interracial relationship was banned in Boston and across the South. The suppression of her work revealed how censorship was deployed to maintain racial segregation and silence women who challenged it.'}],
+'hong_kong_press_freedom':[{nm:'Choy Yuk-ling',role:'Investigative Journalist',yr:2020,desc:'Journalist Bao Choy was prosecuted in Hong Kong for her investigative reporting on the 2019 Yuen Long attack. Her conviction for accessing public records sent a chilling message to journalists, especially women reporters covering politically sensitive stories.'}],
+'pentagon_papers':[{nm:'Hedda Garza',role:'Antiwar Activist and Writer',yr:1971,desc:'Women journalists and activists played crucial roles in the antiwar movement that the Pentagon Papers documented. The suppression of these documents was part of a broader campaign to silence dissent, in which women antiwar voices were disproportionately dismissed and marginalized.'}],
+'samizdat_czechoslovakia':[{nm:'Hana Ponickova',role:'Samizdat Publisher',yr:1977,desc:'Women were central to the Czechoslovak samizdat movement, typing, distributing, and hiding underground literature at enormous personal risk. Charter 77 signatories included many women intellectuals who faced persecution for their roles in preserving free thought.'}],
+'polish_solidarity_censorship':[{nm:'Anna Walentynowicz',role:'Solidarity Activist',yr:1980,desc:'Anna Walentynowicz crane operator whose firing triggered the Gdansk shipyard strike that launched Solidarity. Her dismissal for underground publishing made her a symbol of how censorship and labor rights were inseparably connected in the fight against communist authoritarianism.'}]
+};
 
 let year=-500,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -2317,7 +2404,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Religious Suppression':['socrates_trial','hypatia_murder','arian_heresy','galileo_trial','index_librorum','giordano_bruno','spanish_inquisition','copernicus_ban','cathar_crusade','heliocentrism_suppression','witch_trial_suppression','spinoza_cherem','islamic_philosophy_suppression'],
+'Colonial Erasure':['mayan_codex_destruction','burning_alexandria','nalanda_destruction','aboriginal_stolen_knowledge','ethiopian_manuscript_raids','mesoamerican_codex_burning','inca_quipu_destruction','persian_libraries'],
+'Totalitarian Control':['nazi_book_burning','soviet_censorship','mao_cultural_revolution','khmer_rouge','north_korean_information','vietnamese_reeducation','argentinian_dirty_war','cuban_censorship'],
+'Scientific Suppression':['galileo_trial','darwin_suppression','scopes_trial','lysenko_genetics','soviet_genetics_purge','heliocentrism_suppression','copernicus_ban','alan_turing_persecution','tobacco_suppression','climate_denial'],
+'Digital Censorship':['internet_censorship','great_firewall_china','russian_internet_censorship','myanmar_internet_shutdown','arab_spring_censorship','hong_kong_press_freedom','tiananmen_censorship','rohingya_information'],
+'Literary Suppression':['ulysses_ban','lady_chatterley','lolita_ban','banned_in_boston','pasternak_zhivago','solzhenitsyn_suppression','sappho_suppression','lgbtq_literature_suppression','fahrenheit_451_reality'],
+'Press Freedom':['pentagon_papers','khashoggi_murder','snowden_revelations','assange_wikileaks','eritrean_press_suppression','egyptian_press_censorship','belarusian_crackdown','philippine_martial_law','thai_lese_majeste','zimbabwe_media_suppression'],
+'Cold War Censorship':['soviet_samizdat','samizdat_czechoslovakia','polish_solidarity_censorship','mccarthy_blacklist','south_korean_censorship','cuban_censorship','hays_code'],
+'Moral Censorship':['comstock_laws','hays_code','banned_in_boston','lgbtq_literature_suppression','lady_chatterley','ulysses_ban','lolita_ban','bonfire_vanities'],
+'Asian Suppression':['qin_book_burning','chinese_literary_inquisition','forbidden_city_archives','confucian_text_manipulation','japanese_wartime_censorship','south_korean_censorship','great_firewall_china','internet_censorship','hong_kong_press_freedom','thai_lese_majeste'],
+'Underground Resistance':['soviet_samizdat','samizdat_czechoslovakia','polish_solidarity_censorship','tyndale_bible','wycliffe_bible','printing_press_censorship','voltaire_exile','rousseau_banned'],
+'Whistleblower Persecution':['snowden_revelations','assange_wikileaks','pentagon_papers','khashoggi_murder','tobacco_suppression','climate_denial']
+};
 
 const HERITAGE_REASONS={};
 
