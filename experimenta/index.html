@@ -708,10 +708,50 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'collaboration',ico:'⊕',lbl:'Collaboration',col:'#4a9fc0'},
+{id:'communication',ico:'◈',lbl:'Communication',col:'#c07a4a'},
+{id:'controversy',ico:'⚡',lbl:'Controversy',col:'#c04a4a'},
+{id:'education',ico:'◎',lbl:'Education',col:'#7a4ac0'},
+{id:'environment',ico:'♲',lbl:'Environment',col:'#4ac070'},
+{id:'ethics',ico:'⚖',lbl:'Ethics',col:'#c0a04a'},
+{id:'failure',ico:'✕',lbl:'Failure & Setbacks',col:'#c04a70'},
+{id:'funding',ico:'◉',lbl:'Funding',col:'#70c04a'},
+{id:'global',ico:'◐',lbl:'Global Reach',col:'#4a70c0'},
+{id:'institutions',ico:'⊞',lbl:'Institutions',col:'#c06a4a'},
+{id:'instruments',ico:'⊛',lbl:'Instruments',col:'#4ac0a0'},
+{id:'legacy',ico:'◇',lbl:'Legacy',col:'#c0c04a'},
+{id:'mathematics',ico:'∑',lbl:'Mathematics',col:'#a04ac0'},
+{id:'method',ico:'⊗',lbl:'Method',col:'#4a4ac0'},
+{id:'philosophy',ico:'∞',lbl:'Philosophy',col:'#c04aa0'},
+{id:'politics',ico:'⚑',lbl:'Politics',col:'#a0c04a'},
+{id:'replication',ico:'⊜',lbl:'Replication',col:'#4ac0c0'},
+{id:'resistance',ico:'⊘',lbl:'Resistance',col:'#c0704a'},
+{id:'society',ico:'◆',lbl:'Society',col:'#704ac0'},
+{id:'technology',ico:'⊙',lbl:'Technology',col:'#4aa0c0'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-3000,n:'ANCIENT OBSERVATION'},
+{y:-600,n:'GREEK NATURAL PHILOSOPHY'},
+{y:-200,n:'HELLENISTIC SYNTHESIS'},
+{y:100,n:'CLASSICAL TRANSMISSION'},
+{y:800,n:'ISLAMIC GOLDEN AGE'},
+{y:1440,n:'PRINTING & RENAISSANCE'},
+{y:1543,n:'SCIENTIFIC REVOLUTION'},
+{y:1687,n:'NEWTONIAN ERA'},
+{y:1789,n:'CHEMICAL REVOLUTION'},
+{y:1831,n:'ELECTROMAGNETIC AGE'},
+{y:1859,n:'DARWINIAN ERA'},
+{y:1895,n:'RADIATION & QUANTA'},
+{y:1925,n:'QUANTUM MECHANICS'},
+{y:1945,n:'ATOMIC AGE'},
+{y:1953,n:'MOLECULAR BIOLOGY'},
+{y:1969,n:'SPACE & INFORMATION AGE'},
+{y:1990,n:'GENOMIC ERA'},
+{y:2012,n:'PRECISION & AI ERA'}
+];
 
 const ITEMS=[
 {id:'babylonian_astronomy',nm:'Babylonian Astronomy',sb:'Mesopotamia · c. 1800 BCE',s:-1800,e:-100,lon:44.42,lat:32.54,fp:{imp:10,nov:10,rep:8,pre:7,reach:9,lon:10},conns:['greek_astronomy','egyptian_medicine','chinese_astronomy'],overview:'The earliest systematic observation of celestial phenomena, developed by Babylonian scribes who recorded planetary positions, eclipses, and stellar risings on clay tablets over more than a millennium. The MUL.APIN tablets (c. 1000 BCE) catalogued stars and constellations; the astronomical diaries (from 747 BCE onward) constitute the longest continuous scientific data set in human history. Babylonian astronomers discovered the periodicity of eclipses, computed the length of the synodic month to within seconds of modern values, and developed mathematical methods for predicting planetary positions that would not be surpassed until Kepler.',d:{
@@ -2817,10 +2857,147 @@ global:'AI development is concentrated in a few countries — the US and China t
 ];
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+// Chain 1: The Light Chain — understanding light from optics to lasers
+{from:'islamic_optics',to:'newton_principia',concept:'The Light Chain',year:1687,desc:'Newton built on Ibn al-Haytham\'s optics to develop the theory of colour and light dispersion.'},
+{from:'newton_principia',to:'spectroscopy',concept:'The Light Chain',year:1859,desc:'Kirchhoff and Bunsen used prisms — descendants of Newton\'s experiments — to discover spectral fingerprints.'},
+{from:'spectroscopy',to:'planck_quantum',concept:'The Light Chain',year:1900,desc:'Planck\'s quantum hypothesis explained the spectral distribution of blackbody radiation.'},
+{from:'planck_quantum',to:'einstein_relativity',concept:'The Light Chain',year:1905,desc:'Einstein used Planck\'s quanta to explain the photoelectric effect, proving light has particle nature.'},
+{from:'einstein_relativity',to:'laser_invention',concept:'The Light Chain',year:1960,desc:'Stimulated emission, predicted by Einstein in 1917, was the theoretical foundation for the laser.'},
+// Chain 2: The Atomic Chain — from elements to nuclear fission
+{from:'lavoisier_chemistry',to:'dalton_atomic',concept:'The Atomic Chain',year:1803,desc:'Dalton formalised Lavoisier\'s elements into atomic theory with definite proportions.'},
+{from:'dalton_atomic',to:'mendeleev_periodic',concept:'The Atomic Chain',year:1869,desc:'Mendeleev organised Dalton\'s atoms into the periodic table, revealing hidden patterns.'},
+{from:'mendeleev_periodic',to:'rutherford_atom',concept:'The Atomic Chain',year:1911,desc:'Rutherford probed atomic structure, discovering the nucleus and transforming the atom from indivisible to structured.'},
+{from:'rutherford_atom',to:'bohr_atom',concept:'The Atomic Chain',year:1913,desc:'Bohr applied quantum theory to Rutherford\'s nuclear atom, explaining spectral lines.'},
+{from:'bohr_atom',to:'nuclear_fission',concept:'The Atomic Chain',year:1938,desc:'Understanding of nuclear structure led Hahn and Meitner to discover nuclear fission.'},
+// Chain 3: The Life Code Chain — genetics to CRISPR
+{from:'mendel_genetics',to:'morgan_chromosomes',concept:'The Life Code Chain',year:1910,desc:'Morgan located Mendel\'s hereditary factors on chromosomes, making genetics physical.'},
+{from:'morgan_chromosomes',to:'dna_structure',concept:'The Life Code Chain',year:1953,desc:'Watson and Crick revealed that chromosomal genes are encoded in DNA\'s double helix.'},
+{from:'dna_structure',to:'human_genome',concept:'The Life Code Chain',year:1990,desc:'The Human Genome Project set out to read the entire DNA sequence that Crick and Watson had decoded.'},
+{from:'human_genome',to:'crispr_editing',concept:'The Life Code Chain',year:2012,desc:'Genomic knowledge enabled Doudna and Charpentier to develop CRISPR as a precise gene editor.'},
+// Chain 4: The Germ Theory Chain — microbes to vaccines
+{from:'leeuwenhoek_microbiology',to:'pasteur_germ',concept:'The Germ Theory Chain',year:1862,desc:'Pasteur proved that the microorganisms Leeuwenhoek first observed could cause disease.'},
+{from:'pasteur_germ',to:'koch_bacteriology',concept:'The Germ Theory Chain',year:1882,desc:'Koch systematised Pasteur\'s germ theory into rigorous postulates for proving causation.'},
+{from:'koch_bacteriology',to:'fleming_penicillin',concept:'The Germ Theory Chain',year:1928,desc:'Understanding bacterial pathogens led Fleming to recognise penicillin\'s antibacterial power.'},
+{from:'fleming_penicillin',to:'smallpox_eradication',concept:'The Germ Theory Chain',year:1967,desc:'Antibiotic and vaccine science enabled the WHO\'s campaign to eradicate smallpox.'},
+// Chain 5: The Electromagnetic Chain — magnetism to the internet
+{from:'volta_battery',to:'faraday_electromagnetism',concept:'The Electromagnetic Chain',year:1831,desc:'Volta\'s battery enabled Faraday to experiment with electric currents and discover electromagnetic induction.'},
+{from:'faraday_electromagnetism',to:'maxwell_electromagnetism',concept:'The Electromagnetic Chain',year:1865,desc:'Maxwell unified Faraday\'s experimental findings into the mathematical theory of electromagnetism.'},
+{from:'maxwell_electromagnetism',to:'radio_communication',concept:'The Electromagnetic Chain',year:1895,desc:'Marconi used Maxwell\'s electromagnetic waves for wireless communication.'},
+{from:'radio_communication',to:'internet_arpanet',concept:'The Electromagnetic Chain',year:1969,desc:'Radio and electronic communication technology evolved into packet-switched computer networks.'},
+// Chain 6: The Computing Chain — logic to AI
+{from:'boolean_algebra',to:'turing_computation',concept:'The Computing Chain',year:1936,desc:'Turing formalised Boole\'s logical operations into a universal model of computation.'},
+{from:'turing_computation',to:'transistor_invention',concept:'The Computing Chain',year:1947,desc:'Transistors provided the physical substrate for implementing Turing\'s computational model.'},
+{from:'transistor_invention',to:'integrated_circuit',concept:'The Computing Chain',year:1958,desc:'Kilby and Noyce miniaturised transistors onto integrated circuits, enabling modern computing.'},
+{from:'integrated_circuit',to:'artificial_intelligence',concept:'The Computing Chain',year:1956,desc:'Sufficient computing power enabled the development of artificial intelligence algorithms.'},
+// Chain 7: The Vaccination Chain — inoculation to mRNA
+{from:'jenner_vaccination',to:'pasteur_germ',concept:'The Vaccination Chain',year:1862,desc:'Pasteur extended Jenner\'s empirical vaccination to a scientific theory of immunisation.'},
+{from:'pasteur_germ',to:'immunology',concept:'The Vaccination Chain',year:1890,desc:'Behring discovered antibodies, explaining why Pasteur\'s vaccines worked.'},
+{from:'immunology',to:'polio_vaccine',concept:'The Vaccination Chain',year:1955,desc:'Salk applied immunological principles to develop the first effective polio vaccine.'},
+{from:'polio_vaccine',to:'mrna_vaccines',concept:'The Vaccination Chain',year:2020,desc:'Decades of vaccine science culminated in mRNA vaccines developed in record time.'},
+// Chain 8: The Celestial Mechanics Chain
+{from:'babylonian_astronomy',to:'copernican_revolution',concept:'The Celestial Mechanics Chain',year:1543,desc:'Copernicus reinterpreted Babylonian and Ptolemaic data to place the Sun at the centre.'},
+{from:'copernican_revolution',to:'kepler_astronomy',concept:'The Celestial Mechanics Chain',year:1609,desc:'Kepler refined Copernicus\'s model with elliptical orbits based on Brahe\'s precise data.'},
+{from:'kepler_astronomy',to:'newton_principia',concept:'The Celestial Mechanics Chain',year:1687,desc:'Newton explained Kepler\'s laws through universal gravitation.'},
+{from:'newton_principia',to:'einstein_relativity',concept:'The Celestial Mechanics Chain',year:1905,desc:'Einstein replaced Newton\'s absolute space and time with relativistic spacetime.'},
+// Chain 9: The Microscopic World Chain
+{from:'microscopy_hooke',to:'leeuwenhoek_microbiology',concept:'The Microscopic World Chain',year:1674,desc:'Leeuwenhoek\'s superior lenses revealed microorganisms invisible to Hooke\'s microscope.'},
+{from:'leeuwenhoek_microbiology',to:'cell_theory',concept:'The Microscopic World Chain',year:1839,desc:'Improved microscopy led Schleiden and Schwann to recognise cells as life\'s basic unit.'},
+{from:'cell_theory',to:'neuron_doctrine',concept:'The Microscopic World Chain',year:1888,desc:'Cajal applied cell theory to the nervous system, establishing neurons as discrete units.'},
+{from:'neuron_doctrine',to:'electron_microscope',concept:'The Microscopic World Chain',year:1931,desc:'Electron microscopy revealed ultrastructure invisible to light microscopes, confirming neural architecture.'},
+// Chain 10: The Earth\'s Interior Chain
+{from:'wegener_drift',to:'ocean_floor_mapping',concept:'The Earth\'s Interior Chain',year:1957,desc:'Tharp\'s ocean floor maps provided the visual evidence for Wegener\'s continental drift.'},
+{from:'ocean_floor_mapping',to:'plate_tectonics',concept:'The Earth\'s Interior Chain',year:1962,desc:'Seafloor spreading evidence unified continental drift into the theory of plate tectonics.'},
+// Chain 11: The Energy Chain
+{from:'thermodynamics',to:'electrification',concept:'The Energy Chain',year:1882,desc:'Thermodynamic principles powered the steam engines that generated Edison\'s electricity.'},
+{from:'electrification',to:'solar_cells',concept:'The Energy Chain',year:1954,desc:'The quest for new electricity sources led Bell Labs to develop practical solar cells.'},
+// Chain 12: The Chemical Revolution Chain
+{from:'priestley_oxygen',to:'lavoisier_chemistry',concept:'The Chemical Revolution Chain',year:1789,desc:'Lavoisier correctly identified Priestley\'s "dephlogisticated air" as oxygen, revolutionising chemistry.'},
+{from:'lavoisier_chemistry',to:'davy_electrochemistry',concept:'The Chemical Revolution Chain',year:1807,desc:'Davy used Volta\'s battery and Lavoisier\'s element concept to isolate new elements electrochemically.'},
+{from:'davy_electrochemistry',to:'faraday_electromagnetism',concept:'The Chemical Revolution Chain',year:1831,desc:'Faraday, Davy\'s protégé, discovered electromagnetic induction and founded electrochemistry.'},
+// Chain 13: The Information Theory Chain
+{from:'telegraph_communication',to:'boolean_algebra',concept:'The Information Theory Chain',year:1854,desc:'Boole formalised the binary logic underlying telegraph\'s on-off signalling.'},
+{from:'boolean_algebra',to:'information_theory',concept:'The Information Theory Chain',year:1948,desc:'Shannon used Boolean algebra to create the mathematical theory of information.'},
+{from:'information_theory',to:'internet_arpanet',concept:'The Information Theory Chain',year:1969,desc:'Shannon\'s information theory underpinned the packet-switching protocols of ARPANET.'},
+// Chain 14: The Medical Imaging Chain
+{from:'roentgen_xrays',to:'mri_imaging',concept:'The Medical Imaging Chain',year:1971,desc:'The drive for non-invasive body imaging that began with X-rays led to MRI development.'},
+{from:'mri_imaging',to:'electron_microscope',concept:'The Medical Imaging Chain',year:1975,desc:'Both MRI and electron microscopy pushed imaging resolution to reveal previously invisible structures.'},
+// Chain 15: The Deep Time Chain
+{from:'darwin_evolution',to:'radiocarbon_dating',concept:'The Deep Time Chain',year:1949,desc:'Libby\'s radiocarbon dating provided the absolute chronology Darwin\'s theory needed.'},
+{from:'radiocarbon_dating',to:'climate_science',concept:'The Deep Time Chain',year:1958,desc:'Radiocarbon dating of past climate events enabled reconstruction of Earth\'s climate history.'},
+// Chain 16: The Quantum Revolution Chain
+{from:'planck_quantum',to:'bohr_atom',concept:'The Quantum Revolution Chain',year:1913,desc:'Bohr applied Planck\'s quantum postulate to atomic structure, explaining spectral lines.'},
+{from:'bohr_atom',to:'heisenberg_quantum',concept:'The Quantum Revolution Chain',year:1925,desc:'Heisenberg replaced Bohr\'s semi-classical model with full quantum mechanics.'},
+{from:'heisenberg_quantum',to:'superconductivity',concept:'The Quantum Revolution Chain',year:1957,desc:'Quantum mechanics provided the BCS theory explaining superconductivity.'},
+// Chain 17: The Reproduction & Genetics Chain
+{from:'ivf_reproduction',to:'stem_cells',concept:'The Reproduction & Genetics Chain',year:1998,desc:'IVF technology provided the embryos from which Thomson isolated human embryonic stem cells.'},
+{from:'stem_cells',to:'crispr_editing',concept:'The Reproduction & Genetics Chain',year:2012,desc:'Stem cell and genome editing technologies converged to enable precise genetic medicine.'},
+// Chain 18: The Agricultural Science Chain
+{from:'photosynthesis',to:'green_revolution',concept:'The Agricultural Science Chain',year:1944,desc:'Understanding plant biology enabled Borlaug\'s high-yield crop development.'},
+{from:'green_revolution',to:'vitamins_discovery',concept:'The Agricultural Science Chain',year:1950,desc:'Agricultural science and nutrition science together addressed global food quality and quantity.'},
+// Chain 19: The Space Exploration Chain
+{from:'big_bang_theory',to:'moon_landing',concept:'The Space Exploration Chain',year:1969,desc:'Understanding of cosmic origins drove the ambition that culminated in the Moon landing.'},
+{from:'moon_landing',to:'gps_navigation',concept:'The Space Exploration Chain',year:1978,desc:'Satellite technology developed for space exploration enabled the GPS navigation system.'},
+// Chain 20: The Biological Amplification Chain
+{from:'pcr_technique',to:'human_genome',concept:'The Biological Amplification Chain',year:1990,desc:'PCR\'s ability to amplify DNA was essential for sequencing the human genome.'},
+{from:'human_genome',to:'mrna_vaccines',concept:'The Biological Amplification Chain',year:2020,desc:'Genomic data enabled rapid design of mRNA vaccines targeting specific viral sequences.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'babylonian_astronomy':[{nm:'Enheduanna',role:'High Priestess & Astronomer',yr:-2285,desc:'The world\'s first known author by name, Enheduanna served as high priestess of the Moon god Nanna at Ur. Her astronomical observations and hymns integrated celestial knowledge with religious authority, establishing a tradition of priestly astronomical observation in Mesopotamia.'}],
+'egyptian_medicine':[{nm:'Merit-Ptah',role:'Chief Physician',yr:-2700,desc:'Merit-Ptah is considered the first woman known by name in the history of medicine. Depicted on a tomb in the necropolis near the Step Pyramid at Saqqara, she held the title "Chief Physician," indicating women could achieve the highest medical rank in ancient Egypt.'}],
+'greek_geometry':[{nm:'Hypatia of Alexandria',role:'Mathematician & Philosopher',yr:400,desc:'Hypatia was the leading mathematician and astronomer of late antiquity, teaching Neoplatonist philosophy and mathematics in Alexandria. She edited Ptolemy\'s Almagest and wrote commentaries on Apollonius\'s Conics and Diophantus\'s Arithmetica. Her murder by a Christian mob in 415 CE symbolises the end of classical learning.'}],
+'chinese_astronomy':[{nm:'Wang Zhenyi',role:'Astronomer & Mathematician',yr:1768,desc:'Wang Zhenyi was an extraordinary Qing dynasty astronomer who explained lunar eclipses through practical experimentation, using a round table as the Earth, a lamp as the Sun, and a mirror as the Moon. She wrote extensively on mathematics and made astronomy accessible through clear, vernacular Chinese.'}],
+'copernican_revolution':[{nm:'Sophie Brahe',role:'Astronomer & Horticulturist',yr:1573,desc:'Sophie Brahe assisted her brother Tycho Brahe with astronomical observations at Hven, contributing to the precise data that Kepler would later use to derive his laws of planetary motion. She was a skilled observer and also prepared genealogical tables that demonstrated systematic scholarly work.'}],
+'lavoisier_chemistry':[{nm:'Marie-Anne Paulze Lavoisier',role:'Chemist & Scientific Illustrator',yr:1771,desc:'Marie-Anne Lavoisier was essential to her husband\'s chemical revolution — she translated English and Latin scientific papers, kept detailed laboratory notebooks, drew precise illustrations of experimental apparatus, and actively participated in experiments. Her engravings in Lavoisier\'s Traité élémentaire de chimie made the work comprehensible across languages.'}],
+'jenner_vaccination':[{nm:'Lady Mary Wortley Montagu',role:'Inoculation Pioneer',yr:1721,desc:'Lady Montagu observed smallpox inoculation (variolation) in Constantinople and championed its introduction to Britain in 1721, decades before Jenner\'s vaccination. Despite fierce opposition from the medical establishment, she had her own children inoculated and persuaded Caroline, Princess of Wales, to support trials. Her advocacy saved thousands of lives.'}],
+'davy_electrochemistry':[{nm:'Jane Marcet',role:'Science Writer & Educator',yr:1805,desc:'Jane Marcet\'s "Conversations on Chemistry" (1805) was one of the most influential science textbooks of the nineteenth century. Michael Faraday credited it with sparking his interest in science. She made Davy\'s electrochemical discoveries accessible to a wide audience, including women excluded from scientific lectures.'}],
+'faraday_electromagnetism':[{nm:'Sarah Faraday',role:'Laboratory Assistant & Collaborator',yr:1821,desc:'Sarah Faraday assisted Michael Faraday in his laboratory work and managed his correspondence during periods of ill health. While her contributions are less documented than those of other scientific partners, she maintained the domestic stability that enabled Faraday\'s extraordinary productivity.'}],
+'darwin_evolution':[{nm:'Mary Anning',role:'Palaeontologist',yr:1811,desc:'Mary Anning discovered some of the most important fossils in the history of palaeontology — ichthyosaurs, plesiosaurs, and pterosaurs — along the Dorset coast. Her finds provided crucial evidence for extinction and deep time that informed evolutionary thinking, yet she was excluded from the Geological Society because of her gender and class.'}],
+'cell_theory':[{nm:'Barbara McClintock',role:'Cytogeneticist',yr:1931,desc:'Barbara McClintock discovered genetic transposition ("jumping genes") in maize, demonstrating that the genome is dynamic rather than static. Her work was dismissed for decades because it challenged orthodox genetics. She received the Nobel Prize in 1983, one of the most delayed recognitions in scientific history.'}],
+'pasteur_germ':[{nm:'Fanny Hesse',role:'Microbiologist & Technical Innovator',yr:1882,desc:'Fanny Hesse suggested using agar (from her kitchen experience with agar-agar in jellies) as a solidifying agent for bacterial culture media, replacing the unreliable gelatin. This simple innovation revolutionised microbiology — agar plates remain the standard tool for isolating and studying bacteria over 140 years later.'}],
+'mendeleev_periodic':[{nm:'Ida Noddack',role:'Chemist',yr:1925,desc:'Ida Noddack co-discovered the element rhenium (1925) and, remarkably, proposed in 1934 that Fermi\'s neutron experiments might involve nuclear fission — the splitting of the uranium nucleus into lighter elements. Her suggestion was ignored for four years until Hahn and Meitner confirmed fission, without crediting Noddack\'s prescient insight.'}],
+'roentgen_xrays':[{nm:'Anna Bertha Röntgen',role:'First X-ray Subject',yr:1895,desc:'Anna Bertha Röntgen\'s hand was the subject of the first X-ray photograph of a human body part, taken by her husband Wilhelm in December 1895. This iconic image — showing her bones and wedding ring — became one of the most famous photographs in scientific history and demonstrated X-rays\' medical potential.'}],
+'curie_radioactivity':[{nm:'Marie Curie',role:'Physicist & Chemist',yr:1898,desc:'Marie Curie discovered radioactivity\'s atomic nature, isolated polonium and radium, and became the first person to win two Nobel Prizes (Physics 1903, Chemistry 1911). She pioneered mobile X-ray units in World War I, developed radiation therapy for cancer, and remains the most celebrated woman scientist in history. Her work was conducted despite pervasive sexism in French academic institutions.'}],
+'planck_quantum':[{nm:'Lise Meitner',role:'Nuclear Physicist',yr:1906,desc:'Lise Meitner was the first to correctly explain nuclear fission (1939), a discovery for which her longtime collaborator Otto Hahn received the Nobel Prize alone. She had studied under Planck in Berlin and made foundational contributions to nuclear physics. Einstein called her "the German Marie Curie." Her exclusion from the Nobel Prize remains one of science\'s most glaring injustices.'}],
+'einstein_relativity':[{nm:'Mileva Marić',role:'Physicist & Mathematician',yr:1905,desc:'Mileva Marić was Einstein\'s first wife and fellow physics student at ETH Zurich. The extent of her contribution to Einstein\'s 1905 papers remains debated — some historians argue she was a significant intellectual collaborator, particularly in the mathematical aspects. Letters between them suggest active scientific discussion during the period of Einstein\'s breakthrough work.'}],
+'morgan_chromosomes':[{nm:'Nettie Stevens',role:'Geneticist',yr:1905,desc:'Nettie Stevens independently discovered that sex is determined by chromosomes (XX/XY) in 1905, at the same time as Edmund Wilson. Her work was essential to establishing the chromosomal theory of inheritance, but she received far less credit than her male contemporaries. She died of breast cancer at 50, before her contributions could be fully recognised.'}],
+'spectroscopy':[{nm:'Cecilia Payne-Gaposchkin',role:'Astrophysicist',yr:1925,desc:'Cecilia Payne-Gaposchkin\'s 1925 PhD thesis — described by Otto Struve as "the most brilliant PhD thesis ever written in astronomy" — demonstrated that stars are composed primarily of hydrogen and helium, overturning the prevailing assumption that stellar and terrestrial compositions were similar. Henry Norris Russell initially dissuaded her from this conclusion, then published the same finding four years later with inadequate credit to Payne.'}],
+'hubble_expansion':[{nm:'Henrietta Swan Leavitt',role:'Astronomer',yr:1908,desc:'Henrietta Leavitt discovered the period-luminosity relationship of Cepheid variable stars in 1908, providing the first reliable "standard candle" for measuring cosmic distances. Her discovery enabled Hubble to measure the distance to other galaxies and discover the expanding universe. She was paid 25 cents per hour as a "computer" at Harvard Observatory.'}],
+'fleming_penicillin':[{nm:'Dorothy Hodgkin',role:'Chemist & Crystallographer',yr:1945,desc:'Dorothy Hodgkin determined the molecular structure of penicillin using X-ray crystallography in 1945, enabling its mass production. She also determined the structures of vitamin B12 and insulin. She received the Nobel Prize in Chemistry in 1964 — only the third woman to win a science Nobel. The press headlined her award as "Oxford Housewife Wins Nobel."'}],
+'nuclear_fission':[{nm:'Lise Meitner',role:'Nuclear Physicist',yr:1939,desc:'Lise Meitner provided the first correct theoretical explanation of nuclear fission in January 1939, collaborating with her nephew Otto Frisch. Despite her three decades of work on radioactivity with Otto Hahn, she was excluded from the 1944 Nobel Prize for the discovery of fission — a decision widely regarded as the Nobel Committee\'s most egregious omission.'}],
+'dna_structure':[{nm:'Rosalind Franklin',role:'X-ray Crystallographer',yr:1952,desc:'Rosalind Franklin\'s X-ray diffraction photographs of DNA — especially Photo 51 — provided the crucial evidence for the double helix structure. Watson and Crick used her data, shown to them without her knowledge, to build their model. Franklin died of ovarian cancer at 37, before the Nobel Prize was awarded. The extent to which her contribution was appropriated remains one of the most discussed injustices in the history of science.'}],
+'polio_vaccine':[{nm:'Isabel Morgan',role:'Virologist',yr:1948,desc:'Isabel Morgan demonstrated in 1948 that a formalin-inactivated poliovirus could produce immunity in monkeys — the proof of concept that Jonas Salk used to develop his human polio vaccine. She left active research before the vaccine\'s development, and her essential contribution to polio prevention is rarely acknowledged.'}],
+'turing_computation':[{nm:'Ada Lovelace',role:'Mathematician & Computing Pioneer',yr:1843,desc:'Ada Lovelace wrote the first algorithm intended for implementation on a general-purpose computer — Charles Babbage\'s Analytical Engine — in 1843. She foresaw that computing machines could manipulate symbols and create music, going beyond mere calculation. She is recognised as the world\'s first computer programmer, over a century before electronic computers existed.'}],
+'radar_technology':[{nm:'Joan Curran',role:'Physicist',yr:1942,desc:'Joan Curran invented "chaff" (codenamed "Window") — strips of aluminium foil that could be dropped from aircraft to confuse enemy radar. Her invention was crucial in the Allied bombing campaign over Germany. She also contributed to radar receiver development and later became a distinguished atmospheric physicist studying precipitation.'}],
+'transistor_invention':[{nm:'Esther Conwell',role:'Physicist',yr:1948,desc:'Esther Conwell developed the theory of electron transport in semiconductors that was essential for understanding and improving transistor performance. Her work on hot electron effects and high-field transport in semiconductors became foundational for the entire semiconductor industry. She published influential work for over six decades.'}],
+'information_theory':[{nm:'Betty Shannon',role:'Mathematician & Analyst',yr:1948,desc:'Betty Shannon (née Mary Elizabeth Moore) was a mathematician who worked with Claude Shannon and contributed to his information theory research. A Numerical Analyst at Bell Labs, she co-authored a paper on information theory and helped construct many of the creative mathematical devices and juggling machines that Shannon was famous for.'}],
+'climate_science':[{nm:'Eunice Newton Foote',role:'Scientist & Suffragist',yr:1856,desc:'Eunice Newton Foote demonstrated in 1856 — three years before John Tyndall\'s more famous experiments — that carbon dioxide traps heat. Her paper, presented at the American Association for the Advancement of Science, was the first to connect CO₂ with atmospheric warming. As a woman, she was not permitted to present her own paper; it was read by a male colleague.'}],
+'plate_tectonics':[{nm:'Marie Tharp',role:'Geologist & Cartographer',yr:1957,desc:'Marie Tharp\'s mapping of the Mid-Atlantic Ridge and its central rift valley provided the critical visual evidence for seafloor spreading and plate tectonics. Banned from research vessels because she was a woman, she worked exclusively from ship-collected sonar data. Her collaborator initially dismissed her rift valley discovery as "girl talk." Her ocean floor maps are among the most important scientific maps ever produced.'}],
+'ocean_floor_mapping':[{nm:'Marie Tharp',role:'Geologist & Cartographer',yr:1957,desc:'Marie Tharp created the first comprehensive maps of the ocean floor, revealing the global mid-ocean ridge system. Her identification of the rift valley running down the centre of the Mid-Atlantic Ridge was the key evidence for seafloor spreading. Despite being denied access to research ships, she produced maps that revolutionised earth science and are considered among the most influential scientific visualisations of the twentieth century.'}],
+'big_bang_theory':[{nm:'Ruby Payne-Scott',role:'Radio Astronomer',yr:1945,desc:'Ruby Payne-Scott was a pioneer of radio astronomy in Australia, making the first interferometric radio observations of the Sun. Her work on solar radio bursts contributed to understanding cosmic radio emissions. She was forced to resign from CSIRO when her marriage was discovered, as married women were barred from holding permanent positions.'}],
+'moon_landing':[{nm:'Margaret Hamilton',role:'Software Engineer',yr:1969,desc:'Margaret Hamilton led the team at MIT that developed the onboard flight software for NASA\'s Apollo programme. Her software engineering innovations — including priority scheduling and asynchronous processing — prevented the Apollo 11 landing from aborting when the computer was overloaded. She coined the term "software engineering" and her work ensured the success of humanity\'s first Moon landing.'}],
+'internet_arpanet':[{nm:'Radia Perlman',role:'Network Engineer',yr:1985,desc:'Radia Perlman invented the Spanning Tree Protocol (STP) in 1985, which is fundamental to the operation of network bridges and switches. Often called "the Mother of the Internet," she made Ethernet networks scalable and reliable. Her contributions to network engineering were essential to the internet\'s growth from a research network to a global infrastructure.'}],
+'mri_imaging':[{nm:'Mildred Cohn',role:'Biochemist',yr:1960,desc:'Mildred Cohn pioneered the use of nuclear magnetic resonance (NMR) to study enzyme mechanisms and metabolic pathways, developing techniques that laid groundwork for MRI imaging. Her work demonstrated that NMR could reveal the internal chemistry of living systems, contributing to the scientific foundation on which medical MRI was built.'}],
+'pcr_technique':[{nm:'Alice Huang',role:'Virologist',yr:1970,desc:'Alice Huang discovered reverse transcriptase in vesicular stomatitis virus, contributing to the understanding of RNA-directed DNA synthesis that underpins molecular biology techniques including aspects of PCR development. Her work on viral replication mechanisms expanded understanding of how genetic information flows in biological systems.'}],
+'human_genome':[{nm:'Jane Rogers',role:'Genomics Director',yr:1996,desc:'Jane Rogers led the sequencing team at the Wellcome Sanger Institute that was the single largest contributor to the Human Genome Project, sequencing approximately one-third of the entire human genome. Her leadership was essential to the project\'s completion on schedule and to the decision to make all sequence data freely and immediately available to researchers worldwide.'}],
+'crispr_editing':[{nm:'Jennifer Doudna',role:'Biochemist',yr:2012,desc:'Jennifer Doudna co-developed CRISPR-Cas9 gene editing technology with Emmanuelle Charpentier, demonstrating that the bacterial immune system could be reprogrammed as a precise tool for cutting and editing DNA. They shared the 2020 Nobel Prize in Chemistry — the first all-women Nobel Prize in a science category. Their discovery has transformed biology, medicine, and agriculture.'},
+{nm:'Emmanuelle Charpentier',role:'Microbiologist',yr:2012,desc:'Emmanuelle Charpentier co-discovered tracrRNA\'s role in CRISPR bacterial immunity and co-developed the CRISPR-Cas9 system with Jennifer Doudna. Her insight that the bacterial CRISPR system could be simplified into a two-component tool (guide RNA + Cas9 protein) was the key to making gene editing practical. She shared the 2020 Nobel Prize in Chemistry.'}],
+'higgs_boson':[{nm:'Fabiola Gianotti',role:'Particle Physicist',yr:2012,desc:'Fabiola Gianotti led the ATLAS experiment at CERN — one of the two experiments that discovered the Higgs boson in 2012. She subsequently became the first woman Director-General of CERN (2016), leading the world\'s largest particle physics laboratory. Her leadership of the ATLAS collaboration\'s 3,000 physicists was essential to the Higgs discovery.'}],
+'gravitational_waves':[{nm:'Gabriela González',role:'Physicist',yr:2015,desc:'Gabriela González served as spokesperson of the LIGO Scientific Collaboration during the historic first detection of gravitational waves in 2015. She led the announcement of the discovery to the world and played a crucial role in coordinating the global collaboration of over 1,000 scientists that made the detection possible.'}],
+'stem_cells':[{nm:'Shinya Yamanaka\'s Team',role:'Research Scientists',yr:2006,desc:'Kazutoshi Takahashi, working under Shinya Yamanaka, was the lead researcher who identified the four transcription factors that can reprogram adult cells into pluripotent stem cells. The iPSC breakthrough resolved the ethical controversy over embryonic stem cells and opened new avenues for personalised medicine.'}],
+'immunology':[{nm:'Gruia-Catalin Marinescu',role:'Immunologist',yr:1890,desc:'While Behring and Kitasato are credited with the discovery of antibodies, women contributed significantly to early immunology. Florence Rena Sabin became the first woman to join the National Academy of Sciences in 1925, recognised for her groundbreaking work on the lymphatic system and tuberculosis immunity.'},
+{nm:'Florence Rena Sabin',role:'Anatomist & Immunologist',yr:1925,desc:'Florence Rena Sabin was the first woman professor at Johns Hopkins Medical School and the first woman elected to the National Academy of Sciences. Her research on the origin of blood cells and the lymphatic system advanced immunological understanding. After retirement, she led public health reform in Colorado, dramatically reducing disease rates.'}],
+'artificial_intelligence':[{nm:'Fei-Fei Li',role:'Computer Scientist',yr:2009,desc:'Fei-Fei Li created ImageNet — the massive visual database of over 14 million labelled images that catalysed the deep learning revolution in 2012 when a neural network trained on it dramatically outperformed traditional computer vision. Her work on visual recognition and her advocacy for human-centred AI have shaped the field\'s direction. She served as Chief Scientist of AI at Google Cloud and co-directs the Stanford Human-Centered AI Institute.'}],
+'photography':[{nm:'Anna Atkins',role:'Botanist & Photographer',yr:1843,desc:'Anna Atkins produced the first book illustrated with photographic images — "Photographs of British Algae: Cyanotype Impressions" (1843) — using Sir John Herschel\'s cyanotype process. She created detailed botanical images by placing specimens directly on sensitised paper, producing hundreds of precise blue-and-white prints. She is considered the first person to publish a book of photographs.'}],
+'solar_cells':[{nm:'Maria Telkes',role:'Physical Chemist',yr:1948,desc:'Maria Telkes was a pioneer of solar energy technology. She developed the first solar-heated house (the Dover Sun House, 1948) using a novel phase-change thermal storage system. She also developed a solar-powered water desalination unit used in World War II life rafts. She was known as "the Sun Queen" for her dedication to solar energy research over five decades.'}],
+'smallpox_eradication':[{nm:'Zafar Husain',role:'Epidemiologist',yr:1975,desc:'Zafar Husain and her fellow female vaccinators were critical to the success of smallpox eradication in South Asia, where male vaccinators could not enter the women\'s quarters of Muslim households. Female health workers vaccinated millions of women and children who would otherwise have been unreachable, making the difference between eradication\'s success and failure in the programme\'s most challenging regions.'}],
+'mrna_vaccines':[{nm:'Katalin Karikó',role:'Biochemist',yr:2005,desc:'Katalin Karikó spent decades researching mRNA therapeutics despite repeated grant rejections, demotions, and career setbacks. Her discovery with Drew Weissman that modified nucleosides could make synthetic mRNA non-inflammatory was the breakthrough that made mRNA vaccines possible. She received the 2023 Nobel Prize in Physiology or Medicine. Her persistence through decades of institutional indifference is one of science\'s most inspiring stories.'},
+{nm:'Özlem Türeci',role:'Physician & Immunologist',yr:2008,desc:'Özlem Türeci co-founded BioNTech with her husband Ugur Sahin and served as Chief Medical Officer during the development of the Pfizer-BioNTech COVID-19 vaccine. Her expertise in cancer immunotherapy was redirected to pandemic response, producing a vaccine candidate within days of receiving the SARS-CoV-2 genome sequence. Her work helped save millions of lives.'}],
+'vitamins_discovery':[{nm:'Lucy Wills',role:'Haematologist',yr:1931,desc:'Lucy Wills discovered that a factor in Marmite (later identified as folic acid/vitamin B9) could treat tropical macrocytic anaemia during her research in Bombay. Her discovery led to the identification and synthesis of folic acid, which is now added to flour in many countries to prevent neural tube defects in developing babies. Her work has prevented countless birth defects worldwide.'}],
+'electron_microscope':[{nm:'Hedy Lamarr',role:'Inventor & Actress',yr:1942,desc:'While not directly involved in electron microscopy, Hedy Lamarr co-invented frequency-hopping spread spectrum technology (1942) that demonstrated how engineering innovation could emerge from unexpected sources. Her patent contributed to wireless communication technology used in modern scientific instruments including remote-controlled electron microscopes.'}]
+};
 
 let year=-3000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4330,7 +4507,19 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient World':['babylonian_astronomy','egyptian_medicine','chinese_astronomy','indian_surgery','greek_anatomy','greek_geometry','archimedes_mechanics','roman_engineering'],
+'Islamic Golden Age':['islamic_optics','islamic_algebra','islamic_medicine','chinese_alchemy'],
+'Renaissance & Early Modern':['gutenberg_press','copernican_revolution','vesalius_anatomy','galileo_mechanics','kepler_astronomy','harvey_circulation'],
+'The Enlightenment':['boyle_chemistry','microscopy_hooke','newton_principia','leeuwenhoek_microbiology','leibniz_calculus','linnaeus_taxonomy','euler_mathematics'],
+'Chemical & Industrial Revolution':['lavoisier_chemistry','priestley_oxygen','jenner_vaccination','volta_battery','dalton_atomic','davy_electrochemistry','fourier_heat','thermodynamics','photography'],
+'Electromagnetic Age':['faraday_electromagnetism','cell_theory','boolean_algebra','telegraph_communication','darwin_evolution','pasteur_germ','maxwell_electromagnetism','mendel_genetics','mendeleev_periodic','spectroscopy'],
+'Age of Radiation':['roentgen_xrays','curie_radioactivity','planck_quantum','einstein_relativity','michelson_morley','koch_bacteriology','immunology','radio_communication','electrification','neuron_doctrine'],
+'Quantum & Atomic Era':['rutherford_atom','bohr_atom','heisenberg_quantum','nuclear_fission','superconductivity','wegener_drift','morgan_chromosomes','vitamins_discovery','cosmic_rays','electron_microscope','fleming_penicillin','haber_bosch'],
+'Mid-Century Breakthroughs':['turing_computation','transistor_invention','information_theory','dna_structure','polio_vaccine','radar_technology','hubble_expansion','radiocarbon_dating','green_revolution','solar_cells','anaesthesia'],
+'Space & Digital Age':['integrated_circuit','laser_invention','plate_tectonics','big_bang_theory','moon_landing','internet_arpanet','mri_imaging','climate_science','ocean_floor_mapping','artificial_intelligence','gps_navigation'],
+'Genomic & Precision Era':['pcr_technique','human_genome','ivf_reproduction','crispr_editing','higgs_boson','gravitational_waves','stem_cells','mrna_vaccines','smallpox_eradication','photosynthesis']
+};
 
 const HERITAGE_REASONS={
   celts:'Celtic language, law & festival tradition',
