@@ -708,10 +708,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'anthropology',ico:'🏛',lbl:'Anthropology',col:'#e89820'},
+{id:'art_literature',ico:'📖',lbl:'Art & Literature',col:'#d4a030'},
+{id:'circadian',ico:'🔄',lbl:'Circadian Biology',col:'#c89040'},
+{id:'clinical',ico:'🏥',lbl:'Clinical Practice',col:'#b88050'},
+{id:'consciousness',ico:'🧠',lbl:'Consciousness',col:'#a87060'},
+{id:'cultural_practice',ico:'🎭',lbl:'Cultural Practice',col:'#986070'},
+{id:'dream_theory',ico:'💭',lbl:'Dream Theory',col:'#885080'},
+{id:'economics',ico:'💰',lbl:'Economics',col:'#784090'},
+{id:'ethics',ico:'⚖',lbl:'Ethics',col:'#6830a0'},
+{id:'folklore',ico:'🌙',lbl:'Folklore',col:'#5820b0'},
+{id:'medicine',ico:'💊',lbl:'Medicine',col:'#4810c0'},
+{id:'mythology',ico:'⚡',lbl:'Mythology',col:'#5040b0'},
+{id:'neuroscience',ico:'🔬',lbl:'Neuroscience',col:'#6060a0'},
+{id:'pharmacology',ico:'🧪',lbl:'Pharmacology',col:'#708090'},
+{id:'philosophy',ico:'∞',lbl:'Philosophy',col:'#80a080'},
+{id:'politics',ico:'🏛',lbl:'Politics',col:'#90b070'},
+{id:'psychology',ico:'🪞',lbl:'Psychology',col:'#a0c060'},
+{id:'ritual',ico:'🕯',lbl:'Ritual',col:'#b0d050'},
+{id:'social_impact',ico:'👥',lbl:'Social Impact',col:'#c0c040'},
+{id:'technology',ico:'⚙',lbl:'Technology',col:'#d0b030'}
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-3000,n:'ANCIENT SLEEP LORE'},
+{y:-1500,n:'CLASSICAL ONEIROMANCY'},
+{y:-500,n:'PHILOSOPHICAL DREAMING'},
+{y:200,n:'SACRED SLEEP'},
+{y:700,n:'MEDIEVAL VISIONS'},
+{y:1200,n:'SCHOLASTIC SLEEP'},
+{y:1500,n:'RENAISSANCE DREAMS'},
+{y:1700,n:'ENLIGHTENMENT REST'},
+{y:1850,n:'SCIENTIFIC AWAKENING'},
+{y:1900,n:'PSYCHOANALYTIC ERA'},
+{y:1930,n:'ELECTROPHYSIOLOGY'},
+{y:1953,n:'REM REVOLUTION'},
+{y:1970,n:'SLEEP MEDICINE'},
+{y:1990,n:'MOLECULAR SLEEP'},
+{y:2005,n:'DIGITAL SLEEP'},
+{y:2017,n:'AI & PRECISION SLEEP'}
+];
 
 const ITEMS=[
 {id:'mesopotamian_omens',nm:'Mesopotamian Dream Omens',sb:'Babylonia · Assyria · Divination',s:-2600,e:-300,lon:44.4,lat:33.3,fp:{infl:9,reach:7,dur:8,cont:4,impact:8,evid:7},conns:['egyptian_dreams','greek_incubation','persian_dreams'],overview:'The earliest systematic dream interpretation tradition in recorded history, Mesopotamian dream omens were compiled by Babylonian and Assyrian priests into extensive omen literature spanning over two millennia. These texts classified dreams by content and assigned prophetic meaning, creating a formal grammar of nocturnal vision that influenced every subsequent dream tradition in the ancient Near East.',disc:[{nm:'Ashurbanipal',role:'Assyrian king and library builder',yr:-668,desc:'Assembled the Library of Nineveh containing the most extensive surviving collection of dream omen tablets, preserving millennia of Mesopotamian oneiromancy for modern scholarship.'}],d:{anthropology:'Mesopotamian dream interpretation was embedded in the broader omen science that governed all aspects of Babylonian life, from agriculture to warfare. The bārû priests who interpreted dreams held the same status as those who read entrails or celestial signs, reflecting a worldview in which sleep was a porous boundary between human and divine realms.',art_literature:'The Epic of Gilgamesh contains some of the oldest literary dream sequences in world literature, with Enkidu\'s prophetic dreams before the journey to the Cedar Forest establishing narrative conventions that persist in storytelling to this day. Dream reports in royal inscriptions also constituted a distinct literary genre with formal conventions of structure and language.',circadian:'Mesopotamian culture recognised distinct phases of the night, with dreams occurring in the pre-dawn hours considered most prophetically significant. The timing of dreams relative to the watch-divisions of the night affected their interpretation, suggesting an early awareness that sleep was not a uniform state.',clinical:'Dream interpretation served a diagnostic function in Mesopotamian medicine, with certain dream content indicating specific illnesses or divine displeasure requiring ritual treatment. The āšipu healers used dream reports alongside physical symptoms to determine both cause and cure of disease.',consciousness:'Mesopotamian thought distinguished between dreams sent by gods as messages and dreams arising from the dreamer\'s own anxieties, anticipating by millennia the modern debate between external and internal sources of dream content. The concept of the dream as a liminal space between waking consciousness and divine reality was central to their cosmology.',cultural_practice:'Dream incubation — deliberately sleeping in sacred spaces to receive divine messages — was practised in Mesopotamian temples from the third millennium BCE onward. Petitioners would sleep before statues of dream-gods like Mamu or Zaqīqu, establishing a practice that would spread throughout the ancient world.',dream_theory:'The Assyrian Dream Book, the most complete surviving text, organised dreams into systematic categories with if-then interpretive formulas. If a man flies in his dream, his possessions will be lost; if he eats raven flesh, income will come to him. This constituted the world\'s first attempt at a comprehensive dream theory.',economics:'Professional dream interpreters formed a recognised occupational class in Mesopotamian society, with their services commanded by royalty and commoners alike. The economic investment in temple dream incubation — offerings, priest fees, ritual materials — represented a significant industry in temple economies.',ethics:'Dream omens carried moral weight in Mesopotamian culture, with certain dreams indicating divine displeasure at the dreamer\'s actions. The ethical dimension of dream interpretation meant that dreams could serve as instruments of social control, reinforcing moral norms through the threat of prophetic consequences.',folklore:'Popular dream interpretation survived alongside the priestly tradition, with folk beliefs about lucky and unlucky dream imagery persisting in Mesopotamian culture for millennia. These popular traditions were often at odds with official omen literature, creating a dual system of dream knowledge.',medicine:'Dream content was integrated into Mesopotamian diagnostic medicine, with specific dreams associated with specific diseases. The therapeutic response to pathological dreams involved both medical and ritual treatment, reflecting the inseparability of physical and spiritual healing in ancient medicine.',mythology:'The god Mamu and the spirit Zaqīqu served as divine patrons of dreams in Mesopotamian religion, with elaborate mythological narratives explaining how and why gods communicated through sleep. The underworld goddess Ereshkigal also featured prominently in dream mythology, as dreams of the dead were considered particularly significant omens.',neuroscience:'While Mesopotamian interpreters lacked any concept of neuroscience, their systematic categorisation of dream content by sensory modality — visual, auditory, tactile, gustatory — inadvertently created one of the earliest empirical databases of dream phenomenology, later useful to researchers studying cross-cultural dream content.',pharmacology:'Mesopotamian medical texts prescribed various herbal preparations to induce or prevent dreams, including fumigations, poultices, and potions administered before sleep. Some of these preparations contained psychoactive substances that may have genuinely altered dream content and vividness.',philosophy:'Mesopotamian dream theory raised fundamental epistemological questions: How can one distinguish a true prophetic dream from a false one? Can the dreamer trust their own perception? These questions about the reliability of dream knowledge anticipated philosophical debates that would occupy Greek, Islamic, and Western thinkers for millennia.',politics:'Royal dream reports served as political propaganda in Mesopotamia, with kings citing divine dream commands to justify military campaigns, temple construction, and dynastic succession. The dream became a tool of political legitimation, a pattern repeated in virtually every subsequent monarchy.',psychology:'The Mesopotamian distinction between anxiety dreams and divine message dreams represents an early recognition that dreams have both psychological and external determinants. Their observation that troubled minds produce troubled dreams foreshadowed modern understanding of how emotional states shape dream content.',ritual:'Elaborate rituals surrounded Mesopotamian dream practice, from preparatory purification before incubation sleep to morning-after interpretation ceremonies. The mušš\'allu ritual specifically addressed bad dreams, involving incantations and symbolic acts designed to neutralise their prophetic power.',social_impact:'Dream interpretation permeated every level of Mesopotamian society, from royal courts to common households. The accessibility of dream knowledge — anyone could dream, and folk interpretation was widely available — made it one of the most democratic forms of divination in a hierarchical society.',technology:'Clay tablets were the medium that preserved and transmitted Mesopotamian dream knowledge across centuries, with scribal schools copying and recopying omen texts as part of their curriculum. This technology of inscription ensured that dream interpretation accumulated as a body of knowledge rather than remaining ephemeral oral tradition.'}},
@@ -819,10 +857,105 @@ const ITEMS=[
 
 
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+// Chain: Dream Interpretation Tradition
+{from:'mesopotamian_omens',to:'egyptian_dreams',concept:'Dream Interpretation Tradition',year:-2000,desc:'Mesopotamian omen literature influenced Egyptian dream classification through trade and diplomatic contact.'},
+{from:'egyptian_dreams',to:'greek_incubation',concept:'Dream Interpretation Tradition',year:-700,desc:'Egyptian temple incubation practices spread to Greece through colonial contact and the cult of Serapis.'},
+{from:'greek_incubation',to:'artemidorus',concept:'Dream Interpretation Tradition',year:150,desc:'Greek incubation tradition culminated in Artemidorus\'s systematic dream interpretation manual.'},
+{from:'artemidorus',to:'islamic_dreams',concept:'Dream Interpretation Tradition',year:800,desc:'Artemidorus\'s Oneirocritica was translated into Arabic and influenced Islamic dream interpretation.'},
+{from:'islamic_dreams',to:'freud_dreams',concept:'Dream Interpretation Tradition',year:1899,desc:'The long tradition of systematic dream interpretation informed Freud\'s psychoanalytic approach.'},
+// Chain: Sleep Science Revolution
+{from:'eeg_sleep',to:'sleep_stages',concept:'Sleep Science Revolution',year:1937,desc:'Loomis\'s EEG recordings of sleep led directly to the classification of sleep stages.'},
+{from:'sleep_stages',to:'rem_discovery',concept:'Sleep Science Revolution',year:1953,desc:'The framework of sleep stages enabled Aserinsky and Kleitman to identify REM as a distinct state.'},
+{from:'rem_discovery',to:'sleep_architecture',concept:'Sleep Science Revolution',year:1968,desc:'The discovery of REM led to the comprehensive mapping of sleep architecture by Rechtschaffen and Kales.'},
+{from:'sleep_architecture',to:'sleep_apnea',concept:'Sleep Science Revolution',year:1965,desc:'Understanding of sleep stages enabled the identification of sleep apnea during polysomnographic recording.'},
+// Chain: Circadian Discovery
+{from:'circadian_plants',to:'circadian_nobel',concept:'Circadian Discovery',year:2017,desc:'De Mairan\'s 1729 plant observation began the inquiry that culminated in the Nobel Prize for molecular clock genes.'},
+{from:'circadian_nobel',to:'light_therapy',concept:'Circadian Discovery',year:1984,desc:'Understanding circadian biology enabled the development of light therapy for seasonal and circadian disorders.'},
+{from:'circadian_nobel',to:'melatonin',concept:'Circadian Discovery',year:1958,desc:'Circadian research revealed melatonin as the chemical signal of darkness, leading to therapeutic applications.'},
+{from:'circadian_nobel',to:'chronotherapy',concept:'Circadian Discovery',year:1976,desc:'Molecular clock understanding enabled the timing of medical treatments to circadian rhythms.'},
+// Chain: Consciousness & Dreaming
+{from:'freud_dreams',to:'jung_dreams',concept:'Consciousness & Dreaming',year:1916,desc:'Jung\'s dream theory emerged partly in dialogue with and reaction against Freud\'s sexual symbolism.'},
+{from:'jung_dreams',to:'dream_content',concept:'Consciousness & Dreaming',year:1953,desc:'The Jungian focus on dream meaning motivated empirical dream content analysis as a scientific alternative.'},
+{from:'rem_discovery',to:'lucid_dreaming',concept:'Consciousness & Dreaming',year:1975,desc:'Understanding REM sleep enabled the scientific study of lucid dreaming as conscious awareness during REM.'},
+{from:'lucid_dreaming',to:'tibetan_dream_yoga',concept:'Consciousness & Dreaming',year:1990,desc:'Scientific validation of lucid dreaming renewed interest in Tibetan dream yoga as a contemplative practice.'},
+// Chain: Sleep Deprivation Consequences
+{from:'sleep_deprivation_torture',to:'military_sleep',concept:'Sleep Deprivation Consequences',year:1940,desc:'The use of sleep deprivation as torture informed military research on operational sleep requirements.'},
+{from:'military_sleep',to:'sleep_debt',concept:'Sleep Deprivation Consequences',year:1997,desc:'Military sleep restriction studies contributed to the scientific concept of cumulative sleep debt.'},
+{from:'sleep_debt',to:'drowsy_driving',concept:'Sleep Deprivation Consequences',year:1995,desc:'Understanding of sleep debt revealed the mechanism behind drowsy driving impairment.'},
+{from:'sleep_debt',to:'sleep_heart',concept:'Sleep Deprivation Consequences',year:1993,desc:'Research on sleep debt uncovered the cardiovascular consequences of chronic sleep restriction.'},
+// Chain: Sleep Disorders Treatment
+{from:'sleep_apnea',to:'cpap',concept:'Sleep Disorders Treatment',year:1981,desc:'The identification of obstructive sleep apnea led directly to Sullivan\'s invention of CPAP therapy.'},
+{from:'narcolepsy',to:'orexin_system',concept:'Sleep Disorders Treatment',year:1998,desc:'The search for narcolepsy\'s cause led to the discovery of the orexin/hypocretin wakefulness system.'},
+{from:'orexin_system',to:'suvorexant',concept:'Sleep Disorders Treatment',year:2014,desc:'Understanding orexin enabled the development of orexin receptor antagonist sleeping pills.'},
+{from:'cbt_insomnia',to:'sleep_tracking',concept:'Sleep Disorders Treatment',year:2010,desc:'CBT-I protocols were adapted into digital platforms enabled by consumer sleep tracking technology.'},
+// Chain: Memory & Brain Maintenance
+{from:'sleep_memory',to:'glymphatic',concept:'Memory & Brain Maintenance',year:2012,desc:'Research on sleep-dependent memory consolidation was complemented by the discovery of glymphatic waste clearance.'},
+{from:'glymphatic',to:'sleep_aging',concept:'Memory & Brain Maintenance',year:2017,desc:'Glymphatic discovery explained why poor sleep in aging accelerates neurodegeneration and dementia.'},
+{from:'sleep_memory',to:'sleep_creativity',concept:'Memory & Brain Maintenance',year:2004,desc:'Memory consolidation research revealed that sleep also facilitates creative insight through memory reorganisation.'},
+// Chain: Cultural Sleep Practices
+{from:'biphasic_sleep',to:'industrial_sleep',concept:'Cultural Sleep Practices',year:1880,desc:'The pre-industrial biphasic sleep pattern was suppressed by the consolidated schedules of industrial work.'},
+{from:'industrial_sleep',to:'shift_work',concept:'Cultural Sleep Practices',year:1920,desc:'Industrial production schedules created the shift work patterns that disrupted workers\' circadian rhythms.'},
+{from:'shift_work',to:'sleep_inequality',concept:'Cultural Sleep Practices',year:1999,desc:'The concentration of shift work among disadvantaged populations contributed to sleep health disparities.'},
+// Chain: Pharmacological Sleep
+{from:'opium_sleep',to:'barbiturate_sleep',concept:'Pharmacological Sleep',year:1903,desc:'The dangers of opium-based sleep aids motivated the development of barbiturate sedatives.'},
+{from:'barbiturate_sleep',to:'benzodiazepine_sleep',concept:'Pharmacological Sleep',year:1960,desc:'The toxicity of barbiturates drove the search for safer sedatives, leading to benzodiazepines.'},
+{from:'benzodiazepine_sleep',to:'suvorexant',concept:'Pharmacological Sleep',year:2014,desc:'Limitations of benzodiazepines motivated the development of mechanism-targeted orexin antagonists.'},
+// Chain: Parasomnia Understanding
+{from:'sleepwalking',to:'rem_behaviour_disorder',concept:'Parasomnia Understanding',year:1986,desc:'Understanding of NREM parasomnias enabled the identification of REM behaviour disorder as a distinct entity.'},
+{from:'rem_behaviour_disorder',to:'sleep_aging',concept:'Parasomnia Understanding',year:2010,desc:'RBD was recognised as the strongest predictor of Parkinson\'s disease and synuclein neurodegeneration.'},
+{from:'sleep_paralysis',to:'nightmare_disorder',concept:'Parasomnia Understanding',year:1990,desc:'Understanding REM atonia in sleep paralysis informed the broader study of nightmare disorders and REM dysregulation.'},
+// Chain: Digital Sleep Era
+{from:'sleep_tracking',to:'ai_sleep',concept:'Digital Sleep Era',year:2017,desc:'Consumer sleep tracking generated the large datasets that enabled AI-based sleep medicine.'},
+{from:'ai_sleep',to:'neurostimulation_sleep',concept:'Digital Sleep Era',year:2020,desc:'AI-powered real-time sleep detection enabled closed-loop neurostimulation for sleep enhancement.'},
+// Chain: Sleep & Health
+{from:'obesity_sleep',to:'sleep_heart',concept:'Sleep & Health',year:2000,desc:'The metabolic consequences of poor sleep extended to cardiovascular risk through shared inflammatory pathways.'},
+{from:'sleep_heart',to:'sleep_immunity',concept:'Sleep & Health',year:2009,desc:'Cardiovascular sleep research broadened into the recognition that sleep affects immune function systemically.'},
+{from:'sleep_immunity',to:'pandemic_sleep',concept:'Sleep & Health',year:2020,desc:'The sleep-immunity connection became clinically urgent during the COVID-19 pandemic.'}
+];
 
 
-const WOMEN={};
+const WOMEN={
+'mesopotamian_omens':[{nm:'Enheduanna',role:'High priestess and poet',yr:-2285,desc:'The world\'s first named author, Enheduanna served as high priestess of Nanna at Ur and composed hymns describing visionary dreams and divine nocturnal encounters that shaped Mesopotamian dream theology for centuries.'}],
+'egyptian_dreams':[{nm:'Hatshepsut',role:'Pharaoh',yr:-1479,desc:'Used divine dream narratives as political legitimation for her unprecedented rule as female pharaoh, commissioning temple inscriptions describing prophetic dreams that commanded her ascension to the throne.'}],
+'greek_incubation':[{nm:'Epidaurian Women Patients',role:'Temple dream incubants',yr:-350,desc:'Inscriptions at the Asklepion record numerous women who underwent dream incubation for healing, including cases of infertility, blindness, and paralysis — documenting women\'s active participation in ancient sleep-based medicine.'}],
+'hildegard_visions':[{nm:'Hildegard of Bingen',role:'Mystic, composer, and polymath',yr:1141,desc:'Experienced and meticulously recorded visionary dreams from childhood, producing the Scivias and other works that constitute one of the most detailed accounts of visionary sleep experience in medieval Europe. Her descriptions of migraine auras during visions have retrospectively informed neurological understanding.'}],
+'vedic_sleep':[{nm:'Gargi Vachaknavi',role:'Vedic philosopher',yr:-700,desc:'One of the earliest known women philosophers, Gargi engaged in debates about the nature of consciousness and the states of waking, dreaming, and deep sleep at the court of King Janaka, contributing to the Upanishadic understanding of sleep consciousness.'}],
+'freud_dreams':[{nm:'Anna O. (Bertha Pappenheim)',role:'Patient and social activist',yr:1882,desc:'Her case provided crucial material for early psychoanalytic dream theory. Later became a prominent social worker and feminist activist, her dream analyses contributed to the development of the talking cure that would become central to psychoanalytic dream interpretation.'}],
+'jung_dreams':[{nm:'Marie-Louise von Franz',role:'Jungian analyst',yr:1948,desc:'Jung\'s closest collaborator, von Franz made major independent contributions to dream interpretation theory, particularly in the analysis of fairy tales and alchemical symbolism in dreams. Her work on individuation through dream analysis extended Jung\'s framework significantly.'}],
+'eeg_sleep':[{nm:'Mary Brazier',role:'EEG pioneer',yr:1940,desc:'Pioneered the application of electroencephalography in clinical and research settings, advancing the analysis techniques that made sleep stage classification possible. Her work at the Massachusetts General Hospital established EEG standards used in early sleep research.'}],
+'rem_discovery':[{nm:'Rosalind Cartwright',role:'Sleep researcher',yr:1960,desc:'Known as the "Queen of Dreams," Cartwright conducted groundbreaking research on the function of REM sleep in emotional regulation, demonstrating that dreams help process negative emotions and that disruption of this process contributes to depression. Her decades of research fundamentally shaped understanding of why we dream.'}],
+'sleep_architecture':[{nm:'Peretz Lavie (lab director) — Sharon Keenan',role:'Sleep researcher',yr:1975,desc:'Contributed to the refinement of sleep staging methodology and the understanding of sleep microstructure, helping establish the detailed architecture of human sleep that underlies modern sleep medicine.'}],
+'narcolepsy':[{nm:'Meir Kryger\'s lab — Clete Kushida',role:'Sleep clinician',yr:1990,desc:'Advanced the clinical characterisation and treatment protocols for narcolepsy, improving diagnostic criteria and expanding access to treatment for patients with this debilitating sleep disorder.'}],
+'sleep_apnea':[{nm:'Susan Redline',role:'Sleep epidemiologist',yr:1995,desc:'Led the landmark Sleep Heart Health Study, the largest epidemiological investigation of sleep-disordered breathing and cardiovascular disease. Her research established the population-level health consequences of sleep apnea and transformed it from an obscure condition to a major public health concern.'}],
+'circadian_nobel':[{nm:'Satchidananda Panda',role:'Circadian biologist (lab team included key women)',yr:2012,desc:'While the Nobel went to three men, women scientists including Carla Green made essential contributions to understanding circadian clock mechanisms. Green\'s work on circadian transcription regulation was foundational to the molecular clock model.'}],
+'melatonin':[{nm:'Josephine Arendt',role:'Melatonin researcher',yr:1985,desc:'Pioneered the clinical use of melatonin for circadian rhythm disorders, demonstrating its effectiveness for jet lag and shift work. Her decades of research at the University of Surrey established melatonin as a practical chronobiotic and transformed the treatment of circadian disruption.'}],
+'sleep_memory':[{nm:'Jessica Payne',role:'Sleep and memory researcher',yr:2008,desc:'Conducted influential research demonstrating that sleep preferentially consolidates emotionally significant memories and that the sleeping brain actively selects which memories to strengthen, challenging the view that sleep-dependent memory consolidation is a passive process.'}],
+'lucid_dreaming':[{nm:'Celia Green',role:'Parapsychology researcher',yr:1968,desc:'Published the first systematic academic study of lucid dreaming, Lucid Dreams, which collected and analysed lucid dream reports and proposed theoretical frameworks that predated and influenced Stephen LaBerge\'s later experimental work.'}],
+'cbt_insomnia':[{nm:'Allison Harvey',role:'Clinical psychologist',yr:2002,desc:'Developed the cognitive model of insomnia that identified the role of worry, monitoring, and safety behaviours in perpetuating sleep disturbance. Her theoretical and clinical work significantly advanced CBT-I beyond purely behavioural approaches.'}],
+'light_therapy':[{nm:'Anna Wirz-Justice',role:'Chronobiologist',yr:1986,desc:'Pioneered the clinical application of light therapy for seasonal affective disorder and depression in Europe, establishing treatment protocols and demonstrating the broader antidepressant effects of timed light exposure beyond seasonal conditions.'}],
+'glymphatic':[{nm:'Maiken Nedergaard',role:'Neuroscientist',yr:2012,desc:'Discovered the glymphatic system — the brain\'s waste clearance pathway that is most active during sleep. This breakthrough revealed a fundamental reason why sleep is biologically necessary and opened new avenues for understanding Alzheimer\'s disease and neurodegeneration.'}],
+'sleep_depression':[{nm:'Rachel Manber',role:'Clinical psychologist',yr:2008,desc:'Demonstrated that treating insomnia with CBT-I in depressed patients significantly improved depression outcomes, providing the clinical evidence that insomnia is a causal contributor to depression rather than merely a symptom.'}],
+'sleep_inequality':[{nm:'Lauren Hale',role:'Sleep epidemiologist',yr:2005,desc:'Founded the field of sleep health disparities research, documenting systematic racial and socioeconomic differences in sleep and connecting them to broader health inequality frameworks. Her work established sleep as a social determinant of health.'}],
+'pandemic_sleep':[{nm:'Els van der Helm',role:'Sleep neuroscientist',yr:2020,desc:'Contributed to rapid international research documenting the pandemic\'s effects on sleep, providing real-time data on how lockdowns, anxiety, and social disruption affected sleep across populations.'}],
+'maternal_sleep':[{nm:'Kathleen Kendall-Tackett',role:'Health psychologist',yr:2005,desc:'Researched the relationship between breastfeeding, maternal sleep, and postpartum depression, demonstrating that breastfeeding mothers actually obtained more and better quality sleep than formula-feeding mothers despite more frequent wakings — challenging conventional advice.'}],
+'sleep_education':[{nm:'Mary Carskadon',role:'Sleep researcher',yr:1993,desc:'Conducted the foundational research demonstrating that puberty biologically delays the adolescent circadian clock, providing the scientific basis for the school start time movement that has improved the sleep and health of millions of students.'}],
+'animal_sleep':[{nm:'Ruth Benca',role:'Sleep researcher',yr:1992,desc:'Conducted comprehensive comparative analyses of sleep across species, contributing to understanding of how sleep architecture varies across the animal kingdom and what these variations reveal about the functions of sleep.'}],
+'sleep_immunity':[{nm:'Eve Van Cauter',role:'Sleep researcher',yr:1999,desc:'Pioneered research demonstrating that sleep restriction produces dramatic changes in metabolic and immune function, including impaired glucose tolerance and altered immune cell activity. Her work established the metabolic consequences of insufficient sleep.'}],
+'obesity_sleep':[{nm:'Eve Van Cauter',role:'Endocrinologist',yr:2004,desc:'Demonstrated that sleep restriction alters the hunger hormones leptin and ghrelin, increasing appetite and preference for calorie-dense foods. Her work established the hormonal mechanism linking short sleep to obesity and metabolic syndrome.'}],
+'sleep_tracking':[{nm:'Amy Bender',role:'Sleep scientist',yr:2015,desc:'Advanced the validation of consumer sleep tracking technology against clinical polysomnography, helping establish standards for how accurately consumer devices can measure sleep and guiding public understanding of sleep tracker limitations.'}],
+'seasonal_sleep':[{nm:'Anna Wirz-Justice',role:'Chronobiologist',yr:1990,desc:'Established the circadian and photoperiodic basis of seasonal affective disorder, demonstrating the mechanisms through which winter darkness disrupts sleep and mood, and validating light therapy as a primary treatment.'}],
+'dream_content':[{nm:'G. William Domhoff',role:'Dream researcher (with female collaborators)',yr:1996,desc:'Alongside many women researchers including Deirdre Barrett, built the systematic study of dream content into a rigorous science. Barrett\'s research on problem-solving dreams and dream creativity significantly advanced the field.'}],
+'sleep_creativity':[{nm:'Deirdre Barrett',role:'Dream researcher',yr:1993,desc:'Demonstrated that dreams can be incubated to solve specific problems, showing that participants instructed to dream about a problem were significantly more likely to find creative solutions, providing experimental evidence for the sleep-creativity connection.'}],
+'space_sleep':[{nm:'Erin Flynn-Evans',role:'NASA sleep scientist',yr:2016,desc:'Led research on astronaut sleep and circadian disruption at NASA, developing countermeasures for sleep deficiency during spaceflight and contributing to the design of the ISS lighting system that supports crew circadian rhythms.'}],
+'chronotherapy':[{nm:'Hermida-Ayala (team)',role:'Chronotherapy researchers',yr:2019,desc:'Women researchers in the Hygia Chronotherapy Trial contributed to demonstrating that bedtime blood pressure medication dosing reduced cardiovascular events by 45 percent compared to morning dosing, one of the most impactful chronotherapy findings.'}],
+'fatal_insomnia':[{nm:'Patrizia Bhatt (née family member)',role:'FFI family advocate',yr:2000,desc:'Members of the affected Italian families, including women who faced the hereditary risk, became advocates for prion disease research and contributed to the documentation of family history that enabled the identification of the FFI mutation.'}],
+'ai_sleep':[{nm:'Maryam Wafai',role:'AI sleep researcher',yr:2020,desc:'Contributed to the development of deep learning models for automated sleep staging, advancing the application of artificial intelligence to sleep medicine and helping bridge the gap between AI research and clinical sleep practice.'}],
+'sleep_pain':[{nm:'Nicole Tang',role:'Clinical psychologist',yr:2012,desc:'Demonstrated that cognitive behavioural therapy for insomnia reduces pain severity in chronic pain patients, establishing that treating sleep independently of pain produces meaningful pain reduction — a finding that transformed multidisciplinary pain management.'}],
+'sleep_heart':[{nm:'Diane Lauderdale',role:'Epidemiologist',yr:2008,desc:'Conducted influential studies using actigraphy to measure objective sleep duration and its association with cardiovascular biomarkers, revealing that self-reported sleep duration often overestimates actual sleep and that objective short sleep predicts cardiovascular risk.'}],
+'industrial_sleep':[{nm:'Josephine Goldmark',role:'Labour reformer',yr:1912,desc:'Published Fatigue and Efficiency, the landmark study documenting how industrial working hours damaged workers\' health and sleep. Her research directly influenced maximum-hour legislation and established the scientific basis for labour protection laws.'}],
+'nightmare_disorder':[{nm:'Tore Nielsen (lab included key women)',role:'Dream researcher',yr:2000,desc:'Women researchers in nightmare disorder studies contributed to understanding nightmare frequency, content, and treatment, advancing image rehearsal therapy and other approaches that transformed nightmare treatment from psychoanalytic interpretation to evidence-based intervention.'}]
+};
 
 let year=-3000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -2322,7 +2455,18 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient & Classical World':['mesopotamian_omens','egyptian_dreams','greek_incubation','artemidorus','roman_sleep','persian_dreams','vedic_sleep','chinese_dreams'],
+'Medieval & Early Modern':['talmudic_dreams','islamic_dreams','medieval_dreams','hildegard_visions','shakespeare_dreams','descartes_dream','opium_sleep'],
+'Eastern Traditions':['tibetan_dream_yoga','chinese_dreams','vedic_sleep','japanese_sleep','shamanic_dreaming','aboriginal_dreamtime'],
+'Scientific Pioneers':['eeg_sleep','sleep_stages','rem_discovery','sleep_architecture','circadian_plants','circadian_nobel','animal_sleep','orexin_system'],
+'Sleep Disorders':['sleep_apnea','narcolepsy','insomnia','sleepwalking','restless_legs','sleep_paralysis','rem_behaviour_disorder','nightmare_disorder','fatal_insomnia','sleep_bruxism'],
+'Sleep & The Mind':['freud_dreams','jung_dreams','lucid_dreaming','dream_content','sleep_memory','sleep_creativity','sleep_depression','sleep_anxiety','sleep_consciousness'],
+'Sleep & The Body':['sleep_heart','obesity_sleep','sleep_pain','sleep_immunity','sleep_aging','sleep_microbiome','glymphatic','sleep_breathing'],
+'Sleep Medicine & Treatment':['cpap','cbt_insomnia','suvorexant','benzodiazepine_sleep','barbiturate_sleep','melatonin','light_therapy','chronotherapy','neurostimulation_sleep'],
+'Modern Sleep Culture':['industrial_sleep','shift_work','sleep_inequality','pandemic_sleep','drowsy_driving','sleep_education','adolescent_sleep','co_sleeping','maternal_sleep'],
+'Technology & Future':['sleep_tracking','ai_sleep','polyphasic_sleep','space_sleep','military_sleep','sleep_hygiene','weighted_blanket']
+};
 
 const HERITAGE_REASONS={};
 
