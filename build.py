@@ -234,6 +234,11 @@ def build_atlas(atlas, engine_html=None):
     if fp_m:
         html = re.sub(r"const FP_LABELS\s*=\s*\[[^\]]+\];\s*\nconst FP_KEYS\s*=\s*\[[^\]]+\];",
                       fp_m.group(0), html, count=1)
+        # Also sync SHORT labels in renderFingerprint to match FP_LABELS
+        fp_labels = re.findall(r"'([^']+)'", re.search(r"const FP_LABELS\s*=\s*\[([^\]]+)\]", html).group(1))
+        if fp_labels:
+            short_str = ','.join(f"'{l}'" for l in fp_labels)
+            html = re.sub(r"const SHORT=\[[^\]]+\]", f"const SHORT=[{short_str}]", html, count=1)
 
     # Replace HERITAGE_REGIONS and HERITAGE_REASONS
     hr_m = re.search(r'const HERITAGE_REGIONS\s*=\s*\{[\s\S]*?\};\s*\n+const HERITAGE_REASONS\s*=\s*\{[\s\S]*?\};', data_sections)
@@ -273,6 +278,9 @@ def build_atlas(atlas, engine_html=None):
     if atlas != 'civilitas':
         html = html.replace('navigateToCiv', 'navigateToItem')
         html = html.replace('civClick', 'itemClick')
+        html = html.replace('civPt', 'itemPt')
+        html = html.replace('whatifCiv', 'whatifItem')
+        html = html.replace('zoomToCiv', 'zoomToItem')
         # Replace remaining civilitas-specific strings in welcome drawer & about modal
         html = html.replace('The Human Atlas', subtitle)
         html = html.replace('>CIVILITAS<', f'>{name_upper}<')
@@ -421,6 +429,22 @@ def build_atlas(atlas, engine_html=None):
 
     # Update meta description item count
     html = re.sub(r'(content="Explore )\d+', rf'\g<1>{item_count}', html, count=1)
+
+    # ── Ensure DIPLOMATIC constant exists ──
+    # civilitas defines const DIPLOMATIC=[...] for its diplomatic data feature.
+    # Other atlases copy the renderDiplomaticSection() function from the engine
+    # but may not have a DIPLOMATIC data array, causing a ReferenceError at runtime.
+    if 'renderDiplomaticSection' in html and 'const DIPLOMATIC' not in html:
+        html = html.replace(
+            '// DIPLOMATIC CONNECTION LAYER',
+            'const DIPLOMATIC=[];\n// DIPLOMATIC CONNECTION LAYER'
+        )
+        # Fallback if comment not found
+        if 'const DIPLOMATIC' not in html:
+            html = html.replace(
+                'function renderDiplomaticSection',
+                'const DIPLOMATIC=[];\nfunction renderDiplomaticSection'
+            )
 
     # ── Enforce system-default theme on first load ──
     # The theme IIFE must NOT set data-theme when no preference is saved.

@@ -3654,7 +3654,7 @@ function renderFingerprint(c){
   }).join(' ');
   svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
   // Labels — placed outside the ring with enough clearance, wrapped in two lines where needed
-  const SHORT=['Military','Commerce','Arts','Science','Reach','Longevity'];
+  const SHORT=['Military','Diplomacy','Culture','Administration','Legacy','Durability'];
   angles.forEach((a,i)=>{
     const lr=R+26;
     const lx=cx+lr*Math.cos(a);
@@ -4600,7 +4600,6 @@ function toggleTheme(){
   if(saved){applyTheme(saved);}
   else{
     const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
-    document.documentElement.dataset.theme=sys;
     const _tb2=document.getElementById('theme-btn');if(_tb2)_tb2.textContent=sys==='dark'?'◑':'◐';
   }
 }catch(e){}})();
