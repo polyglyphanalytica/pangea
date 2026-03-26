@@ -390,12 +390,17 @@
       "map": "geo"
     },
     "somnia": {
-      "phase": "1F",
-      "items": 0,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "II"
+      "section": "II",
+      "validated_sha": "93141730d000a9f1431f5e5721c93ba626de005f",
+      "validated_short": "9314173",
+      "validated_at": "2026-03-26T13:38:41.667985Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "eros": {
       "phase": "1A",
