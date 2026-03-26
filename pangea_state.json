@@ -1,7 +1,7 @@
 {
   "version": 2,
   "schema_note": "phase: 1A/1B/1C/1D/1E/1F/DATA/3/4A/4B/4C/5/6/DONE. DATA = write items 1 at a time until target reached. live=true means card--live on homepage.",
-  "active_atlas": "codex",
+  "active_atlas": "somnia",
   "atlases": {
     "civilitas": {
       "phase": "3",
@@ -365,7 +365,7 @@
       "map": "geo"
     },
     "somnia": {
-      "phase": "1A",
+      "phase": "1F",
       "items": 0,
       "target": 100,
       "live": false,
