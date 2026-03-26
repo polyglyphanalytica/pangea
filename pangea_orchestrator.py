@@ -608,6 +608,18 @@ def generate_new_atlas(state):
 
 def get_next_action(state, agent_id=None):
     queue = state.get("queue", [])
+
+    # Purge any live/completed atlases that are still in the queue
+    live_in_queue = [a for a in queue if state.get("atlases", {}).get(a, {}).get("live")]
+    if live_in_queue:
+        completed = state.setdefault("completed", [])
+        for a in live_in_queue:
+            queue.remove(a)
+            if a not in completed:
+                completed.append(a)
+        state["queue"] = queue
+        save_state(state)
+
     if not queue:
         # Auto-generate a new atlas and continue the loop.
         # generate_new_atlas() calls cmd_new_atlas() which calls self_invoke(),
@@ -652,7 +664,18 @@ def get_next_action(state, agent_id=None):
         return {"action": "ERROR", "message": f"'{atlas}' in queue but not in atlases.", "atlas": atlas}
 
     if info.get("live"):
-        return {"action": "CLEANUP", "atlas": atlas}
+        # Atlas is already live — remove from queue and move to completed, then recurse
+        if atlas in queue:
+            queue.remove(atlas)
+        if atlas not in state.get("completed", []):
+            state.setdefault("completed", []).append(atlas)
+        # Release any agent lock on this atlas
+        assignments = _get_assignments(state)
+        for aid in list(assignments.keys()):
+            if assignments[aid].get("atlas") == atlas:
+                del assignments[aid]
+        save_state(state)
+        return get_next_action(state, agent_id)
 
     phase = info.get("phase", "1A")
 
