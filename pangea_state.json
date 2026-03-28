@@ -260,8 +260,8 @@
       "validated_lenses": 20
     },
     "vindica": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "3",
+      "items": 120,
       "target": 100,
       "live": false,
       "map": "world",
@@ -9002,6 +9002,541 @@
       "atlas": "mathematica",
       "batch": "26-100",
       "items": 100
+    },
+    {
+      "atlas": "vindica",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "vindica",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "vindica",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "vindica",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "vindica",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "vindica",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "vindica",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "vindica",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "vindica",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "vindica",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "vindica",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "vindica",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "vindica",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "vindica",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "vindica",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "vindica",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "vindica",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "vindica",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "vindica",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "vindica",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "vindica",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "vindica",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "vindica",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "vindica",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "vindica",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "vindica",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "vindica",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "vindica",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "vindica",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "vindica",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "vindica",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "vindica",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "vindica",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "vindica",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "vindica",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "vindica",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "vindica",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "vindica",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "vindica",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "vindica",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "vindica",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "vindica",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "vindica",
+      "batch": "38-38",
+      "items": 38
+    },
+    {
+      "atlas": "vindica",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "vindica",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "vindica",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "vindica",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "vindica",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "vindica",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "vindica",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "vindica",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "vindica",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "vindica",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "vindica",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "vindica",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "vindica",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "vindica",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "vindica",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "vindica",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "vindica",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "vindica",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "vindica",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "vindica",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "vindica",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "vindica",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "vindica",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "vindica",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "vindica",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "vindica",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "vindica",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "vindica",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "vindica",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "vindica",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "vindica",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "vindica",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "vindica",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "vindica",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "vindica",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "vindica",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "vindica",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "vindica",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "vindica",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "vindica",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "vindica",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "vindica",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "vindica",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "vindica",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "vindica",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "vindica",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "vindica",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "vindica",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "vindica",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "vindica",
+      "batch": "88-88",
+      "items": 88
+    },
+    {
+      "atlas": "vindica",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "vindica",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "vindica",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "vindica",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "vindica",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "vindica",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "vindica",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "vindica",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "vindica",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "vindica",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "vindica",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "vindica",
+      "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "vindica",
+      "batch": "101-120",
+      "items": 120
     }
   ],
   "assignments": {}
