@@ -260,12 +260,17 @@
       "validated_lenses": 20
     },
     "vindica": {
-      "phase": "3",
-      "items": 120,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "VI"
+      "section": "VI",
+      "validated_sha": "1902f7ed618e14e8d68d38c5ff36d479b30299b6",
+      "validated_short": "1902f7e",
+      "validated_at": "2026-03-28T16:27:25.439616Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "labor": {
       "phase": "1A",
@@ -1172,7 +1177,6 @@
     }
   },
   "queue": [
-    "vindica",
     "crimen",
     "martyr",
     "suffragium",
