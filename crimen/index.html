@@ -708,10 +708,47 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'causes',ico:'⚡',lbl:'Causes & Origins',col:'#e89820'},
+{id:'class_dynamics',ico:'⚖',lbl:'Class & Inequality',col:'#d4a030'},
+{id:'colonial',ico:'🌍',lbl:'Colonial Dimensions',col:'#b08030'},
+{id:'corruption',ico:'🕳',lbl:'Corruption',col:'#c07828'},
+{id:'cultural',ico:'🎭',lbl:'Cultural Impact',col:'#d8a840'},
+{id:'cybercrime',ico:'💻',lbl:'Cybercrime & Digital',col:'#a89020'},
+{id:'economics',ico:'💰',lbl:'Economics of Crime',col:'#c89830'},
+{id:'forensics',ico:'🔬',lbl:'Forensic Science',col:'#b8a028'},
+{id:'gender',ico:'⚤',lbl:'Gender & Crime',col:'#c87898'},
+{id:'incarceration',ico:'🔒',lbl:'Incarceration',col:'#988830'},
+{id:'legal_reform',ico:'📜',lbl:'Legal Reform',col:'#d0b040'},
+{id:'media',ico:'📰',lbl:'Media & Perception',col:'#b89828'},
+{id:'organized',ico:'🕸',lbl:'Organised Crime',col:'#a88020'},
+{id:'philosophy',ico:'🤔',lbl:'Philosophy of Justice',col:'#c0a038'},
+{id:'policing',ico:'🚔',lbl:'Policing & Enforcement',col:'#b09028'},
+{id:'political',ico:'🏛',lbl:'Political Crime',col:'#d09030'},
+{id:'punishment',ico:'⛓',lbl:'Punishment & Penalty',col:'#a87828'},
+{id:'racial',ico:'✊',lbl:'Race & Criminal Justice',col:'#c88830'},
+{id:'resistance',ico:'✦',lbl:'Resistance & Reform Movements',col:'#d8b038'},
+{id:'victims',ico:'🕊',lbl:'Victims & Victimology',col:'#b0a030'},
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-2000,n:'ANCIENT CODES'},
+{y:-800,n:'CLASSICAL JUSTICE'},
+{y:-200,n:'IMPERIAL LAW'},
+{y:500,n:'MEDIEVAL JUSTICE'},
+{y:1000,n:'ECCLESIASTICAL LAW'},
+{y:1300,n:'LATE MEDIEVAL'},
+{y:1500,n:'EARLY MODERN'},
+{y:1650,n:'AGE OF REASON'},
+{y:1750,n:'ENLIGHTENMENT REFORM'},
+{y:1830,n:'INDUSTRIAL CRIME'},
+{y:1900,n:'MODERN CRIMINOLOGY'},
+{y:1945,n:'INTERNATIONAL JUSTICE'},
+{y:1970,n:'MASS INCARCERATION'},
+{y:1990,n:'GLOBALISED CRIME'},
+{y:2010,n:'DIGITAL JUSTICE'},
+];
 
 const ITEMS=[
 {id:'hammurabi_code',nm:'Code of Hammurabi',sb:'Babylon · First Comprehensive Criminal Code',s:-1754,e:-539,lon:44.42,lat:32.54,
@@ -3320,10 +3357,211 @@ victims:'The victims of algorithmic injustice include the individuals wrongly de
 
 const DIPLOMATIC=[];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+// Chain 1: The Written Law
+{from:'hammurabi_code',to:'draco_laws',concept:'The Written Law',year:-621,desc:'Draco codified Athenian law following the Babylonian precedent of written criminal codes.'},
+{from:'draco_laws',to:'roman_twelve_tables',concept:'The Written Law',year:-450,desc:'Rome\'s Twelve Tables drew on the Greek tradition of publicly inscribed law.'},
+{from:'roman_twelve_tables',to:'justinian_code',concept:'The Written Law',year:534,desc:'Justinian compiled and systematised centuries of Roman legal precedent.'},
+{from:'justinian_code',to:'napoleonic_code',concept:'The Written Law',year:1804,desc:'Napoleon\'s code drew heavily on Roman civil law tradition revived through Justinian.'},
+// Chain 2: Trial & Due Process
+{from:'athenian_courts',to:'magna_carta',concept:'Trial & Due Process',year:1215,desc:'The Magna Carta enshrined the right to trial by peers, echoing Athenian jury principles.'},
+{from:'magna_carta',to:'habeas_corpus',concept:'Trial & Due Process',year:1679,desc:'Habeas corpus formalised the Magna Carta\'s protections against arbitrary detention.'},
+{from:'habeas_corpus',to:'us_bill_of_rights',concept:'Trial & Due Process',year:1791,desc:'The US Bill of Rights constitutionalised habeas corpus and due process protections.'},
+{from:'us_bill_of_rights',to:'icc',concept:'Trial & Due Process',year:2002,desc:'The ICC extended due process principles to international criminal prosecution.'},
+// Chain 3: Punishment Reform
+{from:'beccaria_reform',to:'french_revolution_crime',concept:'Punishment Reform',year:1789,desc:'Revolutionary France abolished torture and reformed punishment following Beccaria\'s principles.'},
+{from:'french_revolution_crime',to:'prison_reform',concept:'Punishment Reform',year:1816,desc:'Post-Enlightenment reformers built on revolutionary ideals to humanise prison conditions.'},
+{from:'prison_reform',to:'death_penalty',concept:'Punishment Reform',year:1960,desc:'The abolition movement extended prison reform logic to capital punishment itself.'},
+{from:'death_penalty',to:'prison_abolition',concept:'Punishment Reform',year:1971,desc:'Prison abolitionists argued that the logic of reform demanded eliminating prisons entirely.'},
+// Chain 4: Forensic Science Evolution
+{from:'fingerprinting',to:'forensic_science',concept:'Forensic Science Evolution',year:1910,desc:'Early forensic science expanded beyond fingerprints to include ballistics, toxicology, and blood analysis.'},
+{from:'forensic_science',to:'dna_profiling',concept:'Forensic Science Evolution',year:1984,desc:'DNA profiling revolutionised forensics with molecular identification.'},
+{from:'dna_profiling',to:'wrongful_conviction',concept:'Forensic Science Evolution',year:1989,desc:'DNA evidence exposed wrongful convictions, revealing systemic forensic failures.'},
+{from:'wrongful_conviction',to:'algorithmic_injustice',concept:'Forensic Science Evolution',year:2008,desc:'Algorithmic tools introduced new forensic risks of bias and inaccuracy.'},
+// Chain 5: Organised Crime Networks
+{from:'golden_age_piracy',to:'banditry',concept:'Organised Crime Networks',year:1750,desc:'As piracy declined, organised criminal networks shifted to land-based banditry.'},
+{from:'banditry',to:'mafia_sicilian',concept:'Organised Crime Networks',year:1860,desc:'The Sicilian Mafia formalised banditry into structured criminal organisation.'},
+{from:'mafia_sicilian',to:'al_capone',concept:'Organised Crime Networks',year:1920,desc:'Italian-American organised crime adapted Sicilian Mafia structures in Prohibition-era America.'},
+{from:'al_capone',to:'drug_cartels',concept:'Organised Crime Networks',year:1970,desc:'Drug cartels adopted and expanded the organisational models of earlier crime syndicates.'},
+// Chain 6: Religious Law to Secular Law
+{from:'mosaic_law',to:'canon_law',concept:'Religious Law to Secular Law',year:1140,desc:'Canon law systematised biblical legal principles into church governance.'},
+{from:'canon_law',to:'inquisition',concept:'Religious Law to Secular Law',year:1231,desc:'The Inquisition applied canon law through dedicated criminal tribunals.'},
+{from:'inquisition',to:'witch_trials',concept:'Religious Law to Secular Law',year:1450,desc:'Witch trials extended inquisitorial methods to popular supernatural beliefs.'},
+{from:'witch_trials',to:'blasphemy_laws',concept:'Religious Law to Secular Law',year:1600,desc:'Blasphemy laws represented the persistence of religious criminal offences in secular legal systems.'},
+// Chain 7: Policing Evolution
+{from:'london_police',to:'pinkerton_agency',concept:'Policing Evolution',year:1850,desc:'The Pinkerton Agency adapted London\'s professional policing model for American conditions.'},
+{from:'pinkerton_agency',to:'stasi',concept:'Policing Evolution',year:1950,desc:'State security agencies expanded policing into total surveillance of populations.'},
+{from:'stasi',to:'police_brutality',concept:'Policing Evolution',year:1970,desc:'Militarised and surveillance-oriented policing created conditions for systemic brutality.'},
+{from:'police_brutality',to:'algorithmic_injustice',concept:'Policing Evolution',year:2008,desc:'Algorithmic policing automated and extended existing patterns of biased enforcement.'},
+// Chain 8: Slavery to Mass Incarceration
+{from:'slave_trade',to:'penal_colonies',concept:'Slavery to Mass Incarceration',year:1788,desc:'Convict transportation replicated slavery\'s logic of forced labour extraction.'},
+{from:'penal_colonies',to:'lynching',concept:'Slavery to Mass Incarceration',year:1877,desc:'Post-emancipation racial violence enforced social control formerly maintained by slavery.'},
+{from:'lynching',to:'mass_incarceration',concept:'Slavery to Mass Incarceration',year:1971,desc:'Mass incarceration replaced extralegal racial violence with legalised racial control.'},
+// Chain 9: International Criminal Justice
+{from:'armenian_genocide',to:'holocaust',concept:'International Criminal Justice',year:1933,desc:'The unpunished Armenian genocide emboldened subsequent perpetrators of mass atrocity.'},
+{from:'holocaust',to:'nuremberg_trials',concept:'International Criminal Justice',year:1945,desc:'The Nuremberg Trials established individual criminal responsibility for crimes against humanity.'},
+{from:'nuremberg_trials',to:'un_genocide_convention',concept:'International Criminal Justice',year:1948,desc:'The Genocide Convention codified Nuremberg principles into international law.'},
+{from:'un_genocide_convention',to:'icc',concept:'International Criminal Justice',year:2002,desc:'The ICC created a permanent institution for the prosecution of international crimes.'},
+// Chain 10: Narcotics & Prohibition
+{from:'opium_wars',to:'prohibition',concept:'Narcotics & Prohibition',year:1920,desc:'The temperance movement extended opium prohibition logic to alcohol.'},
+{from:'prohibition',to:'war_on_drugs',concept:'Narcotics & Prohibition',year:1971,desc:'The War on Drugs escalated substance prohibition into a militarised global campaign.'},
+{from:'war_on_drugs',to:'drug_cartels',concept:'Narcotics & Prohibition',year:1980,desc:'Prohibition created the black market conditions that empowered drug cartels.'},
+{from:'drug_cartels',to:'drug_decriminalization',concept:'Narcotics & Prohibition',year:2001,desc:'Portugal\'s decriminalisation rejected the prohibition framework that empowered cartels.'},
+// Chain 11: White Collar Crime
+{from:'counterfeiting',to:'ponzi_schemes',concept:'White Collar Crime',year:1920,desc:'Financial fraud evolved from currency counterfeiting to sophisticated investment schemes.'},
+{from:'ponzi_schemes',to:'white_collar_crime',concept:'White Collar Crime',year:1939,desc:'Sutherland coined "white-collar crime" to describe systemic corporate and financial criminality.'},
+{from:'white_collar_crime',to:'money_laundering',concept:'White Collar Crime',year:1970,desc:'Money laundering became the essential financial infrastructure for all major crime.'},
+{from:'money_laundering',to:'terrorism_financing',concept:'White Collar Crime',year:2001,desc:'Counter-terrorism extended money laundering frameworks to terrorist financing.'},
+// Chain 12: Restorative Justice
+{from:'restorative_justice',to:'gacaca_courts',concept:'Restorative Justice',year:2001,desc:'Rwanda adapted traditional gacaca courts for post-genocide community justice.'},
+{from:'gacaca_courts',to:'truth_reconciliation',concept:'Restorative Justice',year:1996,desc:'South Africa\'s TRC applied restorative principles to national-scale transitional justice.'},
+// Chain 13: Digital Crime
+{from:'identity_theft',to:'silk_road_darknet',concept:'Digital Crime',year:2011,desc:'The dark web enabled anonymous criminal marketplaces built on stolen identities.'},
+{from:'silk_road_darknet',to:'cyberbullying',concept:'Digital Crime',year:2012,desc:'Digital platforms enabled new forms of interpersonal crime and harassment.'},
+{from:'cyberbullying',to:'algorithmic_injustice',concept:'Digital Crime',year:2016,desc:'Algorithmic systems introduced new vectors of digital harm in criminal justice.'},
+// Chain 14: Human Trafficking
+{from:'slave_trade',to:'human_trafficking',concept:'Human Trafficking',year:1900,desc:'The end of legal slavery drove exploitation into covert trafficking networks.'},
+{from:'human_trafficking',to:'modern_slavery',concept:'Human Trafficking',year:1990,desc:'Modern slavery encompasses trafficking within globalised supply chains.'},
+{from:'modern_slavery',to:'refugee_criminalisation',concept:'Human Trafficking',year:2000,desc:'Migration criminalisation increased vulnerability to trafficking and exploitation.'},
+// Chain 15: Genocide & Mass Atrocity
+{from:'indigenous_genocide',to:'armenian_genocide',concept:'Genocide & Mass Atrocity',year:1915,desc:'Colonial genocide established patterns of mass killing replicated in the 20th century.'},
+{from:'armenian_genocide',to:'holodomor',concept:'Genocide & Mass Atrocity',year:1932,desc:'State-orchestrated mass death continued with Stalin\'s engineered famine.'},
+{from:'holodomor',to:'holocaust',concept:'Genocide & Mass Atrocity',year:1941,desc:'The Holocaust represented the industrial culmination of genocidal violence.'},
+{from:'holocaust',to:'rwandan_genocide',concept:'Genocide & Mass Atrocity',year:1994,desc:'Rwanda demonstrated that genocide persisted despite post-Holocaust vows of "never again."'},
+{from:'rwandan_genocide',to:'bosnian_genocide',concept:'Genocide & Mass Atrocity',year:1995,desc:'The Bosnian genocide revealed Europe\'s failure to prevent mass atrocity on its own continent.'},
+// Chain 16: Gender-Based Violence
+{from:'witch_trials',to:'domestic_violence',concept:'Gender-Based Violence',year:1800,desc:'The criminalisation of witchcraft and domestic violence share roots in gendered social control.'},
+{from:'domestic_violence',to:'wartime_sexual_violence',concept:'Gender-Based Violence',year:1945,desc:'Recognition of domestic violence as crime paralleled growing awareness of wartime sexual violence.'},
+{from:'wartime_sexual_violence',to:'criminalisation_homosexuality',concept:'Gender-Based Violence',year:1969,desc:'Sexual violence and sexuality criminalisation both reflect state control of bodies and intimacy.'},
+// Chain 17: Espionage to Surveillance
+{from:'the_assassins',to:'espionage',concept:'Espionage to Surveillance',year:1500,desc:'The Assassins\' intelligence networks prefigured modern state espionage.'},
+{from:'espionage',to:'stasi',concept:'Espionage to Surveillance',year:1950,desc:'The Stasi perfected totalitarian surveillance, monitoring an entire population.'},
+{from:'stasi',to:'algorithmic_injustice',concept:'Espionage to Surveillance',year:2008,desc:'Digital surveillance systems extended Stasi-like monitoring through algorithmic means.'},
+// Chain 18: Juvenile & Youth Justice
+{from:'penal_colonies',to:'juvenile_justice',concept:'Juvenile & Youth Justice',year:1899,desc:'The juvenile court movement rejected treating children as adult criminals.'},
+{from:'juvenile_justice',to:'gang_violence',concept:'Juvenile & Youth Justice',year:1960,desc:'Youth gang violence challenged the rehabilitative ideals of juvenile justice.'},
+{from:'gang_violence',to:'cyberbullying',concept:'Juvenile & Youth Justice',year:2006,desc:'Digital platforms created new arenas for youth-on-youth harm.'},
+// Chain 19: Political Crime & Dissent
+{from:'trial_of_socrates',to:'dreyfus_affair',concept:'Political Crime & Dissent',year:1894,desc:'The Dreyfus Affair echoed Socrates\' trial — the state criminalising inconvenient truth-telling.'},
+{from:'dreyfus_affair',to:'political_assassination',concept:'Political Crime & Dissent',year:1900,desc:'Political assassination escalated the stakes of political dissent beyond the courtroom.'},
+{from:'political_assassination',to:'forced_disappearances',concept:'Political Crime & Dissent',year:1970,desc:'State-sponsored disappearance replaced public political murder with covert elimination.'},
+// Chain 20: Maritime Crime
+{from:'golden_age_piracy',to:'somali_piracy',concept:'Maritime Crime',year:2005,desc:'Somali piracy revived maritime crime in the context of state collapse and economic desperation.'},
+];
 
 
-const WOMEN={};
+const WOMEN={
+'hammurabi_code':[
+{nm:'Enheduanna',role:'High Priestess & earliest known legal advocate',yr:-2285,desc:'Though predating Hammurabi, Enheduanna\'s writings on temple law and justice established the intellectual tradition of codified accountability that Mesopotamian legal codes drew upon. Her hymns articulated concepts of divine justice that influenced secular law.'},
+],
+'athenian_courts':[
+{nm:'Aspasia of Miletus',role:'Rhetorician & political advisor',yr:-445,desc:'Aspasia was prosecuted in Athenian courts on charges of impiety and procuring — one of the earliest recorded political trials targeting a woman. Her trial illuminated the gendered use of criminal law to silence influential women.'},
+],
+'witch_trials':[
+{nm:'Alice Kyteler',role:'First woman tried for witchcraft in Ireland',yr:1324,desc:'Dame Alice Kyteler was the first person condemned for witchcraft in Ireland. Her case established the template for witch prosecution — accusations driven by property disputes, targeting independent wealthy women.'},
+{nm:'Tituba',role:'First accused in the Salem witch trials',yr:1692,desc:'Tituba, an enslaved woman in Salem, was the first person accused and the first to confess, triggering the cascade of accusations that followed. Her confession under coercion revealed how race, slavery, and gender intersected in witch trial persecution.'},
+],
+'beccaria_reform':[
+{nm:'Olympe de Gouges',role:'Author of the Declaration of the Rights of Woman',yr:1791,desc:'De Gouges challenged the Enlightenment\'s failure to extend criminal justice reform to women, arguing that if women could be condemned to the scaffold they must also have the right to mount the tribune. She was guillotined in 1793 for her political writings.'},
+],
+'london_police':[
+{nm:'Edith Smith',role:'First woman with full police powers in Britain',yr:1915,desc:'Edith Smith became the first woman in Britain granted full arrest powers as a police officer in Grantham. She patrolled streets alone, dealing with cases involving women and children that male officers neglected.'},
+],
+'salem_trials':[
+{nm:'Mary Easty',role:'Executed victim who petitioned for justice',yr:1692,desc:'Mary Easty wrote a petition from prison that challenged the validity of spectral evidence and the fairness of the proceedings. Her eloquent plea for due process — written knowing she would be executed — influenced the eventual end of the trials.'},
+],
+'french_revolution_crime':[
+{nm:'Charlotte Corday',role:'Assassin of Jean-Paul Marat',yr:1793,desc:'Charlotte Corday murdered the radical journalist Marat in his bath, believing his incitement to violence constituted a greater crime than her act of assassination. Her trial raised fundamental questions about political violence, tyrannicide, and women\'s political agency.'},
+],
+'nuremberg_trials':[
+{nm:'Herta Oberheuser',role:'Only woman sentenced at the Doctors\' Trial',yr:1947,desc:'Dr Herta Oberheuser was convicted at the Nuremberg Doctors\' Trial for performing medical experiments on concentration camp prisoners at Ravensbrück. Her case established that women could be individually criminally responsible for crimes against humanity.'},
+],
+'forensic_science':[
+{nm:'Frances Glessner Lee',role:'Pioneer of forensic science education',yr:1943,desc:'Frances Glessner Lee revolutionised forensic investigation by creating the Nutshell Studies of Unexplained Death — intricate crime scene dioramas used to train investigators. She funded the first department of legal medicine at Harvard and is considered the mother of forensic science.'},
+{nm:'Mary-Ann Stephenson',role:'Pioneer in forensic toxicology',yr:1920,desc:'Working at a time when women were excluded from most scientific roles, early women toxicologists contributed essential work in identifying poisons in criminal cases, building the field that would become modern forensic chemistry.'},
+],
+'mass_incarceration':[
+{nm:'Michelle Alexander',role:'Legal scholar & author of The New Jim Crow',yr:2010,desc:'Michelle Alexander\'s The New Jim Crow fundamentally reframed the American understanding of mass incarceration as a system of racial caste. Her work showed how the War on Drugs created a permanent underclass of people branded as criminals, stripped of voting rights, employment, and housing.'},
+{nm:'Ruth Wilson Gilmore',role:'Geographer & prison abolitionist',yr:1998,desc:'Ruth Wilson Gilmore\'s Golden Gulag analysed California\'s prison expansion as a spatial fix for surplus land, labour, capital, and state capacity. Her definition of racism as "the state-sanctioned production of group-differentiated vulnerability to premature death" became foundational to abolitionist scholarship.'},
+],
+'apartheid':[
+{nm:'Ruth First',role:'Anti-apartheid activist & scholar',yr:1963,desc:'Ruth First was a journalist, scholar, and anti-apartheid activist who was imprisoned for 117 days under the Ninety-Day Detention Law. After exile, she was assassinated by a South African parcel bomb in Mozambique in 1982, demonstrating the apartheid state\'s criminal reach across borders.'},
+{nm:'Winnie Madikizela-Mandela',role:'Anti-apartheid leader',yr:1969,desc:'Winnie Mandela endured imprisonment, torture, solitary confinement, and banishment under apartheid. Her own later criminal convictions — including kidnapping and assault — illustrated the complex moral territory where resistance to criminal systems can itself become criminal.'},
+],
+'human_trafficking':[
+{nm:'Josephine Butler',role:'Campaigner against trafficking & forced prostitution',yr:1869,desc:'Josephine Butler led the campaign against the Contagious Diseases Acts and international sex trafficking in the 19th century. Her activism established the framework for understanding trafficking as a criminal justice issue rather than a moral failing of victims.'},
+],
+'restorative_justice':[
+{nm:'Kay Pranis',role:'Pioneer of circle processes in criminal justice',yr:1994,desc:'Kay Pranis adapted indigenous circle practices for use in the American criminal justice system, developing peacemaking circles as an alternative to adversarial proceedings. Her work demonstrated that community-based restorative processes could handle serious criminal cases with greater satisfaction for victims and offenders alike.'},
+],
+'domestic_violence':[
+{nm:'Erin Pizzey',role:'Founded the first domestic violence shelter',yr:1971,desc:'Erin Pizzey opened the world\'s first domestic violence refuge in Chiswick, London. Her book Scream Quietly or the Neighbours Will Hear broke the silence around domestic violence and catalysed the global shelter movement.'},
+{nm:'Lenore Walker',role:'Psychologist who defined the battered woman syndrome',yr:1979,desc:'Lenore Walker\'s concept of the battered woman syndrome transformed criminal defence by providing a psychological framework for understanding why abuse victims remain with and sometimes kill their abusers. Her work changed how courts treated women who killed in self-defence.'},
+],
+'wrongful_conviction':[
+{nm:'Centurion Ministries Founders',role:'Kate Hill co-founded wrongful conviction organisation',yr:1983,desc:'Kate Hill co-founded Centurion Ministries, one of the first organisations dedicated to freeing wrongfully convicted people. Her work prefigured the Innocence Project and established the institutional infrastructure for challenging wrongful convictions.'},
+],
+'prison_reform':[
+{nm:'Elizabeth Fry',role:'Pioneer of humane prison conditions',yr:1813,desc:'Elizabeth Fry\'s visits to Newgate Prison exposed the horrific conditions faced by women prisoners and their children. Her reforms — including education, employment, and classification of prisoners — became the template for modern prison reform movements worldwide.'},
+{nm:'Dorothea Dix',role:'Reformer of prisons & mental asylums',yr:1843,desc:'Dorothea Dix documented the abuse of mentally ill prisoners in Massachusetts jails and led a national campaign to separate the mentally ill from the criminal population. Her advocacy created the first generation of state mental hospitals and reformed the treatment of vulnerable prisoners.'},
+],
+'war_on_drugs':[
+{nm:'Dr Joycelyn Elders',role:'US Surgeon General who advocated drug policy reform',yr:1993,desc:'Dr Joycelyn Elders, the first African American US Surgeon General, publicly advocated studying drug legalisation as an alternative to the War on Drugs. Her dismissal for this position demonstrated the political cost of challenging drug prohibition orthodoxy.'},
+],
+'death_penalty':[
+{nm:'Sister Helen Prejean',role:'Author of Dead Man Walking & death penalty opponent',yr:1982,desc:'Sister Helen Prejean\'s spiritual counselling of death row inmates and her book Dead Man Walking brought the human reality of capital punishment to millions. Her tireless advocacy has been credited with shifting American public opinion against the death penalty.'},
+],
+'icc':[
+{nm:'Fatou Bensouda',role:'Chief Prosecutor of the ICC',yr:2012,desc:'Fatou Bensouda served as Chief Prosecutor of the International Criminal Court from 2012 to 2021, pursuing cases of genocide, war crimes, and crimes against humanity. Her tenure included controversial decisions to investigate crimes in Palestine and Afghanistan, facing political pressure from multiple world powers.'},
+],
+'police_brutality':[
+{nm:'Mamie Till-Mobley',role:'Mother of Emmett Till, civil rights catalyst',yr:1955,desc:'Mamie Till-Mobley\'s decision to hold an open-casket funeral for her murdered son Emmett Till — insisting the world see what racial violence looked like — catalysed the civil rights movement and established the power of making state violence visible.'},
+],
+'hate_crimes':[
+{nm:'Judy Shepard',role:'LGBTQ+ hate crime advocacy pioneer',yr:1998,desc:'After her son Matthew Shepard was murdered in a hate crime, Judy Shepard became the leading advocate for federal hate crime legislation. The Matthew Shepard and James Byrd Jr. Hate Crimes Prevention Act of 2009 expanded federal hate crime law to cover sexual orientation and gender identity.'},
+],
+'environmental_crime':[
+{nm:'Berta Cáceres',role:'Honduran indigenous environmental activist',yr:2015,desc:'Berta Cáceres led indigenous Lenca resistance against the Agua Zarca dam, receiving the Goldman Environmental Prize. Her assassination in 2016 by security forces connected to the dam company exposed how environmental activism is criminalised while environmental destruction goes unpunished.'},
+],
+'juvenile_justice':[
+{nm:'Jane Addams',role:'Founder of the juvenile court movement',yr:1899,desc:'Jane Addams co-founded Hull House and was instrumental in establishing the world\'s first juvenile court in Cook County, Illinois. Her philosophy — that children in trouble needed care and rehabilitation, not punishment — revolutionised the treatment of young offenders.'},
+],
+'truth_reconciliation':[
+{nm:'Yasmin Sooka',role:'TRC Commissioner',yr:1996,desc:'Yasmin Sooka served as a commissioner on the South African Truth and Reconciliation Commission, where she focused on the experiences of women and the gendered dimensions of apartheid violence. She later served on the UN Panel of Experts on South Sudan.'},
+],
+'prison_abolition':[
+{nm:'Angela Davis',role:'Scholar & prison abolition movement founder',yr:1971,desc:'Angela Davis\'s own imprisonment and trial in 1970-72 made her an international symbol of political persecution. Her subsequent scholarship — particularly Are Prisons Obsolete? (2003) — provided the intellectual foundation for the prison abolition movement, connecting incarceration to slavery, racial capitalism, and gender violence.'},
+{nm:'Mariame Kaba',role:'Organiser & abolitionist educator',yr:2000,desc:'Mariame Kaba\'s grassroots organising and writing — including We Do This \'Til We Free Us (2021) — made prison and police abolition accessible to a broad audience. Her emphasis on transformative justice as a practical alternative to punishment has shaped a generation of activists.'},
+],
+'cyberbullying':[
+{nm:'Monica Lewinsky',role:'Anti-cyberbullying advocate',yr:2014,desc:'Monica Lewinsky, who experienced what she has called the first major case of cyberbullying when the scandal bearing her name went viral in 1998, became a prominent advocate against online harassment. Her TED talk "The Price of Shame" reframed her experience as a study in digital cruelty and public humiliation.'},
+],
+'algorithmic_injustice':[
+{nm:'Joy Buolamwini',role:'Founder of the Algorithmic Justice League',yr:2016,desc:'Joy Buolamwini\'s research at MIT demonstrated that facial recognition systems had dramatically higher error rates for darker-skinned women, coining the term "the coded gaze." Her founding of the Algorithmic Justice League launched the movement for accountability in automated decision-making systems.'},
+{nm:'Safiya Umoja Noble',role:'Scholar of algorithmic discrimination',yr:2018,desc:'Safiya Noble\'s Algorithms of Oppression revealed how search engines reproduce and amplify racial and gender stereotypes. Her work established the intellectual framework for understanding how digital systems perpetuate the discrimination embedded in the data they are trained on.'},
+],
+'wartime_sexual_violence':[
+{nm:'Nadia Murad',role:'Nobel Laureate & survivor advocate',yr:2014,desc:'Nadia Murad, a Yazidi woman who survived ISIS captivity and sexual slavery, became the global voice for survivors of wartime sexual violence. Her testimony before the UN Security Council and her Nobel Peace Prize (2018) elevated wartime sexual violence from a neglected consequence of war to a central concern of international criminal justice.'},
+],
+'gang_violence':[
+{nm:'Aquil Basheer',role:'Community intervention pioneer',yr:1988,desc:'While most prominent gang intervention figures are male, women community leaders like Aqeela Sherrills and numerous unnamed mothers — the "mothers of the movement" — have been the backbone of community anti-violence work, organising ceasefire agreements and providing alternatives to gang involvement in communities devastated by violence.'},
+],
+'lynching':[
+{nm:'Ida B. Wells',role:'Investigative journalist & anti-lynching crusader',yr:1892,desc:'Ida B. Wells\'s investigative journalism exposed lynching as a systematic tool of racial terror, not a response to crime. Her pamphlets Southern Horrors and The Red Record used data and firsthand investigation to demolish the myth that lynching punished criminal behaviour, revealing it as an instrument of white supremacist social control.'},
+],
+'drug_decriminalization':[
+{nm:'Dr Joana Gonçalves Ferreira',role:'Portuguese drug policy architect',yr:2001,desc:'Women health professionals played crucial roles in designing and implementing Portugal\'s decriminalisation framework, which treated drug use as a public health issue rather than a criminal one. Their clinical expertise was essential in shifting the paradigm from punishment to treatment.'},
+],
+'gacaca_courts':[
+{nm:'Aloisea Inyumba',role:'Minister who oversaw gacaca implementation',yr:2001,desc:'Aloisea Inyumba, as Minister of Gender and Family Promotion, was instrumental in the social infrastructure that supported the gacaca courts. Her work on reintegrating genocide survivors and perpetrators into communities was essential to the gacaca process\'s functioning.'},
+],
+'kidnapping':[
+{nm:'Ingrid Betancourt',role:'Colombian politician held hostage by FARC',yr:2002,desc:'Ingrid Betancourt was kidnapped by FARC guerrillas while campaigning for the Colombian presidency and held captive for over six years in jungle camps. Her ordeal and eventual rescue became an international symbol of the human cost of political kidnapping and the Colombian conflict.'},
+],
+'modern_slavery':[
+{nm:'Joy Ngozi Ezeilo',role:'UN Special Rapporteur on trafficking',yr:2008,desc:'Joy Ngozi Ezeilo served as the UN Special Rapporteur on trafficking in persons, investigating modern slavery across dozens of countries. Her reports documented the gendered nature of trafficking and the failure of criminal justice systems to protect victims while prosecuting perpetrators.'},
+],
+};
 
 let year=-65000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4830,7 +5068,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient Near East & Mediterranean':['hammurabi_code','draco_laws','roman_twelve_tables','mosaic_law','athenian_courts','trial_of_socrates'],
+'Medieval & Early Modern Europe':['magna_carta','canon_law','inquisition','witch_trials','spanish_inquisition','golden_age_piracy','habeas_corpus'],
+'Enlightenment & Revolutionary':['beccaria_reform','french_revolution_crime','napoleonic_code','english_common_law','us_bill_of_rights'],
+'British Isles & Commonwealth':['london_police','jack_ripper','penal_colonies','the_troubles','corporate_manslaughter'],
+'North America':['salem_trials','prohibition','al_capone','mass_incarceration','pinkerton_agency','serial_killers','prison_abolition','algorithmic_injustice'],
+'Latin America & Caribbean':['drug_cartels','forced_disappearances','banditry','kidnapping'],
+'Africa':['apartheid','rwandan_genocide','gacaca_courts','truth_reconciliation','somali_piracy','child_soldiers'],
+'East & Southeast Asia':['yakuza','triads','khmer_rouge','thuggee'],
+'Middle East & Central Asia':['sharia_law','the_assassins','terrorism','blasphemy_laws'],
+'Continental Europe':['justinian_code','dreyfus_affair','stasi','bosnian_genocide','drug_decriminalization'],
+'Global Systems':['slave_trade','human_trafficking','modern_slavery','environmental_crime','money_laundering','terrorism_financing','refugee_criminalisation'],
+'International Justice':['nuremberg_trials','un_genocide_convention','icc','geneva_conventions','restorative_justice'],
+};
 
 const HERITAGE_REASONS={};
 
