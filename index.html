@@ -470,8 +470,161 @@ if(_handle){
   _handle.addEventListener('touchcancel',endDrag);
 }
 
+// ── THEME DATA ─────────────────────────────────────────────────
+var TH=[
+  {n:'I',nm:'The Living World',sub:'Natura',id:'natura'},
+  {n:'II',nm:'The Human Animal',sub:'Homo',id:'homo'},
+  {n:'III',nm:'Peoples & Movement',sub:'Gentes',id:'gentes'},
+  {n:'IV',nm:'Belief, Knowledge & Ideas',sub:'Gnōsis',id:'gnosis'},
+  {n:'V',nm:'Power & Conflict',sub:'Potestas',id:'potestas'},
+  {n:'VI',nm:'Rights, Justice & Resistance',sub:'Iustitia',id:'iustitia'},
+  {n:'VII',nm:'Economy, Labour & Exchange',sub:'Oeconomia',id:'oeconomia'},
+  {n:'VIII',nm:'Society & The Everyday',sub:'Vita Communis',id:'vita'},
+  {n:'IX',nm:'Culture, Art & Making',sub:'Ars',id:'ars'},
+  {n:'X',nm:'Word, Sign & Signal',sub:'Signum',id:'signum'},
+  {n:'XI',nm:'The Hidden, Dark & Strange',sub:'Arcana',id:'arcana'},
+  {n:'XII',nm:'The Future & The Possible',sub:'Futura',id:'futura'}
+];
+
+// ── ATLAS DATA ─────────────────────────────────────────────────
+// t=theme index, i=icon, n=name, g=tagline, k=tags, l=live, h=href
+var AT=[
+// ── I · Natura ──
+{t:0,i:'🌌',n:'Cosmos',g:'112 cosmic objects. 13.8 billion years of the universe.',k:['Scale','Discovery','Herstory'],l:1,h:'cosmos/index.html'},
+{t:0,i:'🌡',n:'Clima',g:'Climate is the hidden variable in every historical event.',k:['Climate','Collapse','Ice Age'],l:1,h:'clima/index.html'},
+{t:0,i:'🧊',n:'Aeon',g:'Four billion years of planetary climate. Every ice age, every hothouse, every extinction it caused.',k:['Paleoclimate','Deep Time','Extinction'],l:1,h:'aeon/index.html'},
+{t:0,i:'💧',n:'Aqua',g:'100 water events. Every civilisation that water built. Every one it ended.',k:['Rivers','Drought','Conflict'],l:1,h:'aqua/index.html'},
+{t:0,i:'🪨',n:'Petra',g:'The ground beneath every empire was always the point.',k:['Geology','Resources','Extraction'],l:1,h:'petra/index.html'},
+{t:0,i:'🌿',n:'Flora',g:'The plants that made civilisation.',k:['Crops','Trade','Extinction'],l:1,h:'flora/index.html'},
+{t:0,i:'🐘',n:'Bestia',g:'The animals that made us. The ones we are unmaking.',k:['Domestication','Extinction','War'],l:1,h:'bestia/index.html'},
+{t:0,i:'🌳',n:'Sylva',g:'Every forest that fed, sheltered, or fell to civilisation.',k:['Forest','Deforestation','Ecology'],l:1,h:'sylva/index.html'},
+{t:0,i:'🔥',n:'Ignis',g:'Humanity\'s first technology. Still the most dangerous.',k:['Fire','Energy','Disaster'],l:1,h:'ignis/index.html'},
+{t:0,i:'🌬',n:'Spiritus',g:'Wind, weather, and atmosphere as the invisible hand of history.',k:['Weather','Atmosphere','Climate'],l:1,h:'spiritus/index.html'},
+{t:0,i:'🌾',n:'Solum',g:'Civilisations don\'t collapse. Their soil does.',k:['Soil','Desertification','Collapse'],l:1,h:'solum/index.html'},
+// ── II · Homo ──
+{t:1,i:'🦠',n:'Contagium',g:'Every epidemic. Spread, death, rupture.',k:['Epidemics','Mortality','Response'],l:1,h:'contagium/index.html'},
+{t:1,i:'🫀',n:'Corpus',g:'The human body as territory. Who owns it has always been contested.',k:['Anatomy','Race Science','Autonomy'],l:1,h:'corpus/index.html'},
+{t:1,i:'🧠',n:'Animus',g:'The history of minds that didn\'t fit, and the systems built to manage them.',k:['Psychology','Diagnosis','Power'],l:1,h:'animus/index.html'},
+{t:1,i:'🩹',n:'Dolor',g:'The history of suffering, and the slow fight to end it.',k:['Medicine','Pain','Surgery'],l:1,h:'dolor/index.html'},
+{t:1,i:'⏳',n:'Senex',g:'The one question every civilisation has had to answer.',k:['Ageing','Death','Afterlife'],l:1,h:'senex/index.html'},
+{t:1,i:'🌙',n:'Somnia',g:'The atlas where the territory is entirely inside the mind.',k:['Dreams','Altered States','Ritual'],l:0},
+{t:1,i:'💞',n:'Eros',g:'Every society organised desire. None agreed on how.',k:['Sexuality','Desire','Rights'],l:0},
+{t:1,i:'👁',n:'Sensus',g:'We do not all perceive the same world. We never have.',k:['Senses','Perfume','Perception'],l:0},
+{t:1,i:'💊',n:'Pharmakeia',g:'Every substance humanity has used to heal, alter, or destroy itself.',k:['Drugs','Medicine','Poison'],l:0},
+{t:1,i:'🌾',n:'Fames',g:'Famine as policy. The hunger that changed history.',k:['Famine','Food','Control'],l:0},
+{t:1,i:'🤱',n:'Partus',g:'Every society has tried to control birth. None has fully succeeded.',k:['Birth','Midwifery','Reproduction'],l:0},
+{t:1,i:'🌿',n:'Intoxicatio',g:'Every culture found something to alter its mind with. Every empire found a way to profit from it.',k:['Substances','Trade','Prohibition'],l:0},
+{t:1,i:'🧵',n:'Vestis',g:'Cloth is the oldest technology. It built empires before iron did.',k:['Textiles','Labour','Empire'],l:0},
+{t:1,i:'👁',n:'Stigma',g:'Every society designates some bodies as contaminating. This is always political, never medical.',k:['Exclusion','Bodies','Power'],l:0},
+// ── III · Gentes ──
+{t:2,i:'🌍',n:'Civilitas',g:'100 civilizations. 65,000 years.',k:['Civilizations','Timeline','Herstory'],l:1,h:'civilitas/index.html'},
+{t:2,i:'🗣',n:'Lingua',g:'7,000 languages. Half will die this century.',k:['Language','Extinction','Scripts'],l:1,h:'lingua/index.html'},
+{t:2,i:'🧭',n:'Exōdus',g:'300,000 years of human movement.',k:['Migration','Diaspora','Displacement'],l:0},
+{t:2,i:'⛓',n:'Servitus',g:'The economic engine underneath half the other atlases.',k:['Slavery','Labour','Emancipation'],l:0},
+{t:2,i:'🏕',n:'Nomad',g:'The civilisations that left no cities. They were not less civilised.',k:['Steppe','Arctic','Sea Peoples'],l:0},
+{t:2,i:'🌐',n:'Diaspora',g:'Identity held together across generations of distance.',k:['Exile','Networks','Return'],l:0},
+{t:2,i:'🏷',n:'Nomen',g:'Every name is an argument about who owns the past.',k:['Place Names','Renaming','Colonial'],l:0},
+{t:2,i:'🪶',n:'Tribū',g:'Every indigenous nation. What survived contact and what didn\'t.',k:['Indigenous','Colonialism','Sovereignty'],l:0},
+{t:2,i:'🔒',n:'Captivus',g:'The history of imprisonment — who was caged, and why.',k:['Incarceration','Prison','Control'],l:0},
+{t:2,i:'🧳',n:'Exilium',g:'The ideas that changed the world were often made in the wrong country.',k:['Exile','Diaspora','Ideas'],l:0},
+{t:2,i:'🕊',n:'Asylum',g:'Sanctuary is one of humanity\'s oldest ideas. We keep dismantling it.',k:['Refugees','Sanctuary','Law'],l:0},
+// ── IV · Gnōsis ──
+{t:3,i:'✨',n:'Numen',g:'Every answer humanity has given to the same question.',k:['Religion','Belief','Mythology'],l:1,h:'numen/index.html'},
+{t:3,i:'🏛',n:'Sophia',g:'Every school of thought. Mapped.',k:['Philosophy','Ideas','Transmission'],l:1,h:'sophia/index.html'},
+{t:3,i:'𓂀',n:'Graphē',g:'100 scripts, from cuneiform to emoji.',k:['Writing','Scripts','Extinct'],l:1,h:'graphe/index.html'},
+{t:3,i:'🔬',n:'Experimenta',g:'Where scientific breakthroughs happened. And why there.',k:['Science','Discovery','Institutions'],l:1,h:'experimenta/index.html'},
+{t:3,i:'⚛',n:'Quantum',g:'The complete history of humanity\'s attempts to understand reality.',k:['Physics','Cosmology','Reality'],l:1,h:'quantum/index.html'},
+{t:3,i:'🗺',n:'Terra Incognita',g:'A map of confident errors. The most useful atlas of all.',k:['Wrong Knowledge','Paradigm Shifts'],l:1,h:'terraincognita/index.html'},
+{t:3,i:'🔥',n:'Obscura',g:'What every civilisation was afraid of knowing.',k:['Censorship','Suppression','Index'],l:1,h:'obscura/index.html'},
+{t:3,i:'📚',n:'Scriptorium',g:'The physical life of knowledge — and how close it came to dying.',k:['Books','Libraries','Printing'],l:1,h:'scriptorium/index.html'},
+{t:3,i:'🌠',n:'Augur',g:'Every civilisation read the sky differently. Astronomy to astrology.',k:['Astronomy','Divination','Calendars'],l:1,h:'augur/index.html'},
+{t:3,i:'∞',n:'Mathematica',g:'Where numbers were invented, and what they made possible.',k:['Mathematics','Zero','Proof'],l:1,h:'mathematica/index.html'},
+{t:3,i:'⚙️',n:'Techne',g:'Every tool that changed what it meant to be human.',k:['Technology','Invention','Acceleration'],l:1,h:'techne/index.html'},
+{t:3,i:'📜',n:'Codex',g:'Every culture\'s oldest surviving words. What they chose to write down first tells you everything.',k:['Texts','Epics','Origins'],l:1,h:'codex/index.html'},
+// ── V · Potestas ──
+{t:4,i:'⚔',n:'Bellum',g:'War is the context for most of human history. Examine it.',k:['War','Military','Casualties'],l:1,h:'bellum/index.html'},
+{t:4,i:'👑',n:'Dynastia',g:'100 dynasties. 5,000 years of royal and imperial power.',k:['Dynasties','Succession','Herstory'],l:1,h:'dynastia/index.html'},
+{t:4,i:'📐',n:'Terminus',g:'Every border. Who drew it. What it cost.',k:['Borders','Treaties','Disputed'],l:0},
+{t:4,i:'🔥',n:'Insurgō',g:'Every revolution. Spark, spread, survival.',k:['Revolution','Uprising','Contagion'],l:0},
+{t:4,i:'🕯',n:'Cruor',g:'Mass violence against civilians. The full record.',k:['Genocide','Accountability','Denial'],l:0},
+{t:4,i:'🗡',n:'Sicarius',g:'The most precise political instrument. Almost never works.',k:['Assassination','Consequence','Power'],l:0},
+{t:4,i:'🩻',n:'Trauma',g:'What war leaves behind. The longest part of any conflict.',k:['PTSD','Landmines','Generational'],l:0},
+{t:4,i:'🕵',n:'Arcanum',g:'The operations that changed history, conducted in the dark.',k:['Espionage','Intelligence','Covert'],l:0},
+{t:4,i:'🔐',n:'Kryptós',g:'Caesar to quantum. The arms race of secrecy.',k:['Cipher','Cryptography','Quantum'],l:0},
+{t:4,i:'🏛',n:'Imperium',g:'Every empire. Its reach, its cost, its collapse.',k:['Empire','Colonies','Decline'],l:0},
+{t:4,i:'📢',n:'Propaganda',g:'The art of manufacturing consent across every era.',k:['Propaganda','Media','Persuasion'],l:0},
+{t:4,i:'🏦',n:'Tributum',g:'Who paid taxes, who didn\'t, and who died over the difference.',k:['Taxation','Revolt','Fiscal'],l:0},
+{t:4,i:'🧱',n:'Murus',g:'Every wall is a confession about what the state cannot do.',k:['Walls','Borders','Control'],l:0},
+{t:4,i:'⚔',n:'Armamentum',g:'The spear preceded the state. The gun remade it. The drone is remaking it again.',k:['Weapons','Arms Trade','Technology'],l:0},
+// ── VI · Iustitia ──
+{t:5,i:'⚖',n:'Lex',g:'The rules that didn\'t exist until someone decided they should.',k:['Law','Rights','Justice'],l:1,h:'lex/index.html'},
+{t:5,i:'✊',n:'Manifesto',g:'Every political idea that tried to change the world. Mapped.',k:['Ideology','Spread','Movements'],l:1,h:'manifesto/index.html'},
+{t:5,i:'✊',n:'Vindica',g:'The fight for women\'s rights. Every wave.',k:['Suffrage','Waves','Backlash'],l:0},
+{t:5,i:'🎭',n:'Corruptio',g:'The boundary between power and its abuse has always been negotiated.',k:['Corruption','Kleptocracy','Impunity'],l:1,h:'corruptio/index.html'},
+{t:5,i:'🔍',n:'Crimen',g:'The history of crime — and who decided what it was.',k:['Crime','Policing','Justice'],l:0},
+{t:5,i:'🕊',n:'Martyr',g:'Every cause that required someone to die for it.',k:['Martyrdom','Resistance','Memory'],l:0},
+{t:5,i:'✋',n:'Suffragium',g:'The vote was never freely given. It was taken — and it is still being taken back.',k:['Franchise','Exclusion','Resistance'],l:0},
+{t:5,i:'🌍',n:'Terra',g:'Land ownership is the deepest map of power. It predates money, law, and writing.',k:['Land','Ownership','Seizure'],l:0},
+// ── VII · Oeconomia ──
+{t:6,i:'💰',n:'Pecunia',g:'Money, credit, and every crash since.',k:['Currencies','Crises','Fintech'],l:1,h:'pecunia/index.html'},
+{t:6,i:'⛵',n:'Via',g:'Every trade route from sail to container.',k:['Routes','Commodities','Silk Road'],l:1,h:'via/index.html'},
+{t:6,i:'🚂',n:'Cursus',g:'Every revolution in how fast humans could move changed who held power.',k:['Transport','Infrastructure','Speed'],l:1,h:'cursus/index.html'},
+{t:6,i:'📜',n:'Debitum',g:'Debt is older than money. It has always been a form of power.',k:['Debt','Credit','Jubilee'],l:1,h:'debitum/index.html'},
+{t:6,i:'🔨',n:'Labor',g:'The history of what people have done all day.',k:['Work','Labour Rights','Wages'],l:1,h:'labor/index.html'},
+{t:6,i:'⚙',n:'Machina',g:'Every machine that took a job. Every job it created instead.',k:['Automation','Labour','AI'],l:0},
+{t:6,i:'🏪',n:'Mercatus',g:'The physical places where prices were made.',k:['Markets','Trade Fairs','Exchanges'],l:0},
+{t:6,i:'🎲',n:'Lucrum',g:'The parallel economy that never stops growing.',k:['Organised Crime','Cartels','Shadow'],l:0},
+{t:6,i:'🎁',n:'Dōnum',g:'The economy of generosity is also an economy of power.',k:['Gifts','Philanthropy','Aid'],l:0},
+{t:6,i:'⚓',n:'Nauta',g:'The trade routes that built every fortune, and every war.',k:['Trade Routes','Navigation','Ports'],l:0},
+{t:6,i:'⚒',n:'Faber',g:'The history of making things — craft, manufacture, industry.',k:['Craft','Industry','Labour'],l:0},
+{t:6,i:'🪙',n:'Argentum',g:'Precious metals and the mines that powered every monetary system.',k:['Mining','Metals','Monetary'],l:0},
+// ── VIII · Vita Communis ──
+{t:7,i:'🎩',n:'Classis',g:'Every society said class didn\'t define you. Every society was wrong.',k:['Class','Caste','Mobility'],l:0},
+{t:7,i:'🏠',n:'Domus',g:'The home is the most political space. It always has been.',k:['Home','Housing','Privacy'],l:0},
+{t:7,i:'🧸',n:'Puer',g:'Childhood is a recent invention. Examine it.',k:['Childhood','Child Labour','Rights'],l:0},
+{t:7,i:'🕯',n:'Ritus',g:'How societies mark what matters.',k:['Ritual','Ceremony','Sacred'],l:0},
+{t:7,i:'🍽',n:'Cibus',g:'Every cuisine is a map of who conquered whom.',k:['Cuisine','Migration','Empire'],l:0},
+{t:7,i:'🏙',n:'Via Urbis',g:'The city is humanity\'s greatest and most unfinished invention.',k:['Cities','Urbanism','Slums'],l:0},
+{t:7,i:'🕸',n:'Vinculum',g:'How ideas, diseases, and fashions move through human networks.',k:['Networks','Contagion','Loneliness'],l:0},
+{t:7,i:'🚿',n:'Mundus',g:'Cleanliness is not next to godliness. It is next to power.',k:['Sanitation','Class','Infrastructure'],l:0},
+{t:7,i:'💍',n:'Nuptiae',g:'Marriage is a property contract that acquired romantic mythology about 200 years ago.',k:['Marriage','Property','Gender'],l:0},
+// ── IX · Ars ──
+{t:8,i:'🎵',n:'Anthrophone',g:'Every instrument. Every culture. One map.',k:['Instruments','Organology','Lineage'],l:1,h:'anthrophone/index.html'},
+{t:8,i:'🎨',n:'Pigmentum',g:'The colours that were once impossible.',k:['Pigment','Trade','Symbolism'],l:0},
+{t:8,i:'🏗',n:'Structura',g:'The built ideas that outlasted their makers.',k:['Architecture','Style','Materials'],l:0},
+{t:8,i:'♟',n:'Lūdus',g:'Play as a mirror of civilisation.',k:['Games','Board Games','Sport'],l:0},
+{t:8,i:'🏟',n:'Agōn',g:'Sport is politics conducted by other means. Usually.',k:['Sport','Olympics','Politics'],l:0},
+{t:8,i:'💡',n:'Inventio',g:'Who gets credit for an idea is rarely who had it first.',k:['Invention','Patents','Suppression'],l:0},
+{t:8,i:'🎭',n:'Mimesis',g:'Culture travels by stealing. That is how it grows.',k:['Influence','Appropriation','Style'],l:0},
+{t:8,i:'📖',n:'Fabula',g:'Every story humanity told about itself — myth, epic, novel.',k:['Narrative','Epic','Oral Tradition'],l:0},
+{t:8,i:'🎨',n:'Imago',g:'A map of every art movement and the politics beneath it.',k:['Art','Representation','Patronage'],l:0},
+{t:8,i:'🗿',n:'Memoria',g:'Every monument is an argument. Every removal is a counter-argument.',k:['Monuments','Erasure','Memory'],l:0},
+// ── X · Signum ──
+{t:9,i:'📡',n:'Vox',g:'Every revolution in who could speak to whom.',k:['Media','Press','Propaganda'],l:0},
+{t:9,i:'🕰',n:'Tempus',g:'Whoever controls the calendar controls history.',k:['Calendars','Time Zones','Power'],l:0},
+{t:9,i:'📏',n:'Norma',g:'The invisible agreements that make the world work.',k:['Standards','Measurement','Infrastructure'],l:0},
+{t:9,i:'🧭',n:'Stella',g:'How humans found their way before instruments. And what we lost.',k:['Navigation','Stars','Wayfinding'],l:0},
+{t:9,i:'🌊',n:'Flumen',g:'Rivers were the first roads, the first borders, and the first gods.',k:['Rivers','Civilisation','Infrastructure'],l:0},
+// ── XI · Arcana ──
+{t:10,i:'☠',n:'Venena',g:'The boundary between medicine and murder is a dose.',k:['Poison','Assassination','Toxicology'],l:0},
+{t:10,i:'🔍',n:'Occultus',g:'Secrecy as a social technology. Who it serves. Why it persists.',k:['Secret Societies','Conspiracy','Ritual'],l:0},
+{t:10,i:'🃏',n:'Ludibrium',g:'A map of what people wanted badly enough to believe.',k:['Hoaxes','Fraud','Credulity'],l:0},
+{t:10,i:'👁',n:'Monstrum',g:'What a culture places beyond the human tells you everything about it.',k:['Monsters','Mythology','Fear'],l:0},
+{t:10,i:'🦋',n:'Lusus Naturae',g:'The history of the extraordinary body as spectacle and rights.',k:['Anomaly','Freak Shows','Disability'],l:0},
+{t:10,i:'🩸',n:'Supplicium',g:'Every state that used torture believed it worked. None of them were right. All of them kept doing it.',k:['Torture','Confession','Impunity'],l:0},
+{t:10,i:'🤯',n:'Mirabilia',g:'History\'s most counterintuitive, bizarre, and true facts. The ones that make you question everything.',k:['Curiosities','Counterintuitive','Strange'],l:0},
+{t:10,i:'🕍',n:'Sacra',g:'Every culture decided that some places on earth were closer to the divine. Millions walked to reach them.',k:['Pilgrimage','Sacred Sites','Geography'],l:0},
+{t:10,i:'⚱',n:'Sepultura',g:'How a culture buries its dead is its most honest self-portrait.',k:['Death','Burial','Memory'],l:0},
+// ── XII · Futura ──
+{t:11,i:'☄',n:'Finis',g:'Every near-miss. Every coming threat. The full ledger.',k:['Existential Risk','Close Calls','Future'],l:0},
+{t:11,i:'🔭',n:'Futura',g:'Every era imagined the future. None of them got it right.',k:['Futures','Prediction','Science Fiction'],l:0},
+{t:11,i:'🏙',n:'Utopia',g:'Planned cities. Why they almost all fail.',k:['Planned Cities','Communes','Failure'],l:0},
+{t:11,i:'☮',n:'Pax',g:'Every treaty that ended a war. How long it held. Why it failed.',k:['Peace','Treaties','Reconciliation'],l:0},
+{t:11,i:'🌊',n:'Diluvium',g:'Rising seas, sinking cities, and the civilisations already underwater.',k:['Sea Level','Displacement','Futures'],l:0}
+];
+
 /* ══════════════════════════════════════════════════════════════
-   STEP 3–4: Data arrays and render functions coming next
+   STEP 4: Render functions coming next
    ══════════════════════════════════════════════════════════════ */
 </script>
 </body>
