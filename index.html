@@ -174,30 +174,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .info-panel::-webkit-scrollbar-track{background:transparent}
 .info-panel::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
 
-/* Panel — welcome state */
-.pw-title{font-family:'Cinzel Decorative',serif;font-size:16px;font-weight:700;color:var(--amber-b);letter-spacing:2px;margin-bottom:3px}
-.pw-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px}
-.pw-quote{font-size:15px;line-height:1.8;color:var(--txt2);font-style:italic;margin-bottom:16px;text-align:center}
-.pw-quote-attr{font-size:12px;color:var(--txt3);letter-spacing:1px;font-style:normal}
-.pw-stats{display:flex;gap:24px;justify-content:center;margin:16px 0;padding:14px 0;border-top:1px solid var(--bdr2);border-bottom:1px solid var(--bdr2)}
-.pw-stat{text-align:center}
-.pw-stat-n{font-family:'Cinzel',serif;font-size:22px;font-weight:600;color:var(--amber-b);display:block;line-height:1}
-.pw-stat-l{font-family:'Cinzel',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin-top:3px;display:block}
-.pw-desc{font-size:14px;line-height:1.85;color:var(--txt2);font-style:italic;margin-top:16px}
-.pw-footer{margin-top:20px;padding-top:14px;border-top:1px solid var(--bdr2);font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;text-align:center;line-height:2}
-
-/* Panel — detail state */
-.pd-close{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;line-height:1;padding:4px;float:right;margin:-2px -2px 0 0}
-.pd-close:hover{color:var(--amber-b)}
-.pd-ico{font-size:36px;display:block;margin-bottom:8px;line-height:1.2;clear:both}
-.pd-nm{font-family:'Cinzel Decorative',serif;font-size:16px;font-weight:700;color:var(--amber-b);margin-bottom:6px;letter-spacing:1px}
-.pd-tl{font-size:16px;line-height:1.85;color:var(--txt2);font-style:italic;margin-bottom:14px}
-.pd-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
-.pd-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.5px;padding:3px 7px;border:1px solid var(--bdr2);color:var(--txt3);text-transform:uppercase}
-.pd-status{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:6px}
-.pd-status-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
-.pd-enter{display:block;text-align:center;padding:12px;border:1px solid var(--amber);background:var(--amber-xx);color:var(--amber-b);font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .15s}
-.pd-enter:hover{background:var(--amber-x);border-color:var(--amber-b)}
+/* Panel — hint visibility */
+.tb-hint.hidden{display:none}
 
 /* ── DRAWER HANDLE — hidden by default, shown in mob-open ── */
 .drawer-handle{display:none}
@@ -243,8 +221,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
   .tile{padding:8px 4px 6px}
   .tile-ico{font-size:18px}
   .tile-nm{font-size:8px}
-  .pd-tl{font-size:15px;line-height:1.8}
-  .pw-desc{font-size:13px}
 }
 
 /* ── LANDSCAPE MOBILE (≤900px, landscape) — matches civilitas ── */
@@ -405,14 +381,24 @@ function showAbout(){
   var ay=document.getElementById('about-year');
   if(ay)ay.textContent=new Date().getFullYear();
   modal.style.display='flex';
-  modal.addEventListener('click',function(e){if(e.target===modal)closeAbout();},{once:true});
 }
+// About modal click-outside (persistent, not {once})
+document.addEventListener('click',function(e){
+  var modal=document.getElementById('about-modal');
+  if(modal&&modal.style.display==='flex'&&e.target===modal)closeAbout();
+});
 function closeAbout(){
   var modal=document.getElementById('about-modal');
   if(modal)modal.style.display='none';
 }
 document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){closeAbout();closeBurger();}
+  if(e.key==='Escape'){
+    var modal=document.getElementById('about-modal');
+    var burger=document.getElementById('burger-menu');
+    if(modal&&modal.style.display==='flex'){closeAbout();return;}
+    if(burger&&burger.classList.contains('open')){closeBurger();return;}
+    if(selIdx!==null){selectAtlas(selIdx);}
+  }
 });
 
 // ── MOBILE DRAWER (matches civilitas) ──────────────────────────
@@ -636,6 +622,12 @@ function renderThemeBar(){
     h+='<button class="tb-btn'+(filterT===i?' active':'')+'" onclick="filterTheme('+i+')">'+TH[i].n+' '+TH[i].sub+'<span class="tb-ct">'+ct+'</span></button>';
   }
   el.innerHTML=h;
+  // Update hint text
+  var hint=document.getElementById('tb-hint');
+  if(hint){
+    if(filterT!==null){hint.textContent='Showing '+TH[filterT].nm+' — '+TH[filterT].sub;hint.classList.remove('hidden');}
+    else{hint.textContent='Select any atlas to begin';hint.classList.remove('hidden');}
+  }
 }
 
 // ── RENDER: GRID ──────────────────────────────────────────────
@@ -749,17 +741,19 @@ var _origOpen=openMobileSheet,_origClose=closeMobileSheet;
 openMobileSheet=function(){_origOpen();showMapBtn();};
 closeMobileSheet=function(){_origClose();hideMapBtn();};
 
-// ── KEYBOARD ──────────────────────────────────────────────────
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'&&selIdx!==null){selectAtlas(selIdx);}
-});
-
 // ── INIT ──────────────────────────────────────────────────────
 function init(){
   renderThemeBar();
   renderGrid();
   renderPanel();
   updateCounts();
+  // Keyboard activation for tiles (Enter/Space)
+  document.getElementById('atlas-grid').addEventListener('keydown',function(e){
+    if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('tile')){
+      e.preventDefault();
+      e.target.click();
+    }
+  });
 }
 document.addEventListener('DOMContentLoaded',init);
 </script>
