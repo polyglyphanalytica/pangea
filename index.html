@@ -174,14 +174,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .info-panel::-webkit-scrollbar-track{background:transparent}
 .info-panel::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
 
-/* Panel — hint visibility */
-.tb-hint.hidden{display:none}
-
 /* ── DRAWER HANDLE — hidden by default, shown in mob-open ── */
 .drawer-handle{display:none}
-
-/* ── ABOUT MODAL ── */
-#about-modal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center}
 
 /* ── PORTRAIT MOBILE (≤768px, portrait) — matches civilitas ── */
 @media(max-width:768px) and (orientation:portrait){
@@ -697,6 +691,10 @@ function selectAtlas(idx){
   if(selIdx===idx){selIdx=null;}else{selIdx=idx;}
   renderGrid();
   renderPanel();
+  // Scroll panel to top on new selection
+  var ip=document.getElementById('info-panel');if(ip)ip.scrollTop=0;
+  // Scroll selected tile into view
+  if(selIdx!==null){var st=document.querySelector('.tile.sel');if(st)st.scrollIntoView({block:'nearest',behavior:'smooth'});}
   if(selIdx!==null&&isMobile())openMobileSheet();
   if(selIdx===null&&isMobile())closeMobileSheet();
 }
