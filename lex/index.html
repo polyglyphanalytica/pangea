@@ -137,7 +137,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 #wsvg{width:100%;height:100%}
 
 /* ── DESKTOP PANEL ── */
-.info-panel{width:320px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;padding:18px 18px 28px;position:relative}
+.info-panel{width:320px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;overflow-x:hidden;padding:18px 18px 28px;position:relative}
 .info-close{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;line-height:1;padding:4px;float:right;margin:-2px -2px 0 0}
 .info-close:hover{color:var(--amber-b)}
 .info-nm{font-family:'Cinzel Decorative',serif;font-size:16px;font-weight:700;color:var(--amber-b);margin-bottom:3px;clear:both}
@@ -206,7 +206,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 /* ── FINGERPRINT ── */
 .fp-wrap{margin-top:16px}
 .fp-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:4px}
-.fp-svg{display:block;margin:0 auto}
+.fp-svg{display:block;margin:0 auto;max-width:100%}
 .fp-grid{fill:none;stroke:var(--bdr);stroke-width:.6}
 .fp-poly{fill:var(--amber-x);stroke:var(--amber-b);stroke-width:1.2;stroke-linejoin:round}
 .fp-label{font-family:'Cinzel',serif;font-size:9px;fill:var(--txt3);letter-spacing:.3px}

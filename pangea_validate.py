@@ -568,6 +568,26 @@ def validate(atlas, force=False):
                        len(code_leaks) == 0,
                        f"found: {code_leaks}" if code_leaks else "OK"))
 
+    # ── Info panel horizontal overflow ─────────────────────────────────────
+    # .info-panel must have overflow-x:hidden to prevent horizontal scrollbar
+    # caused by wide content (e.g. 360px fingerprint SVG in 320px panel).
+    # .fp-svg must have max-width:100% so the SVG scales down to fit.
+    has_panel_overflow_x = bool(re.search(
+        r'\.info-panel\s*\{[^}]*overflow-x\s*:\s*hidden', html))
+    checks.append(("info-panel has overflow-x:hidden",
+                   has_panel_overflow_x,
+                   "FAIL: .info-panel missing overflow-x:hidden — causes horizontal scrollbar"
+                   if not has_panel_overflow_x else "OK"))
+
+    has_fp_svg = bool(re.search(r'\.fp-svg\s*\{', html))
+    if has_fp_svg:
+        has_fp_maxwidth = bool(re.search(
+            r'\.fp-svg\s*\{[^}]*max-width\s*:\s*100%', html))
+        checks.append(("fp-svg has max-width:100%",
+                       has_fp_maxwidth,
+                       "FAIL: .fp-svg missing max-width:100% — fingerprint chart overflows panel"
+                       if not has_fp_maxwidth else "OK"))
+
     # ── Colour values ───────────────────────────────────────────────────────
     checks.append(("dark bg #02040a present", "#02040a" in html, ""))
     checks.append(("amber #e89820 present", "#e89820" in html, ""))
