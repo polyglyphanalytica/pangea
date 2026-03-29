@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Pangea Project">
 <meta property="og:title" content="The Pangea Project — One Earth">
-<meta property="og:description" content="Every domain of human knowledge. One file at a time. 75 interactive atlases from civilisation to cryptography, feminism to food, monsters to mathematics.">
+<meta property="og:description" content="Every domain of human knowledge. One file at a time. 120 interactive atlases from civilisation to cryptography, feminism to food, monsters to mathematics.">
 <meta property="og:url" content="https://polyglyphanalytica.github.io/pangea/">
 <meta property="og:image" content="https://polyglyphanalytica.github.io/pangea/og/pangea.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -27,16 +27,11 @@
   "description": "A collection of single-file interactive atlases covering every domain of human knowledge — history, science, culture, power, belief, and the hidden.",
   "url": "https://polyglyphanalytica.github.io/pangea/",
   "author": { "@type": "Organization", "name": "Polyglyph Analytica" },
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "hasPart": [
-    {"@type":"WebApplication","name":"Civilitas — The Human Atlas","url":"https://polyglyphanalytica.github.io/pangea/civilitas/"},
-    {"@type":"WebApplication","name":"Cosmos — The Universe Atlas","url":"https://polyglyphanalytica.github.io/pangea/cosmos/"},
-    {"@type":"WebApplication","name":"Anthrophone — Atlas of Musical Instruments","url":"https://polyglyphanalytica.github.io/pangea/anthrophone/"}
-  ]
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }
 </script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -45,16 +40,12 @@
   --bg:#02040a;
   --panel:#070b12;
   --panel2:#0c1018;
-  --amber:#e89820;
-  --amber-b:#f0b040;
-  --amber-d:#3a2204;
-  --amber-x:rgba(232,152,32,0.14);
-  --amber-xx:rgba(232,152,32,0.08);
-  --txt:#f2e8d5;
-  --txt2:#e0d4b4;
-  --txt3:#c8aa78;
-  --bdr:rgba(232,152,32,0.22);
-  --bdr2:rgba(232,152,32,0.10);
+  --amber:#e89820;--amber-b:#f0b040;--amber-d:#3a2204;
+  --amber-x:rgba(232,152,32,0.14);--amber-xx:rgba(232,152,32,0.08);
+  --txt:#f2e8d5;--txt2:#e0d4b4;--txt3:#c8aa78;
+  --bdr:rgba(232,152,32,0.22);--bdr2:rgba(232,152,32,0.10);
+  --hint:rgba(224,212,180,0.65);
+  --tl-bg:rgba(2,4,10,0.99);
   --hdr-bg:rgba(2,4,10,0.97);
   --shadow:rgba(0,0,0,0.6);
 }
@@ -64,16 +55,12 @@
   --bg:#f0ebe0;
   --panel:#e8e0d0;
   --panel2:#ddd4c0;
-  --amber:#4a2c00;
-  --amber-b:#5a3800;
-  --amber-d:#f0d8a0;
-  --amber-x:rgba(122,78,0,0.10);
-  --amber-xx:rgba(122,78,0,0.06);
-  --txt:#1a1206;
-  --txt2:#1a1206;
-  --txt3:#2e2010;
-  --bdr:rgba(122,78,0,0.28);
-  --bdr2:rgba(122,78,0,0.14);
+  --amber:#4a2c00;--amber-b:#5a3800;--amber-d:#f0d8a0;
+  --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
+  --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
+  --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
+  --hint:rgba(30,18,6,0.6);
+  --tl-bg:rgba(236,228,214,0.99);
   --hdr-bg:rgba(236,228,214,0.97);
   --shadow:rgba(0,0,0,0.18);
 }
@@ -85,12 +72,14 @@
     --amber-x:rgba(122,78,0,0.10);--amber-xx:rgba(122,78,0,0.06);
     --txt:#1a1206;--txt2:#1a1206;--txt3:#2e2010;
     --bdr:rgba(122,78,0,0.28);--bdr2:rgba(122,78,0,0.14);
-    --hdr-bg:rgba(236,228,214,0.97);--shadow:rgba(0,0,0,0.18);
+    --hint:rgba(30,18,6,0.6);
+    --tl-bg:rgba(236,228,214,0.99);
+    --hdr-bg:rgba(236,228,214,0.97);
+    --shadow:rgba(0,0,0,0.18);
   }
 }
 
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-height:100vh}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif}
 
 /* ── SKIP LINK ── */
 .skip-link{position:absolute;top:-40px;left:0;background:var(--amber-b);color:var(--bg);
@@ -98,17 +87,16 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
 .skip-link:focus{top:0}
 
 /* ── HEADER ── */
-.hdr{position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 20px;background:var(--hdr-bg);
-  border-bottom:1px solid var(--bdr2);gap:12px}
+.hdr{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--hdr-bg);border-bottom:1px solid var(--bdr2);gap:12px}
 .hdr-left{display:flex;align-items:baseline;gap:0;min-width:0}
-.logo-t{font-family:'Cinzel',serif;font-size:18px;font-weight:900;
-  color:var(--amber-b);letter-spacing:2px;white-space:nowrap}
-.logo-s{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;
-  color:var(--txt3);text-transform:uppercase;margin-left:10px;white-space:nowrap}
+.logo-t{font-family:'Cinzel',serif;font-size:20px;font-weight:900;color:var(--amber-b);letter-spacing:3px;white-space:nowrap}
+.logo-s{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-left:10px;white-space:nowrap}
+.era-disp{text-align:center;font-family:'Cinzel',serif;flex-shrink:0}
+.era-y{font-size:22px;font-weight:600;color:var(--amber-b);letter-spacing:1px}
+.era-n{font-size:12px;letter-spacing:1.5px;color:var(--txt2);margin-top:1px;text-transform:uppercase;font-weight:600}
 .hdr-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
-
+.cnt-disp{text-align:right;font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--txt3)}
+.cnt-n{font-size:22px;font-weight:600;color:var(--amber);display:block;line-height:1}
 /* ── BURGER ── */
 .burger-wrap{position:relative}
 .burger-btn{background:none;border:1px solid var(--bdr);color:var(--amber-b);cursor:pointer;
@@ -127,155 +115,118 @@ body{background:var(--bg);color:var(--txt);font-family:'Crimson Pro',serif;min-h
 .burger-item:hover,.burger-item:active{background:var(--panel2);color:var(--txt)}
 .burger-divider{height:1px;background:var(--bdr2);margin:2px 0}
 
-/* ── MAIN CONTENT ── */
-.content{max-width:1200px;margin:0 auto;padding:88px 20px 60px}
+/* ── MAIN LAYOUT (mirrors civilitas exactly) ── */
+.main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
+.map-tl-col{display:flex;flex-direction:column;flex:1;min-width:0;min-height:0}
+.map-c{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;min-width:0;min-height:0}
 
-/* ── HERO ── */
-.hero{text-align:center;padding:40px 0 48px;border-bottom:1px solid var(--bdr2);margin-bottom:0}
-.hero-sup{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;
-  color:var(--txt3);text-transform:uppercase;margin-bottom:12px}
-.hero-title{font-family:'Cinzel',serif;font-size:clamp(24px,5vw,48px);
-  font-weight:900;color:var(--amber-b);letter-spacing:3px;margin-bottom:8px;line-height:1.2;
-  word-spacing:0.08em}
-.hero-sub{font-family:'Cinzel',serif;font-size:clamp(11px,1.5vw,14px);
-  letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px}
-.hero-desc{font-size:17px;line-height:1.8;color:var(--txt2);
-  max-width:560px;margin:0 auto;font-style:italic}
-.hero-stats{display:flex;gap:32px;justify-content:center;margin-top:24px;flex-wrap:wrap}
-.hero-manifesto{font-family:'Crimson Pro',serif;font-size:15px;line-height:1.9;color:var(--txt2);
-  max-width:600px;margin:20px auto 0;text-align:center}
-.hero-stat{text-align:center}
-.hero-stat-n{font-family:'Cinzel',serif;font-size:26px;font-weight:600;
-  color:var(--amber-b);display:block;line-height:1}
-.hero-stat-l{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
-  color:var(--txt3);text-transform:uppercase;margin-top:3px}
+/* ── ATLAS GRID ── */
+.atlas-grid{padding:16px 20px 20px}
+.atlas-grid::-webkit-scrollbar{width:5px}
+.atlas-grid::-webkit-scrollbar-track{background:transparent}
+.atlas-grid::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
+.atlas-grid::-webkit-scrollbar-thumb:hover{background:var(--amber)}
 
-/* ── CONTINENTAL DRIFT HERO ── */
-.drift-section{padding:48px 0 56px;text-align:center}
-.drift-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;
-  color:var(--txt3);text-transform:uppercase;margin-bottom:6px}
-.drift-heading{font-family:'Cinzel',serif;font-size:clamp(18px,3vw,28px);
-  font-weight:900;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px}
-.drift-sub{font-family:'Crimson Pro',serif;font-size:15px;color:var(--txt2);
-  font-style:italic;margin-bottom:24px}
-.drift-canvas{position:relative;width:100%;max-width:800px;margin:0 auto;
-  aspect-ratio:2/1;overflow:hidden;border:1px solid var(--bdr2);
-  border-radius:4px;background:var(--panel)}
-.drift-canvas svg{width:100%;height:100%;display:block}
-.drift-era-label{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
-  font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--amber-b);
-  text-transform:uppercase;background:var(--panel);padding:2px 12px;
-  border:1px solid var(--bdr2);border-radius:2px;white-space:nowrap;
-  transition:opacity 0.3s}
-.drift-tl-wrap{width:100%;max-width:800px;margin:16px auto 0;
-  background:var(--panel);border:1px solid var(--bdr2);border-radius:4px;
-  padding:10px 20px 14px;position:relative}
-.drift-tl-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.drift-play{background:none;border:1px solid var(--bdr);color:var(--amber-b);
-  width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;
-  align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
-.drift-play:hover{background:var(--panel2);border-color:var(--amber)}
-.drift-play svg{width:12px;height:12px}
-.drift-tl-era{font-family:'Cinzel',serif;font-size:12px;letter-spacing:1px;
-  color:var(--amber-b);font-weight:600;flex:1;text-align:center}
-.drift-tl-year{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;
-  color:var(--txt3);min-width:60px;text-align:right;flex-shrink:0}
-.drift-tl-lbls{display:flex;justify-content:space-between;margin-bottom:5px}
-.drift-tl-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.5px;
-  color:var(--txt3);text-transform:uppercase}
-.drift-tl-trk{position:relative;height:5px;background:var(--bdr2);border-radius:3px}
-.drift-tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--amber-b);
-  border-radius:3px;pointer-events:none;opacity:.7;width:0%}
-.drift-tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--amber-b);
-  border-radius:50%;transform:translate(-50%,-50%);
-  box-shadow:0 0 10px var(--amber),0 0 20px rgba(232,152,32,.3);
-  pointer-events:none;left:0%}
-input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;
-  cursor:pointer;margin:0;z-index:2;-webkit-appearance:none;appearance:none}
-.drift-tl-hint{text-align:center;margin-top:6px;font-family:'Cinzel',serif;
-  font-size:9px;letter-spacing:1.5px;color:var(--txt3);opacity:.6;text-transform:uppercase}
+/* Theme section headers */
+.ts-hdr{display:flex;align-items:baseline;gap:8px;margin:20px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--bdr2)}
+.ts-num{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3)}
+.ts-nm{font-family:'Cinzel',serif;font-size:11px;font-weight:600;letter-spacing:1.5px;color:var(--amber-b);text-transform:uppercase}
+.ts-sub{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);font-style:italic}
+.ts-ct{font-family:'Cinzel',serif;font-size:8px;letter-spacing:1px;color:var(--txt3);margin-left:auto;opacity:.6}
 
-/* ── HOW ITS GOING DIVIDER ── */
-.going-section{text-align:center;padding:56px 0 40px;margin-bottom:48px;
-  border-bottom:1px solid var(--bdr2)}
-.going-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;
-  color:var(--txt3);text-transform:uppercase;margin-bottom:6px}
-.going-heading{font-family:'Cinzel',serif;font-size:clamp(18px,3vw,28px);
-  font-weight:900;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px}
-.going-sub{font-family:'Crimson Pro',serif;font-size:15px;color:var(--txt2);
-  font-style:italic;margin-bottom:0}
+/* Tile grid */
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:6px}
 
-/* ── SECTION HEADER ── */
-.section-hdr{margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--bdr2)}
-.section-num{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;
-  color:var(--txt3);display:block;margin-bottom:3px}
-.section-title{font-family:'Cinzel',serif;font-size:14px;font-weight:600;
-  letter-spacing:2px;color:var(--amber-b);text-transform:uppercase;display:block}
-.section-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;
-  color:var(--txt3);font-style:italic;margin-top:2px;display:block}
-.section-wrap{margin-bottom:52px}
+/* Individual tiles */
+.tile{background:var(--panel);border:1px solid var(--bdr2);padding:10px 6px 8px;
+  text-align:center;cursor:pointer;transition:all .15s;position:relative}
+.tile:hover{border-color:var(--bdr);background:var(--panel2)}
+.tile.sel{border-color:var(--amber);background:var(--amber-xx);box-shadow:0 0 12px rgba(232,152,32,.12)}
+.tile-ico{font-size:20px;display:block;margin-bottom:4px;line-height:1.2}
+.tile-nm{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.5px;color:var(--txt2);display:block;line-height:1.3}
+/* Live tiles — prominent accent border, gold name */
+.tile.live{border-color:var(--bdr);background:var(--amber-xx)}
+.tile.live:hover{border-color:var(--amber);background:var(--amber-x)}
+.tile.live .tile-nm{color:var(--amber-b);font-weight:600}
+/* Forthcoming tiles — clearly muted */
+.tile.forthcoming{opacity:.35}
+.tile.forthcoming:hover{opacity:.6}
+.tile.forthcoming.sel{opacity:1}
 
-/* ── CARD GRID ── */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+/* ── THEME SLIDER (matches civilitas timeline pattern) ── */
+.tl-wrap{position:relative;height:88px;background:var(--tl-bg);border-top:1px solid var(--bdr);padding:8px 20px 14px;flex-shrink:0}
+.tl-lbls{display:flex;justify-content:space-between;margin-bottom:5px;padding:0 10px}
+.tl-lbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3px;color:var(--txt3);cursor:pointer;transition:color .15s;text-align:center;min-width:0;flex:1}
+.tl-lbl:hover{color:var(--txt2)}
+.tl-lbl.active{color:var(--amber-b);font-weight:600}
+.tl-trk{position:relative;height:5px;background:var(--bdr);border-radius:3px}
+.tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--amber-b);border-radius:3px;pointer-events:none;opacity:.7}
+.tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--amber-b);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--amber),0 0 20px rgba(232,152,32,.3);pointer-events:none;transition:left .04s linear}
+input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0;cursor:pointer;transform:translateY(-50%);margin:0;z-index:2}
+.tl-hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--hint)}
 
-/* ── CARD ── */
-.card{background:var(--panel);border:1px solid var(--bdr2);padding:14px 14px 12px;
-  position:relative;transition:border-color .15s,background .15s}
-.card:not(.card--forthcoming):hover{border-color:var(--bdr);background:var(--panel2)}
-.card a{text-decoration:none;color:inherit;display:block}
-.card-icon{font-size:20px;margin-bottom:6px;display:block;line-height:1}
-.card-name{font-family:'Cinzel',serif;font-size:13px;font-weight:900;
-  color:var(--amber-b);letter-spacing:1px;margin-bottom:3px}
-.card-tagline{font-family:'Crimson Pro',serif;font-size:13px;line-height:1.45;
-  color:var(--txt2);margin-bottom:8px}
-.card-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px}
-.tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.5px;
-  padding:2px 5px;border:1px solid var(--bdr2);color:var(--txt3);text-transform:uppercase}
+/* ── INFO PANEL (matches civilitas exactly) ── */
+.info-panel{width:320px;flex-shrink:0;min-height:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;padding:18px 18px 28px;position:relative}
+.info-panel::-webkit-scrollbar{width:5px}
+.info-panel::-webkit-scrollbar-track{background:transparent}
+.info-panel::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
 
-/* ── STATUS BADGE ── */
-.status{position:absolute;top:10px;right:10px;
-  font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:1.5px;
-  padding:2px 6px;text-transform:uppercase;border:1px solid transparent}
-.status--live{color:#60d080;border-color:rgba(96,208,128,0.35);background:rgba(96,208,128,0.08)}
-.status--building{color:var(--amber-b);border-color:var(--bdr);background:var(--amber-xx)}
+/* ── DRAWER HANDLE — hidden by default, shown in mob-open ── */
+.drawer-handle{display:none}
 
-/* ── COMING SOON ── */
-.coming-soon{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
-  color:var(--txt3);text-transform:uppercase;opacity:.6;display:block;margin-top:4px}
-.card--forthcoming{opacity:.7}
-.card--forthcoming .card-name{color:var(--txt3)}
-
-/* ── FOOTER ── */
-.footer{text-align:center;padding:32px 20px;border-top:1px solid var(--bdr2);
-  font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;
-  color:var(--txt3);text-transform:uppercase;line-height:2}
-
-/* ── ABOUT MODAL ── */
-#about-modal{display:none;position:fixed;inset:0;z-index:2000;
-  background:rgba(0,0,0,.55);align-items:center;justify-content:center}
-
-/* ── RESPONSIVE ── */
-@media(max-width:600px){
-  .hdr{padding:9px 14px}
-  .logo-t{font-size:15px;letter-spacing:1px}
+/* ── PORTRAIT MOBILE (≤768px, portrait) — matches civilitas ── */
+@media(max-width:768px) and (orientation:portrait){
   .logo-s{display:none}
-  .hero-title{font-size:22px}
-  .hero-stats{gap:20px}
-  .card-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
-  .content{padding:76px 14px 48px}
-  .drift-section{padding:28px 0 36px}
-  .drift-canvas{border-radius:3px}
-  .drift-tl-wrap{padding:8px 12px 10px;border-radius:3px}
-  .drift-tl-lbl{font-size:7px;letter-spacing:.3px}
-  .drift-tl-era{font-size:10px}
-  .drift-tl-year{font-size:9px}
-  .drift-tl-hint{font-size:7px;letter-spacing:1px}
-  .drift-era-label{font-size:9px;letter-spacing:1.5px;padding:2px 8px}
-  .drift-heading{font-size:20px}
-  .drift-sub{font-size:13px;margin-bottom:16px}
+  .cnt-disp{display:none}
+  .hdr{padding:8px 12px}
+  .logo-t{font-size:16px;letter-spacing:2px}
+  .era-y{font-size:18px}
+  .era-n{font-size:10px;letter-spacing:1.5px}
+  .main{top:52px!important;bottom:0;flex-direction:column;position:fixed}
+  .map-tl-col{width:100%;flex:0 0 auto;min-height:0}
+  .map-c{flex:0 0 42vh;width:100%}
+  .tl-wrap{flex-shrink:0}
+  .info-panel{
+    flex:1;width:100%;border-left:none;border-top:1px solid var(--bdr);
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+    padding:12px 16px 16px;border-radius:0;min-height:0
+  }
+  .info-panel.mob-open{
+    position:absolute;left:0;right:0;bottom:0;top:21vh;
+    border-top:none;border-radius:12px 12px 0 0;
+    background:var(--panel);box-shadow:0 -4px 24px rgba(0,0,0,.4);z-index:100
+  }
+  .mob-open .drawer-handle{
+    display:flex;align-items:center;justify-content:center;
+    padding:10px 0 6px;cursor:pointer;user-select:none;
+    position:sticky;top:0;z-index:10;background:var(--panel);border-radius:12px 12px 0 0
+  }
+  .mob-open .drawer-handle::before{
+    content:'';width:36px;height:4px;border-radius:2px;
+    background:var(--bdr);transition:background .15s
+  }
+  .mob-open .drawer-handle:active::before{background:var(--amber-b)}
+  .tl-wrap{height:72px;padding:6px 8px 8px}
+  .tl-lbls{padding:0 4px;margin-bottom:3px}
+  .tl-lbl{font-size:8px;letter-spacing:0}
+  .tl-hint{font-size:9px}
+  .atlas-grid{padding:12px 14px}
+  .tile-grid{grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:5px}
+  .tile{padding:8px 4px 6px}
+  .tile-ico{font-size:18px}
+  .tile-nm{font-size:8px}
 }
-@media(max-width:380px){
-  .card-grid{grid-template-columns:1fr 1fr}
+
+/* ── LANDSCAPE MOBILE (≤900px, landscape) — matches civilitas ── */
+@media(max-width:900px) and (orientation:landscape){
+  .logo-s{display:none}
+  .hdr{padding:6px 14px}
+  .logo-t{font-size:15px;letter-spacing:2px}
+  .era-y{font-size:15px}
+  .tl-wrap{height:68px;padding:6px 12px 10px}
+  .tl-lbl{font-size:10px}
+  .tl-hint{font-size:9px}
+  .info-panel{width:280px}
 }
 
 /* ── ACCESSIBILITY ── */
@@ -284,14 +235,22 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
 </head>
 <body>
 
-<a href="#main" class="skip-link">Skip to atlases</a>
+<a href="#info-panel" class="skip-link">Skip to atlas details</a>
 
 <header class="hdr" role="banner">
   <div class="hdr-left">
     <span class="logo-t">The Pangea Project</span>
     <span class="logo-s">One Earth</span>
   </div>
+  <div class="era-disp">
+    <div class="era-y" id="cnt-live">—</div>
+    <div class="era-n" id="cnt-label">ATLASES</div>
+  </div>
   <div class="hdr-right">
+    <div class="cnt-disp" id="cnt-disp">
+      <span class="cnt-n" id="cnt-total">—</span>
+      total
+    </div>
     <div class="burger-wrap" id="burger-wrap">
       <button class="burger-btn" id="burger-btn" onclick="toggleBurger()"
         aria-label="Menu" aria-expanded="false" aria-haspopup="true">
@@ -302,7 +261,7 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
         </svg>
       </button>
       <div class="burger-menu" id="burger-menu" role="menu">
-        <button class="burger-item" id="menu-theme" onclick="toggleTheme();closeBurger()" role="menuitem">
+        <button class="burger-item" onclick="toggleTheme();closeBurger()" role="menuitem">
           <span id="theme-icon">◑</span>
           <span>Toggle Theme</span>
         </button>
@@ -316,337 +275,28 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
   </div>
 </header>
 
-<main class="content" id="main">
-
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-sup">Polyglyph Analytica</div>
-    <div class="hero-title">The Pangea Project</div>
-    <div class="hero-sub">One Earth</div>
-    <div class="hero-desc">To see a world in a grain of sand<br>And a heaven in a wild flower,<br>Hold infinity in the palm of your hand<br>And eternity in an hour.<br><span style="font-size:13px;color:var(--txt3);letter-spacing:1px">— William Blake</span></div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="hero-stat-n" id="atlas-count">100</span>
-        <span class="hero-stat-l">Atlases</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-n">12</span>
-        <span class="hero-stat-l">Themes</span>
-      </div>
+<div class="main">
+  <div class="map-tl-col">
+    <div class="map-c">
+      <div class="atlas-grid" id="atlas-grid"></div>
     </div>
-    <p class="hero-manifesto">Each atlas maps a single domain of human knowledge onto an interactive timeline — from cosmic deep time to the present day. Scrub through billions of years of stellar evolution, millions of years of geological and biological change, or thousands of years of human invention. See which ideas travelled between civilisations, which discoveries made others possible, and whose contributions were written out of the story. Find the women history left out. This is not the encyclopaedia you'd expect. Or the atlas you'd expect. This is a new way to read the human story.</p>
-  </div>
-
-  <!-- HOW IT STARTED — CONTINENTAL DRIFT -->
-  <div class="drift-section">
-    <div class="drift-label">How It Started</div>
-    <div class="drift-heading">Pangea</div>
-    <div class="drift-sub">335 million years of continental drift — from one landmass to seven.</div>
-    <div class="drift-canvas" id="drift-canvas">
-      <svg viewBox="0 0 800 400" id="drift-svg" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <!-- Ocean depth gradients for new ocean floor between separating continents -->
-          <radialGradient id="ocean-young" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#1a3a5c" stop-opacity="0.6"/>
-            <stop offset="100%" stop-color="#0a1428" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="ocean-ridge" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#2a4a6c" stop-opacity="0.5"/>
-            <stop offset="60%" stop-color="#142840" stop-opacity="0.2"/>
-            <stop offset="100%" stop-color="#0a1428" stop-opacity="0"/>
-          </radialGradient>
-          <!-- Continental shelf glow filter -->
-          <filter id="shelf-glow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-            <feColorMatrix in="blur" type="matrix"
-              values="0.4 0 0 0 0.15
-                      0.25 0 0 0 0.08
-                      0.1 0 0 0 0.02
-                      0 0 0 0.35 0" result="glow"/>
-            <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <!-- Volcanic particle glow -->
-          <radialGradient id="volcano-glow">
-            <stop offset="0%" stop-color="#ff6030" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="#ff3000" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-
-        <!-- Deep ocean background -->
-        <rect width="800" height="400" fill="#060e18"/>
-
-        <!-- Latitude grid lines -->
-        <g opacity="0.15">
-          <line x1="0" y1="100" x2="800" y2="100" stroke="#c8aa78" stroke-width="0.3" stroke-dasharray="4,8"/>
-          <line x1="0" y1="200" x2="800" y2="200" stroke="#c8aa78" stroke-width="0.4" stroke-dasharray="2,6"/>
-          <line x1="0" y1="300" x2="800" y2="300" stroke="#c8aa78" stroke-width="0.3" stroke-dasharray="4,8"/>
-          <line x1="200" y1="0" x2="200" y2="400" stroke="#c8aa78" stroke-width="0.3" stroke-dasharray="4,8"/>
-          <line x1="400" y1="0" x2="400" y2="400" stroke="#c8aa78" stroke-width="0.3" stroke-dasharray="4,8"/>
-          <line x1="600" y1="0" x2="600" y2="400" stroke="#c8aa78" stroke-width="0.3" stroke-dasharray="4,8"/>
-        </g>
-
-        <!-- Ocean depth layer — grows between separating continents -->
-        <g id="drift-ocean-layer"></g>
-
-        <!-- Rift/ridge lines layer -->
-        <g id="drift-rift-layer"></g>
-
-        <!-- Continental shelves (blurred glow behind continents) -->
-        <g id="drift-shelf-layer" filter="url(#shelf-glow)"></g>
-
-        <!-- Continents — detailed outlines mapped to viewBox 800x400 -->
-        <!-- Mapping: lon -170..190 → x 0..800, lat 82..-72 → y 0..400 (equirectangular) -->
-        <g id="drift-continents">
-
-          <!-- AFRICA -->
-          <path id="c-af" d="
-            M 418,116 L 421,112 424,108 428,106 433,105 437,106 440,108
-            442,107 445,105 448,106 452,108 454,112 453,115 450,117
-            452,120 456,122 460,124 463,128 465,132 466,136
-            468,140 470,145 471,150 472,155 472,160 471,165
-            470,168 472,172 474,176 475,180 476,185 475,190
-            474,195 472,200 470,204 468,208 466,212 464,216
-            462,220 459,224 456,228 453,231 450,234 447,238
-            444,242 441,245 438,248 434,250 431,252 428,254
-            425,255 422,254 420,252 418,248 416,244 414,240
-            412,236 410,232 408,228 406,224 405,220 404,216
-            403,212 402,208 402,204 402,200 402,196 402,192
-            403,188 404,184 405,180 406,176 406,172 406,168
-            407,164 408,160 409,156 410,152 411,148 412,144
-            413,140 414,136 415,132 416,128 417,124 418,120 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-
-          <!-- SOUTH AMERICA -->
-          <path id="c-sa" d="
-            M 262,164 L 265,162 268,160 271,159 274,160 276,162
-            278,164 280,167 282,170 284,172 285,175 286,178
-            288,182 289,186 290,190 290,194 290,198 290,202
-            289,206 288,210 286,214 284,218 282,222 280,226
-            278,230 276,234 274,238 272,242 270,246 268,250
-            266,254 264,258 262,262 260,266 258,269 256,272
-            254,274 252,276 250,278 248,280 246,281 244,282
-            242,282 240,280 239,278 238,276 237,273 237,270
-            237,266 238,262 240,258 241,254 243,250 244,246
-            246,242 247,238 248,234 248,230 248,226 247,222
-            247,218 247,214 247,210 247,206 248,202 248,198
-            249,194 250,190 251,186 252,182 253,178 254,174
-            256,170 258,167 260,165 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-
-          <!-- NORTH AMERICA -->
-          <path id="c-na" d="
-            M 108,50 L 112,48 116,46 120,44 125,42 130,40
-            136,38 142,37 148,36 154,36 160,36 166,37
-            172,38 178,40 182,42 186,44 188,47 190,50
-            191,54 190,58 188,62 185,66 182,68 178,70
-            175,72 172,74 170,76 168,79 166,82 165,86
-            164,90 163,94 163,98 164,102 166,106 168,110
-            170,113 172,116 175,118 178,120 182,122 186,124
-            188,128 190,132 191,136 190,140 188,142 185,144
-            182,145 178,146 174,146 170,145 166,144 162,142
-            158,140 154,138 150,136 146,134 142,132 138,130
-            134,128 130,126 126,124 122,122 118,120 114,118
-            110,116 106,114 102,112 100,110 98,108 96,106
-            94,103 93,100 92,96 92,92 92,88 93,84
-            94,80 96,76 98,72 100,68 102,64 104,60
-            106,56 108,52 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-
-          <!-- GREENLAND -->
-          <path id="c-gl" d="
-            M 220,24 L 226,22 232,20 238,20 244,22 248,24
-            250,28 250,32 248,36 245,38 242,40 238,42
-            234,42 230,40 226,38 222,36 220,32 219,28 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-
-          <!-- EUROPE (with Scandinavia, Iberia, Italy, British Isles) -->
-          <path id="c-eu" d="
-            M 392,52 L 395,48 398,46 402,44 406,43 410,42
-            414,42 418,43 422,44 426,46 430,48 434,50
-            436,52 438,55 440,58 442,62 443,65 442,68
-            440,70 438,72 436,74 433,76 430,78 427,80
-            424,82 421,84 418,86 416,88 414,90 412,92
-            410,94 408,95 406,96 404,97 402,98 400,97
-            398,96 396,94 394,92 393,90 392,88 390,86
-            388,84 387,82 386,80 385,78 384,76 384,74
-            384,72 384,70 385,68 386,66 387,64 388,62
-            389,60 390,58 391,56 392,54 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-          <!-- Iberian Peninsula -->
-          <path id="c-ib" d="
-            M 388,86 L 385,88 382,90 380,92 379,95 380,98
-            382,100 385,102 388,103 391,102 394,100 396,98
-            397,96 396,94 394,92 392,90 390,88 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-          <!-- Italian Peninsula -->
-          <path id="c-it" d="
-            M 412,92 L 414,95 416,98 417,101 418,104 417,107
-            416,109 414,110 412,109 411,107 410,104 410,101
-            410,98 411,95 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-          <!-- British Isles -->
-          <path id="c-bi" d="
-            M 380,58 L 383,56 385,54 387,56 388,59 387,62
-            385,64 383,66 381,67 379,66 378,64 378,62 379,60 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-
-          <!-- ASIA (mainland) -->
-          <path id="c-as" d="
-            M 442,42 L 448,38 454,35 460,33 466,32 472,32
-            478,33 484,34 490,36 496,38 502,40 508,42
-            514,44 520,46 526,48 532,50 538,52 544,54
-            550,56 556,58 562,60 566,62 570,64 574,66
-            578,68 582,70 585,72 588,74 590,76 592,78
-            594,82 596,86 598,90 599,94 600,98 600,102
-            600,106 599,110 597,114 594,118 590,120 586,122
-            582,124 578,125 574,126 570,128 566,130
-            562,132 558,134 554,135 550,136 546,136
-            542,136 538,136 534,134 530,132 526,130
-            522,128 518,126 514,124 510,122 506,120
-            502,118 498,116 494,114 490,112 486,110
-            482,108 478,106 474,104 470,102 466,100
-            462,98 458,96 454,94 452,92 450,88
-            448,84 446,80 444,76 443,72 442,68
-            442,64 442,60 442,56 442,50 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-
-          <!-- Arabian Peninsula -->
-          <path id="c-ar" d="
-            M 450,110 L 454,108 458,107 462,108 465,110 467,113
-            468,116 468,120 466,124 464,128 461,130 458,131
-            455,130 452,128 450,125 449,122 448,118 449,114 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-
-          <!-- INDIA -->
-          <path id="c-in" d="
-            M 488,128 L 492,126 496,124 500,124 504,126
-            506,130 508,134 509,138 510,142 510,146
-            510,150 509,154 508,158 506,162 504,166
-            502,170 500,174 498,177 496,178 494,178
-            492,176 490,174 488,170 486,166 484,162
-            483,158 482,154 482,150 482,146 483,142
-            484,138 486,134 487,130 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-
-          <!-- SE ASIA / MALAY PENINSULA -->
-          <path id="c-sea" d="
-            M 568,132 L 572,130 576,132 578,136 580,140
-            582,144 583,148 582,152 580,156 578,158
-            576,160 574,158 572,155 570,152 568,148
-            567,144 566,140 566,136 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-
-          <!-- JAPAN -->
-          <path id="c-jp" d="
-            M 616,74 L 620,72 623,74 625,78 626,82 624,86
-            622,90 619,92 616,94 614,92 612,88 612,84
-            613,80 614,76 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-
-          <!-- AUSTRALIA -->
-          <path id="c-au" d="
-            M 578,222 L 582,218 586,215 590,213 594,212
-            598,212 602,213 606,214 610,216 614,218
-            618,220 622,222 625,225 628,228 630,232
-            632,236 632,240 632,244 630,248 628,252
-            626,255 622,258 618,260 614,262 610,264
-            606,265 602,266 598,266 594,264 590,262
-            586,260 582,258 580,254 578,250 576,246
-            575,242 574,238 574,234 576,230 578,226 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-          <!-- Tasmania -->
-          <path id="c-tas" d="
-            M 614,272 L 618,270 622,272 623,276 621,279
-            618,280 615,279 613,276 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-          <!-- New Zealand -->
-          <path id="c-nz" d="
-            M 652,262 L 654,258 657,256 659,258 660,262
-            659,266 657,270 655,274 653,276 651,274
-            650,270 650,266 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-
-          <!-- ANTARCTICA -->
-          <path id="c-an" d="
-            M 180,365 L 195,360 210,356 225,352 240,349
-            255,347 270,345 285,344 300,343 315,342
-            330,342 345,342 360,342 375,343 390,344
-            405,345 420,347 435,349 450,352 465,355
-            480,358 495,362 510,366 520,370 525,374
-            520,378 510,382 495,384 480,386 465,387
-            450,388 435,388 420,388 405,387 390,386
-            375,385 360,384 345,384 330,384 315,384
-            300,385 285,386 270,386 255,386 240,385
-            225,384 210,382 195,378 185,374 180,370 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.5" opacity="0.9"/>
-
-          <!-- CENTRAL AMERICA bridge -->
-          <path id="c-ca" d="
-            M 190,140 L 194,138 198,139 201,142 203,146
-            205,150 207,154 209,157 211,159 213,160
-            216,162 218,164 219,162 218,158 216,154
-            214,150 212,146 210,142 208,139 205,136
-            202,134 199,132 196,134 193,136 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-
-          <!-- MADAGASCAR -->
-          <path id="c-mad" d="
-            M 476,228 L 479,225 482,226 484,230 484,236
-            483,242 481,246 478,248 476,246 474,242
-            474,238 474,234 475,230 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-
-          <!-- INDONESIA / BORNEO -->
-          <path id="c-indo" d="
-            M 584,162 L 588,160 592,161 596,163 600,165
-            604,167 607,170 609,173 608,176 605,178
-            601,179 597,178 593,176 590,174 587,172
-            585,169 584,166 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-          <!-- Papua New Guinea -->
-          <path id="c-png" d="
-            M 618,172 L 622,170 626,169 630,170 634,172
-            637,175 638,178 636,181 633,182 629,182
-            625,181 621,179 619,176 Z
-          " fill="#3a2204" stroke="#e89820" stroke-width="0.4" opacity="0.85"/>
-
-        </g>
-
-        <!-- Volcanic hotspot particles -->
-        <g id="drift-volcano-layer"></g>
-      </svg>
-      <div class="drift-era-label" id="drift-era">Pangea — 335 Mya</div>
-    </div>
-    <div class="drift-tl-wrap" role="navigation" aria-label="Geological timeline">
-      <div class="drift-tl-top">
-        <button class="drift-play" id="drift-play" aria-label="Play continental drift animation" title="Play">
-          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>
-        </button>
-        <span class="drift-tl-era" id="drift-era-top">Pangea</span>
-        <span class="drift-tl-year" id="drift-year">335 Mya</span>
+    <div class="tl-wrap" role="navigation" aria-label="Theme filter">
+      <div class="tl-lbls" id="tl-ticks"></div>
+      <div class="tl-trk">
+        <div class="tl-fill" id="tl-fill"></div>
+        <div class="tl-thumb" id="tl-thumb"></div>
+        <input type="range" class="tl-range" id="tl" min="0" max="13" value="0"
+          aria-label="Filter by theme" aria-valuemin="0" aria-valuemax="13" aria-valuenow="0" aria-valuetext="All themes">
       </div>
-      <div class="drift-tl-lbls">
-        <span class="drift-tl-lbl">335 Mya</span>
-        <span class="drift-tl-lbl">200 Mya</span>
-        <span class="drift-tl-lbl">100 Mya</span>
-        <span class="drift-tl-lbl">50 Mya</span>
-        <span class="drift-tl-lbl">Present</span>
-      </div>
-      <div class="drift-tl-trk">
-        <div class="drift-tl-fill" id="drift-fill"></div>
-        <div class="drift-tl-thumb" id="drift-thumb"></div>
-        <input type="range" class="drift-range" id="drift-range" min="0" max="1000" value="0" step="1" aria-label="Geological timeline">
-      </div>
-      <div class="drift-tl-hint">Drag to explore &middot; Press play to animate</div>
+      <div class="tl-hint" id="tl-hint">Drag to filter by theme</div>
     </div>
   </div>
 
-  <!-- HOW IT'S GOING -->
-  <div class="going-section">
-    <div class="going-label">How It's Going</div>
-    <div class="going-heading">The Atlases</div>
-    <div class="going-sub">Every domain of human knowledge. One atlas at a time.</div>
+  <div class="info-panel" id="info-panel" role="complementary" aria-label="Atlas details" tabindex="-1">
+    <div class="drawer-handle" id="drawer-handle" aria-label="Drag to resize"></div>
+    <div id="panel-content"></div>
   </div>
+</div>
 
   <!-- ═══════════════════════════════════════════ -->
   <!-- I — THE LIVING WORLD                        -->
@@ -1893,566 +1543,568 @@ input.drift-range{position:absolute;top:0;left:0;width:100%;height:100%;opacity:
 </div>
 
 <script>
-// ── THEME ──────────────────────────────────────────────────────────────────
+// ── THEME ──────────────────────────────────────────────────────
 function applyTheme(t){
   document.documentElement.dataset.theme=t;
-  const icon=document.getElementById('theme-icon');
-  if(icon)icon.textContent=t==='dark'?'◑':'◐';
+  var ico=t==='dark'?'◑':'◐';
+  var b=document.getElementById('theme-icon');if(b)b.textContent=ico;
   localStorage.setItem('pangea-theme',t);
+  localStorage.setItem('civ-theme',t);
 }
 function toggleTheme(){
-  const cur=document.documentElement.dataset.theme||
+  var cur=document.documentElement.dataset.theme||
     (window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
   applyTheme(cur==='dark'?'light':'dark');
 }
-(function(){
-  const saved=localStorage.getItem('pangea-theme');
+// Theme IIFE — system default on first load (NO forced data-theme)
+(function(){try{
+  var saved=localStorage.getItem('pangea-theme')||localStorage.getItem('civ-theme');
   if(saved){applyTheme(saved);}
   else{
-    const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
-    document.documentElement.dataset.theme=sys;
-    const icon=document.getElementById('theme-icon');
-    if(icon)icon.textContent=sys==='dark'?'◑':'◐';
+    // Do NOT set data-theme — let CSS @media prefers-color-scheme handle it
+    var sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
+    var b=document.getElementById('theme-icon');if(b)b.textContent=sys==='dark'?'◑':'◐';
   }
-})();
+}catch(e){}})();
+// Cross-tab theme sync
+try{window.addEventListener('storage',function(e){
+  if(e.key==='pangea-theme'&&e.newValue)applyTheme(e.newValue);
+});}catch(e){}
 
-// ── BURGER ─────────────────────────────────────────────────────────────────
+// ── BURGER ─────────────────────────────────────────────────────
 function toggleBurger(){
-  const m=document.getElementById('burger-menu');
-  const btn=document.getElementById('burger-btn');
+  var m=document.getElementById('burger-menu');
+  var btn=document.getElementById('burger-btn');
   if(!m)return;
-  const open=m.classList.toggle('open');
+  var open=m.classList.toggle('open');
   btn.setAttribute('aria-expanded',open);
 }
 function closeBurger(){
-  const m=document.getElementById('burger-menu');
-  const btn=document.getElementById('burger-btn');
+  var m=document.getElementById('burger-menu');
+  var btn=document.getElementById('burger-btn');
   if(m)m.classList.remove('open');
   if(btn)btn.setAttribute('aria-expanded','false');
 }
-// Close burger on outside click
 document.addEventListener('click',function(e){
-  const wrap=document.getElementById('burger-wrap');
+  var wrap=document.getElementById('burger-wrap');
   if(wrap&&!wrap.contains(e.target))closeBurger();
 });
 
-// ── ABOUT MODAL ────────────────────────────────────────────────────────────
+// ── ABOUT MODAL ────────────────────────────────────────────────
 function showAbout(){
-  const modal=document.getElementById('about-modal');
+  var modal=document.getElementById('about-modal');
   if(!modal)return;
-  const ay=document.getElementById('about-year');
+  var ay=document.getElementById('about-year');
   if(ay)ay.textContent=new Date().getFullYear();
   modal.style.display='flex';
-  modal.addEventListener('click',function(e){if(e.target===modal)closeAbout();},{once:true});
 }
+// About modal click-outside (persistent, not {once})
+document.addEventListener('click',function(e){
+  var modal=document.getElementById('about-modal');
+  if(modal&&modal.style.display==='flex'&&e.target===modal)closeAbout();
+});
 function closeAbout(){
-  const modal=document.getElementById('about-modal');
+  var modal=document.getElementById('about-modal');
   if(modal)modal.style.display='none';
 }
 document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){closeAbout();closeBurger();}
+  if(e.key==='Escape'){
+    var modal=document.getElementById('about-modal');
+    var burger=document.getElementById('burger-menu');
+    if(modal&&modal.style.display==='flex'){closeAbout();return;}
+    if(burger&&burger.classList.contains('open')){closeBurger();return;}
+    if(selIdx!==null){selectAtlas(selIdx);}
+  }
 });
 
-// ── FOOTER YEAR ────────────────────────────────────────────────────────────
-(function(){
-  const fy=document.getElementById('footer-year');
-  if(fy)fy.textContent=new Date().getFullYear();
-})();
+// ── MOBILE DRAWER (matches civilitas) ──────────────────────────
+var isMobile=function(){return window.innerWidth<=768&&window.matchMedia('(orientation:portrait)').matches;};
+var _drawer=document.getElementById('info-panel');
+var _handle=document.getElementById('drawer-handle');
+var _drawerOpen=false;
 
-// ── CONTINENTAL DRIFT ANIMATION ───────────────────────────────────────────
-(function(){
-  const playBtn=document.getElementById('drift-play');
-  const rangeEl=document.getElementById('drift-range');
-  const yearEl=document.getElementById('drift-year');
-  const eraEl=document.getElementById('drift-era');
-  const eraTopEl=document.getElementById('drift-era-top');
-  const fillEl=document.getElementById('drift-fill');
-  const thumbEl=document.getElementById('drift-thumb');
-  const riftLayer=document.getElementById('drift-rift-layer');
-  const oceanLayer=document.getElementById('drift-ocean-layer');
-  const shelfLayer=document.getElementById('drift-shelf-layer');
-  const volcanoLayer=document.getElementById('drift-volcano-layer');
-  if(!playBtn||!rangeEl)return;
+function openMobileSheet(){
+  if(!isMobile())return;
+  _drawerOpen=true;
+  _drawer.classList.add('mob-open');
+  _drawer.style.top='';
+}
+function closeMobileSheet(){
+  if(!isMobile()&&!_drawerOpen)return;
+  _drawerOpen=false;
+  _drawer.classList.remove('mob-open');
+  _drawer.style.top='';
+}
 
-  // ── MULTI-KEYFRAME PALEOGEOGRAPHIC DATA ──
-  // t=0 (Pangea 335Mya), 0.25 (200Mya), 0.5 (150Mya), 0.75 (65Mya), 1.0 (present)
-  // tx/ty = translation offset from present-day SVG position, r = rotation degrees
-  // Small islands/peninsulas inherit their parent continent's motion
-  const keyframes={
-    'c-af': [ // Africa — anchor, core of western Pangea
-      {t:0,   tx:-6,   ty:8,    r:5},
-      {t:0.25,tx:-4,   ty:6,    r:3},
-      {t:0.5, tx:-3,   ty:4,    r:2},
-      {t:0.75,tx:-1,   ty:1,    r:0},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-mad': [ // Madagascar — locked to Africa at Pangea
-      {t:0,   tx:-8,   ty:5,    r:5},
-      {t:0.25,tx:-5,   ty:4,    r:3},
-      {t:0.5, tx:-3,   ty:2,    r:1},
-      {t:0.75,tx:-1,   ty:1,    r:0},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-sa': [ // South America — famous jigsaw fit against Africa's west
-      {t:0,   tx:127,  ty:-13,  r:40},
-      {t:0.25,tx:91,   ty:-9,   r:28},
-      {t:0.5, tx:56,   ty:-6,   r:16},
-      {t:0.75,tx:20,   ty:-2,   r:5},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-na': [ // North America — northwest of Europe in Pangea
-      {t:0,   tx:248,  ty:38,   r:18},
-      {t:0.25,tx:179,  ty:27,   r:13},
-      {t:0.5, tx:109,  ty:17,   r:7},
-      {t:0.75,tx:40,   ty:6,    r:2},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-gl': [ // Greenland — follows North America
-      {t:0,   tx:230,  ty:40,   r:16},
-      {t:0.25,tx:165,  ty:29,   r:11},
-      {t:0.5, tx:100,  ty:18,   r:6},
-      {t:0.75,tx:36,   ty:6,    r:2},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-ca': [ // Central America — follows North America
-      {t:0,   tx:244,  ty:36,   r:16},
-      {t:0.25,tx:175,  ty:26,   r:11},
-      {t:0.5, tx:107,  ty:16,   r:6},
-      {t:0.75,tx:39,   ty:5,    r:2},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-eu': [ // Europe — directly north of Africa in Pangea
-      {t:0,   tx:7,    ty:77,   r:-10},
-      {t:0.25,tx:5,    ty:55,   r:-7},
-      {t:0.5, tx:3,    ty:34,   r:-4},
-      {t:0.75,tx:1,    ty:12,   r:-1},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-ib': [ // Iberia — follows Europe
-      {t:0,   tx:6,    ty:74,   r:-9},
-      {t:0.25,tx:4,    ty:53,   r:-6},
-      {t:0.5, tx:3,    ty:32,   r:-4},
-      {t:0.75,tx:1,    ty:11,   r:-1},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-it': [ // Italy — follows Europe
-      {t:0,   tx:6,    ty:72,   r:-13},
-      {t:0.25,tx:4,    ty:52,   r:-9},
-      {t:0.5, tx:3,    ty:32,   r:-5},
-      {t:0.75,tx:1,    ty:11,   r:-2},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-bi': [ // British Isles — follows Europe
-      {t:0,   tx:6,    ty:75,   r:-9},
-      {t:0.25,tx:4,    ty:54,   r:-6},
-      {t:0.5, tx:3,    ty:33,   r:-4},
-      {t:0.75,tx:1,    ty:12,   r:-1},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-as': [ // Asia — east of Europe, massive landmass
-      {t:0,   tx:-70,  ty:60,   r:-8},
-      {t:0.25,tx:-50,  ty:43,   r:-6},
-      {t:0.5, tx:-31,  ty:26,   r:-3},
-      {t:0.75,tx:-11,  ty:10,   r:-1},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-ar': [ // Arabia — locked to Africa/Asia in Pangea
-      {t:0,   tx:-8,   ty:6,    r:5},
-      {t:0.25,tx:-5,   ty:4,    r:3},
-      {t:0.5, tx:-3,   ty:3,    r:2},
-      {t:0.75,tx:-1,   ty:1,    r:0},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-jp': [ // Japan — follows Asia
-      {t:0,   tx:-66,  ty:57,   r:-7},
-      {t:0.25,tx:-47,  ty:41,   r:-5},
-      {t:0.5, tx:-29,  ty:25,   r:-3},
-      {t:0.75,tx:-10,  ty:9,    r:-1},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-sea': [ // SE Asia — follows Asia
-      {t:0,   tx:-64,  ty:55,   r:-7},
-      {t:0.25,tx:-46,  ty:40,   r:-5},
-      {t:0.5, tx:-28,  ty:24,   r:-3},
-      {t:0.75,tx:-10,  ty:8,    r:-1},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-in': [ // India — part of Gondwana, dramatic northward journey
-      {t:0,   tx:-68,  ty:89,   r:-42},
-      {t:0.25,tx:-49,  ty:64,   r:-30},
-      {t:0.5, tx:-30,  ty:39,   r:-18},
-      {t:0.75,tx:-11,  ty:14,   r:-6},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-au': [ // Australia — breaks from Antarctica, drifts NE
-      {t:0,   tx:-180, ty:49,   r:-42},
-      {t:0.25,tx:-130, ty:35,   r:-30},
-      {t:0.5, tx:-79,  ty:22,   r:-18},
-      {t:0.75,tx:-29,  ty:8,    r:-6},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-tas': [ // Tasmania — follows Australia
-      {t:0,   tx:-177, ty:47,   r:-40},
-      {t:0.25,tx:-127, ty:34,   r:-29},
-      {t:0.5, tx:-77,  ty:21,   r:-17},
-      {t:0.75,tx:-28,  ty:7,    r:-6},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-nz': [ // New Zealand — follows Australia
-      {t:0,   tx:-168, ty:44,   r:-38},
-      {t:0.25,tx:-121, ty:32,   r:-27},
-      {t:0.5, tx:-74,  ty:19,   r:-16},
-      {t:0.75,tx:-27,  ty:7,    r:-5},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-png': [ // Papua New Guinea — follows Australia
-      {t:0,   tx:-175, ty:47,   r:-40},
-      {t:0.25,tx:-126, ty:34,   r:-29},
-      {t:0.5, tx:-77,  ty:21,   r:-17},
-      {t:0.75,tx:-28,  ty:7,    r:-6},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-indo': [ // Indonesia — between Asia and Australia
-      {t:0,   tx:-120, ty:54,   r:-25},
-      {t:0.25,tx:-86,  ty:39,   r:-18},
-      {t:0.5, tx:-53,  ty:24,   r:-11},
-      {t:0.75,tx:-19,  ty:8,    r:-4},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ],
-    'c-an': [ // Antarctica — central Gondwana, drifts south
-      {t:0,   tx:56,   ty:-106, r:8},
-      {t:0.25,tx:40,   ty:-76,  r:6},
-      {t:0.5, tx:25,   ty:-47,  r:3},
-      {t:0.75,tx:9,    ty:-17,  r:1},
-      {t:1,   tx:0,    ty:0,    r:0}
-    ]
-  };
-
-  // Get continent center for rotation origin
-
-  // Get continent center for rotation origin
-  function getCenter(id){
-    const el=document.getElementById(id);
-    if(!el)return{x:400,y:200};
-    const bb=el.getBBox();
-    return{x:bb.x+bb.width/2, y:bb.y+bb.height/2};
-  }
-
-  // Interpolate between keyframes
-  function interpKF(kfs, t){
-    if(t<=kfs[0].t) return kfs[0];
-    if(t>=kfs[kfs.length-1].t) return kfs[kfs.length-1];
-    for(let i=0;i<kfs.length-1;i++){
-      if(t>=kfs[i].t && t<=kfs[i+1].t){
-        const seg=(t-kfs[i].t)/(kfs[i+1].t-kfs[i].t);
-        // Ease in-out for natural motion
-        const e=seg<0.5?2*seg*seg:1-Math.pow(-2*seg+2,2)/2;
-        return{
-          tx:kfs[i].tx+(kfs[i+1].tx-kfs[i].tx)*e,
-          ty:kfs[i].ty+(kfs[i+1].ty-kfs[i].ty)*e,
-          r:kfs[i].r+(kfs[i+1].r-kfs[i].r)*e
-        };
-      }
-    }
-    return kfs[kfs.length-1];
-  }
-
-  // ── ERA DATA ──
-  const eras=[
-    {max:50,  name:'Pangea',              year:'335 Mya'},
-    {max:200, name:'Pangea Rifting',       year:'280 Mya'},
-    {max:350, name:'Laurasia & Gondwana',   year:'200 Mya'},
-    {max:500, name:'Gondwana Breaking',     year:'150 Mya'},
-    {max:700, name:'Cretaceous',            year:'100 Mya'},
-    {max:850, name:'K-Pg Aftermath',        year:'60 Mya'},
-    {max:950, name:'Near-Modern',           year:'20 Mya'},
-    {max:1000,name:'Present Day',           year:'Present'}
-  ];
-
-
-  // ── RIFT LINES ── Mid-ocean ridges that form between separating continents
-  const rifts=[
-    // Mid-Atlantic Ridge (SA-Africa separation)
-    {id:'rift-atlantic-s', x1:'c-sa', x2:'c-af', startT:0.15, label:'Mid-Atlantic Ridge'},
-    // North Atlantic (NA-Europe)
-    {id:'rift-atlantic-n', x1:'c-na', x2:'c-eu', startT:0.25, label:'North Atlantic'},
-    // Indian Ocean (India separating)
-    {id:'rift-indian', x1:'c-in', x2:'c-an', startT:0.35, label:'Indian Ocean Ridge'},
-    // Australia-Antarctica
-    {id:'rift-southern', x1:'c-au', x2:'c-an', startT:0.4, label:'Southeast Indian Ridge'}
-  ];
-
-  function renderRifts(t){
-    if(!riftLayer)return;
-    let svg='';
-    rifts.forEach(r=>{
-      if(t<r.startT)return;
-      const intensity=Math.min(1,(t-r.startT)/0.3);
-      const e1=document.getElementById(r.x1);
-      const e2=document.getElementById(r.x2);
-      if(!e1||!e2)return;
-      const b1=e1.getBoundingClientRect(), b2=e2.getBoundingClientRect();
-      const svgEl=document.getElementById('drift-svg');
-      const svgRect=svgEl.getBoundingClientRect();
-      const sx=800/svgRect.width, sy=400/svgRect.height;
-      // Get centers in SVG coordinates
-      const bb1=e1.getBBox(), bb2=e2.getBBox();
-      // Use transform-aware positions
-      const c1=getTransformedCenter(r.x1);
-      const c2=getTransformedCenter(r.x2);
-      const mx=(c1.x+c2.x)/2, my=(c1.y+c2.y)/2;
-      // Wavy rift line
-      const dx=c2.x-c1.x, dy=c2.y-c1.y;
-      const len=Math.sqrt(dx*dx+dy*dy);
-      const nx=-dy/len, ny=dx/len;
-      const wave=8*intensity;
-      const p1x=mx+nx*wave*Math.sin(t*20), p1y=my+ny*wave*Math.sin(t*20);
-      svg+=`<line x1="${c1.x}" y1="${c1.y}" x2="${c2.x}" y2="${c2.y}"
-        stroke="#2a5a8c" stroke-width="${0.5+intensity*1.2}" stroke-dasharray="3,5"
-        opacity="${intensity*0.6}"/>`;
-      // Glowing center point (spreading center)
-      svg+=`<circle cx="${mx}" cy="${my}" r="${2+intensity*3}"
-        fill="none" stroke="#4a8abd" stroke-width="0.8"
-        opacity="${intensity*0.5}"/>`;
-    });
-    riftLayer.innerHTML=svg;
-  }
-
-  function getTransformedCenter(id){
-    const el=document.getElementById(id);
-    if(!el)return{x:400,y:200};
-    const bb=el.getBBox();
-    const cx=bb.x+bb.width/2, cy=bb.y+bb.height/2;
-    // Apply current transform
-    const kfs=keyframes[id];
-    if(!kfs)return{x:cx,y:cy};
-    const st=parseFloat(rangeEl.value)/1000;
-    const v=interpKF(kfs,st);
-    return{x:cx+v.tx, y:cy+v.ty};
-  }
-
-  // ── OCEAN DEPTH ── Gradients between separating continents
-  function renderOcean(t){
-    if(!oceanLayer)return;
-    let svg='';
-    if(t>0.15){
-      const op=Math.min(0.6,(t-0.15)*1.5);
-      // Atlantic ocean forming between SA and AF
-      const sa=getTransformedCenter('c-sa'), af=getTransformedCenter('c-af');
-      const mx=(sa.x+af.x)/2, my=(sa.y+af.y)/2;
-      const dist=Math.sqrt((af.x-sa.x)**2+(af.y-sa.y)**2);
-      svg+=`<ellipse cx="${mx}" cy="${my}" rx="${dist*0.4}" ry="${dist*0.6}"
-        fill="url(#ocean-ridge)" opacity="${op}" transform="rotate(-10,${mx},${my})"/>`;
-    }
-    if(t>0.35){
-      const op=Math.min(0.5,(t-0.35)*1.2);
-      // Indian Ocean
-      const ind=getTransformedCenter('c-in'), ant=getTransformedCenter('c-an');
-      const mx=(ind.x+ant.x)/2, my=(ind.y+ant.y)/2;
-      svg+=`<ellipse cx="${mx}" cy="${my}" rx="40" ry="55"
-        fill="url(#ocean-young)" opacity="${op}"/>`;
-    }
-    if(t>0.4){
-      const op=Math.min(0.4,(t-0.4)*1.0);
-      // Southern Ocean (Australia-Antarctica)
-      const au=getTransformedCenter('c-au'), ant=getTransformedCenter('c-an');
-      const mx=(au.x+ant.x)/2, my=(au.y+ant.y)/2;
-      svg+=`<ellipse cx="${mx}" cy="${my}" rx="45" ry="30"
-        fill="url(#ocean-young)" opacity="${op}"/>`;
-    }
-    oceanLayer.innerHTML=svg;
-  }
-
-  // ── CONTINENTAL SHELF SHADOWS ──
-  function renderShelves(t){
-    if(!shelfLayer)return;
-    let svg='';
-    Object.keys(keyframes).forEach(id=>{
-      const el=document.getElementById(id);
-      if(!el)return;
-      const bb=el.getBBox();
-      const c=getTransformedCenter(id);
-      const rx=bb.width/2+8, ry=bb.height/2+8;
-      svg+=`<ellipse cx="${c.x}" cy="${c.y}" rx="${rx}" ry="${ry}"
-        fill="#3a2204" opacity="0.25"/>`;
-    });
-    shelfLayer.innerHTML=svg;
-  }
-
-  // ── VOLCANIC PARTICLES ── Along rift zones and subduction zones
-  let volcanoParticles=[];
-  let lastVolcanoSpawn=0;
-
-  function spawnVolcano(t){
-    if(t<0.15)return;
-    const now=performance.now();
-    if(now-lastVolcanoSpawn<200)return;
-    lastVolcanoSpawn=now;
-
-    // Spawn near rift zones
-    const zones=[];
-    if(t>0.15){
-      const sa=getTransformedCenter('c-sa'),af=getTransformedCenter('c-af');
-      zones.push({x:(sa.x+af.x)/2+(Math.random()-0.5)*30, y:(sa.y+af.y)/2+(Math.random()-0.5)*60});
-    }
-    if(t>0.35){
-      const ind=getTransformedCenter('c-in'),ant=getTransformedCenter('c-an');
-      zones.push({x:(ind.x+ant.x)/2+(Math.random()-0.5)*20, y:(ind.y+ant.y)/2+(Math.random()-0.5)*40});
-    }
-    if(t>0.6){
-      // Ring of Fire — Pacific rim
-      zones.push({x:140+(Math.random()-0.5)*30, y:120+(Math.random()-0.5)*80});
-      zones.push({x:680+(Math.random()-0.5)*20, y:160+(Math.random()-0.5)*60});
-    }
-    if(zones.length){
-      const z=zones[Math.floor(Math.random()*zones.length)];
-      volcanoParticles.push({
-        x:z.x, y:z.y,
-        vx:(Math.random()-0.5)*0.3,
-        vy:-Math.random()*0.5-0.2,
-        life:1, decay:0.01+Math.random()*0.02,
-        size:1+Math.random()*2
-      });
-    }
-    // Cap particles
-    if(volcanoParticles.length>40)volcanoParticles=volcanoParticles.slice(-30);
-  }
-
-  function renderVolcanoes(){
-    if(!volcanoLayer)return;
-    let svg='';
-    volcanoParticles=volcanoParticles.filter(p=>{
-      p.x+=p.vx; p.y+=p.vy; p.life-=p.decay;
-      return p.life>0;
-    });
-    volcanoParticles.forEach(p=>{
-      const r=p.size*p.life;
-      svg+=`<circle cx="${p.x}" cy="${p.y}" r="${r}"
-        fill="#ff6030" opacity="${p.life*0.7}"/>`;
-      // Glow
-      svg+=`<circle cx="${p.x}" cy="${p.y}" r="${r*2.5}"
-        fill="#ff3000" opacity="${p.life*0.15}"/>`;
-    });
-    volcanoLayer.innerHTML=svg;
-  }
-
-  // ── MAIN APPLY ──
-  function getEra(v){
-    for(const e of eras) if(v<=e.max) return e;
-    return eras[eras.length-1];
-  }
-
-  function getMya(v){
-    // Map 0-1000 to 335-0 Mya
-    return Math.round(335*(1-v/1000));
-  }
-
-  function applyDrift(sliderVal){
-    const t=sliderVal/1000; // 0–1
-
-    // Apply keyframed transforms to each continent
-    Object.keys(keyframes).forEach(id=>{
-      const el=document.getElementById(id);
-      if(!el)return;
-      const v=interpKF(keyframes[id], t);
-      const c=getCenter(id);
-      el.setAttribute('transform',
-        `translate(${v.tx},${v.ty}) rotate(${v.r},${c.x},${c.y})`);
-    });
-
-    // Update secondary layers
-    renderRifts(t);
-    renderOcean(t);
-    renderShelves(t);
-    spawnVolcano(t);
-    renderVolcanoes();
-
-    // Update UI
-    const era=getEra(sliderVal);
-    const mya=getMya(sliderVal);
-    const yearStr=mya<=0?'Present':mya+' Mya';
-    if(eraEl) eraEl.textContent=era.name+' — '+yearStr;
-    if(eraTopEl) eraTopEl.textContent=era.name;
-    if(yearEl) yearEl.textContent=yearStr;
-    if(fillEl) fillEl.style.width=(sliderVal/10)+'%';
-    if(thumbEl) thumbEl.style.left=(sliderVal/10)+'%';
-  }
-
-  // Initialize at Pangea
-  applyDrift(0);
-
-  let animId=null;
-  let playing=false;
-  let animStart=null;
-  const DURATION=12000; // 12 seconds for richer animation
-
-  function animFrame(ts){
-    if(!animStart) animStart=ts;
-    const elapsed=ts-animStart;
-    const val=Math.min(1000,elapsed/DURATION*1000);
-    rangeEl.value=val;
-    applyDrift(val);
-    if(val<1000){
-      animId=requestAnimationFrame(animFrame);
-    }else{
-      stopAnim();
-    }
-  }
-
-  function startAnim(){
-    playing=true;
-    animStart=null;
-    if(parseInt(rangeEl.value)>=990) rangeEl.value=0;
-    const curVal=parseInt(rangeEl.value);
-    animStart=performance.now()-curVal/1000*DURATION;
-    playBtn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-    animId=requestAnimationFrame(animFrame);
-  }
-
-  function stopAnim(){
-    playing=false;
-    if(animId){cancelAnimationFrame(animId);animId=null;}
-    playBtn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"/></svg>';
-  }
-
-  playBtn.addEventListener('click',function(){
-    if(playing) stopAnim(); else startAnim();
+// Drawer handle — tap to collapse
+if(_handle){
+  _handle.addEventListener('click',function(){
+    if(_drawerOpen)closeMobileSheet();
   });
+}
 
-  rangeEl.addEventListener('input',function(){
-    if(playing) stopAnim();
-    applyDrift(parseInt(this.value));
-  });
+// ── THEME DATA ─────────────────────────────────────────────────
+var TH=[
+  {n:'I',nm:'The Living World',sub:'Natura',id:'natura'},
+  {n:'II',nm:'The Human Animal',sub:'Homo',id:'homo'},
+  {n:'III',nm:'Peoples & Movement',sub:'Gentes',id:'gentes'},
+  {n:'IV',nm:'Belief, Knowledge & Ideas',sub:'Gnōsis',id:'gnosis'},
+  {n:'V',nm:'Power & Conflict',sub:'Potestas',id:'potestas'},
+  {n:'VI',nm:'Rights, Justice & Resistance',sub:'Iustitia',id:'iustitia'},
+  {n:'VII',nm:'Economy, Labour & Exchange',sub:'Oeconomia',id:'oeconomia'},
+  {n:'VIII',nm:'Society & The Everyday',sub:'Vita Communis',id:'vita'},
+  {n:'IX',nm:'Culture, Art & Making',sub:'Ars',id:'ars'},
+  {n:'X',nm:'Word, Sign & Signal',sub:'Signum',id:'signum'},
+  {n:'XI',nm:'The Hidden, Dark & Strange',sub:'Arcana',id:'arcana'},
+  {n:'XII',nm:'The Future & The Possible',sub:'Futura',id:'futura'}
+];
 
-  // Continuous particle rendering when paused but particles exist
-  function tickParticles(){
-    if(!playing && volcanoParticles.length>0) renderVolcanoes();
-    requestAnimationFrame(tickParticles);
+// ── ATLAS DATA ─────────────────────────────────────────────────
+// t=theme index, i=icon, n=name, g=tagline, k=tags, l=live, h=href
+var AT=[
+// ── I · Natura ──
+{t:0,i:'🌌',n:'Cosmos',g:'112 cosmic objects. 13.8 billion years of the universe.',k:['Scale','Discovery','Herstory'],l:1,h:'cosmos/index.html'},
+{t:0,i:'🌡',n:'Clima',g:'Climate is the hidden variable in every historical event.',k:['Climate','Collapse','Ice Age'],l:1,h:'clima/index.html'},
+{t:0,i:'🧊',n:'Aeon',g:'Four billion years of planetary climate. Every ice age, every hothouse, every extinction it caused.',k:['Paleoclimate','Deep Time','Extinction'],l:1,h:'aeon/index.html'},
+{t:0,i:'💧',n:'Aqua',g:'100 water events. Every civilisation that water built. Every one it ended.',k:['Rivers','Drought','Conflict'],l:1,h:'aqua/index.html'},
+{t:0,i:'🪨',n:'Petra',g:'The ground beneath every empire was always the point.',k:['Geology','Resources','Extraction'],l:1,h:'petra/index.html'},
+{t:0,i:'🌿',n:'Flora',g:'The plants that made civilisation.',k:['Crops','Trade','Extinction'],l:1,h:'flora/index.html'},
+{t:0,i:'🐘',n:'Bestia',g:'The animals that made us. The ones we are unmaking.',k:['Domestication','Extinction','War'],l:1,h:'bestia/index.html'},
+{t:0,i:'🌳',n:'Sylva',g:'Every forest that fed, sheltered, or fell to civilisation.',k:['Forest','Deforestation','Ecology'],l:1,h:'sylva/index.html'},
+{t:0,i:'🔥',n:'Ignis',g:'Humanity\'s first technology. Still the most dangerous.',k:['Fire','Energy','Disaster'],l:1,h:'ignis/index.html'},
+{t:0,i:'🌬',n:'Spiritus',g:'Wind, weather, and atmosphere as the invisible hand of history.',k:['Weather','Atmosphere','Climate'],l:1,h:'spiritus/index.html'},
+{t:0,i:'🌾',n:'Solum',g:'Civilisations don\'t collapse. Their soil does.',k:['Soil','Desertification','Collapse'],l:1,h:'solum/index.html'},
+// ── II · Homo ──
+{t:1,i:'🦠',n:'Contagium',g:'Every epidemic. Spread, death, rupture.',k:['Epidemics','Mortality','Response'],l:1,h:'contagium/index.html'},
+{t:1,i:'🫀',n:'Corpus',g:'The human body as territory. Who owns it has always been contested.',k:['Anatomy','Race Science','Autonomy'],l:1,h:'corpus/index.html'},
+{t:1,i:'🧠',n:'Animus',g:'The history of minds that didn\'t fit, and the systems built to manage them.',k:['Psychology','Diagnosis','Power'],l:1,h:'animus/index.html'},
+{t:1,i:'🩹',n:'Dolor',g:'The history of suffering, and the slow fight to end it.',k:['Medicine','Pain','Surgery'],l:1,h:'dolor/index.html'},
+{t:1,i:'⏳',n:'Senex',g:'The one question every civilisation has had to answer.',k:['Ageing','Death','Afterlife'],l:1,h:'senex/index.html'},
+{t:1,i:'🌙',n:'Somnia',g:'The atlas where the territory is entirely inside the mind.',k:['Dreams','Altered States','Ritual'],l:0},
+{t:1,i:'💞',n:'Eros',g:'Every society organised desire. None agreed on how.',k:['Sexuality','Desire','Rights'],l:0},
+{t:1,i:'👁',n:'Sensus',g:'We do not all perceive the same world. We never have.',k:['Senses','Perfume','Perception'],l:0},
+{t:1,i:'💊',n:'Pharmakeia',g:'Every substance humanity has used to heal, alter, or destroy itself.',k:['Drugs','Medicine','Poison'],l:0},
+{t:1,i:'🌾',n:'Fames',g:'Famine as policy. The hunger that changed history.',k:['Famine','Food','Control'],l:0},
+{t:1,i:'🤱',n:'Partus',g:'Every society has tried to control birth. None has fully succeeded.',k:['Birth','Midwifery','Reproduction'],l:0},
+{t:1,i:'🌿',n:'Intoxicatio',g:'Every culture found something to alter its mind with. Every empire found a way to profit from it.',k:['Substances','Trade','Prohibition'],l:0},
+{t:1,i:'🧵',n:'Vestis',g:'Cloth is the oldest technology. It built empires before iron did.',k:['Textiles','Labour','Empire'],l:0},
+{t:1,i:'👁',n:'Stigma',g:'Every society designates some bodies as contaminating. This is always political, never medical.',k:['Exclusion','Bodies','Power'],l:0},
+// ── III · Gentes ──
+{t:2,i:'🌍',n:'Civilitas',g:'100 civilizations. 65,000 years.',k:['Civilizations','Timeline','Herstory'],l:1,h:'civilitas/index.html'},
+{t:2,i:'🗣',n:'Lingua',g:'7,000 languages. Half will die this century.',k:['Language','Extinction','Scripts'],l:1,h:'lingua/index.html'},
+{t:2,i:'🧭',n:'Exōdus',g:'300,000 years of human movement.',k:['Migration','Diaspora','Displacement'],l:0},
+{t:2,i:'⛓',n:'Servitus',g:'The economic engine underneath half the other atlases.',k:['Slavery','Labour','Emancipation'],l:0},
+{t:2,i:'🏕',n:'Nomad',g:'The civilisations that left no cities. They were not less civilised.',k:['Steppe','Arctic','Sea Peoples'],l:0},
+{t:2,i:'🌐',n:'Diaspora',g:'Identity held together across generations of distance.',k:['Exile','Networks','Return'],l:0},
+{t:2,i:'🏷',n:'Nomen',g:'Every name is an argument about who owns the past.',k:['Place Names','Renaming','Colonial'],l:0},
+{t:2,i:'🪶',n:'Tribū',g:'Every indigenous nation. What survived contact and what didn\'t.',k:['Indigenous','Colonialism','Sovereignty'],l:0},
+{t:2,i:'🔒',n:'Captivus',g:'The history of imprisonment — who was caged, and why.',k:['Incarceration','Prison','Control'],l:0},
+{t:2,i:'🧳',n:'Exilium',g:'The ideas that changed the world were often made in the wrong country.',k:['Exile','Diaspora','Ideas'],l:0},
+{t:2,i:'🕊',n:'Asylum',g:'Sanctuary is one of humanity\'s oldest ideas. We keep dismantling it.',k:['Refugees','Sanctuary','Law'],l:0},
+// ── IV · Gnōsis ──
+{t:3,i:'✨',n:'Numen',g:'Every answer humanity has given to the same question.',k:['Religion','Belief','Mythology'],l:1,h:'numen/index.html'},
+{t:3,i:'🏛',n:'Sophia',g:'Every school of thought. Mapped.',k:['Philosophy','Ideas','Transmission'],l:1,h:'sophia/index.html'},
+{t:3,i:'𓂀',n:'Graphē',g:'100 scripts, from cuneiform to emoji.',k:['Writing','Scripts','Extinct'],l:1,h:'graphe/index.html'},
+{t:3,i:'🔬',n:'Experimenta',g:'Where scientific breakthroughs happened. And why there.',k:['Science','Discovery','Institutions'],l:1,h:'experimenta/index.html'},
+{t:3,i:'⚛',n:'Quantum',g:'The complete history of humanity\'s attempts to understand reality.',k:['Physics','Cosmology','Reality'],l:1,h:'quantum/index.html'},
+{t:3,i:'🗺',n:'Terra Incognita',g:'A map of confident errors. The most useful atlas of all.',k:['Wrong Knowledge','Paradigm Shifts'],l:1,h:'terraincognita/index.html'},
+{t:3,i:'🔥',n:'Obscura',g:'What every civilisation was afraid of knowing.',k:['Censorship','Suppression','Index'],l:1,h:'obscura/index.html'},
+{t:3,i:'📚',n:'Scriptorium',g:'The physical life of knowledge — and how close it came to dying.',k:['Books','Libraries','Printing'],l:1,h:'scriptorium/index.html'},
+{t:3,i:'🌠',n:'Augur',g:'Every civilisation read the sky differently. Astronomy to astrology.',k:['Astronomy','Divination','Calendars'],l:1,h:'augur/index.html'},
+{t:3,i:'∞',n:'Mathematica',g:'Where numbers were invented, and what they made possible.',k:['Mathematics','Zero','Proof'],l:1,h:'mathematica/index.html'},
+{t:3,i:'⚙️',n:'Techne',g:'Every tool that changed what it meant to be human.',k:['Technology','Invention','Acceleration'],l:1,h:'techne/index.html'},
+{t:3,i:'📜',n:'Codex',g:'Every culture\'s oldest surviving words. What they chose to write down first tells you everything.',k:['Texts','Epics','Origins'],l:1,h:'codex/index.html'},
+// ── V · Potestas ──
+{t:4,i:'⚔',n:'Bellum',g:'War is the context for most of human history. Examine it.',k:['War','Military','Casualties'],l:1,h:'bellum/index.html'},
+{t:4,i:'👑',n:'Dynastia',g:'100 dynasties. 5,000 years of royal and imperial power.',k:['Dynasties','Succession','Herstory'],l:1,h:'dynastia/index.html'},
+{t:4,i:'📐',n:'Terminus',g:'Every border. Who drew it. What it cost.',k:['Borders','Treaties','Disputed'],l:0},
+{t:4,i:'🔥',n:'Insurgō',g:'Every revolution. Spark, spread, survival.',k:['Revolution','Uprising','Contagion'],l:0},
+{t:4,i:'🕯',n:'Cruor',g:'Mass violence against civilians. The full record.',k:['Genocide','Accountability','Denial'],l:0},
+{t:4,i:'🗡',n:'Sicarius',g:'The most precise political instrument. Almost never works.',k:['Assassination','Consequence','Power'],l:0},
+{t:4,i:'🩻',n:'Trauma',g:'What war leaves behind. The longest part of any conflict.',k:['PTSD','Landmines','Generational'],l:0},
+{t:4,i:'🕵',n:'Arcanum',g:'The operations that changed history, conducted in the dark.',k:['Espionage','Intelligence','Covert'],l:0},
+{t:4,i:'🔐',n:'Kryptós',g:'Caesar to quantum. The arms race of secrecy.',k:['Cipher','Cryptography','Quantum'],l:0},
+{t:4,i:'🏛',n:'Imperium',g:'Every empire. Its reach, its cost, its collapse.',k:['Empire','Colonies','Decline'],l:0},
+{t:4,i:'📢',n:'Propaganda',g:'The art of manufacturing consent across every era.',k:['Propaganda','Media','Persuasion'],l:0},
+{t:4,i:'🏦',n:'Tributum',g:'Who paid taxes, who didn\'t, and who died over the difference.',k:['Taxation','Revolt','Fiscal'],l:0},
+{t:4,i:'🧱',n:'Murus',g:'Every wall is a confession about what the state cannot do.',k:['Walls','Borders','Control'],l:0},
+{t:4,i:'⚔',n:'Armamentum',g:'The spear preceded the state. The gun remade it. The drone is remaking it again.',k:['Weapons','Arms Trade','Technology'],l:0},
+// ── VI · Iustitia ──
+{t:5,i:'⚖',n:'Lex',g:'The rules that didn\'t exist until someone decided they should.',k:['Law','Rights','Justice'],l:1,h:'lex/index.html'},
+{t:5,i:'✊',n:'Manifesto',g:'Every political idea that tried to change the world. Mapped.',k:['Ideology','Spread','Movements'],l:1,h:'manifesto/index.html'},
+{t:5,i:'✊',n:'Vindica',g:'The fight for women\'s rights. Every wave.',k:['Suffrage','Waves','Backlash'],l:0},
+{t:5,i:'🎭',n:'Corruptio',g:'The boundary between power and its abuse has always been negotiated.',k:['Corruption','Kleptocracy','Impunity'],l:1,h:'corruptio/index.html'},
+{t:5,i:'🔍',n:'Crimen',g:'The history of crime — and who decided what it was.',k:['Crime','Policing','Justice'],l:0},
+{t:5,i:'🕊',n:'Martyr',g:'Every cause that required someone to die for it.',k:['Martyrdom','Resistance','Memory'],l:0},
+{t:5,i:'✋',n:'Suffragium',g:'The vote was never freely given. It was taken — and it is still being taken back.',k:['Franchise','Exclusion','Resistance'],l:0},
+{t:5,i:'🌍',n:'Terra',g:'Land ownership is the deepest map of power. It predates money, law, and writing.',k:['Land','Ownership','Seizure'],l:0},
+// ── VII · Oeconomia ──
+{t:6,i:'💰',n:'Pecunia',g:'Money, credit, and every crash since.',k:['Currencies','Crises','Fintech'],l:1,h:'pecunia/index.html'},
+{t:6,i:'⛵',n:'Via',g:'Every trade route from sail to container.',k:['Routes','Commodities','Silk Road'],l:1,h:'via/index.html'},
+{t:6,i:'🚂',n:'Cursus',g:'Every revolution in how fast humans could move changed who held power.',k:['Transport','Infrastructure','Speed'],l:1,h:'cursus/index.html'},
+{t:6,i:'📜',n:'Debitum',g:'Debt is older than money. It has always been a form of power.',k:['Debt','Credit','Jubilee'],l:1,h:'debitum/index.html'},
+{t:6,i:'🔨',n:'Labor',g:'The history of what people have done all day.',k:['Work','Labour Rights','Wages'],l:1,h:'labor/index.html'},
+{t:6,i:'⚙',n:'Machina',g:'Every machine that took a job. Every job it created instead.',k:['Automation','Labour','AI'],l:0},
+{t:6,i:'🏪',n:'Mercatus',g:'The physical places where prices were made.',k:['Markets','Trade Fairs','Exchanges'],l:0},
+{t:6,i:'🎲',n:'Lucrum',g:'The parallel economy that never stops growing.',k:['Organised Crime','Cartels','Shadow'],l:0},
+{t:6,i:'🎁',n:'Dōnum',g:'The economy of generosity is also an economy of power.',k:['Gifts','Philanthropy','Aid'],l:0},
+{t:6,i:'⚓',n:'Nauta',g:'The trade routes that built every fortune, and every war.',k:['Trade Routes','Navigation','Ports'],l:0},
+{t:6,i:'⚒',n:'Faber',g:'The history of making things — craft, manufacture, industry.',k:['Craft','Industry','Labour'],l:0},
+{t:6,i:'🪙',n:'Argentum',g:'Precious metals and the mines that powered every monetary system.',k:['Mining','Metals','Monetary'],l:0},
+// ── VIII · Vita Communis ──
+{t:7,i:'🎩',n:'Classis',g:'Every society said class didn\'t define you. Every society was wrong.',k:['Class','Caste','Mobility'],l:0},
+{t:7,i:'🏠',n:'Domus',g:'The home is the most political space. It always has been.',k:['Home','Housing','Privacy'],l:0},
+{t:7,i:'🧸',n:'Puer',g:'Childhood is a recent invention. Examine it.',k:['Childhood','Child Labour','Rights'],l:0},
+{t:7,i:'🕯',n:'Ritus',g:'How societies mark what matters.',k:['Ritual','Ceremony','Sacred'],l:0},
+{t:7,i:'🍽',n:'Cibus',g:'Every cuisine is a map of who conquered whom.',k:['Cuisine','Migration','Empire'],l:0},
+{t:7,i:'🏙',n:'Via Urbis',g:'The city is humanity\'s greatest and most unfinished invention.',k:['Cities','Urbanism','Slums'],l:0},
+{t:7,i:'🕸',n:'Vinculum',g:'How ideas, diseases, and fashions move through human networks.',k:['Networks','Contagion','Loneliness'],l:0},
+{t:7,i:'🚿',n:'Mundus',g:'Cleanliness is not next to godliness. It is next to power.',k:['Sanitation','Class','Infrastructure'],l:0},
+{t:7,i:'💍',n:'Nuptiae',g:'Marriage is a property contract that acquired romantic mythology about 200 years ago.',k:['Marriage','Property','Gender'],l:0},
+// ── IX · Ars ──
+{t:8,i:'🎵',n:'Anthrophone',g:'Every instrument. Every culture. One map.',k:['Instruments','Organology','Lineage'],l:1,h:'anthrophone/index.html'},
+{t:8,i:'🎨',n:'Pigmentum',g:'The colours that were once impossible.',k:['Pigment','Trade','Symbolism'],l:0},
+{t:8,i:'🏗',n:'Structura',g:'The built ideas that outlasted their makers.',k:['Architecture','Style','Materials'],l:0},
+{t:8,i:'♟',n:'Lūdus',g:'Play as a mirror of civilisation.',k:['Games','Board Games','Sport'],l:0},
+{t:8,i:'🏟',n:'Agōn',g:'Sport is politics conducted by other means. Usually.',k:['Sport','Olympics','Politics'],l:0},
+{t:8,i:'💡',n:'Inventio',g:'Who gets credit for an idea is rarely who had it first.',k:['Invention','Patents','Suppression'],l:0},
+{t:8,i:'🎭',n:'Mimesis',g:'Culture travels by stealing. That is how it grows.',k:['Influence','Appropriation','Style'],l:0},
+{t:8,i:'📖',n:'Fabula',g:'Every story humanity told about itself — myth, epic, novel.',k:['Narrative','Epic','Oral Tradition'],l:0},
+{t:8,i:'🎨',n:'Imago',g:'A map of every art movement and the politics beneath it.',k:['Art','Representation','Patronage'],l:0},
+{t:8,i:'🗿',n:'Memoria',g:'Every monument is an argument. Every removal is a counter-argument.',k:['Monuments','Erasure','Memory'],l:0},
+// ── X · Signum ──
+{t:9,i:'📡',n:'Vox',g:'Every revolution in who could speak to whom.',k:['Media','Press','Propaganda'],l:0},
+{t:9,i:'🕰',n:'Tempus',g:'Whoever controls the calendar controls history.',k:['Calendars','Time Zones','Power'],l:0},
+{t:9,i:'📏',n:'Norma',g:'The invisible agreements that make the world work.',k:['Standards','Measurement','Infrastructure'],l:0},
+{t:9,i:'🧭',n:'Stella',g:'How humans found their way before instruments. And what we lost.',k:['Navigation','Stars','Wayfinding'],l:0},
+{t:9,i:'🌊',n:'Flumen',g:'Rivers were the first roads, the first borders, and the first gods.',k:['Rivers','Civilisation','Infrastructure'],l:0},
+// ── XI · Arcana ──
+{t:10,i:'☠',n:'Venena',g:'The boundary between medicine and murder is a dose.',k:['Poison','Assassination','Toxicology'],l:0},
+{t:10,i:'🔍',n:'Occultus',g:'Secrecy as a social technology. Who it serves. Why it persists.',k:['Secret Societies','Conspiracy','Ritual'],l:0},
+{t:10,i:'🃏',n:'Ludibrium',g:'A map of what people wanted badly enough to believe.',k:['Hoaxes','Fraud','Credulity'],l:0},
+{t:10,i:'👁',n:'Monstrum',g:'What a culture places beyond the human tells you everything about it.',k:['Monsters','Mythology','Fear'],l:0},
+{t:10,i:'🦋',n:'Lusus Naturae',g:'The history of the extraordinary body as spectacle and rights.',k:['Anomaly','Freak Shows','Disability'],l:0},
+{t:10,i:'🩸',n:'Supplicium',g:'Every state that used torture believed it worked. None of them were right. All of them kept doing it.',k:['Torture','Confession','Impunity'],l:0},
+{t:10,i:'🤯',n:'Mirabilia',g:'History\'s most counterintuitive, bizarre, and true facts. The ones that make you question everything.',k:['Curiosities','Counterintuitive','Strange'],l:0},
+{t:10,i:'🕍',n:'Sacra',g:'Every culture decided that some places on earth were closer to the divine. Millions walked to reach them.',k:['Pilgrimage','Sacred Sites','Geography'],l:0},
+{t:10,i:'⚱',n:'Sepultura',g:'How a culture buries its dead is its most honest self-portrait.',k:['Death','Burial','Memory'],l:0},
+// ── XII · Futura ──
+{t:11,i:'☄',n:'Finis',g:'Every near-miss. Every coming threat. The full ledger.',k:['Existential Risk','Close Calls','Future'],l:0},
+{t:11,i:'🔭',n:'Futura',g:'Every era imagined the future. None of them got it right.',k:['Futures','Prediction','Science Fiction'],l:0},
+{t:11,i:'🏙',n:'Utopia',g:'Planned cities. Why they almost all fail.',k:['Planned Cities','Communes','Failure'],l:0},
+{t:11,i:'☮',n:'Pax',g:'Every treaty that ended a war. How long it held. Why it failed.',k:['Peace','Treaties','Reconciliation'],l:0},
+{t:11,i:'🌊',n:'Diluvium',g:'Rising seas, sinking cities, and the civilisations already underwater.',k:['Sea Level','Displacement','Futures'],l:0}
+];
+
+// ── EXTENDED DESCRIPTIONS (live atlases) ──────────────────────
+var DESC={
+'Cosmos':'Map 112 cosmic objects across 13.8 billion years — from the Big Bang through stellar nurseries, black holes, and the cosmic microwave background. Scrub the timeline to watch the universe assemble itself. Every object is placed by right ascension and declination on an interactive sky atlas. Herstory surfaces the women astronomers — Leavitt, Payne-Gaposchkin, Rubin, Bell Burnell — whose discoveries were credited to others.',
+'Clima':'100 climate events from the Toba eruption to the present day. See how volcanic winters collapsed civilisations, how the Medieval Warm Period enabled Viking expansion, and how the Little Ice Age reshaped European agriculture. Every drought, flood, and famine placed on the map where it struck.',
+'Aeon':'Four billion years of planetary climate — every ice age, every hothouse, every mass extinction they triggered. The deepest timeline in the project. Scrub from the Hadean through Snowball Earth, the Great Oxygenation Event, the PETM, and into the Anthropocene.',
+'Aqua':'100 water events that made and unmade civilisations. The Nile floods that sustained Egypt, the droughts that collapsed the Maya, the dam projects that displaced millions. Water as infrastructure, weapon, boundary, and god.',
+'Petra':'Geology as the hidden foundation of power. 100 geological events and resources — from the tin that made bronze to the rare earths that make smartphones. See how tectonic shifts created the resources that empires fought over.',
+'Flora':'100 plants that shaped civilisation. The wheat that enabled settlement, the spices that launched trade routes, the rubber that built and destroyed empires. Track how crops migrated across continents and transformed every society they touched.',
+'Bestia':'100 animals that made human civilisation possible — and those we are unmaking. From the first domestication of wolves to the ongoing sixth extinction. Track how the horse transformed warfare, how cattle reshaped landscapes, and how cod built colonial empires.',
+'Sylva':'100 forests and deforestation events across human history. The cedars of Lebanon that built Phoenician ships, the Amazon as carbon sink, the managed forests of Edo Japan. See how every civilisation depended on its forests — and what happened when they fell.',
+'Ignis':'Fire as humanity\'s first and most dangerous technology. 100 events from the controlled burns of early humans through the Great Fire of London to modern wildfires and nuclear energy. Track how mastery of fire shaped cooking, metallurgy, warfare, and industry.',
+'Spiritus':'Wind, weather, and atmosphere as the invisible hand of history. 100 atmospheric events — the kamikaze typhoons that saved Japan, the dust storms that created the Dust Bowl, the jet stream patterns that shaped aviation. Weather as strategy, disaster, and opportunity.',
+'Solum':'Civilisations don\'t collapse — their soil does. 100 events mapping how erosion, salinisation, and desertification ended empires. The Fertile Crescent that became desert, the Dust Bowl that emptied the Plains, the Green Revolution that fed billions at a cost.',
+'Contagium':'Every major epidemic mapped — from the Plague of Athens through the Black Death, smallpox in the Americas, the 1918 flu, and COVID-19. Track how diseases spread along trade routes, how quarantine was invented, and how pandemics reshaped the societies they struck.',
+'Corpus':'The human body as contested territory. 100 events in the history of anatomy, dissection, race science, bodily autonomy, and medical ethics. From Vesalius to Henrietta Lacks, from phrenology to genomics.',
+'Animus':'100 events in the history of the mind — how societies have understood, diagnosed, confined, and treated mental difference. From Bedlam to Freud, from lobotomy to the DSM, from asylum reform to the neurodiversity movement.',
+'Dolor':'The history of pain, suffering, and the long fight to end them. 100 events from trepanation through anaesthesia, antisepsis, antibiotics, and modern palliative care. Track how surgery evolved from butchery to precision.',
+'Senex':'100 events mapping how every civilisation has answered the question of ageing and death. Burial rites, ancestor worship, life expectancy shifts, pension systems, gerontology, and the modern quest for longevity.',
+'Civilitas':'The flagship atlas. 100 civilisations across 65,000 years, from the San people of southern Africa to the European Union. Scrub the timeline. Watch civilisations rise, overlap, and fall. See how ideas travelled between them. Find the women who shaped each one.',
+'Lingua':'7,000 languages mapped — the living, the endangered, and the extinct. 100 linguistic events from the earliest known scripts through language death, creolisation, and digital preservation. Half the world\'s languages will die this century.',
+'Numen':'100 religious traditions and belief systems mapped across 50,000 years. From animism and ancestor worship through the Axial Age, the great monotheisms, syncretic traditions, and modern secular movements. Track how beliefs spread, merged, and transformed.',
+'Sophia':'100 schools of philosophical thought mapped from the pre-Socratics to post-structuralism. See how ideas migrated between civilisations — Greek philosophy through Arabic translation, Indian logic to Tibetan Buddhism, Chinese legalism to modern statecraft.',
+'Graphē':'100 writing systems from Sumerian cuneiform to emoji. Track the invention, spread, and death of scripts. See which scripts descended from others, which were invented independently, and which were deliberately created to resist colonial erasure.',
+'Experimenta':'100 scientific breakthroughs placed where they happened — and why there. Track the institutional conditions that made discovery possible: the House of Wisdom, the Royal Society, Bell Labs, CERN. See how geography shaped what we know.',
+'Quantum':'The complete history of physics — 100 events from Democritus through Newton, Maxwell, Einstein, and quantum mechanics. Track how each discovery made the next possible, and how our understanding of reality has been rewritten at every scale.',
+'Terra Incognita':'A map of confident errors — the most useful atlas of all. 100 events where humanity was certain and wrong. Phlogiston, miasma theory, luminiferous aether, steady-state universe. See how paradigm shifts happen and why they take so long.',
+'Obscura':'100 acts of censorship, suppression, and intellectual persecution. The burning of the Library of Alexandria, the Index Librorum Prohibitorum, Galileo\'s trial, banned books, and modern internet censorship. What every civilisation was afraid of knowing.',
+'Scriptorium':'The physical life of knowledge — 100 events from clay tablets through papyrus, parchment, the printing press, and digital archives. How close humanity came to losing everything, and the scribes, librarians, and archivists who saved it.',
+'Augur':'100 events in the history of reading the sky — astronomy, astrology, and divination. From Stonehenge and Babylonian omen texts through Islamic observatories, Copernicus, and the Hubble Space Telescope. Every civilisation read the sky differently.',
+'Mathematica':'100 mathematical breakthroughs placed where they happened. The invention of zero in India, algebra in Baghdad, calculus in England and Germany simultaneously, and the unsolved problems that still drive the field.',
+'Techne':'100 technologies that changed what it meant to be human. From the hand axe through the printing press, steam engine, telegraph, transistor, and large language model. Track how each invention reshaped labour, power, and daily life.',
+'Codex':'100 of the oldest surviving texts from every culture. The Epic of Gilgamesh, the Rigveda, the Dao De Jing, the Popol Vuh. What each civilisation chose to write down first tells you everything about what they valued.',
+'Bellum':'100 wars and conflicts from the Battle of Megiddo to the present. Track how military technology, tactics, and the scale of destruction evolved. See the human cost — casualties, displacement, and the long aftermath of every conflict.',
+'Dynastia':'100 dynasties across 5,000 years of royal and imperial power. From the pharaohs through the Habsburgs, the Mughals, and the House of Saud. Track how succession, marriage alliances, and civil war shaped the political map.',
+'Lex':'100 legal events from the Code of Ur-Nammu to the International Criminal Court. Track how the concepts of rights, justice, due process, and human dignity evolved — and how law has been used both to liberate and to oppress.',
+'Manifesto':'100 political ideologies mapped from their origin to their global spread. Liberalism, socialism, fascism, feminism, anarchism, environmentalism — track how each idea travelled, transformed, and collided with the others.',
+'Corruptio':'100 events mapping the boundary between power and its abuse. From ancient tribute systems through modern kleptocracy, offshore finance, and institutional capture. The anatomy of corruption across every system of government.',
+'Pecunia':'100 monetary events from the first commodity currencies through coinage, paper money, central banking, and cryptocurrency. Every financial crash, every innovation, every time the rules of money were rewritten.',
+'Via':'100 trade routes from the earliest obsidian trails through the Silk Road, the spice routes, the triangular trade, and modern container shipping. Track how goods, ideas, diseases, and people moved along the same paths.',
+'Cursus':'100 revolutions in transport — from the domestication of the horse through canals, railways, automobiles, aviation, and spaceflight. See how each leap in speed reshaped who held power and who could move.',
+'Debitum':'Debt is older than money. 100 events from Mesopotamian grain loans through medieval usury laws, sovereign defaults, the IMF, and student debt. Track how credit and obligation have shaped every society.',
+'Labor':'100 events in the history of work — from hunter-gatherer subsistence through guilds, factories, trade unions, minimum wage, and the gig economy. Track how the meaning, conditions, and rewards of labour have changed.',
+'Anthrophone':'Every musical instrument from every culture on one interactive map. 100 instruments placed where they originated, with lineage connections showing how designs migrated and evolved across civilisations.',
+'Somnia':'The atlas where the territory is entirely inside the mind. 100 events mapping how every culture has understood dreams, trances, visions, and altered states of consciousness — from oracle traditions and shamanic journeying through Freudian analysis, sleep science, and lucid dreaming research.',
+'Eros':'100 events mapping how every society has organised desire, intimacy, and sexual identity. From sacred prostitution in Mesopotamia through medieval courtly love, the invention of homosexuality as a category, the Kinsey reports, and the global fight for LGBTQ+ rights.',
+'Sensus':'We do not all perceive the same world — and we never have. 100 events in the history of the senses: how cultures trained perception differently, how perfume became an industry, how anaesthesia changed the relationship to pain, and how sensory deprivation became both torture and therapy.',
+'Pharmakeia':'100 substances humanity has used to heal, alter, or destroy itself. From opium in ancient Sumer through quinine, aspirin, penicillin, LSD, and CRISPR. Track how the line between medicine, drug, and poison has shifted with every civilisation.',
+'Fames':'Famine as policy — the hunger that changed history. 100 famines mapped by cause: drought, war, colonial extraction, ideology. The Bengal Famine, the Holodomor, the Great Leap Forward. See how food scarcity has been weaponised across every era.',
+'Partus':'100 events in the contested history of birth and reproduction. From ancient midwifery through the medicalisation of childbirth, the fight for contraception, IVF, and surrogacy law. Every society has tried to control birth. None has fully succeeded.',
+'Intoxicatio':'100 events mapping how every culture found something to alter its mind with — and every empire found a way to profit from it. From ancient beer brewing through the Opium Wars, Prohibition, the War on Drugs, and modern legalisation movements.',
+'Vestis':'Cloth is the oldest technology — it built empires before iron did. 100 events from the first woven textiles through silk production, cotton slavery, the industrial loom, synthetic fibres, and fast fashion. Track how fabric shaped trade, labour, and identity.',
+'Stigma':'100 events mapping how every society designates some bodies as contaminating. Leprosy colonies, racial hygiene, HIV stigma, disability exclusion. This is always political, never medical. Track how the boundary between acceptable and unacceptable bodies has been drawn and redrawn.',
+'Ex\u014ddus':'300,000 years of human movement — 100 migration events from the first dispersal out of Africa through the Bantu expansion, the Atlantic slave trade, the Great Migration, and modern refugee crises. Track how displacement reshapes both origin and destination.',
+'Servitus':'The economic engine underneath half the other atlases. 100 events in the history of slavery — from debt bondage in Mesopotamia through chattel slavery, the abolitionist movement, and modern trafficking. See how unfree labour built the wealth of nations.',
+'Nomad':'The civilisations that left no cities — but were not less civilised. 100 events mapping pastoral, maritime, and hunter-gatherer societies. The Scythians, the Mongol Empire, the Polynesian navigators, the San, the Inuit. Sedentary bias erased them from most histories.',
+'Diaspora':'100 events mapping identity held together across generations of distance. The Jewish diaspora, the African diaspora, the Armenian, the Irish, the Chinese. Track how scattered communities maintained language, faith, cuisine, and solidarity across centuries.',
+'Nomen':'Every name is an argument about who owns the past. 100 renaming events — Constantinople to Istanbul, Bombay to Mumbai, Rhodesia to Zimbabwe. Track how colonial, revolutionary, and nationalist movements rewrote the map through place names.',
+'Trib\u016b':'100 events mapping indigenous nations — what survived contact and what didn\'t. From pre-colonial sovereignty through forced removal, residential schools, land rights movements, and modern indigenous resurgence. Every continent, every coloniser.',
+'Captivus':'The history of imprisonment — who was caged, and why. 100 events from ancient dungeons through the Bastille, the penitentiary movement, Alcatraz, Guant\u00e1namo, and mass incarceration. Track how punishment, reform, and control have been intertwined.',
+'Exilium':'The ideas that changed the world were often made in the wrong country. 100 exiles, banishments, and forced departures — from Ovid to Einstein, from Victor Hugo to Edward Said. Track how displacement became a condition of modern thought.',
+'Asylum':'Sanctuary is one of humanity\'s oldest ideas — and we keep dismantling it. 100 events from ancient temple refuge through the 1951 Refugee Convention, the Syrian crisis, and the modern politics of borders. Track how the right to safety has expanded and contracted.',
+'Terminus':'Every border on the map was drawn by someone — usually with a straight edge and no knowledge of the ground. 100 border events from the Treaty of Tordesillas through the Scramble for Africa, Partition, and modern border walls.',
+'Insurg\u014d':'100 revolutions mapped from the Spartacus revolt through the French Revolution, the Haitian Revolution, the Arab Spring, and beyond. Track how each uprising sparked, spread, and either transformed or was crushed. The anatomy of revolt.',
+'Cruor':'Mass violence against civilians — the full record. 100 events from the Assyrian deportations through the Armenian Genocide, the Holocaust, Rwanda, and Srebrenica. Track the patterns of escalation, the failures of prevention, and the long road to accountability.',
+'Sicarius':'The most precise political instrument — and it almost never works. 100 assassinations from Julius Caesar through Lincoln, Archduke Franz Ferdinand, Gandhi, JFK, and modern targeted killings. Track the intentions, the consequences, and the gap between them.',
+'Trauma':'What war leaves behind — the longest part of any conflict. 100 events mapping PTSD, landmines, unexploded ordnance, environmental devastation, refugee trauma, and the generational transmission of violence. The aftermath is always longer than the war.',
+'Arcanum':'100 covert operations that changed history — from Sun Tzu\'s intelligence doctrine through Bletchley Park, the CIA\'s Cold War operations, Mossad, and modern cyber-espionage. The operations conducted in the dark, and what happened when the light found them.',
+'Krypt\u00f3s':'From Caesar\'s cipher to quantum encryption — 100 events in the arms race of secrecy. Track how codes were made and broken, how cryptography enabled commerce and privacy, and how the balance between security and surveillance keeps shifting.',
+'Imperium':'Every empire — its reach, its cost, its collapse. 100 imperial events from Akkad through Rome, the Mongols, the British Empire, and American hegemony. Track how empires justify expansion, how they extract, and why they always fall.',
+'Propaganda':'The art of manufacturing consent across every era. 100 events from Pharaonic self-glorification through wartime posters, Soviet realism, advertising, and modern algorithmic manipulation. Track how persuasion technology has evolved.',
+'Tributum':'Who paid taxes, who didn\'t, and who died over the difference. 100 fiscal events from ancient tribute systems through the Magna Carta, the tax revolts that sparked revolutions, and modern tax havens. The hidden architecture of every state.',
+'Murus':'Every wall is a confession about what the state cannot do. 100 walls, fences, and barriers from Hadrian\'s Wall through the Great Wall, the Berlin Wall, the Israeli separation barrier, and the US-Mexico border. Track what they promised and what they delivered.',
+'Armamentum':'The spear preceded the state. The gun remade it. The drone is remaking it again. 100 weapons and arms trade events from the bronze sword through gunpowder, the Maxim gun, nuclear weapons, and autonomous systems.',
+'Vindica':'The fight for women\'s rights — every wave, every backlash. 100 events from Sappho through Mary Wollstonecraft, the suffragettes, second-wave feminism, reproductive rights, #MeToo, and the ongoing struggle for equality in law, work, and bodily autonomy.',
+'Crimen':'100 events in the history of crime — and who decided what it was. From ancient blood feuds through the invention of policing, forensic science, organised crime, white-collar fraud, and restorative justice. The boundary between crime and law is always political.',
+'Martyr':'Every cause that required someone to die for it. 100 martyrdoms from Socrates through the early Christians, political assassinations, self-immolations, and modern human rights defenders. Track how the meaning of sacrifice has changed across cultures.',
+'Suffragium':'The vote was never freely given — it was taken, and it is still being taken back. 100 events from Athenian democracy through the Chartists, women\'s suffrage, the Voting Rights Act, and modern voter suppression. The franchise as a continuous struggle.',
+'Terra':'Land ownership is the deepest map of power. It predates money, law, and writing. 100 events from common land through enclosure, colonial seizure, land reform, eminent domain, and indigenous land rights. Track who owns the ground and how they got it.',
+'Machina':'100 machines that took a job — and every job they created instead. From the water mill through the Jacquard loom, the assembly line, industrial robots, and AI. Track how automation has reshaped labour, wealth, and what humans are for.',
+'Mercatus':'The physical places where prices were made. 100 markets, fairs, exchanges, and bazaars — from the Agora of Athens through medieval trade fairs, the Amsterdam Stock Exchange, and modern algorithmic trading floors.',
+'Lucrum':'The parallel economy that never stops growing. 100 events in the history of organised crime — from ancient piracy through the Mafia, drug cartels, cybercrime, and money laundering. Track the shadow economy that mirrors the official one.',
+'D\u014dnum':'The economy of generosity is also an economy of power. 100 events from potlatch through religious charity, Victorian philanthropy, foreign aid, and modern billionaire foundations. Track how giving has been used to control, legitimise, and transform.',
+'Nauta':'100 maritime trade events — from Phoenician merchants through the Age of Sail, the East India Companies, the Suez Canal, and modern container shipping. Track how control of sea lanes has determined who prospers and who starves.',
+'Faber':'The history of making things — craft, manufacture, industry. 100 events from the first pottery through guild systems, the factory, Fordism, offshoring, and the maker movement. Track how the relationship between hand, tool, and product has changed.',
+'Argentum':'Precious metals and the mines that powered every monetary system. 100 events from Nubian gold through the silver mines of Potos\u00ed, the California Gold Rush, apartheid mining, and modern rare earth extraction. Track how what\'s underground determines what\'s above.',
+'Classis':'Every society said class didn\'t define you. Every society was wrong. 100 events mapping caste, class, and social mobility — from the Indian varna system through feudalism, the bourgeoisie, the American Dream, and modern inequality metrics.',
+'Domus':'The home is the most political space — it always has been. 100 events in the history of domestic space: from the first permanent shelters through Roman insulae, medieval manors, public housing, suburbia, and the housing crisis.',
+'Puer':'Childhood is a recent invention. 100 events mapping how societies have treated their youngest — from child sacrifice and apprenticeship through child labour laws, compulsory education, children\'s rights, and the UN Convention on the Rights of the Child.',
+'Ritus':'How societies mark what matters. 100 rituals, ceremonies, and rites of passage — from Palaeolithic burial rites through coronations, bar mitzvahs, quincea\u00f1eras, and secular naming ceremonies. Track how the sacred and the social intertwine.',
+'Cibus':'Every cuisine is a map of who conquered whom. 100 food events from the Columbian Exchange through spice monopolies, the industrialisation of food, famine, fusion cuisine, and the politics of what we eat.',
+'Via Urbis':'The city is humanity\'s greatest and most unfinished invention. 100 urban events from Ur and Mohenjo-daro through Rome, medieval Baghdad, Haussmann\'s Paris, the skyscraper, slum clearance, and the smart city.',
+'Vinculum':'How ideas, diseases, and fashions move through human networks. 100 events mapping social contagion — from rumour in ancient markets through postal systems, telegraph, social media, and the epidemiology of misinformation.',
+'Mundus':'Cleanliness is not next to godliness — it is next to power. 100 events in the history of sanitation, hygiene, and public health infrastructure. From Roman aqueducts through cholera mapping, the flush toilet, and the global sanitation crisis.',
+'Nuptiae':'Marriage is a property contract that acquired romantic mythology about 200 years ago. 100 events from bride price and dowry systems through arranged marriage, companionate marriage, divorce reform, and same-sex marriage legislation.',
+'Pigmentum':'The colours that were once impossible. 100 events in the history of pigment — from ochre handprints through Tyrian purple, ultramarine, synthetic dyes, and digital colour. Track how the ability to make a colour changed who had power.',
+'Structura':'The built ideas that outlasted their makers. 100 architectural events from Göbekli Tepe through the Parthenon, Gothic cathedrals, Bauhaus, brutalism, and parametric design. Track how building technology and ideology shaped the spaces we inhabit.',
+'L\u016bdus':'Play as a mirror of civilisation. 100 games and sports from the Royal Game of Ur through chess, Go, the Olympic Games, video games, and esports. Track how societies reveal themselves through what they play.',
+'Ag\u014dn':'Sport is politics conducted by other means — usually. 100 sporting events from the ancient Olympics through the 1936 Berlin Games, apartheid-era boycotts, Title IX, and modern sportswashing. Track how competition mirrors power.',
+'Inventio':'Who gets credit for an idea is rarely who had it first. 100 inventions mapped with their disputed origins — the telephone, the lightbulb, calculus, the radio. Track how patent law, nationalism, and sexism determined whose name history remembers.',
+'Mimesis':'Culture travels by stealing — that is how it grows. 100 events mapping cultural transmission, appropriation, and influence. From Greco-Buddhist art through jazz, anime, and the globalisation of hip-hop. Track how styles migrate and mutate.',
+'Fabula':'Every story humanity told about itself — myth, epic, novel. 100 narrative events from the Epic of Gilgamesh through the Mahabharata, the Arabian Nights, the novel, and fan fiction. Track how storytelling technology shaped what stories could be told.',
+'Imago':'A map of every art movement and the politics beneath it. 100 events from cave painting through the Renaissance, Impressionism, the Harlem Renaissance, abstract expressionism as CIA propaganda, and digital art.',
+'Memoria':'Every monument is an argument — every removal is a counter-argument. 100 events in the politics of public memory. From Egyptian obelisks through Confederate statues, Soviet monuments, Rhodes Must Fall, and the ongoing war over whose history occupies public space.',
+'Vox':'Every revolution in who could speak to whom. 100 media events from the town crier through the printing press, newspapers, radio, television, the internet, and social media. Track how each new medium redistributed the power to be heard.',
+'Tempus':'Whoever controls the calendar controls history. 100 events in the history of time — from sundials and water clocks through the Gregorian reform, time zones, the International Date Line, and atomic clocks. Track how standardising time standardised power.',
+'Norma':'The invisible agreements that make the world work. 100 events in the history of standards and measurement — from the cubit through the metric system, ISO standards, internet protocols, and the ongoing politics of who sets the rules.',
+'Stella':'How humans found their way before instruments — and what we lost. 100 navigation events from Polynesian wayfinding through the compass, the chronometer, GPS, and autonomous vehicles. Track how each breakthrough in navigation reshaped trade, war, and exploration.',
+'Flumen':'Rivers were the first roads, the first borders, and the first gods. 100 river events mapping how waterways shaped civilisation — the Nile, the Tigris, the Ganges, the Mississippi. Track floods, dams, irrigation, pollution, and the politics of water.',
+'Venena':'The boundary between medicine and murder is a dose. 100 poisoning events from hemlock and arsenic through chemical weapons, nerve agents, radioactive assassination, and environmental toxicology. Track how poison has been used as a political, military, and criminal tool.',
+'Occultus':'Secrecy as a social technology — who it serves and why it persists. 100 events mapping secret societies, intelligence agencies, classified operations, and conspiracy theories. From the Eleusinian Mysteries through the Freemasons, Skull and Bones, and QAnon.',
+'Ludibrium':'A map of what people wanted badly enough to believe. 100 hoaxes, frauds, and deceptions — from the Trojan Horse through the Donation of Constantine, the Protocols of the Elders of Zion, Theranos, and deepfakes.',
+'Monstrum':'What a culture places beyond the human tells you everything about it. 100 events in the history of monsters, mythological creatures, and the monstrous — from dragons and sea serpents through werewolves, Frankenstein, and modern cryptozoology.',
+'Lusus Naturae':'The history of the extraordinary body as spectacle and rights. 100 events from ancient portent interpretation through freak shows, eugenics, the disability rights movement, and modern body diversity. Track how difference has been displayed, exploited, and reclaimed.',
+'Supplicium':'Every state that used torture believed it worked. None of them were right. All of them kept doing it. 100 events from ancient judicial torture through the Inquisition, colonial violence, Abu Ghraib, and the modern abolitionist movement.',
+'Mirabilia':'History\'s most counterintuitive, bizarre, and true facts — the ones that make you question everything. 100 events that defy expectation: the Great Emu War, the Dancing Plague, the time the Pope put a corpse on trial. The strange underbelly of the historical record.',
+'Sacra':'Every culture decided that some places on earth were closer to the divine — and millions walked to reach them. 100 sacred sites and pilgrimage routes from Göbekli Tepe through Jerusalem, Mecca, Varanasi, Camino de Santiago, and modern spiritual tourism.',
+'Sepultura':'How a culture buries its dead is its most honest self-portrait. 100 funerary events from Neanderthal burials through Egyptian mummification, Viking ship burials, the Garden Cemetery movement, cremation, and green burial.',
+'Finis':'Every near-miss and every coming threat — the full ledger. 100 existential risk events from asteroid impacts through supervolcanoes, nuclear close calls, pandemic risk, climate tipping points, and AI alignment. The threats that could end civilisation.',
+'Futura':'Every era imagined the future — and none of them got it right. 100 events in the history of prediction, futurism, and science fiction. From ancient prophecy through Jules Verne, the World\'s Fairs, cyberpunk, and modern foresight. Track what we expected and what we got.',
+'Utopia':'Planned cities, intentional communities, and why they almost all fail. 100 utopian experiments from Plato\'s Republic through New Harmony, the kibbutz, Brasília, Auroville, and charter cities. Track the gap between vision and reality.',
+'Pax':'Every treaty that ended a war — how long it held, and why it failed. 100 peace events from the Egyptian-Hittite treaty through Westphalia, Versailles, the UN Charter, and modern peace processes. Track the architecture of reconciliation.',
+'Diluvium':'Rising seas, sinking cities, and the civilisations already underwater. 100 events mapping sea level change, coastal flooding, and climate displacement — from ancient flood myths through Doggerland, Venice, Jakarta, and the Pacific Islands.'
+};
+
+// ── STATE ──────────────────────────────────────────────────────
+var selIdx=null;   // selected atlas index in AT
+var filterT=null;  // active theme filter index (null = all)
+
+// ── THEME SLIDER ──────────────────────────────────────────────
+// Slider: 0=All, 1–12=themes I–XII, 13=All
+function sliderToTheme(v){v=parseInt(v);return(v<1||v>12)?null:v-1;}
+
+function renderTicks(){
+  var el=document.getElementById('tl-ticks');if(!el)return;
+  var h='<span class="tl-lbl'+(filterT===null?' active':'')+'" onclick="setSlider(0)">All</span>';
+  for(var i=0;i<TH.length;i++){
+    h+='<span class="tl-lbl'+(filterT===i?' active':'')+'" onclick="setSlider('+(i+1)+')">'+TH[i].n+'</span>';
   }
-  tickParticles();
-})();
-</script>
+  h+='<span class="tl-lbl'+(filterT===null?' active':'')+'" onclick="setSlider(13)">All</span>';
+  el.innerHTML=h;
+}
 
-<script>
-// ── DYNAMIC ATLAS COUNTER ──────────────────────────────────────────────────
-(function() {
-  function updateAtlasCount() {
-    var all   = document.querySelectorAll('.card').length;
-    var live  = document.querySelectorAll('.card--live').length;
-    var build = document.querySelectorAll('.card--building').length;
-    var el    = document.getElementById('atlas-count');
-    var lbl   = el ? el.nextElementSibling : null;
-    if (el) el.textContent = all;
-    if (lbl && lbl.classList.contains('hero-stat-l')) {
-      lbl.title = live + ' live · ' + build + ' building · ' + (all - live - build) + ' coming soon';
+function syncSliderUI(v){
+  v=parseInt(v);
+  var pct=v/13*100;
+  var fill=document.getElementById('tl-fill');if(fill)fill.style.width=pct+'%';
+  var thumb=document.getElementById('tl-thumb');if(thumb)thumb.style.left=pct+'%';
+  var hint=document.getElementById('tl-hint');
+  var sl=document.getElementById('tl');
+  if(v<1||v>12){
+    if(hint)hint.textContent='All '+AT.length+' atlases · '+TH.length+' themes';
+    if(sl){sl.setAttribute('aria-valuenow',v);sl.setAttribute('aria-valuetext','All themes');}
+  }else{
+    var t=TH[v-1];
+    if(hint)hint.textContent=t.n+' · '+t.nm+' — '+t.sub;
+    if(sl){sl.setAttribute('aria-valuenow',v);sl.setAttribute('aria-valuetext',t.nm);}
+  }
+}
+
+function setSlider(v){
+  var sl=document.getElementById('tl');if(sl)sl.value=v;
+  onSliderInput(v);
+}
+
+function onSliderInput(v){
+  var th=sliderToTheme(v);
+  if(th===filterT)return;
+  filterT=th;
+  selIdx=null;
+  syncSliderUI(v);
+  renderTicks();
+  renderGrid();
+  renderPanel();
+  if(isMobile())closeMobileSheet();
+  var el=document.querySelector('.map-c');if(el)el.scrollTop=0;
+}
+
+// ── RENDER: GRID ──────────────────────────────────────────────
+function renderGrid(){
+  var el=document.getElementById('atlas-grid');if(!el)return;
+  var h='';
+  for(var i=0;i<TH.length;i++){
+    if(filterT!==null&&filterT!==i)continue;
+    var tiles=[];for(var j=0;j<AT.length;j++){if(AT[j].t===i)tiles.push(j);}
+    if(!tiles.length)continue;
+    var live=0;for(var j=0;j<tiles.length;j++){if(AT[tiles[j]].l)live++;}
+    h+='<div class="ts-hdr"><span class="ts-num">'+TH[i].n+'</span><span class="ts-nm">'+TH[i].nm+'</span><span class="ts-sub">'+TH[i].sub+'</span><span class="ts-ct">'+live+'/'+tiles.length+' live</span></div>';
+    h+='<div class="tile-grid">';
+    for(var j=0;j<tiles.length;j++){
+      var idx=tiles[j],a=AT[idx];
+      var cls='tile'+(a.l?' live':' forthcoming')+(selIdx===idx?' sel':'');
+      h+='<div class="'+cls+'" onclick="selectAtlas('+idx+')" role="button" tabindex="0" aria-label="'+a.n+(a.l?' (live)':' (coming soon)')+'">';
+      h+='<span class="tile-ico">'+a.i+'</span>';
+      h+='<span class="tile-nm">'+a.n+'</span>';
+      h+='</div>';
     }
+    h+='</div>';
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateAtlasCount);
-  } else {
-    updateAtlasCount();
+  el.innerHTML=h;
+}
+
+// ── RENDER: PANEL ─────────────────────────────────────────────
+function renderPanel(){
+  var el=document.getElementById('panel-content');if(!el)return;
+  if(selIdx===null){
+    var live=0;for(var i=0;i<AT.length;i++){if(AT[i].l)live++;}
+    el.innerHTML='<div style="text-align:center;padding-top:12px">'+
+      '<div style="font-family:\'Cinzel\',serif;font-size:18px;color:var(--amber-b);margin-bottom:4px;letter-spacing:2px">The Pangea Project</div>'+
+      '<div style="font-family:\'Cinzel\',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:18px">One Earth</div>'+
+      '<p style="font-size:15px;line-height:1.9;color:var(--txt2);font-style:italic;margin-bottom:4px">To see a world in a grain of sand</p>'+
+      '<p style="font-size:15px;line-height:1.9;color:var(--txt2);font-style:italic;margin-bottom:4px">And a heaven in a wild flower,</p>'+
+      '<p style="font-size:15px;line-height:1.9;color:var(--txt2);font-style:italic;margin-bottom:4px">Hold infinity in the palm of your hand</p>'+
+      '<p style="font-size:15px;line-height:1.9;color:var(--txt2);font-style:italic;margin-bottom:6px">And eternity in an hour.</p>'+
+      '<p style="font-size:11px;color:var(--txt3);letter-spacing:1px;margin-bottom:20px">— William Blake</p>'+
+      '</div>'+
+      '<div style="display:flex;gap:20px;justify-content:center;padding:14px 0;border-top:1px solid var(--bdr2);border-bottom:1px solid var(--bdr2);margin-bottom:16px">'+
+        '<div style="text-align:center"><span style="font-family:\'Cinzel\',serif;font-size:22px;font-weight:600;color:var(--amber-b);display:block;line-height:1">'+AT.length+'</span><span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin-top:3px;display:block">Atlases</span></div>'+
+        '<div style="text-align:center"><span style="font-family:\'Cinzel\',serif;font-size:22px;font-weight:600;color:var(--amber-b);display:block;line-height:1">'+live+'</span><span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin-top:3px;display:block">Live</span></div>'+
+        '<div style="text-align:center"><span style="font-family:\'Cinzel\',serif;font-size:22px;font-weight:600;color:var(--amber-b);display:block;line-height:1">'+TH.length+'</span><span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin-top:3px;display:block">Themes</span></div>'+
+      '</div>'+
+      '<p style="font-size:14px;line-height:1.85;color:var(--txt2);margin-bottom:14px">Each atlas maps a single domain of human knowledge onto an interactive timeline. Scrub through billions of years of stellar evolution, millions of years of geological change, or thousands of years of human invention.</p>'+
+      '<p style="font-size:14px;line-height:1.85;color:var(--txt2);margin-bottom:14px">See which ideas travelled between civilisations, which discoveries made others possible, and whose contributions were written out of the story. Find the women history left out.</p>'+
+      '<p style="font-size:14px;line-height:1.85;color:var(--txt2);margin-bottom:16px">Every atlas is a single self-contained HTML file. No servers, no databases, no dependencies beyond a browser. This is not the encyclopaedia you\'d expect. Or the atlas you\'d expect. This is a new way to read the human story.</p>'+
+      '<div style="border-top:1px solid var(--bdr2);padding-top:12px;margin-bottom:6px;font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase">How to explore</div>'+
+      '<p style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:5px"><span style="color:var(--amber-b)">Select</span> any tile to learn about an atlas</p>'+
+      '<p style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:5px"><span style="color:var(--amber-b)">Filter</span> by theme using the bar below</p>'+
+      '<p style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:5px"><span style="color:var(--amber-b)">Gold tiles</span> are live — select to enter</p>'+
+      '<p style="font-size:13px;line-height:1.7;color:var(--txt3);margin-bottom:0">Dimmed tiles are forthcoming</p>';
+    return;
   }
-})();
+  var a=AT[selIdx],th=TH[a.t];
+  var tags='';if(a.k){for(var i=0;i<a.k.length;i++){tags+='<span style="display:inline-block;font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:.5px;color:var(--txt3);border:1px solid var(--bdr2);padding:2px 7px;margin:0 4px 4px 0">'+a.k[i]+'</span>';}}
+  var enter='';
+  if(a.l&&a.h){
+    enter='<a href="'+a.h+'" style="display:block;text-align:center;margin-top:16px;padding:10px 0;border:1px solid var(--amber);color:var(--amber-b);font-family:\'Cinzel\',serif;font-size:11px;letter-spacing:2px;text-decoration:none;text-transform:uppercase;transition:all .15s;background:var(--amber-xx)" onmouseover="this.style.background=\'var(--amber-x)\'" onmouseout="this.style.background=\'var(--amber-xx)\'">Enter Atlas ▸</a>';
+  }else{
+    enter='<div style="text-align:center;margin-top:16px;padding:10px 0;border:1px solid var(--bdr2);color:var(--txt3);font-family:\'Cinzel\',serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:.6">Coming Soon</div>';
+  }
+  var status=a.l?'<span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--amber-b);text-transform:uppercase;border:1px solid var(--amber);padding:2px 8px;display:inline-block;margin-bottom:12px">Live</span>'
+    :'<span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;border:1px solid var(--bdr2);padding:2px 8px;display:inline-block;margin-bottom:12px">Forthcoming</span>';
+  var desc=DESC[a.n]||a.g;
+  el.innerHTML=
+    '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:2px">'+
+    '<div style="font-size:28px;line-height:1.2">'+a.i+'</div>'+
+    '<div style="flex:1;min-width:0"><div style="font-family:\'Cinzel\',serif;font-size:18px;font-weight:600;color:var(--amber-b);letter-spacing:1px">'+a.n+'</div></div>'+
+    '<button onclick="closeSelection()" aria-label="Close" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;line-height:1;padding:4px;flex-shrink:0;margin-top:2px;transition:color .15s" onmouseover="this.style.color=\'var(--amber-b)\'" onmouseout="this.style.color=\'var(--txt3)\'">✕</button>'+
+    '</div>'+
+    '<div style="padding-top:4px">'+
+    status+
+    '<div style="font-family:\'Cinzel\',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:14px">'+th.n+' · '+th.nm+'</div>'+
+    '</div>'+
+    '<p style="font-size:14px;line-height:1.85;color:var(--txt2);margin-bottom:14px">'+desc+'</p>'+
+    '<div style="margin-bottom:14px;text-align:center">'+tags+'</div>'+
+    enter;
+}
+
+// ── SELECT ATLAS ──────────────────────────────────────────────
+function selectAtlas(idx){
+  if(selIdx===idx){selIdx=null;}else{selIdx=idx;}
+  renderGrid();
+  renderPanel();
+  // Scroll panel to top on new selection
+  var ip=document.getElementById('info-panel');if(ip)ip.scrollTop=0;
+  // Scroll selected tile into view
+  if(selIdx!==null){var st=document.querySelector('.tile.sel');if(st)st.scrollIntoView({block:'nearest',behavior:'smooth'});}
+  if(selIdx!==null&&isMobile())openMobileSheet();
+  if(selIdx===null&&isMobile())closeMobileSheet();
+}
+
+// ── FILTER THEME (called by other code) ──────────────────────
+function filterTheme(t){
+  setSlider(t===null?0:t+1);
+}
+
+// ── UPDATE COUNTS ─────────────────────────────────────────────
+function updateCounts(){
+  var live=0;for(var i=0;i<AT.length;i++){if(AT[i].l)live++;}
+  var cl=document.getElementById('cnt-live');if(cl)cl.textContent=live;
+  var lb=document.getElementById('cnt-label');if(lb)lb.textContent='LIVE ATLASES';
+  var ct=document.getElementById('cnt-total');if(ct)ct.textContent=AT.length+' ';
+}
+
+// ── CLOSE SELECTION ───────────────────────────────────────────
+function closeSelection(){
+  selIdx=null;
+  renderGrid();
+  renderPanel();
+  if(isMobile())closeMobileSheet();
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+function init(){
+  renderTicks();
+  syncSliderUI(0);
+  renderGrid();
+  renderPanel();
+  updateCounts();
+  // Wire up slider
+  var sl=document.getElementById('tl');
+  if(sl)sl.addEventListener('input',function(e){onSliderInput(e.target.value);});
+  // Keyboard activation for tiles (Enter/Space)
+  document.getElementById('atlas-grid').addEventListener('keydown',function(e){
+    if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('tile')){
+      e.preventDefault();
+      e.target.click();
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
 </html>
