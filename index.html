@@ -89,7 +89,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 /* ── HEADER ── */
 .hdr{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--hdr-bg);border-bottom:1px solid var(--bdr2);gap:12px}
 .hdr-left{display:flex;align-items:baseline;gap:0;min-width:0}
-.logo-t{font-family:'Cinzel Decorative',serif;font-size:20px;font-weight:700;color:var(--amber-b);letter-spacing:3px;white-space:nowrap}
+.logo-t{font-family:'Cinzel',serif;font-size:20px;font-weight:900;color:var(--amber-b);letter-spacing:3px;white-space:nowrap}
 .logo-s{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-left:10px;white-space:nowrap}
 .era-disp{text-align:center;font-family:'Cinzel',serif;flex-shrink:0}
 .era-y{font-size:22px;font-weight:600;color:var(--amber-b);letter-spacing:1px}
@@ -132,7 +132,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 
 /* Theme section headers */
 .ts-hdr{display:flex;align-items:baseline;gap:8px;margin:20px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--bdr2)}
-.ts-hdr:first-child{margin-top:0}
 .ts-num{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3)}
 .ts-nm{font-family:'Cinzel',serif;font-size:11px;font-weight:600;letter-spacing:1.5px;color:var(--amber-b);text-transform:uppercase}
 .ts-sub{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);font-style:italic}
@@ -815,6 +814,7 @@ function renderPanel(){
   }
   var status=a.l?'<span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--amber-b);text-transform:uppercase;border:1px solid var(--amber);padding:2px 8px;display:inline-block;margin-bottom:12px">Live</span>'
     :'<span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;border:1px solid var(--bdr2);padding:2px 8px;display:inline-block;margin-bottom:12px">Forthcoming</span>';
+  var desc=DESC[a.n]||a.g;
   el.innerHTML=
     '<div style="text-align:center;padding-top:8px">'+
     '<div style="font-size:32px;margin-bottom:6px">'+a.i+'</div>'+
@@ -822,7 +822,7 @@ function renderPanel(){
     status+
     '<div style="font-family:\'Cinzel\',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:14px">'+th.n+' · '+th.nm+'</div>'+
     '</div>'+
-    '<p style="font-size:14px;line-height:1.8;color:var(--txt2);font-style:italic;margin-bottom:14px;text-align:center">'+a.g+'</p>'+
+    '<p style="font-size:14px;line-height:1.85;color:var(--txt2);margin-bottom:14px">'+desc+'</p>'+
     '<div style="margin-bottom:14px;text-align:center">'+tags+'</div>'+
     enter;
 }
