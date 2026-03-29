@@ -845,6 +845,7 @@ function renderPanel(){
     :'<span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;border:1px solid var(--bdr2);padding:2px 8px;display:inline-block;margin-bottom:12px">Forthcoming</span>';
   var desc=DESC[a.n]||a.g;
   el.innerHTML=
+    '<button onclick="closeSelection()" aria-label="Close" style="position:absolute;top:14px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1;padding:4px;transition:color .15s" onmouseover="this.style.color=\'var(--amber-b)\'" onmouseout="this.style.color=\'var(--txt3)\'">✕</button>'+
     '<div style="text-align:center;padding-top:8px">'+
     '<div style="font-size:32px;margin-bottom:6px">'+a.i+'</div>'+
     '<div style="font-family:\'Cinzel Decorative\',serif;font-size:18px;color:var(--amber-b);margin-bottom:4px">'+a.n+'</div>'+
@@ -882,25 +883,13 @@ function updateCounts(){
   var ct=document.getElementById('cnt-total');if(ct)ct.textContent=AT.length+' ';
 }
 
-// ── MAP BUTTON (mobile — return to grid from expanded panel) ──
-function showMapBtn(){
-  var ex=document.getElementById('mob-map-btn');
-  if(ex)return;
-  var btn=document.createElement('button');
-  btn.id='mob-map-btn';
-  btn.textContent='⊕ Grid';
-  btn.style.cssText='position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:150;font-family:Cinzel,serif;font-size:10px;letter-spacing:1.5px;color:var(--amber-b);background:var(--panel);border:1px solid var(--amber);padding:8px 18px;cursor:pointer;text-transform:uppercase;box-shadow:0 4px 16px rgba(0,0,0,.4)';
-  btn.onclick=function(){closeMobileSheet();selIdx=null;renderGrid();renderPanel();hideMapBtn();};
-  document.body.appendChild(btn);
+// ── CLOSE SELECTION ───────────────────────────────────────────
+function closeSelection(){
+  selIdx=null;
+  renderGrid();
+  renderPanel();
+  if(isMobile())closeMobileSheet();
 }
-function hideMapBtn(){
-  var btn=document.getElementById('mob-map-btn');if(btn)btn.remove();
-}
-
-// Patch mobile open/close to show/hide map button
-var _origOpen=openMobileSheet,_origClose=closeMobileSheet;
-openMobileSheet=function(){_origOpen();showMapBtn();};
-closeMobileSheet=function(){_origClose();hideMapBtn();};
 
 // ── INIT ──────────────────────────────────────────────────────
 function init(){
