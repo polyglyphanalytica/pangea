@@ -197,7 +197,7 @@ input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0
   }
   .mob-open .drawer-handle{
     display:flex;align-items:center;justify-content:center;
-    padding:10px 0 6px;cursor:grab;touch-action:none;user-select:none;
+    padding:10px 0 6px;cursor:pointer;user-select:none;
     position:sticky;top:0;z-index:10;background:var(--panel);border-radius:12px 12px 0 0
   }
   .mob-open .drawer-handle::before{
@@ -415,40 +415,11 @@ function closeMobileSheet(){
   _drawer.style.top='';
 }
 
-// Drawer drag-to-snap
+// Drawer handle — tap to collapse
 if(_handle){
-  var _touchId=null,_startY=0,_startTop=0,_dragging=false;
-  _handle.addEventListener('touchstart',function(e){
-    if(!isMobile()||!_drawerOpen)return;
-    var t=e.changedTouches[0];
-    _touchId=t.identifier;_dragging=true;
-    _startY=t.clientY;
-    _startTop=_drawer.getBoundingClientRect().top-52;
-    _drawer.style.transition='none';
-  },{passive:true});
-  _handle.addEventListener('touchmove',function(e){
-    if(!_dragging||!isMobile())return;
-    var t=Array.from(e.changedTouches).find(function(x){return x.identifier===_touchId;});
-    if(!t)return;
-    e.preventDefault();
-    var dy=t.clientY-_startY;
-    var mainH=window.innerHeight-52;
-    var minTop=window.innerHeight*0.21;
-    var maxTop=mainH*0.5;
-    var newTop=Math.max(minTop,Math.min(maxTop,_startTop+dy));
-    _drawer.style.top=newTop+'px';
-  },{passive:false});
-  function endDrag(){
-    if(!_dragging)return;
-    _dragging=false;
-    _drawer.style.transition='';
-    var mainH=window.innerHeight-52;
-    var curTop=_drawer.getBoundingClientRect().top-52;
-    if(curTop>mainH*0.4){closeMobileSheet();}
-    else{_drawer.style.top='';openMobileSheet();}
-  }
-  _handle.addEventListener('touchend',endDrag);
-  _handle.addEventListener('touchcancel',endDrag);
+  _handle.addEventListener('click',function(){
+    if(_drawerOpen)closeMobileSheet();
+  });
 }
 
 // ── THEME DATA ─────────────────────────────────────────────────
