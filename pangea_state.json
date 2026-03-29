@@ -712,12 +712,17 @@
       "validated_lenses": 20
     },
     "suffragium": {
-      "phase": "DATA",
-      "items": 4,
+      "phase": "DONE",
+      "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "VI"
+      "section": "VI",
+      "validated_sha": "b4c5a74d70101a8076d9c55cecbd9ae98580fbaf",
+      "validated_short": "b4c5a74",
+      "validated_at": "2026-03-29T15:13:55.593409Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "terra": {
       "phase": "1A",
@@ -1187,8 +1192,6 @@
     }
   },
   "queue": [
-    "martyr",
-    "suffragium",
     "terra",
     "servitus",
     "exodus",
@@ -1299,7 +1302,8 @@
     "dolor",
     "senex",
     "somnia",
-    "crimen"
+    "crimen",
+    "martyr"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -10586,6 +10590,491 @@
       "atlas": "suffragium",
       "batch": "4-4",
       "items": 4
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "38-38",
+      "items": 38
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "88-88",
+      "items": 88
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "101-120",
+      "items": 120
     }
   ],
   "assignments": {}
