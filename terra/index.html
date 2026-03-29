@@ -3441,7 +3441,7 @@ const WOMEN={
 'kenyan_white_highlands':[{nm:'Wangari Maathai',role:'Green Belt Movement founder',yr:1977,desc:'Nobel Peace Prize laureate (2004) who founded the Green Belt Movement, connecting women\'s empowerment, environmental conservation, and land rights in Kenya. Her tree-planting campaign became a vehicle for democratic and land justice activism.'}],
 'south_african_land':[{nm:'Mamphela Ramphele',role:'Anti-apartheid activist and intellectual',yr:1975,desc:'Partner of Steve Biko, Ramphele was banished by the apartheid government and later became the first Black woman to lead the University of Cape Town. Her work connected land dispossession to broader systems of racial oppression.'}],
 'philippine_land_reform':[{nm:'Corazon Aquino',role:'President and land reformer',yr:1988,desc:'As President, Aquino signed the Comprehensive Agrarian Reform Law (CARL), the Philippines\' most ambitious land redistribution programme. Despite criticism that her family\'s own Hacienda Luisita was slow to be redistributed, the law transformed millions of hectares.'}],
-'singaporean_land_acquisition':[{nm:'Chan Heng Chee',role:'Ambassador and political scientist',yr:1980,desc:'Leading political scientist who analysed Singapore\'s governance model including its land acquisition programme. Her scholarship helped shape international understanding of the Singapore development model.'}],
+'singapore_land_acquisition':[{nm:'Chan Heng Chee',role:'Ambassador and political scientist',yr:1980,desc:'Leading political scientist who analysed Singapore\'s governance model including its land acquisition programme. Her scholarship helped shape international understanding of the Singapore development model.'}],
 'japanese_land_reform':[{nm:'Beate Sirota Gordon',role:'Constitutional rights author',yr:1946,desc:'A 22-year-old American civilian who drafted the equal rights provisions of Japan\'s post-war constitution, including women\'s property and inheritance rights that ended feudal-era gender restrictions on land ownership.'}],
 'hawaiian_land_dispossession':[{nm:'Queen Lili\'uokalani',role:'Last Hawaiian monarch',yr:1893,desc:'The last sovereign ruler of Hawai\'i, Lili\'uokalani was overthrown in an American-backed coup in 1893 while attempting to restore indigenous Hawaiian sovereignty over their land. Her resistance to annexation remains the foundation of the Hawaiian sovereignty movement.'}],
 'canadian_treaty_system':[{nm:'Mary Two-Axe Earley',role:'Indigenous rights advocate',yr:1968,desc:'Mohawk woman who campaigned for decades against the Indian Act\'s discrimination against indigenous women who married non-indigenous men, which stripped them of their status and land rights. Her work led to the 1985 amendment restoring women\'s rights.'}],
@@ -4617,7 +4617,7 @@ function renderFingerprint(c){
   }).join(' ');
   svg+=`<polygon points="${dataPts}" class="fp-poly"/>`;
   // Labels — placed outside the ring with enough clearance, wrapped in two lines where needed
-  const SHORT=['Military','Commerce','Arts','Science','Reach','Longevity'];
+  const SHORT=['Scale','Resistance','Legal','Impact','Violence','Legacy'];
   angles.forEach((a,i)=>{
     const lr=R+26;
     const lx=cx+lr*Math.cos(a);
