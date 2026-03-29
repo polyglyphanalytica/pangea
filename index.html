@@ -117,8 +117,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 
 /* ── MAIN LAYOUT (mirrors civilitas exactly) ── */
 .main{position:fixed;top:52px;left:0;right:0;bottom:0;display:flex}
-.map-tl-col{display:flex;flex-direction:column;flex:1;min-width:0}
-.map-c{flex:1;overflow-y:auto;overflow-x:hidden;min-width:0;min-height:0}
+.map-tl-col{display:flex;flex-direction:column;flex:1;min-width:0;min-height:0}
+.map-c{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;min-width:0;min-height:0}
 
 /* ── ATLAS GRID ── */
 .atlas-grid{padding:16px 20px 20px}
@@ -153,23 +153,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .tile.forthcoming:hover{opacity:.6}
 .tile.forthcoming.sel{opacity:1}
 
-/* ── THEME BAR (replaces timeline — same position) ── */
-.tl-wrap{position:relative;height:88px;background:var(--tl-bg);border-top:1px solid var(--bdr);padding:12px 20px 8px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center}
-.tb-scroll{display:flex;gap:5px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch}
-.tb-scroll::-webkit-scrollbar{height:3px}
-.tb-scroll::-webkit-scrollbar-track{background:transparent}
-.tb-scroll::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
-.tb-btn{background:none;border:1px solid var(--bdr2);color:var(--txt3);
-  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.8px;
-  padding:6px 12px;cursor:pointer;white-space:nowrap;
-  transition:all .15s;text-transform:uppercase;flex-shrink:0;border-radius:2px}
-.tb-btn:hover{border-color:var(--bdr);color:var(--txt2);background:var(--amber-xx)}
-.tb-btn.active{border-color:var(--amber);color:var(--amber-b);background:var(--amber-xx)}
-.tb-ct{font-size:8px;color:var(--amber);margin-left:3px;opacity:.7}
-.tb-hint{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--hint);text-transform:uppercase;text-align:center}
+/* ── THEME SLIDER (matches civilitas timeline pattern) ── */
+.tl-wrap{position:relative;height:88px;background:var(--tl-bg);border-top:1px solid var(--bdr);padding:8px 20px 14px;flex-shrink:0}
+.tl-lbls{display:flex;justify-content:space-between;margin-bottom:5px;padding:0 10px}
+.tl-lbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3px;color:var(--txt3);cursor:pointer;transition:color .15s;text-align:center;min-width:0;flex:1}
+.tl-lbl:hover{color:var(--txt2)}
+.tl-lbl.active{color:var(--amber-b);font-weight:600}
+.tl-trk{position:relative;height:5px;background:var(--bdr);border-radius:3px}
+.tl-fill{position:absolute;top:0;left:0;height:5px;background:var(--amber-b);border-radius:3px;pointer-events:none;opacity:.7}
+.tl-thumb{position:absolute;top:50%;width:20px;height:20px;background:var(--amber-b);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--amber),0 0 20px rgba(232,152,32,.3);pointer-events:none;transition:left .04s linear}
+input.tl-range{position:absolute;top:50%;left:0;width:100%;height:28px;opacity:0;cursor:pointer;transform:translateY(-50%);margin:0;z-index:2}
+.tl-hint{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--hint)}
 
 /* ── INFO PANEL (matches civilitas exactly) ── */
-.info-panel{width:320px;flex-shrink:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;padding:18px 18px 28px;position:relative}
+.info-panel{width:320px;flex-shrink:0;min-height:0;background:var(--panel);border-left:1px solid var(--bdr);overflow-y:auto;padding:18px 18px 28px;position:relative}
 .info-panel::-webkit-scrollbar{width:5px}
 .info-panel::-webkit-scrollbar-track{background:transparent}
 .info-panel::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
@@ -186,11 +183,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
   .era-y{font-size:18px}
   .era-n{font-size:10px;letter-spacing:1.5px}
   .main{top:52px!important;bottom:0;flex-direction:column;position:fixed}
-  .map-tl-col{width:100%}
+  .map-tl-col{width:100%;flex-shrink:0}
   .map-c{flex:0 0 42vh;width:100%}
   .info-panel{
     flex:1;width:100%;border-left:none;border-top:1px solid var(--bdr);
-    overflow-y:auto;padding:0 16px 16px;border-radius:0;min-height:50%
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+    padding:12px 16px 16px;border-radius:0;min-height:0
   }
   .info-panel.mob-open{
     position:absolute;left:0;right:0;bottom:0;top:21vh;
@@ -207,9 +205,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
     background:var(--bdr);transition:background .15s
   }
   .mob-open .drawer-handle:active::before{background:var(--amber-b)}
-  .tl-wrap{height:76px;padding:8px 14px 6px}
-  .tb-btn{font-size:9px;padding:4px 8px;letter-spacing:.5px}
-  .tb-hint{font-size:7px;letter-spacing:.8px}
+  .tl-wrap{height:76px;padding:6px 14px 10px}
+  .tl-lbl{font-size:10px}
+  .tl-hint{font-size:9px}
   .atlas-grid{padding:12px 14px}
   .tile-grid{grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:5px}
   .tile{padding:8px 4px 6px}
@@ -223,9 +221,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
   .hdr{padding:6px 14px}
   .logo-t{font-size:15px;letter-spacing:2px}
   .era-y{font-size:15px}
-  .tl-wrap{height:68px;padding:6px 12px}
-  .tb-btn{font-size:9px;padding:4px 8px}
-  .tb-hint{font-size:7px;letter-spacing:.5px;white-space:normal;text-align:center;line-height:1.4}
+  .tl-wrap{height:68px;padding:6px 12px 10px}
+  .tl-lbl{font-size:10px}
+  .tl-hint{font-size:9px}
   .info-panel{width:280px}
 }
 
@@ -281,8 +279,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
       <div class="atlas-grid" id="atlas-grid"></div>
     </div>
     <div class="tl-wrap" role="navigation" aria-label="Theme filter">
-      <div class="tb-scroll" id="tb-scroll"></div>
-      <div class="tb-hint" id="tb-hint">Select any atlas to begin</div>
+      <div class="tl-lbls" id="tl-ticks"></div>
+      <div class="tl-trk">
+        <div class="tl-fill" id="tl-fill"></div>
+        <div class="tl-thumb" id="tl-thumb"></div>
+        <input type="range" class="tl-range" id="tl" min="0" max="13" value="0"
+          aria-label="Filter by theme" aria-valuemin="0" aria-valuemax="13" aria-valuenow="0" aria-valuetext="All themes">
+      </div>
+      <div class="tl-hint" id="tl-hint">Drag to filter by theme</div>
     </div>
   </div>
 
@@ -728,21 +732,53 @@ var DESC={
 var selIdx=null;   // selected atlas index in AT
 var filterT=null;  // active theme filter index (null = all)
 
-// ── RENDER: THEME BAR ─────────────────────────────────────────
-function renderThemeBar(){
-  var el=document.getElementById('tb-scroll');if(!el)return;
-  var h='<button class="tb-btn'+(filterT===null?' active':'')+'" onclick="filterTheme(null)">All<span class="tb-ct">'+AT.length+'</span></button>';
+// ── THEME SLIDER ──────────────────────────────────────────────
+// Slider: 0=All, 1–12=themes I–XII, 13=All
+function sliderToTheme(v){v=parseInt(v);return(v<1||v>12)?null:v-1;}
+
+function renderTicks(){
+  var el=document.getElementById('tl-ticks');if(!el)return;
+  var h='<span class="tl-lbl'+(filterT===null?' active':'')+'" onclick="setSlider(0)">All</span>';
   for(var i=0;i<TH.length;i++){
-    var ct=0;for(var j=0;j<AT.length;j++){if(AT[j].t===i)ct++;}
-    h+='<button class="tb-btn'+(filterT===i?' active':'')+'" onclick="filterTheme('+i+')">'+TH[i].n+' '+TH[i].sub+'<span class="tb-ct">'+ct+'</span></button>';
+    h+='<span class="tl-lbl'+(filterT===i?' active':'')+'" onclick="setSlider('+(i+1)+')">'+TH[i].n+'</span>';
   }
+  h+='<span class="tl-lbl'+(filterT===null?' active':'')+'" onclick="setSlider(13)">All</span>';
   el.innerHTML=h;
-  // Update hint text
-  var hint=document.getElementById('tb-hint');
-  if(hint){
-    if(filterT!==null){hint.textContent='Showing '+TH[filterT].nm+' — '+TH[filterT].sub;hint.classList.remove('hidden');}
-    else{hint.textContent='Select any atlas to begin';hint.classList.remove('hidden');}
+}
+
+function syncSliderUI(v){
+  v=parseInt(v);
+  var pct=v/13*100;
+  var fill=document.getElementById('tl-fill');if(fill)fill.style.width=pct+'%';
+  var thumb=document.getElementById('tl-thumb');if(thumb)thumb.style.left=pct+'%';
+  var hint=document.getElementById('tl-hint');
+  var sl=document.getElementById('tl');
+  if(v<1||v>12){
+    if(hint)hint.textContent='All '+AT.length+' atlases · '+TH.length+' themes';
+    if(sl){sl.setAttribute('aria-valuenow',v);sl.setAttribute('aria-valuetext','All themes');}
+  }else{
+    var t=TH[v-1];
+    if(hint)hint.textContent=t.n+' · '+t.nm+' — '+t.sub;
+    if(sl){sl.setAttribute('aria-valuenow',v);sl.setAttribute('aria-valuetext',t.nm);}
   }
+}
+
+function setSlider(v){
+  var sl=document.getElementById('tl');if(sl)sl.value=v;
+  onSliderInput(v);
+}
+
+function onSliderInput(v){
+  var th=sliderToTheme(v);
+  if(th===filterT)return;
+  filterT=th;
+  selIdx=null;
+  syncSliderUI(v);
+  renderTicks();
+  renderGrid();
+  renderPanel();
+  if(isMobile())closeMobileSheet();
+  var el=document.querySelector('.map-c');if(el)el.scrollTop=0;
 }
 
 // ── RENDER: GRID ──────────────────────────────────────────────
@@ -810,6 +846,7 @@ function renderPanel(){
     :'<span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;border:1px solid var(--bdr2);padding:2px 8px;display:inline-block;margin-bottom:12px">Forthcoming</span>';
   var desc=DESC[a.n]||a.g;
   el.innerHTML=
+    '<button onclick="closeSelection()" aria-label="Close" style="position:absolute;top:14px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1;padding:4px;transition:color .15s" onmouseover="this.style.color=\'var(--amber-b)\'" onmouseout="this.style.color=\'var(--txt3)\'">✕</button>'+
     '<div style="text-align:center;padding-top:8px">'+
     '<div style="font-size:32px;margin-bottom:6px">'+a.i+'</div>'+
     '<div style="font-family:\'Cinzel Decorative\',serif;font-size:18px;color:var(--amber-b);margin-bottom:4px">'+a.n+'</div>'+
@@ -834,16 +871,9 @@ function selectAtlas(idx){
   if(selIdx===null&&isMobile())closeMobileSheet();
 }
 
-// ── FILTER THEME ──────────────────────────────────────────────
+// ── FILTER THEME (called by other code) ──────────────────────
 function filterTheme(t){
-  filterT=t;
-  selIdx=null;
-  renderThemeBar();
-  renderGrid();
-  renderPanel();
-  if(isMobile())closeMobileSheet();
-  // scroll grid to top
-  var el=document.querySelector('.map-c');if(el)el.scrollTop=0;
+  setSlider(t===null?0:t+1);
 }
 
 // ── UPDATE COUNTS ─────────────────────────────────────────────
@@ -854,32 +884,24 @@ function updateCounts(){
   var ct=document.getElementById('cnt-total');if(ct)ct.textContent=AT.length+' ';
 }
 
-// ── MAP BUTTON (mobile — return to grid from expanded panel) ──
-function showMapBtn(){
-  var ex=document.getElementById('mob-map-btn');
-  if(ex)return;
-  var btn=document.createElement('button');
-  btn.id='mob-map-btn';
-  btn.textContent='⊕ Grid';
-  btn.style.cssText='position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:150;font-family:Cinzel,serif;font-size:10px;letter-spacing:1.5px;color:var(--amber-b);background:var(--panel);border:1px solid var(--amber);padding:8px 18px;cursor:pointer;text-transform:uppercase;box-shadow:0 4px 16px rgba(0,0,0,.4)';
-  btn.onclick=function(){closeMobileSheet();selIdx=null;renderGrid();renderPanel();hideMapBtn();};
-  document.body.appendChild(btn);
+// ── CLOSE SELECTION ───────────────────────────────────────────
+function closeSelection(){
+  selIdx=null;
+  renderGrid();
+  renderPanel();
+  if(isMobile())closeMobileSheet();
 }
-function hideMapBtn(){
-  var btn=document.getElementById('mob-map-btn');if(btn)btn.remove();
-}
-
-// Patch mobile open/close to show/hide map button
-var _origOpen=openMobileSheet,_origClose=closeMobileSheet;
-openMobileSheet=function(){_origOpen();showMapBtn();};
-closeMobileSheet=function(){_origClose();hideMapBtn();};
 
 // ── INIT ──────────────────────────────────────────────────────
 function init(){
-  renderThemeBar();
+  renderTicks();
+  syncSliderUI(0);
   renderGrid();
   renderPanel();
   updateCounts();
+  // Wire up slider
+  var sl=document.getElementById('tl');
+  if(sl)sl.addEventListener('input',function(e){onSliderInput(e.target.value);});
   // Keyboard activation for tiles (Enter/Space)
   document.getElementById('atlas-grid').addEventListener('keydown',function(e){
     if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('tile')){
