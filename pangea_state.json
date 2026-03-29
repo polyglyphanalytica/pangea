@@ -11075,6 +11075,11 @@
       "atlas": "suffragium",
       "batch": "101-120",
       "items": 120
+    },
+    {
+      "atlas": "terra",
+      "batch": "1-100",
+      "items": 100
     }
   ],
   "assignments": {}
