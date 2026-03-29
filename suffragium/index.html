@@ -4126,7 +4126,7 @@ function renderCompareDrawer(){
   if(!sel&&!sel2){
     dc.innerHTML=`<div class="compare-prompt">
       <div>⊞</div>
-      <div>Select two civilizations on the map to compare them side by side</div>
+      <div>Select two movements on the map to compare them side by side</div>
     </div>`;
     return;
   }
@@ -4241,8 +4241,8 @@ function shareState(){
   const civName=sel?sel.nm:null;
   const shareTitle='Suffragium — The Voting Atlas';
   const shareText=civName
-    ? `Explore ${civName} on Civilitas — 85 civilizations, 65,000 years of human history`
-    : 'Civilitas — 85 civilizations, 65,000 years of human history, all in one map';
+    ? `Explore ${civName} on Suffragium — 100 suffrage movements, 5,000 years of democratic history`
+    : 'Suffragium — 100 suffrage movements, 5,000 years of democratic history, all in one map';
 
   // Use native share sheet on devices that support it (iOS, Android, modern desktop)
   if(navigator.share){
@@ -4965,7 +4965,7 @@ function renderHeritageDrawer(){
     dc.innerHTML=`
     <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">Democratic Heritage</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
-      Select your regional background to see every civilization that shaped your cultural DNA — linguistically, religiously, scientifically, and genetically. Blue markers on the map show your ancestral civilizations.
+      Select your region to see every suffrage movement that shaped its democratic heritage. Blue markers on the map show the movements associated with your region.
     </div>
     <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Choose your region</div>
     <div class="heritage-grid">${regionBtns}</div>`;
@@ -4982,8 +4982,8 @@ function renderHeritageDrawer(){
     ← All regions
   </button>
   <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--amber-b);letter-spacing:1px;margin-bottom:4px">${heritageRegion}</div>
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} contributing civilizations · shown in blue on the map</div>
-  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Your civilizational ancestry</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);margin-bottom:16px">${civs.length} suffrage movements · shown in blue on the map</div>
+  <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--txt3);text-transform:uppercase;margin-bottom:10px">Regional democratic heritage</div>
   ${civs.map(c=>`<div class="heritage-civ" onclick="navigateToItem('${c.id}')">
     <span class="heritage-civ-nm">${c.nm}</span>
     <span class="heritage-civ-why">${HERITAGE_REASONS[c.id]||''}</span>
