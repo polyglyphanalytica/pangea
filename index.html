@@ -148,9 +148,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .tile.sel{border-color:var(--amber);background:var(--amber-xx);box-shadow:0 0 12px rgba(232,152,32,.12)}
 .tile-ico{font-size:20px;display:block;margin-bottom:4px;line-height:1.2}
 .tile-nm{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.5px;color:var(--txt2);display:block;line-height:1.3}
-.tile.live .tile-nm{color:var(--amber-b)}
-.tile.forthcoming{opacity:.5}
-.tile.forthcoming:hover{opacity:.75}
+/* Live tiles — prominent accent border, gold name */
+.tile.live{border-color:var(--bdr);background:var(--amber-xx)}
+.tile.live:hover{border-color:var(--amber);background:var(--amber-x)}
+.tile.live .tile-nm{color:var(--amber-b);font-weight:600}
+/* Forthcoming tiles — clearly muted */
+.tile.forthcoming{opacity:.35}
+.tile.forthcoming:hover{opacity:.6}
 .tile.forthcoming.sel{opacity:1}
 
 /* ── THEME BAR (replaces timeline — same position) ── */
@@ -603,6 +607,51 @@ var AT=[
 {t:11,i:'🌊',n:'Diluvium',g:'Rising seas, sinking cities, and the civilisations already underwater.',k:['Sea Level','Displacement','Futures'],l:0}
 ];
 
+// ── EXTENDED DESCRIPTIONS (live atlases) ──────────────────────
+var DESC={
+'Cosmos':'Map 112 cosmic objects across 13.8 billion years — from the Big Bang through stellar nurseries, black holes, and the cosmic microwave background. Scrub the timeline to watch the universe assemble itself. Every object is placed by right ascension and declination on an interactive sky atlas. Herstory surfaces the women astronomers — Leavitt, Payne-Gaposchkin, Rubin, Bell Burnell — whose discoveries were credited to others.',
+'Clima':'100 climate events from the Toba eruption to the present day. See how volcanic winters collapsed civilisations, how the Medieval Warm Period enabled Viking expansion, and how the Little Ice Age reshaped European agriculture. Every drought, flood, and famine placed on the map where it struck.',
+'Aeon':'Four billion years of planetary climate — every ice age, every hothouse, every mass extinction they triggered. The deepest timeline in the project. Scrub from the Hadean through Snowball Earth, the Great Oxygenation Event, the PETM, and into the Anthropocene.',
+'Aqua':'100 water events that made and unmade civilisations. The Nile floods that sustained Egypt, the droughts that collapsed the Maya, the dam projects that displaced millions. Water as infrastructure, weapon, boundary, and god.',
+'Petra':'Geology as the hidden foundation of power. 100 geological events and resources — from the tin that made bronze to the rare earths that make smartphones. See how tectonic shifts created the resources that empires fought over.',
+'Flora':'100 plants that shaped civilisation. The wheat that enabled settlement, the spices that launched trade routes, the rubber that built and destroyed empires. Track how crops migrated across continents and transformed every society they touched.',
+'Bestia':'100 animals that made human civilisation possible — and those we are unmaking. From the first domestication of wolves to the ongoing sixth extinction. Track how the horse transformed warfare, how cattle reshaped landscapes, and how cod built colonial empires.',
+'Sylva':'100 forests and deforestation events across human history. The cedars of Lebanon that built Phoenician ships, the Amazon as carbon sink, the managed forests of Edo Japan. See how every civilisation depended on its forests — and what happened when they fell.',
+'Ignis':'Fire as humanity\'s first and most dangerous technology. 100 events from the controlled burns of early humans through the Great Fire of London to modern wildfires and nuclear energy. Track how mastery of fire shaped cooking, metallurgy, warfare, and industry.',
+'Spiritus':'Wind, weather, and atmosphere as the invisible hand of history. 100 atmospheric events — the kamikaze typhoons that saved Japan, the dust storms that created the Dust Bowl, the jet stream patterns that shaped aviation. Weather as strategy, disaster, and opportunity.',
+'Solum':'Civilisations don\'t collapse — their soil does. 100 events mapping how erosion, salinisation, and desertification ended empires. The Fertile Crescent that became desert, the Dust Bowl that emptied the Plains, the Green Revolution that fed billions at a cost.',
+'Contagium':'Every major epidemic mapped — from the Plague of Athens through the Black Death, smallpox in the Americas, the 1918 flu, and COVID-19. Track how diseases spread along trade routes, how quarantine was invented, and how pandemics reshaped the societies they struck.',
+'Corpus':'The human body as contested territory. 100 events in the history of anatomy, dissection, race science, bodily autonomy, and medical ethics. From Vesalius to Henrietta Lacks, from phrenology to genomics.',
+'Animus':'100 events in the history of the mind — how societies have understood, diagnosed, confined, and treated mental difference. From Bedlam to Freud, from lobotomy to the DSM, from asylum reform to the neurodiversity movement.',
+'Dolor':'The history of pain, suffering, and the long fight to end them. 100 events from trepanation through anaesthesia, antisepsis, antibiotics, and modern palliative care. Track how surgery evolved from butchery to precision.',
+'Senex':'100 events mapping how every civilisation has answered the question of ageing and death. Burial rites, ancestor worship, life expectancy shifts, pension systems, gerontology, and the modern quest for longevity.',
+'Civilitas':'The flagship atlas. 100 civilisations across 65,000 years, from the San people of southern Africa to the European Union. Scrub the timeline. Watch civilisations rise, overlap, and fall. See how ideas travelled between them. Find the women who shaped each one.',
+'Lingua':'7,000 languages mapped — the living, the endangered, and the extinct. 100 linguistic events from the earliest known scripts through language death, creolisation, and digital preservation. Half the world\'s languages will die this century.',
+'Numen':'100 religious traditions and belief systems mapped across 50,000 years. From animism and ancestor worship through the Axial Age, the great monotheisms, syncretic traditions, and modern secular movements. Track how beliefs spread, merged, and transformed.',
+'Sophia':'100 schools of philosophical thought mapped from the pre-Socratics to post-structuralism. See how ideas migrated between civilisations — Greek philosophy through Arabic translation, Indian logic to Tibetan Buddhism, Chinese legalism to modern statecraft.',
+'Graphē':'100 writing systems from Sumerian cuneiform to emoji. Track the invention, spread, and death of scripts. See which scripts descended from others, which were invented independently, and which were deliberately created to resist colonial erasure.',
+'Experimenta':'100 scientific breakthroughs placed where they happened — and why there. Track the institutional conditions that made discovery possible: the House of Wisdom, the Royal Society, Bell Labs, CERN. See how geography shaped what we know.',
+'Quantum':'The complete history of physics — 100 events from Democritus through Newton, Maxwell, Einstein, and quantum mechanics. Track how each discovery made the next possible, and how our understanding of reality has been rewritten at every scale.',
+'Terra Incognita':'A map of confident errors — the most useful atlas of all. 100 events where humanity was certain and wrong. Phlogiston, miasma theory, luminiferous aether, steady-state universe. See how paradigm shifts happen and why they take so long.',
+'Obscura':'100 acts of censorship, suppression, and intellectual persecution. The burning of the Library of Alexandria, the Index Librorum Prohibitorum, Galileo\'s trial, banned books, and modern internet censorship. What every civilisation was afraid of knowing.',
+'Scriptorium':'The physical life of knowledge — 100 events from clay tablets through papyrus, parchment, the printing press, and digital archives. How close humanity came to losing everything, and the scribes, librarians, and archivists who saved it.',
+'Augur':'100 events in the history of reading the sky — astronomy, astrology, and divination. From Stonehenge and Babylonian omen texts through Islamic observatories, Copernicus, and the Hubble Space Telescope. Every civilisation read the sky differently.',
+'Mathematica':'100 mathematical breakthroughs placed where they happened. The invention of zero in India, algebra in Baghdad, calculus in England and Germany simultaneously, and the unsolved problems that still drive the field.',
+'Techne':'100 technologies that changed what it meant to be human. From the hand axe through the printing press, steam engine, telegraph, transistor, and large language model. Track how each invention reshaped labour, power, and daily life.',
+'Codex':'100 of the oldest surviving texts from every culture. The Epic of Gilgamesh, the Rigveda, the Dao De Jing, the Popol Vuh. What each civilisation chose to write down first tells you everything about what they valued.',
+'Bellum':'100 wars and conflicts from the Battle of Megiddo to the present. Track how military technology, tactics, and the scale of destruction evolved. See the human cost — casualties, displacement, and the long aftermath of every conflict.',
+'Dynastia':'100 dynasties across 5,000 years of royal and imperial power. From the pharaohs through the Habsburgs, the Mughals, and the House of Saud. Track how succession, marriage alliances, and civil war shaped the political map.',
+'Lex':'100 legal events from the Code of Ur-Nammu to the International Criminal Court. Track how the concepts of rights, justice, due process, and human dignity evolved — and how law has been used both to liberate and to oppress.',
+'Manifesto':'100 political ideologies mapped from their origin to their global spread. Liberalism, socialism, fascism, feminism, anarchism, environmentalism — track how each idea travelled, transformed, and collided with the others.',
+'Corruptio':'100 events mapping the boundary between power and its abuse. From ancient tribute systems through modern kleptocracy, offshore finance, and institutional capture. The anatomy of corruption across every system of government.',
+'Pecunia':'100 monetary events from the first commodity currencies through coinage, paper money, central banking, and cryptocurrency. Every financial crash, every innovation, every time the rules of money were rewritten.',
+'Via':'100 trade routes from the earliest obsidian trails through the Silk Road, the spice routes, the triangular trade, and modern container shipping. Track how goods, ideas, diseases, and people moved along the same paths.',
+'Cursus':'100 revolutions in transport — from the domestication of the horse through canals, railways, automobiles, aviation, and spaceflight. See how each leap in speed reshaped who held power and who could move.',
+'Debitum':'Debt is older than money. 100 events from Mesopotamian grain loans through medieval usury laws, sovereign defaults, the IMF, and student debt. Track how credit and obligation have shaped every society.',
+'Labor':'100 events in the history of work — from hunter-gatherer subsistence through guilds, factories, trade unions, minimum wage, and the gig economy. Track how the meaning, conditions, and rewards of labour have changed.',
+'Anthrophone':'Every musical instrument from every culture on one interactive map. 100 instruments placed where they originated, with lineage connections showing how designs migrated and evolved across civilisations.'
+};
+
 // ── STATE ──────────────────────────────────────────────────────
 var selIdx=null;   // selected atlas index in AT
 var filterT=null;  // active theme filter index (null = all)
@@ -652,16 +701,29 @@ function renderGrid(){
 function renderPanel(){
   var el=document.getElementById('panel-content');if(!el)return;
   if(selIdx===null){
-    el.innerHTML='<div style="text-align:center;padding-top:20px">'+
-      '<div style="font-family:\'Cinzel Decorative\',serif;font-size:16px;color:var(--amber-b);margin-bottom:4px">The Pangea Project</div>'+
-      '<div style="font-family:\'Cinzel\',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">One Earth</div>'+
-      '<p style="font-size:14px;line-height:1.8;color:var(--txt2);font-style:italic;margin-bottom:18px">Every domain of human knowledge, mapped. Each atlas is a single self-contained HTML file.</p>'+
-      '<div style="border-top:1px solid var(--bdr2);padding-top:14px;margin-bottom:8px;font-family:\'Cinzel\',serif;font-size:9px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase">How to explore</div>'+
-      '<p style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:6px"><span style="color:var(--amber-b)">Select</span> any tile to learn about an atlas</p>'+
-      '<p style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:6px"><span style="color:var(--amber-b)">Filter</span> by theme using the bar below the grid</p>'+
-      '<p style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:6px"><span style="color:var(--amber-b)">Live</span> atlases are gold — click to enter</p>'+
-      '<p style="font-size:13px;line-height:1.7;color:var(--txt3);margin-bottom:0">Forthcoming atlases are dimmed — they\'re on the way</p>'+
-      '</div>';
+    var live=0;for(var i=0;i<AT.length;i++){if(AT[i].l)live++;}
+    el.innerHTML='<div style="text-align:center;padding-top:12px">'+
+      '<div style="font-family:\'Cinzel Decorative\',serif;font-size:18px;color:var(--amber-b);margin-bottom:4px;letter-spacing:2px">The Pangea Project</div>'+
+      '<div style="font-family:\'Cinzel\',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:18px">One Earth</div>'+
+      '<p style="font-size:15px;line-height:1.9;color:var(--txt2);font-style:italic;margin-bottom:4px">To see a world in a grain of sand</p>'+
+      '<p style="font-size:15px;line-height:1.9;color:var(--txt2);font-style:italic;margin-bottom:4px">And a heaven in a wild flower,</p>'+
+      '<p style="font-size:15px;line-height:1.9;color:var(--txt2);font-style:italic;margin-bottom:4px">Hold infinity in the palm of your hand</p>'+
+      '<p style="font-size:15px;line-height:1.9;color:var(--txt2);font-style:italic;margin-bottom:6px">And eternity in an hour.</p>'+
+      '<p style="font-size:11px;color:var(--txt3);letter-spacing:1px;margin-bottom:20px">— William Blake</p>'+
+      '</div>'+
+      '<div style="display:flex;gap:20px;justify-content:center;padding:14px 0;border-top:1px solid var(--bdr2);border-bottom:1px solid var(--bdr2);margin-bottom:16px">'+
+        '<div style="text-align:center"><span style="font-family:\'Cinzel\',serif;font-size:22px;font-weight:600;color:var(--amber-b);display:block;line-height:1">'+AT.length+'</span><span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin-top:3px;display:block">Atlases</span></div>'+
+        '<div style="text-align:center"><span style="font-family:\'Cinzel\',serif;font-size:22px;font-weight:600;color:var(--amber-b);display:block;line-height:1">'+live+'</span><span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin-top:3px;display:block">Live</span></div>'+
+        '<div style="text-align:center"><span style="font-family:\'Cinzel\',serif;font-size:22px;font-weight:600;color:var(--amber-b);display:block;line-height:1">'+TH.length+'</span><span style="font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase;margin-top:3px;display:block">Themes</span></div>'+
+      '</div>'+
+      '<p style="font-size:14px;line-height:1.85;color:var(--txt2);margin-bottom:14px">Each atlas maps a single domain of human knowledge onto an interactive timeline. Scrub through billions of years of stellar evolution, millions of years of geological change, or thousands of years of human invention.</p>'+
+      '<p style="font-size:14px;line-height:1.85;color:var(--txt2);margin-bottom:14px">See which ideas travelled between civilisations, which discoveries made others possible, and whose contributions were written out of the story. Find the women history left out.</p>'+
+      '<p style="font-size:14px;line-height:1.85;color:var(--txt2);margin-bottom:16px">Every atlas is a single self-contained HTML file. No servers, no databases, no dependencies beyond a browser. This is not the encyclopaedia you\'d expect. Or the atlas you\'d expect. This is a new way to read the human story.</p>'+
+      '<div style="border-top:1px solid var(--bdr2);padding-top:12px;margin-bottom:6px;font-family:\'Cinzel\',serif;font-size:8px;letter-spacing:1.5px;color:var(--txt3);text-transform:uppercase">How to explore</div>'+
+      '<p style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:5px"><span style="color:var(--amber-b)">Select</span> any tile to learn about an atlas</p>'+
+      '<p style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:5px"><span style="color:var(--amber-b)">Filter</span> by theme using the bar below</p>'+
+      '<p style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:5px"><span style="color:var(--amber-b)">Gold tiles</span> are live — select to enter</p>'+
+      '<p style="font-size:13px;line-height:1.7;color:var(--txt3);margin-bottom:0">Dimmed tiles are forthcoming</p>';
     return;
   }
   var a=AT[selIdx],th=TH[a.t];
