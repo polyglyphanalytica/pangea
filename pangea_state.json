@@ -4,10 +4,10 @@
   "active_atlas": "somnia",
   "atlases": {
     "civilitas": {
-      "phase": "3",
+      "phase": "DONE",
       "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "III",
       "validated_sha": "d7e68166c15ad280485aea9166094ec5962dbfb5",
@@ -712,8 +712,8 @@
       "validated_lenses": 20
     },
     "suffragium": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DATA",
+      "items": 4,
       "target": 100,
       "live": false,
       "map": "world",
@@ -10566,6 +10566,26 @@
       "atlas": "martyr",
       "batch": "101-120",
       "items": 120
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "suffragium",
+      "batch": "4-4",
+      "items": 4
     }
   ],
   "assignments": {}
