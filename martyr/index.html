@@ -708,10 +708,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'aftermath',ico:'⟲',lbl:'Aftermath',col:'#e8a040'},
+{id:'causes',ico:'⚑',lbl:'Causes & Context',col:'#d09030'},
+{id:'colonial',ico:'◈',lbl:'Colonial Dimensions',col:'#c88828'},
+{id:'comparative',ico:'⇋',lbl:'Comparative Analysis',col:'#e09838'},
+{id:'contested',ico:'⚖',lbl:'Contested Legacy',col:'#d8a048'},
+{id:'cultural',ico:'♫',lbl:'Cultural Impact',col:'#c89028'},
+{id:'gender',ico:'⚢',lbl:'Gender Dimensions',col:'#d09830'},
+{id:'iconography',ico:'✦',lbl:'Iconography & Symbols',col:'#e0a840'},
+{id:'legacy',ico:'◉',lbl:'Legacy & Influence',col:'#c88020'},
+{id:'media',ico:'◧',lbl:'Media & Documentation',col:'#d8a038'},
+{id:'memory',ico:'⊙',lbl:'Memory & Commemoration',col:'#e09028'},
+{id:'modern_resonance',ico:'⟁',lbl:'Modern Resonance',col:'#c89830'},
+{id:'persecution',ico:'⛓',lbl:'Persecution & Oppression',col:'#d08828'},
+{id:'philosophical',ico:'∞',lbl:'Philosophical Dimensions',col:'#e0a038'},
+{id:'political_impact',ico:'⚙',lbl:'Political Impact',col:'#c88830'},
+{id:'resistance',ico:'✊',lbl:'Resistance & Defiance',col:'#d09028'},
+{id:'sacrifice',ico:'†',lbl:'Sacrifice & Suffering',col:'#e09830'},
+{id:'state_response',ico:'◆',lbl:'State Response',col:'#c8a028'},
+{id:'theology',ico:'☩',lbl:'Theology & Belief',col:'#d0a038'},
+{id:'witnesses',ico:'◎',lbl:'Witnesses & Testimony',col:'#e08828'},
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-1000,n:'ANCIENT WORLD'},
+{y:-500,n:'CLASSICAL ERA'},
+{y:1,n:'ROMAN EMPIRE'},
+{y:313,n:'LATE ANTIQUITY'},
+{y:600,n:'EARLY MEDIEVAL'},
+{y:1000,n:'HIGH MEDIEVAL'},
+{y:1300,n:'LATE MEDIEVAL'},
+{y:1500,n:'REFORMATION'},
+{y:1600,n:'EARLY MODERN'},
+{y:1750,n:'ENLIGHTENMENT'},
+{y:1848,n:'AGE OF REVOLUTION'},
+{y:1914,n:'WORLD WARS'},
+{y:1945,n:'COLD WAR'},
+{y:1960,n:'LIBERATION ERA'},
+{y:1990,n:'POST-COLD WAR'},
+{y:2010,n:'MODERN STRUGGLES'},
+];
 
 const ITEMS=[
 {id:'crucifixion_jesus',nm:'Crucifixion of Jesus',sb:'Jerusalem · Religious Martyrdom',s:30,e:33,lon:35.23,lat:31.78,
@@ -3318,12 +3356,202 @@ media:'Evelyn Groenink\'s investigative journalism has been central to keeping t
 
 
 
-const DIPLOMATIC=[];
+const TRANSMISSIONS=[
+{from:'crucifixion_jesus',to:'martyrdom_stephen',concept:'Christian Witness Tradition',year:35,desc:'Stephen becomes the first Christian martyr, directly inspired by Jesus\'s sacrificial model.'},
+{from:'martyrdom_stephen',to:'martyrdom_perpetua',concept:'Christian Witness Tradition',year:203,desc:'Perpetua\'s prison diary continues the tradition of bearing witness through suffering.'},
+{from:'martyrdom_perpetua',to:'martyrdom_polycarp',concept:'Christian Witness Tradition',year:155,desc:'Polycarp\'s steadfast refusal to recant establishes the bishop-martyr archetype.'},
+{from:'martyrdom_polycarp',to:'cranmer_burning',concept:'Christian Witness Tradition',year:1556,desc:'Cranmer\'s burning at the stake echoes the early church martyrs in a Reformation context.'},
+{from:'death_of_socrates',to:'giordano_bruno',concept:'Intellectual Martyrdom',year:1600,desc:'Bruno\'s execution for heretical cosmology mirrors Socrates\'s death for philosophical dissent.'},
+{from:'giordano_bruno',to:'galileo_condemnation',concept:'Intellectual Martyrdom',year:1633,desc:'Galileo\'s persecution continues the pattern of punishing scientific truth-telling.'},
+{from:'galileo_condemnation',to:'death_liu_xiaobo',concept:'Intellectual Martyrdom',year:2010,desc:'Liu Xiaobo\'s imprisonment for Charter 08 extends the tradition of intellectual sacrifice for truth.'},
+{from:'martyrdom_husayn',to:'martyrdom_ali',concept:'Shia Martyrdom Tradition',year:661,desc:'Ali\'s assassination begins the chain of Shia martyrdom that culminates at Karbala.'},
+{from:'martyrdom_ali',to:'guru_arjan_dev',concept:'Religious Persecution Chain',year:1606,desc:'Guru Arjan\'s execution for refusing conversion parallels the persecution of early Islamic leaders.'},
+{from:'guru_arjan_dev',to:'guru_tegh_bahadur',concept:'Sikh Martyrdom Lineage',year:1675,desc:'Guru Tegh Bahadur\'s execution directly follows Guru Arjan\'s precedent of dying for religious freedom.'},
+{from:'execution_thomas_more',to:'execution_bonhoeffer',concept:'Conscience Against the State',year:1945,desc:'Bonhoeffer\'s execution for resisting Nazism mirrors More\'s refusal to compromise conscience before tyranny.'},
+{from:'execution_bonhoeffer',to:'assassination_romero',concept:'Conscience Against the State',year:1980,desc:'Romero\'s assassination for defending the poor continues the tradition of clerical resistance to state violence.'},
+{from:'assassination_romero',to:'jesuit_martyrs_salvador',concept:'Liberation Theology Martyrs',year:1989,desc:'The Jesuit massacre follows directly from the liberation theology movement Romero embodied.'},
+{from:'jesuit_martyrs_salvador',to:'four_churchwomen_el_salvador',concept:'Liberation Theology Martyrs',year:1980,desc:'The four churchwomen\'s murders precede and foreshadow the broader targeting of religious workers.'},
+{from:'assassination_gandhi',to:'assassination_mlk',concept:'Nonviolent Resistance Martyrs',year:1968,desc:'King explicitly studied Gandhi\'s methods; both were assassinated for their nonviolent campaigns.'},
+{from:'assassination_mlk',to:'death_steve_biko',concept:'Anti-Apartheid Chain',year:1977,desc:'Biko\'s Black Consciousness movement drew directly on the American civil rights struggle.'},
+{from:'death_steve_biko',to:'execution_chris_hani',concept:'Anti-Apartheid Chain',year:1993,desc:'Hani\'s assassination nearly derailed the transition Biko\'s movement had helped set in motion.'},
+{from:'assassination_lumumba',to:'assassination_sankara',concept:'African Liberation Martyrs',year:1987,desc:'Sankara\'s revolutionary vision drew on Lumumba\'s pan-African ideals and met the same fate.'},
+{from:'assassination_sankara',to:'assassination_amilcar_cabral',concept:'African Liberation Martyrs',year:1973,desc:'Cabral\'s assassination parallels Sankara\'s — both were killed on the brink of transformative change.'},
+{from:'assassination_amilcar_cabral',to:'assassination_eduardo_mondlane',concept:'African Liberation Martyrs',year:1969,desc:'Mondlane\'s assassination by parcel bomb follows the pattern of colonial powers eliminating liberation leaders.'},
+{from:'thich_quang_duc',to:'jan_palach',concept:'Self-Immolation as Protest',year:1969,desc:'Palach\'s self-immolation in Prague was explicitly inspired by Quang Duc\'s act in Saigon.'},
+{from:'jan_palach',to:'mohamed_bouazizi',concept:'Self-Immolation as Protest',year:2010,desc:'Bouazizi\'s self-immolation echoes Palach\'s act and triggers the Arab Spring.'},
+{from:'death_spartacus',to:'execution_nat_turner',concept:'Slave Rebellion Martyrs',year:1831,desc:'Turner\'s slave revolt and execution echo Spartacus\'s doomed uprising against institutional bondage.'},
+{from:'execution_nat_turner',to:'death_toussaint_louverture',concept:'Slave Rebellion Martyrs',year:1803,desc:'Toussaint\'s death in a French prison cap the tradition of enslaved people dying for liberation.'},
+{from:'joan_of_arc',to:'execution_edith_cavell',concept:'Women Martyrs of War',year:1915,desc:'Cavell\'s execution by firing squad for aiding soldiers echoes Joan\'s sacrifice in wartime.'},
+{from:'execution_edith_cavell',to:'execution_zoya_kosmodemyanskaya',concept:'Women Martyrs of War',year:1941,desc:'Zoya\'s execution as a partisan echoes Cavell\'s wartime sacrifice and becomes Soviet propaganda.'},
+{from:'murder_rosa_luxemburg',to:'murder_victor_jara',concept:'Revolutionary Martyrs',year:1973,desc:'Jara\'s murder by Pinochet\'s forces mirrors Luxemburg\'s killing — artists and revolutionaries silenced by military coups.'},
+{from:'murder_victor_jara',to:'death_salvador_allende',concept:'Revolutionary Martyrs',year:1973,desc:'Allende\'s death during Pinochet\'s coup occurs the same week as Jara\'s murder — both symbols of Chilean democracy destroyed.'},
+{from:'murder_daphne_caruana_galizia',to:'murder_khashoggi',concept:'Journalist Martyrs',year:2018,desc:'Khashoggi\'s murder follows Caruana Galizia\'s assassination — both killed for exposing corruption.'},
+{from:'murder_khashoggi',to:'anna_politkovskaya',concept:'Journalist Martyrs',year:2006,desc:'Politkovskaya\'s assassination for reporting on Chechnya precedes the global pattern of targeting investigative journalists.'},
+{from:'assassination_lincoln',to:'assassination_sadat',concept:'Leaders Killed by Their Own',year:1981,desc:'Sadat\'s assassination by extremists within his own society echoes Lincoln\'s murder by a compatriot.'},
+{from:'assassination_sadat',to:'assassination_rabin',concept:'Leaders Killed by Their Own',year:1995,desc:'Rabin\'s assassination by a Jewish extremist mirrors Sadat\'s killing — peacemakers murdered by their own people.'},
+{from:'emmett_till',to:'assassination_medgar_evers',concept:'Civil Rights Martyrs',year:1963,desc:'Evers\'s assassination continues the chain of racist violence that Till\'s murder first exposed to the nation.'},
+{from:'assassination_medgar_evers',to:'assassination_malcolm_x',concept:'Civil Rights Martyrs',year:1965,desc:'Malcolm X\'s assassination follows Evers — different philosophies, same fate for Black leaders in America.'},
+{from:'jan_hus',to:'execution_savonarola',concept:'Pre-Reformation Dissenters',year:1498,desc:'Savonarola\'s execution for religious reform echoes Hus\'s burning at Constance.'},
+{from:'execution_savonarola',to:'william_tyndale',concept:'Pre-Reformation Dissenters',year:1536,desc:'Tyndale\'s execution for Bible translation continues the pattern of killing those who challenge church authority.'},
+{from:'execution_bhagat_singh',to:'assassination_aung_san',concept:'Anti-Colonial Martyrs of Asia',year:1947,desc:'Aung San\'s assassination on the eve of Burmese independence mirrors Singh\'s sacrifice for Indian freedom.'},
+{from:'assassination_aung_san',to:'execution_jose_rizal',concept:'Anti-Colonial Martyrs of Asia',year:1896,desc:'Rizal\'s execution by Spain prefigures the pattern of colonial powers killing independence leaders across Asia.'},
+{from:'execution_jose_rizal',to:'execution_nguyen_thai_hoc',concept:'Anti-Colonial Martyrs of Asia',year:1930,desc:'Nguyen Thai Hoc\'s execution by French colonial authorities follows Rizal\'s model of dying for national liberation.'},
+{from:'gwangju_massacre',to:'tiananmen_square',concept:'Democracy Movement Martyrs',year:1989,desc:'Tiananmen follows Gwangju — both democratic uprisings crushed by authoritarian military force.'},
+{from:'tiananmen_square',to:'death_alexei_navalny',concept:'Democracy Movement Martyrs',year:2024,desc:'Navalny\'s death in prison continues the pattern of authoritarian states eliminating democratic challengers.'},
+{from:'death_neda_agha_soltan',to:'death_mahsa_amini',concept:'Iranian Protest Martyrs',year:2022,desc:'Amini\'s death in morality police custody triggers protests that echo the Green Movement sparked by Neda\'s killing.'},
+{from:'hungarian_uprising',to:'soweto_uprising',concept:'Youth Uprising Martyrs',year:1976,desc:'Soweto\'s student uprising and its martyrs echo Hungary\'s — young people dying to resist oppressive systems.'},
+{from:'berta_caceres',to:'assassination_marielle_franco',concept:'Environmental & Social Justice Martyrs',year:2018,desc:'Franco\'s assassination for defending favela communities follows Caceres\'s murder for environmental activism.'},
+{from:'assassination_marielle_franco',to:'chico_mendes',concept:'Environmental & Social Justice Martyrs',year:1988,desc:'Mendes\'s murder for defending the Amazon prefigures the targeting of Latin American justice activists.'},
+{from:'maccabean_martyrs',to:'masada_defenders',concept:'Jewish Martyrdom Tradition',year:73,desc:'Masada\'s mass suicide rather than surrender extends the Maccabean tradition of dying rather than abandoning faith.'},
+{from:'execution_the_bab',to:'bahai_women_shiraz',concept:'Baha\'i Martyrdom',year:1983,desc:'The execution of Baha\'i women in Shiraz continues the persecution begun with the Bab\'s execution.'},
+{from:'execution_charles_i',to:'execution_sacco_vanzetti',concept:'Political Trial Martyrs',year:1927,desc:'Sacco and Vanzetti\'s controversial execution echoes the political nature of Charles I\'s trial.'},
+{from:'lynching_leo_frank',to:'emmett_till',concept:'Racial Terror Martyrs',year:1955,desc:'Till\'s lynching extends the pattern of racist extrajudicial murder that Frank\'s lynching exposed.'},
+{from:'twenty_six_martyrs_japan',to:'martyrdom_dirk_willems',concept:'Martyrs of Religious Conscience',year:1569,desc:'Dirk Willems\'s execution for Anabaptist faith parallels the Japanese martyrs\' deaths for Christian belief.'},
+{from:'execution_wen_tianxiang',to:'death_yun_dongju',concept:'Literary Martyrs',year:1945,desc:'Yun Dong-ju\'s death in a Japanese prison echoes Wen Tianxiang\'s poetic defiance before execution.'},
+{from:'death_bobby_sands',to:'assassination_dulcie_september',concept:'Anti-Occupation Martyrs',year:1988,desc:'September\'s assassination in exile parallels Sands\'s hunger strike — both died resisting occupation of their homelands.'},
+{from:'murder_thomas_becket',to:'execution_thomas_more',concept:'English Martyrs of Conscience',year:1535,desc:'More\'s execution for defying Henry VIII echoes Becket\'s murder for defying Henry II — the crown versus conscience.'},
+{from:'death_dag_hammarskjold',to:'assassination_olof_palme',concept:'Swedish Peace Martyrs',year:1986,desc:'Palme\'s unsolved assassination echoes Hammarskjöld\'s mysterious death — both Swedish leaders killed for peace work.'},
+{from:'armenian_genocide_martyrs',to:'rwandan_genocide_martyrs',concept:'Genocide Martyrs',year:1994,desc:'Rwanda\'s genocide and its martyrs echo Armenia\'s — systematic extermination producing mass martyrdom.'},
+{from:'assassination_hrant_dink',to:'murder_theo_van_gogh',concept:'Free Speech Martyrs',year:2004,desc:'Van Gogh\'s murder for artistic criticism prefigures Dink\'s assassination — both killed for exercising free expression.'},
+{from:'assassination_bhutto',to:'assassination_aquino',concept:'Democratic Return Martyrs',year:1983,desc:'Aquino\'s assassination upon returning from exile mirrors Bhutto\'s killing — both democratic leaders murdered on homecoming.'},
+{from:'sharpeville_massacre',to:'myall_creek_massacre',concept:'Massacre Witness Martyrs',year:1838,desc:'Myall Creek\'s prosecution for Aboriginal massacre prefigures Sharpeville\'s role in exposing state violence.'},
+{from:'death_maximilian_kolbe',to:'white_rose_executions',concept:'WWII Resistance Martyrs',year:1943,desc:'The White Rose students\' execution for anti-Nazi leaflets parallels Kolbe\'s sacrifice in Auschwitz.'},
+{from:'ken_saro_wiwa',to:'assassination_chokri_belaid',concept:'Political Assassination in Transition',year:2013,desc:'Belaid\'s assassination during Tunisia\'s democratic transition echoes Saro-Wiwa\'s killing during Nigeria\'s military rule.'},
+];
 
-const TRANSMISSIONS=[];
 
-
-const WOMEN={};
+const WOMEN={
+'joan_of_arc':[
+{nm:'Joan of Arc',role:'Military Leader & Martyr',yr:1431,desc:'Led French armies to victory at Orléans at age seventeen, then was captured, tried for heresy by an English-allied court, and burned at the stake. Her trial transcript reveals extraordinary courage and theological sophistication from an illiterate peasant girl facing hostile clergy.'},
+],
+'martyrdom_perpetua':[
+{nm:'Vibia Perpetua',role:'Christian Martyr & Diarist',yr:203,desc:'A young noblewoman in Carthage who kept a prison diary — one of the earliest surviving texts by a woman — recording her visions and her refusal to recant despite her father\'s pleas. Her account of facing wild beasts in the arena is one of the most powerful first-person martyrdom narratives in history.'},
+{nm:'Felicity',role:'Enslaved Woman & Co-Martyr',yr:203,desc:'An enslaved woman who gave birth in prison days before her execution, then went to the arena with Perpetua. Her willingness to face death alongside her mistress as an equal in faith challenged Roman social hierarchies.'},
+],
+'martyrdom_hypatia':[
+{nm:'Hypatia of Alexandria',role:'Philosopher & Mathematician',yr:415,desc:'The last great philosopher of ancient Alexandria, she taught Neoplatonism and mathematics before being murdered by a Christian mob. Her death marks the symbolic end of classical learning in the ancient world and the beginning of centuries of suppressed female intellectual authority.'},
+],
+'assassination_gandhi':[
+{nm:'Kasturba Gandhi',role:'Independence Activist',yr:1944,desc:'Kasturba was a political activist in her own right who led protests, was imprisoned multiple times, and died in detention at Aga Khan Palace. Her sacrifices for Indian independence were often overshadowed by her husband\'s fame but were no less real.'},
+],
+'assassination_mlk':[
+{nm:'Coretta Scott King',role:'Civil Rights Leader',yr:1968,desc:'After Martin\'s assassination, Coretta continued the movement, founding the King Center and campaigning for the holiday. She expanded the civil rights agenda to include women\'s rights, LGBT rights, and nuclear disarmament, carrying the martyrdom\'s legacy far beyond its original scope.'},
+{nm:'Fannie Lou Hamer',role:'Voting Rights Activist',yr:1964,desc:'Beaten nearly to death in a Mississippi jail for registering Black voters, Hamer\'s testimony before the 1964 Democratic Convention exposed the violent cost of civil rights work. Her suffering and perseverance embodied the martyrdom tradition within the movement.'},
+],
+'execution_edith_cavell':[
+{nm:'Edith Cavell',role:'Nurse & War Martyr',yr:1915,desc:'A British nurse who helped Allied soldiers escape occupied Belgium, she was arrested by the Germans and executed by firing squad. Her last words — "Patriotism is not enough" — became one of the most quoted statements of the First World War.'},
+],
+'execution_zoya_kosmodemyanskaya':[
+{nm:'Zoya Kosmodemyanskaya',role:'Partisan & War Martyr',yr:1941,desc:'An eighteen-year-old Soviet partisan captured while attempting sabotage behind German lines, she was tortured and hanged publicly. She became the first woman awarded Hero of the Soviet Union posthumously and remains a symbol of youthful resistance against fascism.'},
+],
+'murder_rosa_luxemburg':[
+{nm:'Rosa Luxemburg',role:'Revolutionary Theorist & Martyr',yr:1919,desc:'A brilliant Marxist theorist and co-founder of the Spartacus League, she was captured and murdered by Freikorps paramilitaries in Berlin. Her body was dumped in the Landwehr Canal. Her writings on democracy, imperialism, and revolution remain foundational to left political thought.'},
+],
+'berta_caceres':[
+{nm:'Berta Cáceres',role:'Indigenous & Environmental Activist',yr:2016,desc:'A Lenca indigenous leader who won the Goldman Environmental Prize for her campaign against the Agua Zarca Dam, she was assassinated in her home by hitmen linked to the dam company. Her murder exposed the deadly cost of environmental activism in Honduras and across Latin America.'},
+],
+'assassination_marielle_franco':[
+{nm:'Marielle Franco',role:'City Councillor & Human Rights Defender',yr:2018,desc:'A Black, bisexual, favela-raised city councillor in Rio de Janeiro who championed police reform and LGBTQ rights, she was assassinated in a targeted drive-by shooting. Her murder became a global symbol of the targeting of women human rights defenders.'},
+],
+'four_churchwomen_el_salvador':[
+{nm:'Jean Donovan',role:'Lay Missionary',yr:1980,desc:'A young American lay worker who chose to stay in El Salvador despite receiving death threats, Donovan was raped and murdered along with three nuns by a National Guard death squad. She had written to a friend: "Several times I have decided to leave. I almost could except for the children."'},
+{nm:'Maura Clarke',role:'Maryknoll Sister',yr:1980,desc:'A veteran missionary who had served in Nicaragua before El Salvador, Clarke was murdered alongside Donovan, Ita Ford, and Dorothy Kazel. The four women\'s deaths forced the American public to confront US support for the Salvadoran military regime.'},
+{nm:'Ita Ford',role:'Maryknoll Sister',yr:1980,desc:'Ford had written shortly before her death: "I hope you can find meaning and peace and challenge as I have in my commitment to the poor." Her murder alongside three companions became a turning point in US-El Salvador relations.'},
+{nm:'Dorothy Kazel',role:'Ursuline Sister',yr:1980,desc:'An Ursuline nun from Cleveland who served as a missionary in El Salvador, Kazel was murdered alongside the other three churchwomen. The cover-up of their murders by Salvadoran authorities became an international scandal.'},
+],
+'assassination_bhutto':[
+{nm:'Benazir Bhutto',role:'Prime Minister of Pakistan',yr:2007,desc:'The first woman to lead a Muslim-majority nation, Bhutto was assassinated at a political rally in Rawalpindi after returning from exile. Her father had also been executed by the military — the Bhutto family\'s martyrdom spans generations of Pakistani political history.'},
+],
+'bahai_women_shiraz':[
+{nm:'Mona Mahmudnizhad',role:'Baha\'i Youth Martyr',yr:1983,desc:'A seventeen-year-old Baha\'i who was hanged in Shiraz for teaching Sunday school classes to Baha\'i children. She reportedly kissed the rope before her execution. Her death became a symbol of religious persecution in post-revolutionary Iran.'},
+{nm:'Zarrin Muqimi',role:'Baha\'i Educator',yr:1983,desc:'One of ten Baha\'i women executed together in Shiraz, Muqimi was a dedicated teacher who refused to recant her faith despite imprisonment and torture. The group execution of these women drew international condemnation.'},
+],
+'death_neda_agha_soltan':[
+{nm:'Neda Agha-Soltan',role:'Protest Martyr',yr:2009,desc:'A twenty-six-year-old philosophy student shot dead by a Basij militiaman during Iran\'s Green Movement protests, her dying moments were captured on video and shared globally. She became known as the "Angel of Iran" and the face of the democratic movement.'},
+],
+'death_mahsa_amini':[
+{nm:'Mahsa (Jina) Amini',role:'Symbol of Women\'s Freedom',yr:2022,desc:'A twenty-two-year-old Kurdish-Iranian woman who died in morality police custody after being arrested for allegedly wearing her hijab improperly. Her death triggered the "Woman, Life, Freedom" movement — the largest sustained protests in the Islamic Republic\'s history.'},
+],
+'assassination_romero':[
+{nm:'María Julia Hernández',role:'Human Rights Director',yr:1980,desc:'As head of the Archdiocese\'s legal aid office Tutela Legal, Hernández continued Romero\'s work after his assassination, documenting thousands of human rights violations during the civil war. She carried his martyrdom\'s mission for decades at enormous personal risk.'},
+],
+'emmett_till':[
+{nm:'Mamie Till-Mobley',role:'Civil Rights Activist & Mother',yr:1955,desc:'After her fourteen-year-old son was lynched in Mississippi, Mamie insisted on an open casket funeral to show the world what racial hatred had done. Her decision to display Emmett\'s mutilated body transformed a private grief into a catalyst for the civil rights movement.'},
+],
+'assassination_aquino':[
+{nm:'Corazon Aquino',role:'President of the Philippines',yr:1986,desc:'After her husband Ninoy\'s assassination, Cory became the leader of the People Power Revolution that overthrew Ferdinand Marcos. She transformed her husband\'s martyrdom into a peaceful democratic revolution — one of the most remarkable political transformations in modern history.'},
+],
+'death_bobby_sands':[
+{nm:'Bernadette Devlin McAliskey',role:'Civil Rights Activist & Politician',yr:1981,desc:'The youngest woman ever elected to Westminster, McAliskey was a fierce advocate for Irish republican prisoners and survived an assassination attempt by loyalist paramilitaries. Her activism framed the hunger strikers\' cause in terms of civil rights rather than armed struggle.'},
+],
+'soweto_uprising':[
+{nm:'Antoinette Sithole',role:'Witness & Activist',yr:1976,desc:'Antoinette was the sister of Hector Pieterson, the iconic child victim of the Soweto Uprising. The photograph of her running beside her brother\'s body became the defining image of the massacre. She spent her life as a keeper of her brother\'s memory and an advocate for justice.'},
+],
+'persecution_nero':[
+{nm:'Blandina',role:'Early Christian Martyr',yr:177,desc:'An enslaved Christian woman in Lyon who endured extraordinary tortures during the persecution of Christians in Gaul. According to the Letter of the Churches of Lyon and Vienne, she was the last to die and encouraged her fellow prisoners throughout their ordeals. Her mistress was also martyred alongside her.'},
+],
+'tiananmen_square':[
+{nm:'Chai Ling',role:'Student Protest Leader',yr:1989,desc:'Commander-in-chief of the Tiananmen Square student protesters, Chai Ling helped organize the hunger strike and occupation. She escaped China after the massacre and her story — including controversial decisions during the protests — remains central to the memory of the movement.'},
+],
+'assassination_dulcie_september':[
+{nm:'Dulcie September',role:'ANC Representative & Anti-Apartheid Activist',yr:1988,desc:'An ANC representative in France who was assassinated in Paris, likely for uncovering South African arms deals. She had been exiled, imprisoned, and tortured before taking up the diplomatic post. Her murder remains officially unsolved, a testament to the apartheid regime\'s global reach.'},
+],
+'armenian_genocide_martyrs':[
+{nm:'Aurora Mardiganian',role:'Genocide Survivor & Witness',yr:1919,desc:'A teenager who survived the Armenian Genocide death marches, Mardiganian wrote her memoir and starred in the silent film "Ravished Armenia," becoming the first genocide survivor to tell her story on film. She spent her life bearing witness to atrocities the world wanted to forget.'},
+],
+'rwandan_genocide_martyrs':[
+{nm:'Agathe Uwilingiyimana',role:'Prime Minister of Rwanda',yr:1994,desc:'The first female prime minister of Rwanda, she was assassinated on the first day of the genocide by Hutu extremist soldiers. Her murder was among the first deliberate killings that launched the hundred days of systematic extermination.'},
+],
+'white_rose_executions':[
+{nm:'Sophie Scholl',role:'Anti-Nazi Resistance Martyr',yr:1943,desc:'A twenty-one-year-old university student who distributed anti-Nazi leaflets with the White Rose group, she was arrested, tried by the People\'s Court, and guillotined the same day. Her final words reportedly were: "How can we expect righteousness to prevail when there is hardly anyone willing to give himself up individually to a righteous cause?"'},
+],
+'execution_bonhoeffer':[
+{nm:'Maria von Wedemeyer',role:'Fiancée & Keeper of Legacy',yr:1945,desc:'Bonhoeffer\'s fiancée who maintained correspondence with him during his imprisonment and later ensured his theological writings — including "Letters and Papers from Prison" — were preserved and published. Her dedication preserved one of the most important theological voices of the twentieth century.'},
+],
+'death_maximilian_kolbe':[
+{nm:'Irena Sendler',role:'Rescuer of Jewish Children',yr:1943,desc:'While not directly connected to Kolbe, Sendler smuggled 2,500 Jewish children out of the Warsaw Ghetto, was captured by the Gestapo, tortured, and sentenced to death. She survived through a bribe but walked with a limp for the rest of her life. Her sacrifice parallels Kolbe\'s self-offering in Auschwitz.'},
+],
+'gwangju_massacre':[
+{nm:'Park Gi-sun',role:'Citizen Army Fighter',yr:1980,desc:'One of the women who fought alongside men in the Gwangju Citizens\' Army, Park Gi-sun died defending the Provincial Hall during the final military assault. The women of Gwangju organized rice ball deliveries to protesters, treated the wounded, and took up arms in the final stand.'},
+],
+'sharpeville_massacre':[
+{nm:'Albertina Sisulu',role:'Anti-Apartheid Activist',yr:1960,desc:'A nurse and anti-apartheid leader who was repeatedly detained, banned, and harassed by the apartheid government. After Sharpeville, she helped sustain the resistance movement while her husband Walter was imprisoned on Robben Island. She was known as the "Mother of the Nation."'},
+],
+'hungarian_uprising':[
+{nm:'Erika Szeles',role:'Young Revolutionary',yr:1956,desc:'A fifteen-year-old girl who became one of the iconic faces of the Hungarian Revolution when she was photographed carrying a rifle during the Budapest uprising. She was killed by Soviet forces during the suppression of the revolution, becoming a symbol of youthful courage against tyranny.'},
+],
+'assassination_lincoln':[
+{nm:'Mary Surratt',role:'Convicted Conspirator',yr:1865,desc:'The first woman executed by the US federal government, Surratt was convicted of conspiring in Lincoln\'s assassination, though the evidence against her remains contested. Whether martyr or conspirator, her hanging raised profound questions about justice, gender, and political violence in post-Civil War America.'},
+],
+'execution_bhagat_singh':[
+{nm:'Durga Devi Vohra',role:'Revolutionary & Comrade',yr:1931,desc:'Known as Durga Bhabhi, she helped Bhagat Singh escape Lahore after the Saunders shooting by disguising as his wife on a train. She later attempted to assassinate a British official and spent years in prison. Her revolutionary courage matched Singh\'s but received far less recognition.'},
+],
+'death_of_socrates':[
+{nm:'Xanthippe',role:'Wife of Socrates',yr:-399,desc:'Though often caricatured as a shrew by later writers, Xanthippe bore the burden of Socrates\'s philosophical life — poverty, public ridicule, and finally his execution. Plato records her weeping and being led away before the final conversation, erasing her grief from the canonical death scene.'},
+],
+'crucifixion_jesus':[
+{nm:'Mary Magdalene',role:'First Witness to Resurrection',yr:33,desc:'Present at the crucifixion when most male disciples had fled, Mary Magdalene was — according to all four Gospels — the first witness to the resurrection. Later Church tradition falsely conflated her with a repentant prostitute, diminishing her role as the apostle to the apostles.'},
+{nm:'Mary, Mother of Jesus',role:'Witness to Crucifixion',yr:33,desc:'Stood at the foot of the cross during the crucifixion, bearing witness to her son\'s execution. The Stabat Mater tradition in Christianity centers her suffering, and she became the archetype of the mother who endures the martyrdom of her child.'},
+],
+'death_steve_biko':[
+{nm:'Mamphela Ramphele',role:'Black Consciousness Activist & Partner',yr:1977,desc:'Biko\'s partner and fellow Black Consciousness activist who was banished to a remote area after his death. She went on to become a physician, university vice-chancellor, and managing director of the World Bank — transforming personal tragedy into institutional power.'},
+],
+'ken_saro_wiwa':[
+{nm:'Karalolo Ogbara',role:'Ogoni Women\'s Leader',yr:1993,desc:'A leader of the Ogoni women\'s protests who organized mass demonstrations against Shell Oil\'s environmental destruction in Ogoniland. The Ogoni Women\'s Movement was central to the struggle that Ken Saro-Wiwa led, with women blockading oil facilities and sustaining community resistance at great personal risk.'},
+],
+'assassination_medgar_evers':[
+{nm:'Myrlie Evers-Williams',role:'Civil Rights Leader & NAACP Chair',yr:1963,desc:'After witnessing her husband\'s assassination from their driveway, Myrlie spent thirty years fighting to bring his killer to justice, finally securing Byron De La Beckwith\'s conviction in 1994. She went on to chair the NAACP, transforming widowhood into lifelong leadership.'},
+],
+'death_liu_xiaobo':[
+{nm:'Liu Xia',role:'Poet & Political Prisoner',yr:2017,desc:'Liu Xiaobo\'s wife was placed under illegal house arrest for years despite never being charged with any crime. A poet and photographer, she endured severe depression during her confinement. Her suffering — punishment for her husband\'s activism — constitutes a form of proxy martyrdom unique to authoritarian regimes.'},
+],
+'chico_mendes':[
+{nm:'Marina Silva',role:'Environmental Activist & Senator',yr:1988,desc:'A rubber tapper and colleague of Mendes who continued his environmental work after his assassination. She went on to become Brazil\'s Minister of Environment and a presidential candidate, carrying Mendes\'s legacy into the highest levels of Brazilian politics.'},
+],
+'jan_palach':[
+{nm:'Věra Čáslavská',role:'Olympic Gymnast & Silent Protester',yr:1968,desc:'The seven-time Olympic champion who silently turned her head away during the Soviet anthem at the 1968 Mexico Olympics after the invasion of Czechoslovakia. She was blacklisted for decades. Her quiet defiance paralleled Palach\'s dramatic sacrifice — both protesting the same Soviet occupation through radically different means.'},
+],
+};
 
 let year=-1000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4831,7 +5059,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Middle East & Holy Land':['crucifixion_jesus','martyrdom_husayn','martyrdom_ali','martyrdom_stephen','execution_hallaj','execution_the_bab','assassination_rabin','death_yusuf_al_azma','assassination_sadat','maccabean_martyrs','masada_defenders','martyrdom_peter_paul'],
+'Sub-Saharan Africa':['death_steve_biko','ken_saro_wiwa','assassination_lumumba','assassination_sankara','assassination_amilcar_cabral','assassination_eduardo_mondlane','assassination_chris_hani','soweto_uprising','sharpeville_massacre','assassination_dulcie_september','rwandan_genocide_martyrs','death_dag_hammarskjold','myall_creek_massacre'],
+'South & Southeast Asia':['assassination_gandhi','guru_arjan_dev','guru_tegh_bahadur','execution_bhagat_singh','assassination_aung_san','execution_jose_rizal','twenty_six_martyrs_japan','thich_quang_duc','assassination_aquino','execution_nguyen_thai_hoc','assassination_bhutto'],
+'Europe — Western':['joan_of_arc','giordano_bruno','execution_thomas_more','william_tyndale','murder_thomas_becket','cranmer_burning','execution_savonarola','murder_rosa_luxemburg','execution_edith_cavell','assassination_olof_palme','murder_daphne_caruana_galizia','murder_theo_van_gogh','execution_sacco_vanzetti'],
+'Europe — Eastern':['jan_hus','jan_palach','hungarian_uprising','execution_bonhoeffer','white_rose_executions','death_maximilian_kolbe','execution_zoya_kosmodemyanskaya','anna_politkovskaya','death_alexei_navalny','execution_michael_servetus','death_yun_dongju','assassination_hrant_dink'],
+'North Africa & Iran':['martyrdom_hypatia','assassination_chokri_belaid','death_neda_agha_soltan','death_mahsa_amini','bahai_women_shiraz','armenian_genocide_martyrs','mohamed_bouazizi','martyrdom_perpetua'],
+'Latin America':['assassination_romero','jesuit_martyrs_salvador','four_churchwomen_el_salvador','berta_caceres','chico_mendes','assassination_marielle_franco','murder_victor_jara','death_salvador_allende','execution_che_guevara','execution_tupac_amaru','death_toussaint_louverture'],
+'East Asia':['tiananmen_square','gwangju_massacre','death_liu_xiaobo','execution_wen_tianxiang','execution_nguyen_thai_hoc'],
+'North America':['assassination_mlk','assassination_medgar_evers','assassination_malcolm_x','emmett_till','assassination_lincoln','lynching_leo_frank','execution_nat_turner','execution_sacco_vanzetti','death_bobby_sands'],
+'Classical Mediterranean':['death_of_socrates','persecution_nero','martyrdom_polycarp','martyrdom_perpetua','death_spartacus','martyrdom_peter_paul','execution_charles_i','galileo_condemnation'],
+'Global Journalism':['murder_khashoggi','anna_politkovskaya','murder_daphne_caruana_galizia','murder_theo_van_gogh','assassination_hrant_dink','ken_saro_wiwa'],
+'Religious Conscience':['crucifixion_jesus','martyrdom_stephen','jan_hus','william_tyndale','execution_thomas_more','cranmer_burning','giordano_bruno','execution_the_bab','guru_arjan_dev','guru_tegh_bahadur','martyrdom_dirk_willems','twenty_six_martyrs_japan','execution_michael_servetus','bahai_women_shiraz','death_maximilian_kolbe'],
+};
 
 const HERITAGE_REASONS={};
 
