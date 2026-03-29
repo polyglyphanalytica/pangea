@@ -3042,7 +3042,7 @@ contested:'Sparta is among the most contested political entities in Western hist
 }},
 {id:'salvadoran_peace',nm:'Salvadoran Peace Accords',sb:'El Salvador · Civil War End & Democratisation',s:1992,e:2024,lon:-89.19,lat:13.69,
 fp:{inclusion:6,resistance:8,legal:7,impact:7,mobilisation:8,durability:5},
-conns:['chilean_plebiscite','costa_rican_democracy','mexican_revolution_suffrage','nicaraguan_revolution'],
+conns:['chilean_plebiscite','costa_rican_democracy','mexican_revolution_suffrage','colombian_peace_plebiscite'],
 overview:'The Chapultepec Peace Accords of 16 January 1992 ended El Salvador\'s devastating twelve-year civil war and established the framework for democratic transformation. The war — between the US-backed military government and the FMLN guerrilla coalition — had killed approximately 75,000 people in a country of five million, with the military and its associated death squads responsible for the vast majority of civilian casualties. The accords, mediated by the United Nations, did not merely end fighting: they fundamentally restructured the Salvadoran state by reforming the military, creating a new civilian police force, establishing the Truth Commission, and transforming the FMLN from a guerrilla army into a legal political party. The subsequent democratic trajectory — including the FMLN\'s election to the presidency in 2009 — demonstrated that enemies can become democratic competitors.',
 d:{
 causes:'The civil war\'s roots lay in extreme inequality, oligarchic political control, and the systematic repression of democratic expression. El Salvador was dominated by the "Fourteen Families" — a coffee oligarchy that controlled both land and politics. Military regimes governed from 1931, serving oligarchic interests while blocking land reform, labour rights, and political participation. The 1932 Matanza — in which the military killed an estimated 30,000 peasants after an uprising — established the template of state violence against popular movements. The 1979 coup by reformist officers, followed by escalating death squad violence, the assassination of Archbishop Óscar Romero in 1980, and the Reagan administration\'s massive military support for the government all contributed to the full-scale civil war.',
@@ -3593,8 +3593,8 @@ function renderMap(){
     const heritageIds=mode==='heritage'&&heritageRegion?new Set(HERITAGE_REGIONS[heritageRegion]||[]):null;
     const isHeritage=heritageIds&&heritageIds.has(c.id);
     const heritageInactive=isHeritage&&!on;
-    const isWhatifLost=whatifCiv&&whatifCiv!==c.id&&
-      TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifCiv);
+    const isWhatifLost=whatifItem&&whatifItem!==c.id&&
+      TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifItem);
     const womenCount=(WOMEN[c.id]||[]).length;
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
     // Drift 2: inactive items fully hidden (0 not 0.06). Drift 3: herstory items without WOMEN hidden (0 not 0.35).
@@ -3879,7 +3879,7 @@ function setYear(y){
   if(sel&&!active(sel))closeInfo();
   else renderDrawer();
   updateURL();
-  if(mode==='whatif'&&whatifCiv)renderWhatIfPaths();
+  if(mode==='whatif'&&whatifItem)renderWhatIfPaths();
 }
 
 function renderWorldMap(world){
@@ -3949,7 +3949,7 @@ function init(){
 // ── MODE MANAGEMENT ──
 function setMode(m){
   // Clear mode-specific state when leaving
-  if(m!=='whatif')whatifCiv=null;
+  if(m!=='whatif')whatifItem=null;
   if(m!=='heritage')heritageRegion=null;
   mode=m;
   ['explore','threads','compare','whatif','heritage'].forEach(id=>{
@@ -4734,15 +4734,15 @@ function renderDiplomaticSection(c){
 // ══════════════════════════════════════════════════════
 // WHAT-IF MODE
 // ══════════════════════════════════════════════════════
-let whatifCiv=null;
+let whatifItem=null;
 
 // ── WHAT-IF MAP RENDERING ──
 function renderWhatIfPaths(){
   const layer=document.getElementById('thread-layer');
   if(!layer){return;}
-  if(!whatifCiv){layer.innerHTML='';return;}
+  if(!whatifItem){layer.innerHTML='';return;}
 
-  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
   if(!c){layer.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -4822,7 +4822,7 @@ function renderWhatIfDrawer(){
   if(dt)dt.innerHTML='';
   if(!dc)return;
 
-  if(!whatifCiv){
+  if(!whatifItem){
     dc.innerHTML=`
     <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">What If?</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
@@ -4852,7 +4852,7 @@ function renderWhatIfDrawer(){
     return;
   }
 
-  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
   if(!c){dc.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -4917,7 +4917,7 @@ function renderWhatIfDrawer(){
   if(panel)setTimeout(()=>panel.scrollTop=0,0);
 }
 function setWhatIf(id){
-  whatifCiv=id;
+  whatifItem=id;
   renderWhatIfDrawer();
   renderWhatIfPaths();
   renderMap();
@@ -4925,7 +4925,7 @@ function setWhatIf(id){
 }
 
 function clearWhatIf(){
-  whatifCiv=null;
+  whatifItem=null;
   document.getElementById('thread-layer').innerHTML='';
   renderWhatIfDrawer();
   renderMap();
