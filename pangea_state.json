@@ -699,12 +699,17 @@
       "validated_lenses": 20
     },
     "martyr": {
-      "phase": "4A",
+      "phase": "DONE",
       "items": 100,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
-      "section": "VI"
+      "section": "VI",
+      "validated_sha": "b3152a743b5c46d70995ee3454d60a4e86a46626",
+      "validated_short": "b3152a7",
+      "validated_at": "2026-03-29T09:50:53.521471Z",
+      "validated_items": 100,
+      "validated_lenses": 20
     },
     "suffragium": {
       "phase": "1A",
