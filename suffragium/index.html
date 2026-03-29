@@ -708,10 +708,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'aftermath',ico:'⟳',lbl:'Aftermath',col:'#e89820'},
+{id:'causes',ico:'⚡',lbl:'Causes',col:'#d4a017'},
+{id:'class',ico:'⚖',lbl:'Class',col:'#c89030'},
+{id:'coalitions',ico:'⊕',lbl:'Coalitions',col:'#b8860b'},
+{id:'colonial',ico:'⚓',lbl:'Colonial',col:'#cd853f'},
+{id:'constitution',ico:'📜',lbl:'Constitution',col:'#daa520'},
+{id:'contested',ico:'⟁',lbl:'Contested',col:'#e8251a'},
+{id:'cultural',ico:'♫',lbl:'Cultural',col:'#f4a460'},
+{id:'electoral_system',ico:'☐',lbl:'Electoral System',col:'#e8a820'},
+{id:'gender',ico:'♀',lbl:'Gender',col:'#c060a0'},
+{id:'international',ico:'⊞',lbl:'International',col:'#4a9fc0'},
+{id:'legacy',ico:'★',lbl:'Legacy',col:'#f0c040'},
+{id:'legal_framework',ico:'⚖',lbl:'Legal Framework',col:'#c8a848'},
+{id:'media',ico:'✉',lbl:'Media',col:'#d4aa50'},
+{id:'modern_resonance',ico:'◎',lbl:'Modern Resonance',col:'#e0b840'},
+{id:'opposition',ico:'✕',lbl:'Opposition',col:'#cc6630'},
+{id:'political_philosophy',ico:'☆',lbl:'Political Philosophy',col:'#d4b060'},
+{id:'protest',ico:'✊',lbl:'Protest',col:'#e89040'},
+{id:'race',ico:'◉',lbl:'Race',col:'#b07828'},
+{id:'violence',ico:'⚔',lbl:'Violence',col:'#c04020'},
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-2800,n:'ANCIENT ASSEMBLIES'},
+{y:-500,n:'CLASSICAL DEMOCRACY'},
+{y:-27,n:'ROMAN IMPERIAL ERA'},
+{y:800,n:'MEDIEVAL GOVERNANCE'},
+{y:1200,n:'CHARTER & COMMUNE'},
+{y:1500,n:'EARLY MODERN'},
+{y:1640,n:'REVOLUTIONARY FERMENT'},
+{y:1776,n:'AGE OF REVOLUTION'},
+{y:1848,n:'SPRING OF NATIONS'},
+{y:1890,n:'SUFFRAGE MOVEMENT'},
+{y:1918,n:'POST-WAR EXPANSION'},
+{y:1945,n:'DECOLONISATION'},
+{y:1960,n:'CIVIL RIGHTS ERA'},
+{y:1974,n:'THIRD WAVE'},
+{y:1989,n:'DEMOCRATIC SURGE'},
+{y:2010,n:'DIGITAL DEMOCRACY'},
+];
 
 const ITEMS=[
 {id:'athenian_democracy',nm:'Athenian Democracy',sb:'Athens, Greece · Direct Democracy',s:-508,e:-322,lon:23.73,lat:37.97,
@@ -3320,10 +3358,76 @@ contested:'The UDHR is contested on philosophical, cultural, political, and prac
 
 const DIPLOMATIC=[];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'athenian_democracy',to:'roman_republic',concept:'Classical Democratic Legacy',year:-300,desc:'Athenian democratic principles influenced Roman republican institutions through Greek philosophers and Roman adaptation.'},
+{from:'roman_republic',to:'roman_tribunes',concept:'Classical Democratic Legacy',year:-494,desc:'The Roman Republic\'s patrician dominance provoked the plebeian struggle that created the tribunate.'},
+{from:'roman_tribunes',to:'magna_carta',concept:'Classical Democratic Legacy',year:1215,desc:'Roman concepts of checks on arbitrary power informed medieval constitutional thinking.'},
+{from:'magna_carta',to:'petition_of_right',concept:'English Constitutional Chain',year:1628,desc:'Magna Carta\'s principles of limited royal power were invoked to justify the Petition of Right.'},
+{from:'petition_of_right',to:'levellers_movement',concept:'English Constitutional Chain',year:1645,desc:'The Petition\'s assertion of parliamentary rights opened space for Leveller demands for popular sovereignty.'},
+{from:'levellers_movement',to:'english_bill_of_rights',concept:'English Constitutional Chain',year:1689,desc:'Leveller ideas about constitutional rights influenced the settlement that produced the Bill of Rights.'},
+{from:'english_bill_of_rights',to:'american_revolution',concept:'Atlantic Revolutionary Chain',year:1776,desc:'The English Bill of Rights\' principles of parliamentary sovereignty inspired American colonial resistance.'},
+{from:'american_revolution',to:'french_revolution_suffrage',concept:'Atlantic Revolutionary Chain',year:1789,desc:'American independence and its constitutional experiment directly inspired the French Revolution.'},
+{from:'french_revolution_suffrage',to:'haitian_revolution',concept:'Atlantic Revolutionary Chain',year:1791,desc:'The French Revolution\'s declaration of universal rights was taken literally by enslaved people in Saint-Domingue.'},
+{from:'haitian_revolution',to:'latin_american_independence',concept:'Atlantic Revolutionary Chain',year:1810,desc:'Haiti\'s successful slave revolution inspired independence movements across Latin America.'},
+{from:'chartism',to:'revolutions_1848',concept:'Popular Suffrage Movement',year:1848,desc:'Chartist demands for universal male suffrage inspired revolutionary movements across Europe.'},
+{from:'revolutions_1848',to:'french_second_republic',concept:'Popular Suffrage Movement',year:1848,desc:'The 1848 revolutions directly produced the French Second Republic and its universal male suffrage.'},
+{from:'seneca_falls',to:'nz_women_suffrage',concept:'Women\'s Suffrage Chain',year:1893,desc:'The Seneca Falls Declaration inspired global women\'s suffrage movements, with New Zealand achieving it first.'},
+{from:'nz_women_suffrage',to:'finnish_suffrage',concept:'Women\'s Suffrage Chain',year:1906,desc:'New Zealand\'s pioneering women\'s suffrage inspired Finland to become the first European nation to enfranchise women.'},
+{from:'finnish_suffrage',to:'british_suffragettes',concept:'Women\'s Suffrage Chain',year:1918,desc:'Finnish success emboldened British suffragettes in their campaign for women\'s voting rights.'},
+{from:'british_suffragettes',to:'nineteenth_amendment',concept:'Women\'s Suffrage Chain',year:1920,desc:'British suffragette victories strengthened the American women\'s suffrage movement\'s final push.'},
+{from:'nineteenth_amendment',to:'french_women_suffrage',concept:'Women\'s Suffrage Chain',year:1944,desc:'American and British women\'s suffrage created pressure for France to finally enfranchise women after liberation.'},
+{from:'indian_independence_suffrage',to:'ghanaian_independence',concept:'Decolonisation Wave',year:1957,desc:'India\'s independence and democratic constitution inspired African independence movements, beginning with Ghana.'},
+{from:'ghanaian_independence',to:'kenyan_independence',concept:'Decolonisation Wave',year:1963,desc:'Ghana\'s successful independence catalysed democratic independence movements across Africa.'},
+{from:'kenyan_independence',to:'zimbabwean_independence',concept:'Decolonisation Wave',year:1980,desc:'Kenyan independence inspired liberation struggles in settler-colonial states including Rhodesia.'},
+{from:'polish_solidarity',to:'velvet_revolution',concept:'1989 Democratic Cascade',year:1989,desc:'Poland\'s Solidarity movement demonstrated that communist regimes could be peacefully challenged.'},
+{from:'velvet_revolution',to:'berlin_wall_fall',concept:'1989 Democratic Cascade',year:1989,desc:'Czechoslovakia\'s Velvet Revolution directly contributed to the collapse of East Germany\'s regime.'},
+{from:'berlin_wall_fall',to:'mongolian_democracy',concept:'1989 Democratic Cascade',year:1990,desc:'The fall of communism in Europe inspired Mongolia\'s peaceful democratic revolution.'},
+{from:'philippine_people_power',to:'korean_democratisation',concept:'Asian Democracy Wave',year:1987,desc:'The Philippine People Power revolution inspired South Korean democracy activists.'},
+{from:'korean_democratisation',to:'taiwanese_democratisation',concept:'Asian Democracy Wave',year:1996,desc:'South Korea\'s democratisation demonstrated that Asian tiger economies could become democracies.'},
+{from:'taiwanese_democratisation',to:'indonesian_reformasi',concept:'Asian Democracy Wave',year:1998,desc:'Taiwan\'s successful democratic transition influenced Indonesian reformers.'},
+{from:'south_africa_1994',to:'namibian_independence',concept:'Southern African Liberation',year:1990,desc:'The anti-apartheid movement\'s success was intertwined with Namibian independence.'},
+{from:'south_africa_1994',to:'rwandan_democracy',concept:'Southern African Liberation',year:2003,desc:'South Africa\'s reconciliation model influenced post-genocide Rwanda\'s governance experiments.'},
+{from:'tunisian_revolution',to:'egyptian_revolution_1919',concept:'Arab Democratic Aspirations',year:2011,desc:'Tunisia\'s successful revolution inspired renewed democratic aspirations across the Arab world.'},
+{from:'portuguese_carnation',to:'spanish_second_republic',concept:'Southern European Democratisation',year:1975,desc:'Portugal\'s Carnation Revolution catalysed democratic transitions across Southern Europe.'},
+{from:'greek_metapolitefsi',to:'portuguese_carnation',concept:'Southern European Democratisation',year:1974,desc:'The simultaneous fall of Southern European dictatorships reinforced democratic momentum.'},
+{from:'universal_declaration',to:'voting_rights_act_1965',concept:'Universal Rights Framework',year:1965,desc:'The UDHR\'s principles provided the moral framework for the American civil rights movement.'},
+{from:'universal_declaration',to:'south_africa_1994',concept:'Universal Rights Framework',year:1994,desc:'The UDHR\'s anti-discrimination principles were central to the anti-apartheid movement\'s legal arguments.'},
+{from:'chilean_plebiscite',to:'colombian_peace_plebiscite',concept:'Latin American Plebiscites',year:2016,desc:'Chile\'s successful democratic plebiscite influenced Colombia\'s use of a popular vote for peace.'},
+{from:'costa_rican_democracy',to:'salvadoran_peace',concept:'Central American Peace',year:1992,desc:'Costa Rica\'s democratic stability and Arias peace plan contributed to the Salvadoran peace process.'},
+{from:'ukrainian_maidan',to:'belarusian_democracy',concept:'Post-Soviet Democracy Struggles',year:2020,desc:'Ukraine\'s Maidan revolution inspired Belarusian democratic activists despite the different outcome.'},
+{from:'south_korean_candlelight',to:'hong_kong_democracy',concept:'East Asian Democratic Resilience',year:2019,desc:'South Korea\'s candlelight revolution demonstrated constitutional democratic accountability to Hong Kong activists.'},
+];
 
 
-const WOMEN={};
+const WOMEN={
+'athenian_democracy':[{nm:'Aspasia of Miletus',role:'Political Advisor & Rhetorician',yr:-450,desc:'Aspasia was Pericles\' partner and intellectual companion, reportedly influencing his speeches and policies. Ancient sources credit her with teaching rhetoric and engaging in philosophical debate — extraordinary for a woman in a democracy that excluded women from citizenship. Her influence demonstrates that women shaped democratic culture even when formally excluded from it.'}],
+'seneca_falls':[{nm:'Elizabeth Cady Stanton',role:'Suffrage Leader & Declaration Author',yr:1848,desc:'Stanton authored the Declaration of Sentiments, modelling it on the Declaration of Independence to argue that women\'s exclusion from democracy was as unjust as colonial tyranny. She co-founded the National Woman Suffrage Association and spent fifty years fighting for women\'s right to vote.'},{nm:'Lucretia Mott',role:'Abolitionist & Suffrage Pioneer',yr:1848,desc:'Mott was a Quaker minister, abolitionist, and women\'s rights advocate who co-organised the Seneca Falls Convention. Her exclusion from the 1840 World Anti-Slavery Convention in London — because she was a woman — directly motivated the American women\'s suffrage movement.'}],
+'nz_women_suffrage':[{nm:'Kate Sheppard',role:'Suffrage Campaign Leader',yr:1893,desc:'Sheppard led the campaign that made New Zealand the first self-governing country to grant women the right to vote. She organised a petition of nearly 32,000 signatures — approximately one quarter of all adult women in the colony — demonstrating overwhelming popular support for women\'s suffrage.'},{nm:'Meri Te Tai Mangakāhia',role:'Māori Suffrage Advocate',yr:1893,desc:'Mangakāhia petitioned the Māori Parliament (Kotahitanga) in 1893 for women\'s right to vote and to be elected, making her among the first women in New Zealand to formally demand political rights. Her activism ensured that Māori women were included in the suffrage victory.'}],
+'british_suffragettes':[{nm:'Emmeline Pankhurst',role:'WSPU Founder & Suffrage Leader',yr:1903,desc:'Pankhurst founded the Women\'s Social and Political Union and pioneered militant suffrage tactics — window-smashing, arson, hunger strikes — that shocked Victorian society into confronting women\'s political exclusion. Her willingness to be imprisoned repeatedly demonstrated that women would pay any price for the right to vote.'},{nm:'Millicent Fawcett',role:'Constitutional Suffrage Leader',yr:1897,desc:'Fawcett led the National Union of Women\'s Suffrage Societies, pursuing women\'s suffrage through constitutional means — petitions, lobbying, and peaceful demonstration. Her persistent, decades-long campaign built the broad-based support that ultimately made women\'s suffrage politically achievable.'}],
+'nineteenth_amendment':[{nm:'Susan B. Anthony',role:'Suffrage Campaigner',yr:1872,desc:'Anthony was arrested for voting illegally in 1872 and spent decades campaigning for women\'s suffrage. She co-founded the National Woman Suffrage Association and lectured tirelessly across the country. The Nineteenth Amendment was often called the "Anthony Amendment" in her honour.'},{nm:'Ida B. Wells',role:'Anti-Lynching Activist & Suffragist',yr:1913,desc:'Wells was a journalist, anti-lynching crusader, and suffragist who insisted that the women\'s movement must address racial as well as gender injustice. She refused to march at the back of the 1913 suffrage parade and founded the Alpha Suffrage Club for Black women.'}],
+'finnish_suffrage':[{nm:'Miina Sillanpää',role:'First Female Minister',yr:1907,desc:'Sillanpää was one of the first women elected to parliament in Finland — and in the world — in 1907. She later became Finland\'s first female cabinet minister in 1926, demonstrating that women\'s suffrage could translate into executive power.'}],
+'french_women_suffrage':[{nm:'Olympe de Gouges',role:'Revolutionary Feminist & Author',yr:1791,desc:'De Gouges wrote the Declaration of the Rights of Woman and the Female Citizen in 1791, challenging the French Revolution to extend its principles to women. She was guillotined in 1793 for her political writings, making her one of the earliest martyrs of democratic feminism.'},{nm:'Simone de Beauvoir',role:'Philosopher & Feminist Theorist',yr:1949,desc:'De Beauvoir\'s The Second Sex provided the philosophical foundation for modern feminism, arguing that women\'s subordination was socially constructed rather than natural. Her work influenced the feminist movements that eventually secured French women\'s full political participation.'}],
+'south_africa_1994':[{nm:'Albertina Sisulu',role:'Anti-Apartheid Leader',yr:1983,desc:'Sisulu co-founded the United Democratic Front and spent decades in anti-apartheid activism while her husband Walter was imprisoned on Robben Island. She was elected to parliament in 1994 and called "Mother of the Nation" for her unwavering commitment to democratic liberation.'}],
+'indian_independence_suffrage':[{nm:'Sarojini Naidu',role:'Independence Leader & Governor',yr:1925,desc:'Naidu was the first Indian woman to serve as president of the Indian National Congress and the first woman to become a state governor. A poet and political leader, she combined cultural nationalism with women\'s rights advocacy, insisting that Indian independence must include women\'s full political participation.'}],
+'haitian_revolution':[{nm:'Marie-Jeanne Lamartinière',role:'Revolutionary Fighter',yr:1803,desc:'Lamartinière fought alongside her husband at the Battle of Crête-à-Pierrot, one of the Haitian Revolution\'s most significant engagements. She fought with both rifle and sword, demonstrating that women\'s participation in the struggle for democratic liberation was not merely symbolic but military.'}],
+'costa_rican_democracy':[{nm:'Ángela Acuña Braun',role:'Feminist Pioneer & Lawyer',yr:1925,desc:'Acuña was Central America\'s first female lawyer and led the campaign for women\'s suffrage in Costa Rica from the 1920s through its achievement in 1949. She demonstrated that professional women could combine legal expertise with activist commitment to expand democratic participation.'}],
+'chilean_plebiscite':[{nm:'Michelle Bachelet',role:'President & Human Rights Leader',yr:2006,desc:'Bachelet, a political prisoner under Pinochet whose father was tortured to death, became Chile\'s first female president in 2006. Her journey from dictatorship\'s victim to democratic leader embodied the peace and reconciliation that the plebiscite made possible.'}],
+'portuguese_carnation':[{nm:'Maria Velho da Costa',role:'Feminist Author (Three Marias)',yr:1972,desc:'Velho da Costa co-authored New Portuguese Letters with Barreno and Horta — the book that led to their prosecution under the dictatorship. Their acquittal after the revolution became a symbol of both literary and political liberation, connecting feminist expression to democratic freedom.'}],
+'ukrainian_maidan':[{nm:'Yulia Tymoshenko',role:'Former PM & Democracy Advocate',yr:2004,desc:'Tymoshenko was a central figure in the 2004 Orange Revolution and served as Prime Minister. Her imprisonment under Yanukovych became a symbol of democratic regression, and her release after Maidan demonstrated the personal stakes of Ukraine\'s democratic struggle.'}],
+'belarusian_democracy':[{nm:'Sviatlana Tsikhanouskaya',role:'Opposition Leader',yr:2020,desc:'Tsikhanouskaya entered politics only after her husband was imprisoned for his presidential candidacy. She won the 2020 election (according to independent analysis) and has led the democratic opposition from exile, becoming one of the most prominent women democratic leaders in the world.'},{nm:'Maria Kolesnikova',role:'Political Prisoner & Resistance Symbol',yr:2020,desc:'Kolesnikova tore up her passport to prevent forced deportation, choosing imprisonment over exile. Sentenced to eleven years, she became an international symbol of courage and democratic commitment — a woman who sacrificed her freedom rather than abandon her country\'s democratic cause.'}],
+'bangladeshi_independence':[{nm:'Sheikh Hasina',role:'Prime Minister',yr:1996,desc:'Hasina, daughter of founding father Mujibur Rahman (whose family was assassinated in 1975), served as Prime Minister and led Bangladesh through significant development. Her tenure demonstrated both women\'s capacity for national leadership and the complex relationship between democratic power and authoritarian temptation.'}],
+'jamaican_independence':[{nm:'Portia Simpson-Miller',role:'First Female Prime Minister',yr:2006,desc:'Simpson-Miller became Jamaica\'s first female Prime Minister in 2006, rising from a working-class background through decades of political service. Her leadership demonstrated that Caribbean democracy could produce women leaders who represented the majority population.'}],
+'malawian_democracy':[{nm:'Joyce Banda',role:'President of Malawi',yr:2012,desc:'Banda became Africa\'s second female head of state when she assumed the presidency after Mutharika\'s death in 2012. She reversed her predecessor\'s authoritarian tendencies and pursued democratic governance, demonstrating women\'s capacity for democratic leadership in a country that had only recently emerged from dictatorship.'}],
+'south_korean_candlelight':[{nm:'Han Myeong-sook',role:'First Female Prime Minister',yr:2006,desc:'Han served as South Korea\'s first female Prime Minister and had been a student activist and democracy movement leader during the authoritarian era. Her career demonstrated the connection between women\'s democratic activism and eventual political leadership.'}],
+'voting_rights_act_1965':[{nm:'Fannie Lou Hamer',role:'Civil Rights Voting Activist',yr:1964,desc:'Hamer was a sharecropper who became one of the most powerful voices for voting rights in Mississippi. Beaten and arrested for attempting to register to vote, she co-founded the Mississippi Freedom Democratic Party and testified before the 1964 Democratic National Convention, making the moral case for Black suffrage unforgettable.'},{nm:'Diane Nash',role:'SNCC Leader & Freedom Rider',yr:1961,desc:'Nash was a leader of the Student Nonviolent Coordinating Committee who organised Freedom Rides and voter registration drives across the Jim Crow South. Her strategic brilliance and personal courage were essential to the movement that produced the Voting Rights Act.'}],
+'universal_declaration':[{nm:'Eleanor Roosevelt',role:'UDHR Commission Chair',yr:1948,desc:'Roosevelt chaired the UN Human Rights Commission that drafted the Universal Declaration, using her diplomatic skill and moral authority to build consensus among nations with vastly different political systems. She is widely regarded as the single most important individual in the creation of the modern human rights framework.'},{nm:'Hansa Mehta',role:'Indian Delegate & Gender Equality Advocate',yr:1948,desc:'Mehta successfully argued for changing "All men are born free and equal" to "All human beings are born free and equal" — ensuring that the UDHR\'s language was explicitly gender-inclusive. This linguistic change had profound implications for the global women\'s rights movement.'}],
+'reconstruction_amendments':[{nm:'Sojourner Truth',role:'Abolitionist & Women\'s Rights Advocate',yr:1851,desc:'Truth\'s "Ain\'t I a Woman?" speech connected the abolition of slavery to women\'s rights, arguing that both Black liberation and women\'s suffrage were required for genuine democracy. Her advocacy for the Fifteenth Amendment was inseparable from her demand for women\'s voting rights.'}],
+'philippine_people_power':[{nm:'Corazon Aquino',role:'President of the Philippines',yr:1986,desc:'Aquino, widow of assassinated opposition leader Benigno Aquino Jr., led the People Power Revolution that overthrew Marcos. As the Philippines\' first female president, she restored democracy and demonstrated that women could lead democratic revolutions and govern nations.'}],
+'norwegian_suffrage':[{nm:'Gina Krog',role:'Suffrage Leader',yr:1884,desc:'Krog founded the Norwegian Association for Women\'s Rights and led the campaign for Norwegian women\'s suffrage from 1884 until its achievement in 1913. Her persistent advocacy over three decades made Norway one of the first European countries to grant women full political rights.'}],
+'mongolian_democracy':[{nm:'Oyungerel Tsedevdamba',role:'Human Rights Minister',yr:2012,desc:'Tsedevdamba served as Minister of Culture and helped establish the legal framework for gender equality in democratic Mongolia. She has been a leading voice for women\'s rights, press freedom, and democratic accountability in the post-communist era.'}],
+'east_timorese_independence':[{nm:'Xanana Gusmão\'s Support Network',role:'Women Resistance Fighters',yr:1999,desc:'East Timorese women formed the backbone of the clandestine resistance network — serving as couriers, intelligence gatherers, and organisers. Many suffered gender-specific violence including systematic sexual assault by Indonesian military forces. Their courage enabled the referendum and independence.'}],
+'iroquois_confederacy':[{nm:'Clan Mothers',role:'Political Authority Holders',yr:-1200,desc:'Haudenosaunee Clan Mothers held extraordinary political power — they selected and could depose chiefs, controlled land distribution, and influenced decisions on war and peace. This female political authority was unique among pre-modern governance systems and influenced early American democratic thinking.'}],
+};
 
 let year=-508,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4830,7 +4934,19 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Western Europe':['magna_carta','english_bill_of_rights','petition_of_right','levellers_movement','great_reform_act','chartism','british_suffragettes','representation_people_1918','french_revolution_suffrage','french_second_republic','french_women_suffrage','dutch_republic','norwegian_suffrage','finnish_suffrage','swiss_landsgemeinde','swiss_women_suffrage','italian_suffrage','spanish_second_republic','portuguese_carnation','scottish_devolution','icelandic_althing','corsican_republic'],
+'Eastern Europe':['polish_noble_democracy','polish_constitution_1791','polish_solidarity','velvet_revolution','hungarian_revolution_1956','berlin_wall_fall','russian_revolution_suffrage','ukrainian_maidan','belarusian_democracy'],
+'North America':['american_revolution','seneca_falls','nineteenth_amendment','fifteenth_amendment','reconstruction_amendments','voting_rights_act_1965','iroquois_confederacy','canadian_suffrage','puerto_rican_suffrage'],
+'Latin America & Caribbean':['haitian_revolution','latin_american_independence','mexican_revolution_suffrage','uruguayan_democracy','brazilian_republic','chilean_plebiscite','bolivian_revolution','argentinian_suffrage','costa_rican_democracy','salvadoran_peace','colombian_peace_plebiscite','jamaican_independence'],
+'Sub-Saharan Africa':['ghanaian_independence','kenyan_independence','south_africa_1994','nigerian_independence','namibian_independence','botswana_democracy','ethiopian_democracy','rwandan_democracy','zimbabwean_independence','liberian_republic','senegalese_democracy','malawian_democracy','zambian_democracy'],
+'Middle East & North Africa':['egyptian_revolution_1919','iranian_constitutional','tunisian_revolution','turkish_republic_suffrage','sudanese_revolution'],
+'South Asia':['indian_independence_suffrage','ceylon_universal_suffrage','bangladeshi_independence','indian_evm_democracy'],
+'East & Southeast Asia':['japanese_suffrage','korean_democratisation','south_korean_candlelight','taiwanese_democratisation','tiananmen_democracy','hong_kong_democracy','philippine_people_power','indonesian_reformasi','burmese_democracy','mongolian_democracy','east_timorese_independence'],
+'Oceania & Pacific':['nz_women_suffrage','australian_suffrage','australian_aboriginal_vote','maori_suffrage'],
+'Ancient & Classical':['athenian_democracy','roman_republic','roman_tribunes','spartan_mixed_constitution','sumerian_assembly'],
+'Global':['universal_declaration','revolutions_1848','weimar_constitution','german_unification_suffrage'],
+};
 
 const HERITAGE_REASONS={};
 
