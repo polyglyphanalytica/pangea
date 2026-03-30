@@ -213,10 +213,10 @@
       "validated_lenses": 20
     },
     "servitus": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DONE",
+      "items": 120,
       "target": 100,
-      "live": false,
+      "live": true,
       "map": "world",
       "section": "III"
     },
@@ -1202,7 +1202,6 @@
     }
   },
   "queue": [
-    "servitus",
     "exodus",
     "nomad",
     "diaspora",
@@ -1312,7 +1311,8 @@
     "senex",
     "somnia",
     "crimen",
-    "martyr"
+    "martyr",
+    "servitus"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -11593,6 +11593,523 @@
     {
       "atlas": "terra",
       "batch": "101-120",
+      "items": 120
+    },
+    {
+      "atlas": "servitus",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "servitus",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "servitus",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "servitus",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "servitus",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "servitus",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "servitus",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "servitus",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "servitus",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "servitus",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "servitus",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "servitus",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "servitus",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "servitus",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "servitus",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "servitus",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "servitus",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "servitus",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "servitus",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "servitus",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "servitus",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "servitus",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "servitus",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "servitus",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "servitus",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "servitus",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "servitus",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "servitus",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "servitus",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "servitus",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "servitus",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "servitus",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "servitus",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "servitus",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "servitus",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "servitus",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "servitus",
+      "batch": "37-37",
+      "items": 37
+    },
+    {
+      "atlas": "servitus",
+      "batch": "38-38",
+      "items": 38
+    },
+    {
+      "atlas": "servitus",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "servitus",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "servitus",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "servitus",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "servitus",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "servitus",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "servitus",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "servitus",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "servitus",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "servitus",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "servitus",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "servitus",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "servitus",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "servitus",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "servitus",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "servitus",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "servitus",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "servitus",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "servitus",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "servitus",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "servitus",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "servitus",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "servitus",
+      "batch": "61-61",
+      "items": 61
+    },
+    {
+      "atlas": "servitus",
+      "batch": "62-62",
+      "items": 62
+    },
+    {
+      "atlas": "servitus",
+      "batch": "63-63",
+      "items": 63
+    },
+    {
+      "atlas": "servitus",
+      "batch": "64-64",
+      "items": 64
+    },
+    {
+      "atlas": "servitus",
+      "batch": "65-65",
+      "items": 65
+    },
+    {
+      "atlas": "servitus",
+      "batch": "66-66",
+      "items": 66
+    },
+    {
+      "atlas": "servitus",
+      "batch": "67-67",
+      "items": 67
+    },
+    {
+      "atlas": "servitus",
+      "batch": "68-68",
+      "items": 68
+    },
+    {
+      "atlas": "servitus",
+      "batch": "69-69",
+      "items": 69
+    },
+    {
+      "atlas": "servitus",
+      "batch": "70-70",
+      "items": 70
+    },
+    {
+      "atlas": "servitus",
+      "batch": "71-71",
+      "items": 71
+    },
+    {
+      "atlas": "servitus",
+      "batch": "72-72",
+      "items": 72
+    },
+    {
+      "atlas": "servitus",
+      "batch": "73-73",
+      "items": 73
+    },
+    {
+      "atlas": "servitus",
+      "batch": "74-74",
+      "items": 74
+    },
+    {
+      "atlas": "servitus",
+      "batch": "75-75",
+      "items": 75
+    },
+    {
+      "atlas": "servitus",
+      "batch": "76-76",
+      "items": 76
+    },
+    {
+      "atlas": "servitus",
+      "batch": "77-77",
+      "items": 77
+    },
+    {
+      "atlas": "servitus",
+      "batch": "78-78",
+      "items": 78
+    },
+    {
+      "atlas": "servitus",
+      "batch": "79-79",
+      "items": 79
+    },
+    {
+      "atlas": "servitus",
+      "batch": "80-80",
+      "items": 80
+    },
+    {
+      "atlas": "servitus",
+      "batch": "81-81",
+      "items": 81
+    },
+    {
+      "atlas": "servitus",
+      "batch": "82-82",
+      "items": 82
+    },
+    {
+      "atlas": "servitus",
+      "batch": "83-83",
+      "items": 83
+    },
+    {
+      "atlas": "servitus",
+      "batch": "84-84",
+      "items": 84
+    },
+    {
+      "atlas": "servitus",
+      "batch": "85-85",
+      "items": 85
+    },
+    {
+      "atlas": "servitus",
+      "batch": "86-86",
+      "items": 86
+    },
+    {
+      "atlas": "servitus",
+      "batch": "87-87",
+      "items": 87
+    },
+    {
+      "atlas": "servitus",
+      "batch": "88-88",
+      "items": 88
+    },
+    {
+      "atlas": "servitus",
+      "batch": "89-89",
+      "items": 89
+    },
+    {
+      "atlas": "servitus",
+      "batch": "90-90",
+      "items": 90
+    },
+    {
+      "atlas": "servitus",
+      "batch": "91-91",
+      "items": 91
+    },
+    {
+      "atlas": "servitus",
+      "batch": "92-92",
+      "items": 92
+    },
+    {
+      "atlas": "servitus",
+      "batch": "93-93",
+      "items": 93
+    },
+    {
+      "atlas": "servitus",
+      "batch": "94-94",
+      "items": 94
+    },
+    {
+      "atlas": "servitus",
+      "batch": "95-95",
+      "items": 95
+    },
+    {
+      "atlas": "servitus",
+      "batch": "96-96",
+      "items": 96
+    },
+    {
+      "atlas": "servitus",
+      "batch": "97-97",
+      "items": 97
+    },
+    {
+      "atlas": "servitus",
+      "batch": "98-98",
+      "items": 98
+    },
+    {
+      "atlas": "servitus",
+      "batch": "99-99",
+      "items": 99
+    },
+    {
+      "atlas": "servitus",
+      "batch": "100-100",
+      "items": 100
+    },
+    {
+      "atlas": "servitus",
+      "phase_done": "3",
+      "phase_next": "5",
+      "items": 120
+    },
+    {
+      "atlas": "servitus",
+      "phase_done": "5+6",
+      "phase_next": "GO_LIVE",
+      "items": 120
+    },
+    {
+      "atlas": "servitus",
+      "phase_done": "GO_LIVE",
       "items": 120
     }
   ],
