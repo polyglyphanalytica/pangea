@@ -710,11 +710,49 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'abolition',ico:'⚖',lbl:'Abolition',col:'#4a9fc0'},
+{id:'class_dynamics',ico:'⊿',lbl:'Class Dynamics',col:'#9a6b3c'},
+{id:'colonial',ico:'⚑',lbl:'Colonial Dimensions',col:'#6a8c4a'},
+{id:'cultural',ico:'♫',lbl:'Cultural Impact',col:'#8a6aaa'},
+{id:'economic',ico:'⊕',lbl:'Economic Systems',col:'#c0a040'},
+{id:'gender',ico:'⚢',lbl:'Gender Dimensions',col:'#c060a0'},
+{id:'legal_framework',ico:'§',lbl:'Legal Framework',col:'#7a9a6c'},
+{id:'memory',ico:'◎',lbl:'Memory & Legacy',col:'#6c8aaa'},
+{id:'modern_resonance',ico:'⟳',lbl:'Modern Resonance',col:'#aa6c5a'},
+{id:'mortality',ico:'✝',lbl:'Mortality',col:'#8a4a4a'},
+{id:'psychological',ico:'◐',lbl:'Psychological Impact',col:'#7a6a8a'},
+{id:'racial',ico:'◬',lbl:'Racial Dimensions',col:'#6a7a8a'},
+{id:'religious',ico:'☽',lbl:'Religious Dimensions',col:'#8a8a5a'},
+{id:'reproductive',ico:'⊚',lbl:'Reproductive Control',col:'#9a5a7a'},
+{id:'resistance',ico:'✊',lbl:'Resistance',col:'#aa7a3a'},
+{id:'settlement',ico:'⌂',lbl:'Settlement Patterns',col:'#5a8a7a'},
+{id:'sexual',ico:'⊘',lbl:'Sexual Violence',col:'#9a4a6a'},
+{id:'technological',ico:'⚙',lbl:'Technological Dimensions',col:'#6a8a6a'},
+{id:'trade_routes',ico:'⇢',lbl:'Trade Routes',col:'#8a7a5a'},
+{id:'violence',ico:'⚔',lbl:'Violence & Control',col:'#aa5a3a'},
+];
 
 
 
-const ERAS=[];
+const ERAS=[
+{y:-3000,n:'ANCIENT BONDAGE'},
+{y:-1200,n:'CLASSICAL SLAVERY'},
+{y:-500,n:'IMPERIAL SYSTEMS'},
+{y:200,n:'LATE ANTIQUITY'},
+{y:600,n:'MEDIEVAL SERVITUDE'},
+{y:1000,n:'FEUDAL BONDAGE'},
+{y:1400,n:'ATLANTIC DAWN'},
+{y:1500,n:'PLANTATION ERA'},
+{y:1650,n:'HIGH SLAVERY'},
+{y:1780,n:'ABOLITION STRUGGLES'},
+{y:1850,n:'EMANCIPATION AGE'},
+{y:1900,n:'COLONIAL LABOUR'},
+{y:1930,n:'TOTALITARIAN BONDAGE'},
+{y:1948,n:'POST-WAR RECKONING'},
+{y:1970,n:'MODERN TRAFFICKING'},
+{y:2000,n:'CONTEMPORARY SLAVERY'},
+];
 
 const ITEMS=[
 {id:'mesopotamian_debt_bondage',nm:'Mesopotamian Debt Bondage',sb:'Sumer & Babylon · 3000–539 BCE',s:-3000,e:-539,lon:44.4,lat:31.0,
@@ -3317,10 +3355,185 @@ abolition:'The comfort system in China ended with Japan\'s surrender in August 1
 
 const DIPLOMATIC=[];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'mesopotamian_debt_bondage',to:'code_of_hammurabi_slavery',concept:'Legal Codification of Bondage',year:-1754,desc:'Mesopotamian debt bondage customs were formalised in the Code of Hammurabi.'},
+{from:'code_of_hammurabi_slavery',to:'roman_slavery',concept:'Legal Codification of Bondage',year:-450,desc:'Roman slave law drew on Near Eastern legal traditions of codified bondage.'},
+{from:'roman_slavery',to:'anglo_saxon_slavery',concept:'Legal Codification of Bondage',year:600,desc:'Roman legal concepts of slavery persisted in post-Roman European legal codes.'},
+{from:'anglo_saxon_slavery',to:'russian_serfdom',concept:'Legal Codification of Bondage',year:1649,desc:'European feudal bondage traditions crystallised into Russian serfdom law.'},
+{from:'athenian_slavery',to:'roman_slavery',concept:'Mediterranean Slave Economy',year:-200,desc:'Rome inherited and expanded the Greek Mediterranean slave economy.'},
+{from:'roman_slavery',to:'barbary_slave_trade',concept:'Mediterranean Slave Economy',year:800,desc:'Post-Roman Mediterranean piracy revived large-scale maritime slave raiding.'},
+{from:'barbary_slave_trade',to:'venetian_galley_slavery',concept:'Mediterranean Slave Economy',year:1200,desc:'Venetian and Barbary slave systems became interdependent naval labour suppliers.'},
+{from:'trans_saharan_trade',to:'arab_slave_trade',concept:'Trans-Saharan to Indian Ocean',year:700,desc:'Trans-Saharan trade routes connected to the expanding Arab slave trade network.'},
+{from:'arab_slave_trade',to:'east_african_trade',concept:'Trans-Saharan to Indian Ocean',year:900,desc:'Arab slave traders established the East African coastal trade system.'},
+{from:'east_african_trade',to:'zanzibar_slave_market',concept:'Trans-Saharan to Indian Ocean',year:1700,desc:'East African slave trade concentrated at Zanzibar as its commercial hub.'},
+{from:'portuguese_slave_trade',to:'atlantic_slave_trade',concept:'Atlantic Triangle',year:1526,desc:'Portuguese slave trading pioneered the transatlantic route.'},
+{from:'atlantic_slave_trade',to:'caribbean_plantation',concept:'Atlantic Triangle',year:1620,desc:'The Atlantic trade supplied Caribbean sugar plantations with enslaved Africans.'},
+{from:'caribbean_plantation',to:'brazilian_slavery',concept:'Atlantic Triangle',year:1550,desc:'Caribbean plantation models were replicated and expanded in Brazil.'},
+{from:'atlantic_slave_trade',to:'american_slavery',concept:'Atlantic Triangle',year:1619,desc:'The Atlantic trade supplied North American colonies with enslaved labour.'},
+{from:'american_slavery',to:'convict_leasing',concept:'Bondage After Emancipation',year:1865,desc:'After emancipation, convict leasing recreated forced labour under new legal forms.'},
+{from:'convict_leasing',to:'sharecropping',concept:'Bondage After Emancipation',year:1870,desc:'Convict leasing and sharecropping together maintained racial labour exploitation.'},
+{from:'sharecropping',to:'us_prison_labour',concept:'Bondage After Emancipation',year:1970,desc:'Mass incarceration continued the tradition of racialised forced labour in America.'},
+{from:'haitian_revolution',to:'british_abolition',concept:'Abolition Wave',year:1804,desc:'The Haitian Revolution demonstrated the vulnerability of slave systems.'},
+{from:'british_abolition',to:'transatlantic_abolition',concept:'Abolition Wave',year:1833,desc:'British abolition catalysed the international abolitionist movement.'},
+{from:'transatlantic_abolition',to:'brazilian_slavery',concept:'Abolition Wave',year:1888,desc:'International pressure contributed to Brazil becoming the last Atlantic nation to abolish slavery.'},
+{from:'encomienda_system',to:'spanish_colonial_slavery',concept:'Colonial Extraction Models',year:1542,desc:'The encomienda system evolved into broader Spanish colonial forced labour.'},
+{from:'spanish_colonial_slavery',to:'colonial_indentured',concept:'Colonial Extraction Models',year:1834,desc:'The end of colonial slavery created demand for indentured labour replacements.'},
+{from:'colonial_indentured',to:'coolie_trade',concept:'Colonial Extraction Models',year:1840,desc:'Colonial indenture expanded into the systematic coolie trade across empires.'},
+{from:'coolie_trade',to:'mauritius_indenture',concept:'Colonial Extraction Models',year:1834,desc:'The coolie trade supplied Mauritius and other colonies with replacement labour.'},
+{from:'nazi_forced_labour',to:'gulag_system',concept:'Totalitarian Slave States',year:1930,desc:'Nazi and Soviet forced labour systems developed in parallel as tools of totalitarian control.'},
+{from:'gulag_system',to:'chinese_laogai',concept:'Totalitarian Slave States',year:1949,desc:'China\'s laogai system was modelled on the Soviet gulag.'},
+{from:'chinese_laogai',to:'north_korean_labour',concept:'Totalitarian Slave States',year:1953,desc:'North Korea adopted Chinese and Soviet models of political forced labour.'},
+{from:'congo_free_state',to:'congolese_cobalt',concept:'Congo\'s Perpetual Extraction',year:1908,desc:'Leopold\'s rubber terror established patterns of forced extraction continued in cobalt mining.'},
+{from:'comfort_women',to:'chinese_comfort_women',concept:'Wartime Sexual Slavery',year:1937,desc:'The comfort women system expanded massively into occupied China.'},
+{from:'west_african_slavery',to:'cocoa_child_labour',concept:'West African Labour Continuities',year:1900,desc:'West African forced labour traditions persisted into modern cocoa industry child exploitation.'},
+{from:'indian_caste_bondage',to:'south_asian_debt_bondage',concept:'South Asian Bondage Chain',year:1800,desc:'Caste-based bondage evolved into modern debt bondage systems in South Asia.'},
+{from:'south_asian_debt_bondage',to:'nepalese_kamaiya',concept:'South Asian Bondage Chain',year:1850,desc:'Debt bondage patterns spread across South Asia including Nepal\'s kamaiya system.'},
+{from:'gulf_kafala',to:'domestic_servitude',concept:'Modern Gulf Exploitation',year:1990,desc:'The kafala system enabled systematic domestic servitude across Gulf states.'},
+{from:'middle_passage',to:'amistad_revolt',concept:'Resistance on the Water',year:1839,desc:'The Amistad revolt was a dramatic act of resistance during the Middle Passage.'},
+{from:'quilombo_palmares',to:'maroon_communities',concept:'Maroon Freedom',year:1655,desc:'Palmares inspired maroon communities across the Caribbean and Americas.'},
+{from:'underground_railroad',to:'transatlantic_abolition',concept:'Freedom Networks',year:1850,desc:'The Underground Railroad fed into broader transatlantic abolitionist networks.'},
+];
 
 
-const WOMEN={};
+const WOMEN={
+'haitian_revolution':[
+{nm:'Marie-Jeanne Lamartinierre',role:'Revolutionary fighter',yr:1802,desc:'Marie-Jeanne Lamartinierre fought alongside her husband at the Battle of Crête-à-Pierrot, one of the decisive engagements of the Haitian Revolution. Armed with a musket, she fought in the front lines against French forces and became a symbol of women\'s military participation in the revolution that ended slavery in Saint-Domingue.'},
+{nm:'Cécile Fatiman',role:'Vodou priestess & revolutionary catalyst',yr:1791,desc:'Cécile Fatiman, a mambo (Vodou priestess) of mixed heritage, co-led the Bois Caïman ceremony in August 1791 that catalysed the Haitian Revolution. Her spiritual leadership helped transform individual resistance into coordinated mass uprising against the slave system.'},
+],
+'british_abolition':[
+{nm:'Mary Prince',role:'Author & abolitionist witness',yr:1831,desc:'Mary Prince published The History of Mary Prince (1831), the first account of the life of an enslaved Black woman published in England. Her testimony before Parliament was instrumental in shifting British public opinion toward abolition.'},
+{nm:'Elizabeth Heyrick',role:'Abolitionist pamphleteer',yr:1824,desc:'Elizabeth Heyrick published Immediate, Not Gradual Abolition in 1824, challenging the mainstream abolitionist strategy of gradual emancipation. Her radical insistence on immediate freedom influenced the movement\'s shift toward demanding full and immediate abolition.'},
+],
+'american_slavery':[
+{nm:'Harriet Tubman',role:'Underground Railroad conductor',yr:1850,desc:'Harriet Tubman escaped slavery in 1849 and returned to the South approximately 13 times to lead roughly 70 enslaved people to freedom via the Underground Railroad. During the Civil War she served as a scout, spy, and the first woman to lead an armed assault in American military history (the Combahee River Raid, 1863).'},
+{nm:'Sojourner Truth',role:'Abolitionist & women\'s rights activist',yr:1851,desc:'Born into slavery as Isabella Baumfree, Sojourner Truth became one of the most powerful voices against slavery and for women\'s rights. Her "Ain\'t I a Woman?" speech (1851) drew the connection between racial and gender oppression that defined her activism.'},
+{nm:'Harriet Jacobs',role:'Author of Incidents in the Life of a Slave Girl',yr:1861,desc:'Harriet Jacobs published Incidents in the Life of a Slave Girl (1861), the most comprehensive first-person account of the sexual exploitation of enslaved women. Her narrative exposed the specific gendered violence of American slavery with unflinching honesty.'},
+],
+'underground_railroad':[
+{nm:'Harriet Tubman',role:'Conductor & liberator',yr:1850,desc:'Harriet Tubman was the Underground Railroad\'s most celebrated conductor, making approximately 13 rescue missions into slave territory. She never lost a passenger and earned the name "Moses" for leading her people to freedom.'},
+{nm:'Levi Coffin\'s wife Catherine',role:'Underground Railroad organiser',yr:1840,desc:'Catherine Coffin worked alongside her husband Levi in Newport, Indiana, sheltering over 2,000 fugitive slaves in their home. She managed the practical logistics of feeding, clothing, and hiding freedom seekers — the invisible domestic labour that made the Railroad function.'},
+],
+'transatlantic_abolition':[
+{nm:'Sojourner Truth',role:'International abolitionist voice',yr:1851,desc:'Sojourner Truth\'s advocacy linked American abolition to global movements for human freedom. Her speeches drew connections between slavery, women\'s rights, and universal human dignity that resonated across the Atlantic world.'},
+{nm:'Ellen Craft',role:'Fugitive & international abolitionist',yr:1848,desc:'Ellen Craft, a light-skinned enslaved woman, escaped slavery in 1848 by disguising herself as a white male slaveholder while her husband William posed as her slave. Their dramatic escape and subsequent international lecture tour galvanised British and American abolitionist movements.'},
+],
+'quilombo_palmares':[
+{nm:'Aqualtune',role:'Queen mother of Palmares',yr:1605,desc:'Aqualtune was an Angolan princess captured and enslaved in Brazil who reportedly led a group of enslaved people to freedom and became one of the founding leaders of Quilombo dos Palmares. She is remembered as the grandmother of Zumbi, Palmares\' last great leader.'},
+],
+'nat_turner_rebellion':[
+{nm:'Cherry Turner',role:'Mother and keeper of memory',yr:1831,desc:'Cherry Turner, Nat Turner\'s mother, was an enslaved African woman who reportedly attempted to kill her infant son rather than see him raised in bondage — a radical act of resistance against the reproductive exploitation of slavery. Her African heritage and stories of freedom shaped Nat Turner\'s consciousness.'},
+],
+'comfort_women':[
+{nm:'Kim Hak-sun',role:'First public comfort women witness',yr:1991,desc:'Kim Hak-sun was the first former "comfort woman" to publicly testify about her ordeal, breaking decades of silence in 1991. Her courage in speaking opened the floodgates for hundreds of other survivors across Asia to share their stories, transforming the comfort women issue from a buried secret into an international human rights cause.'},
+],
+'chinese_comfort_women':[
+{nm:'Wan Aihua',role:'Survivor & witness',yr:2000,desc:'Wan Aihua was one of the first Chinese comfort women survivors to speak publicly, testifying about her abduction at age 13 and her years of sexual slavery. She became a plaintiff in lawsuits against the Japanese government and spent her final years ensuring her story would survive her.'},
+],
+'atlantic_slave_trade':[
+{nm:'Phillis Wheatley',role:'Poet & intellectual',yr:1773,desc:'Phillis Wheatley, kidnapped from West Africa and sold into slavery in Boston, became the first African American to publish a book of poetry (1773). Her work challenged the intellectual justification for slavery by demonstrating Black artistic genius.'},
+],
+'caribbean_plantation':[
+{nm:'Nanny of the Maroons',role:'Maroon leader & military strategist',yr:1730,desc:'Queen Nanny led the Windward Maroons of Jamaica in a guerrilla war against British colonial forces throughout the 1720s and 1730s. An Ashanti woman who escaped plantation slavery, she used military strategy and spiritual leadership to maintain a free community in the Blue Mountains, earning her place as a Jamaican National Hero.'},
+],
+'brazilian_slavery':[
+{nm:'Dandara dos Palmares',role:'Warrior of Quilombo dos Palmares',yr:1694,desc:'Dandara was a warrior leader in Quilombo dos Palmares who fought against Portuguese colonial forces. Rather than accept re-enslavement when Palmares fell in 1694, she chose death — throwing herself from a cliff. She symbolises Black women\'s armed resistance to slavery in Brazil.'},
+{nm:'Princess Isabel',role:'Regent who signed the Golden Law',yr:1888,desc:'Princess Isabel, acting as regent of Brazil, signed the Lei Áurea (Golden Law) on 13 May 1888, abolishing slavery in the last country in the Western Hemisphere to do so. While the law was the culmination of decades of resistance by enslaved people and abolitionists, her act made Brazil\'s abolition legally irrevocable.'},
+],
+'maroon_communities':[
+{nm:'Nanny of the Maroons',role:'Jamaica\'s warrior queen',yr:1730,desc:'Nanny of the Maroons was the spiritual and military leader of the Blue Mountain Maroons in Jamaica. She led successful guerrilla campaigns against the British for over a decade and negotiated the 1739 treaty that guaranteed Maroon autonomy — a rare formal recognition of Black freedom within a slave colony.'},
+],
+'cuban_sugar_slavery':[
+{nm:'Carlota Lucumí',role:'Rebellion leader',yr:1843,desc:'Carlota, an enslaved Yoruba woman, led a major slave uprising at the Triunvirato sugar mill in Matanzas province, Cuba in 1843. She freed enslaved people from neighbouring plantations before being captured and executed. Cuba\'s Operation Carlota (1975 intervention in Angola) was named in her honour.'},
+],
+'west_african_slavery':[
+{nm:'Madam Tinubu',role:'Slave trader turned political power',yr:1850,desc:'Madam Efunroye Tinubu was a powerful Yoruba merchant and political figure in Lagos who built her wealth partly through the slave trade before becoming a fierce opponent of British colonial interference. Her complex legacy illustrates how women could wield power within and through slave-trading systems in West Africa.'},
+],
+'roman_slavery':[
+{nm:'Blandina of Lyon',role:'Enslaved Christian martyr',yr:177,desc:'Blandina was an enslaved woman in Roman Gaul who was martyred during the persecution of Christians in Lyon (177 CE). Her steadfast endurance under torture — described in detail by Eusebius — became one of early Christianity\'s most powerful narratives, elevating an enslaved woman to sainthood.'},
+],
+'spartacus_revolt':[
+{nm:'Women of the Spartacus Revolt',role:'Fighters and followers',yr:-71,desc:'Ancient sources record that women — both enslaved and free — joined the Spartacus revolt in significant numbers. They served as fighters, foragers, camp organisers, and intelligence gatherers. Plutarch notes that women were among those who died in the final battle, fighting alongside the men.'},
+],
+'ottoman_bondage':[
+{nm:'Hürrem Sultan (Roxelana)',role:'Enslaved woman who became empress',yr:1530,desc:'Hürrem Sultan, born Anastasia or Alexandra in Ruthenia, was captured and enslaved before rising to become the legal wife of Sultan Suleiman the Magnificent — an unprecedented break with Ottoman tradition. She wielded enormous political power, demonstrating how the Ottoman slave system could paradoxically elevate enslaved individuals to the apex of imperial authority.'},
+{nm:'Kösem Sultan',role:'Enslaved woman who ruled the Ottoman Empire',yr:1623,desc:'Kösem Sultan, originally a Greek girl enslaved and placed in the imperial harem, became one of the most powerful women in Ottoman history, serving as regent for two sultans. She effectively ruled the empire for decades, illustrating the extraordinary — and deeply contradictory — power that the Ottoman slave system could confer on enslaved women.'},
+],
+'mamluk_system':[
+{nm:'Shajara al-Durr',role:'Sultan of Egypt',yr:1250,desc:'Shajara al-Durr, a former slave of Turkic or Armenian origin, became Sultan of Egypt in 1250 — one of the very few women to rule a major Islamic state. Her brief reign marked the transition from the Ayyubid to the Mamluk dynasty and demonstrated that the Mamluk slave-soldier system\'s pathways to power could, in exceptional circumstances, include women.'},
+],
+'indian_caste_bondage':[
+{nm:'Savitribai Phule',role:'Educator & anti-caste activist',yr:1848,desc:'Savitribai Phule, along with her husband Jyotirao, opened the first school for girls of oppressed castes in Pune, India in 1848. She was pelted with stones and dung for daring to educate those whom the caste system designated as bondservants. Her work laid the foundation for anti-caste education movements that challenged hereditary bondage.'},
+],
+'south_asian_debt_bondage':[
+{nm:'Bhanwari Devi',role:'Anti-bonded labour activist',yr:1992,desc:'Bhanwari Devi, a Dalit woman working as a village-level social worker in Rajasthan, challenged bonded labour and child marriage practices. She was gang-raped in retaliation for her activism in 1992, and her case ultimately led to the Vishakha Guidelines — India\'s first legal framework against workplace sexual harassment.'},
+],
+'apartheid_labour':[
+{nm:'Lillian Ngoyi',role:'Anti-apartheid labour activist',yr:1956,desc:'Lillian Ngoyi was the first woman elected to the executive committee of the African National Congress and a leader of the 1956 Women\'s March to the Union Buildings in Pretoria. She organised Black women workers against the pass laws that controlled and coerced their labour under apartheid.'},
+],
+'russian_serfdom':[
+{nm:'Daria Saltykova (Saltychikha)',role:'Notorious serf abuser',yr:1762,desc:'Daria Saltykova was a Russian noblewoman convicted in 1762 of torturing and murdering at least 38 of her serfs — most of them young women. Her case, one of the few where a noble was actually prosecuted for violence against serfs, exposed the system\'s brutality and the near-absolute power that serfdom granted owners over human beings.'},
+],
+'modern_trafficking':[
+{nm:'Somaly Mam',role:'Anti-trafficking activist',yr:1996,desc:'Somaly Mam, a survivor of sex trafficking in Cambodia, founded the Somaly Mam Foundation to rescue victims of modern sexual slavery. Though her personal narrative later faced scrutiny, her work brought international attention to contemporary human trafficking in Southeast Asia and inspired a generation of anti-trafficking advocacy.'},
+],
+'domestic_servitude':[
+{nm:'Erwiana Sulistyaningsih',role:'Survivor & workers\' rights advocate',yr:2014,desc:'Erwiana Sulistyaningsih, an Indonesian domestic worker in Hong Kong, survived months of severe abuse by her employer before her case made international headlines in 2014. Her courage in pursuing legal action led to her employer\'s conviction and catalysed reforms to domestic worker protections across Asia.'},
+],
+'bangladesh_garment':[
+{nm:'Kalpona Akter',role:'Garment workers\' rights activist',yr:2001,desc:'Kalpona Akter began working in Bangladeshi garment factories at age 12. She became a leading voice for garment workers\' rights, founding the Bangladesh Center for Worker Solidarity. Her advocacy for living wages and safe working conditions directly challenged the forced-labour conditions in the global garment supply chain.'},
+],
+'mississippi_cotton':[
+{nm:'Fannie Lou Hamer',role:'Civil rights activist & sharecropper',yr:1962,desc:'Fannie Lou Hamer, a Mississippi sharecropper for most of her life, became a towering figure in the civil rights movement after being forced off the plantation where she had worked for 18 years for attempting to register to vote. She was sterilised without consent — part of the "Mississippi appendectomy" targeting Black women — and her testimony about the ongoing legacy of slavery in Mississippi cotton country shook the 1964 Democratic National Convention.'},
+],
+'convict_leasing':[
+{nm:'Ida B. Wells',role:'Investigative journalist & anti-lynching activist',yr:1892,desc:'Ida B. Wells documented the connections between convict leasing, lynching, and the post-slavery racial terror system in her investigative journalism. Her pamphlets Southern Horrors (1892) and The Red Record (1895) exposed how convict leasing and extrajudicial violence worked together to maintain racial labour control after emancipation.'},
+],
+'sharecropping':[
+{nm:'Nate Shaw\'s wife Hannah',role:'Sharecropper & resistance sustainer',yr:1932,desc:'Hannah Shaw (as recorded in Theodore Rosengarten\'s All God\'s Dangers) sustained her family through decades of sharecropping exploitation and her husband Nate\'s 12-year imprisonment for resisting landlord oppression. Women like Hannah bore the double burden of field labour and domestic survival that kept sharecropping families alive under conditions designed to break them.'},
+],
+'egyptian_slavery':[
+{nm:'Hatshepsut',role:'Pharaoh who regulated forced labour',yr:-1473,desc:'Hatshepsut, one of ancient Egypt\'s few female pharaohs, oversaw massive construction projects at Deir el-Bahri that relied on both enslaved and corvée labour. Her reign demonstrates that women rulers operated within and perpetuated slave systems — complicating simplistic narratives about gender and bondage.'},
+],
+'amistad_revolt':[
+{nm:'Margru (Sarah Kinson)',role:'Amistad captive & missionary',yr:1839,desc:'Margru, a young girl among the Amistad captives, was freed by the Supreme Court decision and educated at Oberlin College. She returned to Sierra Leone as a missionary, becoming one of the few Amistad survivors whose subsequent life is well documented. Her story bridges the experience of capture, the Middle Passage, legal struggle, and return.'},
+],
+'zanj_rebellion':[
+{nm:'Women of the Zanj Revolt',role:'Participants & supporters',yr:869,desc:'While named leaders of the Zanj Rebellion were men, Arabic sources record that enslaved women participated in the revolt, which controlled southern Iraq for 14 years. Women were among the agricultural labourers in the salt flats whose brutal conditions sparked the uprising — the largest slave revolt in the medieval Islamic world.'},
+],
+'devadasi_system':[
+{nm:'Muthulakshmi Reddi',role:'Physician & anti-devadasi activist',yr:1927,desc:'Muthulakshmi Reddi, born to a devadasi mother, became India\'s first female legislator and led the campaign to abolish the devadasi system in Madras Presidency. Her 1927 bill and subsequent advocacy led to the Madras Devadasis (Prevention of Dedication) Act of 1947, the first legal prohibition of temple sexual servitude.'},
+],
+'forced_marriage':[
+{nm:'Nujood Ali',role:'Child bride who won her freedom',yr:2008,desc:'Nujood Ali, a Yemeni girl married off at age 8, walked into a courthouse alone at age 10 and demanded a divorce, becoming the youngest person in Yemen to obtain one. Her case drew international attention to forced child marriage and inspired legal reform efforts across the Middle East.'},
+],
+'yazidi_enslavement':[
+{nm:'Nadia Murad',role:'Nobel laureate & survivor advocate',yr:2014,desc:'Nadia Murad, a Yazidi woman enslaved by ISIS in 2014, escaped captivity and became an international advocate for survivors of sexual violence and human trafficking. She was awarded the Nobel Peace Prize in 2018 for her efforts to end the use of sexual violence as a weapon of war and armed conflict.'},
+],
+'boko_haram_abductions':[
+{nm:'Amina Ali Nkeki',role:'First rescued Chibok girl',yr:2016,desc:'Amina Ali Nkeki was the first of the 276 Chibok schoolgirls abducted by Boko Haram in April 2014 to be found alive, discovered in May 2016. Her survival and rescue gave hope to families of the missing girls and maintained international pressure on the Nigerian government and Boko Haram.'},
+],
+'middle_passage':[
+{nm:'Phillis Wheatley',role:'Survivor & first published Black poet',yr:1761,desc:'Phillis Wheatley survived the Middle Passage as a child of about seven and was purchased by the Wheatley family in Boston. She became the first African American — and the first enslaved person — to publish a book of poetry, her very existence as a literary artist demolishing the intellectual justifications for the slave trade.'},
+],
+'cocoa_child_labour':[
+{nm:'Ange Aboa',role:'Anti-child-labour investigator',yr:2010,desc:'Ange Aboa, an Ivorian journalist, has spent years investigating and documenting child labour and trafficking in West African cocoa production. Her reporting has been instrumental in exposing the gap between chocolate companies\' pledges to eliminate child labour and the reality of ongoing exploitation on cocoa farms.'},
+],
+'thai_fishing_slavery':[
+{nm:'Patima Tungpuchayakul',role:'Anti-trafficking activist',yr:2012,desc:'Patima Tungpuchayakul co-founded the Labour Rights Promotion Network Foundation in Thailand, which has helped rescue hundreds of trafficked fishermen from slave-like conditions on Thai fishing vessels. Her work exposed the scale of forced labour in the Thai seafood industry and contributed to international pressure for reform.'},
+],
+'eritrean_conscription':[
+{nm:'Ciham Ali Ahmed',role:'Political prisoner',yr:2012,desc:'Ciham Ali Ahmed, daughter of a former Eritrean information minister, was arrested at age 15 while attempting to flee the country\'s indefinite national service system. She has been held incommunicado since 2012, her case symbolising the system\'s indiscriminate consumption of young lives, including young women forced into military service where sexual violence is endemic.'},
+],
+'gulf_kafala':[
+{nm:'Sumi Abedin',role:'Migrant worker advocate',yr:2015,desc:'Sumi Abedin, a Bangladeshi migrant worker who experienced abuse under the kafala system in the Gulf states, became an advocate for migrant domestic workers\' rights. Her testimony before international organisations helped document the systematic exploitation that the kafala system enables.'},
+],
+'uyghur_forced_labour':[
+{nm:'Mihrigul Tursun',role:'Survivor & witness',yr:2018,desc:'Mihrigul Tursun, a Uyghur woman detained three times in Chinese internment camps, testified before the US Congressional-Executive Commission on China in 2018 about torture, forced labour, and the separation of Uyghur mothers from their children. Her testimony was among the first detailed accounts of conditions inside the camps.'},
+],
+'north_korean_labour':[
+{nm:'Yeonmi Park',role:'Defector & human rights activist',yr:2014,desc:'Yeonmi Park escaped North Korea at age 13, enduring trafficking and exploitation in China before reaching South Korea. Her memoir and advocacy have brought international attention to North Korean forced labour, the trafficking of North Korean women, and the intersection of state coercion and sexual exploitation.'},
+],
+};
 
 let year=-3000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4816,7 +5029,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Ancient Near East':['mesopotamian_debt_bondage','code_of_hammurabi_slavery','egyptian_slavery'],
+'Classical Mediterranean':['athenian_slavery','helot_system','roman_slavery','spartacus_revolt','venetian_galley_slavery'],
+'Trans-Saharan & East Africa':['trans_saharan_trade','arab_slave_trade','east_african_trade','zanzibar_slave_market','somali_bantu_slavery','mauritanian_slavery'],
+'Atlantic World':['atlantic_slave_trade','middle_passage','caribbean_plantation','cuban_sugar_slavery','amistad_revolt','zong_massacre','cape_verde_trade'],
+'The Americas':['american_slavery','brazilian_slavery','haitian_revolution','quilombo_palmares','nat_turner_rebellion','underground_railroad','convict_leasing','sharecropping','mississippi_cotton','maroon_communities'],
+'European Systems':['anglo_saxon_slavery','russian_serfdom','barbary_slave_trade','crimean_khanate_raids','scottish_mining_bondage','roma_slavery_romania','viking_slave_trade'],
+'Colonial Empires':['encomienda_system','spanish_colonial_slavery','colonial_indentured','congo_free_state','dutch_slave_trade','french_slave_trade','portuguese_slave_trade','blackbirding','hawaiian_plantation','mauritius_indenture','amazonian_rubber','peruvian_guano'],
+'Islamic World':['ottoman_bondage','mamluk_system','janissary_system','yazidi_enslavement'],
+'East & Southeast Asia':['chinese_bondage','korean_nobi','comfort_women','chinese_comfort_women','japanese_wartime_labour','southeast_asian_bondage','khmer_rouge_labour','chinese_laogai','thai_fishing_slavery'],
+'South Asia':['indian_caste_bondage','indian_ocean_trade','coolie_trade','south_asian_debt_bondage','devadasi_system','nepalese_kamaiya','bangladesh_garment'],
+'Modern Forced Labour':['modern_trafficking','uyghur_forced_labour','north_korean_labour','us_prison_labour','gulf_kafala','domestic_servitude','congolese_cobalt','uzbek_cotton','eritrean_conscription','cocoa_child_labour','boko_haram_abductions','libyan_slave_markets','maquiladora_labour'],
+'Abolition & Resistance':['british_abolition','transatlantic_abolition','haitian_revolution','underground_railroad','amistad_revolt','quilombo_palmares','nat_turner_rebellion','zanj_rebellion','maroon_communities','spartacus_revolt'],
+};
 
 const HERITAGE_REASONS={};
 
