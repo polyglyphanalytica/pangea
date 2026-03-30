@@ -50,15 +50,14 @@
     "name": "Polyglyph Analytica"
   },
   "featureList": [
-    "100 civilizations from Aboriginal Australia to the present day",
-    "65,000-year interactive timeline",
-    "30 interpretive lenses including Economy, Military, Gender, Tragedies, Justice",
-    "Cultural transmission tracking across civilizations",
+    "100 slavery and forced labour systems from 3000 BCE to the present day",
+    "5,000-year interactive timeline",
+    "20 interpretive lenses including Legal Framework, Resistance, Economic, Violence",
+    "Bondage transmission tracking across systems",
     "What-If historical scenarios",
-    "Legacy region mapping",
-    "Herstory mode — women who shaped every civilization",
-    "Synthesized musical themes for each civilization",
-    "Civilizational fingerprint radar charts"
+    "Heritage region mapping",
+    "Herstory mode — women who resisted and survived every system",
+    "Bondage fingerprint radar charts"
   ],
   "about": {
     "@type": "Thing",
@@ -666,7 +665,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
       <g id="thread-layer"></g>
       <!-- Selected-item label only -->
       <g id="label-layer" pointer-events="none"></g>
-      <!-- Civilization markers -->
+      <!-- Event markers -->
       <g id="mark-layer"></g>
       <!-- Hover tooltip label (sits above markers) -->
       <g id="hover-label-layer" pointer-events="none"></g>
@@ -677,7 +676,7 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
     </div>
   </div>
   <div class="tl-wrap" role="navigation" aria-label="Timeline">
-  <svg id="density-bar" aria-label="Civilization density over time"></svg>
+  <svg id="density-bar" aria-label="Slavery system density over time"></svg>
   <div class="tl-lbls">
     <span class="tl-lbl">3000 BCE</span>
     <span class="tl-lbl">2000 BCE</span>
@@ -4347,8 +4346,8 @@ function shareState(){
   const civName=sel?sel.nm:null;
   const shareTitle='Servitus — The Slavery Atlas';
   const shareText=civName
-    ? `Explore ${civName} on Civilitas — 85 civilizations, 65,000 years of human history`
-    : 'Civilitas — 85 civilizations, 65,000 years of human history, all in one map';
+    ? `Explore ${civName} on Servitus — 100 slavery systems, 5,000 years of bondage and resistance`
+    : 'Servitus — 100 slavery systems, 5,000 years of bondage and resistance, all in one map';
 
   // Use native share sheet on devices that support it (iOS, Android, modern desktop)
   if(navigator.share){
@@ -4710,7 +4709,7 @@ function renderFingerprint(c){
     svg+=`<text x="${lx.toFixed(1)}" y="${(ly+dy).toFixed(1)}" text-anchor="${anchor}" class="fp-label">${SHORT[i]}</text>`;
   });
   svg+='</svg>';
-  return`<div class="fp-wrap"><div class="fp-title">Civilizational Fingerprint</div>${svg}</div>`;
+  return`<div class="fp-wrap"><div class="fp-title">Bondage Fingerprint</div>${svg}</div>`;
 }
 
 // ══════════════════════════════════════════════════════
@@ -4993,7 +4992,7 @@ function renderWhatIfDrawer(){
           <div style="font-size:12.5px;line-height:1.65;color:var(--txt2)">${t.desc}</div>
         </div>`;
       }).join('')
-    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this civilization in the current dataset.</div>`
+    : `<div style="font-size:12.5px;color:var(--txt3);font-style:italic;padding:8px 0">No outward transmissions recorded for this system in the current dataset.</div>`
   }
 
   ${downstream.length?`
@@ -5477,7 +5476,7 @@ function initMapInteraction(){
   svg.addEventListener('click',function(e){if(_wasDragging){_wasDragging=false;return;}if(Date.now()-(_touchFiredAt||0)<500)return;mapClick(e);});
 }
 
-// Auto-zoom cluster: if tap finds 3+ civs within 40px, zoom in instead of picking
+// Auto-zoom cluster: if tap finds 3+ items within 40px, zoom in instead of picking
 
 function showClusterPicker(civs, screenX, screenY){
   const picker=document.getElementById('cluster-picker');
@@ -5684,9 +5683,9 @@ function updateTlFill(pct){
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 
   <!-- Cluster picker popup -->
-  <div id="cluster-picker" role="dialog" aria-label="Select civilization">
+  <div id="cluster-picker" role="dialog" aria-label="Select event">
     <div id="cluster-picker-hdr">
-      <span>Select civilization</span>
+      <span>Select event</span>
       <button onclick="closeClusterPicker()" style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:14px;padding:0 2px">✕</button>
     </div>
     <div id="cluster-list"></div>
