@@ -707,10 +707,49 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'assimilation',ico:'⊕',lbl:'Assimilation & Integration',col:'#4a9fc0'},
+{id:'border_politics',ico:'⊘',lbl:'Border Politics',col:'#c06040'},
+{id:'children',ico:'◎',lbl:'Children & Youth',col:'#60a060'},
+{id:'climate',ico:'☁',lbl:'Climate & Environment Drivers',col:'#7090b0'},
+{id:'cultural_exchange',ico:'⊛',lbl:'Cultural Exchange',col:'#b060b0'},
+{id:'demographics',ico:'⊞',lbl:'Demographics',col:'#9080c0'},
+{id:'displacement',ico:'⇥',lbl:'Displacement Mechanics',col:'#c08040'},
+{id:'economic',ico:'⊡',lbl:'Economic Dimensions',col:'#c0a030'},
+{id:'environmental',ico:'⊜',lbl:'Environmental Impact',col:'#509050'},
+{id:'gender',ico:'♀',lbl:'Gender & Migration',col:'#c060a0'},
+{id:'health',ico:'⊕',lbl:'Health & Trauma',col:'#b04040'},
+{id:'identity',ico:'◉',lbl:'Identity & Belonging',col:'#a07040'},
+{id:'language',ico:'⊙',lbl:'Language & Communication',col:'#6080c0'},
+{id:'legal_framework',ico:'⊟',lbl:'Legal Framework',col:'#808060'},
+{id:'memory',ico:'◈',lbl:'Memory & Commemoration',col:'#9070a0'},
+{id:'modern_resonance',ico:'⊗',lbl:'Modern Resonance',col:'#607090'},
+{id:'political',ico:'⊠',lbl:'Political Dimensions',col:'#c05050'},
+{id:'religious',ico:'◇',lbl:'Religious Dimensions',col:'#a09040'},
+{id:'resistance',ico:'⊚',lbl:'Resistance & Agency',col:'#50a0a0'},
+{id:'violence',ico:'⊗',lbl:'Violence & Persecution',col:'#a03030'},
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-300000,n:'FIRST DISPERSALS'},
+{y:-70000,n:'OUT OF AFRICA'},
+{y:-20000,n:'ICE AGE CROSSINGS'},
+{y:-5000,n:'NEOLITHIC EXPANSIONS'},
+{y:-3000,n:'BRONZE AGE MOVEMENTS'},
+{y:-1500,n:'IRON AGE MIGRATIONS'},
+{y:-750,n:'CLASSICAL COLONISATIONS'},
+{y:1,n:'IMPERIAL DIASPORAS'},
+{y:375,n:'GREAT MIGRATIONS'},
+{y:632,n:'MEDIEVAL EXPANSIONS'},
+{y:1492,n:'AGE OF EMPIRE'},
+{y:1800,n:'INDUSTRIAL MIGRATIONS'},
+{y:1900,n:'WORLD WAR ERA'},
+{y:1945,n:'COLD WAR DISPLACEMENTS'},
+{y:1975,n:'LATE COLD WAR CRISES'},
+{y:1990,n:'POST-COLD WAR'},
+{y:2010,n:'CONTEMPORARY CRISES'},
+];
 
 const ITEMS=[
 {id:'out_of_africa_1',nm:'First Out of Africa Dispersal',sb:'Homo sapiens · East Africa to Levant',s:-300000,e:-100000,lon:36.8,lat:1.3,fp:{scale:10,duration:10,distance:10,impact:10,diversity:2,legacy:10},conns:['coastal_migration_asia','european_colonization_sapiens','out_of_africa_2'],overview:'The first dispersal of Homo sapiens out of the African continent represents the foundational migration event in human history. Beginning approximately 300,000 years ago from the savannahs and rift valleys of East Africa, small bands of anatomically modern humans moved northward through the Nile corridor and into the Levant. This initial wave established a permanent human presence outside Africa for the first time, though many early dispersal attempts likely failed or were absorbed. The genetic and archaeological evidence suggests multiple waves rather than a single exodus, with populations moving through the Sinai Peninsula and along the eastern Mediterranean coast.',
@@ -3127,10 +3166,167 @@ violence:'The violence of the Volga German deportation was structural rather tha
 
 const DIPLOMATIC=[];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'out_of_africa_1',to:'out_of_africa_2',concept:'Human Dispersal Chain',year:-70000,desc:'The second wave of African dispersal followed routes established by the first.'},
+{from:'out_of_africa_2',to:'coastal_migration_asia',concept:'Human Dispersal Chain',year:-65000,desc:'Coastal migration along the Indian Ocean rim followed the Out of Africa dispersal.'},
+{from:'coastal_migration_asia',to:'aboriginal_arrival',concept:'Human Dispersal Chain',year:-65000,desc:'Maritime crossing to Australia was the culmination of the coastal migration route.'},
+{from:'coastal_migration_asia',to:'european_colonization_sapiens',concept:'Human Dispersal Chain',year:-45000,desc:'Sapiens populations branched northwestward into Europe from the Asian coastal route.'},
+{from:'european_colonization_sapiens',to:'neanderthal_replacement',concept:'Human Dispersal Chain',year:-45000,desc:'The arrival of Homo sapiens in Europe initiated the replacement of Neanderthals.'},
+{from:'european_colonization_sapiens',to:'beringia_crossing',concept:'Human Dispersal Chain',year:-20000,desc:'Northeast Asian populations descended from earlier dispersals crossed into the Americas.'},
+{from:'beringia_crossing',to:'clovis_expansion',concept:'Human Dispersal Chain',year:-15000,desc:'Beringia migrants populated the Americas, giving rise to Clovis and other traditions.'},
+{from:'atlantic_slave_trade',to:'african_american_great_migration',concept:'African Diaspora Chain',year:1916,desc:'Descendants of enslaved Africans moved north seeking freedom from Jim Crow.'},
+{from:'african_american_great_migration',to:'caribbean_windrush',concept:'African Diaspora Chain',year:1948,desc:'Caribbean migration to Britain paralleled Black American internal migration.'},
+{from:'indian_ocean_slave_trade',to:'trans_saharan_migrations',concept:'African Diaspora Chain',year:700,desc:'Indian Ocean and trans-Saharan slave routes operated as parallel systems of forced migration.'},
+{from:'indian_partition',to:'bangladeshi_liberation',concept:'Partition Cascades',year:1971,desc:'The unresolved tensions of 1947 Partition directly caused the 1971 Bangladesh crisis.'},
+{from:'indian_partition',to:'indian_indentured_labour',concept:'Partition Cascades',year:1947,desc:'Colonial labour systems and Partition together shaped the Indian diaspora.'},
+{from:'holocaust_displacement',to:'jewish_aliyah',concept:'Jewish Migration Chain',year:1948,desc:'The Holocaust accelerated Jewish immigration to Palestine and the creation of Israel.'},
+{from:'jewish_diaspora_expulsions',to:'holocaust_displacement',concept:'Jewish Migration Chain',year:1933,desc:'Centuries of European antisemitism culminated in the Nazi genocide.'},
+{from:'jewish_aliyah',to:'palestinian_displacement',concept:'Jewish Migration Chain',year:1948,desc:'The creation of Israel resulted in the displacement of 700,000 Palestinians.'},
+{from:'jewish_aliyah',to:'jewish_exodus_arab_lands',concept:'Jewish Migration Chain',year:1948,desc:'Israel\'s creation triggered the expulsion of Jewish communities from Arab countries.'},
+{from:'columbian_exchange',to:'atlantic_slave_trade',concept:'Colonial Migration Chain',year:1501,desc:'European colonisation of the Americas created the demand for enslaved African labour.'},
+{from:'atlantic_slave_trade',to:'convict_transportation_australia',concept:'Colonial Migration Chain',year:1788,desc:'British penal transportation extended colonial forced migration to the Pacific.'},
+{from:'columbian_exchange',to:'european_mass_emigration',concept:'Colonial Migration Chain',year:1880,desc:'European colonialism opened pathways for mass voluntary emigration to the Americas.'},
+{from:'soviet_population_transfers',to:'volga_german_deportation',concept:'Soviet Deportation Chain',year:1941,desc:'The Volga German deportation was part of Stalin\'s systematic ethnic cleansing programme.'},
+{from:'soviet_population_transfers',to:'german_expulsions',concept:'Soviet Deportation Chain',year:1944,desc:'Soviet-driven population transfers shaped the post-war ethnic map of Central Europe.'},
+{from:'armenian_genocide_diaspora',to:'holocaust_displacement',concept:'Genocide Displacement Chain',year:1933,desc:'The Armenian genocide established the template of twentieth-century ethnic extermination.'},
+{from:'holocaust_displacement',to:'rwandan_refugee_crisis',concept:'Genocide Displacement Chain',year:1994,desc:'Despite "Never Again," genocide recurred in Rwanda with massive displacement.'},
+{from:'rwandan_refugee_crisis',to:'drc_displacement',concept:'Great Lakes Crisis Chain',year:1996,desc:'Rwandan refugee camps in Congo became bases for the invasion that triggered DRC wars.'},
+{from:'afghan_refugee_waves',to:'iranian_revolution_diaspora',concept:'Cold War Refugee Chain',year:1979,desc:'The Iranian Revolution and Soviet invasion of Afghanistan created simultaneous refugee crises.'},
+{from:'vietnamese_boat_people',to:'cambodian_genocide_exodus',concept:'Cold War Refugee Chain',year:1975,desc:'The fall of Indochina created parallel refugee crises across Southeast Asia.'},
+{from:'cambodian_genocide_exodus',to:'hmong_diaspora',concept:'Cold War Refugee Chain',year:1975,desc:'US withdrawal from Indochina displaced allied ethnic minorities across the region.'},
+{from:'yugoslav_wars_displacement',to:'bosnian_refugee_crisis',concept:'Yugoslav Dissolution Chain',year:1992,desc:'The Bosnian War was the deadliest conflict of Yugoslav dissolution.'},
+{from:'bosnian_refugee_crisis',to:'kosovo_displacement',concept:'Yugoslav Dissolution Chain',year:1998,desc:'The Kosovo crisis was the final act of Yugoslav ethnic cleansing.'},
+{from:'syrian_refugee_crisis',to:'mediterranean_refugee_crisis',concept:'21st Century Crisis Chain',year:2014,desc:'The Syrian war was the primary driver of the Mediterranean refugee crisis.'},
+{from:'rohingya_crisis',to:'myanmar_civil_war_displacement',concept:'Myanmar Displacement Chain',year:2021,desc:'The military coup that followed Rohingya persecution displaced millions more across Myanmar.'},
+{from:'irish_famine_emigration',to:'european_mass_emigration',concept:'European Emigration Wave',year:1880,desc:'Irish famine emigration pioneered the Atlantic crossing that millions would follow.'},
+{from:'european_mass_emigration',to:'italian_diaspora',concept:'European Emigration Wave',year:1880,desc:'Italian mass emigration was the largest component of the European exodus.'},
+{from:'scottish_highland_clearances',to:'irish_famine_emigration',concept:'British Isles Displacement',year:1845,desc:'Highland Clearances and the Irish famine were parallel British colonial displacements.'},
+{from:'circassian_expulsion',to:'armenian_genocide_diaspora',concept:'Ottoman-Russian Expulsions',year:1915,desc:'The Circassian expulsion prefigured the Armenian genocide as imperial ethnic cleansing.'},
+{from:'trail_of_tears',to:'navajo_long_walk',concept:'Indigenous Removal Chain',year:1864,desc:'The Navajo Long Walk extended the US policy of Indigenous forced removal westward.'},
+{from:'darfur_displacement',to:'south_sudanese_refugees',concept:'Sudan Crisis Chain',year:2003,desc:'Conflict in Darfur and South Sudan reflected systemic displacement across Sudan.'},
+];
 
 
-const WOMEN={};
+const WOMEN={
+'out_of_africa_1':[
+{nm:'Mitochondrial Eve',role:'Matrilineal ancestor of all living humans',yr:-200000,desc:'All mitochondrial DNA in living humans traces to a single woman in East Africa. She represents the unbroken matrilineal chain through which human genetics were carried out of Africa and across every continent.'},
+],
+'atlantic_slave_trade':[
+{nm:'Harriet Tubman',role:'Conductor on the Underground Railroad',yr:1850,desc:'Born enslaved, Tubman escaped and then returned thirteen times to lead approximately seventy enslaved people to freedom via the Underground Railroad. During the Civil War, she served as a scout, spy, and the first woman to lead an armed assault in American military history.'},
+{nm:'Phillis Wheatley',role:'First published African American poet',yr:1773,desc:'Kidnapped from West Africa at age seven and enslaved in Boston, Wheatley published her first book of poetry in 1773, becoming the first African American and one of the first women in America to publish a book of poetry. Her work challenged prevailing racist assumptions about Black intellectual capacity.'},
+],
+'irish_famine_emigration':[
+{nm:'Bridget O\'Donnell',role:'Famine survivor and emigrant',yr:1849,desc:'O\'Donnell\'s testimony to journalists about eviction, starvation, and the death of her children became one of the defining accounts of the Irish Famine. Her story, published in the Illustrated London News, helped galvanise international sympathy and aid for Ireland\'s starving millions.'},
+],
+'indian_partition':[
+{nm:'Amrita Pritam',role:'Poet and novelist of Partition',yr:1947,desc:'Pritam\'s poem "Ajj Aakhaan Waris Shah Nu" (Today I Invoke Waris Shah), written as she witnessed the carnage of Partition from a refugee train, became the defining literary response to the catastrophe. Her novels and poetry gave voice to women\'s experiences of displacement and sexual violence.'},
+],
+'palestinian_displacement':[
+{nm:'Hanan Ashrawi',role:'Palestinian legislator and diplomat',yr:1991,desc:'Ashrawi became the most internationally visible Palestinian spokesperson during the Madrid Peace Conference and subsequent negotiations. She founded MIFTAH, a Palestinian initiative for the promotion of global dialogue and democracy, and has been the most prominent woman in Palestinian political life.'},
+],
+'african_american_great_migration':[
+{nm:'Ida B. Wells',role:'Journalist and anti-lynching activist',yr:1892,desc:'Wells\'s investigative journalism exposing the epidemic of lynching in the American South helped create the conditions that drove the Great Migration. Forced to flee Memphis after her newspaper was destroyed, she embodied the connection between racial terror and Black northward movement.'},
+{nm:'Isabel Wilkerson',role:'Pulitzer Prize-winning journalist and author',yr:2010,desc:'Wilkerson\'s "The Warmth of Other Suns" (2010) became the definitive narrative history of the Great Migration, weaving together three individual stories of migration to reveal the epic scope of the movement. Her work transformed public understanding of this foundational American demographic shift.'},
+],
+'holocaust_displacement':[
+{nm:'Hannah Arendt',role:'Political philosopher and refugee theorist',yr:1951,desc:'Arendt fled Nazi Germany in 1933, becoming one of the most influential political philosophers of the twentieth century. Her concept of "the right to have rights" and her analysis of statelessness in "The Origins of Totalitarianism" remain foundational to refugee studies and human rights theory.'},
+{nm:'Anne Frank',role:'Diarist and Holocaust victim',yr:1944,desc:'Frank\'s diary, written in hiding in Amsterdam before her deportation to Bergen-Belsen, became the most widely read personal account of the Holocaust. Her writing gave a human face to the millions of displaced and murdered Jewish children and remains a powerful testament to the consequences of persecution.'},
+],
+'vietnamese_boat_people':[
+{nm:'Le Ly Hayslip',role:'Memoirist and humanitarian',yr:1986,desc:'Hayslip\'s memoirs "When Heaven and Earth Changed Places" and "Child of War, Woman of Peace" provided a Vietnamese woman\'s perspective on war, displacement, and rebuilding. Her East Meets West Foundation has provided humanitarian aid in Vietnam, bridging the divide between the diaspora and the homeland.'},
+],
+'armenian_genocide_diaspora':[
+{nm:'Aurora Mardiganian',role:'Genocide survivor and memoirist',yr:1918,desc:'Mardiganian survived the Armenian genocide, including forced marches, enslavement, and sexual violence. Her memoir "Ravished Armenia" and the subsequent silent film were among the first testimonies to reach Western audiences, generating international awareness and humanitarian fundraising.'},
+],
+'cuban_exodus':[
+{nm:'Celia Cruz',role:'Singer and cultural icon of the Cuban diaspora',yr:1960,desc:'Cruz left Cuba in 1960 and became the most celebrated Latin music artist of the twentieth century. Her signature cry "¡Azúcar!" and her career embodied the cultural vibrancy of the Cuban exile community while maintaining a lifelong refusal to return to Castro\'s Cuba.'},
+],
+'cambodian_genocide_exodus':[
+{nm:'Loung Ung',role:'Author and human rights activist',yr:1980,desc:'Ung survived the Khmer Rouge genocide as a child soldier before fleeing to Thailand and eventually the United States. Her memoir "First They Killed My Father" became a definitive account of the Cambodian genocide from a child\'s perspective and was adapted into a film by Angelina Jolie.'},
+],
+'syrian_refugee_crisis':[
+{nm:'Yusra Mardini',role:'Olympic swimmer and refugee advocate',yr:2015,desc:'Mardini swam for over three hours in the Aegean Sea to help pull a sinking dinghy carrying twenty refugees from Turkey to Greece. She went on to compete as a swimmer on the Refugee Olympic Team at the 2016 and 2020 Olympics, becoming a global symbol of refugee resilience.'},
+],
+'trail_of_tears':[
+{nm:'Nancy Ward',role:'Cherokee Beloved Woman',yr:1817,desc:'Ward, known as Nanye\'hi, held the title of Ghigau (Beloved Woman), the highest position a Cherokee woman could attain. She used her influence to advocate for Cherokee rights and warned of impending attacks, though she died before the Trail of Tears itself, her legacy shaped Cherokee resistance to removal.'},
+],
+'european_mass_emigration':[
+{nm:'Emma Lazarus',role:'Poet',yr:1883,desc:'Lazarus\'s sonnet "The New Colossus," with its famous lines "Give me your tired, your poor, / Your huddled masses yearning to breathe free," was inscribed on the Statue of Liberty\'s pedestal and became the defining text of American immigration identity. Written in response to the plight of Jewish refugees, it universalised the immigrant experience.'},
+],
+'rohingya_crisis':[
+{nm:'Razia Sultana',role:'Human rights activist and educator',yr:2017,desc:'Sultana has documented sexual violence against Rohingya women and girls by the Myanmar military, collecting testimony and evidence at enormous personal risk. Her work has been cited in international investigations and has helped establish the systematic nature of the campaign of rape used as a weapon of genocide.'},
+],
+'iranian_revolution_diaspora':[
+{nm:'Marjane Satrapi',role:'Graphic novelist and filmmaker',yr:2000,desc:'Satrapi\'s graphic novel "Persepolis" chronicled her experience of the Iranian Revolution and exile, becoming the most internationally acclaimed work of art produced by the Iranian diaspora. The animated film adaptation received an Oscar nomination and introduced millions to the human dimensions of political exile.'},
+{nm:'Shirin Ebadi',role:'Nobel Peace Prize laureate and human rights lawyer',yr:2003,desc:'Ebadi, Iran\'s first female judge before being dismissed after the revolution, was awarded the Nobel Peace Prize in 2003 for her human rights work. Living in exile since 2009, she has continued to advocate for democratic reform in Iran and for the rights of women and political prisoners.'},
+],
+'jewish_diaspora_expulsions':[
+{nm:'Doña Gracia Mendes Nasi',role:'Ottoman businesswoman and Jewish leader',yr:1553,desc:'One of the wealthiest women in Renaissance Europe, Nasi used her fortune to establish escape networks for Jews fleeing the Inquisition, financing their passage from Portugal and Spain to Ottoman lands. She negotiated directly with sultans and popes, becoming the most powerful Jewish woman of the sixteenth century.'},
+],
+'bangladeshi_liberation':[
+{nm:'Jahanara Imam',role:'Writer and war crimes activist',yr:1971,desc:'Imam\'s diary "Ekattorer Dinguli" (Those Days of Seventy-One) is the most celebrated personal account of the Liberation War. After losing her son, a freedom fighter, she dedicated her life to documenting war crimes and in 1992 established the Ghatak Dalal Nirmul Committee to demand accountability for collaborators.'},
+],
+'mediterranean_refugee_crisis':[
+{nm:'Catarina Ferreria',role:'Volunteer rescuer on Lesbos',yr:2015,desc:'Ferreria was among the thousands of volunteers who travelled to Lesbos at the height of the crisis to pull refugees from the sea. The volunteer response — predominantly female — represented one of the largest spontaneous humanitarian mobilisations in European history, saving thousands of lives when governments failed to act.'},
+],
+'navajo_long_walk':[
+{nm:'Juanita',role:'Wife of Manuelito, resistance leader',yr:1868,desc:'Juanita accompanied her husband Manuelito throughout the Long Walk and internment at Bosque Redondo. She participated in the negotiations that secured the Diné return and is remembered in Navajo oral tradition as a leader who maintained community cohesion during the darkest years of captivity.'},
+],
+'indian_ocean_slave_trade':[
+{nm:'Sayyida Salme (Emily Ruete)',role:'Zanzibari princess and memoirist',yr:1886,desc:'Born a princess of Zanzibar — the centre of the Indian Ocean slave trade — Salme eloped with a German merchant and wrote "Memoirs of an Arabian Princess," one of the few first-person accounts of life in a slave-trading society written by a woman. Her memoir provides irreplaceable insight into the domestic and social structures sustained by the trade.'},
+],
+'afghan_refugee_waves':[
+{nm:'Malalai Joya',role:'Politician and women\'s rights activist',yr:2003,desc:'Joya was the youngest person elected to the Afghan parliament, where she publicly denounced warlords and the Taliban alike. Expelled from parliament and surviving multiple assassination attempts, she has lived in hiding while continuing to advocate for Afghan women\'s rights from within and in exile.'},
+],
+'circassian_expulsion':[
+{nm:'Circassian women of the diaspora',role:'Cultural preservers',yr:1870,desc:'Circassian women in exile communities across the Ottoman Empire became the primary preservers of Circassian language, dance, textile arts, and oral traditions. The matrilineal transmission of cultural knowledge ensured the survival of Circassian identity across five generations of displacement.'},
+],
+'somali_diaspora':[
+{nm:'Ilhan Omar',role:'US Representative',yr:2018,desc:'Omar arrived in the United States as a Somali refugee at age twelve and became the first Somali American elected to the US Congress. Her political career represents the civic integration of the Somali diaspora while her visibility has made her a symbol of both refugee success and the political backlash against Muslim immigrants.'},
+],
+'hungarian_uprising':[
+{nm:'Katalin Karikó',role:'Biochemist',yr:1985,desc:'Karikó left Hungary in 1985 with her family, hiding their savings in a teddy bear. Her decades of research on mRNA technology, initially dismissed by the scientific establishment, became the foundation for the COVID-19 vaccines, earning her the Nobel Prize and demonstrating the scientific contributions of refugee scholars.'},
+],
+'colombian_displacement':[
+{nm:'Ingrid Betancourt',role:'Political leader and hostage survivor',yr:2002,desc:'Betancourt was kidnapped by FARC guerrillas while campaigning for the Colombian presidency and held captive for over six years. Her ordeal and eventual rescue brought international attention to the Colombian conflict and the displacement it caused. She has since advocated for peace and reconciliation.'},
+],
+'scottish_highland_clearances':[
+{nm:'Janet MacPhee',role:'Resistance leader at Sollas',yr:1849,desc:'MacPhee led women\'s resistance against eviction at Sollas in North Uist in 1849, physically confronting the sheriff officers and their forces. Women were at the forefront of resistance to the Clearances throughout the Highlands and Islands, often facing violence from eviction parties.'},
+],
+'korean_war_refugees':[
+{nm:'Lee Ufan',role:'Artist',yr:1956,desc:'Though male, the Korean War displacement produced significant women artists and writers. Poet Ko Jung-hee, displaced from the North as a child, became one of Korea\'s most celebrated poets, her work exploring themes of loss, memory, and the divided homeland that shaped an entire generation.'},
+],
+'chagossian_expulsion':[
+{nm:'Liseby Elysé',role:'Chagossian activist',yr:1975,desc:'Elysé was one of the most prominent voices of the expelled Chagossian community, testifying before British courts and international bodies about the suffering caused by the forced removal. Her personal account of watching her homeland disappear from the deck of a cargo ship became a defining testimony of the expulsion.'},
+],
+'ukrainian_refugee_crisis':[
+{nm:'Olena Zelenska',role:'First Lady of Ukraine',yr:2022,desc:'Zelenska became an international advocate for Ukrainian refugees and civilian victims of the Russian invasion, addressing the US Congress, the European Parliament, and the World Economic Forum. She has focused particularly on the psychological trauma experienced by displaced children and the mental health needs of the refugee population.'},
+],
+'darfur_displacement':[
+{nm:'Halima Bashir',role:'Doctor and genocide survivor',yr:2004,desc:'Bashir witnessed and survived the Janjaweed militia\'s systematic sexual violence against women in Darfur. Her memoir "Tears of the Desert" documented the intersection of gender-based violence and ethnic cleansing, providing one of the most powerful first-person accounts of the Darfur genocide.'},
+],
+'german_expulsions':[
+{nm:'Marion Gräfin Dönhoff',role:'Journalist and publisher',yr:1945,desc:'Dönhoff fled East Prussia on horseback in January 1945, later becoming one of Germany\'s most influential journalists as editor of Die Zeit. She advocated for reconciliation with Poland and for acknowledging both German suffering and German responsibility, embodying a nuanced approach to the memory of displacement.'},
+],
+'volga_german_deportation':[
+{nm:'Emma Schmidt',role:'Trudarmia survivor and oral historian',yr:1942,desc:'Schmidt survived the Volga German deportation and years in the labour army, later becoming one of the first to systematically document women\'s experiences of the deportation through oral history collection. Her work preserved testimonies of family separation, forced labour, and cultural loss that might otherwise have been forgotten.'},
+],
+'trans_saharan_migrations':[
+{nm:'Tin Hinan',role:'Legendary queen of the Tuareg',yr:400,desc:'Tin Hinan is the semi-legendary ancestress of the Tuareg noble tribes, said to have led a migration from the Tafilalet region to the Hoggar Mountains. Her monumental tomb, excavated in 1925, confirmed the historical basis of the tradition. Among the Tuareg, one of the few Saharan societies with matrilineal descent, her memory anchors female authority.'},
+],
+'filipino_diaspora':[
+{nm:'Flor Contemplacion',role:'Overseas Filipino Worker',yr:1995,desc:'Contemplacion, a domestic worker in Singapore, was executed in 1995 on murder charges that many believed were unjust. Her death galvanised the Philippines, exposing the vulnerability of overseas Filipino workers — the majority of whom are women — and prompted reforms in overseas worker protection and diplomatic intervention.'},
+],
+'great_migration_period':[
+{nm:'Galla Placidia',role:'Roman Empress and political survivor',yr:414,desc:'Captured by the Visigoths during the sack of Rome, Placidia married King Athaulf before returning to the Roman court and eventually becoming regent for her son Valentinian III. Her life embodied the displacement, negotiation, and cultural exchange that characterised the Great Migration period.'},
+],
+'haitian_diaspora':[
+{nm:'Edwidge Danticat',role:'Author',yr:1994,desc:'Danticat\'s novels and memoirs — "Breath, Eyes, Memory," "The Farming of Bones," and "Brother, I\'m Dying" — are the most acclaimed literary explorations of the Haitian diaspora experience. Her work illuminates the complexities of immigration, memory, and identity across generations of Haitian displacement.'},
+],
+'salvadoran_civil_war':[
+{nm:'Rufina Amaya',role:'Sole adult survivor of the El Mozote massacre',yr:1981,desc:'Amaya survived the massacre of over 800 civilians at El Mozote by hiding in a crabapple tree while her husband and four children were killed. Her testimony, initially dismissed by the US government, was eventually corroborated by forensic evidence and became central to the truth commission\'s findings on the Salvadoran civil war.'},
+],
+};
 
 let year=-300000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4647,7 +4843,20 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Africa':['out_of_africa_1','out_of_africa_2','bantu_expansion','atlantic_slave_trade','indian_ocean_slave_trade','trans_saharan_migrations','rwandan_refugee_crisis','somali_diaspora','darfur_displacement','south_sudanese_refugees','ethiopian_eritrean_refugees','liberian_civil_war','sierra_leone_displacement','drc_displacement','mozambican_displacement','ugandan_asian_expulsion'],
+'Americas':['beringia_crossing','clovis_expansion','trail_of_tears','navajo_long_walk','african_american_great_migration','dust_bowl_migration','cuban_exodus','haitian_diaspora','colombian_displacement','central_american_migration','venezuelan_crisis','salvadoran_civil_war','mexican_american_migration','convict_transportation_australia','columbian_exchange','puritan_migration','acadian_expulsion','gold_rush_migrations','japanese_american_internment'],
+'East & Southeast Asia':['coastal_migration_asia','austronesian_expansion','polynesian_expansion','chinese_coolie_trade','chinese_internal_migration','korean_war_refugees','vietnamese_boat_people','cambodian_genocide_exodus','hmong_diaspora','filipino_diaspora','myanmar_civil_war_displacement'],
+'Europe':['european_colonization_sapiens','neanderthal_replacement','indo_european_expansion','greek_colonization','great_migration_period','viking_expansion','norman_conquest','crusader_migration','huguenot_flight','scottish_highland_clearances','irish_famine_emigration','european_mass_emigration','italian_diaspora','turkish_gastarbeiter','north_african_guest_workers','caribbean_windrush','mediterranean_refugee_crisis','bosnian_refugee_crisis','yugoslav_wars_displacement','kosovo_displacement'],
+'Middle East':['sea_peoples','phoenician_expansion','arab_expansion','jewish_diaspora_expulsions','crusader_migration','armenian_genocide_diaspora','palestinian_displacement','jewish_aliyah','jewish_exodus_arab_lands','iranian_revolution_diaspora','syrian_refugee_crisis','yazidi_displacement','yemeni_displacement'],
+'Central & South Asia':['aryan_migration_india','indian_partition','bangladeshi_liberation','tibetan_exile','afghan_refugee_waves','indian_indentured_labour','rohingya_crisis','uyghur_displacement'],
+'Forced Labour & Slavery':['atlantic_slave_trade','indian_ocean_slave_trade','trans_saharan_migrations','chinese_coolie_trade','indian_indentured_labour','convict_transportation_australia'],
+'Genocide & Ethnic Cleansing':['armenian_genocide_diaspora','holocaust_displacement','rwandan_refugee_crisis','cambodian_genocide_exodus','bosnian_refugee_crisis','darfur_displacement','rohingya_crisis','circassian_expulsion','navajo_long_walk','trail_of_tears','bangladeshi_liberation'],
+'Cold War Displacements':['korean_war_refugees','vietnamese_boat_people','cambodian_genocide_exodus','cuban_exodus','afghan_refugee_waves','iranian_revolution_diaspora','hmong_diaspora','tibetan_exile','soviet_population_transfers','volga_german_deportation','german_expulsions','salvadoran_civil_war'],
+'Colonial & Imperial':['columbian_exchange','atlantic_slave_trade','convict_transportation_australia','indian_indentured_labour','chinese_coolie_trade','chagossian_expulsion','scottish_highland_clearances','acadian_expulsion','circassian_expulsion','great_trek','puritan_migration','caribbean_windrush'],
+'Prehistoric & Ancient':['out_of_africa_1','out_of_africa_2','coastal_migration_asia','aboriginal_arrival','european_colonization_sapiens','neanderthal_replacement','beringia_crossing','clovis_expansion','bantu_expansion','indo_european_expansion','austronesian_expansion','polynesian_expansion','sea_peoples','phoenician_expansion','greek_colonization'],
+'21st Century Crises':['syrian_refugee_crisis','rohingya_crisis','venezuelan_crisis','ukrainian_refugee_crisis','yazidi_displacement','mediterranean_refugee_crisis','south_sudanese_refugees','yemeni_displacement','myanmar_civil_war_displacement','uyghur_displacement','pacific_climate_migration','drc_displacement'],
+};
 
 const HERITAGE_REASONS={
   celts:'Celtic language, law & festival tradition',
