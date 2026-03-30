@@ -546,8 +546,8 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 <button class="skip-link" onclick="document.getElementById('info-panel').focus()">Skip to civilization panel</button>
 <header class="hdr" role="banner">
   <div class="hdr-left">
-    <span class="logo-t">CIVILITAS</span>
-    <span class="logo-s">The Human Atlas</span>
+    <span class="logo-t">NOMAD</span>
+    <span class="logo-s">The Nomadic Atlas</span>
   </div>
   <div class="era-disp">
     <div class="era-y" id="era-y">3500 BCE</div>
@@ -6767,8 +6767,8 @@ function renderDrawer(){
     dc.innerHTML=`
     <div style="padding:4px 0 16px">
 
-      <div style="font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--amber-b);letter-spacing:2px;margin-bottom:2px">CIVILITAS</div>
-      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Human Atlas</div>
+      <div style="font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--amber-b);letter-spacing:2px;margin-bottom:2px">NOMAD</div>
+      <div style="font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3.5px;color:var(--txt3);text-transform:uppercase;margin-bottom:16px">The Nomadic Atlas</div>
 
       <div style="font-size:13.5px;line-height:1.85;color:var(--txt2);margin-bottom:18px">
         100 civilizations. 65,000 years. Every idea, technology, religion, and political system that made the modern world — mapped, connected, and explorable. From Aboriginal Australia's 65,000-year culture to the present day, rendered on a real geographic projection and navigable across a continuous timeline.
@@ -7290,7 +7290,7 @@ function shareState(){
   catch(e){url='#'+encodeState();}
 
   const civName=sel?sel.nm:null;
-  const shareTitle='Civilitas — The Human Atlas';
+  const shareTitle='Nomad — The Nomadic Atlas';
   const shareText=civName
     ? `Explore ${civName} on Civilitas — 85 civilizations, 65,000 years of human history`
     : 'Civilitas — 85 civilizations, 65,000 years of human history, all in one map';
@@ -8150,7 +8150,7 @@ function renderHerstoryDrawer(){
     dc.innerHTML=`
     <div class="hs-panel-hdr">♀ Herstory</div>
     <div class="hs-panel-sub">
-      A mirror to CIVILITAS — tracing 65,000 years of human history through the women who shaped it. Rulers, philosophers, warriors, artists, and mothers whose contributions were minimised, erased, or deliberately forgotten. The record is incomplete because the record was kept by men. That absence is itself the argument.
+      A mirror to NOMAD — tracing 12,000 years of nomadic history through the women who shaped it. Herders, warriors, diplomats, shamans, and queens whose contributions to mobile societies were minimised, erased, or deliberately forgotten. Sedentary historians dismissed nomadic women as invisible. They were anything but.
     </div>
     <div style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
       Tap any civilization on the map to discover the women who shaped it — queens who governed, scholars who wrote, warriors who fought, and spiritual leaders who held communities together.
@@ -8729,11 +8729,11 @@ function updateTlFill(pct){
   </div>
 
 <!-- About modal -->
-<div id="about-modal" role="dialog" aria-modal="true" aria-label="About Civilitas" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center">
+<div id="about-modal" role="dialog" aria-modal="true" aria-label="About Nomad" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);align-items:center;justify-content:center">
   <div style="background:var(--panel);border:1px solid var(--bdr);border-radius:6px;padding:28px 32px;max-width:420px;width:calc(100% - 40px);position:relative;box-shadow:0 16px 48px rgba(0,0,0,.6)">
     <button onclick="closeAbout()" aria-label="Close" style="position:absolute;top:12px;right:14px;background:none;border:none;color:var(--txt3);cursor:pointer;font-size:18px;line-height:1">✕</button>
-    <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px">CIVILITAS</div>
-    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">The Human Atlas</div>
+    <div style="font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--amber-b);letter-spacing:2px;margin-bottom:4px">NOMAD</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--txt3);text-transform:uppercase;margin-bottom:20px">The Nomadic Atlas</div>
     <p style="font-size:13px;line-height:1.8;color:var(--txt2);margin-bottom:12px">
       Created by <a href="https://polyglyphanalytica.com" target="_blank" rel="noopener" style="color:var(--amber-b);text-decoration:underline;text-underline-offset:3px">Polyglyph Analytica</a> &copy; <span id="about-year"></span>
     </p>
