@@ -2134,7 +2134,7 @@ abolition:'The abolition of Roma slavery in Romania was achieved in stages betwe
 }},
 {id:'spanish_colonial_slavery',nm:'Spanish Colonial Slavery',sb:'Asiento & Plantation System · Americas',s:1501,e:1886,lon:-82.4,lat:23.1,
 fp:{scale:10,duration:8,resistance:7,violence:9,economic:10,legacy:10},
-conns:['encomienda_system','caribbean_plantation','atlantic_slave_trade','brazilian_slavery','cuban_sugar'],
+conns:['encomienda_system','caribbean_plantation','atlantic_slave_trade','brazilian_slavery','cuban_sugar_slavery'],
 overview:'Spain was the first European power to bring enslaved Africans to the Americas and the last to abolish slavery in its colonies. From the first recorded African slaves in Hispaniola in 1501 to the final abolition in Cuba in 1886, Spanish colonial slavery spanned nearly four centuries and touched every corner of the vast Spanish Empire. The system evolved through distinct phases: the early exploitation of Indigenous peoples through the encomienda; the importation of African slaves through the asiento system (licensed monopoly contracts); and the explosive growth of plantation slavery in Cuba and Puerto Rico in the nineteenth century. Spain transported an estimated 1.1 million enslaved Africans to its American colonies.',
 d:{
 legal_framework:'Spanish colonial slavery was governed by a complex layering of Iberian legal traditions, Roman law, and colonial legislation. The Siete Partidas (Castilian legal code from the thirteenth century) recognised slavery but provided theoretical protections — enslaved people could own property, marry, and seek freedom through coartación (self-purchase by instalments). The asiento system granted monopoly contracts for supplying enslaved Africans to the colonies — held successively by Portuguese, Genoese, Dutch, French, and British traders. Colonial slave codes (reglamentos de esclavos) varied by territory and era. The gap between legal theory and colonial practice was enormous: the Siete Partidas\' protections were routinely ignored on remote plantations.',
@@ -2576,7 +2576,7 @@ abolition:'Japanese wartime forced labour ended with Japan\'s surrender on Augus
 }},
 {id:'zanj_rebellion',nm:'Zanj Rebellion',sb:'Abbasid Iraq · Enslaved East African Uprising',s:869,e:883,lon:47.0,lat:30.5,
 fp:{scale:7,duration:3,resistance:10,violence:9,economic:8,legacy:9},
-conns:['arab_slave_trade','east_african_trade','abbasid_slavery'],
+conns:['arab_slave_trade','east_african_trade','mesopotamian_debt_bondage'],
 overview:'The Zanj Rebellion (869–883 CE) was one of the largest slave revolts in history, waged by enslaved East Africans — the Zanj — forced to clear salt flats in southern Iraq under the Abbasid Caliphate. Led by Ali ibn Muhammad, who claimed descent from the Prophet, the rebellion established an independent state that controlled Basra and threatened Baghdad itself. At its peak, the revolt fielded tens of thousands of fighters and lasted fourteen years before Abbasid forces finally crushed it.',
 d:{
 legal_framework:'The legal status of the Zanj was rooted in Islamic jurisprudence on slavery, which permitted the enslavement of non-Muslims captured in war or purchased through trade. While Islamic law theoretically provided enslaved people certain protections — the right to adequate food, clothing, and humane treatment — the agricultural slavery practiced in southern Iraq violated these principles systematically. The Zanj were treated as expendable chattel, forced into brutal labour with no meaningful legal recourse. Ali ibn Muhammad exploited this gap between Islamic legal theory and actual practice, framing the rebellion as a righteous correction of injustice.',
@@ -3698,8 +3698,8 @@ function renderMap(){
     const heritageIds=mode==='heritage'&&heritageRegion?new Set(HERITAGE_REGIONS[heritageRegion]||[]):null;
     const isHeritage=heritageIds&&heritageIds.has(c.id);
     const heritageInactive=isHeritage&&!on;
-    const isWhatifLost=whatifCiv&&whatifCiv!==c.id&&
-      TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifCiv);
+    const isWhatifLost=whatifItem&&whatifItem!==c.id&&
+      TRANSMISSIONS.some(t=>t.to===c.id&&t.from===whatifItem);
     const womenCount=(WOMEN[c.id]||[]).length;
     const mcol=herstory?(isSel?'#f0d060':womenCount?'#c060a0':'#884468'):isSel?'#f0d060':isHeritage?'#4a9fc0':'#e8251a';
     // Drift 2: inactive items fully hidden (0 not 0.06). Drift 3: herstory items without WOMEN hidden (0 not 0.35).
@@ -3986,7 +3986,7 @@ function setYear(y){
   if(sel&&!active(sel))closeInfo();
   else renderDrawer();
   updateURL();
-  if(mode==='whatif'&&whatifCiv)renderWhatIfPaths();
+  if(mode==='whatif'&&whatifItem)renderWhatIfPaths();
 }
 
 function renderWorldMap(world){
@@ -4054,7 +4054,7 @@ function init(){
 // ── MODE MANAGEMENT ──
 function setMode(m){
   // Clear mode-specific state when leaving
-  if(m!=='whatif')whatifCiv=null;
+  if(m!=='whatif')whatifItem=null;
   if(m!=='heritage')heritageRegion=null;
   mode=m;
   ['explore','threads','compare','whatif','heritage'].forEach(id=>{
@@ -4839,15 +4839,15 @@ function renderDiplomaticSection(c){
 // ══════════════════════════════════════════════════════
 // WHAT-IF MODE
 // ══════════════════════════════════════════════════════
-let whatifCiv=null;
+let whatifItem=null;
 
 // ── WHAT-IF MAP RENDERING ──
 function renderWhatIfPaths(){
   const layer=document.getElementById('thread-layer');
   if(!layer){return;}
-  if(!whatifCiv){layer.innerHTML='';return;}
+  if(!whatifItem){layer.innerHTML='';return;}
 
-  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
   if(!c){layer.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -4916,7 +4916,7 @@ function renderWhatIfDrawer(){
   if(dt)dt.innerHTML='';
   if(!dc)return;
 
-  if(!whatifCiv){
+  if(!whatifItem){
     dc.innerHTML=`
     <div style="font-family:'Cinzel Decorative',serif;font-size:12px;color:var(--amber-b);margin-bottom:10px;letter-spacing:1px">What If?</div>
     <div style="font-size:13.5px;line-height:1.8;color:var(--txt2);margin-bottom:16px">
@@ -4946,7 +4946,7 @@ function renderWhatIfDrawer(){
     return;
   }
 
-  const c=ITEMS.find(x=>x&&x.id===whatifCiv);
+  const c=ITEMS.find(x=>x&&x.id===whatifItem);
   if(!c){dc.innerHTML='';return;}
 
   const directOut=TRANSMISSIONS.filter(t=>t.from===c.id);
@@ -5011,7 +5011,7 @@ function renderWhatIfDrawer(){
   if(panel)setTimeout(()=>panel.scrollTop=0,0);
 }
 function setWhatIf(id){
-  whatifCiv=id;
+  whatifItem=id;
   renderWhatIfDrawer();
   renderWhatIfPaths();
   renderMap();
@@ -5019,7 +5019,7 @@ function setWhatIf(id){
 }
 
 function clearWhatIf(){
-  whatifCiv=null;
+  whatifItem=null;
   document.getElementById('thread-layer').innerHTML='';
   renderWhatIfDrawer();
   renderMap();
