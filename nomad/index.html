@@ -708,10 +708,48 @@ body.herstory .hdr{border-bottom-color:rgba(192,96,160,.3)}
 // order by `lbl`. The lens picker renders this array as-is; an unsorted entry
 // will appear out of place in the UI and break predictable scan order.
 // ────────────────────────────────────────────────────────────────────────────
-const LENSES=[];
+const LENSES=[
+{id:'animal_husbandry',ico:'🐎',lbl:'Animal Husbandry',col:'#d4a054'},
+{id:'art',ico:'🎨',lbl:'Art & Expression',col:'#c87898'},
+{id:'climate',ico:'🌦',lbl:'Climate & Environment',col:'#6aaa8a'},
+{id:'conflict',ico:'⚔',lbl:'Conflict & Warfare',col:'#d45040'},
+{id:'decline',ico:'⟁',lbl:'Decline & Transformation',col:'#9a7abc'},
+{id:'diet',ico:'🍖',lbl:'Diet & Subsistence',col:'#c89a5a'},
+{id:'diplomacy',ico:'🤝',lbl:'Diplomacy & Alliances',col:'#5a8ac0'},
+{id:'ecology',ico:'🌿',lbl:'Ecology & Land Use',col:'#5aaa5a'},
+{id:'gender',ico:'⚤',lbl:'Gender & Social Roles',col:'#c06098'},
+{id:'governance',ico:'⚖',lbl:'Governance & Leadership',col:'#8a7ab4'},
+{id:'horse',ico:'🐴',lbl:'Horse & Mount Culture',col:'#b8884a'},
+{id:'identity',ico:'◉',lbl:'Identity & Belonging',col:'#d48a40'},
+{id:'kinship',ico:'👥',lbl:'Kinship & Family',col:'#aa7a6a'},
+{id:'language',ico:'𐤀',lbl:'Language & Oral Tradition',col:'#7a9ac0'},
+{id:'legacy',ico:'⏳',lbl:'Legacy & Influence',col:'#c4a840'},
+{id:'mobility',ico:'➤',lbl:'Mobility & Migration',col:'#5ab0c0'},
+{id:'religion',ico:'☽',lbl:'Religion & Cosmology',col:'#8a6aaa'},
+{id:'shelter',ico:'⛺',lbl:'Shelter & Dwelling',col:'#9a8a6a'},
+{id:'technology',ico:'⚒',lbl:'Technology & Craft',col:'#7aaa8a'},
+{id:'trade',ico:'⚖',lbl:'Trade & Exchange',col:'#c09a40'},
+];
 
 
-const ERAS=[];
+const ERAS=[
+{y:-10000,n:'MESOLITHIC WANDERERS'},
+{y:-6000,n:'EARLY PASTORALISTS'},
+{y:-3000,n:'BRONZE AGE HERDERS'},
+{y:-1200,n:'IRON AGE RIDERS'},
+{y:-600,n:'CLASSICAL STEPPE'},
+{y:-200,n:'EMPIRE OF HORSEMEN'},
+{y:200,n:'MIGRATION ERA'},
+{y:500,n:'TURKIC ASCENDANCY'},
+{y:800,n:'VIKING & STEPPE ZENITH'},
+{y:1100,n:'MONGOL STORM'},
+{y:1300,n:'SUCCESSOR KHANATES'},
+{y:1500,n:'GUNPOWDER FRONTIER'},
+{y:1700,n:'COLONIAL ENCLOSURE'},
+{y:1850,n:'RESERVATION & SETTLEMENT'},
+{y:1945,n:'POSTCOLONIAL ERA'},
+{y:1990,n:'MODERN NOMADISM'},
+];
 
 const ITEMS=[
 {id:'mongols',nm:'Mongol Empire',sb:'Steppe Nomads · Central Asia to Europe',s:1206,e:1368,lon:104.0,lat:47.0,
@@ -3234,12 +3272,191 @@ trade:'The Il-Khanate occupied a pivotal position on the Silk Road, and Mongol r
 
 
 
-const DIPLOMATIC=[];
+const DIPLOMATIC=[
+{from:'mongols',to:'golden_horde',type:'succession',yr:1240},
+{from:'mongols',to:'il_khanate',type:'succession',yr:1256},
+{from:'mongols',to:'chagatai_khanate',type:'succession',yr:1227},
+{from:'mongols',to:'timurids',type:'succession',yr:1370},
+{from:'golden_horde',to:'kazakh_nomads',type:'succession',yr:1450},
+{from:'golden_horde',to:'nogai',type:'succession',yr:1300},
+{from:'xiongnu',to:'huns',type:'migration',yr:100},
+{from:'turkic_khaganate',to:'uyghur_khaganate',type:'succession',yr:744},
+{from:'scythians',to:'sarmatians',type:'succession',yr:-300},
+{from:'lakota',to:'cheyenne',type:'alliance',yr:1830},
+{from:'cheyenne',to:'arapaho',type:'alliance',yr:1830},
+{from:'maasai',to:'samburu',type:'kinship',yr:1500},
+{from:'dinka',to:'nuer',type:'rivalry',yr:1400},
+{from:'inuit',to:'yupik',type:'kinship',yr:-1000},
+{from:'sami',to:'nenets',type:'trade',yr:500},
+{from:'nenets',to:'evenki',type:'trade',yr:800},
+{from:'bajau',to:'moken',type:'kinship',yr:800},
+{from:'bajau',to:'orang_laut',type:'kinship',yr:600},
+{from:'comanche',to:'apache',type:'rivalry',yr:1750},
+{from:'cuman_kipchak',to:'pecheneg',type:'rivalry',yr:1050},
+{from:'xianbei',to:'khitan',type:'succession',yr:400},
+{from:'khitan',to:'jurchen',type:'succession',yr:1100},
+{from:'san_bushmen',to:'khoekhoe',type:'kinship',yr:-500},
+{from:'tuareg',to:'toubou',type:'trade',yr:1000},
+];
 
-const TRANSMISSIONS=[];
+const TRANSMISSIONS=[
+{from:'scythians',to:'sarmatians',concept:'Mounted Archery',year:-400,desc:'Scythian composite bow and mounted archery techniques passed to their Sarmatian successors on the Pontic steppe.'},
+{from:'sarmatians',to:'huns',concept:'Mounted Archery',year:200,desc:'Sarmatian heavy cavalry and archery traditions merged with Hunnic horse warrior culture as the Huns moved westward.'},
+{from:'huns',to:'avars',concept:'Mounted Archery',year:450,desc:'Hunnic warfare techniques were adopted by the Avars, who brought the stirrup to Europe and perfected mounted shock combat.'},
+{from:'avars',to:'mongols',concept:'Mounted Archery',year:800,desc:'The Central Asian mounted archery tradition, refined through successive steppe empires, reached its apex under the Mongols.'},
+{from:'mongols',to:'golden_horde',concept:'Steppe Empire Administration',year:1240,desc:'Mongol imperial governance — the yasa legal code, decimal military organisation, and postal relay system — was transmitted to the Golden Horde.'},
+{from:'golden_horde',to:'kazakh_nomads',concept:'Steppe Empire Administration',year:1450,desc:'Kazakh khanate governance drew on Golden Horde administrative traditions, including tribal confederation structures.'},
+{from:'mongols',to:'timurids',concept:'Steppe Empire Administration',year:1370,desc:'Timur claimed Chinggisid legitimacy and adopted Mongol military organisation and imperial ideology for his conquests.'},
+{from:'mongols',to:'il_khanate',concept:'Steppe Empire Administration',year:1256,desc:'The Il-Khanate inherited Mongol military structure and combined it with Persian bureaucratic tradition.'},
+{from:'turkic_khaganate',to:'uyghur_khaganate',concept:'Turkic Political Models',year:744,desc:'The Uyghur Khaganate inherited and transformed Turkic political institutions, adding urban centres and written administration.'},
+{from:'uyghur_khaganate',to:'khitan',concept:'Turkic Political Models',year:900,desc:'Khitan Liao dynasty adopted Turkic-Uyghur administrative practices alongside Chinese bureaucratic models.'},
+{from:'xiongnu',to:'turkic_khaganate',concept:'Inner Asian Confederacy',year:550,desc:'The Turkic Khaganate replicated the Xiongnu model of steppe confederation, uniting pastoral tribes under a supreme khagan.'},
+{from:'xiongnu',to:'rouran',concept:'Inner Asian Confederacy',year:330,desc:'The Rouran adopted the Xiongnu confederacy model to unite Mongolian steppe tribes after Xiongnu fragmentation.'},
+{from:'rouran',to:'mongols',concept:'Inner Asian Confederacy',year:1200,desc:'Genghis Khan\'s unification of the Mongol tribes drew on the deep tradition of steppe confederation stretching back through the Rouran to the Xiongnu.'},
+{from:'bedouin',to:'tuareg',concept:'Desert Navigation',year:700,desc:'Arab expansion across North Africa transmitted camel pastoralism and desert navigation knowledge to Saharan Berber peoples.'},
+{from:'tuareg',to:'fulani',concept:'Desert Navigation',year:1200,desc:'Tuareg trans-Saharan trade networks connected with Fulani pastoral routes, sharing knowledge of arid-zone survival.'},
+{from:'tuareg',to:'toubou',concept:'Desert Navigation',year:1000,desc:'Toubou peoples of the central Sahara shared desert survival techniques with Tuareg caravaneers along overlapping trade routes.'},
+{from:'san_bushmen',to:'khoekhoe',concept:'Southern African Pastoralism',year:-500,desc:'Khoekhoe peoples acquired livestock and pastoral techniques while maintaining connections with San hunter-gatherer knowledge systems.'},
+{from:'khoekhoe',to:'herero',concept:'Southern African Pastoralism',year:1500,desc:'Herero cattle-herding traditions in Namibia developed alongside and in interaction with Khoekhoe pastoral practices.'},
+{from:'polynesian_voyagers',to:'bajau',concept:'Maritime Nomadism',year:500,desc:'Austronesian seafaring traditions connect Polynesian voyagers and Bajau sea nomads through shared ancestral maritime culture.'},
+{from:'bajau',to:'moken',concept:'Maritime Nomadism',year:800,desc:'Southeast Asian sea nomad traditions — Bajau and Moken — share Austronesian maritime heritage and ocean-adapted lifeways.'},
+{from:'bajau',to:'orang_laut',concept:'Maritime Nomadism',year:600,desc:'Orang Laut sea nomads of the Malay straits shared maritime survival techniques with Bajau communities across island Southeast Asia.'},
+{from:'comanche',to:'lakota',concept:'Plains Horse Culture',year:1750,desc:'The horse-mounted bison-hunting lifeway spread from southern plains peoples like the Comanche northward to the Lakota.'},
+{from:'lakota',to:'cheyenne',concept:'Plains Horse Culture',year:1770,desc:'Cheyenne adopted horse culture and plains hunting techniques through contact with Lakota and other mounted peoples.'},
+{from:'cheyenne',to:'crow',concept:'Plains Horse Culture',year:1780,desc:'Crow people refined horse culture through interaction with Cheyenne and other plains nations, becoming renowned horse breeders.'},
+{from:'comanche',to:'apache',concept:'Plains Horse Culture',year:1700,desc:'Apache acquisition of horses preceded the Comanche, but Comanche military pressure drove Apache adaptation of mounted warfare.'},
+{from:'inuit',to:'yupik',concept:'Arctic Adaptation',year:-1000,desc:'Thule culture innovations — kayaks, dog sleds, toggling harpoons — spread across the Arctic from ancestral Inuit to Yupik peoples.'},
+{from:'yupik',to:'chukchi',concept:'Arctic Adaptation',year:-500,desc:'Arctic survival technologies crossed the Bering Strait as Yupik and Chukchi peoples exchanged techniques for maritime and tundra living.'},
+{from:'chukchi',to:'koryak',concept:'Arctic Adaptation',year:0,desc:'Koryak reindeer herding and maritime hunting traditions developed alongside and in exchange with Chukchi adaptive technologies.'},
+{from:'sami',to:'nenets',concept:'Reindeer Herding',year:500,desc:'Reindeer domestication and herding techniques spread across the Eurasian Arctic from Sami territories eastward to Nenets lands.'},
+{from:'nenets',to:'evenki',concept:'Reindeer Herding',year:800,desc:'Evenki peoples adopted and adapted reindeer herding from western Siberian Nenets traditions, developing riding-reindeer culture.'},
+{from:'evenki',to:'yakuts',concept:'Reindeer Herding',year:1200,desc:'Yakut expansion into Siberia brought them into contact with Evenki reindeer herders, whose techniques they partially adopted alongside horse and cattle raising.'},
+{from:'maasai',to:'samburu',concept:'East African Pastoralism',year:1500,desc:'Samburu and Maasai share Maa-speaking origins and parallel age-set pastoral systems that diverged as they occupied distinct territories.'},
+{from:'maasai',to:'turkana',concept:'East African Pastoralism',year:1700,desc:'Turkana pastoral expansion brought them into competitive contact with Maasai, exchanging raiding techniques and livestock management.'},
+{from:'dinka',to:'nuer',concept:'Nilotic Cattle Culture',year:1400,desc:'Nuer expansion into Dinka territory created intense interaction between these closely related Nilotic cattle-herding societies.'},
+{from:'xianbei',to:'khitan',concept:'Manchurian Steppe Power',year:400,desc:'Khitan tribal confederation drew on Xianbei political and military traditions in building their Manchurian power base.'},
+{from:'khitan',to:'jurchen',concept:'Manchurian Steppe Power',year:1100,desc:'Jurchen conquest of the Khitan Liao dynasty absorbed Khitan administrative and military institutions into Jin dynasty governance.'},
+{from:'scythians',to:'massagetae',concept:'Iranian Nomad Culture',year:-600,desc:'Massagetae shared the broader Scythian-Iranian nomadic cultural complex of mounted warfare, animal art, and pastoral economy.'},
+{from:'massagetae',to:'alan',concept:'Iranian Nomad Culture',year:100,desc:'Alan warrior culture inherited Iranian nomadic traditions from the Massagetae and Sarmatians of the Central Asian steppe.'},
+{from:'pecheneg',to:'cuman_kipchak',concept:'Pontic Steppe Succession',year:1050,desc:'Cuman-Kipchak displaced the Pechenegs from the Pontic steppe, inheriting and adapting their pastoral territories and trade connections.'},
+{from:'cuman_kipchak',to:'nogai',concept:'Pontic Steppe Succession',year:1300,desc:'The Nogai Horde descended from Cuman-Kipchak populations absorbed into the Golden Horde, continuing Pontic steppe pastoral traditions.'},
+{from:'chagatai_khanate',to:'dzungar',concept:'Central Asian Khanate Legacy',year:1600,desc:'Dzungar confederation drew on Chagatai Khanate traditions of Central Asian nomadic governance and Buddhist-steppe synthesis.'},
+{from:'ghilzai',to:'kuchi',concept:'Afghan Pastoral Networks',year:1700,desc:'Kuchi nomadic routes intersected with Ghilzai Pashtun territories, sharing pastoral knowledge and trade connections across Afghanistan.'},
+{from:'aboriginal_australians',to:'torres_strait',concept:'Australian Maritime-Land Connection',year:-5000,desc:'Torres Strait Islanders maintained connections with Aboriginal Australian groups, bridging maritime and continental Indigenous knowledge systems.'},
+{from:'aboriginal_australians',to:'warlpiri',concept:'Australian Songline Networks',year:-10000,desc:'Warlpiri Dreaming tracks connect with broader Aboriginal songline networks that mapped and managed the Australian continent.'},
+];
 
 
-const WOMEN={};
+const WOMEN={
+mongols:[
+{nm:'Börte',role:'Empress consort and political strategist',yr:1206,desc:'Börte Üjin was Genghis Khan\'s principal wife whose political counsel shaped the Mongol Empire\'s formation. Kidnapped by Merkits early in their marriage, her rescue became a catalyst for Temüjin\'s rise. She managed the imperial household and influenced succession decisions that determined the empire\'s future.'},
+{nm:'Töregene Khatun',role:'Regent of the Mongol Empire',yr:1241,desc:'Töregene ruled the entire Mongol Empire as regent for five years after Ögedei Khan\'s death, managing an empire spanning from Korea to Hungary. She navigated complex factional politics, installed her son Güyük as Great Khan, and demonstrated that Mongol women could wield supreme political authority.'},
+{nm:'Mandukhai Khatun',role:'Warrior queen who reunified Mongolia',yr:1470,desc:'Mandukhai Khatun reunified the fragmented Mongol tribes in the late fifteenth century, personally leading armies into battle while pregnant. She restored Chinggisid rule, defeated the Oirats, and is remembered as one of Mongolia\'s greatest leaders — male or female.'},
+],
+scythians:[
+{nm:'Tomyris',role:'Queen of the Massagetae',yr:-530,desc:'Queen Tomyris defeated and killed Cyrus the Great of Persia in 530 BCE, one of antiquity\'s most dramatic military victories. According to Herodotus, she dunked Cyrus\'s severed head in blood, telling him to "have his fill." She stands as proof that steppe women commanded armies and defeated empires.'},
+],
+bedouin:[
+{nm:'Khawla bint al-Azwar',role:'Warrior and military commander',yr:636,desc:'Khawla fought alongside Muslim armies during the Arab conquests of Syria, reportedly fighting in disguise and leading cavalry charges. Her martial prowess was compared to that of Khalid ibn al-Walid. She represents the Bedouin tradition of women warriors that predates and transcends settled gender norms.'},
+],
+comanche:[
+{nm:'Cynthia Ann Parker',role:'Adopted Comanche woman and mother of Quanah Parker',yr:1845,desc:'Captured as a child by Comanche raiders, Cynthia Ann Parker was fully adopted into Comanche life, married war chief Peta Nocona, and became the mother of Quanah Parker, the last great Comanche chief. Her story illuminates how Comanche society integrated outsiders and the devastating impact of forced "rescue" back to white society.'},
+],
+maasai:[
+{nm:'Noonkishu Meitamei',role:'Female elder and ritual specialist',yr:1900,desc:'Maasai women traditionally held critical roles in cattle-based economy: managing milk production, constructing manyatta homesteads, and performing essential blessing ceremonies. Women like Noonkishu maintained spiritual authority through their role in fertility rituals and their control over domestic space and food distribution.'},
+],
+tuareg:[
+{nm:'Tin Hinan',role:'Legendary founding queen of the Tuareg',yr:400,desc:'Tin Hinan is the semi-legendary ancestress of the noble Tuareg. Her monumental tomb at Abalessa in southern Algeria, excavated in 1925, contained rich grave goods confirming a powerful female leader. The Tuareg\'s matrilineal descent system — unusual in the Islamic world — is traced to her legacy.'},
+{nm:'Dassine Oult Yemma',role:'Poet and cultural leader',yr:1920,desc:'Dassine was a celebrated Tuareg poet whose verses of love, resistance, and desert life circulated across the Sahara. Her poetry exemplified the Tuareg tradition of women as cultural custodians — in Tuareg society, women are the keepers of music, poetry, and the Tifinagh alphabet.'},
+],
+san_bushmen:[
+{nm:'||kabbo\'s wife',role:'Knowledge keeper and storyteller',yr:1870,desc:'San women were essential knowledge keepers: they gathered the majority of the community\'s food, held detailed botanical and ecological knowledge, and transmitted oral traditions. The wife of ||kabbo (one of the San informants for the Bleek-Lloyd archive) contributed to preserving San stories that now form one of humanity\'s most precious oral records.'},
+],
+lakota:[
+{nm:'Pretty White Buffalo',role:'Holy woman and keeper of the White Buffalo Calf Pipe',yr:1870,desc:'Lakota spiritual tradition holds that the sacred White Buffalo Calf Pipe was brought to the people by a holy woman. Female spiritual authority remained important: women served as keepers of sacred bundles, vision seekers, and healers throughout Lakota history.'},
+{nm:'Zitkala-Ša',role:'Writer, activist, and political leader',yr:1900,desc:'Zitkala-Ša (Red Bird) published influential autobiographical essays exposing the horrors of boarding schools, composed the first Native American opera, and co-founded the National Council of American Indians. She fought for citizenship rights and treaty enforcement throughout her life.'},
+],
+inuit:[
+{nm:'Idlout Kenojuak Ashevak',role:'Graphic artist',yr:1960,desc:'Kenojuak Ashevak became one of Canada\'s most celebrated artists, whose prints — particularly "The Enchanted Owl" — brought Inuit art to international recognition. Her work drew on traditional Inuit visual culture while creating a new artistic vocabulary that expressed the beauty and spirituality of Arctic life.'},
+],
+sami:[
+{nm:'Elsa Laula Renberg',role:'Political organiser and Sami rights pioneer',yr:1917,desc:'Elsa Laula Renberg organised the first Sami national congress in 1917 at Trondheim, Norway — a foundational moment for Sami political mobilisation. She fought for Sami land rights, reindeer herding rights, and cultural recognition at a time when Scandinavian states pursued aggressive assimilation policies.'},
+],
+romani:[
+{nm:'Bronislawa Wajs (Papusza)',role:'Poet',yr:1950,desc:'Papusza was the first Romani poet to be published in Polish, her verses capturing the beauty of nomadic forest life and the trauma of forced settlement. Her poetry documented Romani culture with extraordinary lyrical power, though her community initially rejected her for sharing their stories with outsiders.'},
+],
+fulani:[
+{nm:'Nana Asmau',role:'Scholar, poet, and educator',yr:1830,desc:'Nana Asmau, daughter of Usman dan Fodio, was a prolific scholar who wrote in Arabic, Fulfulde, Hausa, and Tamacheq. She established a network of women educators (jaji) who travelled to remote Fulani communities teaching literacy and Islamic knowledge — one of the earliest female-led educational systems in West Africa.'},
+],
+aboriginal_australians:[
+{nm:'Truganini',role:'Last full-blood Tasmanian Aboriginal and resistance figure',yr:1860,desc:'Truganini witnessed the near-complete destruction of her people — the Palawa of Tasmania — through colonial violence, disease, and forced relocation. She became a symbol of Indigenous survival and resistance, and her life story revealed the genocidal impact of British colonisation on Australia\'s First Peoples.'},
+{nm:'Oodgeroo Noonuccal',role:'Poet, activist, and educator',yr:1964,desc:'Oodgeroo Noonuccal (Kath Walker) published the first book of poetry by an Aboriginal Australian — "We Are Going" (1964). She became a leading voice for Aboriginal civil rights, land rights, and cultural preservation, using poetry as a weapon against colonial erasure.'},
+],
+vikings:[
+{nm:'Birka Female Warrior',role:'Viking warrior woman',yr:900,desc:'Archaeological excavation of a high-status Viking grave at Birka, Sweden, originally assumed male, was confirmed through DNA analysis in 2017 to contain a female warrior buried with weapons, horses, and gaming pieces indicating strategic military leadership. The discovery proved that Viking women could hold warrior status.'},
+{nm:'Aud the Deep-Minded',role:'Settler and chieftain of Iceland',yr:895,desc:'Aud Ketilsdóttir (Auðr djúpúðga) led a fleet from Scotland to Iceland after her son\'s death, distributing land to her followers and establishing one of Iceland\'s most prominent families. She was one of the most powerful figures in the settlement of Iceland, commanding ships and colonists as a female chieftain.'},
+],
+apache:[
+{nm:'Lozen',role:'Warrior and spiritual leader',yr:1880,desc:'Lozen was a Warm Springs Apache warrior woman who fought alongside Victorio and Geronimo. She possessed what her people considered supernatural power to detect enemies. Her brother Victorio called her "my right hand — strong as a man, braver than most." She was one of the last Apache to surrender.'},
+],
+cheyenne:[
+{nm:'Buffalo Calf Road Woman',role:'Warrior',yr:1876,desc:'Buffalo Calf Road Woman fought at the Battle of the Rosebud (1876) and, according to Northern Cheyenne oral tradition, struck the blow that knocked Custer from his horse at Little Bighorn. The Cheyenne name for the Little Bighorn battle translates as "Where the Girl Saved Her Brother," honouring her rescue of her brother at the Rosebud.'},
+],
+golden_horde:[
+{nm:'Taidula Khatun',role:'Political power broker and regent',yr:1340,desc:'Taidula wielded enormous political influence in the Golden Horde as wife and then mother of successive khans. She corresponded with foreign rulers, intervened in succession disputes, and patronised religious institutions. Metropolitan Alexius of Moscow reportedly cured her blindness, establishing a crucial diplomatic relationship between Moscow and the Horde.'},
+],
+polynesian_voyagers:[
+{nm:'Navigator women of Polynesia',role:'Navigators and voyage leaders',yr:1000,desc:'Polynesian oral traditions record women as navigators and voyage leaders: Hawaiian traditions name Hi\'iaka and other female navigators. Women participated in the great voyaging canoe expeditions that settled the Pacific, and some matrilineal Polynesian societies traced chiefly authority through female lines. Women\'s knowledge of star navigation, wave reading, and provisioning was essential to successful voyages.'},
+],
+navajo:[
+{nm:'Changing Woman',role:'Central deity of Navajo cosmology',yr:-1000,desc:'Changing Woman (Asdzą́ą́ Nádleehé) is the most important deity in Navajo religion — she created the four original Navajo clans from her own body. The kinaaaldá ceremony celebrates girls\' transition to womanhood in her image. Navajo matrilineal kinship, matrilocal residence, and women\'s property ownership all reflect Changing Woman\'s centrality to Navajo identity.'},
+{nm:'Annie Dodge Wauneka',role:'Public health advocate',yr:1951,desc:'Annie Dodge Wauneka, daughter of the last great Navajo chief, was elected to the Navajo Tribal Council and led a campaign against tuberculosis that transformed Navajo public health. She received the Presidential Medal of Freedom in 1963 — the first Native American so honoured — for her work bridging traditional healing and modern medicine.'},
+],
+timurids:[
+{nm:'Goharshad',role:'Queen and architectural patron',yr:1420,desc:'Goharshad, wife of Shah Rukh and daughter-in-law of Timur, was the greatest architectural patron of the Timurid era. The Goharshad Mosque in Mashhad and her commissions in Herat rank among the finest buildings in Islamic architecture. She wielded enormous political power for over forty years until her execution at age eighty.'},
+],
+khitan:[
+{nm:'Empress Dowager Chengtian',role:'Regent and military commander',yr:982,desc:'Xiao Yanyan ruled the Khitan Liao dynasty as regent for her young son, personally leading armies in battle against the Song Chinese. She negotiated the Treaty of Shanyuan (1005) that established a century of peace between the Liao and Song — one of the most significant diplomatic achievements in East Asian history.'},
+],
+dinka:[
+{nm:'Nyandeng de Mabior',role:'Political leader and vice president',yr:2005,desc:'Rebecca Nyandeng de Mabior, wife of John Garang, became one of South Sudan\'s most prominent political figures. She served as presidential advisor and vice president, advocating for peace, women\'s rights, and national reconciliation. Dinka women traditionally hold authority over household resources and agricultural production.'},
+],
+qashqai:[
+{nm:'Bibi Maryam Bakhtiari',role:'Tribal leader and warrior',yr:1910,desc:'Bibi Maryam led Bakhtiari tribal forces in the 1909 march on Tehran that deposed the Qajar shah and restored the Iranian constitution. She rode at the head of armed tribesmen and became a symbol of nomadic women\'s martial courage. The related Qashqai confederation also produced women who led during tribal migrations and conflicts.'},
+],
+cree:[
+{nm:'Thanadelthur',role:'Diplomat and interpreter',yr:1714,desc:'Thanadelthur was a Chipewyan woman who brokered peace between the Cree and Chipewyan peoples in 1714 and served as a crucial diplomatic intermediary for the Hudson\'s Bay Company. Her intelligence, courage, and linguistic skills made her indispensable — she personally led a peace expedition across hundreds of kilometres of winter wilderness.'},
+],
+il_khanate:[
+{nm:'Dokuz Khatun',role:'Political advisor and Christian patron',yr:1260,desc:'Dokuz Khatun, wife of Hulagu Khan, wielded significant political influence in the Il-Khanate. A Nestorian Christian, she protected Christian communities in Persia and Iraq, patronised churches, and influenced Il-Khanate foreign policy toward alliance with Christian powers against the Mamluks. She exemplifies Mongol women\'s political agency before Islamisation.'},
+{nm:'Absh Khatun',role:'Governor of Fars Province',yr:1280,desc:'Absh Khatun governed Fars province (southern Iran) as a Mongol-appointed ruler — one of the few women to govern an entire province in medieval Islamic history. She maintained order, patronised scholarship, and navigated the complex politics of Il-Khanate factional rivalries with considerable skill.'},
+],
+mapuche:[
+{nm:'Janequeo',role:'War leader against Spanish colonialism',yr:1585,desc:'Janequeo led Mapuche resistance forces against the Spanish during the Arauco War after her husband was captured and killed. She commanded warriors in battle, conducted guerrilla raids, and became a symbol of Mapuche resistance. Her military leadership demonstrates that Mapuche women could exercise war leadership roles.'},
+],
+himba:[
+{nm:'Himba matriarchs',role:'Keepers of the sacred fire and kinship',yr:1800,desc:'Himba society is matrilineal: inheritance and clan membership pass through mothers. Women maintain the okuruwo (sacred ancestral fire) that connects the living with the dead. They control household resources, manage cattle allocation through matrilineal networks, and make key decisions about marriage and residence. Their elaborate ochre and fat body covering is a women\'s artistic tradition.'},
+],
+bajau:[
+{nm:'Bajau women divers',role:'Free-diving foragers',yr:1900,desc:'Bajau women are expert free-divers who harvest sea cucumbers, shellfish, and other marine resources — diving to depths of 20 metres or more on a single breath. Their underwater foraging provides a significant portion of household food and trade goods. Bajau women\'s diving abilities develop from childhood, representing one of the most remarkable female-led subsistence adaptations.'},
+],
+nuer:[
+{nm:'Nyaruac',role:'Prophet and spiritual leader',yr:1920,desc:'Nuer women served as prophets (gwan kwoth) with spiritual authority rivalling male leaders. Nyaruac and other women prophets channelled divine spirits, healed the sick, and influenced community decisions. In Nuer society, women held significant economic power through their control of dairy production and their role in cattle transfers at marriage.'},
+],
+turkana:[
+{nm:'Turkana women potters and traders',role:'Artisan-traders',yr:1900,desc:'Turkana women control the production and trade of pottery, baskets, and beadwork — essential economic activities in a pastoral society. Women manage the portable homestead (awi), decide when to move camp, and control food distribution. During droughts, women\'s gathering and trading skills often provide the margin of survival when livestock die.'},
+],
+efe:[
+{nm:'Efe women gatherers',role:'Primary food providers',yr:1950,desc:'Efe women are the primary caloric providers: their gathering of wild yams, fruits, nuts, and other plant foods typically contributes 60-70% of the community\'s calories. Women also manage camp construction, childcare networks, and food distribution — giving them substantial social and economic authority in this egalitarian society.'},
+],
+karakalpak:[
+{nm:'Qirq Qiz heroines',role:'Legendary warrior women',yr:1400,desc:'The Karakalpak epic "Qirq Qiz" (Forty Girls) celebrates a band of female warriors led by Gulaim who defend their homeland against invaders. While legendary, the epic reflects a cultural tradition honouring female martial courage. Karakalpak women traditionally owned and controlled the yurt — the fundamental domestic space — and produced the spectacular textile art for which the culture is renowned.'},
+],
+khoekhoe:[
+{nm:'Krotoa (Eva)',role:'Interpreter and cultural mediator',yr:1660,desc:'Krotoa was a Khoekhoe woman who served as interpreter between her people and the Dutch East India Company at the Cape of Good Hope. She mediated critical negotiations, converted to Christianity, and married a Danish surgeon — becoming one of the first documented cross-cultural mediators in South African history. Her story reveals both Khoekhoe women\'s agency and the devastating impact of colonialism.'},
+],
+};
+
 
 let year=-10000,lenses=new Set(),sel=null,sel2=null,lensDD=false,mode="explore",activeThread=null;
 
@@ -4643,16 +4860,21 @@ function renderWhatIfPaths(){
 
 // Per-civ "what would not exist" summary
 const WHATIF_IMPACT={
-  islamicworld: 'No algebra. No algorithmically-structured mathematics. The Greek philosophical corpus likely lost. European medicine stuck with pre-Galenic folk remedies until at least 1600. No coffee. Fibonacci\'s Liber Abaci — and with it modern commerce — never written.',
-  phoenicians:  'No alphabet. The Greek, Latin, Arabic, Hebrew, and Cyrillic scripts do not exist. Literacy as a democratic technology never arrives. Western literature begins and ends with cuneiform.',
-  mongol:       'No Pax Mongolica — the free-trade zone from China to Hungary. Gunpowder stays in China. The Black Death may never reach Europe. Paper money never transmits west.',
-  india:        'No zero. No decimal positional notation. Without zero, no algebra. No Buddhism east of Bengal. The spice trade never scales. Chess never reaches Persia or Europe.',
-  greece:       'No philosophy as a discipline. No geometry as deductive science. No democracy as a concept. Rome has no intellectual tradition to inherit. The Islamic Golden Age has nothing to translate.',
-  china:        'No paper — and therefore no Gutenberg. No gunpowder. No compass. The information revolution of the 15th century does not happen.',
-  rome:         'No Latin — six modern European languages do not exist. No Roman law. No Catholic Church as an institution.',
-  byzantium:    'Greek manuscripts are not preserved. The Italian Renaissance has nothing to translate. When Constantinople falls, no scholars flee to Florence with Greek texts.',
-  mesopotamia:  'No writing. No law codes. No 60-base mathematics — no 60-minute hours, no 360-degree circles. No systematic astronomy.',
-  egypt:        'No papyrus as an information medium for two millennia. The alphabet concept likely delayed. The first monotheistic experiments never occur.',
+  mongols:      'No Pax Mongolica — the free-trade zone from China to Hungary. Gunpowder stays in China. The Black Death may never reach Europe. Paper money never transmits west. Russia develops without two centuries of Mongol rule. The Silk Road fragments into competing regional powers.',
+  scythians:    'No mounted archery tradition. The entire military culture of the Eurasian steppe develops differently. Greek art loses its most dynamic "animal style" influence. The concept of the horse-warrior civilisation never crystallises.',
+  xiongnu:      'No model for steppe confederacy. The Turkic, Mongol, and other steppe empires have no institutional template. China never builds the Great Wall. The Huns — and their role in Rome\'s fall — may never materialise.',
+  huns:         'Rome\'s western frontier holds longer. The Germanic migrations that reshape Europe are delayed or redirected. The stirrup may arrive in Europe centuries later. The entire political map of the Dark Ages changes.',
+  turkic_khaganate: 'No Turkic political model for Inner Asia. The Uyghur, Seljuk, and Ottoman empires have no institutional ancestry. Turkic languages do not spread across Central Asia. Islam\'s expansion into the steppe takes a different path.',
+  comanche:     'Spain holds Texas and the southern plains unchallenged. The horse-mounted plains culture develops more slowly. The Apache dominate the southern grasslands. The entire power balance of North America shifts.',
+  polynesian_voyagers: 'The Pacific remains empty of humans. Hawaii, New Zealand, Easter Island, and thousands of islands are never settled. The greatest maritime migration in human history never occurs. Ocean navigation as an art form is diminished.',
+  inuit:        'The Arctic remains uninhabited by humans. The kayak, igloo, and toggling harpoon are never invented. Thousands of years of Arctic ecological knowledge are lost. Northern Canada and Greenland have no human presence until European exploration.',
+  vikings:      'No Norse settlement of Iceland, Greenland, or Vinland. No Varangian trade routes connecting Scandinavia to Byzantium. The North Atlantic remains a barrier, not a highway. Russia\'s founding mythology changes entirely.',
+  bedouin:      'Arabia\'s interior remains politically fragmented. The rapid spread of Islam across North Africa and the Middle East lacks its cavalry backbone. The camel-based trade networks that connected Africa, Asia, and Europe through the desert never develop.',
+  sami:         'Reindeer herding as a pastoral system may not develop in Scandinavia. The Arctic regions of northern Europe remain used only for seasonal hunting. A unique model of human-animal partnership is lost.',
+  maasai:       'East African pastoral ecology changes dramatically. The Serengeti ecosystem, shaped by centuries of Maasai fire management and grazing, develops differently. The model of cattle-centred social organisation that influenced much of East Africa is absent.',
+  golden_horde: 'Russia develops without Mongol-Tatar influence — no centralised autocracy, no postal system, different administrative traditions. The Kazakh, Uzbek, and Tatar peoples do not form as they historically did.',
+  san_bushmen:  'The world\'s oldest continuous artistic tradition — 70,000 years of rock art — never exists. Click languages, the most phonologically complex human languages, are lost. Our deepest window into early human culture disappears.',
+  aboriginal_australians: 'The world\'s oldest continuous civilisation — 65,000 years of cultural continuity — never develops. Songlines, the most elaborate system of geographic and spiritual knowledge ever created, do not exist. Fire-stick farming never shapes the Australian landscape.',
 };
 
 function renderWhatIfDrawer(){
@@ -4773,9 +4995,119 @@ function clearWhatIf(){
 // ══════════════════════════════════════════════════════
 // HERITAGE MODE
 // ══════════════════════════════════════════════════════
-const HERITAGE_REGIONS={};
+const HERITAGE_REGIONS={
+'Eurasian Steppe':['mongols','scythians','xiongnu','huns','turkic_khaganate','sarmatians','golden_horde','khitan','pecheneg','cuman_kipchak','avars','rouran','xianbei','massagetae','khazar','alan','nogai','kalmyk','buryat','bashkir'],
+'Central Asia':['timurids','kazakh_nomads','kyrgyz_nomads','chagatai_khanate','dzungar','turkmen','karakalpak','il_khanate','hephthalites','uyghur_khaganate','tocharians'],
+'North American Plains':['comanche','lakota','cheyenne','blackfoot','crow','pawnee','shoshone','dakota','arapaho','osage','nez_perce','ute'],
+'Arabian & Saharan Desert':['bedouin','tuareg','sahrawi','toubou','berber_nomads','afar','somali_pastoralists'],
+'East African Savanna':['maasai','fulani','samburu','turkana','dinka','nuer','borana_oromo','herero','himba','wodaabe'],
+'Circumpolar Arctic':['inuit','sami','nenets','evenki','chukchi','yakuts','yupik','ihalmiut','koryak'],
+'Tropical Forest':['san_bushmen','aboriginal_australians','hadza','mbuti','baka','yanomami','efe','warlpiri','selknam','torres_strait'],
+'Maritime & Oceanic':['polynesian_voyagers','bajau','moken','orang_laut','vikings','irish_travellers'],
+'South & West Asia':['qashqai','bakhtiari','baloch','kuchi','rabari','ghilzai','tibetan_nomads'],
+'Manchuria & Siberia':['jurchen','khitan','xianbei','evenki','yakuts','buryat','chukchi','koryak'],
+'Romani Diaspora':['romani','irish_travellers'],
+'Mesoamerica & South America':['mapuche','raramuri','yanomami','selknam'],
+};
 
-const HERITAGE_REASONS={};
+const HERITAGE_REASONS={
+mongols:'Founded the largest contiguous land empire through mounted warfare and steppe confederation.',
+scythians:'Pioneered the horse-archer warrior culture that defined steppe warfare for millennia.',
+xiongnu:'Created the first great steppe confederation, the model for all subsequent Inner Asian empires.',
+bedouin:'Desert pastoral nomads whose poetry, hospitality codes, and camel culture shaped Arabian identity.',
+comanche:'Dominated the southern Great Plains through revolutionary adoption of horse-mounted warfare.',
+maasai:'East Africa\'s most iconic pastoralists, maintaining cattle-centred culture into the modern era.',
+huns:'Catalysed the fall of Rome and reshaped Europe through westward migration from the steppe.',
+tuareg:'Masters of trans-Saharan trade and desert survival across the world\'s largest hot desert.',
+san_bushmen:'Humanity\'s oldest continuous culture, with rock art traditions spanning 70,000 years.',
+turkic_khaganate:'United the Turkic peoples into a steppe empire spanning from Manchuria to Byzantium.',
+lakota:'Great Plains horse warriors whose resistance at Little Bighorn became a symbol of Indigenous defiance.',
+inuit:'Arctic specialists who thrived in Earth\'s harshest inhabited environment through ingenious adaptation.',
+sami:'Europe\'s only Indigenous reindeer herders, maintaining Arctic pastoral traditions for millennia.',
+romani:'History\'s most widespread diaspora nomads, maintaining distinct identity across centuries of persecution.',
+fulani:'West Africa\'s great pastoral people, driving cattle across the Sahel and founding Islamic states.',
+aboriginal_australians:'The world\'s oldest continuous civilisation, navigating Australia by songline for 65,000+ years.',
+vikings:'Scandinavian seafarers who connected the North Atlantic, Baltic, and Mediterranean through maritime nomadism.',
+apache:'Masters of guerrilla warfare and desert survival across the American Southwest.',
+sarmatians:'Iranian steppe warriors whose heavy cavalry traditions influenced Roman and medieval European warfare.',
+cheyenne:'Plains horse warriors who forged a powerful military alliance with the Lakota and Arapaho.',
+nenets:'Siberian reindeer herders managing the world\'s largest domesticated animal migrations.',
+evenki:'Taiga nomads whose reindeer-riding culture spans the vast Siberian boreal forest.',
+golden_horde:'Mongol successor state that shaped Russia, Central Asia, and Eastern Europe for centuries.',
+blackfoot:'Plains confederacy that controlled the northern buffalo range and resisted colonial encroachment.',
+timurids:'Turco-Mongol conquerors who created an empire of steppe warfare and Persian cultural patronage.',
+hadza:'One of Earth\'s last hunter-gatherer peoples, maintaining traditions in Tanzania\'s Rift Valley.',
+nez_perce:'Pacific Northwest people famous for Appaloosa horse breeding and Chief Joseph\'s epic resistance march.',
+kazakh_nomads:'Central Asian nomads whose vast steppe territory became the world\'s largest landlocked nation.',
+mbuti:'Ituri Forest hunter-gatherers whose net-hunting traditions represent ancient tropical forest adaptation.',
+berber_nomads:'North Africa\'s indigenous pastoral people, herding across the Atlas Mountains and northern Sahara.',
+kyrgyz_nomads:'Mountain pastoralists of the Tien Shan whose yurt culture defines Central Asian nomadic identity.',
+tibetan_nomads:'High-altitude herders of the Tibetan Plateau, the world\'s highest pastoral community.',
+mapuche:'South America\'s most successful Indigenous resistance, maintaining independence for over 300 years.',
+polynesian_voyagers:'History\'s greatest open-ocean navigators, colonising the Pacific using stars, waves, and birds.',
+bajau:'Southeast Asian sea nomads adapted to marine life with extraordinary free-diving abilities.',
+irish_travellers:'Ireland\'s indigenous nomadic minority with distinct language, customs, and tinsmith traditions.',
+qashqai:'Iranian pastoral confederacy migrating between winter and summer pastures across the Zagros Mountains.',
+navajo:'Largest Native American nation, blending Athabascan origins with Puebloan and Spanish influences.',
+somali_pastoralists:'Horn of Africa camel herders whose clan system and poetry tradition define Somali culture.',
+crow:'Plains horse people renowned as the finest horse breeders and riders of the northern Great Plains.',
+uyghur_khaganate:'Turkic empire that uniquely combined steppe power with urban civilisation and written culture.',
+dinka:'Nilotic cattle pastoralists of South Sudan whose culture revolves around their sacred herds.',
+nuer:'Nilotic pastoralists whose segmentary lineage system became a foundational concept in anthropology.',
+pecheneg:'Turkic steppe warriors who controlled the Pontic steppe and challenged Byzantium and Kievan Rus.',
+cuman_kipchak:'Turkic nomads whose vast Desht-i Kipchak stretched from Hungary to Central Asia.',
+avars:'Eurasian nomads who brought the stirrup to Europe and built a powerful Pannonian empire.',
+rouran:'Mongolian steppe confederation whose governance model prefigured the later Mongol Empire.',
+bakhtiari:'Iranian mountain nomads famous for their epic seasonal migration across the Zagros passes.',
+baloch:'Pastoral people of the arid Balochistan plateau spanning Iran, Pakistan, and Afghanistan.',
+himba:'Namibian pastoralists known for their distinctive ochre-covered appearance and cattle-centred culture.',
+pawnee:'Plains earth-lodge people whose astronomical knowledge guided both agriculture and buffalo hunting.',
+baka:'Central African forest hunter-gatherers whose polyphonic music is a UNESCO cultural treasure.',
+shoshone:'Great Basin people who adapted to one of North America\'s harshest desert environments.',
+yakuts:'Turkic horse and cattle herders who colonised the coldest inhabited region on Earth.',
+yupik:'Arctic maritime hunters of the Bering Sea coast, bridging Asian and American Indigenous traditions.',
+kuchi:'Afghanistan\'s great pastoral nomads, moving flocks between highland and lowland pastures.',
+moken:'Andaman Sea nomads whose children develop extraordinary underwater vision from a life lived on the ocean.',
+rabari:'Western India\'s camel and cattle herders, migrating across Rajasthan and Gujarat with spectacular embroidered textiles.',
+selknam:'Patagonian hunter-gatherers who thrived in the harsh conditions of Tierra del Fuego for thousands of years.',
+chagatai_khanate:'Mongol successor state ruling Central Asia, bridging steppe nomadism and Silk Road urbanism.',
+torres_strait:'Maritime people of the strait between Australia and New Guinea, expert navigators and traders.',
+tocharians:'Indo-European people of the Tarim Basin whose mummies reveal ancient East-West connections.',
+dzungar:'Last great nomadic empire of the steppe, whose destruction by the Qing marked the end of an era.',
+wodaabe:'Sahel pastoralists whose Gerewol beauty contest celebrates male beauty and cattle-herding pride.',
+chukchi:'Northeast Siberian reindeer herders who resisted Russian conquest longer than almost any other people.',
+turkana:'East African pastoralists surviving in one of the world\'s most arid inhabited environments.',
+orang_laut:'Sea nomads of the Malay straits whose maritime skills underpinned the Srivijaya and Malacca empires.',
+khoekhoe:'Southern Africa\'s first pastoralists, whose click languages are among the world\'s most complex.',
+ute:'Great Basin and Rocky Mountain people who became formidable mounted warriors after acquiring horses.',
+jurchen:'Manchurian semi-nomads who founded the Jin Dynasty and later the Qing, China\'s last imperial house.',
+afar:'Horn of Africa pastoralists surviving in the Danakil Depression, one of Earth\'s most extreme environments.',
+kalmyk:'Europe\'s only Buddhist people, Oirat Mongols who migrated to the Volga steppe in the seventeenth century.',
+dakota:'Eastern Sioux people whose resistance to American expansion shaped the history of the Great Plains.',
+hephthalites:'White Huns who shattered the Gupta and Sasanian empires from their Central Asian steppe base.',
+samburu:'Close relatives of the Maasai, maintaining warrior age-set pastoralism in northern Kenya.',
+warlpiri:'Central Australian Aboriginal people whose Dreaming traditions encode 40,000+ years of desert knowledge.',
+nogai:'Turkic nomads of the Pontic steppe descended from Golden Horde populations.',
+arapaho:'Plains Algonquian people who formed a powerful alliance with the Cheyenne and Lakota.',
+buryat:'Mongol people of the Baikal region blending Buddhist tradition with Siberian shamanism.',
+raramuri:'Sierra Madre runners whose ultra-distance abilities and canyon-dwelling culture defy modernisation.',
+xianbei:'Proto-Mongolic steppe people whose confederacy bridged the Xiongnu and Turkic eras.',
+toubou:'Central Saharan nomads reputed to be the world\'s most self-sufficient desert survivors.',
+turkmen:'Karakum Desert nomads famous for Akhal-Teke horses, Central Asia\'s finest breed.',
+khazar:'Turkic empire uniquely converting to Judaism, controlling Caucasus-Volga trade for centuries.',
+herero:'Namibian cattle pastoralists whose genocide by imperial Germany was the twentieth century\'s first.',
+osage:'Great Plains people whose territory atop oil deposits created both extraordinary wealth and exploitation.',
+alan:'Iranian steppe warriors who migrated from the Caucasus to influence cultures from Gaul to North Africa.',
+borana_oromo:'Ethiopian-Kenyan pastoralists whose gada age-grade system is a UNESCO Intangible Cultural Heritage.',
+ihalmiut:'Caribou Inuit of the Canadian Barrenlands, among the most isolated hunter-gatherers of the modern era.',
+ghilzai:'Afghan Pashtun pastoral nomads whose tribal warriors repeatedly shaped the fate of empires.',
+koryak:'Kamchatka Peninsula reindeer herders and maritime hunters at the eastern edge of the Eurasian nomadic world.',
+sahrawi:'Western Saharan people whose nomadic identity drives the world\'s longest-running decolonisation struggle.',
+cree:'One of North America\'s largest Indigenous nations, spanning subarctic forest to Great Plains.',
+karakalpak:'Aral Sea people whose homeland became the site of one of history\'s worst environmental disasters.',
+efe:'Ituri Forest Pygmy hunter-gatherers representing humanity\'s most ancient tropical forest adaptation.',
+il_khanate:'Mongol rulers of Persia who transformed from steppe destroyers to Persian cultural patrons in two generations.',
+};
 
 let heritageRegion=null;
 
