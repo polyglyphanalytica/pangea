@@ -458,8 +458,8 @@
       "validated_lenses": 20
     },
     "diaspora": {
-      "phase": "1A",
-      "items": 0,
+      "phase": "DATA",
+      "items": 61,
       "target": 100,
       "live": false,
       "map": "world",
@@ -1207,7 +1207,6 @@
     }
   },
   "queue": [
-    "nomad",
     "diaspora",
     "nomen",
     "tribu",
@@ -1316,7 +1315,8 @@
     "somnia",
     "crimen",
     "martyr",
-    "servitus"
+    "servitus",
+    "nomad"
   ],
   "quota": {
     "max_phases_per_session": 3,
@@ -13175,6 +13175,336 @@
       "atlas": "nomad",
       "batch": "100-100",
       "items": 100
+    },
+    {
+      "atlas": "diaspora",
+      "phase_done": "1A",
+      "phase_next": "1B",
+      "items": 100
+    },
+    {
+      "atlas": "diaspora",
+      "phase_done": "1B",
+      "phase_next": "1C",
+      "items": 100
+    },
+    {
+      "atlas": "diaspora",
+      "phase_done": "1C",
+      "phase_next": "1D",
+      "items": 100
+    },
+    {
+      "atlas": "diaspora",
+      "phase_done": "1D",
+      "phase_next": "1F",
+      "items": 100
+    },
+    {
+      "atlas": "diaspora",
+      "phase_done": "1F",
+      "phase_next": "DATA",
+      "items": 0
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "1-1",
+      "items": 1
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "2-2",
+      "items": 2
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "3-3",
+      "items": 3
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "4-4",
+      "items": 4
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "5-5",
+      "items": 5
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "6-6",
+      "items": 6
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "7-7",
+      "items": 7
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "8-8",
+      "items": 8
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "9-9",
+      "items": 9
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "10-10",
+      "items": 10
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "11-11",
+      "items": 11
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "12-12",
+      "items": 12
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "13-13",
+      "items": 13
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "14-14",
+      "items": 14
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "15-15",
+      "items": 15
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "16-16",
+      "items": 16
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "17-17",
+      "items": 17
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "18-18",
+      "items": 18
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "19-19",
+      "items": 19
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "20-20",
+      "items": 20
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "21-21",
+      "items": 21
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "22-22",
+      "items": 22
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "23-23",
+      "items": 23
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "24-24",
+      "items": 24
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "25-25",
+      "items": 25
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "26-26",
+      "items": 26
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "27-27",
+      "items": 27
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "28-28",
+      "items": 28
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "29-29",
+      "items": 29
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "30-30",
+      "items": 30
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "31-31",
+      "items": 31
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "32-32",
+      "items": 32
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "33-33",
+      "items": 33
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "34-34",
+      "items": 34
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "35-35",
+      "items": 35
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "36-36",
+      "items": 36
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "37-38",
+      "items": 38
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "39-39",
+      "items": 39
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "40-40",
+      "items": 40
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "41-41",
+      "items": 41
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "42-42",
+      "items": 42
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "43-43",
+      "items": 43
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "44-44",
+      "items": 44
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "45-45",
+      "items": 45
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "46-46",
+      "items": 46
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "47-47",
+      "items": 47
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "48-48",
+      "items": 48
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "49-49",
+      "items": 49
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "50-50",
+      "items": 50
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "51-51",
+      "items": 51
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "52-52",
+      "items": 52
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "53-53",
+      "items": 53
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "54-54",
+      "items": 54
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "55-55",
+      "items": 55
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "56-56",
+      "items": 56
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "57-57",
+      "items": 57
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "58-58",
+      "items": 58
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "59-59",
+      "items": 59
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "60-60",
+      "items": 60
+    },
+    {
+      "atlas": "diaspora",
+      "batch": "61-61",
+      "items": 61
     }
   ],
   "assignments": {}
